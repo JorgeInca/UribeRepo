@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
+
+	<title>Investigacion - Horus México</title>
+
+
+	<!-- Bootstrap core CSS -->
+	<link href="dist/css/bootstrap.min.css" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+	<link href="pricing.css" rel="stylesheet">
+</head>
+
+<body>
+
+	<div id="menuBarDiv"></div>
+
+	<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+		<h1 class="display-4">Investigación</h1>
+		<p class="lead">Realice búsqueda individual o masivamente</p>
+	</div>
+
+	<div class="row justify-content-center">
+		<div class="col-md-10">
+			<ul class="nav nav-tabs" id="myTab" role="tablist">
+				<li class="nav-item">
+					<a class="nav-link active show" id="home-tab" data-toggle="tab" href="#home" role="tab"
+						aria-controls="home" aria-selected="false">Individual</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+						aria-controls="profile" aria-selected="true">Masiva</a>
+				</li>
+			</ul>
+			<!--Individual-->
+			<div class="tab-content" id="myTabContent">
+				<div class="tab-pane fade active show" id="home" role="tabpanel" aria-labelledby="home-tab">
+					<div class="row">
+						<p>.</p>
+					</div>
+					<div class="row justify-content-center">
+						<div class="col-md-8">
+							<form class="needs-validation" onsubmit="consumeAws();return false" novalidate>
+								<div class="form-row">
+									<div class="col-md-6 mb-3">
+										<label for="form_firstName">Nombre / Razón social</label>
+										<input type="text" class="form-control" id="form_firstName"
+											placeholder="First name" value="" required>
+										<div class="invalid-feedback">
+											Nombre requerido!
+										</div>
+										<div class="valid-feedback">
+											Ok!
+										</div>
+									</div>
+									<div class="col-md-6 mb-3">
+										<label for="form_lastName">Apellido</label>
+										<input type="text" class="form-control" id="form_lastName"
+											placeholder="Last name" value="" required>
+										<div class="invalid-feedback">
+											Apellido requerido!
+										</div>
+										<div class="valid-feedback">
+											Ok!
+										</div>
+									</div>
+
+								</div>
+								<div class="form-row">
+									<div class="col-md-6 mb-3">
+										<label for="form_rfc">RFC</label>
+										<input type="text" class="form-control" id="form_rfc" placeholder="Last name"
+											value="" required>
+										<div class="invalid-feedback">
+											RFC requerido!
+										</div>
+										<div class="valid-feedback">
+											Ok!
+										</div>
+									</div>
+									<div class="col-md-6 mb-3">
+										<label for="form_pais">País</label>
+										<select class="form-control" id="form_pais" required>
+											<option selected></option>
+											<option value="1">México</option>
+											<option value="2">U.S.A</option>
+											<option value="3">Canada</option>
+										</select>
+										<div class="invalid-feedback">
+											Please provide a valid city.
+										</div>
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="form-check">
+										<input class="form-check-input" type="checkbox" value="" id="invalidCheck"
+											required>
+										<label class="form-check-label" for="invalidCheck">
+											Acepto términos y condiciones.
+										</label>
+										<div class="invalid-feedback">
+											Debes aceptar terminos antes de continuar.
+										</div>
+									</div>
+								</div>
+								<button class="btn btn-primary" type="submit">Buscar</button>
+							</form>
+
+							<div class="row">
+								<p>.</p>
+							</div>
+
+							<hr class="my-4">
+
+							<!--<div class="jumbotron">
+
+								<p class="lead" id="lambdaText">information.</p>
+								<hr class="my-4">
+							</div>-->
+
+							<div class="row">
+								<p>.</p>
+							</div>
+
+
+							<div id="accordion">
+								<div class="card">
+									<div class="card-header alert-primary" id="headingOne">
+										<h5 class="mb-0">
+											<button class="btn btn-link" data-toggle="collapse"
+												data-target="#collapseOne" aria-expanded="true"
+												aria-controls="collapseOne">
+												Archivo "SAT"
+											</button>
+										</h5>
+									</div>
+
+									<div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+										data-parent="#accordion">
+										<div class="card-body">
+											<div id="lambdaText"></div>
+										</div>
+									</div>
+								</div>
+								<div class="card">
+									<div class="card-header alert-danger" id="headingTwo">
+										<h5 class="mb-0">
+											<button class="btn btn-link collapsed" data-toggle="collapse"
+												data-target="#collapseTwo" aria-expanded="false"
+												aria-controls="collapseTwo">
+												CONDUSEF
+											</button>
+										</h5>
+									</div>
+									<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+										data-parent="#accordion">
+										<div class="card-body">
+											Segunda Información.
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="row">
+								<p>.</p>
+							</div>
+
+							<div class="row justify-content-center">
+								<div class="col-md-6 mb-3">
+									<label for="fuentesDiv">Fuentes</label>
+									<textarea type="text" class="form-control" id="fuentesDiv" rows="3"
+										disabled> Fuente 1 </textarea>
+								</div>
+								<div class="col-md-6 mb-3">
+									<label for="chart_div">Nivel de Riesgo</label>
+									<div id="chart_div" style="width: 400px; height: 120px;"></div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+				<!--Individual-->
+				<div class="tab-pane " id="profile" role="tabpanel" aria-labelledby="profile-tab">
+					<div class="row">
+						<p>.</p>
+					</div>
+					<div class="row justify-content-center">
+						<div class="col-md-8">
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container" id="globalFooterBarDiv"></div>
+
+
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+		crossorigin="anonymous"></script>
+
+	<script>window.jQuery || document.write('<script src="assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+	<script src="assets/js/vendor/popper.min.js"></script>
+	<script src="dist/js/bootstrap.min.js"></script>
+	<script src="assets/js/vendor/holder.min.js"></script>
+	<script src="js/awsTools.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script>
+		jQuery("#menuBarDiv").load("globalMenuBar.html");
+		jQuery("#globalFooterBarDiv").load("globalFooterBar.html");
+	</script>
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+	<script>
+		Holder.addTheme('thumb', {
+			bg: '#55595c',
+			fg: '#eceeef',
+			text: 'Thumbnail'
+		});
+	</script>
+
+	<script>
+		// Example starter JavaScript for disabling form submissions if there are invalid fields
+		(function () {
+			'use strict';
+			window.addEventListener('load', function () {
+				// Fetch all the forms we want to apply custom Bootstrap validation styles to
+				var forms = document.getElementsByClassName('needs-validation');
+				// Loop over them and prevent submission
+				var validation = Array.prototype.filter.call(forms, function (form) {
+					form.addEventListener('submit', function (event) {
+						if (form.checkValidity() === false) {
+							event.preventDefault();
+							event.stopPropagation();
+						}
+						form.classList.add('was-validated');
+					}, false);
+				});
+			}, false);
+		})();
+	</script>
+
+	<script type="text/javascript">
+		google.charts.load('current', {'packages': ['gauge']});
+		google.charts.setOnLoadCallback(drawChart);
+
+		function drawChart() {
+
+			var data = google.visualization.arrayToDataTable([
+				['Label', 'Value'],
+				['Riesgo', 50]
+			]);
+
+			var options = {
+				width: 600, height: 180,
+				redFrom: 66, redTo: 100,
+				yellowFrom: 33, yellowTo: 66,
+				greenFrom: 0, greenTo: 33,
+				minorTicks: 5
+			};
+
+			var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
+
+			chart.draw(data, options);
+
+
+		}
+	</script>
+</body>
+
+</html>
