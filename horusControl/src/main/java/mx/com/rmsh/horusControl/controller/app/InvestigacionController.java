@@ -25,6 +25,8 @@ public class InvestigacionController {
 
 		System.out.println(investigacionRequest.toString());
 		
+		//arraylist
+		
 		response = gson.toJson(service.getAWSKendraResponse(investigacionRequest));	
 
 		System.out.println("********* [Controller] response : " + response);
