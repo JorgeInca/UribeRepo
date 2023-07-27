@@ -12,7 +12,7 @@ function consumeAws() {
 	var var_rfc = $("#form_rfc").val();
 	var var_pais = $("#form_pais").val();
 
-	if (var_rfc === "" || var_lastname === "" || var_rfc === "" || var_pais === "") {
+	if (var_rfc === ""  || var_rfc === "" || var_pais === "") {
 		return;
 	}
 
@@ -33,9 +33,24 @@ function consumeAws() {
 
 			$("#lambdaText").empty();
 
-			console.log(JSON.stringify(data));
+			for (let x in data.body.origen) {
+				
+				$('#lambdaText').append('<br><div class="badge badge-info">'+data.body.origen[x].fuente+'</a>');
+				$('#lambdaText').append('<br>');
+				$('#lambdaText').append('<br>...<div>'+data.body.origen[x].texto+'</a>...');
+				$('#lambdaText').append('<br><a href="'+data.body.origen[x].url+'">'+data.body.origen[x].url+'</a>');
+				$('#lambdaText').append('<br><hr class="my-4">');
+					
+				//console.log(x + ": " + data.body.origen[x].url)
+				
+			}
+			
+			//console.log(JSON.stringify(data));
 
-			$('#lambdaText').text(data.mensaje);
+
+
+			//var obj = $('#lambdaText').text(JSON.stringify(data));
+			//obj.html(obj.html().replace(/\n/g, '<br/>'));
 
 
 
@@ -47,3 +62,4 @@ function consumeAws() {
 	});
 
 }
+

@@ -3,7 +3,10 @@ package mx.com.rmsh.horusControl.service;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
+import com.google.gson.Gson;
+
 import mx.com.rmsh.horusControl.vo.Investigacion;
+import mx.com.rmsh.horusControl.vo.InvestigacionLAMBDA;
 import mx.com.rmsh.horusControl.vo.InvestigacionRequest;
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
 import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
@@ -18,7 +21,7 @@ import software.amazon.awssdk.services.lambda.model.LambdaException;
 public class AWSServiceImpl implements AWSService {
 
 	@Override
-	public Investigacion getAWSKendraResponse(InvestigacionRequest investigacionRequest) {
+	public InvestigacionLAMBDA getAWSKendraResponse(InvestigacionRequest investigacionRequest) {
 
 		String nombreLambda = "arn:aws:lambda:us-east-1:100906894518:function:SearchEnginePost";
 
@@ -34,11 +37,19 @@ public class AWSServiceImpl implements AWSService {
 
 		
 		awsLambda.close();
-
+		
+		Gson gson = new Gson();
+		InvestigacionLAMBDA lambda = new InvestigacionLAMBDA();
+		
+		respuestaInvestigacion.setMensaje( respuestaInvestigacion.getMensaje().replaceAll("\n", "\\n") );
+		
+		lambda = gson.fromJson(respuestaInvestigacion.getMensaje() , InvestigacionLAMBDA.class); 
+		 
+		System.out.println( "Dato imprimie:" + lambda);
 	
 
 		// TODO Auto-generated method stub
-		return respuestaInvestigacion;
+		return lambda;
 	}
 
 	// snippet-start:[lambda.java2.invoke.main]
@@ -60,7 +71,7 @@ public class AWSServiceImpl implements AWSService {
 
 			res = awsLambda.invoke(request);
 			String value = res.payload().asUtf8String();
-			System.out.println("Se logro" + value);
+			//System.out.println("Se logro" + value);
 
 			return value;
 
