@@ -47,7 +47,7 @@
 						<p>.</p>
 					</div>
 					<div class="row justify-content-center">
-						<div class="col-md-8">
+						<div class="col-md-10">
 							<form class="needs-validation" onsubmit="consumeAws();return false" novalidate>
 								<div class="form-row">
 									<div class="col-md-6 mb-3">
@@ -183,6 +183,8 @@
 						</div>
 					</div>
 				</div>
+				
+				
 				<!--Masiva-->
 				<div class="tab-pane " id="profile" role="tabpanel" aria-labelledby="profile-tab">
 					<div class="row">
@@ -191,7 +193,11 @@
 					<div class="row justify-content-center">
 						<div class="col-md-8">
 							<!-- Dropzone -->
-							<form action="/target" class="dropzone" id="my-dropzone"></form>
+							<form method="POST" action="/upload" enctype="multipart/form-data" class="dropzone" id="my-awesome-dropzone">
+								<div class="row"><input type="file" name="file" /></div>
+								<div class="row"><input type="submit" value="Submit" /></div>
+								
+							</form>
 							<!-- End Dropzone -->
 						</div>
 					</div>
@@ -280,10 +286,15 @@
 	</script>
 
 	<script>
-		// Note that the name "myDropzone" is the camelized
-		// id of the form.
-		Dropzone.options.myDropzone = {
-			// Configuration options go here
+		Dropzone.options.myGreatDropzone = { // camelized version of the `id`
+			paramName: "file", // The name that will be used to transfer the file
+			maxFilesize: 2, // MB
+			accept: function (file, done) {
+				if (file.name == "justinbieber.jpg") {
+					done("Naha, you don't.");
+				}
+				else {done();}
+			}
 		};
 	</script>
 </body>

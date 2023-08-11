@@ -1,10 +1,25 @@
 package mx.com.rmsh.horusControl.controller.app;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Iterator;
+
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.Gson;
 
@@ -24,13 +39,80 @@ public class InvestigacionController {
 		Gson gson = new Gson();
 
 		System.out.println(investigacionRequest.toString());
-		
-		//arraylist
-		
-		response = gson.toJson(service.getAWSKendraResponse(investigacionRequest));	
+
+		// arraylist
+
+		response = gson.toJson(service.getAWSKendraResponse(investigacionRequest));
 
 		System.out.println("********* [Controller] response : " + response);
 
 		return response;
+	}
+
+	@PostMapping("/upload")
+	public ModelAndView fileUpload(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
+
+		String UPLOAD_FOLDER = "C://test//";
+
+		if (file.isEmpty()) {
+			return new ModelAndView("status", "message", "Please select a file and try again");
+		}
+
+		try {
+
+			XSSFWorkbook excelPeticion;
+
+			String lowerCaseFileName = file.getOriginalFilename().toLowerCase();
+			if (lowerCaseFileName.endsWith(".xlsx")) {
+
+				excelPeticion = new XSSFWorkbook(file.getInputStream());
+
+				XSSFSheet sheet = excelPeticion.getSheetAt(0);
+
+				Iterator<Row> rowIterator = sheet.iterator();
+
+				while (rowIterator.hasNext()) {
+
+					Row row = rowIterator.next();
+
+					// For each row, iterate through all the
+					// columns
+					Iterator<Cell> cellIterator = row.cellIterator();
+
+					while (cellIterator.hasNext()) {
+
+						Cell cell = (Cell) cellIterator.next();
+
+						// Checking the cell type and format
+						// accordingly
+						switch (cell.getCellType()) {
+
+						// Case 1
+						case NUMERIC:
+							System.out.println(cell.getNumericCellValue());
+							break;
+
+						// Case 2
+						case STRING:
+							System.out.println(cell.getStringCellValue());
+							break;
+						}
+					}
+				}
+
+			} else {
+				System.out.println("notFormatted");
+			}
+
+			// read and write the file to the selected location-
+			byte[] bytes = file.getBytes();
+			Path path = Paths.get(UPLOAD_FOLDER + file.getOriginalFilename());
+			Files.write(path, bytes);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return new ModelAndView("status", "message", "File Uploaded sucessfully");
 	}
 }
