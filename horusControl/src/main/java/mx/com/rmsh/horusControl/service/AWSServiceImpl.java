@@ -33,7 +33,7 @@ public class AWSServiceImpl implements AWSService {
 				.build();
 		
 		Investigacion respuestaInvestigacion = new Investigacion();
-		respuestaInvestigacion.setMensaje(invokeFunction(awsLambda, functionName,investigacionRequest));
+		respuestaInvestigacion.setJson(invokeFunction(awsLambda, functionName,investigacionRequest));
 
 		
 		awsLambda.close();
@@ -41,9 +41,9 @@ public class AWSServiceImpl implements AWSService {
 		Gson gson = new Gson();
 		InvestigacionLAMBDA lambda = new InvestigacionLAMBDA();
 		
-		respuestaInvestigacion.setMensaje( respuestaInvestigacion.getMensaje().replaceAll("\n", "\\n") );
+		respuestaInvestigacion.setJson( respuestaInvestigacion.getJson().replaceAll("\n", "\\n") );
 		
-		lambda = gson.fromJson(respuestaInvestigacion.getMensaje() , InvestigacionLAMBDA.class); 
+		lambda = gson.fromJson(respuestaInvestigacion.getJson() , InvestigacionLAMBDA.class); 
 		 
 		System.out.println( "Dato imprimie:" + lambda);
 	

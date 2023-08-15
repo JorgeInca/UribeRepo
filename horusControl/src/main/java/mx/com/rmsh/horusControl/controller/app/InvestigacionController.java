@@ -24,13 +24,18 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.google.gson.Gson;
 
 import mx.com.rmsh.horusControl.service.AWSService;
+import mx.com.rmsh.horusControl.service.InvestigacionService;
 import mx.com.rmsh.horusControl.vo.InvestigacionRequest;
+import mx.com.rmsh.horusControl.vo.ReporteRequest;
 
 @Controller
 public class InvestigacionController {
 
 	@Autowired
-	AWSService service;
+	AWSService awsService;
+	
+	@Autowired
+	InvestigacionService investigacionService;
 
 	@RequestMapping(value = "/consumeLambda", method = RequestMethod.POST)
 	public @ResponseBody String posted(InvestigacionRequest investigacionRequest) {
@@ -42,9 +47,26 @@ public class InvestigacionController {
 
 		// arraylist
 
-		response = gson.toJson(service.getAWSKendraResponse(investigacionRequest));
+		response = gson.toJson(awsService.getAWSKendraResponse(investigacionRequest));
 
-		System.out.println("********* [Controller] response : " + response);
+		System.out.println("********* [Controller] consumeLambda : " + response);
+
+		return response;
+	}
+	
+	@RequestMapping(value = "/consultaReportes", method = RequestMethod.POST)
+	public @ResponseBody String reporte(ReporteRequest reporteRequest) {
+
+		String response = "";
+		Gson gson = new Gson();
+
+		System.out.println(reporteRequest.toString());
+
+		// arraylist
+
+		response = gson.toJson(investigacionService.getReportes(reporteRequest));
+
+		System.out.println("********* [Controller] consultaInvestigaciones : " + response);
 
 		return response;
 	}
