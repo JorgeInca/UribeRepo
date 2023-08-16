@@ -33,7 +33,7 @@
 		<p class="lead">Consulta de los reportes previamente realizados</p>
 	</div>
 	
-	<button onclick="cargaListaInvestigaciones()" class="btn btn-primary">Prueba</button>
+	<!--  <button onclick="cargaListaInvestigaciones()" class="btn btn-primary">Prueba</button> -->
 	
 	<!--  <button onclick="consumeInvestigacionReporte()"
 	class="btn btn-primary"> Iniciar</button> -->
@@ -165,11 +165,8 @@
 	<script src="assets/js/vendor/popper.min.js"></script>
 	<script src="dist/js/bootstrap.min.js"></script>
 	<script src="assets/js/vendor/holder.min.js"></script>
+	<script src="js/awsTools.js"></script>
 	<script src="js/reportesTools.js"></script>
-	
-	   	<!-- datatables JS -->
-    <script type="text/javascript" src="datatables/datatables.min.js"></script>     
-    <script type="text/javascript" src="js/mainDatatable.js"></script>  
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	
 	<script>
@@ -185,10 +182,35 @@
 			text: 'Thumbnail'
 		});
 	</script>
+	
+	
+	<script>
+		// Example starter JavaScript for disabling form submissions if there are invalid fields
+		(function () {
+			'use strict';
+			window.addEventListener('load', function () {
+				// Fetch all the forms we want to apply custom Bootstrap validation styles to
+				var forms = document.getElementsByClassName('needs-validation');
+				// Loop over them and prevent submission
+				var validation = Array.prototype.filter.call(forms, function (form) {
+					form.addEventListener('submit', function (event) {
+						if (form.checkValidity() === false) {
+							event.preventDefault();
+							event.stopPropagation();
+						}
+						form.classList.add('was-validated');
+					}, false);
+				});
+			}, false);
+		})();
+	</script>
+	
+	
+	<!-- datatables JS -->
+    <script type="text/javascript" src="datatables/datatables.min.js"></script>     
+    <script type="text/javascript" src="js/mainDatatable.js"></script> 
+	
 
-
-
-    
     
   </body>
 </html>
