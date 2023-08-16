@@ -19,16 +19,34 @@ public class InvestigacionDaoImpl implements InvestigacionDao {
 	@Override
 	public List<Investigacion> getReportes(ReporteRequest request) {
 
-		return jdbcTemplate.query("select * from investigacion order by fecha_creacion;",
+		return jdbcTemplate.query("select \r\n"
+				+ "A.id_investigacion as id_investigacion,\r\n"
+				+ "B.id_usuario as idUsuario,\r\n"
+				+ "B.nombre as nombreUsuario,\r\n"
+				+ "C.id_empresa as idEmpresa,\r\n"
+				+ "C.nombre as nombreEmpresa,\r\n"
+				+ "A.apellidos as apellidos,\r\n"
+				+ "A.primer_nombre as primerNombre,\r\n"
+				+ "A.segundo_nombre as segundoNombre,\r\n"
+				+ "A.json_desc as json_desc,\r\n"
+				+ "A.nivel_riesgo_inicial as riesgoInicial,\r\n"
+				+ "A.nivel_riesgo_final as riesgoFinal,\r\n"
+				+ "A.fecha_creacion as fecha_creacion,\r\n"
+				+ "A.estatus as estatus\r\n"
+				+ "from investigacion A inner join usuario B on  A.id_usuario = B.id_usuario left join empresa C on  B.id_empresa = C.id_empresa where A.estatus = 1 order by A.fecha_creacion desc;",
 				
 				(rs, rowNum) -> new Investigacion(
 						rs.getLong("id_investigacion"), 
-						rs.getString("nombre"),
-						rs.getLong("id_usuario"), 
-						rs.getLong("id_empresa"), 
+						rs.getLong("idUsuario"),
+						rs.getString("nombreUsuario"), 
+						rs.getLong("idEmpresa"), 
+						rs.getString("nombreEmpresa"), 
+						rs.getString("apellidos"), 
+						rs.getString("primerNombre"), 
+						rs.getString("segundoNombre"), 
 						rs.getString("json_desc"), 
-						rs.getInt("nivel_riesgo_inicial"), 
-						rs.getInt("nivel_riesgo_final"), 
+						rs.getInt("riesgoInicial"), 
+						rs.getInt("riesgoFinal"), 
 						rs.getTimestamp("fecha_creacion"),
 						rs.getInt("estatus")
 						));

@@ -33,7 +33,7 @@
 		<p class="lead">Consulta de los reportes previamente realizados</p>
 	</div>
 	
-	<!--  <button onclick="cargaListaInvestigaciones()" class="btn btn-primary">Prueba</button> -->
+	<button onclick="cargaListaInvestigaciones()" class="btn btn-danger" id="buttontest">Prueba</button>
 	
 	<!--  <button onclick="consumeInvestigacionReporte()"
 	class="btn btn-primary"> Iniciar</button> -->
@@ -47,103 +47,19 @@
                         <thead>
                             <tr>                            
                                 <th>Folio</th>
-                                <th>Cliente</th>
-                                <th>Nombre</th>                           
-                                <th>Año de Ingreso</th>
-                                <th>Descarga</th>
+                                <th>Usuario</th>
+                                <th>Cliente</th>                           
+                                <th>Apellidos/RS</th>
+                                <th>Nombres</th>
+                                <th>Nivel de Riesgo</th>
+                                <th>Fecha</th>
+                                <th>Editar</th>
                             </tr>
                         </thead>
+                        
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>JORGE LOPEZ</td>                              
-                                <td>PEPSICO.SA.de C.V.</td>
-                                <td>2011/04/25</td>
-                                <td><a href="#"><i class="bi bi-cloud-download"></i></a></td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>CARLOS BUSTAMANTE</td>                              
-                                <td>KAWASAKI MOTORS.SA.de C.V.</td>
-                                <td>2011/04/25</td>
-                                <td><a href="#"><i class="bi bi-cloud-download"></i></a></td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>OMAR HERRERA LOPEZ</td>                              
-                                <td>BIMBO.SA.de C.V.</td>
-                                <td>2011/04/25</td>
-                                <td><a href="#"><i class="bi bi-cloud-download"></i></a></td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>EDUARDO GARCIA</td>                              
-                                <td>SONIDO @DISCOTEK.SA.de C.V.</td>
-                                <td>2011/04/25</td>
-                                <td><a href="#"><i class="bi bi-cloud-download"></i></a></td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>MARIO BAHENA LOPEZ</td>                              
-                                <td>DOJO NINJA.SA.de C.V.</td>
-                                <td>2011/04/25</td>
-                                <td><a href="#"><i class="bi bi-cloud-download"></i></a></td>
-                            </tr>
-                            <tr>
-                                <td>6</td>
-                                <td>EDWIN PEREZ LOPEZ</td>                              
-                                <td>MTV MUSIC.SA.de C.V.</td>
-                                <td>2011/04/25</td>
-                                <td><a href="#"><i class="bi bi-cloud-download"></i></a></td>
-                            </tr>
-                            <tr>
-                                <td>7</td>
-                                <td>OMAR HERRERA</td>                              
-                                <td>NISSAN MOTORS.SA.de C.V.</td>
-                                <td>2011/04/25</td>
-                                <td><a href="#"><i class="bi bi-cloud-download"></i></a></td>
-                            </tr>
-                            <tr>
-                                <td>8</td>
-                                <td>NICOLA TESLA</td>                              
-                                <td>PROGRAMADORES.SA.de C.V.</td>
-                                <td>2011/04/25</td>
-                                <td><a href="#"><i class="bi bi-cloud-download"></i></a></td>
-                            </tr>
-                            <tr>
-                                <td>9</td>
-                                <td>REYNALDO ERAZO</td>                              
-                                <td>VETERINARIA PURINA.SA.de C.V.</td>
-                                <td>2011/04/25</td>
-                                <td><a href="#"><i class="bi bi-cloud-download"></i></a></td>
-                            </tr>
-                            <tr>
-                                <td>10</td>
-                                <td>FERNANDO SALGADO</td>                              
-                                <td>GYM SPORT.SA.de C.V.</td>
-                                <td>2011/04/25</td>
-                                <td><a href="#"><i class="bi bi-cloud-download"></i></a></td>
-                            </tr>
-                            <tr>
-                                <td>11</td>
-                                <td>RUBI SOTO</td>                              
-                                <td>BOUTIQUE.SA.de C.V.</td>
-                                <td>2011/04/25</td>
-                                <td><a href="#"><i class="bi bi-cloud-download"></i></a></td>
-                            </tr>
-                            <tr>
-                                <td>12</td>
-                                <td>MAGALY ESTRADA</td>                              
-                                <td>FLORERIA.SA.de C.V.</td>
-                                <td>2011/04/25</td>
-                                <td><a href="#"><i class="bi bi-cloud-download"></i></a></td>
-                            </tr>
-                            
-                            
-                            
-                            
-                            
-                        </tbody>        
+                        </tbody>       
+                         
                        </table>                  
                     </div>
                 </div>
@@ -152,7 +68,6 @@
      
    
    	<div class="container" id="globalFooterBarDiv"></div>
-   	
 
 
 	<!-- Bootstrap core JavaScript
@@ -166,7 +81,6 @@
 	<script src="assets/js/vendor/popper.min.js"></script>
 	<script src="dist/js/bootstrap.min.js"></script>
 	<script src="assets/js/vendor/holder.min.js"></script>
-	<script src="js/awsTools.js"></script>
 	<script src="js/reportesTools.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	
@@ -183,7 +97,7 @@
 			text: 'Thumbnail'
 		});
 	</script>
-			
+
 	<script>
 		// Example starter JavaScript for disabling form submissions if there are invalid fields
 		(function () {
@@ -205,12 +119,13 @@
 		})();
 	</script>
 	
-	
-	<!-- datatables JS -->
-    <script type="text/javascript" src="datatables/datatables.min.js"></script>     
-    <script type="text/javascript" src="js/mainDatatable.js"></script> 
-	
 
+   	<!-- datatables JS -->
+    <script type="text/javascript" src="datatables/datatables.min.js"></script>    
+     
+    <script type="text/javascript" src="js/mainDatatable.js"></script>  
+
+    
     
   </body>
 </html>

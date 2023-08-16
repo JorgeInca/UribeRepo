@@ -1,3 +1,4 @@
+var tableGlobal;
 /**
  * 
  */
@@ -6,7 +7,7 @@
 //$('#example').DataTable(); //Para inicializar datatables de la manera más simple
 
 $(document).ready(function() {    
-    $('#horus').DataTable({
+    tableGlobal = $('#horus').DataTable({
     //para cambiar el lenguaje a español
         "language": {
                 "lengthMenu": "Mostrar _MENU_ registros",
