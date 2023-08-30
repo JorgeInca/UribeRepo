@@ -5,8 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.mysql.fabric.Response;
-
 import mx.com.rmsh.horusControl.dao.SensorDao;
 import mx.com.rmsh.horusControl.vo.SensorRequest;
 import mx.com.rmsh.horusControl.vo.SensorRow;

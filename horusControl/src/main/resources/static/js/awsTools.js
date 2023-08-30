@@ -1,3 +1,4 @@
+var investigacionGlobal;
 /**
  * 
  */
@@ -33,6 +34,8 @@ function consumeAws() {
 
 			$("#lambdaText").empty();
 
+			investigacionGlobal = data;
+
 			for (let x in data.body.origen) {
 
 				$('#lambdaText').append('<br><div class="badge badge-info">' + data.body.origen[x].fuente + '</a>');
@@ -43,18 +46,77 @@ function consumeAws() {
 
 				//console.log(x + ": " + data.body.origen[x].url)
 
+				//alert( JSON.stringify(investigacionGlobal) );
+
+				$("#guardaButtonInvestigacion").removeAttr('disabled');
+
 			}
 
-			var textoRegExpFirstname = new RegExp( var_firstname+ ' ' , 'gi' );
-			var textoRegExpLastname = new RegExp( var_lastname , 'gi' );
-			
+			var textoRegExpFirstname = new RegExp(var_firstname + ' ', 'gi');
+			var textoRegExpLastname = new RegExp(var_lastname, 'gi');
+
 			var html = $('#lambdaText').html();
-			
+
 			$('#lambdaText').html(
-				html.replace(textoRegExpFirstname, '<strong>'+var_firstname.toUpperCase()+'</strong>').replace(textoRegExpLastname, '<strong>'+var_lastname.toUpperCase()+'</strong>')
-			
+				html.replace(textoRegExpFirstname, '<strong>' + var_firstname.toUpperCase() + '</strong>').replace(textoRegExpLastname, '<strong>' + var_lastname.toUpperCase() + '</strong>')
+
 			);
 
+
+
+		},
+		error: function(xhr, ajaxOptions, thrownError) {
+
+		}
+
+	});
+
+}
+
+function guardaInvestigacion() {
+
+	console.log('inicia guardardo');
+
+	var uri = "guardaInvestigacion";
+
+	var var_firstname = $("#form_firstName").val();
+	var var_lastname = $("#form_lastName").val();
+	var var_rfc = $("#form_rfc").val();
+	var var_pais = $("#form_pais").val();
+
+	if (!confirm("¡Deseas guardar la invesigacion?")) {
+		return;
+	}
+
+	var investigacionRequest = {
+		firstname: var_firstname,
+		lastname: var_lastname,
+		rfc: var_rfc,
+		pais: var_pais,
+		investigacionJson: JSON.stringify(investigacionGlobal)
+	};
+
+
+
+	$.ajax({
+		url: uri,
+		type: 'POST',
+		dataType: 'json',
+		data: investigacionRequest,
+		success: function(data) {
+
+			alert('El FOLIO GENERADO ES ' + data);
+
+		
+			$("#form_firstName").prop('disabled', true);
+			$("#form_lastName").prop('disabled', true);
+			$("#form_rfc").prop('disabled', true);
+			$("#form_pais").prop('disabled', true);
+			
+			$("#rowFolio").show(); //hide
+			
+			$("#noFolio").empty();
+			$('#noFolio').append('<strong> '+data + ' </strong>');
 
 
 		},

@@ -31,7 +31,7 @@ public class InvestigacionLAMBDA {
 class Body {
 	
 	public ArrayList<Origen> origen;
-	public int nivel_riesgo;
+	public Integer nivel_riesgo;
 	public ArrayList<String> parametros_busqueda;
 	public ArrayList<String> fuentes;
 	

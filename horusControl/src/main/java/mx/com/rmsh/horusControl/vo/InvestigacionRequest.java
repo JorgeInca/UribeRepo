@@ -6,6 +6,8 @@ public class InvestigacionRequest {
 	public String lastname;
 	public String rfc;
 	public String pais;
+	public String investigacionJson;
+	public String json;
 
 	public String getFirstname() {
 		return firstname;
@@ -39,10 +41,26 @@ public class InvestigacionRequest {
 		this.pais = pais;
 	}
 
+	public String getInvestigacionJson() {
+		return investigacionJson;
+	}
+
+	public void setInvestigacionJson(String investigacionJson) {
+		this.investigacionJson = investigacionJson;
+	}
+
+	public String getJson() {
+		return json;
+	}
+
+	public void setJson(String json) {
+		this.json = json;
+	}
+
 	@Override
 	public String toString() {
 		return "InvestigacionRequest [firstname=" + firstname + ", lastname=" + lastname + ", rfc=" + rfc + ", pais="
-				+ pais + "]";
+				+ pais + ", investigacionJson=" + investigacionJson + ", json=" + json + "]";
 	}
 
 }

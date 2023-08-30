@@ -62,6 +62,14 @@
 						<p>.</p>
 					</div>
 					<div class="row justify-content-center">
+						<div id="rowFolio" class="col-md-2">
+							<div class="alert alert-info" role="alert">Folio generado:    <span id="noFolio"></span></div>
+						</div>
+					</div>
+					<div class="row">
+						<p>.</p>
+					</div>
+					<div class="row justify-content-center">
 						<div class="col-md-10">
 							<form class="needs-validation" onsubmit="consumeAws();return false" novalidate>
 								<div class="form-row">
@@ -121,7 +129,10 @@
 										</div>
 									</div>
 								</div>
-								<button class="btn btn-primary" type="submit">Buscar</button>
+								<div class="row justify-content-center">
+									<div class="col-md-6 mb-3"><button class="btn btn-primary" type="submit">Buscar</button></div>
+									<div class="col-md-6 mb-3"><button class="btn btn-success" type="button" id="guardaButtonInvestigacion" onclick="guardaInvestigacion()" disabled>Guardar Reporte</button></div>
+								</div>
 							</form>
 
 							<div class="row">
@@ -474,6 +485,10 @@
 
 		}
 	</script>
+	
+	<script>
+		$("#rowFolio").hide(); //hide
+	</script>
 
 	<script>
 		Dropzone.options.myGreatDropzone = { // camelized version of the `id`
@@ -487,6 +502,8 @@
 			}
 		};
 	</script>
+	
+	
 	
 
 	

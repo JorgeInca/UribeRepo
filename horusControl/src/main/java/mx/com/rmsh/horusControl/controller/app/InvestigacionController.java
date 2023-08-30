@@ -13,6 +13,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,9 +23,11 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import mx.com.rmsh.horusControl.service.AWSService;
 import mx.com.rmsh.horusControl.service.InvestigacionService;
+import mx.com.rmsh.horusControl.vo.InvestigacionLAMBDA;
 import mx.com.rmsh.horusControl.vo.InvestigacionRequest;
 import mx.com.rmsh.horusControl.vo.ReporteRequest;
 
@@ -33,6 +36,9 @@ public class InvestigacionController {
 
 	@Autowired
 	AWSService awsService;
+	
+	@Autowired
+	InvestigacionService service;
 	
 	@Autowired
 	InvestigacionService investigacionService;
@@ -50,6 +56,23 @@ public class InvestigacionController {
 		response = gson.toJson(awsService.getAWSKendraResponse(investigacionRequest));
 
 		System.out.println("********* [Controller] consumeLambda : " + response);
+
+		return response;
+	}
+	
+	@RequestMapping(value = "/guardaInvestigacion", method = RequestMethod.POST)
+	public @ResponseBody String guardaInvestigacion(InvestigacionRequest investigacionRequest) {
+
+		String response = "";
+
+		final GsonBuilder gsonBuilder = new GsonBuilder();
+		final Gson gson = gsonBuilder.create();
+
+		System.out.println(investigacionRequest.toString());
+
+		response = service.guardaInvestigacion(investigacionRequest) + "";
+		
+		System.out.println("********* [Controller] guardaInvestigacion : " + response);
 
 		return response;
 	}
