@@ -204,7 +204,7 @@
 								</div>
 								<div class="col-md-6 mb-3">
 									<label for="chart_div">Nivel de Riesgo</label>
-									<div id="chart_div" style="width: 400px; height: 120px;"></div>
+									<div id="gaugeArea"> <canvas id="foo" width="200" height="100"></canvas> </div>
 								</div>
 							</div>
 
@@ -455,35 +455,43 @@
     <script type="text/javascript" src="datatables/datatables.min.js"></script>     
     <script type="text/javascript" src="js/mainDatatable.js"></script>  
 	
-	
+	<script type="text/javascript" src="https://bernii.github.io/gauge.js/dist/gauge.min.js"></script>  
 	
 	
 
 	<script type="text/javascript">
-		google.charts.load('current', {'packages': ['gauge']});
-		google.charts.setOnLoadCallback(drawChart);
+		//https://bernii.github.io/gauge.js/
+		
+					var opts = {
+						angle: -0.08, // The span of the gauge arc
+						lineWidth: 0.51, // The line thickness
+						radiusScale: 1, // Relative radius
+						pointer: {
+							length: 0.74, // // Relative to gauge radius
+							strokeWidth: 0.06, // The thickness
+							color: '#000000' // Fill color
+						},
+						staticZones: [
+							{strokeStyle: "#30B32D", min: 0, max: 1}, // Red from 100 to 130
+							{strokeStyle: "#FFDD00", min: 1, max: 2}, // Yellow
+							{strokeStyle: "#F03E3E", min: 2, max: 3}
+						],
+						limitMax: false,     // If false, max value increases automatically if value > maxValue
+						limitMin: false,     // If true, the min value of the gauge will be fixed
+						colorStart: '#6F6EA0',   // Colors
+						colorStop: '#C0C0DB',    // just experiment with them
+						strokeColor: '#EEEEEE',  // to see which ones work best for you
+						generateGradient: true,
+						highDpiSupport: true,     // High resolution support
 
-		function drawChart() {
-
-			var data = google.visualization.arrayToDataTable([
-				['Label', 'Value'],
-				['Riesgo', 50]
-			]);
-
-			var options = {
-				width: 600, height: 180,
-				redFrom: 66, redTo: 100,
-				yellowFrom: 33, yellowTo: 66,
-				greenFrom: 0, greenTo: 33,
-				minorTicks: 5
-			};
-
-			var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
-
-			chart.draw(data, options);
-
-
-		}
+					};
+					var target = document.getElementById('foo'); // your canvas element
+					var gauge = new Gauge(target).setOptions(opts); // create sexy gauge!
+					gauge.maxValue = 3; // set max gauge value
+					gauge.setMinValue(0);  // Prefer setter over gauge.minValue = 0
+					gauge.animationSpeed = 75; // set animation speed (32 is default value)
+					gauge.set(1.5); // set actual value
+			
 	</script>
 	
 	<script>

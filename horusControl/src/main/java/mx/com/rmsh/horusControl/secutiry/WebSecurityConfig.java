@@ -3,6 +3,7 @@ package mx.com.rmsh.horusControl.secutiry;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -13,9 +14,15 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
+import mx.com.rmsh.horusControl.dao.SecurityDaoImpl;
+import mx.com.rmsh.horusControl.vo.UserHorus;
+
 @Configuration
 //@EnableWebSecurity 
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
+	
+	@Autowired
+	SecurityDaoImpl daoUser;
 
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
@@ -47,41 +54,25 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
 	 @Bean
 	public UserDetailsService userDetailsService() {
+		 
+		 
+		 List <UserDetails> userList = new ArrayList<UserDetails>();		 
+		 
+		 
+		 for(UserHorus aux : daoUser.getUsers()){
+			 
+			 UserDetails actualUser =
+					 User.withDefaultPasswordEncoder()
+						.username(aux.getName())
+						.password(aux.getPassword())
+						.roles("USER")
+						.build();
+			 
+			 userList.add(actualUser);
+			 
+			}
+		 
 			
-		 UserDetails uli =
-				 User.withDefaultPasswordEncoder()
-					.username("Uli")
-					.password("horus123")
-					.roles("USER")
-					.build();
-		 
-		 UserDetails generic =
-				 User.withDefaultPasswordEncoder()
-					.username("Diego")
-					.password("horus123")
-					.roles("USER")
-					.build();
-		 UserDetails ashley =
-				 User.withDefaultPasswordEncoder()
-					.username("Ashley")
-					.password("horus222")
-					.roles("USER")
-					.build();
-		 
-		 UserDetails charly =
-				 User.withDefaultPasswordEncoder()
-					.username("charly")
-					.password("horus222")
-					.roles("USER")
-					.build();
-		 
-		 List <UserDetails> userList = new ArrayList<UserDetails>();
-		 
-		 userList.add(uli);
-		 userList.add(generic);
-		 userList.add(ashley);
-		 userList.add(charly);
-
 		return new InMemoryUserDetailsManager(userList);
 		}	 	
 	
