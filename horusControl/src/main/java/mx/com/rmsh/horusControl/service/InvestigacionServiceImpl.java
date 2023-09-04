@@ -6,15 +6,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import mx.com.rmsh.horusControl.dao.InvestigacionDao;
+import mx.com.rmsh.horusControl.dao.SecurityDao;
 import mx.com.rmsh.horusControl.vo.Investigacion;
 import mx.com.rmsh.horusControl.vo.InvestigacionRequest;
 import mx.com.rmsh.horusControl.vo.ReporteRequest;
+import mx.com.rmsh.horusControl.vo.UserHorus;
 
 @Service
 public class InvestigacionServiceImpl implements InvestigacionService {
 
 	@Autowired
 	InvestigacionDao dao;
+	
+	@Autowired
+	SecurityDao daoUser;
+	
 
 	@Override
 	public List<Investigacion> getReportes(ReporteRequest request) {
@@ -27,6 +33,14 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 		// TODO Auto-generated method stub
 		return dao.guardaInvestigacion(request);
 	}
+
+
+	@Override
+	public List<UserHorus> getUser() {
+		return daoUser.getUser();
+	} 
+
+	
 
 
 }

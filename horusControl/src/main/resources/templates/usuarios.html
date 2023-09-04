@@ -33,9 +33,9 @@
 		<p class="lead">Pagina de Usuarios</p>
 	</div>
 	
-	<button onclick="cargaListaInvestigaciones()" class="btn btn-danger" id="buttontest">Prueba</button>
 	
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalUsuarios" data-whatever="@getbootstrap">Formulario</button>
+	
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalUsuarios" data-whatever="@getbootstrap">Nuevo Usuario</button>
 														
 							<hr class="my-4">
 
@@ -109,13 +109,11 @@
                         <thead>
                             <tr>                            
                                 <th>Id_usuario</th>
-                                <th>Nombre</th>
+                                <th>Nombre Usuario</th>
                                 <th>Email</th>                           
-                                <th>Fecha_creacion</th>
-                                <th>Estatus</th>
-                                <th>Id_empresa</th>
-                                <th>Rol</th>
-                                <th>Password</th>
+                                <th>Role</th>
+                                <th>Correo</th>
+                                <th>Editar</th>                               
                             </tr>
                         </thead>
                         
@@ -143,7 +141,7 @@
 	<script src="assets/js/vendor/popper.min.js"></script>
 	<script src="dist/js/bootstrap.min.js"></script>
 	<script src="assets/js/vendor/holder.min.js"></script>
-	<script src="js/reportesTools.js"></script>
+	<script src="js/usuarioTools.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	
 	<script>
@@ -181,6 +179,10 @@
 		})();
 	</script>
 	
+	
+	<script>
+	cargaListaUsuarios();
+	</script>
 	
 
 	

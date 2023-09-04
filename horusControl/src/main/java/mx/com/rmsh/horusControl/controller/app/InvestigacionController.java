@@ -30,6 +30,7 @@ import mx.com.rmsh.horusControl.service.InvestigacionService;
 import mx.com.rmsh.horusControl.vo.InvestigacionLAMBDA;
 import mx.com.rmsh.horusControl.vo.InvestigacionRequest;
 import mx.com.rmsh.horusControl.vo.ReporteRequest;
+import mx.com.rmsh.horusControl.vo.UserHorus;
 
 @Controller
 public class InvestigacionController {
@@ -42,6 +43,7 @@ public class InvestigacionController {
 	
 	@Autowired
 	InvestigacionService investigacionService;
+	
 
 	@RequestMapping(value = "/consumeLambda", method = RequestMethod.POST)
 	public @ResponseBody String posted(InvestigacionRequest investigacionRequest) {
@@ -93,6 +95,28 @@ public class InvestigacionController {
 
 		return response;
 	}
+	
+	
+	@RequestMapping(value = "/consultaUsuarios", method = RequestMethod.POST)
+	public @ResponseBody String usuario(UserHorus userHorus) {
+
+		String response = "";
+		Gson gson = new Gson();
+
+		System.out.println(userHorus.toString());
+
+		// arraylist
+
+		response = gson.toJson(investigacionService.getUser());
+
+		System.out.println("********* [Controller] consultaUsuarios : " + response);
+
+		return response;
+	}
+	
+	
+	
+	
 
 	@PostMapping("/upload")
 	public ModelAndView fileUpload(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {

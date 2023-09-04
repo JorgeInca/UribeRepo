@@ -59,7 +59,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 		 List <UserDetails> userList = new ArrayList<UserDetails>();		 
 		 
 		 
-		 for(UserHorus aux : daoUser.getUsers()){
+		 for(UserHorus aux : daoUser.getUser()){
 			 
 			 UserDetails actualUser =
 					 User.withDefaultPasswordEncoder()

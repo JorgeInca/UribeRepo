@@ -34,7 +34,9 @@ public class InvestigacionDaoImpl implements InvestigacionDao {
 			+ " A.nivel_riesgo_final as riesgoFinal,"
 			+ " A.fecha_creacion as fecha_creacion,"
 			+ " A.estatus as estatus "
-			+ " FROM investigacion A inner join usuario B on  A.id_usuario = B.id_usuario left join empresa C on  B.id_empresa = C.id_empresa where A.estatus = 1 order by A.fecha_creacion desc;";
+			+ " FROM investigacion A inner join usuario B on  A.id_usuario = B.id_usuario "
+			+ "left join empresa C on  B.id_empresa = C.id_empresa "
+			+ "where A.estatus = 1 order by A.fecha_creacion desc;";
 	
 	String QUERY_CREATE_REPORTEE=
 			"INSERT INTO `horusDatabase`.`investigacion`"
