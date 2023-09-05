@@ -34,9 +34,9 @@
 	</div>
 	
 	
-	
+	<div style="display:flex; justify-content:flex-end; width:90%; padding:0;">
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalUsuarios" data-whatever="@getbootstrap">Nuevo Usuario</button>
-														
+	</div>													
 							<hr class="my-4">
 
 							<!--<div class="jumbotron">
@@ -45,6 +45,8 @@
 								<hr class="my-4">
 							</div>-->
 
+
+   <!--Modal Usuarios-->
 <div class="modal fade" id="ModalUsuarios" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -55,7 +57,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form>
+        <form class="needs-validation" onsubmit="consumeAws();return false" novalidate>
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">Id_usuario:</label>
             <input type="text" class="form-control" id="recipient-name">
