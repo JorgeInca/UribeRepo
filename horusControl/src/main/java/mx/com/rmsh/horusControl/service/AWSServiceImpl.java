@@ -41,9 +41,11 @@ public class AWSServiceImpl implements AWSService {
 		Gson gson = new Gson();
 		InvestigacionLAMBDA lambda = new InvestigacionLAMBDA();
 		
-		respuestaInvestigacion.setJson( respuestaInvestigacion.getJson().replaceAll("\n", "\\n") );
+		
+		respuestaInvestigacion.setJson( respuestaInvestigacion.getJson().replaceAll("\n", "\\n") );			
 		
 		lambda = gson.fromJson(respuestaInvestigacion.getJson() , InvestigacionLAMBDA.class); 
+		lambda.setJsonBD(respuestaInvestigacion.getJson()); //Para guardar en BD
 		 
 		System.out.println( "Dato imprimie:" + lambda);
 	

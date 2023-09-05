@@ -54,15 +54,19 @@ public class InvestigacionController {
 		System.out.println(investigacionRequest.toString());
 
 		// arraylist
-
-		response = gson.toJson(awsService.getAWSKendraResponse(investigacionRequest));
+		
+		InvestigacionLAMBDA lambdaQuery = awsService.getAWSKendraResponse(investigacionRequest);				
+		investigacionRequest.setInvestigacionJson(lambdaQuery.getJsonBD());
+		
+		response = gson.toJson(awsService.getAWSKendraResponse(investigacionRequest));		
+		lambdaQuery.setCreated(service.guardaInvestigacion(investigacionRequest));
 
 		System.out.println("********* [Controller] consumeLambda : " + response);
 
 		return response;
 	}
 	
-	@RequestMapping(value = "/guardaInvestigacion", method = RequestMethod.POST)
+	@RequestMapping(value = "/guardaInvestigacion", method = RequestMethod.POST) //NOT USED YET
 	public @ResponseBody String guardaInvestigacion(InvestigacionRequest investigacionRequest) {
 
 		String response = "";

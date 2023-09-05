@@ -48,7 +48,18 @@ function consumeAws() {
 
 				//alert( JSON.stringify(investigacionGlobal) );
 
-				$("#guardaButtonInvestigacion").removeAttr('disabled');
+				console.log('El FOLIO GENERADO ES ' + data.created);
+
+
+				$("#form_firstName").prop('disabled', true);
+				$("#form_lastName").prop('disabled', true);
+				$("#form_rfc").prop('disabled', true);
+				$("#form_pais").prop('disabled', true);
+
+				$("#rowFolio").show(); //hide
+
+				$("#noFolio").empty();
+				$('#noFolio').append('<strong> ' + data + ' </strong>');
 
 			}
 
