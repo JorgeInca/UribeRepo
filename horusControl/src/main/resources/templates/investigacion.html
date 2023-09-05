@@ -129,30 +129,39 @@
 										</div>
 									</div>
 								</div>
+								
+								
 								<div class="row justify-content-center">
 									<div class="col-md-6 mb-3"><button class="btn btn-primary" type="submit">Buscar</button></div>
-									<div class="col-md-6 mb-3"><button class="btn btn-success" type="button" id="guardaButtonInvestigacion" onclick="guardaInvestigacion()" disabled>Guardar Reporte</button></div>
+									<!--<div class="col-md-6 mb-3"><button class="btn btn-success" type="button" id="guardaButtonInvestigacion" onclick="guardaInvestigacion()" disabled>Guardar Reporte</button></div>-->
+								</div>								
+								
+								<div class="row justify-content-center">
+									<div class="col-md-6 mb-3"><button class="btn btn-warning" type="button" id="limpiaButtonInvestigacion" onclick="limpiaInvestigacion()" disabled>Limpiar formulario</button></div>
+									<div class="col-md-6 mb-3"><button class="btn btn-danger" type="button" id="pdfButtonInvestigacion" onclick="generaPDF()" disabled>Exportar a PDF</button></div>
+								</div>
+								
+								<div class="row">
+									<p>.</p>
+								</div>
+								
+								
+								<div class="row justify-content-center">
+									<div class="col-md-6 mb-3">
+										<label for="fuentesDiv">Resúmen:</label>
+										<textarea type="text" class="form-control" id="fuentesDiv" rows="3" disabled> Fuente 1 </textarea>
+									</div>
+									<div class="col-md-6 mb-3">
+										<div class="row justify-content-center">
+											<label for="chart_div">Nivel de Riesgo</label>
+											<div id="gaugeArea"> <canvas id="foo" width="200" height="100"></canvas> </div>
+										</div>
+									</div>
 								</div>
 							</form>
 
-							<div class="row">
-								<p>.</p>
-							</div>
 
 							<hr class="my-4">
-
-							<!--<div class="jumbotron">
-
-								<p class="lead" id="lambdaText">information.</p>
-								<hr class="my-4">
-							</div>-->
-
-							<div class="row">
-								<p>.</p>
-							</div>
-							
-							
-
 
 							<div id="accordion">
 								<div class="card">
@@ -161,7 +170,7 @@
 											<button class="btn btn-link" data-toggle="collapse"
 												data-target="#collapseOne" aria-expanded="true"
 												aria-controls="collapseOne">
-												Archivo "SAT"
+												Sanciones, cumplimiento y PEP
 											</button>
 										</h5>
 									</div>
@@ -179,7 +188,7 @@
 											<button class="btn btn-link collapsed" data-toggle="collapse"
 												data-target="#collapseTwo" aria-expanded="false"
 												aria-controls="collapseTwo">
-												CONDUSEF
+												Menciones:
 											</button>
 										</h5>
 									</div>
@@ -196,17 +205,7 @@
 								<p>.</p>
 							</div>
 
-							<div class="row justify-content-center">
-								<div class="col-md-6 mb-3">
-									<label for="fuentesDiv">Fuentes</label>
-									<textarea type="text" class="form-control" id="fuentesDiv" rows="3"
-										disabled> Fuente 1 </textarea>
-								</div>
-								<div class="col-md-6 mb-3">
-									<label for="chart_div">Nivel de Riesgo</label>
-									<div id="gaugeArea"> <canvas id="foo" width="200" height="100"></canvas> </div>
-								</div>
-							</div>
+							
 
 						</div>
 					</div>
