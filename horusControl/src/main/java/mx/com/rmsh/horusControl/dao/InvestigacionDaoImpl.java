@@ -89,7 +89,7 @@ public class InvestigacionDaoImpl implements InvestigacionDao {
 	          ps.setLong(4, 2l);
 	          ps.setLong(5, 121l);
 	          ps.setString(6, request.getInvestigacionJson());
-	          ps.setLong(7, 3l);
+	          ps.setLong(7, request.getNivel_riesgo());
 	          return ps;
 	        }, keyHolder);
 

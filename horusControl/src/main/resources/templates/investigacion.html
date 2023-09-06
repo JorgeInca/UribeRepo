@@ -133,12 +133,12 @@
 								
 								<div class="row justify-content-center">
 									<div class="col-md-6 mb-3"><button class="btn btn-primary" type="submit">Buscar</button></div>
-									<!--<div class="col-md-6 mb-3"><button class="btn btn-success" type="button" id="guardaButtonInvestigacion" onclick="guardaInvestigacion()" disabled>Guardar Reporte</button></div>-->
+									<div class="col-md-6 mb-3"><button class="btn btn-danger" type="button" id="pdfButtonInvestigacion" onclick="generaPDF()" disabled>Exportar a PDF</button></div>									
 								</div>								
 								
 								<div class="row justify-content-center">
 									<div class="col-md-6 mb-3"><button class="btn btn-warning" type="button" id="limpiaButtonInvestigacion" onclick="limpiaInvestigacion()" disabled>Limpiar formulario</button></div>
-									<div class="col-md-6 mb-3"><button class="btn btn-danger" type="button" id="pdfButtonInvestigacion" onclick="generaPDF()" disabled>Exportar a PDF</button></div>
+									<div class="col-md-6 mb-3">.<!--<button class="btn btn-success" type="button" id="guardaButtonInvestigacion" onclick="guardaInvestigacion()" disabled>Guardar Reporte</button>--></div>
 								</div>
 								
 								<div class="row">
@@ -153,7 +153,7 @@
 									</div>
 									<div class="col-md-6 mb-3">
 										<div class="row justify-content-center">
-											<label for="chart_div">Nivel de Riesgo</label>
+											<label for="chart_div">Nivel de Riesgo <span id="nivelRiesgoLabel"></span></label>
 											<div id="gaugeArea"> <canvas id="foo" width="200" height="100"></canvas> </div>
 										</div>
 									</div>
@@ -170,7 +170,7 @@
 											<button class="btn btn-link" data-toggle="collapse"
 												data-target="#collapseOne" aria-expanded="true"
 												aria-controls="collapseOne">
-												Sanciones, cumplimiento y PEP
+												Sanciones, cumplimiento y PEP <span id="noSanciones"></span>
 											</button>
 										</h5>
 									</div>
@@ -485,11 +485,11 @@
 
 					};
 					var target = document.getElementById('foo'); // your canvas element
-					var gauge = new Gauge(target).setOptions(opts); // create sexy gauge!
-					gauge.maxValue = 3; // set max gauge value
-					gauge.setMinValue(0);  // Prefer setter over gauge.minValue = 0
-					gauge.animationSpeed = 75; // set animation speed (32 is default value)
-					gauge.set(1.5); // set actual value
+					gaugeGobal = new Gauge(target).setOptions(opts); // create sexy gauge!
+					gaugeGobal.maxValue = 3; // set max gauge value
+					gaugeGobal.setMinValue(0);  // Prefer setter over gauge.minValue = 0
+					gaugeGobal.animationSpeed = 75; // set animation speed (32 is default value)
+					gaugeGobal.set(1.5); // set actual value
 			
 	</script>
 	

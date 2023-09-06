@@ -6,6 +6,7 @@ public class InvestigacionRequest {
 	public String lastname;
 	public String rfc;
 	public String pais;
+	public Integer nivel_riesgo;
 	public String investigacionJson;
 	public String json;
 
@@ -57,10 +58,19 @@ public class InvestigacionRequest {
 		this.json = json;
 	}
 
+	public Integer getNivel_riesgo() {
+		return nivel_riesgo;
+	}
+
+	public void setNivel_riesgo(Integer nivel_riesgo) {
+		this.nivel_riesgo = nivel_riesgo;
+	}
+
 	@Override
 	public String toString() {
 		return "InvestigacionRequest [firstname=" + firstname + ", lastname=" + lastname + ", rfc=" + rfc + ", pais="
-				+ pais + ", investigacionJson=" + investigacionJson + ", json=" + json + "]";
+				+ pais + ", nivel_riesgo=" + nivel_riesgo + ", investigacionJson=" + investigacionJson + ", json="
+				+ json + "]";
 	}
 
 }

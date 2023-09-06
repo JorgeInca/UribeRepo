@@ -47,9 +47,7 @@ public class AWSServiceImpl implements AWSService {
 		lambda = gson.fromJson(respuestaInvestigacion.getJson() , InvestigacionLAMBDA.class); 
 		lambda.setJsonBD(respuestaInvestigacion.getJson()); //Para guardar en BD
 		 
-		System.out.println( "Dato imprimie:" + lambda);
-	
-
+		
 		// TODO Auto-generated method stub
 		return lambda;
 	}

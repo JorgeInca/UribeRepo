@@ -1,4 +1,6 @@
 var investigacionGlobal;
+var gaugeGobal;
+
 /**
  * 
  */
@@ -35,6 +37,7 @@ function consumeAws() {
 			$("#lambdaText").empty();
 
 			investigacionGlobal = data;
+			console.log('El FOLIO GENERADO ES ' + data.created);
 
 			for (let x in data.body.origen) {
 
@@ -48,23 +51,31 @@ function consumeAws() {
 
 				//alert( JSON.stringify(investigacionGlobal) );
 
-				console.log('El FOLIO GENERADO ES ' + data.created);
-
-
-				$("#form_firstName").prop('disabled', true);
-				$("#form_lastName").prop('disabled', true);
-				$("#form_rfc").prop('disabled', true);
-				$("#form_pais").prop('disabled', true);
-
-				$("#rowFolio").show(); //hide
-
-				$("#noFolio").empty();
-				$('#noFolio').append('<strong> ' + data + ' </strong>');
-
 			}
+			
+			//Bloquea los botones
+			$("#form_firstName").prop('disabled', true);
+			$("#form_lastName").prop('disabled', true);
+			$("#form_rfc").prop('disabled', true);
+			$("#form_pais").prop('disabled', true);
+			$("#rowFolio").show(); //hide
 
-			var textoRegExpFirstname = new RegExp(var_firstname + ' ', 'gi');
-			var textoRegExpLastname = new RegExp(var_lastname, 'gi');
+			//Habilida los botones
+			$("#limpiaButtonInvestigacion").prop('disabled', false);
+			$("#pdfButtonInvestigacion").prop('disabled', false);
+
+			$("#noFolio").empty();
+
+			//Etiquetas
+			$('#noFolio').append('<strong> ' + data.created + ' </strong>');
+			$('#noSanciones').append('<strong>( ' + data.body.origen.length + ' )</strong>');
+			$('#nivelRiesgoLabel').append('<strong> ' + data.body.nivel_riesgo + ' </strong>');
+	
+			
+			gaugeGobal.set( data.body.nivel_riesgo > 0 ? (data.body.nivel_riesgo - 0.5) : data.body.nivel_riesgo  );
+
+			//var textoRegExpFirstname = new RegExp(var_firstname + ' ', 'gi');
+			//var textoRegExpLastname = new RegExp(var_lastname, 'gi');
 
 			var html = $('#lambdaText').html();
 

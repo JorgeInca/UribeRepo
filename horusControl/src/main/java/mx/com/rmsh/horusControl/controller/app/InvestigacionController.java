@@ -55,11 +55,14 @@ public class InvestigacionController {
 
 		// arraylist
 		
-		InvestigacionLAMBDA lambdaQuery = awsService.getAWSKendraResponse(investigacionRequest);				
-		investigacionRequest.setInvestigacionJson(lambdaQuery.getJsonBD());
+		InvestigacionLAMBDA lambdaQuery = awsService.getAWSKendraResponse(investigacionRequest);	
 		
-		response = gson.toJson(awsService.getAWSKendraResponse(investigacionRequest));		
+		//Conversion a BD
+		investigacionRequest.setInvestigacionJson(lambdaQuery.getJsonBD());
+		investigacionRequest.setNivel_riesgo(lambdaQuery.getBody().getNivel_riesgo());
+					
 		lambdaQuery.setCreated(service.guardaInvestigacion(investigacionRequest));
+		response = gson.toJson(lambdaQuery);	
 
 		System.out.println("********* [Controller] consumeLambda : " + response);
 
