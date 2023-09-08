@@ -13,5 +13,7 @@ public interface InvestigacionDao {
 	public List<Investigacion> getReportes(ReporteRequest request);
 	
 	public Long guardaInvestigacion(InvestigacionRequest request);
+	
+	public String getInvestigacionById(Long investigacionid);
 
 }

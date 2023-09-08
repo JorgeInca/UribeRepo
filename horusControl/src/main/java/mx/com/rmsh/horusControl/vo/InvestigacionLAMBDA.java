@@ -4,8 +4,9 @@ import org.springframework.web.servlet.function.ServerRequest.Headers;
 
 public class InvestigacionLAMBDA {
 
+	public Long idInvestigacion;
 	public int statusCode;
-	public Long created;
+	public Long created;	
 	public String jsonBD;
 	public Body body;
 
@@ -37,15 +38,25 @@ public class InvestigacionLAMBDA {
 		return jsonBD;
 	}
 
+	public Long getIdInvestigacion() {
+		return idInvestigacion;
+	}
+
+	public void setIdInvestigacion(Long idInvestigacion) {
+		this.idInvestigacion = idInvestigacion;
+	}
+
 	public void setJsonBD(String jsonBD) {
 		this.jsonBD = jsonBD;
 	}
 
 	@Override
 	public String toString() {
-		return "InvestigacionLAMBDA [statusCode=" + statusCode + ", created=" + created + ", jsonBD=" + jsonBD
-				+ ", body=" + body + "]";
+		return "InvestigacionLAMBDA [idInvestigacion=" + idInvestigacion + ", statusCode=" + statusCode + ", created="
+				+ created + ", jsonBD=" + jsonBD + ", body=" + body + "]";
 	}
+
+	
 
 }
 

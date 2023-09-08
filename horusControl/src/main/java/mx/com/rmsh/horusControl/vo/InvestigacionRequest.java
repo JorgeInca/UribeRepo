@@ -2,6 +2,7 @@ package mx.com.rmsh.horusControl.vo;
 
 public class InvestigacionRequest {
 
+	public Long idInvestigacion;
 	public String firstname;
 	public String lastname;
 	public String rfc;
@@ -66,11 +67,19 @@ public class InvestigacionRequest {
 		this.nivel_riesgo = nivel_riesgo;
 	}
 
+	public Long getIdInvestigacion() {
+		return idInvestigacion;
+	}
+
+	public void setIdInvestigacion(Long idInvestigacion) {
+		this.idInvestigacion = idInvestigacion;
+	}
+
 	@Override
 	public String toString() {
-		return "InvestigacionRequest [firstname=" + firstname + ", lastname=" + lastname + ", rfc=" + rfc + ", pais="
-				+ pais + ", nivel_riesgo=" + nivel_riesgo + ", investigacionJson=" + investigacionJson + ", json="
-				+ json + "]";
+		return "InvestigacionRequest [idInvestigacion=" + idInvestigacion + ", firstname=" + firstname + ", lastname="
+				+ lastname + ", rfc=" + rfc + ", pais=" + pais + ", nivel_riesgo=" + nivel_riesgo
+				+ ", investigacionJson=" + investigacionJson + ", json=" + json + "]";
 	}
 
 }

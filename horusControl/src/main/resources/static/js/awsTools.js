@@ -74,13 +74,13 @@ function consumeAws() {
 			
 			gaugeGobal.set( data.body.nivel_riesgo > 0 ? (data.body.nivel_riesgo - 0.5) : data.body.nivel_riesgo  );
 
-			//var textoRegExpFirstname = new RegExp(var_firstname + ' ', 'gi');
-			//var textoRegExpLastname = new RegExp(var_lastname, 'gi');
+			var textoRegExpFirstname = new RegExp(var_firstname + ' ', 'gi');
+			var textoRegExpLastname = new RegExp(var_lastname, 'gi');
 
 			var html = $('#lambdaText').html();
 
 			$('#lambdaText').html(
-				html.replace(textoRegExpFirstname, '<strong>' + var_firstname.toUpperCase() + '</strong>').replace(textoRegExpLastname, '<strong>' + var_lastname.toUpperCase() + '</strong>')
+				html.replace(textoRegExpFirstname, '<strong> ' + var_firstname.toUpperCase() + '</strong>').replace(textoRegExpLastname, '<strong> ' + var_lastname.toUpperCase() + '</strong>')
 
 			);
 

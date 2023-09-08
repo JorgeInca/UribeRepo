@@ -1,10 +1,12 @@
 package mx.com.rmsh.horusControl.service;
 
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.google.gson.Gson;
 
+import mx.com.rmsh.horusControl.dao.InvestigacionDao;
 import mx.com.rmsh.horusControl.vo.Investigacion;
 import mx.com.rmsh.horusControl.vo.InvestigacionLAMBDA;
 import mx.com.rmsh.horusControl.vo.InvestigacionRequest;
@@ -19,6 +21,9 @@ import software.amazon.awssdk.services.lambda.model.LambdaException;
 
 @Service
 public class AWSServiceImpl implements AWSService {
+	
+	@Autowired
+	InvestigacionDao daoInvestigacion;
 
 	@Override
 	public InvestigacionLAMBDA getAWSKendraResponse(InvestigacionRequest investigacionRequest) {
@@ -81,6 +86,18 @@ public class AWSServiceImpl implements AWSService {
 			return "X";
 
 		}
+	}
+
+	@Override
+	public InvestigacionLAMBDA getJSONFromBD(InvestigacionRequest investigacionRequest) {
+		// TODO Auto-generated method stub
+		InvestigacionLAMBDA lambda;
+		
+		Gson gson = new Gson();
+		
+		lambda = gson.fromJson(daoInvestigacion.getInvestigacionById(investigacionRequest.getIdInvestigacion()) , InvestigacionLAMBDA.class); 
+		
+		return lambda;
 	}
 
 }

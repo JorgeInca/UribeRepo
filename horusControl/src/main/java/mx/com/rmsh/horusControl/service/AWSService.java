@@ -7,5 +7,6 @@ public interface AWSService {
 	
 	public InvestigacionLAMBDA getAWSKendraResponse(InvestigacionRequest investigacionRequest);
 	
+	public InvestigacionLAMBDA getJSONFromBD(InvestigacionRequest investigacionRequest);
 	
 }

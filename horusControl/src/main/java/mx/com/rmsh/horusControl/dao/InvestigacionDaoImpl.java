@@ -51,6 +51,9 @@ public class InvestigacionDaoImpl implements InvestigacionDao {
 			+ ")"
 			+ "VALUES"
 			+ "(?,?,?,?,?,?,?)";
+	
+	String QUERY_GET_JSON_INVESTIGACION_BYID =
+			"Select json_desc from investigacion A where A.id_investigacion = ? ";
 
 	@SuppressWarnings("deprecation")
 	@Override
@@ -95,6 +98,17 @@ public class InvestigacionDaoImpl implements InvestigacionDao {
 
 	        return (long) keyHolder.getKey().longValue();
 	    }
+
+	@Override
+	@SuppressWarnings("deprecation")
+	public String getInvestigacionById(Long investigacionid) {
+		// TODO Auto-generated method stub
+		 
+		String jsonInvestigacion = (String) jdbcTemplate.queryForObject(
+				 QUERY_GET_JSON_INVESTIGACION_BYID, new Object[] { investigacionid }, String.class);
+		 
+		 return jsonInvestigacion;
+	}
 	
 	
 }
