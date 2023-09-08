@@ -41,10 +41,10 @@ function cargaListaUsuarios() {
 					.add([
 						'<a href="#"><strong>' + data[x].id_usuario + '</strong></a>',
 						data[x].name,
+						data[x].nombreEmpresa,
 						data[x].email,
 						data[x].rol,
-						data[x].email,
-						'<a href="#"><i class="bi bi-cloud-download"></i></a>'
+						'<a href="#"><i class="bi bi-pencil-square"></i></a>'
 					])
 					.draw(false);
 

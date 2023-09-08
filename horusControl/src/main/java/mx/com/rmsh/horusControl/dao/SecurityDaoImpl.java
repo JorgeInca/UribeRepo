@@ -31,10 +31,26 @@ public class SecurityDaoImpl implements SecurityDao {
 			+ " A.fecha_creacion as fecha_creacion,"
 			+ " A.estatus as estatus, "
 			+ " B.id_empresa as id_empresa,"
+			+ " B.nombre as nombreEmpresa,"
 			+ " A.rol as rol, "
 			+ " A.password as password "
-			+ " FROM usuario A inner join empresa B on A.id_empresa = B.id_empresa "
+			+ " FROM usuario A left join empresa B on A.id_empresa = B.id_empresa "
 			+ "where A.estatus = 1 order by A.fecha_creacion desc;";
+	
+	
+	//Insertar nuevo usuario
+	String QUERY_CREATE_USUARIO=
+			"INSERT INTO `horusDatabase`.`usuario`"
+			+ "("
+			+ "`nombre`,"
+			+ "`email`,"
+			+ "`estatus`,"
+			+ "`id_empresa`,"
+			+ "`rol`,"
+			+ "`password`"
+			+ ")"
+			+ "VALUES"
+			+ "(?,?,?,?,?,?)";
 			
 	
 
@@ -48,9 +64,10 @@ public class SecurityDaoImpl implements SecurityDao {
 				(rs, rowNum) -> new UserHorus(
 						rs.getLong("id_usuario"), 
 						rs.getString("name"),
-						rs.getString("email"), 
+						rs.getString("email"), 						
 						rs.getInt("estatus"),
 						rs.getLong("id_empresa"),
+						rs.getString("nombreEmpresa"),
 						rs.getInt("rol"), 
 						rs.getString("password")
 						));
@@ -69,10 +86,32 @@ public class SecurityDaoImpl implements SecurityDao {
 						rs.getString("email"), 
 						rs.getInt("estatus"),
 						rs.getLong("id_empresa"),
+						rs.getString("nombreEmpresa"),
 						rs.getInt("rol"), 
 						rs.getString("password")
 						));
 	}
+	
+	@Override
+	public Long guardaUsuario(UserHorus user) {
+		// TODO Auto-generated method stub
+		KeyHolder keyHolder = new GeneratedKeyHolder();
+
+	    jdbcTemplate.update(connection -> {
+	        PreparedStatement ps = connection
+	          .prepareStatement(QUERY_CREATE_USUARIO,Statement.RETURN_GENERATED_KEYS);
+	          ps.setString(1, user.getName());
+	          ps.setString(2, user.getEmail());
+	          ps.setInt(3, user.getEstatus());
+	          ps.setLong(4, user.getIdEmpresa());
+	          ps.setInt(5, user.getRol());
+	          ps.setString(6, user.getPassword());
+	          return ps;
+	        }, keyHolder);
+
+	        return (long) keyHolder.getKey().longValue();
+	    }
+	
 
 
 

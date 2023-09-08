@@ -34,9 +34,7 @@
 	</div>
 	
 	
-	<div style="display:flex; justify-content:flex-end; width:90%; padding:0;">
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalUsuarios" data-whatever="@getbootstrap">Nuevo Usuario</button>
-	</div>													
+												
 							<hr class="my-4">
 
 							<!--<div class="jumbotron">
@@ -44,12 +42,18 @@
 								<p class="lead" id="lambdaText">information.</p>
 								<hr class="my-4">
 							</div>-->
+							
+    <div style="display:flex; justify-content:flex-end; width:92%; padding:1%;">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalUsuarios" data-whatever="@getbootstrap">Nuevo Usuario</button>
+	</div>							
+							
 
 
    <!--Modal Usuarios-->
-<div class="modal fade" id="ModalUsuarios" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="ModalUsuarios" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
+    
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Formulario Usuarios</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -57,44 +61,110 @@
         </button>
       </div>
       <div class="modal-body">
-        <form class="needs-validation" onsubmit="consumeAws();return false" novalidate>
+      
+      <div class="row justify-content-center">
+						<div id="rowFolio" class="col-md-4">
+							<div class="alert alert-info" role="alert">Id generado:    <span id="noFolio"></span></div>
+						</div>
+					</div>
+					<div class="row">
+						<p>.</p>
+					</div>
+      
+  <form class="needs-validation" onsubmit="consumeAwsUsuarios();return false" novalidate>
           <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Id_usuario:</label>
-            <input type="text" class="form-control" id="recipient-name">
-          </div>
+            <label for="noFolio" class="col-form-label">Id_usuario:</label>
+            <input type="text" class="form-control" id="noFolio"
+            placeholder="Id usuario" value="" required>
+										<div class="invalid-feedback">
+											Id_usuario requerido!
+										</div>
+										<div class="valid-feedback">
+											Ok!
+										</div>          
+                                        </div>
           <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Nombre:</label>
-            <input type="text" class="form-control" id="recipient-name">
-          </div>
+            <label for="form-name" class="col-form-label">Nombre:</label>
+            <input type="text" class="form-control" id="form-name"
+            placeholder="First name" value="" required>
+										<div class="invalid-feedback">
+											Nombre requerido!
+										</div>
+										<div class="valid-feedback">
+											Ok!
+		    	                        </div>
+                                        </div>
           <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Email:</label>
-            <input type="text" class="form-control" id="recipient-name">
-          </div>
+            <label for="form-email" class="col-form-label">Email:</label>
+            <input type="text" class="form-control" id="form-email" 
+            placeholder="Emal" value="" required>
+										<div class="invalid-feedback">
+											Email requerido!
+										</div>
+										<div class="valid-feedback">
+											Ok!
+										</div>
+                                        </div>
           <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Fecha_creacion:</label>
-            <input type="text" class="form-control" id="recipient-name">
-          </div>
+            <label for="form-fecha_creacion" class="col-form-label">Fecha_creacion:</label>
+            <input type="text" class="form-control" id="form-fecha_creacion"
+            placeholder="Fecha" value="" required>
+										<div class="invalid-feedback">
+											Fecha requerida!
+										</div>
+										<div class="valid-feedback">
+											Ok!
+										</div>
+                                        </div>
           <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Estatus:</label>
-            <input type="text" class="form-control" id="recipient-name">
-          </div>
+            <label for="form-estatus" class="col-form-label">Estatus:</label>
+            <input type="text" class="form-control" id="form-estatus"
+            placeholder="Estatus" value="" required>
+										<div class="invalid-feedback">
+											Estatus requerido!
+										</div>
+										<div class="valid-feedback">
+											Ok!
+										</div>
+                                        </div>
           <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Id_empresa:</label>
-            <input type="text" class="form-control" id="recipient-name">
-          </div>
+            <label for="form-id_empresa" class="col-form-label">Id_empresa:</label>
+            <input type="text" class="form-control" id="form-id_empresa"
+            placeholder="Id Empresa" value="" required>
+										<div class="invalid-feedback">
+											Id_empresa requerido!
+										</div>
+										<div class="valid-feedback">
+											Ok!
+										</div>
+                                        </div>
           <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Rol:</label>
-            <input type="text" class="form-control" id="recipient-name">
-          </div>
+            <label for="form-rol" class="col-form-label">Rol:</label>
+            <input type="text" class="form-control" id="form-rol"
+            placeholder="Rol" value="" required>
+										<div class="invalid-feedback">
+											Rol requerido!
+										</div>
+										<div class="valid-feedback">
+											Ok!
+										</div>
+                                        </div>
           <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Password:</label>
-            <input type="text" class="form-control" id="recipient-name">
-          </div>
+            <label for="form-password" class="col-form-label">Password:</label>
+            <input type="text" class="form-control" id="form-password"
+            placeholder="Password" value="" required>
+										<div class="invalid-feedback">
+											Password requerido!
+										</div>
+										<div class="valid-feedback">
+											Ok!
+										</div>
+                                        </div>
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary">Enviar</button>
+        <button type="button" class="btn btn-primary" id="guardaButtonUsuario" onclick="guardaUsuario()">Enviar</button>
       </div>
     </div>
   </div>
@@ -112,9 +182,9 @@
                             <tr>                            
                                 <th>Id_usuario</th>
                                 <th>Nombre Usuario</th>
+                                <th>Cliente</th>
                                 <th>Email</th>                           
-                                <th>Role</th>
-                                <th>Correo</th>
+                                <th>Role</th>        
                                 <th>Editar</th>                               
                             </tr>
                         </thead>
@@ -143,6 +213,7 @@
 	<script src="assets/js/vendor/popper.min.js"></script>
 	<script src="dist/js/bootstrap.min.js"></script>
 	<script src="assets/js/vendor/holder.min.js"></script>
+	<script src="js/awsUsuariosTools.js"></script>
 	<script src="js/usuarioTools.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	

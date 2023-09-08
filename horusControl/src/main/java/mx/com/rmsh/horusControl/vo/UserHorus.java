@@ -1,5 +1,7 @@
 package mx.com.rmsh.horusControl.vo;
 
+import java.util.Date;
+
 public class UserHorus {
 
 	public Long id_usuario;
@@ -7,6 +9,7 @@ public class UserHorus {
 	public String email;
 	public Integer estatus;
 	public Long idEmpresa;
+	private String nombreEmpresa;
 	public Integer rol;
 	public String password;
 
@@ -14,14 +17,15 @@ public class UserHorus {
 		super();
 	}
 
-	public UserHorus(Long id_usuario, String name, String email, Integer estatus, Long idEmpresa, Integer rol,
-			String password) {
+	public UserHorus(Long id_usuario, String name, String email, Integer estatus, Long idEmpresa, String nombreEmpresa,
+			Integer rol, String password) {
 		super();
 		this.id_usuario = id_usuario;
 		this.name = name;
 		this.email = email;
 		this.estatus = estatus;
 		this.idEmpresa = idEmpresa;
+		this.nombreEmpresa = nombreEmpresa;
 		this.rol = rol;
 		this.password = password;
 	}
@@ -66,6 +70,14 @@ public class UserHorus {
 		this.idEmpresa = idEmpresa;
 	}
 
+	public String getNombreEmpresa() {
+		return nombreEmpresa;
+	}
+
+	public void setNombreEmpresa(String nombreEmpresa) {
+		this.nombreEmpresa = nombreEmpresa;
+	}
+
 	public Integer getRol() {
 		return rol;
 	}
@@ -85,7 +97,11 @@ public class UserHorus {
 	@Override
 	public String toString() {
 		return "UserHorus [id_usuario=" + id_usuario + ", name=" + name + ", email=" + email + ", estatus=" + estatus
-				+ ", idEmpresa=" + idEmpresa + ", rol=" + rol + ", password=" + password + "]";
+				+ ", idEmpresa=" + idEmpresa + ", nombreEmpresa=" + nombreEmpresa + ", rol=" + rol + ", password="
+				+ password + "]";
 	}
+	
+	
 
+	
 }

@@ -38,6 +38,12 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 	@Override
 	public List<UserHorus> getUser() {
 		return daoUser.getUser();
+	}
+
+	@Override
+	public Long guardaUsuario(UserHorus user) {
+		// TODO Auto-generated method stub
+		return daoUser.guardaUsuario(user);
 	} 
 
 	

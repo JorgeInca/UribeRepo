@@ -15,4 +15,6 @@ public interface InvestigacionService {
 	public Long guardaInvestigacion(InvestigacionRequest request);
 			
 	public List<UserHorus> getUser();
+	
+	public Long guardaUsuario(UserHorus user);
 }
