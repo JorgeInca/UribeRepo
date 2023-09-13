@@ -1,5 +1,6 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
 	<meta charset="utf-8">
@@ -19,6 +20,21 @@
 </head>
 
 <body>
+	 <!--<p th:text="${#authentication}" />
+	<p th:text="${#authentication.authorities}" />
+	UsernamePasswordAuthenticationToken 
+	[Principal=org.springframework.security.core.userdetails.User
+	 [Username=Jorge12, Password=[PROTECTED], Enabled=true, 
+	 AccountNonExpired=true, credentialsNonExpired=true, 
+	 AccountNonLocked=true, Granted Authorities=[ROLE_PAPU]], 
+	 Credentials=[PROTECTED], Authenticated=true, 
+	 Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, 
+	 SessionId=4ECA768807E0F0550B5FF0481DDAAE62], Granted Authorities=[ROLE_PAPU]]-->
+	 
+	<input type="text" hidden id="nameUserHorus" th:value="${#authentication.name}" >
+	<input type="text" hidden id="idUserHorus" >
+	<input type="text" hidden id="emailUserHorus" >
+	
 
 	<div id="menuBarDiv"></div>
 
@@ -68,6 +84,8 @@
 	<script src="dist/js/bootstrap.min.js"></script>
 	<script src="assets/js/vendor/holder.min.js"></script>
 	<script src="js/awsTools.js"></script>
+	<script src="js/generalTools.js"></script>
+	
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script>
 		jQuery("#menuBarDiv").load("globalMenuBar.html");
@@ -102,6 +120,10 @@
 				});
 			}, false);
 		})();
+	</script>
+	
+	<script>
+		getUserData();
 	</script>
 
 

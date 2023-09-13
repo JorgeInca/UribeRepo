@@ -12,9 +12,11 @@ public class Investigacion {
 	private String apellidos;
 	private String primer_nombe;
 	private String segundo_nombre;
+	private String rfc;
 	private String json;
 	private Integer riesgoInicial;
 	private Integer riesgoFinal;
+	private Integer pais;
 	private Date fechaCreacion;
 	private Integer estatus;
 
@@ -141,17 +143,30 @@ public class Investigacion {
 		return estatus;
 	}
 
-	public void setEstatus(Integer estatus) {
-		this.estatus = estatus;
+	public String getRfc() {
+		return rfc;
+	}
+
+	public void setRfc(String rfc) {
+		this.rfc = rfc;
+	}
+
+	public Integer getPais() {
+		return pais;
+	}
+
+	public void setPais(Integer pais) {
+		this.pais = pais;
 	}
 
 	@Override
 	public String toString() {
 		return "Investigacion [idInvestigacion=" + idInvestigacion + ", idUsuario=" + idUsuario + ", nombreUsuario="
 				+ nombreUsuario + ", idEmpresa=" + idEmpresa + ", nombreEmpresa=" + nombreEmpresa + ", apellidos="
-				+ apellidos + ", primer_nombe=" + primer_nombe + ", segundo_nombre=" + segundo_nombre + ", json=" + json
-				+ ", riesgoInicial=" + riesgoInicial + ", riesgoFinal=" + riesgoFinal + ", fechaCreacion="
-				+ fechaCreacion + ", estatus=" + estatus + "]";
+				+ apellidos + ", primer_nombe=" + primer_nombe + ", segundo_nombre=" + segundo_nombre + ", rfc=" + rfc
+				+ ", json=" + json + ", riesgoInicial=" + riesgoInicial + ", riesgoFinal=" + riesgoFinal + ", pais="
+				+ pais + ", fechaCreacion=" + fechaCreacion + ", estatus=" + estatus + "]";
 	}
+	
 
 }

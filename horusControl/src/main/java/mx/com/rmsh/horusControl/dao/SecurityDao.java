@@ -10,6 +10,8 @@ public interface SecurityDao {
 	public List<UserHorus> getUsers(UserHorus request);
 
 	public List<UserHorus> getUser();
+	
+	public UserHorus getUserdataByName(String userName);
 
 	public Long guardaUsuario(UserHorus user);
 	

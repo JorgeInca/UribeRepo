@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.google.gson.Gson;
 
 import mx.com.rmsh.horusControl.dao.InvestigacionDao;
+import mx.com.rmsh.horusControl.enums.Pais;
 import mx.com.rmsh.horusControl.vo.Investigacion;
 import mx.com.rmsh.horusControl.vo.InvestigacionLAMBDA;
 import mx.com.rmsh.horusControl.vo.InvestigacionRequest;
@@ -67,7 +68,8 @@ public class AWSServiceImpl implements AWSService {
 			jsonObj.put("firstname", investigacionRequest.getFirstname());
 			jsonObj.put("lastname", investigacionRequest.getLastname());
 			jsonObj.put("rfc", investigacionRequest.getRfc());
-			jsonObj.put("pais", "mexicoooo");
+			jsonObj.put("pais", Pais.getNameyId(investigacionRequest.getPais()));
+			
 			String json = jsonObj.toString();
 			SdkBytes payload = SdkBytes.fromUtf8String(json);
 

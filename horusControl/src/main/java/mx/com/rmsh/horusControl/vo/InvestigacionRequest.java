@@ -5,8 +5,9 @@ public class InvestigacionRequest {
 	public Long idInvestigacion;
 	public String firstname;
 	public String lastname;
+	public Long idUsuario;
 	public String rfc;
-	public String pais;
+	public Integer pais;
 	public Integer nivel_riesgo;
 	public String investigacionJson;
 	public String json;
@@ -33,14 +34,6 @@ public class InvestigacionRequest {
 
 	public void setRfc(String rfc) {
 		this.rfc = rfc;
-	}
-
-	public String getPais() {
-		return pais;
-	}
-
-	public void setPais(String pais) {
-		this.pais = pais;
 	}
 
 	public String getInvestigacionJson() {
@@ -75,11 +68,29 @@ public class InvestigacionRequest {
 		this.idInvestigacion = idInvestigacion;
 	}
 
+	public Integer getPais() {
+		return pais;
+	}
+
+	public void setPais(Integer pais) {
+		this.pais = pais;
+	}
+
+	public Long getIdUsuario() {
+		return idUsuario;
+	}
+
+	public void setIdUsuario(Long idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+
 	@Override
 	public String toString() {
 		return "InvestigacionRequest [idInvestigacion=" + idInvestigacion + ", firstname=" + firstname + ", lastname="
-				+ lastname + ", rfc=" + rfc + ", pais=" + pais + ", nivel_riesgo=" + nivel_riesgo
-				+ ", investigacionJson=" + investigacionJson + ", json=" + json + "]";
+				+ lastname + ", isUsuario=" + idUsuario + ", rfc=" + rfc + ", pais=" + pais + ", nivel_riesgo="
+				+ nivel_riesgo + ", investigacionJson=" + investigacionJson + ", json=" + json + "]";
 	}
+
+	
 
 }

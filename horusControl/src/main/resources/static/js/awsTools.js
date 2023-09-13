@@ -14,8 +14,9 @@ function consumeAws() {
 	var var_lastname = $("#form_lastName").val();
 	var var_rfc = $("#form_rfc").val();
 	var var_pais = $("#form_pais").val();
+	var var_id_usuario = $("#idUserHorus").val();
 
-	if (var_rfc === "" || var_rfc === "" || var_pais === "") {
+	if (var_lastname === "" || var_pais === "") {
 		return;
 	}
 
@@ -24,7 +25,8 @@ function consumeAws() {
 		firstname: var_firstname,
 		lastname: var_lastname,
 		rfc: var_rfc,
-		pais: var_pais
+		pais: var_pais,
+		idUsuario:var_id_usuario
 	};
 
 	$.ajax({
@@ -48,11 +50,21 @@ function consumeAws() {
 				$('#lambdaText').append('<br><hr class="my-4">');
 
 				//console.log(x + ": " + data.body.origen[x].url)
-
 				//alert( JSON.stringify(investigacionGlobal) );
-
 			}
-			
+
+			for (let x in data.body.mentions) {
+
+				$('#mentionsText').append('<br><img src="images/icons/' + data.body.mentions[x].engine + '.png" width="40" height="40"><div class="badge badge-info">' + data.body.mentions[x].title + '</a>');
+				$('#mentionsText').append('<br>');
+				$('#mentionsText').append('<br>...<div>' + data.body.mentions[x].description + '</a>...');
+				$('#mentionsText').append('<br><a href="' + data.body.mentions[x].link + '">' + data.body.mentions[x].link + '</a>');
+				$('#mentionsText').append('<br><hr class="my-4">');
+
+				//console.log(x + ": " + data.body.origen[x].url)
+				//alert( JSON.stringify(investigacionGlobal) );
+			}
+
 			//Bloquea los botones
 			$("#form_firstName").prop('disabled', true);
 			$("#form_lastName").prop('disabled', true);
@@ -65,14 +77,18 @@ function consumeAws() {
 			$("#pdfButtonInvestigacion").prop('disabled', false);
 
 			$("#noFolio").empty();
+			$("#noSanciones").empty();
+			$("#noMenciones").empty();
+			$("#nivelRiesgoLabel").empty();
 
 			//Etiquetas
 			$('#noFolio').append('<strong> ' + data.created + ' </strong>');
 			$('#noSanciones').append('<strong>( ' + data.body.origen.length + ' )</strong>');
+			$('#noMenciones').append('<strong>( ' + data.body.mentions.length + ' )</strong>');
 			$('#nivelRiesgoLabel').append('<strong> ' + data.body.nivel_riesgo + ' </strong>');
-	
-			
-			gaugeGobal.set( data.body.nivel_riesgo > 0 ? (data.body.nivel_riesgo - 0.5) : data.body.nivel_riesgo  );
+
+
+			gaugeGobal.set(data.body.nivel_riesgo > 0 ? (data.body.nivel_riesgo - 0.5) : data.body.nivel_riesgo);
 
 			var textoRegExpFirstname = new RegExp(var_firstname + ' ', 'gi');
 			var textoRegExpLastname = new RegExp(var_lastname, 'gi');
@@ -129,16 +145,16 @@ function guardaInvestigacion() {
 
 			alert('El FOLIO GENERADO ES ' + data);
 
-		
+
 			$("#form_firstName").prop('disabled', true);
 			$("#form_lastName").prop('disabled', true);
 			$("#form_rfc").prop('disabled', true);
 			$("#form_pais").prop('disabled', true);
-			
+
 			$("#rowFolio").show(); //hide
-			
+
 			$("#noFolio").empty();
-			$('#noFolio').append('<strong> '+data + ' </strong>');
+			$('#noFolio').append('<strong> ' + data + ' </strong>');
 
 
 		},
@@ -149,4 +165,38 @@ function guardaInvestigacion() {
 	});
 
 }
+
+
+
+$('#uploadButton').click(function() {
+	
+	var formData = new FormData();	
+	var idUserHorus = $("#idUserHorus").val();
+	var form_nombreCampana = $("#form_nombreCampana").val();
+	
+	formData.append('file', $('#fileInput')[0].files[0]);
+	formData.append('idUserHorus', idUserHorus );
+	formData.append('nombreCampaña', form_nombreCampana );
+	
+
+	if (form_nombreCampana === "") {
+		return;
+	}
+
+	$.ajax({
+		type: 'POST',
+		url: 'uploadMasiva',
+		data: formData,
+		processData: false,
+		contentType: false,
+		success: function(response) {
+			$('#response').text('File uploaded successfully: ' + response);
+		},
+		error: function(xhr, status, error) {
+			$('#response').text('Error uploading file: ' + error);
+		}
+	});
+	
+	
+});
 

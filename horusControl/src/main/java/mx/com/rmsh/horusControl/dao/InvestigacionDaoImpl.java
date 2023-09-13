@@ -2,6 +2,8 @@ package mx.com.rmsh.horusControl.dao;
 
 import java.sql.PreparedStatement;
 import java.sql.Statement;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,9 +50,10 @@ public class InvestigacionDaoImpl implements InvestigacionDao {
 			+ "`id_empresa`,"
 			+ "`json_desc`,"
 			+ "`nivel_riesgo_inicial`"
+			+ "`fecha_creacion`"
 			+ ")"
 			+ "VALUES"
-			+ "(?,?,?,?,?,?,?)";
+			+ "(?,?,?,?,?,?,?,?)";
 	
 	String QUERY_GET_JSON_INVESTIGACION_BYID =
 			"Select json_desc from investigacion A where A.id_investigacion = ? ";
@@ -82,6 +85,8 @@ public class InvestigacionDaoImpl implements InvestigacionDao {
 	public Long guardaInvestigacion(InvestigacionRequest request) {
 		// TODO Auto-generated method stub
 		KeyHolder keyHolder = new GeneratedKeyHolder();
+		
+		Date date = new Date();
 
 	    jdbcTemplate.update(connection -> {
 	        PreparedStatement ps = connection
@@ -89,10 +94,11 @@ public class InvestigacionDaoImpl implements InvestigacionDao {
 	          ps.setString(1, request.getLastname());
 	          ps.setString(2, request.getFirstname());
 	          ps.setString(3, request.getFirstname());
-	          ps.setLong(4, 2l);
+	          ps.setLong(4, request.getIdUsuario());
 	          ps.setLong(5, 121l);
 	          ps.setString(6, request.getInvestigacionJson());
 	          ps.setLong(7, request.getNivel_riesgo());
+	          ps.setTimestamp(8, new Timestamp( date.getTime() ) );
 	          return ps;
 	        }, keyHolder);
 
@@ -109,6 +115,12 @@ public class InvestigacionDaoImpl implements InvestigacionDao {
 		 
 		 return jsonInvestigacion;
 	}
-	
+
+	@Override
+	public Long guardaInvestigacionMasiva(List<Investigacion> request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	 
 	
 }

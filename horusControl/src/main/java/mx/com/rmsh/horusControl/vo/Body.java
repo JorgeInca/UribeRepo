@@ -8,6 +8,7 @@ public class Body {
 	public Integer nivel_riesgo;
 	public ArrayList<String> parametros_busqueda;
 	public ArrayList<String> fuentes;
+	public ArrayList<Mentions> mentions;
 	
 	
 

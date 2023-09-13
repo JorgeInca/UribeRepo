@@ -10,8 +10,7 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
-import mx.com.rmsh.horusControl.vo.Investigacion;
-import mx.com.rmsh.horusControl.vo.InvestigacionRequest;
+import mx.com.rmsh.horusControl.dao.rowMapper.UsuarioRowMapper;
 import mx.com.rmsh.horusControl.vo.UserHorus;
 
 @Repository
@@ -51,6 +50,10 @@ public class SecurityDaoImpl implements SecurityDao {
 			+ ")"
 			+ "VALUES"
 			+ "(?,?,?,?,?,?)";
+	
+	//Insertar nuevo usuario
+	String QUERY_GET_USERBYNAME=
+			" select * from usuario where nombre = ? ";
 			
 	
 
@@ -111,10 +114,15 @@ public class SecurityDaoImpl implements SecurityDao {
 
 	        return (long) keyHolder.getKey().longValue();
 	    }
-	
 
+		@Override
+		@SuppressWarnings("deprecation")
+		public UserHorus getUserdataByName(String userName) {
+			// TODO Auto-generated method stub
+			return jdbcTemplate.queryForObject(QUERY_GET_USERBYNAME, 
+					new Object[] { userName }, new UsuarioRowMapper());
 
-
+		}
 
 
 	

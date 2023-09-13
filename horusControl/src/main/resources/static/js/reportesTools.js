@@ -51,6 +51,7 @@ function cargaListaInvestigaciones() {
 						data[x].fechaCreacion,
 						'<a href="#"><i class="bi bi-cloud-download"></i></a>'
 					])
+					.order( [0,'desc'] )
 					.draw(false);
 
 			}
@@ -124,6 +125,18 @@ function cargaInvestigacionId( idInvestigacion ) {
 
 			}
 			
+			for (let x in data.body.mentions) {
+
+				$('#mentionsText').append('<br><img src="images/icons/'+ data.body.mentions[x].engine +'.png" width="40" height="40"><div class="badge badge-info">' + data.body.mentions[x].title + '</a>');
+				$('#mentionsText').append('<br>');
+				$('#mentionsText').append('<br>...<div>' + data.body.mentions[x].description + '</a>...');
+				$('#mentionsText').append('<br><a href="' + data.body.mentions[x].link + '">' + data.body.mentions[x].link + '</a>');
+				$('#mentionsText').append('<br><hr class="my-4">');				
+
+				//console.log(x + ": " + data.body.origen[x].url)
+				//alert( JSON.stringify(investigacionGlobal) );
+			}
+			
 			//Bloquea los botones
 			$("#form_firstName").prop('disabled', true);
 			$("#form_lastName").prop('disabled', true);
@@ -137,11 +150,13 @@ function cargaInvestigacionId( idInvestigacion ) {
 
 			$("#noFolio").empty();
 			$("#noSanciones").empty();
+			$("#noMenciones").empty();
 			$("#nivelRiesgoLabel").empty();
 
 			//Etiquetas
 			$('#noFolio').append('<strong> ' + idInvestigacion + ' </strong>');
 			$('#noSanciones').append('<strong>( ' + data.body.origen.length + ' )</strong>');
+			$('#noMenciones').append('<strong>( ' + data.body.mentions.length + ' )</strong>');
 			$('#nivelRiesgoLabel').append('<strong> ' + data.body.nivel_riesgo + ' </strong>');
 	
 			loadCHart();

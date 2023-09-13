@@ -23,6 +23,7 @@ $(document).ready(function() {
                     "sPrevious": "Anterior"
 			     },
 			     "sProcessing":"Procesando...",
-            }
+            },
+        order: [[ 0, "desc" ]]
     });     
 });

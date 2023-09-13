@@ -22,18 +22,16 @@
 	<link rel="stylesheet" type="text/css" href="datatables/DataTables-1.10.18/css/dataTables.bootstrap4.min.css">
 
 	<!--Estilo requeritdo para el chart-->
-	<style>
-		.chart-wrapper {
-			width: 750px !important;
-			height: 450px !important;
 
-		}
-	</style>
 
 
 </head>
 
 <body>
+	
+	<input type="text" hidden id="nameUserHorus" th:value="${#authentication.name}" >
+	<input type="text" hidden id="idUserHorus" >
+	<input type="text" hidden id="emailUserHorus" >
 
 	<div id="menuBarDiv"></div>
 
@@ -51,6 +49,7 @@
 	<!--DataTables Horus-->
 
 	<hr class="my-4">
+	<span class="loader"></span>
 
 	<div class="row justify-content-center">
 		<div class="col-lg-10">
@@ -162,13 +161,13 @@
 									<div class="col-md-6 mb-3">
 										<label for="form_rfc">RFC</label>
 										<input type="text" class="form-control" id="form_rfc" placeholder="Last name"
-											value="" required>
-										<div class="invalid-feedback">
+											value="">
+										<!--<div class="invalid-feedback">
 											RFC requerido!
 										</div>
 										<div class="valid-feedback">
 											Ok!
-										</div>
+										</div>-->
 									</div>
 									<div class="col-md-6 mb-3">
 										<label for="form_pais">País</label>
@@ -239,19 +238,19 @@
 									</div>
 								</div>
 								<div class="card">
-									<div class="card-header alert-danger" id="headingTwo">
+									<div class="card-header alert-info" id="headingTwo">
 										<h5 class="mb-0">
 											<button class="btn btn-link collapsed" data-toggle="collapse"
 												data-target="#collapseTwo" aria-expanded="false"
 												aria-controls="collapseTwo">
-												Menciones:
+												Menciones <span id="noMenciones"></span>
 											</button>
 										</h5>
 									</div>
 									<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
 										data-parent="#accordion">
 										<div class="card-body">
-											Segunda Información.
+											<div id="mentionsText"></div>
 										</div>
 									</div>
 								</div>
@@ -294,6 +293,7 @@
 	<script src="dist/js/bootstrap.min.js"></script>
 	<script src="assets/js/vendor/holder.min.js"></script>
 	<script src="js/reportesTools.js"></script>
+	<script src="js/generalTools.js"></script>
 	
 
 	<script>
@@ -497,7 +497,13 @@
 		});
 	</script>
 	
+	<script>
+		getUserData();
+	</script>
+	
 		<script type="text/javascript" src="https://bernii.github.io/gauge.js/dist/gauge.min.js"></script>  
+		
+		
 	
 
 

@@ -65,15 +65,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 					 User.withDefaultPasswordEncoder()
 						.username(aux.getName())
 						.password(aux.getPassword())
-						.roles("USER")
+						.roles("PAPU")
 						.build();
 			 
 			 userList.add(actualUser);
 			 
 			}
 		 
-			
-		return new InMemoryUserDetailsManager(userList);
+		
+		 return new InMemoryUserDetailsManager(userList);
+		//return new InMemoryUserDetailsManager(userList);
 		}	 	
 	
 }
