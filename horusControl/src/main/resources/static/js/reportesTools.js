@@ -46,10 +46,10 @@ function cargaListaInvestigaciones() {
 						data[x].nombreUsuario,
 						data[x].nombreEmpresa,
 						data[x].apellidos,
-						data[x].primer_nombre,
+						data[x].primer_nombre,						
+						data[x].estatusText,
 						data[x].riesgoInicial,
-						data[x].fechaCreacion,
-						'<a href="#"><i class="bi bi-cloud-download"></i></a>'
+						data[x].fechaCreacion
 					])
 					.order( [0,'desc'] )
 					.draw(false);

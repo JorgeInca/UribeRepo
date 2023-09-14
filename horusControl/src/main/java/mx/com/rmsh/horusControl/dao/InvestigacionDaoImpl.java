@@ -39,7 +39,7 @@ public class InvestigacionDaoImpl implements InvestigacionDao {
 			+ " A.estatus as estatus "
 			+ " FROM investigacion A inner join usuario B on  A.id_usuario = B.id_usuario "
 			+ "left join empresa C on  B.id_empresa = C.id_empresa "
-			+ "where A.estatus = 1 order by A.fecha_creacion desc;";
+			+ "where A.estatus != 3 order by A.fecha_creacion desc;";
 	
 	String QUERY_CREATE_REPORTEE=
 			"INSERT INTO `horusDatabase`.`investigacion`"
@@ -55,7 +55,7 @@ public class InvestigacionDaoImpl implements InvestigacionDao {
 			+ "`estatus`"
 			+ ")"
 			+ "VALUES"
-			+ "(?,?,?,?,?,?,?,?)";
+			+ "(?,?,?,?,?,?,?,?,?)";
 	
 	String QUERY_GET_JSON_INVESTIGACION_BYID =
 			"Select json_desc from investigacion A where A.id_investigacion = ? ";
@@ -92,11 +92,11 @@ public class InvestigacionDaoImpl implements InvestigacionDao {
 	          .prepareStatement(QUERY_CREATE_REPORTEE,Statement.RETURN_GENERATED_KEYS);
 	          ps.setString(1, request.getLastname());
 	          ps.setString(2, request.getFirstname());	          
-	          ps.setLong(4, request.getIdUsuario());
-	          ps.setLong(5, 121l);
-	          ps.setString(6, request.getInvestigacionJson());
-	          ps.setLong(7, request.getNivel_riesgo());
-	          ps.setTimestamp(8, new Timestamp( new Date().getTime() ) );
+	          ps.setLong(3, request.getIdUsuario());
+	          ps.setLong(4, 121l);
+	          ps.setString(5, request.getInvestigacionJson());
+	          ps.setLong(6, request.getNivel_riesgo());
+	          ps.setTimestamp(7, new Timestamp( new Date().getTime() ) );
 	          ps.setLong(8, 0L );
 	          ps.setLong(9, request.getIdEstatus() );
 	          return ps;

@@ -2,6 +2,8 @@ package mx.com.rmsh.horusControl.vo;
 
 import java.util.Date;
 
+import mx.com.rmsh.horusControl.enums.EstatusInvestigacion;
+
 public class Investigacion {
 
 	private Long idInvestigacion;
@@ -18,6 +20,7 @@ public class Investigacion {
 	private Integer pais;
 	private Date fechaCreacion;
 	private Integer estatus;
+	public String estatusText;
 
 	public Investigacion() {
 		super();
@@ -39,6 +42,8 @@ public class Investigacion {
 		this.riesgoFinal = riesgoFinal;
 		this.fechaCreacion = fechaCreacion;
 		this.estatus = estatus;
+		
+		this.setEstatusText(EstatusInvestigacion.getNameyId(estatus));
 	}
 
 	public Long getIdInvestigacion() {
@@ -153,13 +158,23 @@ public class Investigacion {
 		this.estatus = estatus;
 	}
 
+	public String getEstatusText() {
+		return estatusText;
+	}
+
+	public void setEstatusText(String estatusText) {
+		this.estatusText = estatusText;
+	}
+
 	@Override
 	public String toString() {
 		return "Investigacion [idInvestigacion=" + idInvestigacion + ", idUsuario=" + idUsuario + ", nombreUsuario="
 				+ nombreUsuario + ", idEmpresa=" + idEmpresa + ", nombreEmpresa=" + nombreEmpresa + ", apellidos="
 				+ apellidos + ", primer_nombre=" + primer_nombre + ", rfc=" + rfc + ", json=" + json
 				+ ", riesgoInicial=" + riesgoInicial + ", riesgoFinal=" + riesgoFinal + ", pais=" + pais
-				+ ", fechaCreacion=" + fechaCreacion + ", estatus=" + estatus + "]";
+				+ ", fechaCreacion=" + fechaCreacion + ", estatus=" + estatus + ", estatusText=" + estatusText + "]";
 	}
+
+	
 
 }

@@ -2,9 +2,9 @@ package mx.com.rmsh.horusControl.enums;
 
 public enum EstatusInvestigacion {
 
-	FINALIZADO(1, "Finalizado"),
-	PENDIENTE(2, "Pendiente"),
-	DESCARTADA(3, "Descartado");
+	FINALIZADO(1, "FINALIZADO"),
+	PENDIENTE(2, "PENDIENTE"),
+	DESCARTADA(3, "DESCARTADO");
 
 	EstatusInvestigacion(Integer idEstatus, String name) {
 		this.idEstatus = idEstatus;
