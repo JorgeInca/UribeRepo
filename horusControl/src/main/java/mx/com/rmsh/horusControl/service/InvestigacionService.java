@@ -20,6 +20,6 @@ public interface InvestigacionService {
 	
 	public Long guardaUsuario(UserHorus user);
 	
-	public List<Investigacion> guardaInvestigacionMasiva(MasivaRequest masivaRequest) throws IOException;
+	public List<InvestigacionRequest> guardaInvestigacionMasiva(MasivaRequest masivaRequest) throws IOException;
 	
 }

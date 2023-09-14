@@ -11,6 +11,9 @@ public class InvestigacionRequest {
 	public Integer nivel_riesgo;
 	public String investigacionJson;
 	public String json;
+	public Long idMasiva;
+	public Integer idEstatus;
+	public String estatusText;
 
 	public String getFirstname() {
 		return firstname;
@@ -84,13 +87,36 @@ public class InvestigacionRequest {
 		this.idUsuario = idUsuario;
 	}
 
+	public Long getIdMasiva() {
+		return idMasiva;
+	}
+
+	public void setIdMasiva(Long idMasiva) {
+		this.idMasiva = idMasiva;
+	}
+
+	public Integer getIdEstatus() {
+		return idEstatus;
+	}
+
+	public void setIdEstatus(Integer idEstatus) {
+		this.idEstatus = idEstatus;
+	}
+
+	public String getEstatusText() {
+		return estatusText;
+	}
+
+	public void setEstatusText(String estatusText) {
+		this.estatusText = estatusText;
+	}
+
 	@Override
 	public String toString() {
 		return "InvestigacionRequest [idInvestigacion=" + idInvestigacion + ", firstname=" + firstname + ", lastname="
-				+ lastname + ", isUsuario=" + idUsuario + ", rfc=" + rfc + ", pais=" + pais + ", nivel_riesgo="
-				+ nivel_riesgo + ", investigacionJson=" + investigacionJson + ", json=" + json + "]";
+				+ lastname + ", idUsuario=" + idUsuario + ", rfc=" + rfc + ", pais=" + pais + ", nivel_riesgo="
+				+ nivel_riesgo + ", investigacionJson=" + investigacionJson + ", json=" + json + ", idMasiva="
+				+ idMasiva + ", idEstatus=" + idEstatus + ", estatusText=" + estatusText + "]";
 	}
-
-	
 
 }

@@ -16,7 +16,9 @@ import org.springframework.stereotype.Service;
 
 import mx.com.rmsh.horusControl.dao.InvestigacionDao;
 import mx.com.rmsh.horusControl.dao.SecurityDao;
+import mx.com.rmsh.horusControl.enums.EstatusInvestigacion;
 import mx.com.rmsh.horusControl.enums.Pais;
+import mx.com.rmsh.horusControl.utils.TextoHandler;
 import mx.com.rmsh.horusControl.vo.Investigacion;
 import mx.com.rmsh.horusControl.vo.InvestigacionRequest;
 import mx.com.rmsh.horusControl.vo.MasivaRequest;
@@ -56,9 +58,9 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 	}
 
 	@Override
-	public List<Investigacion> guardaInvestigacionMasiva(MasivaRequest masivaRequest) throws IOException {
+	public List<InvestigacionRequest> guardaInvestigacionMasiva(MasivaRequest masivaRequest) throws IOException {
 
-		List<Investigacion> listaRetorno = new ArrayList<Investigacion>();
+		List<InvestigacionRequest> listaRetorno = new ArrayList<InvestigacionRequest>();
 
 		// Variables Excel
 		String UPLOAD_FOLDER = "C://test//";
@@ -85,7 +87,7 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 				if (!esCabecera) {
 					
 					System.out.println("** SI ENTRA" + esCabecera);			
-					Investigacion investigacion = new Investigacion();
+					InvestigacionRequest investigacion = new InvestigacionRequest();
 					
 					
 					DataFormatter fmt = new DataFormatter();
@@ -102,28 +104,42 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 						Cell cell = (Cell) cellIterator.next();
 
 						if( cellActual == 3 ) 							
-							investigacion.setApellidos(fmt.formatCellValue(cell));
+							investigacion.setLastname(fmt.formatCellValue(cell));
 						if( cellActual == 4 )
-							investigacion.setPrimer_nombe(fmt.formatCellValue(cell));
+							investigacion.setFirstname(fmt.formatCellValue(cell));
 						if( cellActual == 5 ) 
-							investigacion.setSegundo_nombre(fmt.formatCellValue(cell));
+							investigacion.setFirstname( TextoHandler.sumaNombres(investigacion.getFirstname(), fmt.formatCellValue(cell))	);
 						if( cellActual == 9 ) 
 							investigacion.setPais( Pais.getIdByName(fmt.formatCellValue(cell)) );
 						if( cellActual == 16 ) 
 							investigacion.setRfc(fmt.formatCellValue(cell));
 						
-						
+						investigacion.setIdUsuario(masivaRequest.getIdUsuario());
+						investigacion.setNivel_riesgo(0);
+						investigacion.setIdMasiva(0L);
+						investigacion.setInvestigacionJson("");
+						investigacion.setIdEstatus( EstatusInvestigacion.PENDIENTE.getIdEstatus() );
+											
 						
 						cellActual++;						
 					}
 					
-					listaRetorno.add(investigacion);
+					//Campos vacios
+					if( !( "".equals(investigacion.getFirstname()) && "".equals(investigacion.getLastname()) ) )
+							listaRetorno.add(investigacion);
 				}
 				esCabecera = false;
 			}
 		}
 		
-		//dao.guardaInvestigacion(null)
+		System.out.println("Archivos procesados");
+		
+		for(InvestigacionRequest model : listaRetorno) {
+			System.out.println();
+            System.out.println(model.toString());
+        }
+		
+		dao.guardaInvestigacionMasiva(listaRetorno);
 
 		return listaRetorno;
 	}

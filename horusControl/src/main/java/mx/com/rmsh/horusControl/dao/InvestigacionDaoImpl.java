@@ -1,12 +1,14 @@
 package mx.com.rmsh.horusControl.dao;
 
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
@@ -29,8 +31,7 @@ public class InvestigacionDaoImpl implements InvestigacionDao {
 			+ " C.id_empresa as idEmpresa,"
 			+ " C.nombre as nombreEmpresa,"
 			+ " A.apellidos as apellidos,"
-			+ " A.primer_nombre as primerNombre,"
-			+ " A.segundo_nombre as segundoNombre,"
+			+ " A.primer_nombre as primerNombre,"			
 			+ " A.json_desc as json_desc,"
 			+ " A.nivel_riesgo_inicial as riesgoInicial,"
 			+ " A.nivel_riesgo_final as riesgoFinal,"
@@ -44,13 +45,14 @@ public class InvestigacionDaoImpl implements InvestigacionDao {
 			"INSERT INTO `horusDatabase`.`investigacion`"
 			+ "("
 			+ "`apellidos`,"
-			+ "`primer_nombre`,"
-			+ "`segundo_nombre`,"
+			+ "`primer_nombre`,"			
 			+ "`id_usuario`,"
 			+ "`id_empresa`,"
 			+ "`json_desc`,"
-			+ "`nivel_riesgo_inicial`"
-			+ "`fecha_creacion`"
+			+ "`nivel_riesgo_inicial`,"
+			+ "`fecha_creacion`,"
+			+ "`id_masiva`,"
+			+ "`estatus`"
 			+ ")"
 			+ "VALUES"
 			+ "(?,?,?,?,?,?,?,?)";
@@ -71,8 +73,7 @@ public class InvestigacionDaoImpl implements InvestigacionDao {
 						rs.getLong("idEmpresa"), 
 						rs.getString("nombreEmpresa"), 
 						rs.getString("apellidos"), 
-						rs.getString("primerNombre"), 
-						rs.getString("segundoNombre"), 
+						rs.getString("primerNombre"),						 
 						rs.getString("json_desc"), 
 						rs.getInt("riesgoInicial"), 
 						rs.getInt("riesgoFinal"), 
@@ -86,19 +87,18 @@ public class InvestigacionDaoImpl implements InvestigacionDao {
 		// TODO Auto-generated method stub
 		KeyHolder keyHolder = new GeneratedKeyHolder();
 		
-		Date date = new Date();
-
 	    jdbcTemplate.update(connection -> {
 	        PreparedStatement ps = connection
 	          .prepareStatement(QUERY_CREATE_REPORTEE,Statement.RETURN_GENERATED_KEYS);
 	          ps.setString(1, request.getLastname());
-	          ps.setString(2, request.getFirstname());
-	          ps.setString(3, request.getFirstname());
+	          ps.setString(2, request.getFirstname());	          
 	          ps.setLong(4, request.getIdUsuario());
 	          ps.setLong(5, 121l);
 	          ps.setString(6, request.getInvestigacionJson());
 	          ps.setLong(7, request.getNivel_riesgo());
-	          ps.setTimestamp(8, new Timestamp( date.getTime() ) );
+	          ps.setTimestamp(8, new Timestamp( new Date().getTime() ) );
+	          ps.setLong(8, 0L );
+	          ps.setLong(9, request.getIdEstatus() );
 	          return ps;
 	        }, keyHolder);
 
@@ -117,10 +117,29 @@ public class InvestigacionDaoImpl implements InvestigacionDao {
 	}
 
 	@Override
-	public Long guardaInvestigacionMasiva(List<Investigacion> request) {
-		// TODO Auto-generated method stub
-		return null;
+	public void guardaInvestigacionMasiva(List<InvestigacionRequest> request) {		
+
+        jdbcTemplate.batchUpdate(QUERY_CREATE_REPORTEE, new BatchPreparedStatementSetter() {
+            @Override
+            public void setValues(PreparedStatement preparedStatement, int i) throws SQLException {
+            	InvestigacionRequest entity = request.get(i);
+                preparedStatement.setString(1, entity.getLastname());
+                preparedStatement.setString(2, entity.getFirstname());
+                preparedStatement.setLong(3, entity.getIdUsuario());
+                preparedStatement.setLong(4, 121l);
+                preparedStatement.setString(5, entity.getInvestigacionJson());
+                preparedStatement.setLong(6, entity.getNivel_riesgo());
+                preparedStatement.setTimestamp(7,new Timestamp( new Date().getTime() ) );
+                preparedStatement.setLong(8, entity.getIdMasiva());  
+                preparedStatement.setLong(9, entity.getIdEstatus() );
+            }
+
+            @Override
+            public int getBatchSize() {
+                return request.size();
+            }
+        });
 	}
-	 
+	
 	
 }

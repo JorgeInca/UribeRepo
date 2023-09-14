@@ -46,7 +46,7 @@ function cargaListaInvestigaciones() {
 						data[x].nombreUsuario,
 						data[x].nombreEmpresa,
 						data[x].apellidos,
-						data[x].primer_nombe,
+						data[x].primer_nombre,
 						data[x].riesgoInicial,
 						data[x].fechaCreacion,
 						'<a href="#"><i class="bi bi-cloud-download"></i></a>'

@@ -15,10 +15,10 @@ import org.springframework.web.multipart.MultipartFile;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import mx.com.rmsh.horusControl.enums.EstatusInvestigacion;
 import mx.com.rmsh.horusControl.service.AWSService;
 import mx.com.rmsh.horusControl.service.InvestigacionService;
 import mx.com.rmsh.horusControl.service.SecurityService;
-import mx.com.rmsh.horusControl.vo.Investigacion;
 import mx.com.rmsh.horusControl.vo.InvestigacionLAMBDA;
 import mx.com.rmsh.horusControl.vo.InvestigacionRequest;
 import mx.com.rmsh.horusControl.vo.MasivaRequest;
@@ -53,6 +53,7 @@ public class InvestigacionController {
 		// Conversion a BD
 		investigacionRequest.setInvestigacionJson(lambdaQuery.getJsonBD());
 		investigacionRequest.setNivel_riesgo(lambdaQuery.getBody().getNivel_riesgo());
+		investigacionRequest.setIdEstatus(EstatusInvestigacion.FINALIZADO.getIdEstatus());
 
 		lambdaQuery.setCreated(investigacionService.guardaInvestigacion(investigacionRequest));
 		response = gson.toJson(lambdaQuery);
@@ -141,7 +142,7 @@ public class InvestigacionController {
 		masivaRequest.setNombreCampaña(nombreCampaña);
 
 		Gson gson = new Gson();
-		List<Investigacion> listaRetorno = new ArrayList<Investigacion>();
+		List<InvestigacionRequest> listaRetorno = new ArrayList<InvestigacionRequest>();
 		String response = "";
 
 //		if (file.isEmpty()) {
