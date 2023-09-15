@@ -14,6 +14,10 @@ function guardaUsuario() {
 	var var_id_empresa = $("#form-id_empresa").val();
 	var var_rol = $("#form-rol").val();
 	var var_password = $("#form-password").val();
+	
+	if (var_firstname === "" || var_email === "" || var_estatus === "" || var_id_empresa === "" || var_rol === "" || var_password === "") {
+		return;
+	}
 
 	if (!confirm("¡Deseas agregar al nuevo usuario?")) {
 		return;
