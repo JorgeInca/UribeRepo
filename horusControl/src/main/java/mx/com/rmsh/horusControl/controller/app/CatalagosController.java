@@ -63,5 +63,23 @@ public class CatalagosController {
 
 			return response;
 		}
+		
+		
+		@RequestMapping(value = "/consultaUsuarios", method = RequestMethod.POST)
+		public @ResponseBody String usuario(UserHorus userHorus) {
+
+			String response = "";
+			Gson gson = new Gson();
+
+			System.out.println(userHorus.toString());
+
+			// arraylist
+
+			response = gson.toJson(investigacionService.getUser());
+
+			System.out.println("********* [Controller] consultaUsuarios : " + response);
+
+			return response;
+		}
 
 }

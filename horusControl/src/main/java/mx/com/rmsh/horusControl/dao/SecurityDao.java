@@ -15,5 +15,6 @@ public interface SecurityDao {
 
 	public Long guardaUsuario(UserHorus user);
 	
+	public String getUsuarioById(Long id_usuario);
 
 }
