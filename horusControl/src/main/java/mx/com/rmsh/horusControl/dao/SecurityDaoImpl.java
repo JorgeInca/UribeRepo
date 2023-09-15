@@ -125,6 +125,13 @@ public class SecurityDaoImpl implements SecurityDao {
 		}
 
 
+		@Override
+		public String getUsuarioById(Long id_usuario) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+
 	
 	
 }
