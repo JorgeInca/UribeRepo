@@ -22,4 +22,6 @@ public interface InvestigacionService {
 	
 	public List<InvestigacionRequest> guardaInvestigacionMasiva(MasivaRequest masivaRequest) throws IOException;
 	
+	public UserHorus getUsuarioById(Long id_usuario);
+	
 }

@@ -34,7 +34,7 @@ public class SecurityDaoImpl implements SecurityDao {
 			+ " A.rol as rol, "
 			+ " A.password as password "
 			+ " FROM usuario A left join empresa B on A.id_empresa = B.id_empresa "
-			+ "where A.estatus = 1 order by A.fecha_creacion desc;";
+			+ " Where A.Estatus = 1 order by A.fecha_creacion desc;";
 	
 	
 	//Insertar nuevo usuario
@@ -54,6 +54,25 @@ public class SecurityDaoImpl implements SecurityDao {
 	//Insertar nuevo usuario
 	String QUERY_GET_USERBYNAME=
 			" select * from usuario where nombre = ? ";
+	
+	//Buscar usuario por Id
+/*	String QUERY_GET_USUARIO_BYID =
+				"SELECT "
+						+ " A.id_usuario as id_usuario,"
+						+ " A.nombre as name,"
+						+ " A.email as email,"
+						+ " A.fecha_creacion as fecha_creacion,"
+						+ " A.estatus as estatus, "
+						+ " B.id_empresa as id_empresa,"
+						+ " B.nombre as nombreEmpresa,"
+						+ " A.rol as rol, "
+						+ " A.password as password "
+						+ " FROM usuario A left join empresa B on A.id_empresa = B.id_empresa "
+//						+ "where A.id_usuario = ? ";  */
+		
+		//Buscar usuario por Id
+			String QUERY_GET_USUARIO_BYID =
+						" select * from usuario A where A.id_usuario = ? "; 
 			
 	
 
@@ -126,10 +145,14 @@ public class SecurityDaoImpl implements SecurityDao {
 
 
 		@Override
-		public String getUsuarioById(Long id_usuario) {
+		public UserHorus getUsuarioById(Long id_usuario) {
 			// TODO Auto-generated method stub
-			return null;
+			return jdbcTemplate.queryForObject(QUERY_GET_USUARIO_BYID, 
+					new Object[] { id_usuario }, new UsuarioRowMapper());
 		}
+
+
+	
 
 
 	

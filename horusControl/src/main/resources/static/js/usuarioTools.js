@@ -20,7 +20,6 @@ function cargaListaUsuarios() {
 
 			$("#lambdaText").empty();
 
-			//alert(JSON.stringify(data));
 
 			for (let x in data) {
 
@@ -33,6 +32,7 @@ function cargaListaUsuarios() {
 						data[x].rol,
 						'<a href="#"><i class="bi bi-pencil-square"></i></a>'
 					])
+					.order( [0,'desc'] )
 					.draw(false);
 
 			}
@@ -50,6 +50,8 @@ function cargaListaUsuarios() {
 }
 
 function cargaUsuarioId(id_usuario) {
+	
+	alert('Revisando el id ' + id_usuario);
 
 	console.log('inicia cargaUsarioId');
 
@@ -71,6 +73,8 @@ function cargaUsuarioId(id_usuario) {
 
 			$("#lambdaText").empty();
 			
+			for (let x in data.body.origen) {
+			
 			//Llena campos Modal de Usuarios:
 			$( "#noFolio" ).val(  data.body.parametros_busqueda[0] );
 			$( "#form-name" ).val(  data.body.parametros_busqueda[1] );
@@ -85,15 +89,7 @@ function cargaUsuarioId(id_usuario) {
 			investigacionGlobalUsuarios = data;
 			console.log('El ID GENERADO ES ' + UserHorus);
 
-			for (let x in data.body.origen) {
-
-				$('#lambdaText').append('<br><div class="badge badge-info">' + data.body.origen[x].fuente + '</a>');
-				$('#lambdaText').append('<br>');
-				$('#lambdaText').append('<br>...<div>' + data.body.origen[x].texto + '</a>...');
-				$('#lambdaText').append('<br><a href="' + data.body.origen[x].url + '">' + data.body.origen[x].url + '</a>');
-				$('#lambdaText').append('<br><hr class="my-4">');
 			}
-			
 			//Bloquea los botones
 			$("#noFolio").prop('disabled', true);
 			$("#form-name").prop('disabled', true);
@@ -110,16 +106,9 @@ function cargaUsuarioId(id_usuario) {
 
 
 			$("#noFolio").empty();
-		//	$("#noSanciones").empty();
-			//$("#nivelRiesgoLabel").empty();
 
 			//Etiquetas
 			$('#noFolio').append('<strong> ' + id_usuario + ' </strong>');
-		//	$('#noSanciones').append('<strong>( ' + data.body.origen.length + ' )</strong>');
-		//	$('#nivelRiesgoLabel').append('<strong> ' + data.body.nivel_riesgo + ' </strong>');
-	
-		//	loadCHart();
-		//	gaugeGobal.set( data.body.nivel_riesgo > 0 ? (data.body.nivel_riesgo - 0.5) : data.body.nivel_riesgo  );
 
 			var textoRegExpFirstname = new RegExp(data.body.parametros_busqueda[1] + ' ', 'gi');
 			var textoRegExpEmail = new RegExp(data.body.parametros_busqueda[2], 'gi');

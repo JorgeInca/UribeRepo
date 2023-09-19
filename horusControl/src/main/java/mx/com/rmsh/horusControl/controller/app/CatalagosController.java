@@ -81,5 +81,24 @@ public class CatalagosController {
 
 			return response;
 		}
+		
+		@RequestMapping(value = "/cargaUsuarioId", method = RequestMethod.POST)
+		public @ResponseBody String getUserdataById(UserHorus userHorus) {
+
+			String response = "";
+			Gson gson = new Gson();
+
+			System.out.println(userHorus.toString());
+
+			// arraylist
+			response = gson.toJson(investigacionService.getUsuarioById(userHorus.getId_usuario()));
+
+			System.out.println("********* [Controller] cargaUsuarioId : " + response);
+
+			return response;
+		}
+		
+	
+		
 
 }

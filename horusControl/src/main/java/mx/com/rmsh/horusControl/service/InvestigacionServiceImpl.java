@@ -53,9 +53,14 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 
 	@Override
 	public Long guardaUsuario(UserHorus user) {
-		// TODO Auto-generated method stub
-		return daoUser.guardaUsuario(user);
+		return daoUser.guardaUsuario(user); 
 	}
+	
+	@Override
+	public UserHorus getUsuarioById(Long id_usuario) {
+		return daoUser.getUsuarioById(id_usuario);
+	}
+
 
 	@Override
 	public List<InvestigacionRequest> guardaInvestigacionMasiva(MasivaRequest masivaRequest) throws IOException {
@@ -143,5 +148,6 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 
 		return listaRetorno;
 	}
+
 
 }
