@@ -76,7 +76,7 @@ public class InvestigacionController {
 
 		response = gson.toJson(lambdaQuery);
 
-		System.out.println("********* [Controller] consumeLambda : " + response);
+		System.out.println("********* [Controller] cargaInvestigacionId : " + response);
 
 		return response;
 	}

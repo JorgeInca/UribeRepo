@@ -115,7 +115,12 @@ function cargaInvestigacionId( idInvestigacion ) {
 
 				$('#lambdaText').append('<br><div class="badge badge-info">' + data.body.origen[x].fuente + '</a>');
 				$('#lambdaText').append('<br>');
-				$('#lambdaText').append('<br>...<div>' + data.body.origen[x].texto + '</a>...');
+				
+				if(data.body.origen[x].isJSON == "0")
+					$('#lambdaText').append('<br>...<div>' + data.body.origen[x].free_text + '</a>...');
+				else
+					$('#lambdaText').append('<br>...<div>' + createTableFromMap(data.body.origen[x].texto) + '</a>...');					
+				
 				$('#lambdaText').append('<br><a href="' + data.body.origen[x].url + '">' + data.body.origen[x].url + '</a>');
 				$('#lambdaText').append('<br><hr class="my-4">');
 

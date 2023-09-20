@@ -37,3 +37,24 @@ function getUserData() {
 
 
 }
+
+function createTableFromMap(myMap) {
+
+	let table = '<table>';
+	//table += '<tr><th>ID</th><th>Name</th><th>Rank</th></tr>';
+
+	for (const myKey of Object.keys(myMap)) {
+				
+		table = table + '<tr>';
+			table = table + '<td>' + myKey + '</td>';
+			table = table + '<td>' + myMap[myKey] + '</td>';
+			table = table + '</tr>';
+			
+	}
+
+	
+	table += "</table>"
+	
+
+	return table;
+}

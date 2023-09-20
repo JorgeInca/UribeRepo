@@ -41,6 +41,7 @@ public class AWSServiceImpl implements AWSService {
 		Investigacion respuestaInvestigacion = new Investigacion();
 		respuestaInvestigacion.setJson(invokeFunction(awsLambda, functionName,investigacionRequest));
 
+		System.out.println( "JASON" + respuestaInvestigacion.getJson()  );
 		
 		awsLambda.close();
 		
@@ -79,6 +80,11 @@ public class AWSServiceImpl implements AWSService {
 			res = awsLambda.invoke(request);
 			String value = res.payload().asUtf8String();
 			//System.out.println("Se logro" + value);
+			
+			//Para campos vacios
+			String texto = "\\\"texto\\\": \\\"\\\",";
+			
+			value = value.replaceAll(texto, "\"texto\": { \"hola\" : \"holi\"  } ,");
 
 			return value;
 
