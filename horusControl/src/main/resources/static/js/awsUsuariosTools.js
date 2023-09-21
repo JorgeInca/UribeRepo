@@ -43,9 +43,10 @@ function guardaUsuario() {
 
 			alert('El ID GENERADO DEL NUEVO USUARIO ES ' + data);
 
-		
+		    $("#noFolio1").prop('disabled', true);
 			$("#form-name").prop('disabled', true);
 			$("#form-email").prop('disabled', true);
+			$("#form-fecha_creacion").prop('disabled', true);
 			$("#form-estatus").prop('disabled', true);
 			$("#form-id_empresa").prop('disabled', true);
 			$("#form-rol").prop('disabled', true);
@@ -55,6 +56,11 @@ function guardaUsuario() {
 			
 			$("#noFolio").empty();
 			$('#noFolio').append('<strong> '+data + ' </strong>');
+			
+			
+			//Habilita los botones
+		//	$("#limpiarUsuarios").prop('disabled', false);
+		//	$("#EnviarUsuarios").prop('disabled', false);
 
 
 		},

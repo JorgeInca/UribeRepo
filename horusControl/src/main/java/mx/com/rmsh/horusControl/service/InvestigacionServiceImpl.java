@@ -60,6 +60,11 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 	public UserHorus getUsuarioById(Long id_usuario) {
 		return daoUser.getUsuarioById(id_usuario);
 	}
+	
+	@Override
+	public long eliminiarUsuario(Long id_usuario) {
+		return daoUser.eliminiarUsuario(id_usuario);
+	}
 
 
 	@Override
@@ -148,6 +153,8 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 
 		return listaRetorno;
 	}
+
+	
 
 
 }

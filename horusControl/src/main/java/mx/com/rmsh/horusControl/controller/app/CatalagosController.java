@@ -98,6 +98,22 @@ public class CatalagosController {
 			return response;
 		}
 		
+		@RequestMapping(value = "/eliminarUsuarioId", method = RequestMethod.POST)
+		public @ResponseBody String eliminiarUsuario(UserHorus userHorus) {
+
+			String response = "";
+			Gson gson = new Gson();
+
+			System.out.println(userHorus.toString());
+
+			// arraylist
+			response = gson.toJson(investigacionService.eliminiarUsuario(userHorus.getId_usuario()));
+
+			System.out.println("********* [Controller] cargaUsuarioId : " + response);
+
+			return response;
+		}
+		
 	
 		
 

@@ -51,12 +51,12 @@ public class SecurityDaoImpl implements SecurityDao {
 			+ "VALUES"
 			+ "(?,?,?,?,?,?)";
 	
-	//Insertar nuevo usuario
+	//Obtiene el usuario de la sesion
 	String QUERY_GET_USERBYNAME=
 			" select * from usuario where nombre = ? ";
 	
 	//Buscar usuario por Id
-/*	String QUERY_GET_USUARIO_BYID =
+	/* String QUERY_GET_USUARIO_BYID =
 				"SELECT "
 						+ " A.id_usuario as id_usuario,"
 						+ " A.nombre as name,"
@@ -64,15 +64,18 @@ public class SecurityDaoImpl implements SecurityDao {
 						+ " A.fecha_creacion as fecha_creacion,"
 						+ " A.estatus as estatus, "
 						+ " B.id_empresa as id_empresa,"
-						+ " B.nombre as nombreEmpresa,"
 						+ " A.rol as rol, "
 						+ " A.password as password "
 						+ " FROM usuario A left join empresa B on A.id_empresa = B.id_empresa "
-//						+ "where A.id_usuario = ? ";  */
+				    	+ "where A.id_usuario = ? ";  */
 		
 		//Buscar usuario por Id
 			String QUERY_GET_USUARIO_BYID =
-						" select * from usuario A where A.id_usuario = ? "; 
+						" select * from usuario A where A.id_usuario = ? ";  
+			
+			//Eliminar usuario por Id
+			String QUERY_DELETE_USUARIO_BYID =
+						" delete from usuario A where A.id_usuario = ? ";  
 			
 	
 
@@ -151,10 +154,13 @@ public class SecurityDaoImpl implements SecurityDao {
 					new Object[] { id_usuario }, new UsuarioRowMapper());
 		}
 
-
+	
+		
+		@Override
+		public long eliminiarUsuario(Long id_usuario) {
+		    return jdbcTemplate.update("DELETE from usuario A where A.id_usuario = ?");
+		}
 	
 
-
-	
 	
 }

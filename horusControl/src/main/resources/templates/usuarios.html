@@ -80,13 +80,13 @@
 						<div class="col-md-10">   
   <form id ="miForm" class="needs-validation" novalidate>
           <div class="form-group">
-            <label for="noFolio" class="col-form-label">Id_usuario:</label>
-            <input type="text" class="form-control" id="noFolio"
+            <label for="noFolio1" class="col-form-label">Id_usuario:</label>
+            <input type="text" class="form-control" id="noFolio1"
             placeholder="Id usuario" disabled>         
                                         </div>
           <div class="form-group">
             <label for="form-name" class="col-form-label">Nombre:</label>
-            <input type="text" class="form-control" id="form-name"
+            <input type="text" class="form-control" id="form-name" 
             placeholder="First name" required>
 										<div class="invalid-feedback">
 											Nombre requerido!
@@ -97,8 +97,8 @@
                                         </div>
           <div class="form-group">
             <label for="form-email" class="col-form-label">Email:</label>
-            <input type="email" class="form-control" id="form-email" name="email"
-            placeholder="Ejemplo@email.com" value="" required>
+            <input type="email" class="form-control" id="form-email" name="email" 
+            placeholder="Ejemplo@email.com" required>
 										<div class="invalid-feedback">
 											Email requerido!
 										</div>
@@ -109,13 +109,13 @@
           <div class="form-group">
             <label for="form-fecha_creacion" class="col-form-label">Fecha_creacion:</label>
             <input type="text" class="form-control" id="form-fecha_creacion"
-            placeholder="Fecha" disabled/>
+            placeholder="Fecha" disabled>
             </div>
             
           <div class="form-group">
             <label for="form-estatus" class="col-form-label">Estatus:</label>
-            <select class="form-control" id="form-estatus" placeholder="Estatus" value="" required>
-                                        <option value="none" selected disabled hidden>Seleccion una opcion</option>
+            <select class="form-control" id="form-estatus"  placeholder="Estatus" required>
+                                        <option value="none" selected  hidden>Seleccion una opcion</option>
                                         <option value= "1">Administrador</option>
                                         <option value= "2">Usuario</option>
                                         </select>
@@ -128,7 +128,7 @@
                                         </div>
           <div class="form-group">
             <label for="form-id_empresa" class="col-form-label">Id_empresa:</label>
-            <select class="form-control" id="form-id_empresa" placeholder="Id Empresa" value="" required>
+            <select class="form-control" id="form-id_empresa"  placeholder="Id Empresa" required>
                                         <option value="none" selected disabled hidden>Seleccion una opcion</option>
                                         <option value= "1">Coca-Cola</option>
                                         <option value= "2">Horus</option>
@@ -142,8 +142,8 @@
                                         </div>
           <div class="form-group">
             <label for="form-rol" class="col-form-label">Rol:</label>
-            <input type="text" class="form-control" id="form-rol"
-            placeholder="Rol" value="" required>
+            <input type="text" class="form-control" id="form-rol" name="rol" 
+            placeholder="Rol" required>
 										<div class="invalid-feedback">
 											Rol requerido!
 										</div>
@@ -154,8 +154,8 @@
           <div class="form-group">
             <label for="form-password" class="col-form-label">Password:</label>
             <input type="password" pattern=".{6,}" class="form-control" id="form-password"
-            aria-describedby="passwordHelpBlock"
-            placeholder="Password, minimo de 6 caracteres" value="" required>
+            aria-describedby="passwordHelpBlock" 
+            placeholder="Password, minimo de 6 caracteres" required>
             <small id="passwordHelpBlock" class="form-text text-muted">
             Su contraseña debe tener entre 6 y 20 caracteres, contener letras y números, y no debe contener espacios, caracteres especiales ni emoji.
             </small>
@@ -171,9 +171,9 @@
       	</div>
     </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" id="limpiar" onclick="limpiarFormulario()">Limpiar formulario</button>
+        <button type="button" class="btn btn-secondary" id="limpiarUsuarios" onclick="limpiarFormulario()">Limpiar formulario</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <button type="submit" class="btn btn-primary" onclick="guardaUsuario()">Enviar</button>
+        <button type="submit" class="btn btn-primary" id="EnviarUsuarios" onclick="guardaUsuario()" >Enviar</button>
       </div>
       </form>
        
@@ -198,7 +198,8 @@
                                 <th>Cliente</th>
                                 <th>Email</th>                           
                                 <th>Role</th>        
-                                <th>Editar</th>                               
+                                <th>Editar</th>         
+                                <th>Eliminar</th>                      
                             </tr>
                         </thead>
                         

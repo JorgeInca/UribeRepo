@@ -24,4 +24,6 @@ public interface InvestigacionService {
 	
 	public UserHorus getUsuarioById(Long id_usuario);
 	
+	public long eliminiarUsuario(Long id_usuario);
+	
 }
