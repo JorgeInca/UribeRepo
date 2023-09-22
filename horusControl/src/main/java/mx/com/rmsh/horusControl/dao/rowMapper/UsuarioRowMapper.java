@@ -17,6 +17,13 @@ public class UsuarioRowMapper implements RowMapper<UserHorus>{
 		user.setName(rs.getString("nombre"));
 		user.setEmail(rs.getString("email"));
 		
+		user.setEstatus(rs.getInt("estatus"));
+		user.setIdEmpresa(rs.getLong("idEmpresa"));
+		user.setNombreEmpresa(rs.getString("nombreEmpresa"));
+		user.setRol(rs.getInt("rol"));
+		user.setPassword(rs.getString("password"));
+		
+		
 		
         return user;
 

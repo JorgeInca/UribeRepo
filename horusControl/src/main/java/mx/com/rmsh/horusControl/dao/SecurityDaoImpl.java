@@ -52,30 +52,38 @@ public class SecurityDaoImpl implements SecurityDao {
 			+ "(?,?,?,?,?,?)";
 	
 	//Obtiene el usuario de la sesion
-	String QUERY_GET_USERBYNAME=
-			" select * from usuario where nombre = ? ";
+	String QUERY_GET_USERBYNAME =
+			"SELECT "
+					+ " A.id_usuario as id_usuario,"
+					+ " A.nombre as nombre,"
+					+ " A.email as email,"
+					+ " A.fecha_creacion as fecha_creacion,"
+					+ " A.estatus as estatus, "
+					+ " A.id_empresa as idEmpresa,"
+					+ " B.nombre as nombreEmpresa,"
+					+ " A.rol as rol, "
+					+ " A.password as password "
+					+ " FROM usuario A left join empresa B on A.id_empresa = B.id_empresa "
+					+ " WHERE A.nombre = ? ";
 	
-	//Buscar usuario por Id
-	/* String QUERY_GET_USUARIO_BYID =
-				"SELECT "
-						+ " A.id_usuario as id_usuario,"
-						+ " A.nombre as name,"
-						+ " A.email as email,"
-						+ " A.fecha_creacion as fecha_creacion,"
-						+ " A.estatus as estatus, "
-						+ " B.id_empresa as id_empresa,"
-						+ " A.rol as rol, "
-						+ " A.password as password "
-						+ " FROM usuario A left join empresa B on A.id_empresa = B.id_empresa "
-				    	+ "where A.id_usuario = ? ";  */
-		
 		//Buscar usuario por Id
 			String QUERY_GET_USUARIO_BYID =
-						" select * from usuario A where A.id_usuario = ? ";  
+					"SELECT "
+							+ " A.id_usuario as id_usuario,"
+							+ " A.nombre as nombre,"
+							+ " A.email as email,"
+							+ " A.fecha_creacion as fecha_creacion,"
+							+ " A.estatus as estatus, "
+							+ " A.id_empresa as idEmpresa,"
+							+ " B.nombre as nombreEmpresa,"
+							+ " A.rol as rol, "
+							+ " A.password as password "
+							+ " FROM usuario A left join empresa B on A.id_empresa = B.id_empresa "
+							+ " WHERE A.id_usuario = ? ";  
 			
 			//Eliminar usuario por Id
 			String QUERY_DELETE_USUARIO_BYID =
-						" delete from usuario A where A.id_usuario = ? ";  
+					"Update usuario set estatus = 2 where A.id_usuario = ?"; 
 			
 	
 
@@ -158,7 +166,7 @@ public class SecurityDaoImpl implements SecurityDao {
 		
 		@Override
 		public long eliminiarUsuario(Long id_usuario) {
-		    return jdbcTemplate.update("DELETE from usuario A where A.id_usuario = ?");
+		    return jdbcTemplate.update("Update usuario set estatus = 2 where id_usuario = ?");
 		}
 	
 

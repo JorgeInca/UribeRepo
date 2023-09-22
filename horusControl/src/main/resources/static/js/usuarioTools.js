@@ -77,7 +77,7 @@ function cargaUsuarioId(id_usuario) {
 			
 			$("#form-fecha_creacion").val( data.fecha_creacion);
 			$("#form-estatus").val( data.estatus);
-			$("#form-id_empresa").val( data.id_empresa);
+			$("#form-id_empresa").val( data.idEmpresa);
 			$("#form-rol").val( data.rol);
 			$("#form-password").val( data.password);
 			
