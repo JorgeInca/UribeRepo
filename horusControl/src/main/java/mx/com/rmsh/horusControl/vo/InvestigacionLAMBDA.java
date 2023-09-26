@@ -162,8 +162,7 @@ class Origen {
 }
 
 class Mentions {
-	public String title;
-	@SerializedName("type")
+	public String title;	
 	public String link;	
 	public String description;
 	public String engine;

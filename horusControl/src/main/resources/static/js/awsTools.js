@@ -6,8 +6,8 @@ var gaugeGobal;
  */
 function consumeAws() {
 
-	console.log('inicia aws');
-
+	console.log('inicia aws');	
+	
 	var uri = "consumeLambda";
 
 	var var_firstname = $("#form_firstName").val();
@@ -16,10 +16,11 @@ function consumeAws() {
 	var var_pais = $("#form_pais").val();
 	var var_id_usuario = $("#idUserHorus").val();
 
-	if (var_lastname === "" || var_pais === "") {
+	if (var_firstname === "") {
 		return;
 	}
 
+	$('body').removeClass('loaded');
 
 	var investigacionRequest = {
 		firstname: var_firstname,
@@ -37,22 +38,27 @@ function consumeAws() {
 		success: function(data) {
 
 			$("#lambdaText").empty();
+			$("#mentionsText").empty();
 
 			investigacionGlobal = data;
 			console.log('El FOLIO GENERADO ES ' + data.created);
+			
+			
 
 			for (let x in data.body.origen) {
 
-				$('#lambdaText').append('<br><div class="badge badge-info">' + data.body.origen[x].fuente + '</a>');
+				$('#lambdaText').append('<br><div class="badge badge-info">' + data.body.origen[x].fuente + '</div>');
 				$('#lambdaText').append('<br>');
 				
 				if(data.body.origen[x].isJSON == "0")
-					$('#lambdaText').append('<br>...<div>' + data.body.origen[x].free_text + '</a>...');
+					$('#lambdaText').append('<br>...<div>' + data.body.origen[x].free_text + '</div>...');
 				else
-					$('#lambdaText').append('<br>...<div>' + createTableFromMap(data.body.origen[x].texto) + '</a>...');
+					$('#lambdaText').append('<br>...<div>' + createTableFromMap(data.body.origen[x].texto) + '</div>...');
 				
-				$('#lambdaText').append('<br><a href="' + data.body.origen[x].url + '">' + data.body.origen[x].url + '</a>');
+				$('#lambdaText').append('<br><a href="' + data.body.origen[x].url + '">' + data.body.origen[x].url + '</div>');
 				$('#lambdaText').append('<br><hr class="my-4">');
+				
+				 
 
 				//console.log(x + ": " + data.body.origen[x].url)
 				//alert( JSON.stringify(investigacionGlobal) );
@@ -60,9 +66,9 @@ function consumeAws() {
 
 			for (let x in data.body.mentions) {
 
-				$('#mentionsText').append('<br><img src="images/icons/' + data.body.mentions[x].engine + '.png" width="40" height="40"><div class="badge badge-info">' + data.body.mentions[x].title + '</a>');
+				$('#mentionsText').append('<br><img src="images/icons/' + data.body.mentions[x].engine + '.png" width="40" height="40"><div class="badge badge-info">' + data.body.mentions[x].title + '</div>');
 				$('#mentionsText').append('<br>');
-				$('#mentionsText').append('<br>...<div>' + data.body.mentions[x].description + '</a>...');
+				$('#mentionsText').append('<br>...<div>' + data.body.mentions[x].description + '</div>...');
 				$('#mentionsText').append('<br><a href="' + data.body.mentions[x].link + '">' + data.body.mentions[x].link + '</a>');
 				$('#mentionsText').append('<br><hr class="my-4">');
 
@@ -91,6 +97,8 @@ function consumeAws() {
 			$('#noSanciones').append('<strong>( ' + data.body.origen.length + ' )</strong>');
 			$('#noMenciones').append('<strong>( ' + data.body.mentions.length + ' )</strong>');
 			$('#nivelRiesgoLabel').append('<strong> ' + data.body.nivel_riesgo + ' </strong>');
+			
+			$('#idInvestigacionGlobal').val( data.created );
 
 
 			gaugeGobal.set(data.body.nivel_riesgo > 0 ? (data.body.nivel_riesgo - 0.5) : data.body.nivel_riesgo);
@@ -100,10 +108,7 @@ function consumeAws() {
 
 			var html = $('#lambdaText').html();
 
-			$('#lambdaText').html(
-				html.replace(textoRegExpFirstname, '<strong> ' + var_firstname.toUpperCase() + '</strong>').replace(textoRegExpLastname, '<strong> ' + var_lastname.toUpperCase() + '</strong>')
-
-			);
+			$('body').addClass('loaded');
 
 
 

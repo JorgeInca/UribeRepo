@@ -49,7 +49,7 @@ function cargaListaUsuarios() {
 
 function cargaUsuarioId(id_usuario) {
 	
-	alert('Revisando el Id :' + id_usuario);
+	//alert('Revisando el Id :' + id_usuario);
 
 	console.log('inicia cargaUsarioId');
 
@@ -123,7 +123,7 @@ function cargaUsuarioId(id_usuario) {
 
 	console.log('Inicia eliminarUsuarioId');
 	
-	var uri = "eliminaUsuarios";
+	var uri = "eliminarUsuarioId";
 	
 	if (!confirm("¡Seguro quieres eliminar al usuario?")) {
 		return;

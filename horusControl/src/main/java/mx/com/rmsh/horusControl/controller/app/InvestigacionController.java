@@ -1,10 +1,25 @@
 package mx.com.rmsh.horusControl.controller.app;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,6 +39,13 @@ import mx.com.rmsh.horusControl.vo.InvestigacionRequest;
 import mx.com.rmsh.horusControl.vo.MasivaRequest;
 import mx.com.rmsh.horusControl.vo.ReporteRequest;
 import mx.com.rmsh.horusControl.vo.UserHorus;
+import net.sf.jasperreports.engine.JREmptyDataSource;
+import net.sf.jasperreports.engine.JRExporter;
+import net.sf.jasperreports.engine.JRExporterParameter;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.export.JRPdfExporter;
 
 @Controller
 public class InvestigacionController {
@@ -33,10 +55,12 @@ public class InvestigacionController {
 
 	@Autowired
 	InvestigacionService investigacionService;
-	
+
 	@Autowired
 	SecurityService securityService;
-	
+
+	@Autowired
+	ServletContext servletContext;
 
 	@RequestMapping(value = "/consumeLambda", method = RequestMethod.POST)
 	public @ResponseBody String posted(InvestigacionRequest investigacionRequest) {
@@ -110,15 +134,16 @@ public class InvestigacionController {
 
 		response = gson.toJson(investigacionService.getReportes(reporteRequest));
 
-		System.out.println("********* [Controller] consultaInvestigaciones : " + response);
+		System.out.println("********* [Controller] consultaInvestigaciones : OK " );
 
 		return response;
-	}	
+	}
 
 	@PostMapping("/uploadMasiva")
-    @ResponseBody
-	public String fileUpload(@RequestParam("file") MultipartFile file, @RequestParam("idUserHorus") Long idUserHorus, @RequestParam("nombreCampaña") String nombreCampaña) {
-		
+	@ResponseBody
+	public String fileUpload(@RequestParam("file") MultipartFile file, @RequestParam("idUserHorus") Long idUserHorus,
+			@RequestParam("nombreCampaña") String nombreCampaña) {
+
 		MasivaRequest masivaRequest = new MasivaRequest();
 		masivaRequest.setFile(file);
 		masivaRequest.setIdUsuario(idUserHorus);
@@ -135,12 +160,10 @@ public class InvestigacionController {
 		try {
 			listaRetorno = investigacionService.guardaInvestigacionMasiva(masivaRequest);
 			response = gson.toJson(listaRetorno);
-			
+
 			System.out.println("********* [Controller] upload : " + response);
 			return response;
 		}
-		
-		
 
 		catch (Exception e) {
 			e.printStackTrace();
@@ -148,7 +171,7 @@ public class InvestigacionController {
 		}
 
 	}
-	
+
 	@RequestMapping(value = "/getUserdataByName", method = RequestMethod.POST)
 	public @ResponseBody String getUserdataByName(UserHorus userHorus) {
 
@@ -163,5 +186,69 @@ public class InvestigacionController {
 		System.out.println("********* [Controller] getUserdataByName : " + response);
 
 		return response;
+	}
+
+	@RequestMapping(value = "/generaReporteByID/{idInvestigacion}", method = RequestMethod.GET)
+	public ResponseEntity<ByteArrayResource> generateInventoryPurchasePdf(HttpServletResponse response,
+			@PathVariable("idInvestigacion") Long idInvestigacion) throws Exception {
+		
+		System.out.println("********* [Controller] generaReporteByID : ");
+		
+		InvestigacionRequest reguest = new InvestigacionRequest();
+		reguest.setIdInvestigacion(idInvestigacion);
+		
+		
+		InvestigacionLAMBDA lambdaQuery = awsService.getJSONFromBD(reguest);		
+
+		// generate the PDF
+		Map<String, Object> parameters = new HashMap<String, Object>();
+		parameters.put("clienteName", "Coca-Cola");
+		parameters.put("idInvestigacion", idInvestigacion.toString());
+		parameters.put("nombreCompleto", lambdaQuery.getBody().getParametros_busqueda().get(0) + " " + lambdaQuery.getBody().getParametros_busqueda().get(1));
+
+		try {
+			
+			
+			String reportName =  File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator + "mx"
+					+ File.separator + "com" + File.separator + "rmsh" + File.separator + "horusControl" + File.separator + "reportes"+ File.separator +"reporteInvestigacion";
+
+			// compiles jrxml
+			JasperCompileManager.compileReportToFile(reportName + ".jrxml");
+			// fills compiled report with parameters and a connection
+			JasperPrint print = JasperFillManager.fillReport(reportName + ".jasper", parameters,
+					new JREmptyDataSource());
+			// exports report to pdf
+			JRExporter exporter = new JRPdfExporter();
+			exporter.setParameter(JRExporterParameter.JASPER_PRINT, print);
+			exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, new FileOutputStream(reportName + ".pdf"));
+			exporter.exportReport();
+
+			File file = new File(reportName + ".pdf");
+			System.out.println("Archivo abierto PDF");
+
+			Path path = Paths.get(file.getAbsolutePath());
+			byte[] data = Files.readAllBytes(path);
+
+			MediaType mediaType = MediaType.APPLICATION_JSON_UTF8;
+			ByteArrayResource resource = new ByteArrayResource(data);
+
+			System.out.println("fileName: " + file.getName());
+			System.out.println("mediaType: " + mediaType);
+
+			return ResponseEntity.ok()
+					// Content-Disposition
+					.header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + path.getFileName().toString())
+					// Content-Type
+					.contentType(mediaType) //
+					// Content-Lengh
+					.contentLength(data.length) //
+					.body(resource);
+
+		} catch (Exception e) {
+			throw new RuntimeException("It's not possible to generate the pdf report.", e);
+		} finally {
+
+		}
+
 	}
 }

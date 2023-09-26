@@ -101,6 +101,7 @@ function cargaInvestigacionId( idInvestigacion ) {
 		success: function(data) {
 
 			$("#lambdaText").empty();
+			$("#mentionsText").empty();
 			
 			//Llena campos Modal:
 			$( "#form_firstName" ).val(  data.body.parametros_busqueda[0] );
@@ -113,17 +114,17 @@ function cargaInvestigacionId( idInvestigacion ) {
 
 			for (let x in data.body.origen) {
 
-				$('#lambdaText').append('<br><div class="badge badge-info">' + data.body.origen[x].fuente + '</a>');
+				$('#lambdaText').append('<br><div class="badge badge-info">' + data.body.origen[x].fuente + '</div>');
 				$('#lambdaText').append('<br>');
 				
 				if(data.body.origen[x].isJSON == "0")
-					$('#lambdaText').append('<br>...<div>' + data.body.origen[x].free_text + '</a>...');
+					$('#lambdaText').append('<br>...<div>' + data.body.origen[x].free_text + '</div>...');
 				else
-					$('#lambdaText').append('<br>...<div>' + createTableFromMap(data.body.origen[x].texto) + '</a>...');					
+					$('#lambdaText').append('<br>...<div>' + createTableFromMap(data.body.origen[x].texto) + '</div>...');					
 				
 				$('#lambdaText').append('<br><a href="' + data.body.origen[x].url + '">' + data.body.origen[x].url + '</a>');
 				$('#lambdaText').append('<br><hr class="my-4">');
-
+				$("#idInvestigacionGlobal").val( data.created )
 				//console.log(x + ": " + data.body.origen[x].url)
 
 				//alert( JSON.stringify(investigacionGlobal) );
@@ -132,9 +133,9 @@ function cargaInvestigacionId( idInvestigacion ) {
 			
 			for (let x in data.body.mentions) {
 
-				$('#mentionsText').append('<br><img src="images/icons/'+ data.body.mentions[x].engine +'.png" width="40" height="40"><div class="badge badge-info">' + data.body.mentions[x].title + '</a>');
+				$('#mentionsText').append('<br><img src="images/icons/'+ data.body.mentions[x].engine +'.png" width="40" height="40"><div class="badge badge-info">' + data.body.mentions[x].title + '</div>');
 				$('#mentionsText').append('<br>');
-				$('#mentionsText').append('<br>...<div>' + data.body.mentions[x].description + '</a>...');
+				$('#mentionsText').append('<br>...<div>' + data.body.mentions[x].description + '</div>...');
 				$('#mentionsText').append('<br><a href="' + data.body.mentions[x].link + '">' + data.body.mentions[x].link + '</a>');
 				$('#mentionsText').append('<br><hr class="my-4">');				
 
@@ -157,12 +158,14 @@ function cargaInvestigacionId( idInvestigacion ) {
 			$("#noSanciones").empty();
 			$("#noMenciones").empty();
 			$("#nivelRiesgoLabel").empty();
-
+			
 			//Etiquetas
 			$('#noFolio').append('<strong> ' + idInvestigacion + ' </strong>');
 			$('#noSanciones').append('<strong>( ' + data.body.origen.length + ' )</strong>');
 			$('#noMenciones').append('<strong>( ' + data.body.mentions.length + ' )</strong>');
 			$('#nivelRiesgoLabel').append('<strong> ' + data.body.nivel_riesgo + ' </strong>');
+			
+			$('#idInvestigacionGlobal').val( idInvestigacion );
 	
 			loadCHart();
 			gaugeGobal.set( data.body.nivel_riesgo > 0 ? (data.body.nivel_riesgo - 0.5) : data.body.nivel_riesgo  );
@@ -171,11 +174,13 @@ function cargaInvestigacionId( idInvestigacion ) {
 			var textoRegExpLastname = new RegExp(data.body.parametros_busqueda[1], 'gi');
 
 			var html = $('#lambdaText').html();
+			
+			
 
-			$('#lambdaText').html(
-				html.replace(textoRegExpFirstname, '<strong>' + data.body.parametros_busqueda[0].toUpperCase() + '</strong> ').replace(textoRegExpLastname, '<strong> ' + data.body.parametros_busqueda[1].toUpperCase() + '</strong>')
+			//$('#lambdaText').html(
+				//html.replace(textoRegExpFirstname, '<strong>' + data.body.parametros_busqueda[0].toUpperCase() + '</strong> ').replace(textoRegExpLastname, '<strong> ' + data.body.parametros_busqueda[1].toUpperCase() + '</strong>')
 
-			);
+			//);
 
 
 

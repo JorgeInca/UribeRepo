@@ -12,6 +12,8 @@ import org.apache.poi.ss.usermodel.Row.MissingCellPolicy;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.stereotype.Service;
 
 import mx.com.rmsh.horusControl.dao.InvestigacionDao;
@@ -154,6 +156,7 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 		return listaRetorno;
 	}
 
+	 
 	
 
 
