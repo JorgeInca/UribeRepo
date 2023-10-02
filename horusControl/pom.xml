@@ -135,7 +135,7 @@
 			<artifactId>jasperreports</artifactId>
 			<version>6.0.2</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>net.sf.jasperreports</groupId>
 			<artifactId>jasperreports-fonts</artifactId>
@@ -148,6 +148,13 @@
 			<groupId>ar.com.fdvs</groupId>
 			<artifactId>DynamicJasper-core-fonts</artifactId>
 			<version>2.0</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.apache.pdfbox/pdfbox -->
+		<dependency>
+			<groupId>org.apache.pdfbox</groupId>
+			<artifactId>pdfbox</artifactId>
+			<version>2.0.13</version>
 		</dependency>
 
 

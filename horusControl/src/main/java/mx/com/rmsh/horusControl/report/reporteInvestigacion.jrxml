@@ -1,40 +1,94 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.0.0.final using JasperReports Library version 6.0.0  -->
-<!-- 2023-09-20T01:29:12 -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporteInvestigacion" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3f8d7e70-1ce9-4c74-aa90-341bac4b9b8a">
+<!-- 2023-09-29T03:00:48 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporteInvestigacion" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3f8d7e70-1ce9-4c74-aa90-341bac4b9b8a">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
 	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
 	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
 	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<style name="Style1">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$P{nivelRiesgoTexto}.equalsIgnoreCase(  "ALTO" )]]></conditionExpression>
+			<style forecolor="#E01919" backcolor="#EB2B28" hAlign="Left" fontName="Arial" fontSize="18" isBold="true"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$P{nivelRiesgoTexto}.equalsIgnoreCase( "BAJO" )]]></conditionExpression>
+			<style forecolor="#2CB83F" backcolor="#37AD43" hAlign="Left" fontName="Arial" fontSize="18" isBold="true"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$P{nivelRiesgoTexto}.equalsIgnoreCase( "MEDIO" )]]></conditionExpression>
+			<style forecolor="#E0DD1D" backcolor="#D4D42F" hAlign="Left" fontName="Arial" fontSize="18"/>
+		</conditionalStyle>
+	</style>
+	<style name="Table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Dataset1" uuid="58a66b18-a1d0-411c-9eec-4a70b841709b">
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+	</subDataset>
 	<parameter name="clienteName" class="java.lang.String"/>
 	<parameter name="idInvestigacion" class="java.lang.String"/>
 	<parameter name="nombreCompleto" class="java.lang.String"/>
+	<parameter name="nivelRiesgoTexto" class="java.lang.String"/>
+	<parameter name="hayintcump" class="java.lang.String"/>
+	<parameter name="haynatcump" class="java.lang.String"/>
+	<parameter name="hayintPEP" class="java.lang.String"/>
+	<parameter name="hayMentions" class="java.lang.String"/>
+	<parameter name="hayOthers" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DATA" class="java.util.List"/>
+	<parameter name="subreportParameter" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="subreportParameter2" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="subreportParameter3" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="subreportParameter4" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="subreportParameter5" class="net.sf.jasperreports.engine.JasperReport"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
+	<field name="listaPEP" class="java.util.ArrayList"/>
+	<field name="listaCumIn" class="java.lang.String"/>
+	<field name="listaCumNac" class="java.lang.String"/>
+	<field name="listaOthers" class="java.lang.String"/>
+	<field name="listaMentions" class="java.lang.String"/>
 	<group name="Group1">
 		<groupExpression><![CDATA[(int)($V{REPORT_COUNT}/15)]]></groupExpression>
-		<groupHeader>
-			<band height="37"/>
-		</groupHeader>
-		<groupFooter>
-			<band height="6"/>
-		</groupFooter>
 	</group>
 	<group name="Group2">
 		<groupExpression><![CDATA[(int)($V{REPORT_COUNT}/5)]]></groupExpression>
-		<groupHeader>
-			<band height="30"/>
-		</groupHeader>
 	</group>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="70" splitType="Stretch">
+		<band height="450" splitType="Stretch">
 			<image>
-				<reportElement x="275" y="0" width="300" height="64" uuid="c8f81be1-92d7-4120-815f-a3df90da2a34"/>
+				<reportElement x="275" y="0" width="278" height="64" uuid="c8f81be1-92d7-4120-815f-a3df90da2a34"/>
 				<imageExpression><![CDATA["leaf_banner_violet.png"]]></imageExpression>
 			</image>
 			<staticText>
@@ -43,7 +97,7 @@
 				<text><![CDATA[NUWA ®]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="SubTitle" x="-3" y="33" width="200" height="36" uuid="2820f09d-dc9f-4777-8dd0-b328c052df3e"/>
+				<reportElement style="SubTitle" x="0" y="50" width="200" height="38" uuid="2820f09d-dc9f-4777-8dd0-b328c052df3e"/>
 				<textElement textAlignment="Left" verticalAlignment="Top">
 					<font size="9"/>
 				</textElement>
@@ -51,21 +105,30 @@
 Listados de Sanción
 Menciones Adversas]]></text>
 			</staticText>
-		</band>
-	</title>
-	<pageHeader>
-		<band splitType="Stretch"/>
-	</pageHeader>
-	<columnHeader>
-		<band height="87" splitType="Stretch">
-			<line>
-				<reportElement positionType="FixRelativeToBottom" x="0" y="0" width="555" height="1" uuid="c9d5774a-f444-402a-b170-f6be370bf51f"/>
-				<graphicElement>
-					<pen lineWidth="0.5" lineColor="#999999"/>
-				</graphicElement>
-			</line>
 			<staticText>
-				<reportElement style="Column header" mode="Transparent" x="358" y="30" width="195" height="20" forecolor="#666666" backcolor="#FFFFFF" uuid="20bdd101-0b27-4c42-bb4b-1c06f3faab8a"/>
+				<reportElement style="Title" mode="Transparent" x="0" y="33" width="190" height="18" forecolor="#BA1FC2" backcolor="#FFFFFF" uuid="4d66f188-6237-4b40-be52-3866c14b9734"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Privado y Confidencial
+]]></text>
+			</staticText>
+			<textField isBlankWhenNull="false">
+				<reportElement style="Column header" mode="Transparent" x="454" y="110" width="100" height="20" forecolor="#666666" backcolor="#FFFFFF" uuid="91e2de83-354e-4f6a-84fa-8166c68cb0ec"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{idInvestigacion}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" mode="Transparent" x="392" y="110" width="62" height="20" forecolor="#666666" backcolor="#FFFFFF" uuid="085422c1-8205-46c2-8c17-0b74a21c51b5"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Folio: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" mode="Transparent" x="392" y="95" width="62" height="20" forecolor="#666666" backcolor="#FFFFFF" uuid="20bdd101-0b27-4c42-bb4b-1c06f3faab8a"/>
 				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
 					<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 					<paragraph lineSpacing="1_1_2"/>
@@ -73,59 +136,104 @@ Menciones Adversas]]></text>
 				<text><![CDATA[Cliente: 
 Folio: ]]></text>
 			</staticText>
+			<image>
+				<reportElement x="390" y="140" width="120" height="55" uuid="648c1e5c-525b-4399-adb2-0f28c260ad2a"/>
+				<imageExpression><![CDATA[$P{nivelRiesgoTexto} + ".png"]]></imageExpression>
+			</image>
 			<staticText>
-				<reportElement style="SubTitle" x="-1" y="6" width="180" height="24" uuid="b4a6f282-e61c-4f02-ac1f-1082279b9669"/>
-				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font size="13"/>
+				<reportElement style="SubTitle" mode="Transparent" x="0" y="145" width="100" height="30" forecolor="#666666" backcolor="#FFFFFF" uuid="c5202758-c334-4559-9911-4b75e249bab9"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="13" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 				</textElement>
-				<text><![CDATA[Criterio de Búsqueda:]]></text>
-			</staticText>
-			<textField pattern="EEEEE dd MMMMM yyyy">
-				<reportElement style="Column header" x="358" y="10" width="197" height="20" uuid="8f4416e9-4f6c-48a9-a4f2-88008a14e833"/>
-				<textElement textAlignment="Left" verticalAlignment="Top">
-					<font size="10" isBold="false"/>
-				</textElement>
-				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
-			</textField>
-			<line>
-				<reportElement positionType="FixRelativeToBottom" x="0" y="65" width="555" height="1" uuid="535d8789-0a98-46c6-a265-6cf333a28cf5"/>
-				<graphicElement>
-					<pen lineWidth="0.5" lineColor="#999999"/>
-				</graphicElement>
-			</line>
-			<textField>
-				<reportElement style="Column header" mode="Transparent" x="420" y="30" width="100" height="20" forecolor="#666666" backcolor="#FFFFFF" uuid="0e880728-1e5b-40d0-ab69-68eb0aa2a2db"/>
-				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
-					<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{clienteName}]]></textFieldExpression>
-			</textField>
-			<textField isBlankWhenNull="false">
-				<reportElement style="Column header" mode="Transparent" x="420" y="45" width="100" height="20" forecolor="#666666" backcolor="#FFFFFF" uuid="91e2de83-354e-4f6a-84fa-8166c68cb0ec"/>
-				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
-					<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{idInvestigacion}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement style="Column header" mode="Transparent" x="358" y="45" width="102" height="20" forecolor="#666666" backcolor="#FFFFFF" uuid="085422c1-8205-46c2-8c17-0b74a21c51b5"/>
-				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
-					<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
-				</textElement>
-				<text><![CDATA[Folio: ]]></text>
+				<text><![CDATA[Nivel de Riesgo:]]></text>
 			</staticText>
 			<textField>
-				<reportElement style="Title" mode="Transparent" x="0" y="30" width="340" height="30" forecolor="#BA1FC2" backcolor="#FFFFFF" uuid="cf286e72-626d-4429-817e-00d7603414d1"/>
+				<reportElement style="Title" mode="Transparent" x="0" y="115" width="340" height="30" forecolor="#BA1FC2" backcolor="#FFFFFF" uuid="cf286e72-626d-4429-817e-00d7603414d1"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
 					<font fontName="Arial" size="16" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{nombreCompleto}]]></textFieldExpression>
 			</textField>
+			<textField>
+				<reportElement style="Column header" mode="Transparent" x="454" y="95" width="100" height="20" forecolor="#666666" backcolor="#FFFFFF" uuid="0e880728-1e5b-40d0-ab69-68eb0aa2a2db"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{clienteName}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="SubTitle" x="0" y="93" width="180" height="22" uuid="b4a6f282-e61c-4f02-ac1f-1082279b9669"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="13"/>
+				</textElement>
+				<text><![CDATA[Criterio de Búsqueda:]]></text>
+			</staticText>
+			<textField>
+				<reportElement style="Style1" x="0" y="175" width="100" height="24" uuid="e250cd55-1528-47f7-8aa3-1c02ab343bd9"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$P{nivelRiesgoTexto}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="356" y="60" width="197" height="20" uuid="8f4416e9-4f6c-48a9-a4f2-88008a14e833"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement positionType="Float" x="172" y="240" width="383" height="40" uuid="dc0f9c99-9808-4cdc-8892-fc7d68a1b0b9"/>
+				<subreportParameter name="hayintcump">
+					<subreportParameterExpression><![CDATA[$P{hayintcump}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{SUBREPORT_DATA})]]></dataSourceExpression>
+				<subreportExpression><![CDATA["intcump.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="172" y="280" width="383" height="40" uuid="0f716038-4d03-4de5-bfcf-6be8fdae5bca"/>
+				<subreportParameter name="haynatcump">
+					<subreportParameterExpression><![CDATA[$P{haynatcump}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{SUBREPORT_DATA})]]></dataSourceExpression>
+				<subreportExpression><![CDATA["natcump.jasper"]]></subreportExpression>
+			</subreport>
+			<line>
+				<reportElement positionType="Float" x="0" y="88" width="555" height="1" uuid="ffa56bc3-e27f-40d5-b81e-8439e795ec79"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement positionType="Float" x="0" y="200" width="555" height="1" uuid="07b73446-7327-4db6-af0d-461b4e6c55dc"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<subreport>
+				<reportElement positionType="Float" x="172" y="320" width="383" height="40" uuid="7cd9b79a-031e-420d-a5ed-ac75bdedb457"/>
+				<subreportParameter name="hayintPEP">
+					<subreportParameterExpression><![CDATA[$P{hayintPEP}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{SUBREPORT_DATA})]]></dataSourceExpression>
+				<subreportExpression><![CDATA["pep.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="172" y="360" width="383" height="40" uuid="3c479a73-ae1f-4732-a3fe-56ee476aabfe"/>
+				<subreportParameter name="hayOthers">
+					<subreportParameterExpression><![CDATA[$P{hayOthers}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{SUBREPORT_DATA})]]></dataSourceExpression>
+				<subreportExpression><![CDATA["others.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="172" y="400" width="383" height="40" uuid="93bc21d0-d1ad-49a6-a6dd-55fb84fddbec"/>
+				<subreportParameter name="hayMentions">
+					<subreportParameterExpression><![CDATA[$P{hayMentions}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{SUBREPORT_DATA})]]></dataSourceExpression>
+				<subreportExpression><![CDATA["mentions.jasper"]]></subreportExpression>
+			</subreport>
 		</band>
-	</columnHeader>
-	<detail>
-		<band height="16" splitType="Stretch"/>
-	</detail>
+	</title>
 	<columnFooter>
 		<band height="73" splitType="Stretch">
 			<line>
@@ -139,18 +247,11 @@ Folio: ]]></text>
 	<pageFooter>
 		<band height="20" splitType="Stretch">
 			<textField>
-				<reportElement style="Column header" x="433" y="0" width="80" height="20" uuid="aabfa83f-a88a-442a-a0e8-5f859b64a96d"/>
+				<reportElement style="Column header" x="433" y="0" width="120" height="20" uuid="aabfa83f-a88a-442a-a0e8-5f859b64a96d"/>
 				<textElement textAlignment="Right">
 					<font size="10" isBold="false"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
-			</textField>
-			<textField evaluationTime="Report">
-				<reportElement style="Column header" x="513" y="0" width="40" height="20" uuid="302f7057-bce2-4d12-9505-c56dadb9418d"/>
-				<textElement>
-					<font size="10" isBold="false"/>
-				</textElement>
-				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Seccion 1 de 3"]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement style="Column header" mode="Transparent" x="222" y="-23" width="118" height="43" forecolor="#BA1FC2" backcolor="#FFFFFF" uuid="581450ee-f27d-45da-bda8-ad94568b6c4e"/>

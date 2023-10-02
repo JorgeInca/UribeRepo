@@ -37,27 +37,46 @@ function consumeAws() {
 		data: investigacionRequest,
 		success: function(data) {
 
-			$("#lambdaText").empty();
 			$("#mentionsText").empty();
+			
+			//
+			$("#lambdaTextintcump").empty();
+			$("#lambdaTextnatcump").empty();
+			$("#lambdaTextPEP").empty();
+			$("#lambdaTextOthers").empty();			
+			
 
 			investigacionGlobal = data;
 			console.log('El FOLIO GENERADO ES ' + data.created);
 			
+			var countInt = 0;
+			var countNat = 0;
+			var countPEP = 0;
+			var countOth = 0;
+			
 			
 
 			for (let x in data.body.origen) {
-
-				$('#lambdaText').append('<br><div class="badge badge-info">' + data.body.origen[x].fuente + '</div>');
-				$('#lambdaText').append('<br>');
 				
-				if(data.body.origen[x].isJSON == "0")
-					$('#lambdaText').append('<br>...<div>' + data.body.origen[x].free_text + '</div>...');
-				else
-					$('#lambdaText').append('<br>...<div>' + createTableFromMap(data.body.origen[x].texto) + '</div>...');
+				if( data.body.origen[x].category == "intcump"	){
+					fillLambdaText( 'lambdaTextintcump' , data.body.origen[x]  );
+					countInt++;
+				}
 				
-				$('#lambdaText').append('<br><a href="' + data.body.origen[x].url + '">' + data.body.origen[x].url + '</div>');
-				$('#lambdaText').append('<br><hr class="my-4">');
+				if( data.body.origen[x].category == "natcump"	){
+					fillLambdaText( 'lambdaTextnatcump' , data.body.origen[x]  );
+					countNat++;
+				}
 				
+				if( data.body.origen[x].category == "PEP"	){
+					fillLambdaText( 'lambdaTextPEP' , data.body.origen[x]  );
+					countPEP++;
+				}
+				
+				if( data.body.origen[x].category == "others"	){
+					fillLambdaText( 'lambdaTextOthers' , data.body.origen[x]  );
+					countOth++;
+				}
 				 
 
 				//console.log(x + ": " + data.body.origen[x].url)
@@ -68,7 +87,7 @@ function consumeAws() {
 
 				$('#mentionsText').append('<br><img src="images/icons/' + data.body.mentions[x].engine + '.png" width="40" height="40"><div class="badge badge-info">' + data.body.mentions[x].title + '</div>');
 				$('#mentionsText').append('<br>');
-				$('#mentionsText').append('<br>...<div>' + data.body.mentions[x].description + '</div>...');
+				$('#mentionsText').append('<br>...<div>' + data.body.mentions[x].description + '</div><div class="badge badge-danger">'+data.body.mentions[x].keyword+'</div>');
 				$('#mentionsText').append('<br><a href="' + data.body.mentions[x].link + '">' + data.body.mentions[x].link + '</a>');
 				$('#mentionsText').append('<br><hr class="my-4">');
 
@@ -84,17 +103,29 @@ function consumeAws() {
 			$("#rowFolio").show(); //hide
 
 			//Habilida los botones
+			$("#busquedaMainButton").prop('disabled', true);
 			$("#limpiaButtonInvestigacion").prop('disabled', false);
 			$("#pdfButtonInvestigacion").prop('disabled', false);
 
 			$("#noFolio").empty();
-			$("#noSanciones").empty();
+			
+			$("#nointer").empty();
+			$("#noNacionales").empty();
+			$("#noPEPS").empty();
+			$("#noOthers").empty();
+			
 			$("#noMenciones").empty();
 			$("#nivelRiesgoLabel").empty();
 
 			//Etiquetas
 			$('#noFolio').append('<strong> ' + data.created + ' </strong>');
-			$('#noSanciones').append('<strong>( ' + data.body.origen.length + ' )</strong>');
+			
+			$('#nointer').append('<strong>( ' + countInt + ' )</strong>');
+			$('#noNacionales').append('<strong>( ' + countNat + ' )</strong>');
+			$('#noPEPS').append('<strong>( ' + countPEP + ' )</strong>');
+			$('#noOthers').append('<strong>( ' + countOth + ' )</strong>');
+			
+			
 			$('#noMenciones').append('<strong>( ' + data.body.mentions.length + ' )</strong>');
 			$('#nivelRiesgoLabel').append('<strong> ' + data.body.nivel_riesgo + ' </strong>');
 			
@@ -105,8 +136,7 @@ function consumeAws() {
 
 			var textoRegExpFirstname = new RegExp(var_firstname + ' ', 'gi');
 			var textoRegExpLastname = new RegExp(var_lastname, 'gi');
-
-			var html = $('#lambdaText').html();
+		
 
 			$('body').addClass('loaded');
 
@@ -209,3 +239,45 @@ $('#uploadButton').click(function() {
 	
 	
 });
+
+
+function limpiaInvestigacion(){
+
+				
+			gaugeGobal.set(0);
+			
+			$("#form_firstName").val("");
+			$("#form_lastName").val("");
+			$("#form_rfc").val("");
+			$("#form_pais").val(14);
+			
+			
+			$("#rowFolio").hide(); //hide
+			
+			$("#form_firstName").prop('disabled', false);
+			$("#form_lastName").prop('disabled', false);
+			$("#form_rfc").prop('disabled', false);
+			$("#form_pais").prop('disabled', false);
+			
+			$("#noFolio").empty();
+			
+			$("#nointer").empty();
+			$("#noNacionales").empty();
+			$("#noPEPS").empty();
+			$("#noOthers").empty();			
+			$("#noMenciones").empty();
+			
+			$("#nivelRiesgoLabel").empty();			
+			
+			$("#lambdaTextintcump").empty();
+			$("#lambdaTextnatcump").empty();
+			$("#lambdaTextPEP").empty();
+			$("#lambdaTextOthers").empty();
+			$("#mentionsText").empty();
+	
+			$("#pdfButtonInvestigacion").prop('disabled', true);
+			$("#limpiaButtonInvestigacion").prop('disabled', true);
+			$("#busquedaMainButton").prop('disabled', false);
+	
+}
+

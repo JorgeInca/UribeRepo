@@ -21,8 +21,7 @@ function cargaListaInvestigaciones() {
 		data: reporteRequest,
 		success: function(data) {
 
-			$("#lambdaText").empty();
-
+			
 			//alert(JSON.stringify(data));
 
 			for (let x in data) {
@@ -99,35 +98,51 @@ function cargaInvestigacionId( idInvestigacion ) {
 		dataType: 'json',
 		data: investigacionRequest,
 		success: function(data) {
-
-			$("#lambdaText").empty();
+			
 			$("#mentionsText").empty();
+			
+			//
+			$("#lambdaTextintcump").empty();
+			$("#lambdaTextnatcump").empty();
+			$("#lambdaTextPEP").empty();
+			$("#lambdaTextOthers").empty();	
 			
 			//Llena campos Modal:
 			$( "#form_firstName" ).val(  data.body.parametros_busqueda[0] );
 			$( "#form_lastName" ).val(  data.body.parametros_busqueda[1] );
 			$( "#form_rfc" ).val(  data.body.parametros_busqueda[2] );
-			$( "#form_pais" ).val( 1 );
+			$( "#form_pais" ).val( 14 );
 
 			investigacionGlobal = data;
 			console.log('El FOLIO GENERADO ES ' + investigacionRequest);
+			
+			var countInt = 0;
+			var countNat = 0;
+			var countPEP = 0;
+			var countOth = 0;
+			
 
 			for (let x in data.body.origen) {
 
-				$('#lambdaText').append('<br><div class="badge badge-info">' + data.body.origen[x].fuente + '</div>');
-				$('#lambdaText').append('<br>');
+				if( data.body.origen[x].category == "intcump"	){
+					fillLambdaText( 'lambdaTextintcump' , data.body.origen[x]  );
+					countInt++;
+				}
 				
-				if(data.body.origen[x].isJSON == "0")
-					$('#lambdaText').append('<br>...<div>' + data.body.origen[x].free_text + '</div>...');
-				else
-					$('#lambdaText').append('<br>...<div>' + createTableFromMap(data.body.origen[x].texto) + '</div>...');					
+				if( data.body.origen[x].category == "natcump"	){
+					fillLambdaText( 'lambdaTextnatcump' , data.body.origen[x]  );
+					countNat++;
+				}
 				
-				$('#lambdaText').append('<br><a href="' + data.body.origen[x].url + '">' + data.body.origen[x].url + '</a>');
-				$('#lambdaText').append('<br><hr class="my-4">');
-				$("#idInvestigacionGlobal").val( data.created )
-				//console.log(x + ": " + data.body.origen[x].url)
-
-				//alert( JSON.stringify(investigacionGlobal) );
+				if( data.body.origen[x].category == "PEP"	){
+					fillLambdaText( 'lambdaTextPEP' , data.body.origen[x]  );
+					countPEP++;
+				}
+				
+				if( data.body.origen[x].category == "others"	){
+					fillLambdaText( 'lambdaTextOthers' , data.body.origen[x]  );
+					countOth++;
+				}
 
 			}
 			
@@ -135,7 +150,7 @@ function cargaInvestigacionId( idInvestigacion ) {
 
 				$('#mentionsText').append('<br><img src="images/icons/'+ data.body.mentions[x].engine +'.png" width="40" height="40"><div class="badge badge-info">' + data.body.mentions[x].title + '</div>');
 				$('#mentionsText').append('<br>');
-				$('#mentionsText').append('<br>...<div>' + data.body.mentions[x].description + '</div>...');
+				$('#mentionsText').append('<br>...<div>' + data.body.mentions[x].description + '</div><div class="badge badge-danger">'+data.body.mentions[x].keyword+'</div>');
 				$('#mentionsText').append('<br><a href="' + data.body.mentions[x].link + '">' + data.body.mentions[x].link + '</a>');
 				$('#mentionsText').append('<br><hr class="my-4">');				
 
@@ -155,13 +170,23 @@ function cargaInvestigacionId( idInvestigacion ) {
 			$("#pdfButtonInvestigacion").prop('disabled', false);
 
 			$("#noFolio").empty();
-			$("#noSanciones").empty();
+			
+			$("#nointer").empty();
+			$("#noNacionales").empty();
+			$("#noPEPS").empty();
+			$("#noOthers").empty();
+			
 			$("#noMenciones").empty();
 			$("#nivelRiesgoLabel").empty();
 			
 			//Etiquetas
 			$('#noFolio').append('<strong> ' + idInvestigacion + ' </strong>');
-			$('#noSanciones').append('<strong>( ' + data.body.origen.length + ' )</strong>');
+			
+			$('#nointer').append('<strong>( ' + countInt + ' )</strong>');
+			$('#noNacionales').append('<strong>( ' + countNat + ' )</strong>');
+			$('#noPEPS').append('<strong>( ' + countPEP + ' )</strong>');
+			$('#noOthers').append('<strong>( ' + countOth + ' )</strong>');
+			
 			$('#noMenciones').append('<strong>( ' + data.body.mentions.length + ' )</strong>');
 			$('#nivelRiesgoLabel').append('<strong> ' + data.body.nivel_riesgo + ' </strong>');
 			
@@ -173,9 +198,7 @@ function cargaInvestigacionId( idInvestigacion ) {
 			var textoRegExpFirstname = new RegExp(data.body.parametros_busqueda[0] + ' ', 'gi');
 			var textoRegExpLastname = new RegExp(data.body.parametros_busqueda[1], 'gi');
 
-			var html = $('#lambdaText').html();
-			
-			
+						
 
 			//$('#lambdaText').html(
 				//html.replace(textoRegExpFirstname, '<strong>' + data.body.parametros_busqueda[0].toUpperCase() + '</strong> ').replace(textoRegExpLastname, '<strong> ' + data.body.parametros_busqueda[1].toUpperCase() + '</strong>')

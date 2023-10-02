@@ -134,7 +134,7 @@ public class InvestigacionController {
 
 		response = gson.toJson(investigacionService.getReportes(reporteRequest));
 
-		System.out.println("********* [Controller] consultaInvestigaciones : OK " );
+		System.out.println("********* [Controller] consultaInvestigaciones : OK ");
 
 		return response;
 	}
@@ -191,64 +191,10 @@ public class InvestigacionController {
 	@RequestMapping(value = "/generaReporteByID/{idInvestigacion}", method = RequestMethod.GET)
 	public ResponseEntity<ByteArrayResource> generateInventoryPurchasePdf(HttpServletResponse response,
 			@PathVariable("idInvestigacion") Long idInvestigacion) throws Exception {
-		
+
 		System.out.println("********* [Controller] generaReporteByID : ");
-		
-		InvestigacionRequest reguest = new InvestigacionRequest();
-		reguest.setIdInvestigacion(idInvestigacion);
-		
-		
-		InvestigacionLAMBDA lambdaQuery = awsService.getJSONFromBD(reguest);		
 
-		// generate the PDF
-		Map<String, Object> parameters = new HashMap<String, Object>();
-		parameters.put("clienteName", "Coca-Cola");
-		parameters.put("idInvestigacion", idInvestigacion.toString());
-		parameters.put("nombreCompleto", lambdaQuery.getBody().getParametros_busqueda().get(0) + " " + lambdaQuery.getBody().getParametros_busqueda().get(1));
-
-		try {
-			
-			
-			String reportName =  File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator + "mx"
-					+ File.separator + "com" + File.separator + "rmsh" + File.separator + "horusControl" + File.separator + "reportes"+ File.separator +"reporteInvestigacion";
-
-			// compiles jrxml
-			JasperCompileManager.compileReportToFile(reportName + ".jrxml");
-			// fills compiled report with parameters and a connection
-			JasperPrint print = JasperFillManager.fillReport(reportName + ".jasper", parameters,
-					new JREmptyDataSource());
-			// exports report to pdf
-			JRExporter exporter = new JRPdfExporter();
-			exporter.setParameter(JRExporterParameter.JASPER_PRINT, print);
-			exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, new FileOutputStream(reportName + ".pdf"));
-			exporter.exportReport();
-
-			File file = new File(reportName + ".pdf");
-			System.out.println("Archivo abierto PDF");
-
-			Path path = Paths.get(file.getAbsolutePath());
-			byte[] data = Files.readAllBytes(path);
-
-			MediaType mediaType = MediaType.APPLICATION_JSON_UTF8;
-			ByteArrayResource resource = new ByteArrayResource(data);
-
-			System.out.println("fileName: " + file.getName());
-			System.out.println("mediaType: " + mediaType);
-
-			return ResponseEntity.ok()
-					// Content-Disposition
-					.header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + path.getFileName().toString())
-					// Content-Type
-					.contentType(mediaType) //
-					// Content-Lengh
-					.contentLength(data.length) //
-					.body(resource);
-
-		} catch (Exception e) {
-			throw new RuntimeException("It's not possible to generate the pdf report.", e);
-		} finally {
-
-		}
+		return investigacionService.getPDFInvestigacion(idInvestigacion);
 
 	}
 }

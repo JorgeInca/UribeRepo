@@ -87,3 +87,18 @@ $('#pdfButtonInvestigacion').on('click', function() {
 	window.open('generaReporteByID/'+investigacionId);
 	
 });
+
+
+function fillLambdaText( lambdaId , origen ){
+	
+	$('#'+lambdaId).append('<br><div class="badge badge-info">' + origen.fuente + '</div>');
+	$('#'+lambdaId).append('<br>');
+	
+	if(origen.isJSON == "0")
+		$('#'+lambdaId).append('<br>...<div>' + origen.free_text + '</div>...');
+	else
+		$('#'+lambdaId).append('<br>...<div>' + createTableFromMap( origen.texto) + '</div>...');
+		$('#'+lambdaId).append('<br><a href="' + origen.url + '">' + origen.url + '</div>');
+		$('#'+lambdaId).append('<br><hr class="my-4">');		
+	
+}

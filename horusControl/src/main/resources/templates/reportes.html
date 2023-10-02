@@ -174,8 +174,7 @@
 									<div class="col-md-6 mb-3">
 										<label for="form_pais">País</label>
 										<select class="form-control" id="form_pais" required>
-											<option selected></option>
-											<option value="1">México</option>
+											<option value="14" selected>México</option>
 											<option value="2">U.S.A</option>
 											<option value="3">Canada</option>
 										</select>
@@ -221,13 +220,14 @@
 							<hr class="my-4">
 
 							<div id="accordion">
+								<!--Listados Cumplimiento Internacional CARD-->
 								<div class="card">
 									<div class="card-header alert-primary" id="headingOne">
 										<h5 class="mb-0">
 											<button class="btn btn-link" data-toggle="collapse"
 												data-target="#collapseOne" aria-expanded="true"
 												aria-controls="collapseOne">
-												Sanciones, cumplimiento y PEP <span id="noSanciones"></span>
+												Listados de Cumplimiento Internacionales <span id="nointer"></span>
 											</button>
 										</h5>
 									</div>
@@ -235,21 +235,76 @@
 									<div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
 										data-parent="#accordion">
 										<div class="card-body">
-											<div id="lambdaText"></div>
+											<div id="lambdaTextintcump"></div>
 										</div>
 									</div>
 								</div>
+								<!--Listados Cumplimiento Nacional CARD-->
 								<div class="card">
-									<div class="card-header alert-info" id="headingTwo">
+									<div class="card-header alert-primary" id="headingTwo">
 										<h5 class="mb-0">
 											<button class="btn btn-link collapsed" data-toggle="collapse"
 												data-target="#collapseTwo" aria-expanded="false"
 												aria-controls="collapseTwo">
-												Menciones <span id="noMenciones"></span>
+												Listados de Cumplimiento Nacionales <span id="noNacionales"></span>
 											</button>
 										</h5>
 									</div>
 									<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+										data-parent="#accordion">
+										<div class="card-body">
+											<div id="lambdaTextnatcump"></div>
+										</div>
+									</div>
+								</div>
+								<!--Listados PErso CARD-->
+								<div class="card">
+									<div class="card-header alert-primary" id="headingThree">
+										<h5 class="mb-0">
+											<button class="btn btn-link collapsed" data-toggle="collapse"
+												data-target="#collapseThree" aria-expanded="false"
+												aria-controls="collapseThree">
+												Personas Políticamente Expuestas: <span id="noPEPS"></span>
+											</button>
+										</h5>
+									</div>
+									<div id="collapseThree" class="collapse" aria-labelledby="headingThree"
+										data-parent="#accordion">
+										<div class="card-body">
+											<div id="lambdaTextPEP"></div>
+										</div>
+									</div>
+								</div>
+								<!--Listados Others CARD-->
+								<div class="card">
+									<div class="card-header alert-primary" id="headingFour">
+										<h5 class="mb-0">
+											<button class="btn btn-link collapsed" data-toggle="collapse"
+												data-target="#collapseFour" aria-expanded="false"
+												aria-controls="collapseFour">
+												Otras bases de datos <span id="noOthers"></span>
+											</button>
+										</h5>
+									</div>
+									<div id="collapseFour" class="collapse" aria-labelledby="headingFour"
+										data-parent="#accordion">
+										<div class="card-body">
+											<div id="lambdaTextOthers"></div>
+										</div>
+									</div>
+								</div>
+								<!--Listados Menciones CARD-->
+								<div class="card">
+									<div class="card-header alert-info" id="headingFive">
+										<h5 class="mb-0">
+											<button class="btn btn-link collapsed" data-toggle="collapse"
+												data-target="#collapseFive" aria-expanded="false"
+												aria-controls="collapseFive">
+												Menciones <span id="noMenciones"></span>
+											</button>
+										</h5>
+									</div>
+									<div id="collapseFive" class="collapse" aria-labelledby="headingFive"
 										data-parent="#accordion">
 										<div class="card-body">
 											<div id="mentionsText"></div>
@@ -501,6 +556,7 @@
 	
 	<script>
 		getUserData();
+		$("#lambdaText").hide();
 	</script>
 	
 		<script type="text/javascript" src="https://bernii.github.io/gauge.js/dist/gauge.min.js"></script>  
