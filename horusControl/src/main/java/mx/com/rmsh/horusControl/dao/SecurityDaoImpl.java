@@ -83,7 +83,7 @@ public class SecurityDaoImpl implements SecurityDao {
 			
 			//Eliminar usuario por Id
 			String QUERY_DELETE_USUARIO_BYID =
-					"Update usuario set estatus = 2 where A.id_usuario = ?"; 
+					"Update usuario set estatus = 2 where id_usuario = ?"; 
 			
 	
 
@@ -162,13 +162,14 @@ public class SecurityDaoImpl implements SecurityDao {
 					new Object[] { id_usuario }, new UsuarioRowMapper());
 		}
 
-	
-		
+
 		@Override
 		public long eliminiarUsuario(Long id_usuario) {
-		    return jdbcTemplate.update("Update usuario set estatus = 2 where id_usuario = ?");
-		}
-	
-
-	
+			 return jdbcTemplate.update(QUERY_DELETE_USUARIO_BYID, 
+					new Object[] { id_usuario });
+		}  
+		
+		
+		
+		
 }

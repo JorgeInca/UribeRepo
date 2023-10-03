@@ -106,8 +106,8 @@ public class CatalagosController {
 
 			System.out.println(userHorus.toString());
 
-			// arraylist
-			response = gson.toJson(investigacionService.eliminiarUsuario(userHorus.getId_usuario()));
+			
+		    response = gson.toJson(investigacionService.eliminiarUsuario(userHorus.getId_usuario()));
 
 			System.out.println("********* [Controller] cargaUsuarioId : " + response);
 
