@@ -29,6 +29,8 @@ public interface InvestigacionService {
 	
 	public long eliminiarUsuario(Long id_usuario);
 	
+	public UserHorus editUser(Long id_usuario);
+	
 	public ResponseEntity<ByteArrayResource> getPDFInvestigacion(Long idInvestigacion);
 	
 }

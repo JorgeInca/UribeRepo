@@ -52,8 +52,8 @@ public class CatalagosController {
 
 			String response = "";
 
-			final GsonBuilder gsonBuilder = new GsonBuilder();
-			final Gson gson = gsonBuilder.create();
+			// final GsonBuilder gsonBuilder = new GsonBuilder();
+			// final Gson gson = gsonBuilder.create();
 
 			System.out.println(user.toString());
 
@@ -114,6 +114,23 @@ public class CatalagosController {
 			return response;
 		}
 		
+		
+		//editar el Usuario
+				@RequestMapping(value = "/editarUsuarioId", method = RequestMethod.POST) //NOT USED YET
+				public @ResponseBody String editUser(UserHorus user) {
+
+					
+					String response = "";
+					Gson gson = new Gson();
+
+					System.out.println(user.toString());
+
+					response = gson.toJson(investigacionService.editUser(user.getId_usuario()));
+					
+					System.out.println("********* [Controller] guardaUsuario : " + response);
+
+					return response;
+				}
 	
 		
 

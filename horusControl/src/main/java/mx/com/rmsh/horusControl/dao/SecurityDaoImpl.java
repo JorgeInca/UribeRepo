@@ -85,6 +85,20 @@ public class SecurityDaoImpl implements SecurityDao {
 			String QUERY_DELETE_USUARIO_BYID =
 					"Update usuario set estatus = 2 where id_usuario = ?"; 
 			
+			String QUERY_GET_USUARIO_BYID2 =
+					"SELECT "
+							+ " A.id_usuario as id_usuario,"
+							+ " A.nombre as nombre,"
+							+ " A.email as email,"
+							+ " A.fecha_creacion as fecha_creacion,"
+							+ " A.estatus as estatus, "
+							+ " A.id_empresa as idEmpresa,"
+							+ " B.nombre as nombreEmpresa,"
+							+ " A.rol as rol, "
+							+ " A.password as password "
+							+ " FROM usuario A left join empresa B on A.id_empresa = B.id_empresa "
+							+ " WHERE A.id_usuario = ? ";  
+			
 	
 
 
@@ -167,6 +181,13 @@ public class SecurityDaoImpl implements SecurityDao {
 		public long eliminiarUsuario(Long id_usuario) {
 			 return jdbcTemplate.update(QUERY_DELETE_USUARIO_BYID, 
 					new Object[] { id_usuario });
+		}
+
+
+		@Override
+		public UserHorus editUser(Long id_usuario) {
+			return jdbcTemplate.queryForObject(QUERY_GET_USUARIO_BYID2, 
+					new Object[] { id_usuario }, new UsuarioRowMapper());
 		}  
 		
 		

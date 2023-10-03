@@ -96,6 +96,14 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 	public long eliminiarUsuario(Long id_usuario) {
 		return daoUser.eliminiarUsuario(id_usuario);
 	}
+	
+	@Override
+	public UserHorus editUser(Long id_usuario) {
+		// TODO Auto-generated method stub
+		return daoUser.editUser(id_usuario);
+	}
+
+	
 
 
 	@Override
@@ -403,6 +411,9 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 		return reportTransferObjectPDF;
 		
 	}
+
+	
+	
 
 
 }

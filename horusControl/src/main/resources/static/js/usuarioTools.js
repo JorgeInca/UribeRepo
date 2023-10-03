@@ -30,7 +30,7 @@ function cargaListaUsuarios() {
 						data[x].nombreEmpresa,
 						data[x].email,
 						data[x].rol,
-						'<a href="#"><i class="bi bi-pencil-square"></i></a>',
+						'<a href="#" onclick="editarUsuarioId('+data[x].id_usuario +')" ><i class="bi bi-pencil-square"></i></a>',
 					    '<a href="#" onclick="eliminarUsuarioId('+data[x].id_usuario +')" ><i class="bi bi-trash"></i></a>'
 					])
 					.order( [0,'desc'] )
@@ -151,3 +151,80 @@ function cargaUsuarioId(id_usuario) {
    	});
 
 }
+
+
+function editarUsuarioId(id_usuario) {
+	
+	alert('Podra editar la informacion del id ' + id_usuario);
+	
+	console.log('inicia editarUsuarioId');
+
+	var uri = "editarUsuarioId";
+	
+	$('#ModalUsuarios').modal('show');
+	
+	var editarUserHorus = {
+		id_usuario: id_usuario
+	};
+	
+	$.ajax({
+		url: uri,
+		type: 'POST',
+		dataType: 'json',
+		data: editarUserHorus,
+		success: function(data) {
+			
+			//Llena campos Modal de Usuarios:
+			$("#noFolio").val( data.id_usuario );
+			$("#noFolio1").val( data.id_usuario );
+			$("#form-name" ).val( data.name );
+			$("#form-email").val( data.email );
+			
+			$("#form-fecha_creacion").val( data.fecha_creacion);
+			$("#form-estatus").val( data.estatus);
+			$("#form-id_empresa").val( data.idEmpresa);
+			$("#form-rol").val( data.rol);
+			$("#form-password").val( data.password);
+			
+
+		//	investigacionGlobalUsuarios = data;
+			console.log('El ID GENERADO ES ' + editarUserHorus);
+
+			
+			//Bloquea los botones
+			$("#noFolio1").prop('disabled', false);
+			$("#form-name").prop('disabled', false);
+			$("#form-email").prop('disabled', false);
+		//	$("#form-fecha_creacion").prop('disabled', true);
+			$("#form-estatus").prop('disabled', false);
+			$("#form-id_empresa").prop('disabled', false);
+			$("#form-rol").prop('disabled', false);
+			$("#form-password").prop('disabled', false);
+			$("#rowFolio").show(); //hide
+
+			//Habilita los botones
+			$("#limpiarUsuarios").prop('disabled', true);
+			$("#EnviarUsuarios").prop('disabled', false);
+
+
+			$("#noFolio").empty();
+
+			//Etiquetas
+			$('#noFolio').append('<strong> ' + id_usuario + ' </strong>');
+			
+
+
+		},
+		error: function(xhr, ajaxOptions, thrownError) {
+
+		}
+
+	});
+	
+	
+}
+
+
+
+
+
