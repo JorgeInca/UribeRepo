@@ -296,6 +296,31 @@
      });
       </script>
       
+   <!--    <script>
+      setInterval(function(){
+    	// aqui puedes ejecutar un llamado ajax, que sería la inserción de datos a tu db
+    	// la cual se ejecutaría después de 3 segundos, después de haber cargado la página
+    	$.ajax({
+    	    url:'http://localhost:8080/usuarios.html',
+    	    success:function(res){
+    	        alert('acción de ejecución lanzada al servidor');
+    	    },
+    	    error:function(err){
+    	        alert('Error sobre la conexión al servidor');
+    	    }
+    	});
+    	}, 3000);
+      
+      
+      </script> -->  
+      
+      <script>
+      let refresh = document.getElementById('EnviarUsuarios');
+      refresh.addEventListener('click', _ => {
+    	  location.reload();
+      })
+      </script>
+      
 	
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" 
 	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

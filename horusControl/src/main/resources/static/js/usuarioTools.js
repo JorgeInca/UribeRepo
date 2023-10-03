@@ -139,7 +139,8 @@ function cargaUsuarioId(id_usuario) {
 		dataType: 'json',
 		data: UserHorus,
 		success: function(data) {
-			
+			           
+            window.location.reload()
 		
 			alert('El Id eliminado fue :' + id_usuario);
 
