@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.0.0.final using JasperReports Library version 6.0.0  -->
-<!-- 2023-09-29T03:00:48 -->
+<!-- 2023-10-02T13:56:04 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporteInvestigacion" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3f8d7e70-1ce9-4c74-aa90-341bac4b9b8a">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
@@ -86,7 +86,7 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="450" splitType="Stretch">
+		<band height="470" splitType="Stretch">
 			<image>
 				<reportElement x="275" y="0" width="278" height="64" uuid="c8f81be1-92d7-4120-815f-a3df90da2a34"/>
 				<imageExpression><![CDATA["leaf_banner_violet.png"]]></imageExpression>
@@ -181,7 +181,7 @@ Folio: ]]></text>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<subreport>
-				<reportElement positionType="Float" x="172" y="240" width="383" height="40" uuid="dc0f9c99-9808-4cdc-8892-fc7d68a1b0b9"/>
+				<reportElement positionType="Float" x="40" y="270" width="435" height="40" uuid="dc0f9c99-9808-4cdc-8892-fc7d68a1b0b9"/>
 				<subreportParameter name="hayintcump">
 					<subreportParameterExpression><![CDATA[$P{hayintcump}]]></subreportParameterExpression>
 				</subreportParameter>
@@ -189,7 +189,7 @@ Folio: ]]></text>
 				<subreportExpression><![CDATA["intcump.jasper"]]></subreportExpression>
 			</subreport>
 			<subreport>
-				<reportElement positionType="Float" x="172" y="280" width="383" height="40" uuid="0f716038-4d03-4de5-bfcf-6be8fdae5bca"/>
+				<reportElement positionType="Float" x="40" y="310" width="435" height="40" uuid="0f716038-4d03-4de5-bfcf-6be8fdae5bca"/>
 				<subreportParameter name="haynatcump">
 					<subreportParameterExpression><![CDATA[$P{haynatcump}]]></subreportParameterExpression>
 				</subreportParameter>
@@ -209,7 +209,7 @@ Folio: ]]></text>
 				</graphicElement>
 			</line>
 			<subreport>
-				<reportElement positionType="Float" x="172" y="320" width="383" height="40" uuid="7cd9b79a-031e-420d-a5ed-ac75bdedb457"/>
+				<reportElement positionType="Float" x="40" y="350" width="435" height="40" uuid="7cd9b79a-031e-420d-a5ed-ac75bdedb457"/>
 				<subreportParameter name="hayintPEP">
 					<subreportParameterExpression><![CDATA[$P{hayintPEP}]]></subreportParameterExpression>
 				</subreportParameter>
@@ -217,7 +217,7 @@ Folio: ]]></text>
 				<subreportExpression><![CDATA["pep.jasper"]]></subreportExpression>
 			</subreport>
 			<subreport>
-				<reportElement positionType="Float" x="172" y="360" width="383" height="40" uuid="3c479a73-ae1f-4732-a3fe-56ee476aabfe"/>
+				<reportElement positionType="Float" x="40" y="390" width="435" height="40" uuid="3c479a73-ae1f-4732-a3fe-56ee476aabfe"/>
 				<subreportParameter name="hayOthers">
 					<subreportParameterExpression><![CDATA[$P{hayOthers}]]></subreportParameterExpression>
 				</subreportParameter>
@@ -225,13 +225,20 @@ Folio: ]]></text>
 				<subreportExpression><![CDATA["others.jasper"]]></subreportExpression>
 			</subreport>
 			<subreport>
-				<reportElement positionType="Float" x="172" y="400" width="383" height="40" uuid="93bc21d0-d1ad-49a6-a6dd-55fb84fddbec"/>
+				<reportElement positionType="Float" x="40" y="430" width="435" height="40" uuid="93bc21d0-d1ad-49a6-a6dd-55fb84fddbec"/>
 				<subreportParameter name="hayMentions">
 					<subreportParameterExpression><![CDATA[$P{hayMentions}]]></subreportParameterExpression>
 				</subreportParameter>
 				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{SUBREPORT_DATA})]]></dataSourceExpression>
 				<subreportExpression><![CDATA["mentions.jasper"]]></subreportExpression>
 			</subreport>
+			<staticText>
+				<reportElement style="SubTitle" x="20" y="230" width="180" height="22" uuid="8a468f8a-4f86-4f35-b627-7404a81b818b"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="18"/>
+				</textElement>
+				<text><![CDATA[Resúmen:]]></text>
+			</staticText>
 		</band>
 	</title>
 	<columnFooter>

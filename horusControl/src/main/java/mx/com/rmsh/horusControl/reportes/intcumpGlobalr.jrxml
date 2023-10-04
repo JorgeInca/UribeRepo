@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.0.0.final using JasperReports Library version 6.0.0  -->
+<!-- 2023-10-02T16:12:44 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4" pageWidth="500" pageHeight="612" columnWidth="396" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="4e773abe-a72d-4669-8f8f-8bf9bffaa262">
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="g_titulo" class="java.lang.String"/>
+	<field name="g_origen" class="java.lang.String"/>
+	<field name="g_freeText" class="java.lang.String"/>
+	<field name="g_keyword" class="java.lang.String"/>
+	<field name="g_table" class="java.lang.String"/>
+	<field name="g_mentionImage" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="104" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="20" y="20" width="460" height="20" isRemoveLineWhenBlank="true" forecolor="#2070E8" uuid="1665a057-aedd-4c49-8089-f7f9c0341e37"/>
+				<textFieldExpression><![CDATA[$F{g_origen}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="40" y="40" width="440" height="20" isRemoveLineWhenBlank="true" uuid="2c9f157e-9352-425c-866e-ca173f8d6a0b"/>
+				<textFieldExpression><![CDATA[$F{g_freeText}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="40" y="60" width="460" height="20" isRemoveLineWhenBlank="true" forecolor="#FF0703" backcolor="#FFFFFF" uuid="d2e2b761-a10e-49dd-8eb8-4d0fc4b6485f"/>
+				<textFieldExpression><![CDATA[$F{g_keyword}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="0" y="41" width="20" height="19" uuid="ae4a3d38-04c8-4d1b-86d6-6c3d92e2888f"/>
+				<imageExpression><![CDATA[$F{g_mentionImage} + ".png"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement positionType="Float" x="20" y="80" width="460" height="20" isRemoveLineWhenBlank="true" uuid="ce2f4841-98a6-41a5-8250-3b03490ec200"/>
+				<textFieldExpression><![CDATA[$F{g_table}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="SubTitle" positionType="Float" mode="Transparent" x="0" y="0" width="396" height="20" isRemoveLineWhenBlank="true" forecolor="#666666" backcolor="#FFFFFF" uuid="5f4654a1-07d0-418a-88f3-19ab102d3fd3"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="15" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{g_titulo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

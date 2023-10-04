@@ -32,6 +32,8 @@ import mx.com.rmsh.horusControl.enums.EstatusInvestigacion;
 import mx.com.rmsh.horusControl.enums.NivelRiesgo;
 import mx.com.rmsh.horusControl.enums.Pais;
 import mx.com.rmsh.horusControl.utils.TextoHandler;
+import mx.com.rmsh.horusControl.vo.Body;
+import mx.com.rmsh.horusControl.vo.FillReportInvestigacionResultadoVO;
 import mx.com.rmsh.horusControl.vo.FillReportInvestigacionVO;
 import mx.com.rmsh.horusControl.vo.Investigacion;
 import mx.com.rmsh.horusControl.vo.InvestigacionLAMBDA;
@@ -39,6 +41,7 @@ import mx.com.rmsh.horusControl.vo.InvestigacionRequest;
 import mx.com.rmsh.horusControl.vo.MasivaRequest;
 import mx.com.rmsh.horusControl.vo.Mentions;
 import mx.com.rmsh.horusControl.vo.Origen;
+import mx.com.rmsh.horusControl.vo.OrigenClasificator;
 import mx.com.rmsh.horusControl.vo.ReportTransferObjectPDF;
 import mx.com.rmsh.horusControl.vo.ReporteRequest;
 import mx.com.rmsh.horusControl.vo.UserHorus;
@@ -245,6 +248,7 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 			parameter.put("subreportParameter4", subOth);
 			parameter.put("subreportParameter5", submen);
 			parameter.put("SUBREPORT_DATA", datosParam.getObjetosCount());
+			parameter.put("SUBREPORT_DATA2", datosParam.getObjetosResultado());
 
 			
 			// compiles jrxml
@@ -261,18 +265,21 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 			
 			//*************************************************************************Segundo Reporte
 			
-			// generate the PDF 2
-			Map<String, Object> parameters2 = new HashMap<String, Object>();
-			parameters2.put("clienteName", "Coca-Cola");
-			parameters2.put("idInvestigacion", idInvestigacion.toString());
-			parameters2.put("nombreCompleto", lambdaQuery.getBody().getParametros_busqueda().get(0) + " " + lambdaQuery.getBody().getParametros_busqueda().get(1));
-			parameters2.put("nivelRiesgoTexto", NivelRiesgo.getNameyId( lambdaQuery.getBody().getNivel_riesgo() ) );
+			ArrayList <FillReportInvestigacionResultadoVO> miListaObject2 = new ArrayList<FillReportInvestigacionResultadoVO>();
+			FillReportInvestigacionResultadoVO nuevoResultado = new FillReportInvestigacionResultadoVO();
+			miListaObject2.add(nuevoResultado);
+			
+			//Create 5 subreports Checklist
+			JasperReport subIntGlobal = JasperCompileManager.compileReport(reportFolderPath +"intcumpGlobal"	+ ".jrxml");
+			
+			parameter.put("subreportParameter6", subIntGlobal);
+			
+			JRDataSource beanCollectionDataSource2 = new JRBeanCollectionDataSource(miListaObject2);
 			
 			// compiles jrxml
 			JasperCompileManager.compileReportToFile(reportName2 + ".jrxml");
 			// fills compiled report with parameters and a connection
-			JasperPrint print2 = JasperFillManager.fillReport(reportName2 + ".jasper", parameters2,
-					new JREmptyDataSource());
+			JasperPrint print2 = JasperFillManager.fillReport(reportName2 + ".jasper", parameter,beanCollectionDataSource2);
 			// exports report to pdf
 			JRExporter exporter2 = new JRPdfExporter();
 			exporter2.setParameter(JRExporterParameter.JASPER_PRINT, print2);
@@ -342,10 +349,13 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 		
 		Map<String, Object> parameter= new HashMap<String, Object>();
 		ArrayList<FillReportInvestigacionVO> listaObjetos = new ArrayList<FillReportInvestigacionVO>();
+		ArrayList<FillReportInvestigacionResultadoVO> listaObjetosResultado = new ArrayList<FillReportInvestigacionResultadoVO>();
 		
 		//Objeto vacio para evitar el reporte blanco
 		listaObjetos.add(new FillReportInvestigacionVO());
+		listaObjetosResultado.add(new FillReportInvestigacionResultadoVO());
 		
+		//Datos Usuario
 		parameter.put("clienteName",      "Coca-Cola");
 		parameter.put("idInvestigacion",   String.valueOf( lambdaQuery.getIdInvestigacion().toString() ));
 		parameter.put("nombreCompleto",   lambdaQuery.getBody().getParametros_busqueda().get(0) + " " + lambdaQuery.getBody().getParametros_busqueda().get(1));
@@ -404,16 +414,176 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 		parameter.put("hayOthers",  hayOthers); //I_GREEN,I_RED
 		parameter.put("hayMentions",hayMentions); //I_GREEN,I_RED
 		
+		//Datos reporte Resultados
+		OrigenClasificator reultados = new OrigenClasificator();
+		reultados = clasifica(lambdaQuery.getBody());
+
+		//Título 1
+		FillReportInvestigacionResultadoVO titulo1 = new FillReportInvestigacionResultadoVO();
+		titulo1.setG_titulo("Listados de Cumplimiento Internacionales:");
+		listaObjetosResultado.add(titulo1);
+		listaObjetosResultado.addAll(reultados.getInternacional());
 		
+		//Título 2
+		FillReportInvestigacionResultadoVO titulo2 = new FillReportInvestigacionResultadoVO();
+		titulo2.setG_titulo("Listados de Cumplimiento Nacionales:");
+		listaObjetosResultado.add(titulo2);
+		listaObjetosResultado.addAll(reultados.getNacional());
+		
+		//Título 3
+		FillReportInvestigacionResultadoVO titulo3 = new FillReportInvestigacionResultadoVO();
+		titulo3.setG_titulo("Personas Políticamente Expuestas:");
+		listaObjetosResultado.add(titulo3);		
+		listaObjetosResultado.addAll(reultados.getPep());
+
+		//Título 4
+		FillReportInvestigacionResultadoVO titulo4 = new FillReportInvestigacionResultadoVO();
+		titulo4.setG_titulo("Otras Bases de datos:");
+		listaObjetosResultado.add(titulo4);
+		listaObjetosResultado.addAll(reultados.getOtros());
+		
+		//Título 5
+		FillReportInvestigacionResultadoVO titulo5 = new FillReportInvestigacionResultadoVO();
+		titulo5.setG_titulo("Menciones:");
+		listaObjetosResultado.add(titulo5);
+		listaObjetosResultado.addAll(reultados.getMenciones());
+		
+		//Resumen
 		reportTransferObjectPDF.setObjetosCount(listaObjetos);
+		reportTransferObjectPDF.setObjetosResultado(listaObjetosResultado);
 		reportTransferObjectPDF.setParameter(parameter);
 		
 		return reportTransferObjectPDF;
 		
 	}
+	
+	public OrigenClasificator clasifica(Body body) {
+		
+		OrigenClasificator resultadoFInal =  new OrigenClasificator();
+		
+		//Vacios para no afectar el data_source
+		ArrayList<FillReportInvestigacionResultadoVO> internacional = new ArrayList<FillReportInvestigacionResultadoVO>();
+		
+		ArrayList<FillReportInvestigacionResultadoVO> nacional = new ArrayList<FillReportInvestigacionResultadoVO>();
+		nacional.add(new FillReportInvestigacionResultadoVO());
+		ArrayList<FillReportInvestigacionResultadoVO> pep = new ArrayList<FillReportInvestigacionResultadoVO>();
+		pep.add(new FillReportInvestigacionResultadoVO());
+		ArrayList<FillReportInvestigacionResultadoVO> otros = new ArrayList<FillReportInvestigacionResultadoVO>();
+		otros.add(new FillReportInvestigacionResultadoVO());
+		ArrayList<FillReportInvestigacionResultadoVO> menciones = new ArrayList<FillReportInvestigacionResultadoVO>();
+		menciones.add(new FillReportInvestigacionResultadoVO());
 
+		
+
+		for (Origen origen : body.getOrigen()) {
+
+			if ("intcump".equals(origen.getCategory())) {
+				FillReportInvestigacionResultadoVO nuevo =new FillReportInvestigacionResultadoVO();
+				nuevo.setG_origen(origen.getFuente());				
+				
+				if( 0 == origen.getIsJSON() )
+					nuevo.setG_freeText(origen.getFree_text());
+				else
+					nuevo.setG_table( createTable( origen.getTexto()) );
+				
+				internacional.add(nuevo);
+			}
+			if ("natcump".equals(origen.getCategory())) {
+				FillReportInvestigacionResultadoVO nuevo =new FillReportInvestigacionResultadoVO();
+				nuevo.setG_origen(origen.getFuente());
+				
+				if( 0 == origen.getIsJSON() )
+					nuevo.setG_freeText(origen.getFree_text());
+				else
+					nuevo.setG_table( createTable( origen.getTexto()) );
+				
+				nacional.add(nuevo);
+			}
+			if ("PEP".equals(origen.getCategory())) {
+				FillReportInvestigacionResultadoVO nuevo =new FillReportInvestigacionResultadoVO();
+				nuevo.setG_origen(origen.getFuente());
+				
+				if( 0 == origen.getIsJSON() )
+					nuevo.setG_freeText(origen.getFree_text());
+				else
+					nuevo.setG_table( createTable( origen.getTexto()) );
+				
+				pep.add(nuevo);
+			}
+			if ("others".equals(origen.getCategory())) {
+				FillReportInvestigacionResultadoVO nuevo =new FillReportInvestigacionResultadoVO();
+				nuevo.setG_origen(origen.getFuente());
+				
+				if( 0 == origen.getIsJSON() )
+					nuevo.setG_freeText(origen.getFree_text());
+				else
+					nuevo.setG_table( createTable( origen.getTexto()) );
+				
+				otros.add(nuevo);
+			}
+
+		}
+		
+		for (Mentions origen : body.getMentions()) {
+
+			FillReportInvestigacionResultadoVO nuevo =new FillReportInvestigacionResultadoVO();
+			nuevo.setG_origen(origen.getTitle());
+			nuevo.setG_freeText(origen.getDescription() + " \n \n " + origen .getLink());
+			nuevo.setG_keyword(origen.getKeyword());
+			nuevo.setG_mentionImage(origen.getEngine());
+			menciones.add(nuevo);
+
+		}
+		
+		if( internacional.size() == 0) {
+			internacional.add(new FillReportInvestigacionResultadoVO());
+		}
+		if( nacional.size() == 0) {
+			nacional.add(new FillReportInvestigacionResultadoVO());
+		}
+		if( pep.size() == 0) {
+			pep.add(new FillReportInvestigacionResultadoVO());
+		}
+		if( otros.size() == 0) {
+			otros.add(new FillReportInvestigacionResultadoVO());
+		}
+		if( menciones.size() == 0) {
+			menciones.add(new FillReportInvestigacionResultadoVO());
+		}
+		
+		
+		resultadoFInal.setInternacional(internacional);
+		resultadoFInal.setNacional(nacional);
+		resultadoFInal.setPep(pep);
+		resultadoFInal.setOtros(otros);
+		resultadoFInal.setMenciones(menciones);
+
+		return resultadoFInal;
+	}
 	
-	
+	public String createTable(Map<String, String> texto) {
+		
+		
+		String tablaHtml = "<table border=1 cellspacing=0><tr>"
+				+ "<th>Dato</th><th>Valor</th>"
+				+ "</tr>";
+		
+		for (Map.Entry<String, String> entry : texto.entrySet()) {
+			
+			tablaHtml = tablaHtml + "<tr>";
+			tablaHtml = tablaHtml +"<td>" + entry.getKey() + "</td>";
+			tablaHtml = tablaHtml +"<td>" + entry.getValue() + "</td>";
+			tablaHtml = tablaHtml + "</tr>";
+			
+		}
+		
+		
+		tablaHtml = tablaHtml + "</table>";
+		
+		System.out.println(tablaHtml);
+		
+		return tablaHtml;
+	}
 
 
 }
