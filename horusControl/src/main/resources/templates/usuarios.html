@@ -48,10 +48,9 @@
 							</div>-->
 							
     <div style="display:flex; justify-content:flex-end; width:92%; padding:1%;">
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalUsuarios" data-whatever="@getbootstrap">Nuevo Usuario</button>
+    <button type="button" class="btn btn-primary" onclick="newUser()" >Nuevo Usuario</button>
 	</div>							
 							
-
 
 <!--Modal Usuarios-->
 <div class="modal fade" id="ModalUsuarios" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -67,111 +66,109 @@
 			</div>
 			<div class="modal-body">
 
-				<div class="row justify-content-center">
-					<div id="rowFolio" class="col-md-4">
-						<div class="alert alert-info" role="alert">Id generado: <span id="noFolio"></span></div>
-					</div>
+				<div class="row justify-content-center"></div>
+				<div id="rowFolio" class="col-md-4">
+					<div class="alert alert-info" role="alert">Id generado: <span id="noFolio"></span></div>
 				</div>
-				<div class="row">
-					<p>.</p>
-				</div>
+			</div>
+			<div class="row">
+				<p>.</p>
+			</div>
 
 
-				<div class="row justify-content-center">
-					<div class="col-md-10">
-						<form id="miForm" class="needs-validation" novalidate>
-							<div class="form-group">
-								<label for="noFolio1" class="col-form-label">Id_usuario:</label>
-								<input type="text" class="form-control" id="noFolio1" placeholder="Id usuario" disabled>
+			<div class="row justify-content-center">
+				<div class="col-md-10">
+					<form id="miForm" class="needs-validation" novalidate>
+						<div class="form-group">
+							<label for="noFolio1" class="col-form-label">Id_usuario:</label>
+							<input type="text" class="form-control" id="noFolio1" placeholder="Id usuario" disabled>
+						</div>
+						<div class="form-group">
+							<label for="form-name" class="col-form-label">Nombre:</label>
+							<input type="text" class="form-control" id="form-name" placeholder="First name" required>
+							<div class="invalid-feedback">
+								Nombre requerido!
 							</div>
-							<div class="form-group">
-								<label for="form-name" class="col-form-label">Nombre:</label>
-								<input type="text" class="form-control" id="form-name" placeholder="First name"
-									required>
-								<div class="invalid-feedback">
-									Nombre requerido!
-								</div>
-								<div class="valid-feedback">
-									Correcto!
-								</div>
+							<div class="valid-feedback">
+								Correcto!
 							</div>
-							<div class="form-group">
-								<label for="form-email" class="col-form-label">Email:</label>
-								<input type="email" class="form-control" id="form-email" name="email"
-									placeholder="Ejemplo@email.com" required>
-								<div class="invalid-feedback">
-									Email requerido!
-								</div>
-								<div class="valid-feedback">
-									Correcto!
-								</div>
+						</div>
+						<div class="form-group">
+							<label for="form-email" class="col-form-label">Email:</label>
+							<input type="email" class="form-control" id="form-email" name="email"
+								placeholder="Ejemplo@email.com" required>
+							<div class="invalid-feedback">
+								Email requerido!
 							</div>
-							
+							<div class="valid-feedback">
+								Correcto!
+							</div>
+						</div>
+
 						<!--  	<div class="form-group">
 								<label for="form-fecha_creacion" class="col-form-label">Fecha_creacion:</label>
 								<input type="text" class="form-control" id="form-fecha_creacion" placeholder="Fecha"
 									disabled>
 							</div> -->
 
-							<div class="form-group">
-								<label for="form-estatus" class="col-form-label">Estatus:</label>
-								<select class="form-control" id="form-estatus" placeholder="Estatus" required>
-									<option value="none" selected hidden>Seleccion una opcion</option>
-									<option value="1">Administrador</option>
-									<option value="2">Usuario</option>
-								</select>
-								<div class="invalid-feedback">
-									Estatus requerido!
-								</div>
-								<div class="valid-feedback">
-									Correcto!
-								</div>
+						<div class="form-group">
+							<label for="form-estatus" class="col-form-label">Estatus:</label>
+							<select class="form-control" id="form-estatus" placeholder="Estatus" required>
+								<option value="none" selected hidden>Seleccion una opcion</option>
+								<option value="1">Administrador</option>
+								<option value="2">Usuario</option>
+							</select>
+							<div class="invalid-feedback">
+								Estatus requerido!
 							</div>
-							<div class="form-group">
-								<label for="form-id_empresa" class="col-form-label">Id_empresa:</label>
-								<select class="form-control" id="form-id_empresa" placeholder="Id Empresa" required>
-									<option value="none" selected hidden>Seleccion una opcion</option>
-									<option value="1">Coca-Cola</option>
-									<option value="2">Horus</option>
-								</select>
-								<div class="invalid-feedback">
-									Id_empresa requerido!
-								</div>
-								<div class="valid-feedback">
-									Correcto!
-								</div>
+							<div class="valid-feedback">
+								Correcto!
 							</div>
-							<div class="form-group">
-								<label for="form-rol" class="col-form-label">Rol:</label>
-								<input type="text" class="form-control" id="form-rol" name="rol" placeholder="Rol"
-									required>
-								<div class="invalid-feedback">
-									Rol requerido!
-								</div>
-								<div class="valid-feedback">
-									Correcto!
-								</div>
+						</div>
+						<div class="form-group">
+							<label for="form-id_empresa" class="col-form-label">Id_empresa:</label>
+							<select class="form-control" id="form-id_empresa" placeholder="Id Empresa" required>
+								<option value="none" selected hidden>Seleccion una opcion</option>
+								<option value="1">Coca-Cola</option>
+								<option value="2">Horus</option>
+							</select>
+							<div class="invalid-feedback">
+								Id_empresa requerido!
 							</div>
-							<div class="form-group">
-								<label for="form-password" class="col-form-label">Password:</label>
-								<input type="password" pattern=".{6,}" class="form-control" id="form-password"
-									aria-describedby="passwordHelpBlock" placeholder="Password, minimo de 6 caracteres"
-									required>
-								<small id="passwordHelpBlock" class="form-text text-muted">
-									Su contraseña debe tener entre 6 y 20 caracteres, contener letras y números, y no
-									debe contener espacios, caracteres especiales ni emoji.
-								</small>
-								<div class="invalid-feedback">
-									Password requerido!
-								</div>
-								<div class="valid-feedback">
-									Correcto!
-								</div>
+							<div class="valid-feedback">
+								Correcto!
 							</div>
+						</div>
+						<div class="form-group">
+							<label for="form-rol" class="col-form-label">Rol:</label>
+							<input type="text" class="form-control" id="form-rol" name="rol" placeholder="Rol" required>
+							<div class="invalid-feedback">
+								Rol requerido!
+							</div>
+							<div class="valid-feedback">
+								Correcto!
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="form-password" class="col-form-label">Password:</label>
+							<input type="password" pattern=".{6,}" class="form-control" id="form-password"
+								aria-describedby="passwordHelpBlock" placeholder="Password, minimo de 6 caracteres"
+								required>
+							<small id="passwordHelpBlock" class="form-text text-muted">
+								Su contraseña debe tener entre 6 y 20 caracteres, contener letras y números, y no
+								debe contener espacios, caracteres especiales ni emoji.
+							</small>
+							<div class="invalid-feedback">
+								Password requerido!
+							</div>
+							<div class="valid-feedback">
+								Correcto!
+							</div>
+						</div>
 
-					</div>
 				</div>
 			</div>
+
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" id="limpiarUsuarios"
 					onclick="limpiarFormulario()">Limpiar formulario</button>
@@ -179,13 +176,14 @@
 				<button type="submit" class="btn btn-primary" id="EnviarUsuarios"
 					onclick="guardaUsuario()">Enviar</button>
 			</div>
-			</form>
-
-
-
 		</div>
+		</form>
+
+
+
 	</div>
 </div>
+
 	
 	
       
@@ -223,18 +221,14 @@
 	<!-- Bootstrap core JavaScript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-		crossorigin="anonymous"></script>
-
-	<script>window.jQuery || document.write('<script src="assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
+	
 	<script src="assets/js/vendor/popper.min.js"></script>
 	<script src="dist/js/bootstrap.min.js"></script>
 	<script src="assets/js/vendor/holder.min.js"></script>
 	<script src="js/awsUsuariosTools.js"></script>
 	<script src="js/usuarioTools.js"></script>
-	<script src="js/generalTools.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="js/generalTools.js"></script>	
 	
 	<script>
 		jQuery("#menuBarDiv").load("globalMenuBar.html");
@@ -314,23 +308,18 @@
       
       </script> -->  
       
-      <script>
+<!--      <script>
       let refresh = document.getElementById('EnviarUsuarios');
       refresh.addEventListener('click', _ => {
     	  location.reload();
       })
-      </script>
-      
-	
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" 
-	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-
-
+      </script>-->
+    
    	<!-- datatables JS -->
     <script type="text/javascript" src="datatables/datatables.min.js"></script>    
      
     <script type="text/javascript" src="js/mainDatatable.js"></script>  
-    <script type="text/javascript" src="js/mainModalUsuarios.js"></script> 
+    <!--<script type="text/javascript" src="js/mainModalUsuarios.js"></script>--> 
 
     
     

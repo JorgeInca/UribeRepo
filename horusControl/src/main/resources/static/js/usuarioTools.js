@@ -225,6 +225,12 @@ function editarUsuarioId(id_usuario) {
 	
 }
 
+function newUser(){
+	
+	$('#ModalUsuarios').modal('show');
+	
+}
+
 
 
 
