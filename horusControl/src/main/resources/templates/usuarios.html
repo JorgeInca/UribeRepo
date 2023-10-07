@@ -48,8 +48,10 @@
 							</div>-->
 							
     <div style="display:flex; justify-content:flex-end; width:92%; padding:1%;">
-    <button type="button" class="btn btn-primary" onclick="newUser()" >Nuevo Usuario</button>
+    <button type="button" class="btn btn-primary" onclick="newUser()">Nuevo Usuario</button>
 	</div>							
+    
+    <!--  onclick="newUser()"> -->
 							
 
 <!--Modal Usuarios-->
@@ -66,9 +68,10 @@
 			</div>
 			<div class="modal-body">
 
-				<div class="row justify-content-center"></div>
+				<div class="row justify-content-center">
 				<div id="rowFolio" class="col-md-4">
-					<div class="alert alert-info" role="alert">Id generado: <span id="noFolio"></span></div>
+					<div class="alert alert-info" role="alert">Id generado: <span id="noFolio" class="row justify-content-center"></span></div>
+				</div>
 				</div>
 			</div>
 			<div class="row">
@@ -173,6 +176,8 @@
 				<button type="button" class="btn btn-secondary" id="limpiarUsuarios"
 					onclick="limpiarFormulario()">Limpiar formulario</button>
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+				<button type="submit" class="btn btn-secondary"  id="updateUsuarios"
+					onclick="actualizaUsuario()">Actualizar</button>
 				<button type="submit" class="btn btn-primary" id="EnviarUsuarios"
 					onclick="guardaUsuario()">Enviar</button>
 			</div>
@@ -289,24 +294,7 @@
        });
      });
       </script>
-      
-   <!--    <script>
-      setInterval(function(){
-    	// aqui puedes ejecutar un llamado ajax, que sería la inserción de datos a tu db
-    	// la cual se ejecutaría después de 3 segundos, después de haber cargado la página
-    	$.ajax({
-    	    url:'http://localhost:8080/usuarios.html',
-    	    success:function(res){
-    	        alert('acción de ejecución lanzada al servidor');
-    	    },
-    	    error:function(err){
-    	        alert('Error sobre la conexión al servidor');
-    	    }
-    	});
-    	}, 3000);
-      
-      
-      </script> -->  
+
       
 <!--      <script>
       let refresh = document.getElementById('EnviarUsuarios');

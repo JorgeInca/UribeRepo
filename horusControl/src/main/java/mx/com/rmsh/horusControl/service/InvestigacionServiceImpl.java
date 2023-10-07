@@ -105,6 +105,12 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 		// TODO Auto-generated method stub
 		return daoUser.editUser(id_usuario);
 	}
+	
+	@Override
+	public long updateUser(UserHorus user) {
+		return daoUser.updateUser(user);
+	}
+
 
 	
 
@@ -585,5 +591,6 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 		return tablaHtml;
 	}
 
+	
 
 }

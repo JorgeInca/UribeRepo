@@ -85,6 +85,8 @@ public class SecurityDaoImpl implements SecurityDao {
 			String QUERY_DELETE_USUARIO_BYID =
 					"Update usuario set estatus = 2 where id_usuario = ?"; 
 			
+			
+			//Muestra la informacion del usuario a Editar
 			String QUERY_GET_USUARIO_BYID2 =
 					"SELECT "
 							+ " A.id_usuario as id_usuario,"
@@ -98,6 +100,10 @@ public class SecurityDaoImpl implements SecurityDao {
 							+ " A.password as password "
 							+ " FROM usuario A left join empresa B on A.id_empresa = B.id_empresa "
 							+ " WHERE A.id_usuario = ? ";  
+			
+	  // Edita la informacion
+		String QUERY_UPDATE_USUARIO =
+		"Update usuario set nombre= ?,email =?,estatus =?,id_empresa =?,rol=?,password=? where id_usuario = ?"; 
 			
 	
 
@@ -188,6 +194,24 @@ public class SecurityDaoImpl implements SecurityDao {
 		public UserHorus editUser(Long id_usuario) {
 			return jdbcTemplate.queryForObject(QUERY_GET_USUARIO_BYID2, 
 					new Object[] { id_usuario }, new UsuarioRowMapper());
+		}
+
+		@Autowired
+		@Override
+		public long updateUser(UserHorus user) {
+		
+			 return jdbcTemplate.update(connection -> {
+			        PreparedStatement ps = connection
+			          .prepareStatement(QUERY_UPDATE_USUARIO);
+			          ps.setString(1, user.getName());
+			          ps.setString(2, user.getEmail());
+			          ps.setInt(3, user.getEstatus());
+			          ps.setLong(4, user.getIdEmpresa());
+			          ps.setInt(5, user.getRol());
+			          ps.setString(6, user.getPassword());
+			          ps.setLong(7, user.getId_usuario());
+			          return ps;
+			        });
 		}  
 		
 		

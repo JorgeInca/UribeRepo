@@ -100,6 +100,7 @@ function cargaUsuarioId(id_usuario) {
 			//Habilita los botones
 			$("#limpiarUsuarios").prop('disabled', true);
 			$("#EnviarUsuarios").prop('disabled', true);
+			$("#updateUsuarios").prop('disabled', true);
 
 
 			$("#noFolio").empty();
@@ -193,7 +194,7 @@ function editarUsuarioId(id_usuario) {
 
 			
 			//Bloquea los botones
-			$("#noFolio1").prop('disabled', false);
+			$("#noFolio1").prop('disabled', true);
 			$("#form-name").prop('disabled', false);
 			$("#form-email").prop('disabled', false);
 		//	$("#form-fecha_creacion").prop('disabled', true);
@@ -205,7 +206,8 @@ function editarUsuarioId(id_usuario) {
 
 			//Habilita los botones
 			$("#limpiarUsuarios").prop('disabled', true);
-			$("#EnviarUsuarios").prop('disabled', false);
+			$("#EnviarUsuarios").prop('disabled', true);
+			$("#updateUsuarios").prop('disabled', false);
 
 
 			$("#noFolio").empty();
@@ -225,9 +227,70 @@ function editarUsuarioId(id_usuario) {
 	
 }
 
+
+function actualizaUsuario(id_usuario){
+	
+	console.log('Inicia actualizacion');
+
+	var uri = "actualizaUsuario";
+	
+	var var_firstname = $("#form-name").val();
+	var var_email = $("#form-email").val();
+	var var_estatus = $("#form-estatus").val();
+	var var_id_empresa = $("#form-id_empresa").val();
+	var var_rol = $("#form-rol").val();
+	var var_password = $("#form-password").val();
+	
+	if (!confirm("¡Deseas actualizar la informacion del usuario?")) {
+		return;
+	}
+	
+	var UserHorus = {
+	    name: var_firstname,
+		email: var_email,
+		estatus: var_estatus,
+		idEmpresa: var_id_empresa,
+		rol: var_rol,
+		password: var_password
+	};
+	
+	var editarUserHorus = {
+		id_usuario: id_usuario
+		}
+	
+	$.ajax({
+		url: uri,
+		type: 'POST',
+		dataType: 'json',
+		data: UserHorus,
+		data2: editarUserHorus,
+		success: function(data) {
+			
+			window.location.reload()
+		
+			alert('La informacion del Id: ' + id_usuario + ' se actualizo con exito!');
+			
+			
+			
+			},
+		error: function(xhr, ajaxOptions, thrownError) {
+
+		   }
+		
+		});
+	
+}
+
+
+
+
 function newUser(){
 	
 	$('#ModalUsuarios').modal('show');
+			
+			
+  	//Bloquea los botones	
+	$("#updateUsuarios").prop('disabled', true);
 	
 }
 

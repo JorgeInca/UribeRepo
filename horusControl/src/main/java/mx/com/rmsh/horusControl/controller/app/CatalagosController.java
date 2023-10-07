@@ -115,7 +115,7 @@ public class CatalagosController {
 		}
 		
 		
-		//editar el Usuario
+		//Muestra la informacion del usuario a editar
 				@RequestMapping(value = "/editarUsuarioId", method = RequestMethod.POST) //NOT USED YET
 				public @ResponseBody String editUser(UserHorus user) {
 
@@ -126,6 +126,22 @@ public class CatalagosController {
 					System.out.println(user.toString());
 
 					response = gson.toJson(investigacionService.editUser(user.getId_usuario()));
+					
+					System.out.println("********* [Controller] guardaUsuario : " + response);
+
+					return response;
+				}
+	//Editar la inforacion
+				@RequestMapping(value = "/actualizaUsuario", method = RequestMethod.POST) //NOT USED YET
+				public @ResponseBody String updateUser(UserHorus user) {
+
+					
+					String response = "";
+					Gson gson = new Gson();
+
+					System.out.println(user.toString());
+
+					response = gson.toJson(investigacionService.updateUser(user));
 					
 					System.out.println("********* [Controller] guardaUsuario : " + response);
 

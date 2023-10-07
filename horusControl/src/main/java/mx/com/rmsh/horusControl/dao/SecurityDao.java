@@ -21,5 +21,7 @@ public interface SecurityDao {
 	
 	public UserHorus editUser(Long id_usuario);
 	
+	public long updateUser(UserHorus user);
+	
 
 }

@@ -59,8 +59,7 @@ function guardaUsuario() {
 			
 			
 			//Habilita los botones
-		//	$("#limpiarUsuarios").prop('disabled', false);
-		//	$("#EnviarUsuarios").prop('disabled', false);
+		    $("#updateUsuarios").prop('disabled', true);
 
 
 		},
