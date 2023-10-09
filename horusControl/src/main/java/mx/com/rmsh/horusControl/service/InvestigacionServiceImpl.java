@@ -64,9 +64,10 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 
 	@Autowired
 	SecurityDao daoUser;
-	
+
 	@Autowired
 	AWSService awsService;
+
 
 	@Override
 	public List<Investigacion> getReportes(ReporteRequest request) {
@@ -87,19 +88,19 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 
 	@Override
 	public Long guardaUsuario(UserHorus user) {
-		return daoUser.guardaUsuario(user); 
+		return daoUser.guardaUsuario(user);
 	}
-	
+
 	@Override
 	public UserHorus getUsuarioById(Long id_usuario) {
 		return daoUser.getUsuarioById(id_usuario);
 	}
-	
+
 	@Override
 	public long eliminiarUsuario(Long id_usuario) {
 		return daoUser.eliminiarUsuario(id_usuario);
 	}
-	
+
 	@Override
 	public UserHorus editUser(Long id_usuario) {
 		// TODO Auto-generated method stub
@@ -111,10 +112,6 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 		return daoUser.updateUser(user);
 	}
 
-
-	
-
-
 	@Override
 	public List<InvestigacionRequest> guardaInvestigacionMasiva(MasivaRequest masivaRequest) throws IOException {
 
@@ -124,8 +121,8 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 		String UPLOAD_FOLDER = "C://test//";
 		XSSFWorkbook excelPeticion;
 		String lowerCaseFileName = masivaRequest.getFile().getOriginalFilename().toLowerCase();
-		
-		System.out.println( " " );
+
+		System.out.println(" ");
 
 		if (lowerCaseFileName.endsWith(".xlsx")) {
 
@@ -139,15 +136,14 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 			boolean esCabecera = true;
 
 			while (rowIterator.hasNext()) {
-				
+
 				Row row = rowIterator.next();
-				
+
 				if (!esCabecera) {
-					
-					System.out.println("** SI ENTRA" + esCabecera);			
+
+					System.out.println("** SI ENTRA" + esCabecera);
 					InvestigacionRequest investigacion = new InvestigacionRequest();
-					
-					
+
 					DataFormatter fmt = new DataFormatter();
 
 					// For each row, iterate through all the
@@ -158,96 +154,106 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 
 					while (cellIterator.hasNext()) {
 						System.out.println("** SI ASDENTRA" + cellActual);
-						
+
 						Cell cell = (Cell) cellIterator.next();
 
-						if( cellActual == 3 ) 							
+						if (cellActual == 3)
 							investigacion.setLastname(fmt.formatCellValue(cell));
-						if( cellActual == 4 )
+						if (cellActual == 4)
 							investigacion.setFirstname(fmt.formatCellValue(cell));
-						if( cellActual == 5 ) 
-							investigacion.setFirstname( TextoHandler.sumaNombres(investigacion.getFirstname(), fmt.formatCellValue(cell))	);
-						if( cellActual == 9 ) 
-							investigacion.setPais( Pais.getIdByName(fmt.formatCellValue(cell)) );
-						if( cellActual == 16 ) 
+						if (cellActual == 5)
+							investigacion.setFirstname(
+									TextoHandler.sumaNombres(investigacion.getFirstname(), fmt.formatCellValue(cell)));
+						if (cellActual == 9)
+							investigacion.setPais(Pais.getIdByName(fmt.formatCellValue(cell)));
+						if (cellActual == 16)
 							investigacion.setRfc(fmt.formatCellValue(cell));
-						
+
 						investigacion.setIdUsuario(masivaRequest.getIdUsuario());
 						investigacion.setNivel_riesgo(0);
 						investigacion.setIdMasiva(0L);
 						investigacion.setInvestigacionJson("");
-						investigacion.setIdEstatus( EstatusInvestigacion.PENDIENTE.getIdEstatus() );
-											
-						
-						cellActual++;						
+						investigacion.setIdEstatus(EstatusInvestigacion.PENDIENTE.getIdEstatus());
+
+						cellActual++;
 					}
-					
-					//Campos vacios
-					if( !( "".equals(investigacion.getFirstname()) && "".equals(investigacion.getLastname()) ) )
-							listaRetorno.add(investigacion);
+
+					// Campos vacios
+					if (!("".equals(investigacion.getFirstname()) && "".equals(investigacion.getLastname())))
+						listaRetorno.add(investigacion);
 				}
 				esCabecera = false;
 			}
 		}
-		
+
 		System.out.println("Archivos procesados");
-		
-		for(InvestigacionRequest model : listaRetorno) {
+
+		for (InvestigacionRequest model : listaRetorno) {
 			System.out.println();
-            System.out.println(model.toString());
-        }
+			System.out.println(model.toString());
+		}
 		
-		dao.guardaInvestigacionMasiva(listaRetorno);
+		try {
+			demoJob();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		System.out.println("Let job works");
+		
+		//dao.guardaInvestigacionMasiva(listaRetorno);
 
 		return listaRetorno;
 	}
 
 	@Override
 	public ResponseEntity<ByteArrayResource> getPDFInvestigacion(Long idInvestigacion) {
-		
+
 		System.out.println("********* [Service] getPDFInvestigacion : ");
-		
-		boolean linux = false; 
-		
-		//Delete first File.separator for Windows
-		String reportFolderPath =  ( linux ? File.separator : "" ) + "src" + File.separator + "main" + File.separator + "java" + File.separator + "mx"
-				+ File.separator + "com" + File.separator + "rmsh" + File.separator + "horusControl" + File.separator + "reportes"+ File.separator;
-	
-		//Nombres reportes
-		String reportName =   reportFolderPath +"reporteInvestigacion";
-		String reportName2 =   reportFolderPath +"reporteInvestigacion2";
-		String reportName3 =   reportFolderPath +"reporteInvestigacion3";
-		
-		//NombresSuubreportes
-		
+
+		boolean linux = false;
+
+		// Delete first File.separator for Windows
+		String reportFolderPath = (linux ? File.separator : "") + "src" + File.separator + "main" + File.separator
+				+ "java" + File.separator + "mx" + File.separator + "com" + File.separator + "rmsh" + File.separator
+				+ "horusControl" + File.separator + "reportes" + File.separator;
+
+		// Nombres reportes
+		String reportName = reportFolderPath + "reporteInvestigacion";
+		String reportName2 = reportFolderPath + "reporteInvestigacion2";
+		String reportName3 = reportFolderPath + "reporteInvestigacion3";
+
+		// NombresSuubreportes
+
 		InvestigacionRequest reguest = new InvestigacionRequest();
-		reguest.setIdInvestigacion(idInvestigacion);		
+		reguest.setIdInvestigacion(idInvestigacion);
 		InvestigacionLAMBDA lambdaQuery = awsService.getJSONFromBD(reguest);
 		lambdaQuery.setIdInvestigacion(idInvestigacion);
 
-
 		try {
-			
-			//*************************************************************************Primer Reporte
-			//Consigue los datos para llenar parametros y los carga al DS del reporte
-			ArrayList <FillReportInvestigacionVO> miListaObject = new ArrayList<FillReportInvestigacionVO>();	
-			
-			ReportTransferObjectPDF datosParam = fillReport( lambdaQuery );
+
+			// *************************************************************************Primer
+			// Reporte
+			// Consigue los datos para llenar parametros y los carga al DS del reporte
+			ArrayList<FillReportInvestigacionVO> miListaObject = new ArrayList<FillReportInvestigacionVO>();
+
+			ReportTransferObjectPDF datosParam = fillReport(lambdaQuery);
 			FillReportInvestigacionVO nuevo = new FillReportInvestigacionVO();
 			miListaObject.add(nuevo);
-					
+
 			JRDataSource beanCollectionDataSource = new JRBeanCollectionDataSource(miListaObject);
-			
-			//Create 5 subreports Checklist
-			JasperReport subInt = JasperCompileManager.compileReport(reportFolderPath +"intcump"	+ ".jrxml");
-			JasperReport subNac = JasperCompileManager.compileReport(reportFolderPath +"natcump"	+ ".jrxml");
-			JasperReport subPep = JasperCompileManager.compileReport(reportFolderPath +"pep"		+ ".jrxml");
-			JasperReport subOth = JasperCompileManager.compileReport(reportFolderPath +"others"		+ ".jrxml");
-			JasperReport submen = JasperCompileManager.compileReport(reportFolderPath +"mentions"	+ ".jrxml");
-			
+
+			// Create 5 subreports Checklist
+			JasperReport subInt = JasperCompileManager.compileReport(reportFolderPath + "intcump" + ".jrxml");
+			JasperReport subNac = JasperCompileManager.compileReport(reportFolderPath + "natcump" + ".jrxml");
+			JasperReport subPep = JasperCompileManager.compileReport(reportFolderPath + "pep" + ".jrxml");
+			JasperReport subOth = JasperCompileManager.compileReport(reportFolderPath + "others" + ".jrxml");
+			JasperReport submen = JasperCompileManager.compileReport(reportFolderPath + "mentions" + ".jrxml");
+
 			// generate the PDF 1
-			Map<String, Object> parameter = datosParam.getParameter();	
-			
+			Map<String, Object> parameter = datosParam.getParameter();
+
 			parameter.put("subreportParameter", subInt);
 			parameter.put("subreportParameter2", subNac);
 			parameter.put("subreportParameter3", subPep);
@@ -256,52 +262,54 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 			parameter.put("SUBREPORT_DATA", datosParam.getObjetosCount());
 			parameter.put("SUBREPORT_DATA2", datosParam.getObjetosResultado());
 
-			
 			// compiles jrxml
 			JasperCompileManager.compileReportToFile(reportName + ".jrxml");
-			JasperPrint print = JasperFillManager.fillReport(reportName + ".jasper", parameter,beanCollectionDataSource);
-			
+			JasperPrint print = JasperFillManager.fillReport(reportName + ".jasper", parameter,
+					beanCollectionDataSource);
+
 			// exports report to pdf
 			JRExporter exporter = new JRPdfExporter();
 			exporter.setParameter(JRExporterParameter.JASPER_PRINT, print);
 			exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, new FileOutputStream(reportName + ".pdf"));
 			exporter.exportReport();
 
+			// *************************************************************************Segundo
+			// Reporte
 
-			
-			//*************************************************************************Segundo Reporte
-			
-			ArrayList <FillReportInvestigacionResultadoVO> miListaObject2 = new ArrayList<FillReportInvestigacionResultadoVO>();
+			ArrayList<FillReportInvestigacionResultadoVO> miListaObject2 = new ArrayList<FillReportInvestigacionResultadoVO>();
 			FillReportInvestigacionResultadoVO nuevoResultado = new FillReportInvestigacionResultadoVO();
 			miListaObject2.add(nuevoResultado);
-			
-			//Create 5 subreports Checklist
-			JasperReport subIntGlobal = JasperCompileManager.compileReport(reportFolderPath +"intcumpGlobal"	+ ".jrxml");
-			
+
+			// Create 5 subreports Checklist
+			JasperReport subIntGlobal = JasperCompileManager
+					.compileReport(reportFolderPath + "intcumpGlobal" + ".jrxml");
+
 			parameter.put("subreportParameter6", subIntGlobal);
-			
+
 			JRDataSource beanCollectionDataSource2 = new JRBeanCollectionDataSource(miListaObject2);
-			
+
 			// compiles jrxml
 			JasperCompileManager.compileReportToFile(reportName2 + ".jrxml");
 			// fills compiled report with parameters and a connection
-			JasperPrint print2 = JasperFillManager.fillReport(reportName2 + ".jasper", parameter,beanCollectionDataSource2);
+			JasperPrint print2 = JasperFillManager.fillReport(reportName2 + ".jasper", parameter,
+					beanCollectionDataSource2);
 			// exports report to pdf
 			JRExporter exporter2 = new JRPdfExporter();
 			exporter2.setParameter(JRExporterParameter.JASPER_PRINT, print2);
 			exporter2.setParameter(JRExporterParameter.OUTPUT_STREAM, new FileOutputStream(reportName2 + ".pdf"));
 			exporter2.exportReport();
-			
-			
-			//*************************************************************************Tercer Reporte
-			
+
+			// *************************************************************************Tercer
+			// Reporte
+
 			// generate the PDF 3
 			Map<String, Object> parameters3 = new HashMap<String, Object>();
 			parameters3.put("clienteName", "Coca-Cola");
 			parameters3.put("idInvestigacion", idInvestigacion.toString());
-			parameters3.put("nombreCompleto", lambdaQuery.getBody().getParametros_busqueda().get(0) + " " + lambdaQuery.getBody().getParametros_busqueda().get(1));
-			parameters3.put("nivelRiesgoTexto", NivelRiesgo.getNameyId( lambdaQuery.getBody().getNivel_riesgo() ) );
-			
+			parameters3.put("nombreCompleto", lambdaQuery.getBody().getParametros_busqueda().get(0) + " "
+					+ lambdaQuery.getBody().getParametros_busqueda().get(1));
+			parameters3.put("nivelRiesgoTexto", NivelRiesgo.getNameyId(lambdaQuery.getBody().getNivel_riesgo()));
+
 			// compiles jrxml
 			JasperCompileManager.compileReportToFile(reportName3 + ".jrxml");
 			// fills compiled report with parameters and a connection
@@ -312,26 +320,27 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 			exporter3.setParameter(JRExporterParameter.JASPER_PRINT, print3);
 			exporter3.setParameter(JRExporterParameter.OUTPUT_STREAM, new FileOutputStream(reportName3 + ".pdf"));
 			exporter3.exportReport();
-			
-			//*************************************************************************Genera PDF
-			//Add Pdfs
+
+			// *************************************************************************Genera
+			// PDF
+			// Add Pdfs
 			String finalReportName = reportFolderPath + "Investigacion" + parameter.get("idInvestigacion") + ".pdf";
 			PDFMergerUtility ut = new PDFMergerUtility();
 			ut.addSource(reportName + ".pdf");
 			ut.addSource(reportName2 + ".pdf");
 			ut.addSource(reportName3 + ".pdf");
-			ut.setDestinationFileName( finalReportName );
+			ut.setDestinationFileName(finalReportName);
 			ut.mergeDocuments();
-			
-			//Create Final PDF			
+
+			// Create Final PDF
 			File file = new File(finalReportName);
 			System.out.println("Archivo abierto PDF");
 			Path path = Paths.get(file.getAbsolutePath());
-			byte[] data = Files.readAllBytes(path);			
+			byte[] data = Files.readAllBytes(path);
 			ByteArrayResource resource = new ByteArrayResource(data);
-			
+
 			System.out.println("fileName: " + file.getName());
-			
+
 			return ResponseEntity.ok()
 					// Content-Disposition
 					.header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + path.getFileName().toString())
@@ -348,128 +357,129 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 		}
 	}
 
-	 
-	private ReportTransferObjectPDF fillReport( InvestigacionLAMBDA lambdaQuery ) {
-		
+	private ReportTransferObjectPDF fillReport(InvestigacionLAMBDA lambdaQuery) {
+
 		ReportTransferObjectPDF reportTransferObjectPDF = new ReportTransferObjectPDF();
-		
-		Map<String, Object> parameter= new HashMap<String, Object>();
+
+		Map<String, Object> parameter = new HashMap<String, Object>();
 		ArrayList<FillReportInvestigacionVO> listaObjetos = new ArrayList<FillReportInvestigacionVO>();
 		ArrayList<FillReportInvestigacionResultadoVO> listaObjetosResultado = new ArrayList<FillReportInvestigacionResultadoVO>();
-		
-		//Objeto vacio para evitar el reporte blanco
+
+		// Objeto vacio para evitar el reporte blanco
 		listaObjetos.add(new FillReportInvestigacionVO());
 		listaObjetosResultado.add(new FillReportInvestigacionResultadoVO());
-		
-		//Datos Usuario
-		parameter.put("clienteName",      "Coca-Cola");
-		parameter.put("idInvestigacion",   String.valueOf( lambdaQuery.getIdInvestigacion().toString() ));
-		parameter.put("nombreCompleto",   lambdaQuery.getBody().getParametros_busqueda().get(0) + " " + lambdaQuery.getBody().getParametros_busqueda().get(1));
-		parameter.put("nivelRiesgoTexto", NivelRiesgo.getNameyId( lambdaQuery.getBody().getNivel_riesgo() ) );
-		
+
+		// Datos Usuario
+		parameter.put("clienteName", "Coca-Cola");
+		parameter.put("idInvestigacion", String.valueOf(lambdaQuery.getIdInvestigacion().toString()));
+		parameter.put("nombreCompleto", lambdaQuery.getBody().getParametros_busqueda().get(0) + " "
+				+ lambdaQuery.getBody().getParametros_busqueda().get(1));
+		parameter.put("nivelRiesgoTexto", NivelRiesgo.getNameyId(lambdaQuery.getBody().getNivel_riesgo()));
+
 		String hayintcump = "I_GREEN";
 		String haynatcump = "I_GREEN";
 		String hayintPEP = "I_GREEN";
 		String hayOthers = "I_GREEN";
 		String hayMentions = "I_GREEN";
-		
-		//Origenes
-		for (Origen origen : lambdaQuery.getBody().getOrigen()) {			
-			
-			if( "intcump".equals(origen.getCategory()) ) {
-				FillReportInvestigacionVO origenFill= new FillReportInvestigacionVO();
+
+		// Origenes
+		for (Origen origen : lambdaQuery.getBody().getOrigen()) {
+
+			if ("intcump".equals(origen.getCategory())) {
+				FillReportInvestigacionVO origenFill = new FillReportInvestigacionVO();
 				hayintcump = "I_RED";
-				origenFill.setListaCumIn(origen.getFuente()  );
+				origenFill.setListaCumIn(origen.getFuente());
 				listaObjetos.add(origenFill);
 			}
-			if( "natcump".equals(origen.getCategory()) ) {
-				FillReportInvestigacionVO origenFill= new FillReportInvestigacionVO();
+			if ("natcump".equals(origen.getCategory())) {
+				FillReportInvestigacionVO origenFill = new FillReportInvestigacionVO();
 				haynatcump = "I_RED";
 				origenFill.setListaCumNac(origen.getFuente());
 				listaObjetos.add(origenFill);
 			}
-			if( "PEP".equals(origen.getCategory()) ) {
-				FillReportInvestigacionVO origenFill= new FillReportInvestigacionVO();
+			if ("PEP".equals(origen.getCategory())) {
+				FillReportInvestigacionVO origenFill = new FillReportInvestigacionVO();
 				hayintPEP = "I_RED";
 				origenFill.setListaPEP(origen.getFuente());
 				listaObjetos.add(origenFill);
 			}
-			if( "others".equals(origen.getCategory()) ) {
-				FillReportInvestigacionVO origenFill= new FillReportInvestigacionVO();
+			if ("others".equals(origen.getCategory())) {
+				FillReportInvestigacionVO origenFill = new FillReportInvestigacionVO();
 				hayOthers = "I_RED";
 				origenFill.setListaOthers(origen.getFuente());
 				listaObjetos.add(origenFill);
-			}			
-			
+			}
+
 		}
-		
-		//Mentions
-		if (lambdaQuery.getBody().getMentions().size()>0) {
-			
+
+		// Mentions
+		if (lambdaQuery.getBody().getMentions().size() > 0) {
+
 			hayMentions = "I_RED";
-			
-			FillReportInvestigacionVO origenFill= new FillReportInvestigacionVO();
-			origenFill.setListaMentions("Entradas Identificadas ( "+ lambdaQuery.getBody().getMentions().size() +" )");
+
+			FillReportInvestigacionVO origenFill = new FillReportInvestigacionVO();
+			origenFill
+					.setListaMentions("Entradas Identificadas ( " + lambdaQuery.getBody().getMentions().size() + " )");
 			listaObjetos.add(origenFill);
-		
+
 		}
-		
-		parameter.put("hayintcump", hayintcump); //I_GREEN,I_RED
-		parameter.put("haynatcump", haynatcump); //I_GREEN,I_RED
-		parameter.put("hayintPEP",  hayintPEP); //I_GREEN,I_RED
-		parameter.put("hayOthers",  hayOthers); //I_GREEN,I_RED
-		parameter.put("hayMentions",hayMentions); //I_GREEN,I_RED
-		
-		//Datos reporte Resultados
+
+		parameter.put("hayintcump", hayintcump); // I_GREEN,I_RED
+		parameter.put("haynatcump", haynatcump); // I_GREEN,I_RED
+		parameter.put("hayintPEP", hayintPEP); // I_GREEN,I_RED
+		parameter.put("hayOthers", hayOthers); // I_GREEN,I_RED
+		parameter.put("hayMentions", hayMentions); // I_GREEN,I_RED
+
+		// Datos reporte Resultados
 		OrigenClasificator reultados = new OrigenClasificator();
 		reultados = clasifica(lambdaQuery.getBody());
 
-		//Título 1
+		// Título 1
 		FillReportInvestigacionResultadoVO titulo1 = new FillReportInvestigacionResultadoVO();
 		titulo1.setG_titulo("Listados de Cumplimiento Internacionales:");
 		listaObjetosResultado.add(titulo1);
 		listaObjetosResultado.addAll(reultados.getInternacional());
-		
-		//Título 2
+
+		// Título 2
 		FillReportInvestigacionResultadoVO titulo2 = new FillReportInvestigacionResultadoVO();
 		titulo2.setG_titulo("Listados de Cumplimiento Nacionales:");
 		listaObjetosResultado.add(titulo2);
 		listaObjetosResultado.addAll(reultados.getNacional());
-		
-		//Título 3
+
+		// Título 3
 		FillReportInvestigacionResultadoVO titulo3 = new FillReportInvestigacionResultadoVO();
 		titulo3.setG_titulo("Personas Políticamente Expuestas:");
-		listaObjetosResultado.add(titulo3);		
+		listaObjetosResultado.add(titulo3);
 		listaObjetosResultado.addAll(reultados.getPep());
 
-		//Título 4
+		// Título 4
 		FillReportInvestigacionResultadoVO titulo4 = new FillReportInvestigacionResultadoVO();
 		titulo4.setG_titulo("Otras Bases de datos:");
 		listaObjetosResultado.add(titulo4);
 		listaObjetosResultado.addAll(reultados.getOtros());
-		
-		//Título 5
+
+		// Título 5
 		FillReportInvestigacionResultadoVO titulo5 = new FillReportInvestigacionResultadoVO();
 		titulo5.setG_titulo("Menciones:");
 		listaObjetosResultado.add(titulo5);
 		listaObjetosResultado.addAll(reultados.getMenciones());
-		
-		//Resumen
+
+		// Resumen
 		reportTransferObjectPDF.setObjetosCount(listaObjetos);
 		reportTransferObjectPDF.setObjetosResultado(listaObjetosResultado);
 		reportTransferObjectPDF.setParameter(parameter);
-		
+
 		return reportTransferObjectPDF;
-		
+
 	}
-	
+
 	public OrigenClasificator clasifica(Body body) {
-		
-		OrigenClasificator resultadoFInal =  new OrigenClasificator();
-		
-		//Vacios para no afectar el data_source
+
+		OrigenClasificator resultadoFInal = new OrigenClasificator();
+
+		// Vacios para no afectar el data_source
 		ArrayList<FillReportInvestigacionResultadoVO> internacional = new ArrayList<FillReportInvestigacionResultadoVO>();
-		
+
 		ArrayList<FillReportInvestigacionResultadoVO> nacional = new ArrayList<FillReportInvestigacionResultadoVO>();
 		nacional.add(new FillReportInvestigacionResultadoVO());
 		ArrayList<FillReportInvestigacionResultadoVO> pep = new ArrayList<FillReportInvestigacionResultadoVO>();
@@ -479,85 +489,82 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 		ArrayList<FillReportInvestigacionResultadoVO> menciones = new ArrayList<FillReportInvestigacionResultadoVO>();
 		menciones.add(new FillReportInvestigacionResultadoVO());
 
-		
-
 		for (Origen origen : body.getOrigen()) {
 
 			if ("intcump".equals(origen.getCategory())) {
-				FillReportInvestigacionResultadoVO nuevo =new FillReportInvestigacionResultadoVO();
-				nuevo.setG_origen(origen.getFuente());				
-				
-				if( 0 == origen.getIsJSON() )
+				FillReportInvestigacionResultadoVO nuevo = new FillReportInvestigacionResultadoVO();
+				nuevo.setG_origen(origen.getFuente());
+
+				if (0 == origen.getIsJSON())
 					nuevo.setG_freeText(origen.getFree_text());
 				else
-					nuevo.setG_table( createTable( origen.getTexto()) );
-				
+					nuevo.setG_table(createTable(origen.getTexto()));
+
 				internacional.add(nuevo);
 			}
 			if ("natcump".equals(origen.getCategory())) {
-				FillReportInvestigacionResultadoVO nuevo =new FillReportInvestigacionResultadoVO();
+				FillReportInvestigacionResultadoVO nuevo = new FillReportInvestigacionResultadoVO();
 				nuevo.setG_origen(origen.getFuente());
-				
-				if( 0 == origen.getIsJSON() )
+
+				if (0 == origen.getIsJSON())
 					nuevo.setG_freeText(origen.getFree_text());
 				else
-					nuevo.setG_table( createTable( origen.getTexto()) );
-				
+					nuevo.setG_table(createTable(origen.getTexto()));
+
 				nacional.add(nuevo);
 			}
 			if ("PEP".equals(origen.getCategory())) {
-				FillReportInvestigacionResultadoVO nuevo =new FillReportInvestigacionResultadoVO();
+				FillReportInvestigacionResultadoVO nuevo = new FillReportInvestigacionResultadoVO();
 				nuevo.setG_origen(origen.getFuente());
-				
-				if( 0 == origen.getIsJSON() )
+
+				if (0 == origen.getIsJSON())
 					nuevo.setG_freeText(origen.getFree_text());
 				else
-					nuevo.setG_table( createTable( origen.getTexto()) );
-				
+					nuevo.setG_table(createTable(origen.getTexto()));
+
 				pep.add(nuevo);
 			}
 			if ("others".equals(origen.getCategory())) {
-				FillReportInvestigacionResultadoVO nuevo =new FillReportInvestigacionResultadoVO();
+				FillReportInvestigacionResultadoVO nuevo = new FillReportInvestigacionResultadoVO();
 				nuevo.setG_origen(origen.getFuente());
-				
-				if( 0 == origen.getIsJSON() )
+
+				if (0 == origen.getIsJSON())
 					nuevo.setG_freeText(origen.getFree_text());
 				else
-					nuevo.setG_table( createTable( origen.getTexto()) );
-				
+					nuevo.setG_table(createTable(origen.getTexto()));
+
 				otros.add(nuevo);
 			}
 
 		}
-		
+
 		for (Mentions origen : body.getMentions()) {
 
-			FillReportInvestigacionResultadoVO nuevo =new FillReportInvestigacionResultadoVO();
+			FillReportInvestigacionResultadoVO nuevo = new FillReportInvestigacionResultadoVO();
 			nuevo.setG_origen(origen.getTitle());
-			nuevo.setG_freeText(origen.getDescription() + " \n \n " + origen .getLink());
+			nuevo.setG_freeText(origen.getDescription() + " \n \n " + origen.getLink());
 			nuevo.setG_keyword(origen.getKeyword());
 			nuevo.setG_mentionImage(origen.getEngine());
 			menciones.add(nuevo);
 
 		}
-		
-		if( internacional.size() == 0) {
+
+		if (internacional.size() == 0) {
 			internacional.add(new FillReportInvestigacionResultadoVO());
 		}
-		if( nacional.size() == 0) {
+		if (nacional.size() == 0) {
 			nacional.add(new FillReportInvestigacionResultadoVO());
 		}
-		if( pep.size() == 0) {
+		if (pep.size() == 0) {
 			pep.add(new FillReportInvestigacionResultadoVO());
 		}
-		if( otros.size() == 0) {
+		if (otros.size() == 0) {
 			otros.add(new FillReportInvestigacionResultadoVO());
 		}
-		if( menciones.size() == 0) {
+		if (menciones.size() == 0) {
 			menciones.add(new FillReportInvestigacionResultadoVO());
 		}
-		
-		
+
 		resultadoFInal.setInternacional(internacional);
 		resultadoFInal.setNacional(nacional);
 		resultadoFInal.setPep(pep);
@@ -566,31 +573,30 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 
 		return resultadoFInal;
 	}
-	
+
 	public String createTable(Map<String, String> texto) {
-		
-		
-		String tablaHtml = "<table border=1 cellspacing=0><tr>"
-				+ "<th>Dato</th><th>Valor</th>"
-				+ "</tr>";
-		
+
+		String tablaHtml = "<table border=1 cellspacing=0><tr>" + "<th>Dato</th><th>Valor</th>" + "</tr>";
+
 		for (Map.Entry<String, String> entry : texto.entrySet()) {
-			
+
 			tablaHtml = tablaHtml + "<tr>";
-			tablaHtml = tablaHtml +"<td>" + entry.getKey() + "</td>";
-			tablaHtml = tablaHtml +"<td>" + entry.getValue() + "</td>";
+			tablaHtml = tablaHtml + "<td>" + entry.getKey() + "</td>";
+			tablaHtml = tablaHtml + "<td>" + entry.getValue() + "</td>";
 			tablaHtml = tablaHtml + "</tr>";
-			
+
 		}
-		
-		
+
 		tablaHtml = tablaHtml + "</table>";
-		
+
 		System.out.println(tablaHtml);
-		
+
 		return tablaHtml;
 	}
-
 	
+	public Long demoJob() throws Exception {
+		return null;
+
+	}
 
 }
