@@ -196,7 +196,7 @@ public class SecurityDaoImpl implements SecurityDao {
 					new Object[] { id_usuario }, new UsuarioRowMapper());
 		}
 
-		@Autowired
+	
 		@Override
 		public long updateUser(UserHorus user) {
 		

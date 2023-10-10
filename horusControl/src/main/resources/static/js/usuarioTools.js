@@ -287,10 +287,22 @@ function actualizaUsuario(id_usuario){
 function newUser(){
 	
 	$('#ModalUsuarios').modal('show');
-			
-			
-  	//Bloquea los botones	
-	$("#updateUsuarios").prop('disabled', true);
+	
+	
+	//Habilita los botones
+			$("#noFolio1").prop('disabled', true);
+			$("#form-name").prop('disabled', false);
+			$("#form-email").prop('disabled', false);
+			$("#form-estatus").prop('disabled', false);
+			$("#form-id_empresa").prop('disabled', false);
+			$("#form-rol").prop('disabled', false);
+			$("#form-password").prop('disabled', false);
+			$("#rowFolio").show(); //hide
+
+			//Habilita los botones
+			$("#limpiarUsuarios").prop('disabled', false);
+			$("#EnviarUsuarios").prop('disabled', false);	
+        	$("#updateUsuarios").prop('disabled', true);
 	
 }
 

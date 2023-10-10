@@ -48,10 +48,8 @@
 							</div>-->
 							
     <div style="display:flex; justify-content:flex-end; width:92%; padding:1%;">
-    <button type="button" class="btn btn-primary" onclick="newUser()">Nuevo Usuario</button>
+    <button type="submit" class="btn btn-primary" id="limpiar" onclick="newUser()">Nuevo Usuario</button>
 	</div>							
-    
-    <!--  onclick="newUser()"> -->
 							
 
 <!--Modal Usuarios-->
@@ -62,7 +60,7 @@
 
 			<div class="modal-header">
 				<h5 class="modal-title" id="exampleModalLabel">Formulario Usuarios</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<button type="submit" class="close" data-dismiss="modal" aria-label="Close" id="clean">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
@@ -70,7 +68,7 @@
 
 				<div class="row justify-content-center">
 				<div id="rowFolio" class="col-md-4">
-					<div class="alert alert-info" role="alert">Id generado: <span id="noFolio" class="row justify-content-center"></span></div>
+					<div class="alert alert-info" role="alert" id="noFolio" >Id generado: <span class="row justify-content-center" id="id"></span></div>
 				</div>
 				</div>
 			</div>
@@ -175,7 +173,7 @@
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" id="limpiarUsuarios"
 					onclick="limpiarFormulario()">Limpiar formulario</button>
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+				<button type="submit" class="btn btn-secondary" data-dismiss="modal" id="clean2">Cerrar</button>
 				<button type="submit" class="btn btn-secondary"  id="updateUsuarios"
 					onclick="actualizaUsuario()">Actualizar</button>
 				<button type="submit" class="btn btn-primary" id="EnviarUsuarios"
@@ -294,14 +292,40 @@
        });
      });
       </script>
-
       
-<!--      <script>
-      let refresh = document.getElementById('EnviarUsuarios');
-      refresh.addEventListener('click', _ => {
-    	  location.reload();
-      })
-      </script>-->
+      <script>
+      $('#limpiar').click(function() {
+    		document.getElementById("miForm").reset();
+    	});
+    			
+      </script>
+      
+      <script>
+      $('#clean').click(function() {
+    		document.getElementById("miForm").reset();
+    	});
+    			
+      </script>
+      
+      <script>
+      $('#clean2').click(function() {
+    		document.getElementById("miForm").reset();
+    	});
+    			
+      </script>
+      
+      <script type="text/javascript">
+	$(document).ready(function() {
+		$("#clean").click(function(event) {
+			$("id").empty();
+		});
+		$("#clean2").click(function(event) {
+			$("id").empty();
+		});
+		
+	});
+</script>
+
     
    	<!-- datatables JS -->
     <script type="text/javascript" src="datatables/datatables.min.js"></script>    
