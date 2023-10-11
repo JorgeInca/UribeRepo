@@ -11,6 +11,7 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import mx.com.rmsh.horusControl.dao.rowMapper.UsuarioRowMapper;
+import mx.com.rmsh.horusControl.vo.Empresas;
 import mx.com.rmsh.horusControl.vo.UserHorus;
 
 @Repository
@@ -19,8 +20,19 @@ public class SecurityDaoImpl implements SecurityDao {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
-	/* String QUERY_GET_USERS=
-			 " select * from usuario where Estatus = 1 order by fecha_creacion desc; "; */
+	 String QUERY_GET_Empresa = "SELECT "
+			 + " id_empresa as id_empresa,"
+			 + " nombre as nombre,"
+			 + " email as email,"
+			 + " phone as phone,"
+			 + " fecha_creacion as fecha_creacion,"
+			 + " estatus as estatus"
+			 + " FROM empresa "; 
+	
+/*	String QUERY_GET_Empresa = 
+			"Select * from empresa "; */
+			 
+			
 	
 	
 	String QUERY_GET_USERS = "SELECT "
@@ -212,8 +224,26 @@ public class SecurityDaoImpl implements SecurityDao {
 			          ps.setLong(7, user.getId_usuario());
 			          return ps;
 			        });
-		}  
-		
+		}
+
+
+		@SuppressWarnings("deprecation")
+		@Override
+		public List<Empresas> getEmpresa(Empresas request) {
+			
+			 return jdbcTemplate.query(QUERY_GET_Empresa,
+					
+					(rs, rowNum) -> new Empresas(
+							rs.getLong("id_empresa"),
+							rs.getString("nombre"),
+							rs.getString("email"),
+							rs.getLong("phone"),
+							rs.getInt("estatus")
+							));
+		}
+
+
+	
 		
 		
 		

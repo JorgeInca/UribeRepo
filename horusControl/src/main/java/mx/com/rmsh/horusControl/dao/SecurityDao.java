@@ -1,6 +1,8 @@
 package mx.com.rmsh.horusControl.dao;
 
 import java.util.List;
+
+import mx.com.rmsh.horusControl.vo.Empresas;
 import mx.com.rmsh.horusControl.vo.ReporteRequest;
 import mx.com.rmsh.horusControl.vo.UserHorus;
 
@@ -22,6 +24,10 @@ public interface SecurityDao {
 	public UserHorus editUser(Long id_usuario);
 	
 	public long updateUser(UserHorus user);
+	
+	public List<Empresas> getEmpresa(Empresas request);
+	
+	
 	
 
 }

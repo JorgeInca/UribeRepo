@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.ResponseEntity;
 
+import mx.com.rmsh.horusControl.vo.Empresas;
 import mx.com.rmsh.horusControl.vo.Investigacion;
 import mx.com.rmsh.horusControl.vo.InvestigacionRequest;
 import mx.com.rmsh.horusControl.vo.MasivaRequest;

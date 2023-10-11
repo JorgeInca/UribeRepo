@@ -33,6 +33,7 @@ import mx.com.rmsh.horusControl.enums.NivelRiesgo;
 import mx.com.rmsh.horusControl.enums.Pais;
 import mx.com.rmsh.horusControl.utils.TextoHandler;
 import mx.com.rmsh.horusControl.vo.Body;
+import mx.com.rmsh.horusControl.vo.Empresas;
 import mx.com.rmsh.horusControl.vo.FillReportInvestigacionResultadoVO;
 import mx.com.rmsh.horusControl.vo.FillReportInvestigacionVO;
 import mx.com.rmsh.horusControl.vo.Investigacion;
@@ -598,5 +599,8 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 		return null;
 
 	}
+
+	
+	
 
 }

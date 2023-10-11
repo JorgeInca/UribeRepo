@@ -26,11 +26,15 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import mx.com.rmsh.horusControl.service.AWSService;
+import mx.com.rmsh.horusControl.service.CatalagosService;
+import mx.com.rmsh.horusControl.service.CatalagosServiceImp;
 import mx.com.rmsh.horusControl.service.InvestigacionService;
+import mx.com.rmsh.horusControl.vo.Empresas;
 import mx.com.rmsh.horusControl.vo.InvestigacionLAMBDA;
 import mx.com.rmsh.horusControl.vo.InvestigacionRequest;
 import mx.com.rmsh.horusControl.vo.ReporteRequest;
 import mx.com.rmsh.horusControl.vo.UserHorus;
+import mx.com.rmsh.horusControl.service.*;
 
 
 @Controller
@@ -44,6 +48,9 @@ public class CatalagosController {
 	
 	@Autowired
 	InvestigacionService investigacionService;
+	
+	@Autowired
+	CatalagosService catalagosService;
 	
 	
 	//Guarda el nuevo Usuario
@@ -144,6 +151,25 @@ public class CatalagosController {
 					response = gson.toJson(investigacionService.updateUser(user));
 					
 					System.out.println("********* [Controller] guardaUsuario : " + response);
+
+					return response;
+				}
+				
+				
+				//Informacion de las empresas 
+				@RequestMapping(value = "/consultaEmpresas", method = RequestMethod.POST)
+				public @ResponseBody String empresa(Empresas empresas) {
+
+					String response = "";
+					Gson gson = new Gson();
+
+					System.out.println(empresas.toString());
+
+			    //	response = gson.toJson(investigacionService.getEmpresa(empresas));
+					
+					response = gson.toJson(catalagosService.getEmpresa(empresas));
+
+					System.out.println("********* [Controller] consultaEmpresas : " + response);
 
 					return response;
 				}
