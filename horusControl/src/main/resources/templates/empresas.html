@@ -4,7 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Usuarios - Horus México</title>
+    <title>Empresas - Horus México</title>
     
    <!-- ORIGINAL Bootstrap core CSS -->
 	<link href="dist/css/bootstrap.min.css" rel="stylesheet">
@@ -48,7 +48,8 @@
                                 <th>Nombre Empresa</th>
                                 <th>Email</th> 
                                 <th>Telefono</th>                                                                
-                                <th>Estatus</th>                                                       
+                                <th>Estatus</th>  
+                                <th>Editar</th>                                                     
                             </tr>
                         </thead>
                         
@@ -60,6 +61,107 @@
                 </div>
         </div>          
       
+      
+      
+      <!--Modal Empresas-->
+<div class="modal fade" id="ModalEmpresas" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Formulario Empresas</h5>
+				<button type="submit" class="close" data-dismiss="modal" aria-label="Close" id="clean">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+
+				<div class="row justify-content-center">
+				<div id="rowFolio" class="col-md-4">
+					<div class="alert alert-info" role="alert" id="noFolio" >Id generado: <span class="row justify-content-center" ></span></div>
+				</div>
+				</div>
+			</div>
+			<div class="row">
+				<p>.</p>
+			</div>
+
+
+			<div class="row justify-content-center">
+				<div class="col-md-10">
+					<form id="miForm" class="needs-validation" novalidate>
+						<div class="form-group">
+							<label for="noFolio1" class="col-form-label">Id_empresa:</label>
+							<input type="text" class="form-control" id="noFolio1" placeholder="Id usuario" disabled>
+						</div>
+						<div class="form-group">
+							<label for="form-name" class="col-form-label">Nombre:</label>
+							<input type="text" class="form-control" id="form-name" placeholder="First name" required>
+							<div class="invalid-feedback">
+								Nombre requerido!
+							</div>
+							<div class="valid-feedback">
+								Correcto!
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="form-email" class="col-form-label">Email:</label>
+							<input type="email" class="form-control" id="form-email" name="email"
+								placeholder="Ejemplo@email.com" required>
+							<div class="invalid-feedback">
+								Email requerido!
+							</div>
+							<div class="valid-feedback">
+								Correcto!
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="form-phone" class="col-form-label">Phone:</label>
+							<input type="tel" class="form-control" id="form-phone" placeholder="Telefono" required>
+							<div class="invalid-feedback">
+								Telefono requerido!
+							</div>
+							<div class="valid-feedback">
+								Correcto!
+							</div>
+						</div>
+					
+						<div class="form-group">
+							<label for="form-estatus" class="col-form-label">Estatus:</label>
+							<select class="form-control" id="form-estatus" placeholder="Estatus" required>
+								<option value="none" selected hidden>Seleccion una opcion</option>
+								<option value="1">Administrador</option>
+								<option value="2">Usuario</option>
+							</select>
+							<div class="invalid-feedback">
+								Estatus requerido!
+							</div>
+							<div class="valid-feedback">
+								Correcto!
+							</div>
+						</div>
+
+				</div>
+			</div>
+
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" id="limpiarEmpresas"
+					onclick="limpiarFormulario()">Limpiar formulario</button>
+				<button type="submit" class="btn btn-secondary" data-dismiss="modal" id="clean2">Cerrar</button>
+				<button type="submit" class="btn btn-secondary"  id="updateUsuarios"
+					onclick="actualizaUsuario()">Actualizar</button>
+				<button type="submit" class="btn btn-primary" id="EnviarUsuarios"
+					onclick="guardaUsuario()">Enviar</button>
+			</div>
+		</div>
+		</form>
+
+
+
+	</div>
+</div>
      
    
    	<div class="container" id="globalFooterBarDiv"></div>
@@ -119,6 +221,24 @@
 	<script>
 		getUserData();
 	</script>
+	
+	<!-- Boton Limpiar  -->
+	 <script>
+     function limpiarFormulario() {
+     document.getElementById("miForm").reset();
+     }
+     </script>
+     
+      <script>
+    document.addEventListener('DOMContentLoaded', function(){
+    let formulario = document.getElementById('miForm');
+    formulario.addEventListener('submit', function() {
+      formulario.reset();
+       });
+     });
+      </script>
+      
+ 
 	
 
 

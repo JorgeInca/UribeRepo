@@ -25,7 +25,11 @@ public interface SecurityDao {
 	
 	public long updateUser(UserHorus user);
 	
+	
+	//Informacion de las Empresas
 	public List<Empresas> getEmpresa(Empresas request);
+	
+	public Empresas getEmpresadataById(Long id_empresa);
 	
 	
 	

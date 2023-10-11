@@ -77,7 +77,11 @@ public class CatalagosServiceImp implements CatalagosService {
 		return daoUser.getEmpresa(request);
 	}
 
-
+	@Override
+	public Empresas getEmpresadataById(Long id_empresa) {
+		// TODO Auto-generated method stub
+		return daoUser.getEmpresadataById(id_empresa);
+	}
 
 	
 

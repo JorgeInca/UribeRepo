@@ -138,7 +138,7 @@ public class CatalagosController {
 
 					return response;
 				}
-	//Editar la inforacion
+	//Editar la informacion
 				@RequestMapping(value = "/actualizaUsuario", method = RequestMethod.POST) //NOT USED YET
 				public @ResponseBody String updateUser(UserHorus user) {
 
@@ -156,7 +156,7 @@ public class CatalagosController {
 				}
 				
 				
-				//Informacion de las empresas 
+	//----------------------------Informacion de las empresas ------------------------------------------------------------------
 				@RequestMapping(value = "/consultaEmpresas", method = RequestMethod.POST)
 				public @ResponseBody String empresa(Empresas empresas) {
 
@@ -173,7 +173,25 @@ public class CatalagosController {
 
 					return response;
 				}
-	
+				
+				
+				//Carga las empresas por su Id
+				@RequestMapping(value = "/cargaEmpresaId", method = RequestMethod.POST)
+				public @ResponseBody String getEmpresadataById(Empresas empresas) {
+
+					String response = "";
+					Gson gson = new Gson();
+
+					System.out.println(empresas.toString());
+
+					response = gson.toJson(catalagosService.getEmpresadataById(empresas.getId_empresa()));
+
+					System.out.println("********* [Controller] cargaEmpresaId : " + response);
+					
+					return response;
+
+				
+				}
 		
 
 }

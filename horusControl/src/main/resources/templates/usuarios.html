@@ -68,7 +68,7 @@
 
 				<div class="row justify-content-center">
 				<div id="rowFolio" class="col-md-4">
-					<div class="alert alert-info" role="alert" id="noFolio" >Id generado: <span class="row justify-content-center" id="id"></span></div>
+					<div class="alert alert-info" role="alert" id="noFolio" >Id generado: <span class="row justify-content-center" ></span></div>
 				</div>
 				</div>
 			</div>
@@ -268,7 +268,7 @@
 		})();
 	</script>
 	
-	
+	<!-- funcion del dataTable   -->
 	<script>
 	cargaListaUsuarios();
 	</script>
@@ -277,6 +277,7 @@
 		getUserData();
 	</script>
 	
+	
 	<!-- Boton Limpiar  -->
 	 <script>
      function limpiarFormulario() {
@@ -284,6 +285,8 @@
      }
      </script>
      
+     
+     <!-- Limpia formulario despues de agregar usuario  -->
      <script>
     document.addEventListener('DOMContentLoaded', function(){
     let formulario = document.getElementById('miForm');
@@ -293,38 +296,23 @@
      });
       </script>
       
-      <script>
-      $('#limpiar').click(function() {
-    		document.getElementById("miForm").reset();
-    	});
-    			
-      </script>
+  
       
       <script>
       $('#clean').click(function() {
     		document.getElementById("miForm").reset();
     	});
     			
-      </script>
-      
-      <script>
       $('#clean2').click(function() {
     		document.getElementById("miForm").reset();
     	});
-    			
+      
+
       </script>
       
-      <script type="text/javascript">
-	$(document).ready(function() {
-		$("#clean").click(function(event) {
-			$("id").empty();
-		});
-		$("#clean2").click(function(event) {
-			$("id").empty();
-		});
-		
-	});
-</script>
+  
+      
+    
 
     
    	<!-- datatables JS -->

@@ -18,6 +18,8 @@ public interface CatalagosService {
 	
 	public List<Empresas> getEmpresa(Empresas request);
 	
+	public Empresas getEmpresadataById(Long id_empresa);
+	
 	
 	
 

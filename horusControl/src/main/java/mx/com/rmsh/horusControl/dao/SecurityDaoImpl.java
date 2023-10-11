@@ -10,9 +10,9 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
-import mx.com.rmsh.horusControl.dao.rowMapper.UsuarioRowMapper;
-import mx.com.rmsh.horusControl.vo.Empresas;
-import mx.com.rmsh.horusControl.vo.UserHorus;
+import mx.com.rmsh.horusControl.dao.rowMapper.*;
+import mx.com.rmsh.horusControl.vo.*;
+
 
 @Repository
 public class SecurityDaoImpl implements SecurityDao {
@@ -20,6 +20,7 @@ public class SecurityDaoImpl implements SecurityDao {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
+//---------------- Empresas --------------------------------------------------	
 	 String QUERY_GET_Empresa = "SELECT "
 			 + " id_empresa as id_empresa,"
 			 + " nombre as nombre,"
@@ -29,11 +30,19 @@ public class SecurityDaoImpl implements SecurityDao {
 			 + " estatus as estatus"
 			 + " FROM empresa "; 
 	
-/*	String QUERY_GET_Empresa = 
-			"Select * from empresa "; */
-			 
-			
-	
+     //Busca empresa por id
+		String QUERY_GET_EMPRESA_BYID =
+				"SELECT "
+						 + " id_empresa as id_empresa,"
+						 + " nombre as nombre,"
+						 + " email as email,"
+						 + " phone as phone,"
+						 + " fecha_creacion as fecha_creacion,"
+						 + " estatus as estatus"
+						 + " FROM empresa "
+				    	 + " WHERE id_empresa = ? "; 
+		
+//---------------------- Usuarios -------------------------------------------------		
 	
 	String QUERY_GET_USERS = "SELECT "
 			+ " A.id_usuario as id_usuario,"
@@ -227,6 +236,7 @@ public class SecurityDaoImpl implements SecurityDao {
 		}
 
 
+//------------------------ Empresas -------------------------------------------------
 		@SuppressWarnings("deprecation")
 		@Override
 		public List<Empresas> getEmpresa(Empresas request) {
@@ -241,10 +251,20 @@ public class SecurityDaoImpl implements SecurityDao {
 							rs.getInt("estatus")
 							));
 		}
+		
+		@Override
+		public Empresas getEmpresadataById(Long id_empresa) {
+			return jdbcTemplate.queryForObject(QUERY_GET_EMPRESA_BYID, 
+					new Object[] { id_empresa }, new EmpresaRowMapper());
+		}
+
 
 
 	
 		
 		
+
+	
+	
 		
 }
