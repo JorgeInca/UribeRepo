@@ -59,22 +59,22 @@ function consumeAws() {
 			for (let x in data.body.origen) {
 				
 				if( data.body.origen[x].category == "intcump"	){
-					fillLambdaText( 'lambdaTextintcump' , data.body.origen[x]  );
+					fillLambdaText( 'lambdaTextintcump' , data.body.origen[x] , false , '0' );
 					countInt++;
 				}
 				
 				if( data.body.origen[x].category == "natcump"	){
-					fillLambdaText( 'lambdaTextnatcump' , data.body.origen[x]  );
+					fillLambdaText( 'lambdaTextnatcump' , data.body.origen[x] , false , '0');
 					countNat++;
 				}
 				
 				if( data.body.origen[x].category == "PEP"	){
-					fillLambdaText( 'lambdaTextPEP' , data.body.origen[x]  );
+					fillLambdaText( 'lambdaTextPEP' , data.body.origen[x] , false , '0');
 					countPEP++;
 				}
 				
 				if( data.body.origen[x].category == "others"	){
-					fillLambdaText( 'lambdaTextOthers' , data.body.origen[x]  );
+					fillLambdaText( 'lambdaTextOthers' , data.body.origen[x] , false , '0');
 					countOth++;
 				}
 				 
@@ -207,7 +207,7 @@ function guardaInvestigacion() {
 }
 
 
-
+//Botón de carga masiva
 $('#uploadButton').click(function() {
 	
 	var formData = new FormData();	
@@ -230,7 +230,17 @@ $('#uploadButton').click(function() {
 		processData: false,
 		contentType: false,
 		success: function(response) {
+			
+			$("#rowMasiva").show(); //hide
+			
 			$('#response').text('File uploaded successfully: ' + response);
+			
+			$("#noMasiva").empty();
+			$('#noMasiva').append('<strong> ' + response + ' </strong>');
+			
+			tableGlobal.clear().draw();
+			cargaListaMasivas();
+			
 		},
 		error: function(xhr, status, error) {
 			$('#response').text('Error uploading file: ' + error);
@@ -281,3 +291,65 @@ function limpiaInvestigacion(){
 	
 }
 
+
+
+function cargaListaMasivas() {
+
+
+	var uri = "consultaMasivas";
+	var idUserHorus = $("#idUserHorus").val();
+
+	var masivaRequest = {
+		idUsuario: idUserHorus
+
+	};
+
+	$.ajax({
+		url: uri,
+		type: 'POST',
+		dataType: 'json',
+		data: masivaRequest,
+		success: function(data) {
+
+			
+			//alert(JSON.stringify(data));
+
+			for (let x in data) {
+
+				/*let tableRef = document.getElementById("horus");
+
+				// Insert a row at the end of the table
+				let newRow = tableRef.insertRow(-1);
+
+				// Insert a cell in the row at index 0
+				let newCell = newRow.insertCell(0);
+
+				// Append a text node to the cell
+				let newText = document.createTextNode(data[x].nombreUsuario);
+
+				newCell.appendChild(newText);*/
+
+				tableGlobal.row
+					.add([
+						'<a href="#" onclick="cargaInvestigacionId('+data[x].idInvestigacionMasiva+')" ><strong>' + data[x].idInvestigacionMasiva + '</strong></a>',
+						data[x].nombre,
+						data[x].nombreUsuario,
+						data[x].fechaCreacion,											
+						data[x].estatusText
+					])
+					.order( [0,'desc'] )
+					.draw(false);
+
+			}		
+
+
+
+		},
+		error: function(xhr, ajaxOptions, thrownError) {
+
+		}
+
+	});
+
+
+}

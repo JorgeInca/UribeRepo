@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -33,18 +34,20 @@ import mx.com.rmsh.horusControl.enums.NivelRiesgo;
 import mx.com.rmsh.horusControl.enums.Pais;
 import mx.com.rmsh.horusControl.utils.TextoHandler;
 import mx.com.rmsh.horusControl.vo.Body;
-import mx.com.rmsh.horusControl.vo.Empresas;
 import mx.com.rmsh.horusControl.vo.FillReportInvestigacionResultadoVO;
 import mx.com.rmsh.horusControl.vo.FillReportInvestigacionVO;
 import mx.com.rmsh.horusControl.vo.Investigacion;
 import mx.com.rmsh.horusControl.vo.InvestigacionLAMBDA;
 import mx.com.rmsh.horusControl.vo.InvestigacionRequest;
+import mx.com.rmsh.horusControl.vo.Masiva;
 import mx.com.rmsh.horusControl.vo.MasivaRequest;
 import mx.com.rmsh.horusControl.vo.Mentions;
 import mx.com.rmsh.horusControl.vo.Origen;
 import mx.com.rmsh.horusControl.vo.OrigenClasificator;
+import mx.com.rmsh.horusControl.vo.OrigenesBorradoRequest;
 import mx.com.rmsh.horusControl.vo.ReportTransferObjectPDF;
 import mx.com.rmsh.horusControl.vo.ReporteRequest;
+import mx.com.rmsh.horusControl.vo.RiesgoRequest;
 import mx.com.rmsh.horusControl.vo.UserHorus;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JREmptyDataSource;
@@ -114,9 +117,11 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 	}
 
 	@Override
-	public List<InvestigacionRequest> guardaInvestigacionMasiva(MasivaRequest masivaRequest) throws IOException {
+	public Long guardaInvestigacionMasiva(MasivaRequest masivaRequest) throws IOException {
 
 		List<InvestigacionRequest> listaRetorno = new ArrayList<InvestigacionRequest>();
+		
+		Long idMasiva = 0L;
 
 		// Variables Excel
 		String UPLOAD_FOLDER = "C://test//";
@@ -133,6 +138,8 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 			XSSFSheet sheet = excelPeticion.getSheetAt(0);
 
 			Iterator<Row> rowIterator = sheet.iterator();
+			
+			idMasiva = dao.guardaMasiva(masivaRequest);
 
 			boolean esCabecera = true;
 
@@ -172,16 +179,18 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 
 						investigacion.setIdUsuario(masivaRequest.getIdUsuario());
 						investigacion.setNivel_riesgo(0);
-						investigacion.setIdMasiva(0L);
+						investigacion.setIdMasiva(idMasiva);
 						investigacion.setInvestigacionJson("");
 						investigacion.setIdEstatus(EstatusInvestigacion.PENDIENTE.getIdEstatus());
 
 						cellActual++;
 					}
 
-					// Campos vacios
-					if (!("".equals(investigacion.getFirstname()) && "".equals(investigacion.getLastname())))
-						listaRetorno.add(investigacion);
+					// Campos vacios o nul
+					if (!(investigacion.getFirstname() == null && investigacion.getLastname() == null)) {
+						if (!("".equals(investigacion.getFirstname()) && "".equals(investigacion.getLastname())))
+							listaRetorno.add(investigacion);
+					}
 				}
 				esCabecera = false;
 			}
@@ -194,18 +203,12 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 			System.out.println(model.toString());
 		}
 		
-		try {
-			demoJob();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		
 		System.out.println("Let job works");
 		
-		//dao.guardaInvestigacionMasiva(listaRetorno);
+		dao.guardaInvestigacionMasiva(listaRetorno);
 
-		return listaRetorno;
+		return idMasiva;
 	}
 
 	@Override
@@ -230,7 +233,7 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 		InvestigacionRequest reguest = new InvestigacionRequest();
 		reguest.setIdInvestigacion(idInvestigacion);
 		InvestigacionLAMBDA lambdaQuery = awsService.getJSONFromBD(reguest);
-		lambdaQuery.setIdInvestigacion(idInvestigacion);
+		
 
 		try {
 
@@ -309,7 +312,7 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 			parameters3.put("idInvestigacion", idInvestigacion.toString());
 			parameters3.put("nombreCompleto", lambdaQuery.getBody().getParametros_busqueda().get(0) + " "
 					+ lambdaQuery.getBody().getParametros_busqueda().get(1));
-			parameters3.put("nivelRiesgoTexto", NivelRiesgo.getNameyId(lambdaQuery.getBody().getNivel_riesgo()));
+			//parameters3.put("nivelRiesgoTexto", NivelRiesgo.getNameyId(lambdaQuery.getBody().getNivel_riesgo()));
 
 			// compiles jrxml
 			JasperCompileManager.compileReportToFile(reportName3 + ".jrxml");
@@ -375,6 +378,17 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 		parameter.put("idInvestigacion", String.valueOf(lambdaQuery.getIdInvestigacion().toString()));
 		parameter.put("nombreCompleto", lambdaQuery.getBody().getParametros_busqueda().get(0) + " "
 				+ lambdaQuery.getBody().getParametros_busqueda().get(1));
+		
+		
+		Integer riesgoEditado = dao.getRiesgoFInal(lambdaQuery.getIdInvestigacion());
+		
+		if( ! (riesgoEditado == null) ) {
+			lambdaQuery.getBody().setNivel_riesgo(riesgoEditado);
+			lambdaQuery.getBody().setNivel_riesgo_editado(riesgoEditado);
+		}
+		else
+			lambdaQuery.getBody().setNivel_riesgo_editado( 0 );
+		
 		parameter.put("nivelRiesgoTexto", NivelRiesgo.getNameyId(lambdaQuery.getBody().getNivel_riesgo()));
 
 		String hayintcump = "I_GREEN";
@@ -382,48 +396,73 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 		String hayintPEP = "I_GREEN";
 		String hayOthers = "I_GREEN";
 		String hayMentions = "I_GREEN";
-
-		// Origenes
+		
+		String fromArrayOrigenes = lambdaQuery.getBody().getEliminadosOrigenes();
+		List<String> origenesEliminados = Arrays.asList( fromArrayOrigenes.split("\\s*,\\s*") );//Arrays.asList(fromArray.split("\\s*,\\s*"));
+		String fromArrayMentions = lambdaQuery.getBody().getEliminadosMentions();
+		List<String> mentionsEliminados = Arrays.asList( fromArrayMentions.split("\\s*,\\s*") );//Arrays.asList(fromArray.split("\\s*,\\s*"));
+		
+		// Origenes		
 		for (Origen origen : lambdaQuery.getBody().getOrigen()) {
+			
+			if( !origenesEliminados.contains( origen.getId().toString() ) ){
 
-			if ("intcump".equals(origen.getCategory())) {
-				FillReportInvestigacionVO origenFill = new FillReportInvestigacionVO();
-				hayintcump = "I_RED";
-				origenFill.setListaCumIn(origen.getFuente());
-				listaObjetos.add(origenFill);
-			}
-			if ("natcump".equals(origen.getCategory())) {
-				FillReportInvestigacionVO origenFill = new FillReportInvestigacionVO();
-				haynatcump = "I_RED";
-				origenFill.setListaCumNac(origen.getFuente());
-				listaObjetos.add(origenFill);
-			}
-			if ("PEP".equals(origen.getCategory())) {
-				FillReportInvestigacionVO origenFill = new FillReportInvestigacionVO();
-				hayintPEP = "I_RED";
-				origenFill.setListaPEP(origen.getFuente());
-				listaObjetos.add(origenFill);
-			}
-			if ("others".equals(origen.getCategory())) {
-				FillReportInvestigacionVO origenFill = new FillReportInvestigacionVO();
-				hayOthers = "I_RED";
-				origenFill.setListaOthers(origen.getFuente());
-				listaObjetos.add(origenFill);
+					if ("intcump".equals(origen.getCategory())) {
+						FillReportInvestigacionVO origenFill = new FillReportInvestigacionVO();
+						hayintcump = "I_RED";
+						origenFill.setListaCumIn(origen.getFuente());
+						listaObjetos.add(origenFill);
+					}
+					if ("natcump".equals(origen.getCategory())) {
+						FillReportInvestigacionVO origenFill = new FillReportInvestigacionVO();
+						haynatcump = "I_RED";
+						origenFill.setListaCumNac(origen.getFuente());
+						listaObjetos.add(origenFill);
+					}
+					if ("PEP".equals(origen.getCategory())) {
+						FillReportInvestigacionVO origenFill = new FillReportInvestigacionVO();
+						hayintPEP = "I_RED";
+						origenFill.setListaPEP(origen.getFuente());
+						listaObjetos.add(origenFill);
+					}
+					if ("others".equals(origen.getCategory())) {
+						FillReportInvestigacionVO origenFill = new FillReportInvestigacionVO();
+						hayOthers = "I_RED";
+						origenFill.setListaOthers(origen.getFuente());
+						listaObjetos.add(origenFill);
+					}
+			
 			}
 
 		}
+		
+		Integer numeroOrigenes= 0;
+		for (Mentions mention : lambdaQuery.getBody().getMentions()) {
+			
+			if( !mentionsEliminados.contains( mention.getId().toString() ) ){				
+			
+				hayMentions = "I_RED";
+				numeroOrigenes++;
+				
+				break;
+			}
+			
+		}
+		
+		FillReportInvestigacionVO origenFill = new FillReportInvestigacionVO();
+		origenFill.setListaMentions("Entradas Identificadas ( " + numeroOrigenes + " )");
+		listaObjetos.add(origenFill);
 
 		// Mentions
-		if (lambdaQuery.getBody().getMentions().size() > 0) {
-
-			hayMentions = "I_RED";
-
-			FillReportInvestigacionVO origenFill = new FillReportInvestigacionVO();
-			origenFill
-					.setListaMentions("Entradas Identificadas ( " + lambdaQuery.getBody().getMentions().size() + " )");
-			listaObjetos.add(origenFill);
-
-		}
+//		if (lambdaQuery.getBody().getMentions().size() > 0) {
+//
+//			hayMentions = "I_RED";
+//
+//			FillReportInvestigacionVO origenFill = new FillReportInvestigacionVO();
+//			origenFill.setListaMentions("Entradas Identificadas ( " + lambdaQuery.getBody().getMentions().size() + " )");
+//			listaObjetos.add(origenFill);
+//
+//		}
 
 		parameter.put("hayintcump", hayintcump); // I_GREEN,I_RED
 		parameter.put("haynatcump", haynatcump); // I_GREEN,I_RED
@@ -489,64 +528,77 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 		otros.add(new FillReportInvestigacionResultadoVO());
 		ArrayList<FillReportInvestigacionResultadoVO> menciones = new ArrayList<FillReportInvestigacionResultadoVO>();
 		menciones.add(new FillReportInvestigacionResultadoVO());
+		
+		String fromArrayOrigenes = body.getEliminadosOrigenes();
+		List<String> origenesEliminados = Arrays.asList( fromArrayOrigenes.split("\\s*,\\s*") );//Arrays.asList(fromArray.split("\\s*,\\s*"));
+		String fromArrayMentions = body.getEliminadosMentions();
+		List<String> mentionsEliminados = Arrays.asList( fromArrayMentions.split("\\s*,\\s*") );//Arrays.asList(fromArray.split("\\s*,\\s*"));
 
 		for (Origen origen : body.getOrigen()) {
 
-			if ("intcump".equals(origen.getCategory())) {
-				FillReportInvestigacionResultadoVO nuevo = new FillReportInvestigacionResultadoVO();
-				nuevo.setG_origen(origen.getFuente());
+			if (!origenesEliminados.contains(origen.getId().toString())) {
 
-				if (0 == origen.getIsJSON())
-					nuevo.setG_freeText(origen.getFree_text());
-				else
-					nuevo.setG_table(createTable(origen.getTexto()));
+				if ("intcump".equals(origen.getCategory())) {
+					FillReportInvestigacionResultadoVO nuevo = new FillReportInvestigacionResultadoVO();
+					nuevo.setG_origen(origen.getFuente());
 
-				internacional.add(nuevo);
-			}
-			if ("natcump".equals(origen.getCategory())) {
-				FillReportInvestigacionResultadoVO nuevo = new FillReportInvestigacionResultadoVO();
-				nuevo.setG_origen(origen.getFuente());
+					if (0 == origen.getIsJSON())
+						nuevo.setG_freeText(origen.getFree_text());
+					else
+						nuevo.setG_table(createTable(origen.getTexto()));
 
-				if (0 == origen.getIsJSON())
-					nuevo.setG_freeText(origen.getFree_text());
-				else
-					nuevo.setG_table(createTable(origen.getTexto()));
+					internacional.add(nuevo);
+				}
+				if ("natcump".equals(origen.getCategory())) {
+					FillReportInvestigacionResultadoVO nuevo = new FillReportInvestigacionResultadoVO();
+					nuevo.setG_origen(origen.getFuente());
 
-				nacional.add(nuevo);
-			}
-			if ("PEP".equals(origen.getCategory())) {
-				FillReportInvestigacionResultadoVO nuevo = new FillReportInvestigacionResultadoVO();
-				nuevo.setG_origen(origen.getFuente());
+					if (0 == origen.getIsJSON())
+						nuevo.setG_freeText(origen.getFree_text());
+					else
+						nuevo.setG_table(createTable(origen.getTexto()));
 
-				if (0 == origen.getIsJSON())
-					nuevo.setG_freeText(origen.getFree_text());
-				else
-					nuevo.setG_table(createTable(origen.getTexto()));
+					nacional.add(nuevo);
+				}
+				if ("PEP".equals(origen.getCategory())) {
+					FillReportInvestigacionResultadoVO nuevo = new FillReportInvestigacionResultadoVO();
+					nuevo.setG_origen(origen.getFuente());
 
-				pep.add(nuevo);
-			}
-			if ("others".equals(origen.getCategory())) {
-				FillReportInvestigacionResultadoVO nuevo = new FillReportInvestigacionResultadoVO();
-				nuevo.setG_origen(origen.getFuente());
+					if (0 == origen.getIsJSON())
+						nuevo.setG_freeText(origen.getFree_text());
+					else
+						nuevo.setG_table(createTable(origen.getTexto()));
 
-				if (0 == origen.getIsJSON())
-					nuevo.setG_freeText(origen.getFree_text());
-				else
-					nuevo.setG_table(createTable(origen.getTexto()));
+					pep.add(nuevo);
+				}
+				if ("others".equals(origen.getCategory())) {
+					FillReportInvestigacionResultadoVO nuevo = new FillReportInvestigacionResultadoVO();
+					nuevo.setG_origen(origen.getFuente());
 
-				otros.add(nuevo);
+					if (0 == origen.getIsJSON())
+						nuevo.setG_freeText(origen.getFree_text());
+					else
+						nuevo.setG_table(createTable(origen.getTexto()));
+
+					otros.add(nuevo);
+				}
+
 			}
 
 		}
 
 		for (Mentions origen : body.getMentions()) {
-
+			
+			if( !mentionsEliminados.contains( origen.getId().toString() ) ){
+				
 			FillReportInvestigacionResultadoVO nuevo = new FillReportInvestigacionResultadoVO();
 			nuevo.setG_origen(origen.getTitle());
 			nuevo.setG_freeText(origen.getDescription() + " \n \n " + origen.getLink());
 			nuevo.setG_keyword(origen.getKeyword());
 			nuevo.setG_mentionImage(origen.getEngine());
 			menciones.add(nuevo);
+			
+			}
 
 		}
 
@@ -600,7 +652,28 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 
 	}
 
-	
-	
+	@Override
+	public List<Masiva> getMasivas(MasivaRequest request) {
+		// TODO Auto-generated method stub
+		return dao.getMasivas(request);
+	}
+
+	@Override
+	public void updateRiesgoById(RiesgoRequest request) {
+		 dao.updateRiesgoById(request);
+		
+	}
+
+	@Override
+	public void updateEliminadosOrigen(OrigenesBorradoRequest request) {
+		dao.updateEliminadosOrigen(request);
+		
+	}
+
+	@Override
+	public void updateEliminadosMention(OrigenesBorradoRequest request) {
+		dao.updateEliminadosMention(request);
+		
+	}
 
 }

@@ -20,6 +20,7 @@ public class Origen {
 	public String risk_level;
 	public Integer isJSON;
 	public String category;
+	public Integer id;
 
 	public String getNombre() {
 		return nombre;
@@ -117,12 +118,22 @@ public class Origen {
 		this.category = category;
 	}
 
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
 	@Override
 	public String toString() {
 		return "Origen [nombre=" + nombre + ", url=" + url + ", resultado=" + resultado + ", texto=" + texto
 				+ ", free_text=" + free_text + ", summary=" + summary + ", fuente=" + fuente + ", score=" + score
 				+ ", description=" + description + ", risk_level=" + risk_level + ", isJSON=" + isJSON + ", category="
-				+ category + "]";
+				+ category + ", id=" + id + "]";
 	}
+
+	
 
 }

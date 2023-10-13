@@ -295,7 +295,16 @@
 						<div class="row">
 							<p>.</p>
 						</div>
-				
+						
+						<div class="row">
+							<p>.</p>
+						</div>
+						<div class="row justify-content-center">
+							<div id="rowMasiva" class="col-md-2">
+								<div class="alert alert-info" role="alert">Folio generado: <span id="noMasiva"></span></div>
+							</div>
+						</div>
+						
 						<div class="row justify-content-center">
 				
 				
@@ -349,12 +358,10 @@
 									<thead>
 										<tr>
 											<th>Id</th>
-											<th>Primer Nombre</th>
-											<th>Primer Apellido</th>
-											<th>Segundo Apellido</th>
-											<th>Nacionalidad</th>
-											<th>Rfc</th>
-											<th>Edicion</th>
+											<th>Nombre</th>
+											<th>Usuario</th>
+											<th>Fecha</th>
+											<th>Editar</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -524,12 +531,17 @@
 
 	<script>
 		$("#rowFolio").hide(); //hide
+		$("#rowMasiva").hide(); //hide
 		$("#lambdaText").hide();
 	</script>
 
 
 	<script>
 		getUserData();
+	</script>
+	
+	<script>
+		cargaListaMasivas();
 	</script>
 
 

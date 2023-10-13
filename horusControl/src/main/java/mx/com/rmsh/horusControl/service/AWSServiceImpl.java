@@ -29,14 +29,9 @@ public class AWSServiceImpl implements AWSService {
 	@Override
 	public InvestigacionLAMBDA getAWSKendraResponse(InvestigacionRequest investigacionRequest) {
 
-		String nombreLambda = "arn:aws:lambda:us-east-1:100906894518:function:SearchEnginePost";
-
-		String functionName = nombreLambda;
-		Region region = Region.US_EAST_1;
-		LambdaClient awsLambda = LambdaClient.builder().region(region)
-				.credentialsProvider(StaticCredentialsProvider.create(
-						AwsBasicCredentials.create("AKIARO7UFAS3A3ISPD6R", "2CFt//lW5g8jh7qkI5OUP8CSOpUNwHsdwk99QXo5")))
-				.build();
+		String functionName = "arn:aws:lambda:us-east-1:100906894518:function:SearchEnginePost";
+		
+		LambdaClient awsLambda = getAWSlamdaClient();
 		
 		Investigacion respuestaInvestigacion = new Investigacion();
 		respuestaInvestigacion.setJson(invokeFunction(awsLambda, functionName,investigacionRequest));
@@ -60,7 +55,7 @@ public class AWSServiceImpl implements AWSService {
 	}
 
 	// snippet-start:[lambda.java2.invoke.main]
-	public static String invokeFunction(LambdaClient awsLambda, String functionName,InvestigacionRequest investigacionRequest) {
+	public String invokeFunction(LambdaClient awsLambda, String functionName,InvestigacionRequest investigacionRequest) {
 
 		InvokeResponse res = null;
 		try {
@@ -103,9 +98,36 @@ public class AWSServiceImpl implements AWSService {
 		
 		Gson gson = new Gson();
 		
-		lambda = gson.fromJson(daoInvestigacion.getInvestigacionById(investigacionRequest.getIdInvestigacion()) , InvestigacionLAMBDA.class); 
+		lambda = gson.fromJson(daoInvestigacion.getInvestigacionById(investigacionRequest.getIdInvestigacion()) , InvestigacionLAMBDA.class);		
+		lambda.setIdInvestigacion(investigacionRequest.getIdInvestigacion());
+		
+		Integer riesgoEditado = daoInvestigacion.getRiesgoFInal(investigacionRequest.getIdInvestigacion());
+		String origenesEliminados = daoInvestigacion.getEliminadosOrigen(investigacionRequest.getIdInvestigacion());
+		String mentionsEliminados = daoInvestigacion.getEliminadoMentions(investigacionRequest.getIdInvestigacion());
+		
+		if( ! (riesgoEditado == null) ) {
+			lambda.getBody().setNivel_riesgo(riesgoEditado);
+			lambda.getBody().setNivel_riesgo_editado(riesgoEditado);
+		}
+		else
+			lambda.getBody().setNivel_riesgo_editado( 0 );
+		
+		lambda.getBody().setEliminadosOrigenes(origenesEliminados);
+		lambda.getBody().setEliminadosMentions(mentionsEliminados);
+		
+		System.out.println("Riesgo : " + lambda.getBody().getNivel_riesgo_editado() );
 		
 		return lambda;
+	}
+	
+	public LambdaClient getAWSlamdaClient(){
+		
+		Region region = Region.US_EAST_1;
+		
+		 return LambdaClient.builder().region(region)
+					.credentialsProvider(StaticCredentialsProvider.create(
+							AwsBasicCredentials.create("AKIARO7UFAS3A3ISPD6R", "2CFt//lW5g8jh7qkI5OUP8CSOpUNwHsdwk99QXo5")))
+					.build();
 	}
 
 }

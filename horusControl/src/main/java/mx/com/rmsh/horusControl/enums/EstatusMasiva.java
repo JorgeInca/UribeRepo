@@ -1,13 +1,13 @@
 package mx.com.rmsh.horusControl.enums;
 
-public enum NivelRiesgo {
+public enum EstatusMasiva {
 
-	BAJO(1, "BAJO"),
-	MEDIO(2, "MEDIO"),
-	ALTO(3, "ALTO"),
-	ZERO(0, "BAJO");
+	EN_PROCESO(1, "EN PROCESO"),
+	TERMINADA(2, "TERMINADA"),
+	CANCELADA(3, "CANCELADA"),
+	ERROR(4, "ERROR");
 
-	NivelRiesgo(Integer idEstatus, String name) {
+	EstatusMasiva(Integer idEstatus, String name) {
 		this.idEstatus = idEstatus;
 		this.name = name;
 	}
@@ -16,18 +16,20 @@ public enum NivelRiesgo {
 	private String name;
 
 	public static String getNameyId(Integer id) {
+		
+		System.out.println( "33 id " + id  );
 
-		for (NivelRiesgo e : values()) {
+		for (EstatusMasiva e : values()) {
 			if (e.idEstatus.equals(id))
 				return e.getName();
 		}
-		return "BAJO";
+		return "Desconocido";
 
 	}
 
 	public static Integer getIdByName(String name) {
 
-		for (NivelRiesgo e : values()) {
+		for (EstatusMasiva e : values()) {
 			if (e.name.equals(name))
 				return e.getIdEstatus();
 		}

@@ -13,7 +13,23 @@ public class InvestigacionRequest {
 	public String json;
 	public Long idMasiva;
 	public Integer idEstatus;
-	public String estatusText;
+	public String estatusText;	
+
+	public InvestigacionRequest() {
+		super();
+	}
+	
+	
+	public InvestigacionRequest(Long idInvestigacion, String firstname, String lastname, String rfc, Integer pais) {
+		super();
+		this.idInvestigacion = idInvestigacion;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.rfc = rfc;
+		this.pais = pais;
+	}
+
+
 
 	public String getFirstname() {
 		return firstname;

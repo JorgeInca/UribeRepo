@@ -9,8 +9,11 @@ import org.springframework.http.ResponseEntity;
 import mx.com.rmsh.horusControl.vo.Empresas;
 import mx.com.rmsh.horusControl.vo.Investigacion;
 import mx.com.rmsh.horusControl.vo.InvestigacionRequest;
+import mx.com.rmsh.horusControl.vo.Masiva;
 import mx.com.rmsh.horusControl.vo.MasivaRequest;
+import mx.com.rmsh.horusControl.vo.OrigenesBorradoRequest;
 import mx.com.rmsh.horusControl.vo.ReporteRequest;
+import mx.com.rmsh.horusControl.vo.RiesgoRequest;
 import mx.com.rmsh.horusControl.vo.UserHorus;
 
 
@@ -24,7 +27,7 @@ public interface InvestigacionService {
 	
 	public Long guardaUsuario(UserHorus user);
 	
-	public List<InvestigacionRequest> guardaInvestigacionMasiva(MasivaRequest masivaRequest) throws IOException;
+	public Long guardaInvestigacionMasiva(MasivaRequest masivaRequest) throws IOException;
 	
 	public UserHorus getUsuarioById(Long id_usuario);
 	
@@ -36,4 +39,11 @@ public interface InvestigacionService {
 	
 	public ResponseEntity<ByteArrayResource> getPDFInvestigacion(Long idInvestigacion);
 	
+	public List<Masiva> getMasivas(MasivaRequest request);
+	
+	public void updateRiesgoById(RiesgoRequest request);
+	
+	public void updateEliminadosOrigen( OrigenesBorradoRequest request );
+	
+	public void updateEliminadosMention( OrigenesBorradoRequest request );
 }

@@ -89,16 +89,23 @@ $('#pdfButtonInvestigacion').on('click', function() {
 });
 
 
-function fillLambdaText( lambdaId , origen ){
-	
-	$('#'+lambdaId).append('<br><div class="badge badge-info">' + origen.fuente + '</div>');
-	$('#'+lambdaId).append('<br>');
-	
-	if(origen.isJSON == "0")
-		$('#'+lambdaId).append('<br>...<div>' + origen.free_text + '</div>...');
+function fillLambdaText(lambdaId, origen, esEdit, origenesBorrados) {
+
+	$('#' + lambdaId).append('<br><div class="badge badge-info">' + origen.fuente + '</div>');
+	$('#' + lambdaId).append('<br>');
+
+	if (origen.isJSON == "0")
+		$('#' + lambdaId).append('<br>...<div>' + origen.free_text + '</div>...');
 	else
-		$('#'+lambdaId).append('<br>...<div>' + createTableFromMap( origen.texto) + '</div>...');
-		$('#'+lambdaId).append('<br><a href="' + origen.url + '">' + origen.url + '</div>');
-		$('#'+lambdaId).append('<br><hr class="my-4">');		
+		$('#' + lambdaId).append('<br>...<div>' + createTableFromMap(origen.texto) + '</div>...');
+
+	$('#' + lambdaId).append('<br><a href="' + origen.url + '">' + origen.url + '</div>');
 	
+	if (esEdit) {
+		$('#' + lambdaId).append('<br>');
+		$('#' + lambdaId).append('<br><a href="javascript:borraOrigen(false,\'' + origen.id + '\',\'' + origenesBorrados + '\');" ><img src="images/icons/eliminar.png" width="35" height="35"></a>');
+	}
+	
+	$('#' + lambdaId).append('<br><hr class="my-4">');
+
 }

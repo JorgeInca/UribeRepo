@@ -1,22 +1,10 @@
 package mx.com.rmsh.horusControl.controller.app;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,15 +25,10 @@ import mx.com.rmsh.horusControl.service.SecurityService;
 import mx.com.rmsh.horusControl.vo.InvestigacionLAMBDA;
 import mx.com.rmsh.horusControl.vo.InvestigacionRequest;
 import mx.com.rmsh.horusControl.vo.MasivaRequest;
+import mx.com.rmsh.horusControl.vo.OrigenesBorradoRequest;
 import mx.com.rmsh.horusControl.vo.ReporteRequest;
+import mx.com.rmsh.horusControl.vo.RiesgoRequest;
 import mx.com.rmsh.horusControl.vo.UserHorus;
-import net.sf.jasperreports.engine.JREmptyDataSource;
-import net.sf.jasperreports.engine.JRExporter;
-import net.sf.jasperreports.engine.JRExporterParameter;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.export.JRPdfExporter;
 
 @Controller
 public class InvestigacionController {
@@ -148,9 +131,7 @@ public class InvestigacionController {
 		masivaRequest.setFile(file);
 		masivaRequest.setIdUsuario(idUserHorus);
 		masivaRequest.setNombreCampaña(nombreCampaña);
-
-		Gson gson = new Gson();
-		List<InvestigacionRequest> listaRetorno = new ArrayList<InvestigacionRequest>();
+	
 		String response = "";
 
 //		if (file.isEmpty()) {
@@ -158,10 +139,10 @@ public class InvestigacionController {
 //		}
 
 		try {
-			listaRetorno = investigacionService.guardaInvestigacionMasiva(masivaRequest);
-			response = gson.toJson(listaRetorno);
+			response = investigacionService.guardaInvestigacionMasiva(masivaRequest) + "";
+			
 
-			System.out.println("********* [Controller] upload : " + response);
+			System.out.println("********* [Controller] uploadID : " + response);
 			return response;
 		}
 
@@ -196,5 +177,60 @@ public class InvestigacionController {
 
 		return investigacionService.getPDFInvestigacion(idInvestigacion);
 
+	}
+	
+	@RequestMapping(value = "/consultaMasivas", method = RequestMethod.POST)
+	public @ResponseBody String reporteMasivas(MasivaRequest masivarequest) {
+
+		String response = "";
+		Gson gson = new Gson();
+
+		System.out.println(masivarequest.toString());
+
+		// arraylist
+
+		response = gson.toJson(investigacionService.getMasivas(masivarequest));
+
+		System.out.println("********* [Controller] consultaMasivas : OK ");
+
+		return response;
+	}
+	
+	@RequestMapping(value = "/actualizaRiesgoById", method = RequestMethod.POST)
+	public @ResponseBody String actualizaRiesgoById(RiesgoRequest riegoRequest) {
+
+		String response = "1";
+		
+
+		System.out.println(riegoRequest.toString());
+
+		// arraylist
+
+		investigacionService.updateRiesgoById(riegoRequest);
+
+		System.out.println("********* [Controller] actualizaRiesgoById : OK ");
+
+		return response;
+	}
+	
+	@RequestMapping(value = "/actualizaOrigenMention", method = RequestMethod.POST)
+	public @ResponseBody String actualizaOrigenMention(OrigenesBorradoRequest borraRequest) {
+
+		String response = "1";
+		
+
+		System.out.println(borraRequest.toString());
+
+		// arraylist
+		if(borraRequest.isEsMention()) {
+			investigacionService.updateEliminadosMention(borraRequest);
+		}else {
+			investigacionService.updateEliminadosOrigen(borraRequest);
+		}
+		
+
+		System.out.println("********* [Controller] actualizaRiesgoById : OK ");
+
+		return response;
 	}
 }

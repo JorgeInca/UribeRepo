@@ -16,7 +16,11 @@ import org.springframework.stereotype.Repository;
 
 import mx.com.rmsh.horusControl.vo.Investigacion;
 import mx.com.rmsh.horusControl.vo.InvestigacionRequest;
+import mx.com.rmsh.horusControl.vo.Masiva;
+import mx.com.rmsh.horusControl.vo.MasivaRequest;
+import mx.com.rmsh.horusControl.vo.OrigenesBorradoRequest;
 import mx.com.rmsh.horusControl.vo.ReporteRequest;
+import mx.com.rmsh.horusControl.vo.RiesgoRequest;
 
 @Repository
 public class InvestigacionDaoImpl implements InvestigacionDao {
@@ -56,9 +60,41 @@ public class InvestigacionDaoImpl implements InvestigacionDao {
 			+ ")"
 			+ "VALUES"
 			+ "(?,?,?,?,?,?,?,?,?)";
+
+	String QUERY_CREATE_MASIVA=
+			"INSERT INTO `horusDatabase`.`investigacion_masiva`"
+			+ "("
+			+ "`ID_USUARIO`,"
+			+ "`TITULO`,"
+			+ "`estatus`"
+			+ ")"
+			+ "VALUES"
+			+ "(?,?,1)";
 	
 	String QUERY_GET_JSON_INVESTIGACION_BYID =
 			"Select json_desc from investigacion A where A.id_investigacion = ? ";
+	
+	String QUERY_GET_JSON_INVESTIGACION_MASIVA = "select A.* , B.nombre as nombreUsuario from investigacion_masiva A  inner join usuario B on B.id_usuario = A.id_usuario where A.estatus in (1,2) ";
+	
+	String QUERY_GET_INVESTIGACION_REQUEST_FOR_AWS = "Select * from investigacion A where A.id_masiva != 0 and A.estatus = 2 order by A.id_investigacion desc limit 10";
+	
+	String QUERY_UPDATE_MASIVAEND = "update investigacion_masiva A set A.estatus = 2 where A.id_investigacion_masiva in ( SELECT * FROM (select B.id_investigacion_masiva from investigacion_masiva B LEFT JOIN investigacion C ON B.id_investigacion_masiva = C.id_masiva WHERE (C.estatus != 2 OR C.estatus IS NULL) AND B.estatus = 1) D)";
+	
+	String QUERY_SET_JSON_BY_ID = "update investigacion A set A.json_desc = ? where A.id_investigacion = ?";
+	
+	String QUERY_FINISH_INVESTIGACION = "update investigacion A set A.estatus = 1 where A.id_investigacion = ?";
+	
+	String QUERY_UPDATE_RIESGOBYID = "update investigacion A set A.nivel_riesgo_final = ? where A.id_investigacion = ?";
+	
+	String QUERY_GET_RIESGO_FINAL_BYID = "Select nivel_riesgo_final from investigacion A where A.id_investigacion = ? ";
+	
+	String QUERY_GET_DEL_ORIGEN_BYID = "Select origenes_eliminados from investigacion A where A.id_investigacion = ? ";
+	
+	String QUERY_GET_DEL_MENTIONS_BYID = "Select menciones_eliminadas from investigacion A where A.id_investigacion = ? ";
+	
+	String QUERY_UPDATE_ORIGENESELIMINADOS = "update investigacion A set A.origenes_eliminados = ? where A.id_investigacion = ?";
+	
+	String QUERY_UPDATE_MENTIONSELIMINADOS = "update investigacion A set A.menciones_eliminadas = ? where A.id_investigacion = ?";
 
 	@SuppressWarnings("deprecation")
 	@Override
@@ -139,6 +175,163 @@ public class InvestigacionDaoImpl implements InvestigacionDao {
                 return request.size();
             }
         });
+	}
+
+	
+	@SuppressWarnings("deprecation")
+	@Override
+	public List<Masiva> getMasivas(MasivaRequest request) {
+
+		return jdbcTemplate.query(QUERY_GET_JSON_INVESTIGACION_MASIVA,
+				
+				(rs, rowNum) -> new Masiva(
+						rs.getLong("id_investigacion_masiva"),
+						rs.getString("TITULO"), 
+						rs.getLong("ID_USUARIO"),
+						rs.getString("nombreUsuario"),
+						rs.getTimestamp("fecha_creacion"), 
+						rs.getInt("estatus")						
+						));
+	}
+	
+	@Override
+	public Long guardaMasiva(MasivaRequest request) {
+		// TODO Auto-generated method stub
+		KeyHolder keyHolder = new GeneratedKeyHolder();
+		
+	    jdbcTemplate.update(connection -> {
+	        PreparedStatement ps = connection
+	          .prepareStatement(QUERY_CREATE_MASIVA,Statement.RETURN_GENERATED_KEYS);
+	          ps.setLong(1, request.getIdUsuario());
+	          ps.setString(2, request.getNombreCampaña());
+	          return ps;
+	        }, keyHolder);
+
+	        return (long) keyHolder.getKey().longValue();
+	    }
+
+	@Override
+	public List<InvestigacionRequest> getMasivasToAWS(Integer limit) {
+		// TODO Auto-generated method stub
+		return jdbcTemplate.query(QUERY_GET_INVESTIGACION_REQUEST_FOR_AWS,
+				
+				(rs, rowNum) -> new InvestigacionRequest(
+						rs.getLong("id_investigacion"),
+						rs.getString("apellidos"), 
+						rs.getString("primer_nombre"),
+						"",
+						 14 			
+						));
+	}
+
+	@Override
+	public void updateCampanias() {
+		
+		// TODO Auto-generated method stub
+		jdbcTemplate.update(connection -> {
+	        PreparedStatement ps = connection
+	          .prepareStatement(QUERY_UPDATE_MASIVAEND);	         
+	          return ps;
+	        });
+		
+	}
+
+	@Override
+	public void setJsonById(Long idInvestigacion, String json) {
+		// TODO Auto-generated method stub
+				jdbcTemplate.update(connection -> {
+			        PreparedStatement ps = connection
+			          .prepareStatement(QUERY_SET_JSON_BY_ID);
+			        
+			        	ps.setString(1, json);
+			        	ps.setLong(2,idInvestigacion);	        	
+			        	
+			          return ps;
+			        });
+		
+	}
+
+	@Override
+	public void finishInvestigacionTask(Long idInvestigacion) {
+		// TODO Auto-generated method stub
+				jdbcTemplate.update(connection -> {
+			        PreparedStatement ps = connection
+			          .prepareStatement(QUERY_FINISH_INVESTIGACION);
+			        
+			         ps.setLong(1,idInvestigacion);
+			         
+			          return ps;
+			        });
+		
+	}
+
+	@Override
+	public void updateRiesgoById(RiesgoRequest request) {
+		// TODO Auto-generated method stub
+		jdbcTemplate.update(connection -> {
+	        PreparedStatement ps = connection
+	          .prepareStatement(QUERY_UPDATE_RIESGOBYID);
+	        
+	        	ps.setInt(1, request.getRiesgo());
+	        	ps.setLong(2,request.getIdInvestigacion());	        	
+	        	
+	          return ps;
+	        });		
+	}
+
+	@Override
+	public Integer getRiesgoFInal(Long idInvestigacion) {
+		Integer riesgoFinalInt = (Integer) jdbcTemplate.queryForObject(
+				QUERY_GET_RIESGO_FINAL_BYID, new Object[] { idInvestigacion }, Integer.class);
+		 
+		 return riesgoFinalInt;
+		
+	}
+
+	@Override
+	public String getEliminadosOrigen(Long idInvestigacion) {
+		// TODO Auto-generated method stub
+		String resultado = (String) jdbcTemplate.queryForObject(
+				QUERY_GET_DEL_ORIGEN_BYID, new Object[] { idInvestigacion }, String.class);
+		 
+		 return resultado;
+	}
+
+	@Override
+	public String getEliminadoMentions(Long idInvestigacion) {
+		// TODO Auto-generated method stub
+		String resultado = (String) jdbcTemplate.queryForObject(
+				QUERY_GET_DEL_MENTIONS_BYID, new Object[] { idInvestigacion }, String.class);
+		 
+		 return resultado;
+	}
+
+	@Override
+	public void updateEliminadosOrigen(OrigenesBorradoRequest request) {
+		jdbcTemplate.update(connection -> {
+	        PreparedStatement ps = connection
+	          .prepareStatement(QUERY_UPDATE_ORIGENESELIMINADOS);
+	        
+	        	ps.setString(1, request.getNuevoValor());
+	        	ps.setLong(2,request.getIdInvestigacion());	        	
+	        	
+	          return ps;
+	        });		
+		
+	}
+
+	@Override
+	public void updateEliminadosMention(OrigenesBorradoRequest request) {
+		jdbcTemplate.update(connection -> {
+	        PreparedStatement ps = connection
+	          .prepareStatement(QUERY_UPDATE_MENTIONSELIMINADOS);
+	        
+	        	ps.setString(1, request.getNuevoValor());
+	        	ps.setLong(2,request.getIdInvestigacion());	        	
+	        	
+	          return ps;
+	        });		
+		
 	}
 	
 	

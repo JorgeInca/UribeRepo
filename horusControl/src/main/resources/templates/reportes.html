@@ -186,13 +186,24 @@
 
 
 								<div class="row justify-content-center">
-									<div class="col-md-6 mb-3"><button class="btn btn-primary"
-											type="submit">Buscar</button></div>
-									<div class="col-md-6 mb-3"><button class="btn btn-danger" type="button"
-											id="pdfButtonInvestigacion" onclick="generaPDF()" disabled>Exportar a
-											PDF</button></div>
+									<div class="col-md-6 mb-3"> <label for="valorRiesgoEditable">Riesgo editable:</label>
+										<input type="text" class="form-control" id="valorRiesgoEditable" placeholder="Valor Riesgo 0-3"
+											value=""> </div>
+									<div class="col-md-6 mb-3">										</div>
 								</div>
 
+								<div class="row justify-content-center">
+									<div class="col-md-6 mb-3"> 
+										 <button class="btn btn-success" type="button"
+											id="editarRiesgoButton" onclick="editaRiesgo()" >Editar Riesgo</button>
+									 </div>
+									<div class="col-md-6 mb-3">
+										<label for="pdfButtonInvestigacion"></label>
+										<button class="btn btn-danger" type="button"
+											id="pdfButtonInvestigacion" disabled>Exportar a
+											PDF</button>
+									</div>
+								</div>
 								
 								<div class="row">
 									<p>.</p>
@@ -209,7 +220,7 @@
 										<div class="row justify-content-center">
 											<label for="chart_div">Nivel de Riesgo <span
 													id="nivelRiesgoLabel"></span></label>
-											<div id="gaugeArea"> <canvas id="foo" width="200" height="100"></canvas>
+											<div id="gaugeArea"> <canvas id="miGauge" width="200" height="100"></canvas>
 											</div>
 										</div>
 									</div>

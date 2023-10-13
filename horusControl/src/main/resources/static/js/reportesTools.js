@@ -2,6 +2,10 @@
  * 
  */
 
+var lastClick = 0;
+var delay = 20;
+
+
 var gaugeGobal;
 
 function cargaListaInvestigaciones() {
@@ -72,10 +76,13 @@ function cargaListaInvestigaciones() {
 function cargaInvestigacionId( idInvestigacion ) {
 
 	console.log('inicia cargaInvestigacionId');
+	
+	$('#idInvestigacionGlobal').val( idInvestigacion );
 
 	var uri = "cargaInvestigacionId";
 	
-	$('#modalReportes').modal('show');
+	//$('#modalReportes').modal('show');
+	$('#modalReportes').modal('toggle'); 
 	
 
 /*	var var_firstname = $("#form_firstName").val();
@@ -99,6 +106,8 @@ function cargaInvestigacionId( idInvestigacion ) {
 		data: investigacionRequest,
 		success: function(data) {
 			
+			//alert( "nivel de riesgo editado " +  data.body.nivel_riesgo_editado)
+			
 			$("#mentionsText").empty();
 			
 			//
@@ -121,39 +130,54 @@ function cargaInvestigacionId( idInvestigacion ) {
 			var countPEP = 0;
 			var countOth = 0;
 			
-
+			//Ocultar Borrados
+			const origenesBorrador = data.body.eliminadosOrigenes.split(',').map(Number);
+			const mencionesBorradas = data.body.eliminadosMentions.split(',').map(Number);		
+			
 			for (let x in data.body.origen) {
 
-				if( data.body.origen[x].category == "intcump"	){
-					fillLambdaText( 'lambdaTextintcump' , data.body.origen[x]  );
-					countInt++;
-				}
-				
-				if( data.body.origen[x].category == "natcump"	){
-					fillLambdaText( 'lambdaTextnatcump' , data.body.origen[x]  );
-					countNat++;
-				}
-				
-				if( data.body.origen[x].category == "PEP"	){
-					fillLambdaText( 'lambdaTextPEP' , data.body.origen[x]  );
-					countPEP++;
-				}
-				
-				if( data.body.origen[x].category == "others"	){
-					fillLambdaText( 'lambdaTextOthers' , data.body.origen[x]  );
-					countOth++;
+				if (!origenesBorrador.includes(data.body.origen[x].id)) {
+					
+					if (data.body.origen[x].category == "intcump") {
+						fillLambdaText('lambdaTextintcump', data.body.origen[x], true, data.body.eliminadosOrigenes);
+						countInt++;
+					}
+
+					if (data.body.origen[x].category == "natcump") {
+						fillLambdaText('lambdaTextnatcump', data.body.origen[x], true, data.body.eliminadosOrigenes);
+						countNat++;
+					}
+
+					if (data.body.origen[x].category == "PEP") {
+						fillLambdaText('lambdaTextPEP', data.body.origen[x], true, data.body.eliminadosOrigenes);
+						countPEP++;
+					}
+
+					if (data.body.origen[x].category == "others") {
+						fillLambdaText('lambdaTextOthers', data.body.origen[x], true, data.body.eliminadosOrigenes);
+						countOth++;
+					}
+					
 				}
 
 			}
 			
+			
+			var countMentions = 0;
 			for (let x in data.body.mentions) {
+				
+				if (!mencionesBorradas.includes(data.body.mentions[x].id)) {
 
-				$('#mentionsText').append('<br><img src="images/icons/'+ data.body.mentions[x].engine +'.png" width="40" height="40"><div class="badge badge-info">' + data.body.mentions[x].title + '</div>');
-				$('#mentionsText').append('<br>');
-				$('#mentionsText').append('<br>...<div>' + data.body.mentions[x].description + '</div><div class="badge badge-danger">'+data.body.mentions[x].keyword+'</div>');
-				$('#mentionsText').append('<br><a href="' + data.body.mentions[x].link + '">' + data.body.mentions[x].link + '</a>');
-				$('#mentionsText').append('<br><hr class="my-4">');				
-
+					$('#mentionsText').append('<br><img src="images/icons/' + data.body.mentions[x].engine + '.png" width="40" height="40"><div class="badge badge-info">' + data.body.mentions[x].title + '</div>');
+					$('#mentionsText').append('<br>');
+					$('#mentionsText').append('<br>...<div>' + data.body.mentions[x].description + '</div><div class="badge badge-danger">' + data.body.mentions[x].keyword + '</div>');
+					$('#mentionsText').append('<br><a href="' + data.body.mentions[x].link + '">' + data.body.mentions[x].link + '</a>');
+					$('#mentionsText').append('<br>');
+					$('#mentionsText').append('<br><button class="btn btn-danger" type="button" onclick="borraOrigen(\'true\',\'' + data.body.mentions[x].id + '\',\'' + data.body.eliminadosMentions + '\')"><img src="images/icons/eliminar.png" width="35" height="35">');
+					$('#mentionsText').append('<br><hr class="my-4">');
+					countMentions++;
+				}
+				
 				//console.log(x + ": " + data.body.origen[x].url)
 				//alert( JSON.stringify(investigacionGlobal) );
 			}
@@ -187,7 +211,10 @@ function cargaInvestigacionId( idInvestigacion ) {
 			$('#noPEPS').append('<strong>( ' + countPEP + ' )</strong>');
 			$('#noOthers').append('<strong>( ' + countOth + ' )</strong>');
 			
-			$('#noMenciones').append('<strong>( ' + data.body.mentions.length + ' )</strong>');
+			$('#noMenciones').append('<strong>( ' + countMentions + ' )</strong>');
+				
+			
+			$('#valorRiesgoEditable').val( data.body.nivel_riesgo_editado );
 			$('#nivelRiesgoLabel').append('<strong> ' + data.body.nivel_riesgo + ' </strong>');
 			
 			$('#idInvestigacionGlobal').val( idInvestigacion );
@@ -243,7 +270,7 @@ function loadCHart(){
 						highDpiSupport: true,     // High resolution support
 
 					};
-					var target = document.getElementById('foo'); // your canvas element
+					var target = document.getElementById('miGauge'); // your canvas element
 					gaugeGobal = new Gauge(target).setOptions(opts); // create sexy gauge!
 					gaugeGobal.maxValue = 3; // set max gauge value
 					gaugeGobal.setMinValue(0);  // Prefer setter over gauge.minValue = 0
@@ -251,3 +278,105 @@ function loadCHart(){
 					gaugeGobal.set(1.5); // set actual value
 	
 }
+
+function editaRiesgo() {
+
+	var valorRiesgoEditable = $("#valorRiesgoEditable").val();
+	var idInvestigacionGlobal = $("#idInvestigacionGlobal").val();
+	var idUserHorus = $("#idUserHorus").val();
+
+	if (valorRiesgoEditable === "") {
+		return;
+	}
+
+	var riesgoRequest = {
+		riesgo: valorRiesgoEditable,
+		idInvestigacion: idInvestigacionGlobal,
+		idUsuario: idUserHorus
+	};
+
+	var uri = "actualizaRiesgoById";
+
+
+	$.ajax({
+		url: uri,
+		type: 'POST',
+		dataType: 'json',
+		data: riesgoRequest,
+		success: function(data) {
+			
+			alert("Valor actualizado");	
+			cargaInvestigacionId( idInvestigacionGlobal ) ;
+				
+			
+			
+			
+		},
+		error: function(xhr, ajaxOptions, thrownError) {
+			alert("ERROR");	
+		}
+
+	});
+}
+
+function borraOrigen(esMention, porBorrar, borrados) {
+	
+	var delayInMilliseconds = 1000; //1 second
+
+	if (lastClick >= (Date.now() - delay))
+		return;
+  	lastClick = Date.now();
+  	
+	setTimeout(function() {
+	  //your code to be executed after 1 second
+	}, delayInMilliseconds);	 
+
+	var idInvestigacionGlobal = $("#idInvestigacionGlobal").val();
+	var idUserHorus = $("#idUserHorus").val();
+	var uri = "actualizaOrigenMention";
+
+	var queBorras = esMention ? 'la MENCION' : 'el ORIGEN';
+		
+	if ( confirm('¿Estás seguro que desear borrar ' + queBorras + '?') ) {
+		// Save it!
+		const arr = borrados.split(',').map(Number);
+		arr.push(porBorrar);
+
+
+		var origenesBorradoRequest = {
+			nuevoValor: arr,
+			idInvestigacion: idInvestigacionGlobal,
+			idUsuario: idUserHorus,
+			esMention: esMention
+		};
+
+		$.ajax({
+			url: uri,
+			type: 'POST',
+			dataType: 'json',
+			data: origenesBorradoRequest,
+			success: function(data) {
+
+				alert("Valor actualizado");
+				cargaInvestigacionId(idInvestigacionGlobal);
+
+			},
+			error: function(xhr, ajaxOptions, thrownError) {
+				alert("ERROR");
+			}
+
+		});
+		
+	} else {
+		// Do nothing!
+		alert('Cancelado....');
+	}
+
+
+}
+
+/*
+$("#modalReportes").on('shown.bs.modal', function() {
+	loadCHart();	
+});
+*/
