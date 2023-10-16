@@ -141,9 +141,11 @@ function cargaUsuarioId(id_usuario) {
 		data: UserHorus,
 		success: function(data) {
 			           
-            window.location.reload()
+            //window.location.reload()
 		
 			alert('El Id eliminado fue :' + id_usuario);
+			tableGlobal.clear().draw();
+			cargaListaUsuarios();
 
 		},
 		error: function(xhr, ajaxOptions, thrownError) {
@@ -228,12 +230,13 @@ function editarUsuarioId(id_usuario) {
 }
 
 
-function actualizaUsuario(id_usuario){
+function actualizaUsuario(){
 	
 	console.log('Inicia actualizacion');
 
 	var uri = "actualizaUsuario";
 	
+	var id_usuario = $("#noFolio1").val();
 	var var_firstname = $("#form-name").val();
 	var var_email = $("#form-email").val();
 	var var_estatus = $("#form-estatus").val();
@@ -246,6 +249,7 @@ function actualizaUsuario(id_usuario){
 	}
 	
 	var UserHorus = {
+		id_usuario: id_usuario,
 	    name: var_firstname,
 		email: var_email,
 		estatus: var_estatus,
@@ -263,13 +267,12 @@ function actualizaUsuario(id_usuario){
 		type: 'POST',
 		dataType: 'json',
 		data: UserHorus,
-		data2: editarUserHorus,
 		success: function(data) {
 			
-			window.location.reload()
+			//window.location.reload()
 		
 			alert('La informacion del Id: ' + id_usuario + ' se actualizo con exito!');
-			
+			editarUsuarioId(id_usuario);
 			
 			
 			},
