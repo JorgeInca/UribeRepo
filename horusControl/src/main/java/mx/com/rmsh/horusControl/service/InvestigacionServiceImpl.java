@@ -48,6 +48,7 @@ import mx.com.rmsh.horusControl.vo.OrigenesBorradoRequest;
 import mx.com.rmsh.horusControl.vo.ReportTransferObjectPDF;
 import mx.com.rmsh.horusControl.vo.ReporteRequest;
 import mx.com.rmsh.horusControl.vo.RiesgoRequest;
+import mx.com.rmsh.horusControl.vo.Tabla;
 import mx.com.rmsh.horusControl.vo.UserHorus;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JREmptyDataSource;
@@ -216,7 +217,7 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 
 		System.out.println("********* [Service] getPDFInvestigacion : ");
 
-		boolean linux = false;
+		boolean linux = true;
 
 		// Delete first File.separator for Windows
 		String reportFolderPath = (linux ? File.separator : "") + "src" + File.separator + "main" + File.separator
@@ -371,7 +372,7 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 
 		// Objeto vacio para evitar el reporte blanco
 		listaObjetos.add(new FillReportInvestigacionVO());
-		listaObjetosResultado.add(new FillReportInvestigacionResultadoVO());
+		//listaObjetosResultado.add(new FillReportInvestigacionResultadoVO());
 
 		// Datos Usuario
 		parameter.put("clienteName", "Coca-Cola");
@@ -439,6 +440,9 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 		Integer numeroOrigenes= 0;
 		for (Mentions mention : lambdaQuery.getBody().getMentions()) {
 			
+			System.out.println("mentionsEliminados " + mentionsEliminados);
+			System.out.println("mentionsEliminados " + mention.getId());
+			
 			if( !mentionsEliminados.contains( mention.getId().toString() ) ){				
 			
 				hayMentions = "I_RED";
@@ -476,34 +480,44 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 
 		// Título 1
 		FillReportInvestigacionResultadoVO titulo1 = new FillReportInvestigacionResultadoVO();
-		titulo1.setG_titulo("Listados de Cumplimiento Internacionales:");
-		listaObjetosResultado.add(titulo1);
-		listaObjetosResultado.addAll(reultados.getInternacional());
+		if(reultados.getInternacional().size()>0) {
+			titulo1.setG_titulo(null);
+			titulo1.setG_origen(null);
+			titulo1.setG_freeText(null);
+			titulo1.setG_keyword(null);
+			titulo1.setG_titulo("Listados de Cumplimiento Internacionales:");
+			listaObjetosResultado.add(titulo1);
+			listaObjetosResultado.addAll(reultados.getInternacional());
+		}
 
 		// Título 2
 		FillReportInvestigacionResultadoVO titulo2 = new FillReportInvestigacionResultadoVO();
-		titulo2.setG_titulo("Listados de Cumplimiento Nacionales:");
-		listaObjetosResultado.add(titulo2);
-		listaObjetosResultado.addAll(reultados.getNacional());
-
+		if(reultados.getNacional().size()>0) {
+			titulo2.setG_titulo("Listados de Cumplimiento Nacionales:");
+			listaObjetosResultado.add(titulo2);
+			listaObjetosResultado.addAll(reultados.getNacional());
+		}
 		// Título 3
 		FillReportInvestigacionResultadoVO titulo3 = new FillReportInvestigacionResultadoVO();
-		titulo3.setG_titulo("Personas Políticamente Expuestas:");
-		listaObjetosResultado.add(titulo3);
-		listaObjetosResultado.addAll(reultados.getPep());
-
+		if(reultados.getPep().size()>0) {
+			titulo3.setG_titulo("Personas Políticamente Expuestas:");
+			listaObjetosResultado.add(titulo3);
+			listaObjetosResultado.addAll(reultados.getPep());
+		}
 		// Título 4
 		FillReportInvestigacionResultadoVO titulo4 = new FillReportInvestigacionResultadoVO();
-		titulo4.setG_titulo("Otras Bases de datos:");
-		listaObjetosResultado.add(titulo4);
-		listaObjetosResultado.addAll(reultados.getOtros());
-
+		if(reultados.getOtros().size()>0) {
+			titulo4.setG_titulo("Otras Bases de datos:");
+			listaObjetosResultado.add(titulo4);
+			listaObjetosResultado.addAll(reultados.getOtros());
+		}
 		// Título 5
-		FillReportInvestigacionResultadoVO titulo5 = new FillReportInvestigacionResultadoVO();
-		titulo5.setG_titulo("Menciones:");
-		listaObjetosResultado.add(titulo5);
-		listaObjetosResultado.addAll(reultados.getMenciones());
-
+		if(reultados.getMenciones().size()>0) {
+			FillReportInvestigacionResultadoVO titulo5 = new FillReportInvestigacionResultadoVO();
+			titulo5.setG_titulo("Menciones:");
+			listaObjetosResultado.add(titulo5);
+			listaObjetosResultado.addAll(reultados.getMenciones());
+		}
 		// Resumen
 		reportTransferObjectPDF.setObjetosCount(listaObjetos);
 		reportTransferObjectPDF.setObjetosResultado(listaObjetosResultado);
@@ -521,13 +535,13 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 		ArrayList<FillReportInvestigacionResultadoVO> internacional = new ArrayList<FillReportInvestigacionResultadoVO>();
 
 		ArrayList<FillReportInvestigacionResultadoVO> nacional = new ArrayList<FillReportInvestigacionResultadoVO>();
-		nacional.add(new FillReportInvestigacionResultadoVO());
+		//nacional.add(new FillReportInvestigacionResultadoVO());
 		ArrayList<FillReportInvestigacionResultadoVO> pep = new ArrayList<FillReportInvestigacionResultadoVO>();
-		pep.add(new FillReportInvestigacionResultadoVO());
+		//pep.add(new FillReportInvestigacionResultadoVO());
 		ArrayList<FillReportInvestigacionResultadoVO> otros = new ArrayList<FillReportInvestigacionResultadoVO>();
-		otros.add(new FillReportInvestigacionResultadoVO());
+		//otros.add(new FillReportInvestigacionResultadoVO());
 		ArrayList<FillReportInvestigacionResultadoVO> menciones = new ArrayList<FillReportInvestigacionResultadoVO>();
-		menciones.add(new FillReportInvestigacionResultadoVO());
+		//menciones.add(new FillReportInvestigacionResultadoVO());
 		
 		String fromArrayOrigenes = body.getEliminadosOrigenes();
 		List<String> origenesEliminados = Arrays.asList( fromArrayOrigenes.split("\\s*,\\s*") );//Arrays.asList(fromArray.split("\\s*,\\s*"));
@@ -542,10 +556,16 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 					FillReportInvestigacionResultadoVO nuevo = new FillReportInvestigacionResultadoVO();
 					nuevo.setG_origen(origen.getFuente());
 
-					if (0 == origen.getIsJSON())
-						nuevo.setG_freeText(origen.getFree_text());
-					else
-						nuevo.setG_table(createTable(origen.getTexto()));
+					if (0 == origen.getIsJSON()) {
+						String cadena3Espacios= "";
+						cadena3Espacios = cadena3Espacios + origen.getFree_text();
+						nuevo.setG_freeText(cadena3Espacios.replaceAll("\\n\\n\\n","\\n"));
+						nuevo.setG_link(origen.getUrl());
+					}
+					else {
+						nuevo.setRowsOK(createTable(origen.getTexto()));
+						nuevo.setG_link(origen.getUrl());
+					}
 
 					internacional.add(nuevo);
 				}
@@ -553,10 +573,16 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 					FillReportInvestigacionResultadoVO nuevo = new FillReportInvestigacionResultadoVO();
 					nuevo.setG_origen(origen.getFuente());
 
-					if (0 == origen.getIsJSON())
-						nuevo.setG_freeText(origen.getFree_text());
-					else
-						nuevo.setG_table(createTable(origen.getTexto()));
+					if (0 == origen.getIsJSON()){
+						String cadena3Espacios= "";
+						cadena3Espacios = cadena3Espacios + origen.getFree_text();
+						nuevo.setG_freeText(cadena3Espacios.replaceAll("\\n\\n\\n","\\n"));
+						nuevo.setG_link(origen.getUrl());
+					}
+					else{
+						nuevo.setRowsOK(createTable(origen.getTexto()));
+						nuevo.setG_link(origen.getUrl());
+					}
 
 					nacional.add(nuevo);
 				}
@@ -564,10 +590,16 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 					FillReportInvestigacionResultadoVO nuevo = new FillReportInvestigacionResultadoVO();
 					nuevo.setG_origen(origen.getFuente());
 
-					if (0 == origen.getIsJSON())
-						nuevo.setG_freeText(origen.getFree_text());
-					else
-						nuevo.setG_table(createTable(origen.getTexto()));
+					if (0 == origen.getIsJSON()) {
+						String cadena3Espacios= "";
+						cadena3Espacios = cadena3Espacios + origen.getFree_text();
+						nuevo.setG_freeText(cadena3Espacios.replaceAll("\\n\\n\\n","\\n"));
+						nuevo.setG_link(origen.getUrl());
+					}
+					else{
+						nuevo.setRowsOK(createTable(origen.getTexto()));
+						nuevo.setG_link(origen.getUrl());
+					}
 
 					pep.add(nuevo);
 				}
@@ -575,10 +607,16 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 					FillReportInvestigacionResultadoVO nuevo = new FillReportInvestigacionResultadoVO();
 					nuevo.setG_origen(origen.getFuente());
 
-					if (0 == origen.getIsJSON())
-						nuevo.setG_freeText(origen.getFree_text());
-					else
-						nuevo.setG_table(createTable(origen.getTexto()));
+					if (0 == origen.getIsJSON()){
+						String cadena3Espacios= "";
+						cadena3Espacios = cadena3Espacios + origen.getFree_text();
+						nuevo.setG_freeText(cadena3Espacios.replaceAll("\\n\\n\\n","\\n"));
+						nuevo.setG_link(origen.getUrl());
+					}
+					else{
+						nuevo.setRowsOK(createTable(origen.getTexto()));
+						nuevo.setG_link(origen.getUrl());
+					}
 
 					otros.add(nuevo);
 				}
@@ -593,7 +631,8 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 				
 			FillReportInvestigacionResultadoVO nuevo = new FillReportInvestigacionResultadoVO();
 			nuevo.setG_origen(origen.getTitle());
-			nuevo.setG_freeText(origen.getDescription() + " \n \n " + origen.getLink());
+			nuevo.setG_freeText(origen.getDescription());
+			nuevo.setG_link(origen.getLink());
 			nuevo.setG_keyword(origen.getKeyword());
 			nuevo.setG_mentionImage(origen.getEngine());
 			menciones.add(nuevo);
@@ -603,19 +642,19 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 		}
 
 		if (internacional.size() == 0) {
-			internacional.add(new FillReportInvestigacionResultadoVO());
+			//internacional.add(new FillReportInvestigacionResultadoVO());
 		}
 		if (nacional.size() == 0) {
-			nacional.add(new FillReportInvestigacionResultadoVO());
+			//nacional.add(new FillReportInvestigacionResultadoVO());
 		}
 		if (pep.size() == 0) {
-			pep.add(new FillReportInvestigacionResultadoVO());
+			//pep.add(new FillReportInvestigacionResultadoVO());
 		}
 		if (otros.size() == 0) {
-			otros.add(new FillReportInvestigacionResultadoVO());
+			//otros.add(new FillReportInvestigacionResultadoVO());
 		}
 		if (menciones.size() == 0) {
-			menciones.add(new FillReportInvestigacionResultadoVO());
+			//menciones.add(new FillReportInvestigacionResultadoVO());
 		}
 
 		resultadoFInal.setInternacional(internacional);
@@ -627,24 +666,22 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 		return resultadoFInal;
 	}
 
-	public String createTable(Map<String, String> texto) {
-
-		String tablaHtml = "<table border=1 cellspacing=0><tr>" + "<th>Dato</th><th>Valor</th>" + "</tr>";
+	public ArrayList<Tabla> createTable(Map<String, String> texto) {
+		
+		ArrayList<Tabla> returning = new ArrayList<Tabla>();
 
 		for (Map.Entry<String, String> entry : texto.entrySet()) {
-
-			tablaHtml = tablaHtml + "<tr>";
-			tablaHtml = tablaHtml + "<td>" + entry.getKey() + "</td>";
-			tablaHtml = tablaHtml + "<td>" + entry.getValue() + "</td>";
-			tablaHtml = tablaHtml + "</tr>";
+			
+			Tabla row = new Tabla( entry.getKey() , entry.getValue());
+			returning.add(row);
 
 		}
 
-		tablaHtml = tablaHtml + "</table>";
 
-		System.out.println(tablaHtml);
 
-		return tablaHtml;
+		System.out.println("Creating table " + texto);
+
+		return returning;
 	}
 	
 	public Long demoJob() throws Exception {

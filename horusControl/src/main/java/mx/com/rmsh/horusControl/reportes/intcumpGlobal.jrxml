@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.0.0.final using JasperReports Library version 6.0.0  -->
-<!-- 2023-10-04T17:41:29 -->
+<!-- 2023-10-17T16:04:59 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4" pageWidth="500" pageHeight="612" columnWidth="396" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="4e773abe-a72d-4669-8f8f-8bf9bffaa262">
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
@@ -13,6 +13,67 @@
 	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#2070E8">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 1_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 1_CH" mode="Opaque" backcolor="#4553ED">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="dataSetTablita" uuid="cff37e83-53e6-4c5c-b0dd-5fb1ac9f0ce2">
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+		<field name="datoTabla" class="java.lang.String"/>
+		<field name="valorTabla" class="java.lang.String"/>
+	</subDataset>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -22,44 +83,105 @@
 	<field name="g_keyword" class="java.lang.String"/>
 	<field name="g_table" class="java.lang.String"/>
 	<field name="g_mentionImage" class="java.lang.String"/>
+	<field name="rowsOK" class="java.util.List"/>
+	<field name="g_link" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<detail>
-		<band height="245" splitType="Stretch">
+		<band height="129" splitType="Stretch">
 			<property name="local_mesure_unitheight" value="pixel"/>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement positionType="Float" x="20" y="20" width="460" height="20" isRemoveLineWhenBlank="true" forecolor="#2070E8" uuid="1665a057-aedd-4c49-8089-f7f9c0341e37"/>
+				<reportElement positionType="Float" x="20" y="0" width="460" height="20" isRemoveLineWhenBlank="true" forecolor="#4553ED" uuid="1665a057-aedd-4c49-8089-f7f9c0341e37"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{g_origen}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement positionType="Float" x="40" y="40" width="459" height="20" isRemoveLineWhenBlank="true" uuid="2c9f157e-9352-425c-866e-ca173f8d6a0b"/>
-				<textElement textAlignment="Left"/>
+				<reportElement positionType="Float" x="21" y="20" width="459" height="17" isRemoveLineWhenBlank="true" uuid="2c9f157e-9352-425c-866e-ca173f8d6a0b">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="Times New Roman" size="10" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{g_freeText}]]></textFieldExpression>
 			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement positionType="Float" x="40" y="60" width="460" height="20" isRemoveLineWhenBlank="true" forecolor="#FF0703" backcolor="#FFFFFF" uuid="d2e2b761-a10e-49dd-8eb8-4d0fc4b6485f"/>
-				<textFieldExpression><![CDATA[$F{g_keyword}]]></textFieldExpression>
-			</textField>
 			<image>
-				<reportElement x="0" y="41" width="20" height="19" uuid="ae4a3d38-04c8-4d1b-86d6-6c3d92e2888f"/>
+				<reportElement positionType="Float" x="0" y="21" width="20" height="19" uuid="ae4a3d38-04c8-4d1b-86d6-6c3d92e2888f">
+					<printWhenExpression><![CDATA[!("".equals($F{g_mentionImage}))]]></printWhenExpression>
+				</reportElement>
 				<imageExpression><![CDATA[$F{g_mentionImage} + ".png"]]></imageExpression>
 			</image>
-			<textField isStretchWithOverflow="true">
-				<reportElement style="SubTitle" positionType="Float" mode="Transparent" x="0" y="0" width="396" height="20" isRemoveLineWhenBlank="true" forecolor="#666666" backcolor="#FFFFFF" uuid="5f4654a1-07d0-418a-88f3-19ab102d3fd3"/>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="SubTitle" positionType="Float" mode="Transparent" x="0" y="0" width="396" height="20" isRemoveLineWhenBlank="true" forecolor="#000000" backcolor="#FFFFFF" uuid="5f4654a1-07d0-418a-88f3-19ab102d3fd3"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
-					<font fontName="Arial" size="15" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<font fontName="Times New Roman" size="13" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{g_titulo}]]></textFieldExpression>
 			</textField>
 			<componentElement>
-				<reportElement positionType="Float" x="40" y="80" width="459" height="159" isRemoveLineWhenBlank="true" uuid="6fde6d9d-0e15-492b-8acd-fa9f5669bed3">
-					<printWhenExpression><![CDATA[!$F{g_table}.equals( "" )]]></printWhenExpression>
+				<reportElement positionType="Float" x="21" y="50" width="459" height="40" isRemoveLineWhenBlank="true" forecolor="#FFFAFA" uuid="39104055-c7a2-4414-a410-4a9bed56deed">
+					<property name="net.sf.jasperreports.export.headertoolbar.table.name" value=""/>
+					<printWhenExpression><![CDATA[$F{rowsOK}!=null]]></printWhenExpression>
 				</reportElement>
-				<hc:html xmlns:hc="http://jasperreports.sourceforge.net/htmlcomponent" xsi:schemaLocation="http://jasperreports.sourceforge.net/htmlcomponent http://jasperreports.sourceforge.net/xsd/htmlcomponent.xsd" scaleType="RetainShape" horizontalAlign="Left" verticalAlign="Middle">
-					<hc:htmlContentExpression><![CDATA[$F{g_table}]]></hc:htmlContentExpression>
-				</hc:html>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" whenNoDataType="Blank">
+					<datasetRun subDataset="dataSetTablita" uuid="db842b45-2ce2-430f-823d-5bc1a85c3ed0">
+						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{rowsOK})]]></dataSourceExpression>
+					</datasetRun>
+					<jr:column width="100" uuid="b7cff9d9-7a33-4974-bb20-790617a91237">
+						<jr:columnHeader style="Table 1_CH" height="20">
+							<staticText>
+								<reportElement mode="Transparent" x="1" y="1" width="99" height="19" forecolor="#FFFFFF" uuid="0d6727ab-6f07-4f69-b847-6b4b71df4a4a"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Dato]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table 1_TD" height="20">
+							<textField>
+								<reportElement x="0" y="0" width="100" height="20" uuid="6ac9c151-05dc-46aa-a91d-d4f8acafb48e"/>
+								<box>
+									<topPen lineColor="#FFFFFF"/>
+									<leftPen lineColor="#FFFFFF"/>
+									<bottomPen lineColor="#FFFFFF"/>
+									<rightPen lineColor="#FFFFFF"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{datoTabla}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="358" uuid="1b5730cb-2eca-4469-8d11-026d74ce35b9">
+						<jr:columnHeader style="Table 1_CH" height="20">
+							<staticText>
+								<reportElement x="0" y="0" width="358" height="20" forecolor="#FFFFFF" uuid="531d3f29-9ff3-4ea7-a798-37296ba79ee7"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Valor]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table 1_TD" height="20">
+							<textField>
+								<reportElement x="0" y="0" width="358" height="20" uuid="f93ec587-eceb-45f8-817e-1a0c5e9493ff"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{valorTabla}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
 			</componentElement>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="21" y="90" width="459" height="17" isRemoveLineWhenBlank="true" forecolor="#086ED4" uuid="782fa955-3f86-490d-8278-4597915bfcd5">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font fontName="Times New Roman" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{g_link}]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 </jasperReport>
