@@ -1,5 +1,7 @@
 package mx.com.rmsh.horusControl.vo;
 
+import java.util.ArrayList;
+
 public class FillReportInvestigacionResultadoVO {
 
 	public String g_titulo = "";
@@ -7,7 +9,9 @@ public class FillReportInvestigacionResultadoVO {
 	public String g_freeText = "";
 	public String g_keyword = "";
 	public String g_table = "";
-	public String g_mentionImage = "w";
+	public String g_mentionImage = "";
+	public String g_link = "";
+	public ArrayList<Tabla> rowsOK = null;
 
 	public String getG_titulo() {
 		return g_titulo;
@@ -57,11 +61,31 @@ public class FillReportInvestigacionResultadoVO {
 		this.g_mentionImage = g_mentionImage;
 	}
 
+	public ArrayList<Tabla> getRowsOK() {
+		return rowsOK;
+	}
+
+	public void setRowsOK(ArrayList<Tabla> rowsOK) {
+		this.rowsOK = rowsOK;
+	}
+
+	public String getG_link() {
+		return g_link;
+	}
+
+	public void setG_link(String g_link) {
+		this.g_link = g_link;
+	}
+
 	@Override
 	public String toString() {
 		return "FillReportInvestigacionResultadoVO [g_titulo=" + g_titulo + ", g_origen=" + g_origen + ", g_freeText="
 				+ g_freeText + ", g_keyword=" + g_keyword + ", g_table=" + g_table + ", g_mentionImage="
-				+ g_mentionImage + "]";
+				+ g_mentionImage + ", g_link=" + g_link + ", rowsOK=" + rowsOK + "]";
 	}
+
+	
+
+	
 
 }
