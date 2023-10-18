@@ -44,7 +44,7 @@ public class SecurityDaoImpl implements SecurityDao {
 		
 		//Insertar nueva empresa
 		String QUERY_CREATE_EMPRESA =
-				"INSERT INTO `horusDatabase`.`empresas`"
+				"INSERT INTO `horusDatabase`.`empresa`"
 				+ "("
 				+ "`nombre`,"
 				+ "`email`,"
