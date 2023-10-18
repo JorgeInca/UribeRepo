@@ -192,6 +192,56 @@ public class CatalagosController {
 
 				
 				}
+				
+				//Guarda la nueva Empresa
+				@RequestMapping(value = "/guardaEmpresa", method = RequestMethod.POST) //NOT USED YET
+				public @ResponseBody String guardaEmpresa(Empresas user) {
+
+					String response = "";
+
+					System.out.println(user.toString());
+
+					response = catalagosService.guardaEmpresa(user)+ "";
+					
+					System.out.println("********* [Controller] guardaUsuario : " + response);
+
+					return response;
+				}
+				
+				//Muestra la informacion del usuario a editar
+				@RequestMapping(value = "/editarEmpresaId", method = RequestMethod.POST) //NOT USED YET
+				public @ResponseBody String editEmpresa(Empresas user) {
+
+					
+					String response = "";
+					Gson gson = new Gson();
+
+					System.out.println(user.toString());
+
+					response = gson.toJson(catalagosService.editEmpresa(user.getId_empresa()));
+					
+					System.out.println("********* [Controller] guardaEmpresa : " + response);
+
+					return response;
+				}
+				
+	          //Editar la informacion
+				@RequestMapping(value = "/actualizaEmpresa", method = RequestMethod.POST) //NOT USED YET
+				public @ResponseBody String updateEmpresa(Empresas user) {
+
+					
+					String response = "";
+					Gson gson = new Gson();
+
+					System.out.println(user.toString());
+
+					response = gson.toJson(catalagosService.updateEmpresa(user));
+					
+					System.out.println("********* [Controller] guardaEmpresa : " + response);
+
+					return response;
+				}
+				
 		
 
 }

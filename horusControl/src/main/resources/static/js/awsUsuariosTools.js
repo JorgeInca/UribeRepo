@@ -60,6 +60,10 @@ function guardaUsuario() {
 			
 			//Habilita los botones
 		    $("#updateUsuarios").prop('disabled', true);
+		    
+		    //Actualiza la lista 
+		    tableGlobal.clear().draw();
+			cargaListaUsuarios();
 
 
 		},

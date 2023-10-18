@@ -31,6 +31,12 @@ public interface SecurityDao {
 	
 	public Empresas getEmpresadataById(Long id_empresa);
 	
+	public Long guardaEmpresa(Empresas user);
+	
+	public Empresas editEmpresa(Long id_empresa);
+		
+    public long updateEmpresa(Empresas user);
+	
 	
 	
 

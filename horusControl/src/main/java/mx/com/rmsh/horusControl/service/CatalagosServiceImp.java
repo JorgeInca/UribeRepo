@@ -83,6 +83,24 @@ public class CatalagosServiceImp implements CatalagosService {
 		return daoUser.getEmpresadataById(id_empresa);
 	}
 
+	@Override
+	public Long guardaEmpresa(Empresas user) {
+		// TODO Auto-generated method stub
+		return daoUser.guardaEmpresa(user);
+	}
+
+	@Override
+	public Empresas editEmpresa(Long id_empresa) {
+		// TODO Auto-generated method stub
+		return daoUser.editEmpresa(id_empresa);
+	}
+
+	@Override
+	public long updateEmpresa(Empresas user) {
+		// TODO Auto-generated method stub
+		return daoUser.updateEmpresa(user);
+	}
+
 	
 
 }

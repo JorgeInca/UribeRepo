@@ -42,6 +42,34 @@ public class SecurityDaoImpl implements SecurityDao {
 						 + " FROM empresa "
 				    	 + " WHERE id_empresa = ? "; 
 		
+		//Insertar nueva empresa
+		String QUERY_CREATE_EMPRESA =
+				"INSERT INTO `horusDatabase`.`empresas`"
+				+ "("
+				+ "`nombre`,"
+				+ "`email`,"
+				+ "`phone`,"
+				+ "`estatus`"
+				+ ")"
+				+ "VALUES"
+				+ "(?,?,?,?)";
+		
+		//Muestra la informacion del usuario a Editar
+		String QUERY_GET_EMPRESA_BYID2 =
+				"SELECT "
+						 + " id_empresa as id_empresa,"
+						 + " nombre as nombre,"
+						 + " email as email,"
+						 + " phone as phone,"
+						 + " fecha_creacion as fecha_creacion,"
+						 + " estatus as estatus"
+						 + " FROM empresa "
+						+ " WHERE id_empresa = ? ";  
+		
+           // Edita la informacion
+        	String QUERY_UPDATE_EMPRESA =
+	    "Update empresa set nombre= ?,email =?,phone = ?,estatus =? where id_empresa = ?";
+		
 //---------------------- Usuarios -------------------------------------------------		
 	
 	String QUERY_GET_USERS = "SELECT "
@@ -257,6 +285,52 @@ public class SecurityDaoImpl implements SecurityDao {
 			return jdbcTemplate.queryForObject(QUERY_GET_EMPRESA_BYID, 
 					new Object[] { id_empresa }, new EmpresaRowMapper());
 		}
+
+		
+		@Override
+		public Long guardaEmpresa(Empresas user) {
+			// TODO Auto-generated method stub
+			KeyHolder keyHolder = new GeneratedKeyHolder();
+
+		    jdbcTemplate.update(connection -> {
+		        PreparedStatement ps = connection
+		          .prepareStatement(QUERY_CREATE_EMPRESA,Statement.RETURN_GENERATED_KEYS);
+		          ps.setString(1, user.getNombre());
+		          ps.setString(2, user.getEmail());
+		          ps.setLong(3, user.getPhone());
+		          ps.setInt(4, user.getEstatus());
+		          return ps;
+		        }, keyHolder);
+
+		        return (long) keyHolder.getKey().longValue();
+		    }
+		
+		
+		
+		@Override
+		public long updateEmpresa(Empresas user) {
+	
+			return jdbcTemplate.update(connection -> {
+		           PreparedStatement ps = connection
+		          .prepareStatement(QUERY_UPDATE_EMPRESA);
+		           ps.setString(1, user.getNombre());
+		           ps.setString(2, user.getEmail());
+		           ps.setLong(3, user.getPhone());
+		           ps.setInt(4, user.getEstatus());
+		           ps.setLong(5, user.getId_empresa());
+		           return ps;
+	        });
+		        
+		}
+		
+
+		@Override
+		public Empresas editEmpresa(Long id_empresa) {
+			// TODO Auto-generated method stub
+			return jdbcTemplate.queryForObject(QUERY_GET_EMPRESA_BYID2, 
+					new Object[] { id_empresa }, new EmpresaRowMapper());
+		}
+		
 
 
 
