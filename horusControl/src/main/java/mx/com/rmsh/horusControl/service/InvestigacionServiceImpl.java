@@ -217,7 +217,7 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 
 		System.out.println("********* [Service] getPDFInvestigacion : ");
 
-		boolean linux = true;
+		boolean linux = false;
 
 		// Delete first File.separator for Windows
 		String reportFolderPath = (linux ? File.separator : "") + "src" + File.separator + "main" + File.separator
@@ -260,6 +260,7 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 			Map<String, Object> parameter = datosParam.getParameter();
 
 			parameter.put("subreportParameter", subInt);
+			parameter.put("nombre_logo", "LOGO_"+"PROEZA");
 			parameter.put("subreportParameter2", subNac);
 			parameter.put("subreportParameter3", subPep);
 			parameter.put("subreportParameter4", subOth);
@@ -318,7 +319,7 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 			// compiles jrxml
 			JasperCompileManager.compileReportToFile(reportName3 + ".jrxml");
 			// fills compiled report with parameters and a connection
-			JasperPrint print3 = JasperFillManager.fillReport(reportName3 + ".jasper", parameters3,
+			JasperPrint print3 = JasperFillManager.fillReport(reportName3 + ".jasper", parameter,
 					new JREmptyDataSource());
 			// exports report to pdf
 			JRExporter exporter3 = new JRPdfExporter();
@@ -411,25 +412,25 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 					if ("intcump".equals(origen.getCategory())) {
 						FillReportInvestigacionVO origenFill = new FillReportInvestigacionVO();
 						hayintcump = "I_RED";
-						origenFill.setListaCumIn(origen.getFuente());
+						origenFill.setListaCumIn( "•	" + origen.getFuente());
 						listaObjetos.add(origenFill);
 					}
 					if ("natcump".equals(origen.getCategory())) {
 						FillReportInvestigacionVO origenFill = new FillReportInvestigacionVO();
 						haynatcump = "I_RED";
-						origenFill.setListaCumNac(origen.getFuente());
+						origenFill.setListaCumNac( "•	" + origen.getFuente());
 						listaObjetos.add(origenFill);
 					}
 					if ("PEP".equals(origen.getCategory())) {
 						FillReportInvestigacionVO origenFill = new FillReportInvestigacionVO();
 						hayintPEP = "I_RED";
-						origenFill.setListaPEP(origen.getFuente());
+						origenFill.setListaPEP( "•	" + origen.getFuente());
 						listaObjetos.add(origenFill);
 					}
 					if ("others".equals(origen.getCategory())) {
 						FillReportInvestigacionVO origenFill = new FillReportInvestigacionVO();
-						hayOthers = "I_RED";
-						origenFill.setListaOthers(origen.getFuente());
+						hayOthers = "I_GREEN";
+						origenFill.setListaOthers( "•	" + origen.getFuente());
 						listaObjetos.add(origenFill);
 					}
 			
@@ -440,21 +441,22 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 		Integer numeroOrigenes= 0;
 		for (Mentions mention : lambdaQuery.getBody().getMentions()) {
 			
-			System.out.println("mentionsEliminados " + mentionsEliminados);
-			System.out.println("mentionsEliminados " + mention.getId());
+			//System.out.println("mentionsEliminados " + mentionsEliminados);
+			//System.out.println("mentionsEliminados " + mention.getId());
 			
 			if( !mentionsEliminados.contains( mention.getId().toString() ) ){				
 			
 				hayMentions = "I_RED";
 				numeroOrigenes++;
 				
-				break;
+				
+				
 			}
 			
 		}
 		
 		FillReportInvestigacionVO origenFill = new FillReportInvestigacionVO();
-		origenFill.setListaMentions("Entradas Identificadas ( " + numeroOrigenes + " )");
+		origenFill.setListaMentions("•	" + "Entradas Identificadas ( " + numeroOrigenes + " )");
 		listaObjetos.add(origenFill);
 
 		// Mentions
@@ -544,6 +546,8 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 		//menciones.add(new FillReportInvestigacionResultadoVO());
 		
 		String fromArrayOrigenes = body.getEliminadosOrigenes();
+		
+		System.out.println("fromArrayOrigenes " + fromArrayOrigenes.toString() );
 		List<String> origenesEliminados = Arrays.asList( fromArrayOrigenes.split("\\s*,\\s*") );//Arrays.asList(fromArray.split("\\s*,\\s*"));
 		String fromArrayMentions = body.getEliminadosMentions();
 		List<String> mentionsEliminados = Arrays.asList( fromArrayMentions.split("\\s*,\\s*") );//Arrays.asList(fromArray.split("\\s*,\\s*"));
@@ -565,6 +569,7 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 					else {
 						nuevo.setRowsOK(createTable(origen.getTexto()));
 						nuevo.setG_link(origen.getUrl());
+						nuevo.setG_origen2(origen.getFuente());
 					}
 
 					internacional.add(nuevo);
@@ -582,6 +587,7 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 					else{
 						nuevo.setRowsOK(createTable(origen.getTexto()));
 						nuevo.setG_link(origen.getUrl());
+						nuevo.setG_origen2(origen.getFuente());
 					}
 
 					nacional.add(nuevo);
@@ -599,6 +605,7 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 					else{
 						nuevo.setRowsOK(createTable(origen.getTexto()));
 						nuevo.setG_link(origen.getUrl());
+						nuevo.setG_origen2(origen.getFuente());
 					}
 
 					pep.add(nuevo);
@@ -616,6 +623,7 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 					else{
 						nuevo.setRowsOK(createTable(origen.getTexto()));
 						nuevo.setG_link(origen.getUrl());
+						nuevo.setG_origen2(origen.getFuente());
 					}
 
 					otros.add(nuevo);
@@ -656,7 +664,12 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 		if (menciones.size() == 0) {
 			//menciones.add(new FillReportInvestigacionResultadoVO());
 		}
-
+		System.out.println(  "Tamaño internacional" + internacional.size());
+		System.out.println(  "Tamaño nacional " + nacional.size());
+		System.out.println(  "Tamaño pep" + pep.size());
+		System.out.println(  "Tamaño otros " + otros.size());
+		System.out.println(  "Tamaño menciones " + menciones.size());
+		
 		resultadoFInal.setInternacional(internacional);
 		resultadoFInal.setNacional(nacional);
 		resultadoFInal.setPep(pep);
@@ -677,9 +690,7 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 
 		}
 
-
-
-		System.out.println("Creating table " + texto);
+		//System.out.println("Creating table " + texto);
 
 		return returning;
 	}

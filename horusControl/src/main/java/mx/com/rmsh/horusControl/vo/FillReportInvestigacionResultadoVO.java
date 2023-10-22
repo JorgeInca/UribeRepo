@@ -6,6 +6,7 @@ public class FillReportInvestigacionResultadoVO {
 
 	public String g_titulo = "";
 	public String g_origen = "";
+	public String g_origen2 = null;
 	public String g_freeText = "";
 	public String g_keyword = "";
 	public String g_table = "";
@@ -77,15 +78,19 @@ public class FillReportInvestigacionResultadoVO {
 		this.g_link = g_link;
 	}
 
-	@Override
-	public String toString() {
-		return "FillReportInvestigacionResultadoVO [g_titulo=" + g_titulo + ", g_origen=" + g_origen + ", g_freeText="
-				+ g_freeText + ", g_keyword=" + g_keyword + ", g_table=" + g_table + ", g_mentionImage="
-				+ g_mentionImage + ", g_link=" + g_link + ", rowsOK=" + rowsOK + "]";
+	public String getG_origen2() {
+		return g_origen2;
 	}
 
-	
+	public void setG_origen2(String g_origen2) {
+		this.g_origen2 = g_origen2;
+	}
 
-	
+	@Override
+	public String toString() {
+		return "FillReportInvestigacionResultadoVO [g_titulo=" + g_titulo + ", g_origen=" + g_origen + ", g_origen2="
+				+ g_origen2 + ", g_freeText=" + g_freeText + ", g_keyword=" + g_keyword + ", g_table=" + g_table
+				+ ", g_mentionImage=" + g_mentionImage + ", g_link=" + g_link + ", rowsOK=" + rowsOK + "]";
+	}
 
 }

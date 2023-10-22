@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.0.0.final using JasperReports Library version 6.0.0  -->
-<!-- 2023-10-17T16:11:09 -->
+<!-- 2023-10-22T14:20:56 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4" pageWidth="396" pageHeight="612" columnWidth="396" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="4e773abe-a72d-4669-8f8f-8bf9bffaa262">
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
@@ -23,22 +23,36 @@
 	<columnHeader>
 		<band height="19" splitType="Stretch">
 			<staticText>
-				<reportElement style="SubTitle" mode="Transparent" x="30" y="0" width="280" height="19" forecolor="#666666" backcolor="#FFFFFF" uuid="416607e9-f406-435e-88ac-d044b40781aa"/>
+				<reportElement style="SubTitle" mode="Transparent" x="30" y="0" width="280" height="19" forecolor="#3E7BFF" backcolor="#FFFFFF" uuid="416607e9-f406-435e-88ac-d044b40781aa"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
-					<font fontName="Arial" size="13" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<font fontName="Dialog" size="13" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[Listados de Cumplimiento Nacionales]]></text>
 			</staticText>
 			<image>
-				<reportElement x="0" y="0" width="20" height="19" uuid="ae4a3d38-04c8-4d1b-86d6-6c3d92e2888f"/>
+				<reportElement x="376" y="0" width="20" height="19" uuid="ae4a3d38-04c8-4d1b-86d6-6c3d92e2888f"/>
 				<imageExpression><![CDATA[$P{haynatcump} + ".png"]]></imageExpression>
 			</image>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="20" splitType="Stretch">
+			<property name="local_mesure_unitheight" value="pixel"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<textField isBlankWhenNull="true">
-				<reportElement x="80" y="0" width="218" height="20" isRemoveLineWhenBlank="true" uuid="1665a057-aedd-4c49-8089-f7f9c0341e37"/>
+				<reportElement x="80" y="1" width="280" height="18" isRemoveLineWhenBlank="true" uuid="1665a057-aedd-4c49-8089-f7f9c0341e37">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="local_mesure_unitwidth" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="local_mesure_unity" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="local_mesure_unitx" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Dialog"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{listaCumNac}]]></textFieldExpression>
 			</textField>
 		</band>
