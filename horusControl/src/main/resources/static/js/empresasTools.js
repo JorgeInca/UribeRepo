@@ -91,8 +91,8 @@ function cargaEmpresaId(id_empresa) {
 
 			//Habilita los botones
 			$("#limpiarEmpresas").prop('disabled', true);
-			$("#EnviarUsuarios").prop('disabled', true);
-			$("#updateUsuarios").prop('disabled', true);
+			$("#EnviarEmpresas").prop('disabled', true);
+			$("#updateEmpresas").prop('disabled', true);
 
 
 			$("#noFolio").empty();
@@ -127,8 +127,10 @@ function Empresas(){
 
 			//Habilita los botones
 			$("#limpiarUsuarios").prop('disabled', false);
-			$("#EnviarUsuarios").prop('disabled', false);	
-        	$("#updateUsuarios").prop('disabled', true);
+		
+        	
+        	$("#EnviarEmpresas").prop('disabled', false);
+			$("#updateEmpresas").prop('disabled', true);
 	
 }
 
@@ -176,8 +178,8 @@ function editarEmpresaId(id_empresa) {
 
 			//Habilita los botones
 			$("#limpiarEmpresas").prop('disabled', true);
-			$("#EnviarUsuarios").prop('disabled', true);
-			$("#updateUsuarios").prop('disabled', false);
+			$("#EnviarEmpresas").prop('disabled', true);
+			$("#updateEmpresas").prop('disabled', false);
 
 
 			$("#noFolio").empty();
@@ -204,7 +206,7 @@ function actualizaEmpresa(){
 	var uri = "actualizaEmpresa";
 	
 	var id_empresa = $("#noFolio1").val();
-	var var_firstname = $("#form-name").val();
+	var var_name = $("#form-name").val();
 	var var_email = $("#form-email").val();
 	var var_phone = $("#form-phone").val();
 	var var_estatus = $("#form-estatus").val();
@@ -215,7 +217,7 @@ function actualizaEmpresa(){
 	
 	var Empresas = {
 		id_empresa: id_empresa,
-	    name: var_firstname,
+	    name: var_name,
 		email: var_email,
 		phone: var_phone,
 		estatus: var_estatus
@@ -259,12 +261,12 @@ function guardaEmpresa() {
 
 	var uri = "guardaEmpresa";
 
-	var var_firstname = $("#form-name").val();
+	var var_name = $("#form-name").val();
 	var var_email = $("#form-email").val();
 	var var_phone = $("#form-phone").val();
 	var var_estatus = $("#form-estatus").val();
 	
-	if (var_firstname === "" || var_email === "" || var_phone === "" || var_estatus === "" ) {
+	if (var_name === "" || var_email === "" || var_phone === "" || var_estatus === "" ) {
 		return;
 	}
 
@@ -273,7 +275,7 @@ function guardaEmpresa() {
 	}
 
 	var Empresas = {
-	    name: var_firstname,
+	    name: var_name,
 		email: var_email,
 		phone: var_phone,
 		estatus: var_estatus
@@ -302,7 +304,7 @@ function guardaEmpresa() {
 			
 			
 			//Habilita los botones
-		    $("#updateUsuarios").prop('disabled', true);
+			$("#updateEmpresas").prop('disabled', true);
 		    
 		    //Actualiza la lista 
 		    tableGlobal.clear().draw();
