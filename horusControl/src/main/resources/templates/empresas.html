@@ -26,7 +26,7 @@
     
   <body> 
   
-  <input type="text" hidden id="nameUserHorus" th:value="${#authentication.name}" >
+    <input type="text" hidden id="nameUserHorus" th:value="${#authentication.name}" >
 	<input type="text" hidden id="idUserHorus" >
 	<input type="text" hidden id="emailUserHorus" >
   
@@ -49,35 +49,9 @@
     <div style="display:flex; justify-content:flex-end; width:92%; padding:1%;">
     <button type="submit" class="btn btn-primary" id="limpiar" onclick="Empresas()">Nueva Empresa</button>
 	</div>	
-  
-  <!--DataTables Horus-->
-        <div class="row justify-content-center">
-                <div class="col-lg-10">
-                    <div class="table-responsive">        
-                        <table id="horus" class="table table-striped table-bordered" style="width:100%">
-                        <thead>
-                            <tr>                            
-                                <th>Id_empresa</th>
-                                <th>Nombre Empresa</th>
-                                <th>Email</th> 
-                                <th>Telefono</th>                                                                
-                                <th>Estatus</th>  
-                                <th>Editar</th>                                                     
-                            </tr>
-                        </thead>
-                        
-                        <tbody>
-                        </tbody>       
-                         
-                       </table>                  
-                    </div>
-                </div>
-        </div>          
-      
-      
-      
-      <!--Modal Empresas-->
-<div class="modal fade" id="ModalEmpresas" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+	
+	<!--Modal Usuarios-->
+<div class="modal fade" id="ModalEmpresas"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
 	aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
@@ -105,9 +79,10 @@
 				<div class="col-md-10">
 					<form id="miForm" class="needs-validation" novalidate>
 						<div class="form-group">
-							<label for="noFolio1" class="col-form-label">Id_empresa:</label>
+							<label for="noFolio1" class="col-form-label">Id_usuario:</label>
 							<input type="text" class="form-control" id="noFolio1" placeholder="Id usuario" disabled>
 						</div>
+						
 						<div class="form-group">
 							<label for="form-name" class="col-form-label">Nombre:</label>
 							<input type="text" class="form-control" id="form-name" placeholder="Name" required>
@@ -118,6 +93,7 @@
 								Correcto!
 							</div>
 						</div>
+						
 						<div class="form-group">
 							<label for="form-email" class="col-form-label">Email:</label>
 							<input type="email" class="form-control" id="form-email" name="email"
@@ -140,8 +116,8 @@
 								Correcto!
 							</div>
 						</div>
-					
-						<div class="form-group">
+		
+		<div class="form-group">
 							<label for="form-estatus" class="col-form-label">Estatus:</label>
 							<select class="form-control" id="form-estatus" placeholder="Estatus" required>
 								<option value="none" selected hidden>Seleccion una opcion</option>
@@ -172,9 +148,44 @@
 		</form>
 
 
-
 	</div>
 </div>
+  
+  
+    <!--DataTables Horus-->
+        <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="table-responsive">        
+                        <table id="horus" class="table table-striped table-bordered" style="width:100%">
+                        <thead>
+                            <tr>                            
+                                <th>Id_empresa</th>
+                                <th>Nombre</th>
+                                <th>Email</th>                           
+                                <th>Phone</th>        
+                                <th>Estatus</th>
+                                <th>Editar</th>                           
+                            </tr>
+                        </thead>
+                        
+                        <tbody>
+                        </tbody>       
+                         
+                       </table>                  
+                    </div>
+                </div>
+        </div>          
+      
+            
+     
+     
+     
+     
+     
+     
+     
+     
+     
      
    
    	<div class="container" id="globalFooterBarDiv"></div>
