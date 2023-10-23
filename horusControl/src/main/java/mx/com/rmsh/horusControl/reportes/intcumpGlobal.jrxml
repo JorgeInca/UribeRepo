@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.0.0.final using JasperReports Library version 6.0.0  -->
-<!-- 2023-10-17T16:04:59 -->
+<!-- 2023-10-22T14:01:51 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4" pageWidth="500" pageHeight="612" columnWidth="396" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="4e773abe-a72d-4669-8f8f-8bf9bffaa262">
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
@@ -74,6 +74,8 @@
 		<field name="datoTabla" class="java.lang.String"/>
 		<field name="valorTabla" class="java.lang.String"/>
 	</subDataset>
+	<parameter name="Parameter1" class="java.lang.String"/>
+	<parameter name="Parameter2" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -85,16 +87,19 @@
 	<field name="g_mentionImage" class="java.lang.String"/>
 	<field name="rowsOK" class="java.util.List"/>
 	<field name="g_link" class="java.lang.String"/>
+	<field name="g_origen2" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<detail>
-		<band height="129" splitType="Stretch">
+		<band height="106" splitType="Stretch">
 			<property name="local_mesure_unitheight" value="pixel"/>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement positionType="Float" x="20" y="0" width="460" height="20" isRemoveLineWhenBlank="true" forecolor="#4553ED" uuid="1665a057-aedd-4c49-8089-f7f9c0341e37"/>
+				<reportElement positionType="Float" x="20" y="0" width="460" height="20" isRemoveLineWhenBlank="true" forecolor="#3E7BFF" uuid="1665a057-aedd-4c49-8089-f7f9c0341e37">
+					<printWhenExpression><![CDATA[new Boolean ( $F{rowsOK}==null )]]></printWhenExpression>
+				</reportElement>
 				<textElement>
-					<font fontName="Times New Roman" size="12" isBold="true"/>
+					<font fontName="Times New Roman" size="13" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{g_origen}]]></textFieldExpression>
 			</textField>
@@ -116,14 +121,14 @@
 				<imageExpression><![CDATA[$F{g_mentionImage} + ".png"]]></imageExpression>
 			</image>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement style="SubTitle" positionType="Float" mode="Transparent" x="0" y="0" width="396" height="20" isRemoveLineWhenBlank="true" forecolor="#000000" backcolor="#FFFFFF" uuid="5f4654a1-07d0-418a-88f3-19ab102d3fd3"/>
+				<reportElement style="SubTitle" positionType="Float" mode="Transparent" x="0" y="0" width="400" height="20" isRemoveLineWhenBlank="true" forecolor="#000000" backcolor="#FFFFFF" uuid="5f4654a1-07d0-418a-88f3-19ab102d3fd3"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
 					<font fontName="Times New Roman" size="13" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{g_titulo}]]></textFieldExpression>
 			</textField>
 			<componentElement>
-				<reportElement positionType="Float" x="21" y="50" width="459" height="40" isRemoveLineWhenBlank="true" forecolor="#FFFAFA" uuid="39104055-c7a2-4414-a410-4a9bed56deed">
+				<reportElement positionType="Float" x="21" y="60" width="458" height="20" isRemoveLineWhenBlank="true" forecolor="#FFFAFA" uuid="39104055-c7a2-4414-a410-4a9bed56deed">
 					<property name="net.sf.jasperreports.export.headertoolbar.table.name" value=""/>
 					<printWhenExpression><![CDATA[$F{rowsOK}!=null]]></printWhenExpression>
 				</reportElement>
@@ -132,13 +137,6 @@
 						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{rowsOK})]]></dataSourceExpression>
 					</datasetRun>
 					<jr:column width="100" uuid="b7cff9d9-7a33-4974-bb20-790617a91237">
-						<jr:columnHeader style="Table 1_CH" height="20">
-							<staticText>
-								<reportElement mode="Transparent" x="1" y="1" width="99" height="19" forecolor="#FFFFFF" uuid="0d6727ab-6f07-4f69-b847-6b4b71df4a4a"/>
-								<textElement textAlignment="Center" verticalAlignment="Middle"/>
-								<text><![CDATA[Dato]]></text>
-							</staticText>
-						</jr:columnHeader>
 						<jr:detailCell style="Table 1_TD" height="20">
 							<textField>
 								<reportElement x="0" y="0" width="100" height="20" uuid="6ac9c151-05dc-46aa-a91d-d4f8acafb48e"/>
@@ -154,13 +152,6 @@
 						</jr:detailCell>
 					</jr:column>
 					<jr:column width="358" uuid="1b5730cb-2eca-4469-8d11-026d74ce35b9">
-						<jr:columnHeader style="Table 1_CH" height="20">
-							<staticText>
-								<reportElement x="0" y="0" width="358" height="20" forecolor="#FFFFFF" uuid="531d3f29-9ff3-4ea7-a798-37296ba79ee7"/>
-								<textElement textAlignment="Center" verticalAlignment="Middle"/>
-								<text><![CDATA[Valor]]></text>
-							</staticText>
-						</jr:columnHeader>
 						<jr:detailCell style="Table 1_TD" height="20">
 							<textField>
 								<reportElement x="0" y="0" width="358" height="20" uuid="f93ec587-eceb-45f8-817e-1a0c5e9493ff"/>
@@ -172,7 +163,7 @@
 				</jr:table>
 			</componentElement>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement positionType="Float" x="21" y="90" width="459" height="17" isRemoveLineWhenBlank="true" forecolor="#086ED4" uuid="782fa955-3f86-490d-8278-4597915bfcd5">
+				<reportElement positionType="Float" x="21" y="80" width="459" height="17" isRemoveLineWhenBlank="true" forecolor="#086ED4" uuid="782fa955-3f86-490d-8278-4597915bfcd5">
 					<property name="local_mesure_unitheight" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -181,6 +172,17 @@
 					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{g_link}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" mode="Opaque" x="21" y="44" width="458" height="16" isRemoveLineWhenBlank="true" forecolor="#FFFFFF" backcolor="#427DFF" uuid="c18ab9ee-f347-4006-9f6b-f85ae4354e4d">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<printWhenExpression><![CDATA[new Boolean ( $F{rowsOK}!=null )]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Dialog" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{g_origen2}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
