@@ -32,7 +32,11 @@ public interface InvestigacionDao {
 	
 	public void finishInvestigacionTask( Long idInvestigacion );
 	
-	public void updateRiesgoById( RiesgoRequest request );
+	public void errorInvestigacionTask( Long idInvestigacion );
+	
+	public void setRiesgoInicialById( RiesgoRequest request );
+	
+	public void updateRiesgoFinalById( RiesgoRequest request );
 	
 	public Integer getRiesgoFInal( Long idInvestigacion );
 	
@@ -43,5 +47,9 @@ public interface InvestigacionDao {
 	public void updateEliminadosOrigen( OrigenesBorradoRequest request );
 	
 	public void updateEliminadosMention( OrigenesBorradoRequest request );
+	
+	public String getNombreClientePorUsuario(Long idUsuario);
+	
+	public Long getIdUserByInvestigacionId(Long investigacionid);
 
 }

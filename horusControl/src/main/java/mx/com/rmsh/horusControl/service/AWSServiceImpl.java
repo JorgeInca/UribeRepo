@@ -1,5 +1,8 @@
 package mx.com.rmsh.horusControl.service;
 
+import java.io.File;
+import java.net.URL;
+
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,11 +17,14 @@ import mx.com.rmsh.horusControl.vo.InvestigacionRequest;
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
 import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
 import software.amazon.awssdk.core.SdkBytes;
+import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.lambda.LambdaClient;
 import software.amazon.awssdk.services.lambda.model.InvokeRequest;
 import software.amazon.awssdk.services.lambda.model.InvokeResponse;
 import software.amazon.awssdk.services.lambda.model.LambdaException;
+import software.amazon.awssdk.services.s3.S3Client;
+import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 
 @Service
 public class AWSServiceImpl implements AWSService {
@@ -128,6 +134,46 @@ public class AWSServiceImpl implements AWSService {
 					.credentialsProvider(StaticCredentialsProvider.create(
 							AwsBasicCredentials.create("AKIARO7UFAS3A3ISPD6R", "2CFt//lW5g8jh7qkI5OUP8CSOpUNwHsdwk99QXo5")))
 					.build();
+	}
+	
+	public S3Client getAWSS3Client(){
+		
+		Region region = Region.US_EAST_1;
+		
+		 return S3Client.builder().region(region)
+					.credentialsProvider(StaticCredentialsProvider.create(
+							AwsBasicCredentials.create("AKIARO7UFAS3A3ISPD6R", "2CFt//lW5g8jh7qkI5OUP8CSOpUNwHsdwk99QXo5")))
+					.build();
+	}
+
+	@Override
+	public String createFolder(String folderName) {
+		
+		String bucketName = "horuscampanias";
+		S3Client client = getAWSS3Client();
+		PutObjectRequest request = PutObjectRequest.builder().bucket(bucketName).key(folderName).build();	
+		
+		client.putObject(request, RequestBody.empty());
+		System.out.println("Folder " + folderName + " is ready.");
+		
+		URL URL = client.utilities().getUrl( builder -> builder.bucket(bucketName).key(folderName).build() );
+
+		return URL.toString();
+	}
+
+	@Override
+	public String saveFile(String folderName, File file) {
+		
+		String bucketName = "horuscampanias";
+		String fileName = folderName +file.getName();
+		
+		S3Client client = getAWSS3Client();
+		PutObjectRequest request = PutObjectRequest.builder().bucket(bucketName).key(fileName).build();	
+		System.out.println( "Nombre:" + file.getName());
+		client.putObject(request, RequestBody.fromFile(file));
+		URL URL = client.utilities().getUrl( builder -> builder.bucket(bucketName).key( fileName ).build() );
+		// TODO Auto-generated method stub
+		return URL.toString();
 	}
 
 }

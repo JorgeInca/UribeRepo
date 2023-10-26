@@ -5,6 +5,7 @@ public class RiesgoRequest {
 	public Long idUsuario;
 	public Long idInvestigacion;
 	public Integer riesgo;
+	public String nombreCliente;
 
 	public Long getIdUsuario() {
 		return idUsuario;
@@ -30,10 +31,19 @@ public class RiesgoRequest {
 		this.riesgo = riesgo;
 	}
 
+	public String getNombreCliente() {
+		return nombreCliente;
+	}
+
+	public void setNombreCliente(String nombreCliente) {
+		this.nombreCliente = nombreCliente;
+	}
+
 	@Override
 	public String toString() {
 		return "RiesgoRequest [idUsuario=" + idUsuario + ", idInvestigacion=" + idInvestigacion + ", riesgo=" + riesgo
-				+ "]";
+				+ ", nombreCliente=" + nombreCliente + "]";
 	}
 
+	
 }

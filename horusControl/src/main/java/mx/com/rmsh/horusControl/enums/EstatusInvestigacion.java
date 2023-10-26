@@ -4,7 +4,7 @@ public enum EstatusInvestigacion {
 
 	FINALIZADO(1, "FINALIZADO"),
 	PENDIENTE(2, "PENDIENTE"),
-	DESCARTADA(3, "DESCARTADO");
+	ERROR(3, "ERROR");
 
 	EstatusInvestigacion(Integer idEstatus, String name) {
 		this.idEstatus = idEstatus;

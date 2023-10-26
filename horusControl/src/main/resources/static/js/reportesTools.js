@@ -45,13 +45,13 @@ function cargaListaInvestigaciones() {
 
 				tableGlobal.row
 					.add([
-						'<a href="#" onclick="cargaInvestigacionId('+data[x].idInvestigacion+')" ><strong>' + data[x].idInvestigacion + '</strong></a>',
+						creaLinkSiFinalizada( data[x].idInvestigacion , data[x].estatusText),						
 						data[x].nombreUsuario,
 						data[x].nombreEmpresa,
 						data[x].apellidos,
 						data[x].primer_nombre,						
 						data[x].estatusText,
-						data[x].riesgoInicial,
+						getRiesgoTexto(data[x].riesgoTexto),
 						data[x].fechaCreacion
 					])
 					.order( [0,'desc'] )
@@ -380,3 +380,66 @@ $("#modalReportes").on('shown.bs.modal', function() {
 	loadCHart();	
 });
 */
+
+
+function pruebaAWSSave() {
+
+	var valorRiesgoEditable = $("#valorRiesgoEditable").val();
+	var idInvestigacionGlobal = $("#idInvestigacionGlobal").val();
+	var idUserHorus = $("#idUserHorus").val();
+
+
+
+	var riesgoRequest = {
+		riesgo: valorRiesgoEditable,
+		idInvestigacion: idInvestigacionGlobal,
+		idUsuario: idUserHorus
+	};
+
+	var uri = "pruebaAWS";
+
+
+	$.ajax({
+		url: uri,
+		type: 'POST',
+		dataType: 'json',
+		data: riesgoRequest,
+		success: function(data) {
+			
+	
+			
+		},
+		error: function(xhr, ajaxOptions, thrownError) {
+			alert("ERROR");	
+		}
+
+	});
+}
+
+
+function getRiesgoTexto(riesgoTexto) {
+
+		if( riesgoTexto === "ALTO" ){
+			return '<span class="badge badge-danger">' + riesgoTexto + 	'</span>';
+		}
+		if( riesgoTexto === "MEDIO" ){
+			return '<span class="badge badge-warning">' + riesgoTexto + 	'</span>';
+		}
+		if( riesgoTexto === "BAJO" ){
+			return '<span class="badge badge-success">' + riesgoTexto + 	'</span>';
+		}
+		if( riesgoTexto === "PENDIENTE" ){
+			return '<span class="badge badge-primary">' + riesgoTexto + 	'</span>';
+		}
+	
+}
+
+function creaLinkSiFinalizada(idInvestigacion , estatusText ) {
+
+		if( estatusText === "FINALIZADO" ){
+			return '<a href="#" onclick="cargaInvestigacionId(' + idInvestigacion + ')" ><strong>' + idInvestigacion + '</strong></a>';
+		}else{
+			return '<strong>' + idInvestigacion + '</strong>';	
+		}
+	
+}

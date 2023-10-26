@@ -37,13 +37,29 @@ public interface InvestigacionService {
 	
 	public long updateUser(UserHorus user);
 	
-	public ResponseEntity<ByteArrayResource> getPDFInvestigacion(Long idInvestigacion);
+	public ResponseEntity<ByteArrayResource> getPDFInvestigacion(Long idInvestigacion,String campaign, boolean s3Exists);
 	
 	public List<Masiva> getMasivas(MasivaRequest request);
 	
-	public void updateRiesgoById(RiesgoRequest request);
+	public void setRiesgoById(RiesgoRequest request);
+	
+	public void updateRiesgoFinalById(RiesgoRequest request);
 	
 	public void updateEliminadosOrigen( OrigenesBorradoRequest request );
 	
 	public void updateEliminadosMention( OrigenesBorradoRequest request );
+	
+	public List<InvestigacionRequest> getMasivasToAWS(Integer limit);
+	
+	public void setJsonById( Long idInvestigacion , String json );
+	
+	public void finishInvestigacionTask( Long idInvestigacion );
+	
+	public void errorInvestigacionTask( Long idInvestigacion );
+	
+	public String getNombreClientePorUsuario(Long idUsuario);
+	
+	public void updateCampanias();
+	
+	
 }

@@ -343,8 +343,7 @@
 	</div>
 
 
-	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalReportes"
-		data-whatever="@getbootstrap">MODAL REPORTES</button>
+	<button class="btn btn-danger" type="button" id="pruebasLigeras" onclick="pruebaAWSSave()" disabled>PRUEBAS A</button>
 
 
 	<div class="container" id="globalFooterBarDiv"></div>
@@ -409,12 +408,12 @@
 
 	<script type="text/javascript" src="js/mainDatatable.js"></script>
 
-	//Chart Google
+	<!-- Chart Google-->
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-	//chart js .l.
+	<!-- chart js .l.-->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.1.1/chart.min.js"></script>
 
-	//Chart linea
+	<!-- Chart linea-->
 	<script type="text/javascript">
 		google.charts.load('current', {'packages': ['line']});
 		google.charts.setOnLoadCallback(drawChart);
@@ -464,7 +463,7 @@
 		}
 	</script>
 
-	//Chart Donut
+	<!-- //Chart Donut-->
 	<script type="text/javascript">
 		var ctx = document.getElementById("donutChart");
 		var myChart = new Chart(ctx, {
@@ -501,7 +500,7 @@
 		});
 	</script>
 
-	//Chart JS RADAR
+	<!-- //Chart JS RADAR-->
 	<script>
 		var chrt = document.getElementById("radarChart").getContext("2d");
 

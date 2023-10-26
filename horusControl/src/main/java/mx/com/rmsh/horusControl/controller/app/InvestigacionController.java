@@ -1,5 +1,7 @@
 package mx.com.rmsh.horusControl.controller.app;
 
+import java.io.File;
+
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
 
@@ -131,7 +133,7 @@ public class InvestigacionController {
 		masivaRequest.setFile(file);
 		masivaRequest.setIdUsuario(idUserHorus);
 		masivaRequest.setNombreCampaña(nombreCampaña);
-	
+
 		String response = "";
 
 //		if (file.isEmpty()) {
@@ -140,7 +142,6 @@ public class InvestigacionController {
 
 		try {
 			response = investigacionService.guardaInvestigacionMasiva(masivaRequest) + "";
-			
 
 			System.out.println("********* [Controller] uploadID : " + response);
 			return response;
@@ -174,11 +175,12 @@ public class InvestigacionController {
 			@PathVariable("idInvestigacion") Long idInvestigacion) throws Exception {
 
 		System.out.println("********* [Controller] generaReporteByID : ");
-
-		return investigacionService.getPDFInvestigacion(idInvestigacion);
+			
+		
+		return investigacionService.getPDFInvestigacion(idInvestigacion, "/General/", false);
 
 	}
-	
+
 	@RequestMapping(value = "/consultaMasivas", method = RequestMethod.POST)
 	public @ResponseBody String reporteMasivas(MasivaRequest masivarequest) {
 
@@ -195,41 +197,71 @@ public class InvestigacionController {
 
 		return response;
 	}
-	
+
 	@RequestMapping(value = "/actualizaRiesgoById", method = RequestMethod.POST)
 	public @ResponseBody String actualizaRiesgoById(RiesgoRequest riegoRequest) {
 
 		String response = "1";
-		
 
 		System.out.println(riegoRequest.toString());
 
 		// arraylist
 
-		investigacionService.updateRiesgoById(riegoRequest);
+		investigacionService.updateRiesgoFinalById(riegoRequest);
 
 		System.out.println("********* [Controller] actualizaRiesgoById : OK ");
 
 		return response;
 	}
-	
+
 	@RequestMapping(value = "/actualizaOrigenMention", method = RequestMethod.POST)
 	public @ResponseBody String actualizaOrigenMention(OrigenesBorradoRequest borraRequest) {
 
 		String response = "1";
-		
 
 		System.out.println(borraRequest.toString());
 
 		// arraylist
-		if(borraRequest.isEsMention()) {
+		if (borraRequest.isEsMention()) {
 			investigacionService.updateEliminadosMention(borraRequest);
-		}else {
+		} else {
 			investigacionService.updateEliminadosOrigen(borraRequest);
 		}
-		
 
 		System.out.println("********* [Controller] actualizaRiesgoById : OK ");
+
+		return response;
+	}
+
+	@RequestMapping(value = "/pruebaAWS", method = RequestMethod.POST)
+	public @ResponseBody String pruebaAWS(RiesgoRequest riegoRequest) {
+
+		String response = "1";		
+		System.out.println("Prueba S3");
+		
+		boolean lanux = false;
+		String reportFolderPath = (lanux ? File.separator : "") + "src" + File.separator + "main" + File.separator
+				+ "java" + File.separator + "mx" + File.separator + "com" + File.separator + "rmsh" + File.separator
+				+ "horusControl" + File.separator + "reportes" + File.separator;
+		
+		String finalReportName = reportFolderPath + "Investigacion74.pdf";
+		
+		File file = new File(finalReportName);	
+		
+		
+		riegoRequest.setNombreCliente(investigacionService.getNombreClientePorUsuario(riegoRequest.getIdUsuario()));
+
+		String newFolder = riegoRequest.getNombreCliente() + "/General/";
+		// arraylist
+		String urlFolder = awsService.createFolder(newFolder);
+		String urlFile =   awsService.saveFile(newFolder,file);
+		
+				
+		System.out.println("URL " + urlFolder + " is ready.");
+		System.out.println("URL " + urlFile + " is ready.");
+		
+		
+		
 
 		return response;
 	}

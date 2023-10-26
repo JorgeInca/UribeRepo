@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.0.0.final using JasperReports Library version 6.0.0  -->
-<!-- 2023-10-22T14:12:10 -->
+<!-- 2023-10-24T13:37:50 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporteInvestigacion" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3f8d7e70-1ce9-4c74-aa90-341bac4b9b8a">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
@@ -27,13 +27,13 @@
 	<title>
 		<band height="196" splitType="Stretch">
 			<line>
-				<reportElement positionType="Float" x="2" y="105" width="555" height="1" uuid="1928aefa-293f-44cb-a76b-317b527ddacd"/>
+				<reportElement positionType="Float" x="2" y="111" width="555" height="1" uuid="1928aefa-293f-44cb-a76b-317b527ddacd"/>
 				<graphicElement>
 					<pen lineWidth="0.5" lineColor="#999999"/>
 				</graphicElement>
 			</line>
 			<staticText>
-				<reportElement style="SubTitle" mode="Transparent" x="506" y="88" width="27" height="17" forecolor="#666666" backcolor="#FFFFFF" uuid="ae2db6ad-569c-447a-a47a-bea1e6df2b53">
+				<reportElement style="SubTitle" mode="Transparent" x="505" y="94" width="27" height="17" forecolor="#666666" backcolor="#FFFFFF" uuid="ae2db6ad-569c-447a-a47a-bea1e6df2b53">
 					<property name="local_mesure_unitheight" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -42,20 +42,8 @@
 				</textElement>
 				<text><![CDATA[Folio: ]]></text>
 			</staticText>
-			<staticText>
-				<reportElement style="Title" mode="Transparent" x="432" y="50" width="48" height="21" forecolor="#3E7BFF" backcolor="#FFFFFF" uuid="20d51798-5827-4e95-a2d4-293380bcaafb">
-					<property name="local_mesure_unitheight" value="pixel"/>
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
-					<font fontName="Dialog" size="14" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
-					<paragraph lineSpacing="1_1_2"/>
-				</textElement>
-				<text><![CDATA[Cliente: 
-Folio: ]]></text>
-			</staticText>
 			<textField pattern="MMM d, yyyy h:mm:ss a" isBlankWhenNull="false">
-				<reportElement style="SubTitle" mode="Transparent" x="533" y="88" width="22" height="17" forecolor="#666666" backcolor="#FFFFFF" uuid="01aee6b9-2259-405b-92cd-74558ff31818">
+				<reportElement style="SubTitle" mode="Transparent" x="532" y="94" width="22" height="17" forecolor="#666666" backcolor="#FFFFFF" uuid="01aee6b9-2259-405b-92cd-74558ff31818">
 					<property name="local_mesure_unitheight" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -64,8 +52,17 @@ Folio: ]]></text>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{idInvestigacion}]]></textFieldExpression>
 			</textField>
+			<image>
+				<reportElement x="450" y="0" width="100" height="100" uuid="0e411747-0af2-4c54-bcf7-a9d367cc25d6">
+					<property name="local_mesure_unitwidth" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<imageExpression><![CDATA[$P{nombre_logo} + ".jpg"]]></imageExpression>
+			</image>
 			<textField isBlankWhenNull="false">
-				<reportElement style="Title" mode="Transparent" x="480" y="50" width="75" height="21" forecolor="#3E7BFF" backcolor="#FFFFFF" uuid="8322b164-32ac-4516-b88d-7046a281e4a5">
+				<reportElement style="Title" mode="Transparent" x="369" y="56" width="185" height="21" forecolor="#3E7BFF" backcolor="#FFFFFF" uuid="8322b164-32ac-4516-b88d-7046a281e4a5">
 					<property name="local_mesure_unitheight" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="local_mesure_unitwidth" value="pixel"/>
@@ -74,10 +71,10 @@ Folio: ]]></text>
 				<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
 					<font fontName="Dialog" size="14" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{clienteName}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Cliente: " + $P{clienteName}]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Page" pattern="MMM d, yyyy h:mm:ss a">
-				<reportElement style="SubTitle" mode="Transparent" x="358" y="71" width="197" height="17" forecolor="#666666" backcolor="#FFFFFF" uuid="99e543e9-b879-403f-b90a-de0daa14e98c">
+				<reportElement style="SubTitle" mode="Transparent" x="357" y="77" width="197" height="17" forecolor="#666666" backcolor="#FFFFFF" uuid="99e543e9-b879-403f-b90a-de0daa14e98c">
 					<property name="local_mesure_unitheight" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -86,10 +83,6 @@ Folio: ]]></text>
 				</textElement>
 				<textFieldExpression><![CDATA[(new java.text.SimpleDateFormat("dd MMMMM yyyy hh:mm aaa",new Locale("es", "ES"))).format(new java.util.Date())]]></textFieldExpression>
 			</textField>
-			<image>
-				<reportElement x="490" y="0" width="50" height="50" uuid="0e411747-0af2-4c54-bcf7-a9d367cc25d6"/>
-				<imageExpression><![CDATA[$P{nombre_logo} + ".png"]]></imageExpression>
-			</image>
 			<image>
 				<reportElement x="370" y="106" width="110" height="84" uuid="b51d581d-5665-4086-a2d6-516c994c21f3"/>
 				<imageExpression><![CDATA[$P{nivelRiesgoTexto} + ".png"]]></imageExpression>

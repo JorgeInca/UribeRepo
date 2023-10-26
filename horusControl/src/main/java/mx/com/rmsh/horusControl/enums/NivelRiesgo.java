@@ -2,6 +2,7 @@ package mx.com.rmsh.horusControl.enums;
 
 public enum NivelRiesgo {
 
+	PENDIENTE(null, "PENDIENTE"),
 	BAJO(1, "BAJO"),
 	MEDIO(2, "MEDIO"),
 	ALTO(3, "ALTO"),
@@ -16,10 +17,26 @@ public enum NivelRiesgo {
 	private String name;
 
 	public static String getNameyId(Integer id) {
+		
+		//System.out.println(" tha fak " + id);
+		
+		if( id == null ) {
+			return PENDIENTE.getName();
+		}
 
 		for (NivelRiesgo e : values()) {
-			if (e.idEstatus.equals(id))
-				return e.getName();
+			
+			if( e.idEstatus == null ) {
+				if( id == null) {
+					return e.getName();
+				}
+			}else {
+
+				if (e.idEstatus.equals(id))
+					return e.getName();
+				
+			}
+						
 		}
 		return "BAJO";
 

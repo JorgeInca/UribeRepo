@@ -64,7 +64,7 @@ import net.sf.jasperreports.engine.export.JRPdfExporter;
 @Service
 public class InvestigacionServiceImpl implements InvestigacionService {
 
-	@Autowired
+	@Autowired 
 	InvestigacionDao dao;
 
 	@Autowired
@@ -76,7 +76,9 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 
 	@Override
 	public List<Investigacion> getReportes(ReporteRequest request) {
-
+		
+		//Integer riesgoEditado = dao.getRiesgoFInal(lambdaQuery.getIdInvestigacion());
+		
 		return dao.getReportes(request);
 	}
 
@@ -125,7 +127,7 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 		Long idMasiva = 0L;
 
 		// Variables Excel
-		String UPLOAD_FOLDER = "C://test//";
+		
 		XSSFWorkbook excelPeticion;
 		String lowerCaseFileName = masivaRequest.getFile().getOriginalFilename().toLowerCase();
 
@@ -179,7 +181,7 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 							investigacion.setRfc(fmt.formatCellValue(cell));
 
 						investigacion.setIdUsuario(masivaRequest.getIdUsuario());
-						investigacion.setNivel_riesgo(0);
+						investigacion.setNivel_riesgo(null);
 						investigacion.setIdMasiva(idMasiva);
 						investigacion.setInvestigacionJson("");
 						investigacion.setIdEstatus(EstatusInvestigacion.PENDIENTE.getIdEstatus());
@@ -213,9 +215,9 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 	}
 
 	@Override
-	public ResponseEntity<ByteArrayResource> getPDFInvestigacion(Long idInvestigacion) {
+	public ResponseEntity<ByteArrayResource> getPDFInvestigacion(Long idInvestigacion, String campaign, boolean s3Exists) {
 
-		System.out.println("********* [Service] getPDFInvestigacion : ");
+		System.out.println("********* [Service] getPDFInvestigacion : " +  idInvestigacion + " campaign: " +  campaign +" s3Exists: " + s3Exists );
 
 		boolean linux = false;
 
@@ -234,6 +236,11 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 		InvestigacionRequest reguest = new InvestigacionRequest();
 		reguest.setIdInvestigacion(idInvestigacion);
 		InvestigacionLAMBDA lambdaQuery = awsService.getJSONFromBD(reguest);
+		lambdaQuery.setIdInvestigacion(idInvestigacion);		
+		
+		Long idUsuario = dao.getIdUserByInvestigacionId(idInvestigacion);
+		
+		lambdaQuery.setNombreEmpresa( getNombreClientePorUsuario(idUsuario));
 		
 
 		try {
@@ -260,7 +267,7 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 			Map<String, Object> parameter = datosParam.getParameter();
 
 			parameter.put("subreportParameter", subInt);
-			parameter.put("nombre_logo", "LOGO_"+"PROEZA");
+			parameter.put("nombre_logo", "LOGO_"+lambdaQuery.getNombreEmpresa());
 			parameter.put("subreportParameter2", subNac);
 			parameter.put("subreportParameter3", subPep);
 			parameter.put("subreportParameter4", subOth);
@@ -289,6 +296,7 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 			// Create 5 subreports Checklist
 			JasperReport subIntGlobal = JasperCompileManager
 					.compileReport(reportFolderPath + "intcumpGlobal" + ".jrxml");
+		
 
 			parameter.put("subreportParameter6", subIntGlobal);
 
@@ -310,7 +318,7 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 
 			// generate the PDF 3
 			Map<String, Object> parameters3 = new HashMap<String, Object>();
-			parameters3.put("clienteName", "Coca-Cola");
+			parameters3.put("clienteName", lambdaQuery.getNombreEmpresa());
 			parameters3.put("idInvestigacion", idInvestigacion.toString());
 			parameters3.put("nombreCompleto", lambdaQuery.getBody().getParametros_busqueda().get(0) + " "
 					+ lambdaQuery.getBody().getParametros_busqueda().get(1));
@@ -346,6 +354,21 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 			ByteArrayResource resource = new ByteArrayResource(data);
 
 			System.out.println("fileName: " + file.getName());
+			
+			if(!s3Exists) {
+				
+				System.out.println("Guardando en S3");
+				
+				String newFolder = lambdaQuery.getNombreEmpresa() + campaign;
+				
+				String urlFolder = awsService.createFolder(newFolder);
+				String urlFile =   awsService.saveFile(newFolder,file);
+				
+				System.out.println("URL " + urlFolder + " is ready.");
+				System.out.println("URL " + urlFile + " is ready.");
+				
+				
+			}
 
 			return ResponseEntity.ok()
 					// Content-Disposition
@@ -374,9 +397,10 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 		// Objeto vacio para evitar el reporte blanco
 		listaObjetos.add(new FillReportInvestigacionVO());
 		//listaObjetosResultado.add(new FillReportInvestigacionResultadoVO());
-
+		
+		
 		// Datos Usuario
-		parameter.put("clienteName", "Coca-Cola");
+		parameter.put("clienteName", lambdaQuery.nombreEmpresa);
 		parameter.put("idInvestigacion", String.valueOf(lambdaQuery.getIdInvestigacion().toString()));
 		parameter.put("nombreCompleto", lambdaQuery.getBody().getParametros_busqueda().get(0) + " "
 				+ lambdaQuery.getBody().getParametros_busqueda().get(1));
@@ -705,10 +729,16 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 		// TODO Auto-generated method stub
 		return dao.getMasivas(request);
 	}
+	
+	@Override
+	public void setRiesgoById(RiesgoRequest request) {
+		 dao.setRiesgoInicialById(request);
+		
+	}
 
 	@Override
-	public void updateRiesgoById(RiesgoRequest request) {
-		 dao.updateRiesgoById(request);
+	public void updateRiesgoFinalById(RiesgoRequest request) {
+		 dao.updateRiesgoFinalById(request);
 		
 	}
 
@@ -721,6 +751,42 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 	@Override
 	public void updateEliminadosMention(OrigenesBorradoRequest request) {
 		dao.updateEliminadosMention(request);
+		
+	}
+
+	@Override
+	public String getNombreClientePorUsuario(Long idUsuario) {
+		// TODO Auto-generated method stub
+		return dao.getNombreClientePorUsuario(idUsuario);
+	}
+
+	@Override
+	public List<InvestigacionRequest> getMasivasToAWS(Integer limit) {
+		// TODO Auto-generated method stub
+		return dao.getMasivasToAWS(limit);
+	}
+
+	@Override
+	public void setJsonById(Long idInvestigacion, String json) {
+		dao.setJsonById(idInvestigacion,json);
+		
+	}
+
+	@Override
+	public void finishInvestigacionTask(Long idInvestigacion) {
+		dao.finishInvestigacionTask(idInvestigacion);
+		
+	}
+	
+	@Override
+	public void errorInvestigacionTask(Long idInvestigacion) {
+		dao.errorInvestigacionTask(idInvestigacion);
+		
+	}
+
+	@Override
+	public void updateCampanias() {
+		dao.updateCampanias();
 		
 	}
 

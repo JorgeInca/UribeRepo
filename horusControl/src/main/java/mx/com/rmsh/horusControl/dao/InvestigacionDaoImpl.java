@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.sql.Types;
 import java.util.Date;
 import java.util.List;
 
@@ -43,7 +44,7 @@ public class InvestigacionDaoImpl implements InvestigacionDao {
 			+ " A.estatus as estatus "
 			+ " FROM investigacion A inner join usuario B on  A.id_usuario = B.id_usuario "
 			+ "left join empresa C on  B.id_empresa = C.id_empresa "
-			+ "where A.estatus != 3 order by A.fecha_creacion desc;";
+			+ "where A.estatus != 4 order by A.fecha_creacion desc;";
 	
 	String QUERY_CREATE_REPORTEE=
 			"INSERT INTO `horusDatabase`.`investigacion`"
@@ -56,10 +57,11 @@ public class InvestigacionDaoImpl implements InvestigacionDao {
 			+ "`nivel_riesgo_inicial`,"
 			+ "`fecha_creacion`,"
 			+ "`id_masiva`,"
-			+ "`estatus`"
+			+ "`estatus`,"
+			+ "`rfc`"
 			+ ")"
 			+ "VALUES"
-			+ "(?,?,?,?,?,?,?,?,?)";
+			+ "(?,?,?,?,?,?,?,?,?,?)";
 
 	String QUERY_CREATE_MASIVA=
 			"INSERT INTO `horusDatabase`.`investigacion_masiva`"
@@ -76,15 +78,19 @@ public class InvestigacionDaoImpl implements InvestigacionDao {
 	
 	String QUERY_GET_JSON_INVESTIGACION_MASIVA = "select A.* , B.nombre as nombreUsuario from investigacion_masiva A  inner join usuario B on B.id_usuario = A.id_usuario where A.estatus in (1,2) ";
 	
-	String QUERY_GET_INVESTIGACION_REQUEST_FOR_AWS = "Select * from investigacion A where A.id_masiva != 0 and A.estatus = 2 order by A.id_investigacion desc limit 10";
+	String QUERY_GET_INVESTIGACION_REQUEST_FOR_AWS = "Select * from investigacion A inner join investigacion_masiva B on A.id_masiva = B.id_investigacion_masiva where A.id_masiva != 0 and (A.estatus = 2 or A.estatus = 3) order by A.id_investigacion desc limit 1000 ";
 	
 	String QUERY_UPDATE_MASIVAEND = "update investigacion_masiva A set A.estatus = 2 where A.id_investigacion_masiva in ( SELECT * FROM (select B.id_investigacion_masiva from investigacion_masiva B LEFT JOIN investigacion C ON B.id_investigacion_masiva = C.id_masiva WHERE (C.estatus != 2 OR C.estatus IS NULL) AND B.estatus = 1) D)";
 	
 	String QUERY_SET_JSON_BY_ID = "update investigacion A set A.json_desc = ? where A.id_investigacion = ?";
 	
+	String QUERY_ERROR_INVESTIGACION = "update investigacion A set A.estatus = 3 where A.id_investigacion = ?";
+	
 	String QUERY_FINISH_INVESTIGACION = "update investigacion A set A.estatus = 1 where A.id_investigacion = ?";
 	
-	String QUERY_UPDATE_RIESGOBYID = "update investigacion A set A.nivel_riesgo_final = ? where A.id_investigacion = ?";
+	String QUERY_SET_RIESGO_BYID = "update investigacion A set A.nivel_riesgo_inicial = ? where A.id_investigacion = ?";
+	
+	String QUERY_UPDATE_RIESGO_FINALBYID = "update investigacion A set A.nivel_riesgo_final = ? where A.id_investigacion = ?";
 	
 	String QUERY_GET_RIESGO_FINAL_BYID = "Select nivel_riesgo_final from investigacion A where A.id_investigacion = ? ";
 	
@@ -95,6 +101,12 @@ public class InvestigacionDaoImpl implements InvestigacionDao {
 	String QUERY_UPDATE_ORIGENESELIMINADOS = "update investigacion A set A.origenes_eliminados = ? where A.id_investigacion = ?";
 	
 	String QUERY_UPDATE_MENTIONSELIMINADOS = "update investigacion A set A.menciones_eliminadas = ? where A.id_investigacion = ?";
+	
+	String QUERY_GET_EMPRESA_USUARIO_BYID =
+			"select b.nombre from usuario A inner join empresa b on A.id_empresa = b.id_empresa where A.id_usuario = ? ";
+	
+	String QUERY_GET_USER_INVESTIGACION_BYID =
+			"select id_usuario from investigacion  where id_investigacion = ? ";
 
 	@SuppressWarnings("deprecation")
 	@Override
@@ -111,8 +123,8 @@ public class InvestigacionDaoImpl implements InvestigacionDao {
 						rs.getString("apellidos"), 
 						rs.getString("primerNombre"),						 
 						rs.getString("json_desc"), 
-						rs.getInt("riesgoInicial"), 
-						rs.getInt("riesgoFinal"), 
+						(Integer) rs.getObject("riesgoInicial"), 
+						(Integer) rs.getObject("riesgoFinal"), 
 						rs.getTimestamp("fecha_creacion"),
 						rs.getInt("estatus")
 						));
@@ -135,6 +147,7 @@ public class InvestigacionDaoImpl implements InvestigacionDao {
 	          ps.setTimestamp(7, new Timestamp( new Date().getTime() ) );
 	          ps.setLong(8, 0L );
 	          ps.setLong(9, request.getIdEstatus() );
+	          ps.setString(10, request.getRfc() );
 	          return ps;
 	        }, keyHolder);
 
@@ -164,10 +177,18 @@ public class InvestigacionDaoImpl implements InvestigacionDao {
                 preparedStatement.setLong(3, entity.getIdUsuario());
                 preparedStatement.setLong(4, 121l);
                 preparedStatement.setString(5, entity.getInvestigacionJson());
-                preparedStatement.setLong(6, entity.getNivel_riesgo());
+                
+                if( ! (entity.getNivel_riesgo() == null) ) {
+                	preparedStatement.setLong(6, entity.getNivel_riesgo());
+                }else {
+                	preparedStatement.setNull(6, Types.TINYINT);
+				}
+                
                 preparedStatement.setTimestamp(7,new Timestamp( new Date().getTime() ) );
                 preparedStatement.setLong(8, entity.getIdMasiva());  
                 preparedStatement.setLong(9, entity.getIdEstatus() );
+                preparedStatement.setString(10, entity.getRfc());
+                
             }
 
             @Override
@@ -219,8 +240,8 @@ public class InvestigacionDaoImpl implements InvestigacionDao {
 						rs.getLong("id_investigacion"),
 						rs.getString("apellidos"), 
 						rs.getString("primer_nombre"),
-						"",
-						 14 			
+						14,
+						rs.getString("titulo")
 						));
 	}
 
@@ -264,13 +285,41 @@ public class InvestigacionDaoImpl implements InvestigacionDao {
 			        });
 		
 	}
+	
+	@Override
+	public void errorInvestigacionTask(Long idInvestigacion) {
+		// TODO Auto-generated method stub
+				jdbcTemplate.update(connection -> {
+			        PreparedStatement ps = connection
+			          .prepareStatement(QUERY_ERROR_INVESTIGACION);
+			        
+			         ps.setLong(1,idInvestigacion);
+			         
+			          return ps;
+			        });
+		
+	}
 
 	@Override
-	public void updateRiesgoById(RiesgoRequest request) {
+	public void updateRiesgoFinalById(RiesgoRequest request) {
 		// TODO Auto-generated method stub
 		jdbcTemplate.update(connection -> {
 	        PreparedStatement ps = connection
-	          .prepareStatement(QUERY_UPDATE_RIESGOBYID);
+	          .prepareStatement(QUERY_UPDATE_RIESGO_FINALBYID);
+	        
+	        	ps.setInt(1, request.getRiesgo());
+	        	ps.setLong(2,request.getIdInvestigacion());	        	
+	        	
+	          return ps;
+	        });		
+	}
+	
+	@Override
+	public void setRiesgoInicialById(RiesgoRequest request) {
+		// TODO Auto-generated method stub
+		jdbcTemplate.update(connection -> {
+	        PreparedStatement ps = connection
+	          .prepareStatement(QUERY_SET_RIESGO_BYID);
 	        
 	        	ps.setInt(1, request.getRiesgo());
 	        	ps.setLong(2,request.getIdInvestigacion());	        	
@@ -332,6 +381,28 @@ public class InvestigacionDaoImpl implements InvestigacionDao {
 	          return ps;
 	        });		
 		
+	}
+
+	@Override
+	public String getNombreClientePorUsuario(Long idUsuario) {
+		// TODO Auto-generated method stub
+		 
+		String nombreUsuario = (String) jdbcTemplate.queryForObject(
+				QUERY_GET_EMPRESA_USUARIO_BYID, new Object[] { idUsuario }, String.class);
+		 
+		 return nombreUsuario;
+		
+	}
+	
+	@Override
+	@SuppressWarnings("deprecation")
+	public Long getIdUserByInvestigacionId(Long investigacionid) {
+		// TODO Auto-generated method stub
+		 
+		Long idUsuario = (Long) jdbcTemplate.queryForObject(
+				QUERY_GET_USER_INVESTIGACION_BYID, new Object[] { investigacionid }, Long.class);
+		 
+		 return idUsuario;
 	}
 	
 	

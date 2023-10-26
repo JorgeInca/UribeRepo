@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.0.0.final using JasperReports Library version 6.0.0  -->
-<!-- 2023-10-22T14:34:32 -->
+<!-- 2023-10-24T13:37:51 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporteInvestigacion" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="45" bottomMargin="20" uuid="3f8d7e70-1ce9-4c74-aa90-341bac4b9b8a">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
@@ -74,6 +74,15 @@
 	</background>
 	<title>
 		<band height="336" splitType="Stretch">
+			<image>
+				<reportElement x="450" y="-12" width="100" height="100" uuid="0f0d853e-4699-4623-9181-2da57cea87ee">
+					<property name="local_mesure_unitwidth" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<imageExpression><![CDATA[$P{nombre_logo} + ".jpg"]]></imageExpression>
+			</image>
 			<line>
 				<reportElement positionType="Float" x="0" y="105" width="555" height="1" uuid="ffa56bc3-e27f-40d5-b81e-8439e795ec79"/>
 				<graphicElement>
@@ -108,18 +117,6 @@
 				</textElement>
 				<text><![CDATA[Folio: ]]></text>
 			</staticText>
-			<staticText>
-				<reportElement style="Title" mode="Transparent" x="432" y="50" width="48" height="21" forecolor="#3E7BFF" backcolor="#FFFFFF" uuid="ebaff0c6-d216-443e-b675-d35feb133bfd">
-					<property name="local_mesure_unitheight" value="pixel"/>
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
-					<font fontName="Dialog" size="14" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
-					<paragraph lineSpacing="1_1_2"/>
-				</textElement>
-				<text><![CDATA[Cliente: 
-Folio: ]]></text>
-			</staticText>
 			<textField pattern="MMM d, yyyy h:mm:ss a" isBlankWhenNull="false">
 				<reportElement style="SubTitle" mode="Transparent" x="533" y="88" width="22" height="17" forecolor="#666666" backcolor="#FFFFFF" uuid="1d95c811-c3d5-4a48-8993-ffa24145f48e">
 					<property name="local_mesure_unitheight" value="pixel"/>
@@ -129,18 +126,6 @@ Folio: ]]></text>
 					<font fontName="Dialog" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{idInvestigacion}]]></textFieldExpression>
-			</textField>
-			<textField isBlankWhenNull="false">
-				<reportElement style="Title" mode="Transparent" x="480" y="50" width="75" height="21" forecolor="#3E7BFF" backcolor="#FFFFFF" uuid="8604428c-e001-469c-9c90-6534c64eb8d1">
-					<property name="local_mesure_unitheight" value="pixel"/>
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-					<property name="local_mesure_unitwidth" value="pixel"/>
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-				</reportElement>
-				<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
-					<font fontName="Dialog" size="14" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{clienteName}]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Page" pattern="MMM d, yyyy h:mm:ss a">
 				<reportElement style="SubTitle" mode="Transparent" x="358" y="71" width="197" height="17" forecolor="#666666" backcolor="#FFFFFF" uuid="0b8330a2-a370-420f-8962-5f4a1628a3d5">
@@ -152,10 +137,6 @@ Folio: ]]></text>
 				</textElement>
 				<textFieldExpression><![CDATA[(new java.text.SimpleDateFormat("dd MMMMM yyyy hh:mm aaa",new Locale("es", "ES"))).format(new java.util.Date())]]></textFieldExpression>
 			</textField>
-			<image>
-				<reportElement x="490" y="0" width="50" height="50" uuid="f879e691-32d5-4bcf-af97-a62b5f155cc3"/>
-				<imageExpression><![CDATA[$P{nombre_logo} + ".png"]]></imageExpression>
-			</image>
 			<staticText>
 				<reportElement style="Title" mode="Transparent" x="0" y="50" width="190" height="18" forecolor="#3E7BFF" backcolor="#FFFFFF" uuid="c3fe0910-03b0-4f0e-bad9-2700d1a5f2d5"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
@@ -193,6 +174,18 @@ Menciones Adversas]]></text>
 					<font fontName="Dialog" size="14" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{nombreCompleto}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement style="Title" mode="Transparent" x="369" y="49" width="185" height="21" forecolor="#3E7BFF" backcolor="#FFFFFF" uuid="e5c14eb6-b430-41fb-8fd1-b2bb5d4da03c">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="local_mesure_unitwidth" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Dialog" size="14" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Cliente: " + $P{clienteName}]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>

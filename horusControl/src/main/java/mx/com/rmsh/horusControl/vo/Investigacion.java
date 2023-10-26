@@ -3,7 +3,11 @@ package mx.com.rmsh.horusControl.vo;
 import java.util.Date;
 
 import mx.com.rmsh.horusControl.enums.EstatusInvestigacion;
+import mx.com.rmsh.horusControl.enums.NivelRiesgo;
 
+/**
+ * 
+ */
 public class Investigacion {
 
 	private Long idInvestigacion;
@@ -17,6 +21,7 @@ public class Investigacion {
 	private String json;
 	private Integer riesgoInicial;
 	private Integer riesgoFinal;
+	private String riesgoTexto;
 	private Integer pais;
 	private Date fechaCreacion;
 	private Integer estatus;
@@ -27,8 +32,8 @@ public class Investigacion {
 	}
 
 	public Investigacion(Long idInvestigacion, Long idUsuario, String nombreUsuario, Long idEmpresa,
-			String nombreEmpresa, String apellidos, String primer_nombre, String json,
-			Integer riesgoInicial, Integer riesgoFinal, Date fechaCreacion, Integer estatus) {
+			String nombreEmpresa, String apellidos, String primer_nombre, String json, Integer riesgoInicial,
+			Integer riesgoFinal, Date fechaCreacion, Integer estatus) {
 		super();
 		this.idInvestigacion = idInvestigacion;
 		this.idUsuario = idUsuario;
@@ -42,8 +47,15 @@ public class Investigacion {
 		this.riesgoFinal = riesgoFinal;
 		this.fechaCreacion = fechaCreacion;
 		this.estatus = estatus;
-		
+
 		this.setEstatusText(EstatusInvestigacion.getNameyId(estatus));
+
+		if (riesgoFinal != null) {
+			this.riesgoTexto = NivelRiesgo.getNameyId(riesgoFinal);
+		} else {
+			this.riesgoTexto = NivelRiesgo.getNameyId(riesgoInicial);
+		}
+
 	}
 
 	public Long getIdInvestigacion() {
@@ -166,6 +178,14 @@ public class Investigacion {
 		this.estatusText = estatusText;
 	}
 
+	public String getRiesgoTexto() {
+		return riesgoTexto;
+	}
+
+	public void setRiesgoTexto(String riesgoTexto) {
+		this.riesgoTexto = riesgoTexto;
+	}
+
 	@Override
 	public String toString() {
 		return "Investigacion [idInvestigacion=" + idInvestigacion + ", idUsuario=" + idUsuario + ", nombreUsuario="
@@ -174,7 +194,5 @@ public class Investigacion {
 				+ ", riesgoInicial=" + riesgoInicial + ", riesgoFinal=" + riesgoFinal + ", pais=" + pais
 				+ ", fechaCreacion=" + fechaCreacion + ", estatus=" + estatus + ", estatusText=" + estatusText + "]";
 	}
-
-	
 
 }

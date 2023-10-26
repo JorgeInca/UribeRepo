@@ -6,11 +6,12 @@ public class InvestigacionRequest {
 	public String firstname;
 	public String lastname;
 	public Long idUsuario;
-	public String rfc;
+	public String rfc = "";
 	public Integer pais;
 	public Integer nivel_riesgo;
 	public String investigacionJson;
 	public String json;
+	public String titulo;
 	public Long idMasiva;
 	public Integer idEstatus;
 	public String estatusText;	
@@ -26,6 +27,15 @@ public class InvestigacionRequest {
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.rfc = rfc;
+		this.pais = pais;
+	}
+	
+	public InvestigacionRequest(Long idInvestigacion, String firstname, String lastname, Integer pais, String titulo) {
+		super();
+		this.idInvestigacion = idInvestigacion;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.titulo = titulo;
 		this.pais = pais;
 	}
 
@@ -127,12 +137,25 @@ public class InvestigacionRequest {
 		this.estatusText = estatusText;
 	}
 
+
+	public String getTitulo() {
+		return titulo;
+	}
+
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
+
+
 	@Override
 	public String toString() {
 		return "InvestigacionRequest [idInvestigacion=" + idInvestigacion + ", firstname=" + firstname + ", lastname="
 				+ lastname + ", idUsuario=" + idUsuario + ", rfc=" + rfc + ", pais=" + pais + ", nivel_riesgo="
-				+ nivel_riesgo + ", investigacionJson=" + investigacionJson + ", json=" + json + ", idMasiva="
-				+ idMasiva + ", idEstatus=" + idEstatus + ", estatusText=" + estatusText + "]";
+				+ nivel_riesgo + ", investigacionJson=" + investigacionJson + ", json=" + json + ", titulo=" + titulo
+				+ ", idMasiva=" + idMasiva + ", idEstatus=" + idEstatus + ", estatusText=" + estatusText + "]";
 	}
+
+	
 
 }

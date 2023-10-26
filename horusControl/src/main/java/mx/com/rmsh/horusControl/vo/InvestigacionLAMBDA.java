@@ -9,6 +9,8 @@ public class InvestigacionLAMBDA {
 	public Long created;
 	public String jsonBD;
 	public Body body;
+	public Long idUsuario;
+	public String nombreEmpresa;
 
 	public int getStatusCode() {
 		return statusCode;
@@ -50,11 +52,32 @@ public class InvestigacionLAMBDA {
 		this.jsonBD = jsonBD;
 	}
 
+	public Long getIdUsuario() {
+		return idUsuario;
+	}
+
+	public void setIdUsuario(Long idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+
+	public String getNombreEmpresa() {
+		return nombreEmpresa;
+	}
+
+	public void setNombreEmpresa(String nombreEmpresa) {
+		this.nombreEmpresa = nombreEmpresa;
+	}
+
 	@Override
 	public String toString() {
 		return "InvestigacionLAMBDA [idInvestigacion=" + idInvestigacion + ", statusCode=" + statusCode + ", created="
-				+ created + ", jsonBD=" + jsonBD + ", body=" + body + "]";
+				+ created + ", jsonBD=" + jsonBD + ", body=" + body + ", idUsuario=" + idUsuario + ", nombreEmpresa="
+				+ nombreEmpresa + "]";
 	}
+
+	
+
+	
 
 }
 
