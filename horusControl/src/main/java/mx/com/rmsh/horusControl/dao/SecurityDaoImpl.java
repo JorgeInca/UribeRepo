@@ -69,8 +69,12 @@ public class SecurityDaoImpl implements SecurityDao {
            // Edita la informacion
         	String QUERY_UPDATE_EMPRESA =
 	    "Update empresa set nombre= ?,email =?,phone = ?,estatus =? where id_empresa = ?";
+        	
+        	
+        	
+        	
 		
-//---------------------- Usuarios -------------------------------------------------		
+//------------------------------------------------ Usuarios ----------------------------------------------------------------------------------		
 	
 	String QUERY_GET_USERS = "SELECT "
 			+ " A.id_usuario as id_usuario,"
@@ -265,6 +269,7 @@ public class SecurityDaoImpl implements SecurityDao {
 
 
 //------------------------ Empresas -------------------------------------------------
+		
 		@SuppressWarnings("deprecation")
 		@Override
 		public List<Empresas> getEmpresa(Empresas request) {
@@ -286,7 +291,7 @@ public class SecurityDaoImpl implements SecurityDao {
 					new Object[] { id_empresa }, new EmpresaRowMapper());
 		}
 
-		
+	
 		@Override
 		public Long guardaEmpresa(Empresas user) {
 			// TODO Auto-generated method stub
@@ -304,7 +309,6 @@ public class SecurityDaoImpl implements SecurityDao {
 
 		        return (long) keyHolder.getKey().longValue();
 		    }
-		
 		
 		
 		@Override

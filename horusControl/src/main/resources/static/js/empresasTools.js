@@ -116,9 +116,7 @@ function Empresas(){
 	$('#ModalEmpresas').modal('show');
 	
 	
-	//Habilita los botones
-			$("#rowFolio").show(); //hide
-			
+	        //Habilita los botones
 			$("#noFolio1").prop('disabled', true);
 			$("#form-name").prop('disabled', false);
 			$("#form-email").prop('disabled', false);
@@ -127,11 +125,9 @@ function Empresas(){
 
 			//Habilita los botones
 			$("#limpiarUsuarios").prop('disabled', false);
-		
-        	
-        	$("#EnviarEmpresas").prop('disabled', false);
+	     	$("#EnviarEmpresas").prop('disabled', false);
 			$("#updateEmpresas").prop('disabled', true);
-	
+	 
 }
 
 function editarEmpresaId(id_empresa) {
@@ -206,7 +202,7 @@ function actualizaEmpresa(){
 	var uri = "actualizaEmpresa";
 	
 	var id_empresa = $("#noFolio1").val();
-	var var_name = $("#form-name").val();
+	var var_firstname = $("#form-name").val();
 	var var_email = $("#form-email").val();
 	var var_phone = $("#form-phone").val();
 	var var_estatus = $("#form-estatus").val();
@@ -217,7 +213,7 @@ function actualizaEmpresa(){
 	
 	var Empresas = {
 		id_empresa: id_empresa,
-	    name: var_name,
+	    nombre: var_firstname,
 		email: var_email,
 		phone: var_phone,
 		estatus: var_estatus
@@ -254,6 +250,8 @@ function actualizaEmpresa(){
 
 
 
+var investigacionGlobalUsuarios;
+var usuariosGlobal;
 
 function guardaEmpresa() {
 
@@ -261,12 +259,13 @@ function guardaEmpresa() {
 
 	var uri = "guardaEmpresa";
 
-	var var_name = $("#form-name").val();
+	var var_firstname = $("#form-name").val();
+	// var var_name = $("#form-name").val();
 	var var_email = $("#form-email").val();
 	var var_phone = $("#form-phone").val();
 	var var_estatus = $("#form-estatus").val();
 	
-	if (var_name === "" || var_email === "" || var_phone === "" || var_estatus === "" ) {
+	if (var_firstname === "" || var_email === "" || var_phone === "" || var_estatus === "" ) {
 		return;
 	}
 
@@ -275,7 +274,7 @@ function guardaEmpresa() {
 	}
 
 	var Empresas = {
-	    name: var_name,
+	    nombre: var_firstname,
 		email: var_email,
 		phone: var_phone,
 		estatus: var_estatus
