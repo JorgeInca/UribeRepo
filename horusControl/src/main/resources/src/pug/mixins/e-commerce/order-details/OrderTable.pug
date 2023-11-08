@@ -1,0 +1,94 @@
+mixin OrderTableRow(data,index)
+  tr.hover-actions-trigger.btn-reveal-trigger.position-static
+    td.align-middle.white-space-nowrap.py-2
+      a(href=`${CWD}${paths['e-commerce-fe-product-details']}`).d-block.border.rounded-2
+        img(src=`${CWD}assets/img/${data.productImage}` alt="" width=53)
+    td.products.align-middle.py-0
+      a.fw-semi-bold.line-clamp-2.mb-0(href=`${CWD}${paths['e-commerce-fe-product-details']}`)=`${data.product}`
+    td.color.align-middle.white-space-nowrap.text-900.py-0.ps-4=data.color
+    td.size.align-middle.white-space-nowrap.text-700.fw-semi-bold.py-0.ps-4=data.size
+    td.price.align-middle.text-900.fw-semi-bold.text-end.py-0.ps-4=data.price
+    td.quantity.align-middle.text-end.py-0.ps-4.text-700=data.quantity
+    td.total.align-middle.fw-bold.text-1000.text-end.py-0.ps-4=data.total
+
+
+mixin OrderTable
+  -
+    var orderTableData = [
+      {
+        product:'Fitbit Sense Advanced Smartwatch with Tools for Heart Health, Stress Management & Skin Temperature Trends, Carbon/Graphite, One Size (S & L Bands)',
+        productImage:'/products/1.png',
+        color: 'Pure matte black',
+        price:'$57',
+        size: 42,
+        quantity: 4,
+        total: '$228'
+      },
+      {
+        product:'iPhone 13 pro max-Pacific Blue-128GB storage',
+        productImage:'/products/2.png',
+        color: 'Glossy black',
+        price:'$199',
+        size: 'XL',
+        quantity: 2,
+        total: '$398'
+      },
+      {
+        product:'Apple MacBook Pro 13 inch-M1-8/256GB-space',
+        productImage:'/products/3.png',
+        color: 'Glossy black',
+        price:'$600',
+        size: 'L',
+        quantity: 1,
+        total: '$600'
+      },
+      {
+        product:'Apple iMac 24" 4K Retina Display M1 8 Core CPU, 7 Core GPU, 256GB SSD, Green (MJV83ZP/A) 2021',
+        productImage:'/products/4.png',
+        color: 'Gray',
+        price:'$250',
+        size: '22',
+        quantity: 2,
+        total: '$500'
+      },
+      {
+        product:'Razer Kraken v3 x Wired 7.1 Surroung Sound Gaming headset',
+        productImage:'/products/5.png',
+        color: 'Black',
+        price:'$49',
+        size: 'L',
+        quantity: 3,
+        total: '$147'
+      },
+      {
+        product:'PlayStation 5 DualSense Wireless Controller',
+        productImage:'/products/6.png',
+        color: 'Green Golden',
+        price:'$65',
+        size: 'Regular',
+        quantity: 2,
+        total: '$130'
+      },
+    ]
+
+  #orderTable(data-list!={
+    valueNames: ["products", "color", "size", "price", "quantity", "total"],
+    page: 10
+  })
+    .table-responsive.scrollbar
+      table.table.fs--1.mb-0.border-top.border-200
+        thead
+          tr
+            th.sort.white-space-nowrap.align-middle.fs--2(scope='col')
+            th.sort.white-space-nowrap.align-middle(scope='col' style='min-width:400px;' data-sort="products") PRODUCTS
+            th.sort.align-middle.ps-4(scope='col' data-sort="color" style='width:150px;' ) COLOR
+            th.sort.align-middle.ps-4(scope='col' data-sort="size" style='width:300px;') SIZE
+            th.sort.align-middle.text-end.ps-4(scope='col' data-sort="price" style='width:150px;') PRICE
+            th.sort.align-middle.text-end.ps-4(scope='col' data-sort="quantity" style='width:200px;') QUANTITY
+            th.sort.align-middle.text-end.ps-4(scope='col' data-sort="total" style='width:250px;') TOTAL
+        tbody.list#order-table-body
+          each row,index in orderTableData
+            +OrderTableRow(row,index)
+  .d-flex.flex-between-center.py-3.border-bottom.mb-6
+    p.text-1100.fw-semi-bold.lh-sm.mb-0 Items subtotal :
+    p.text-1100.fw-bold.lh-sm.mb-0 $1690

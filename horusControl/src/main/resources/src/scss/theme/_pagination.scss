@@ -1,0 +1,24 @@
+.page-item {
+  margin: 0.125rem;
+  // &:first-child {
+  //   .page-link {
+  //     color: $primary;
+  //   }
+  // }
+  // &:last-child {
+  //   .page-link {
+  //     color: $primary;
+  //   }
+  // }
+}
+
+.page-link {
+  padding: $pagination-padding-y $pagination-padding-x;
+  font-size: $pagination-font-size;
+  font-weight: $font-weight-bold;
+  border-radius: $pagination-border-radius;
+  line-height: $line-height-sm;
+  &.disabled {
+    color: var(--#{$prefix}gray-400);
+  }
+}

@@ -1,0 +1,79 @@
+mixin CartTableRow(data,index)
+  tr.cart-table-row.btn-reveal-trigger
+    td.align-middle.white-space-nowrap.py-0
+      a(href=`${CWD}${paths['e-commerce-fe-product-details']}`).d-block.border.rounded-2
+        img(src=`${CWD}assets/img/${data.productImage}` alt="" width=53)
+    td.products.align-middle
+      a.fw-semi-bold.mb-0.line-clamp-2(href=`${CWD}${paths['e-commerce-fe-product-details']}`)=data.product
+    td.color.align-middle.white-space-nowrap.fs--1.text-900=data.color
+    td.size.align-middle.white-space-nowrap.text-700.fs--1.fw-semi-bold=data.size
+    td.price.align-middle.text-900.fs--1.fw-semi-bold.text-end=data.price
+    td.quantity.align-middle.fs-0.ps-5
+      .input-group.input-group-sm.flex-nowrap(data-quantity)
+        button.btn.btn-sm.px-2(data-type="minus") -
+        input.form-control.text-center.input-spin-none.bg-transparent.border-0.px-0(type='number' min="1" value=data.quantity aria-label='Amount (to the nearest dollar)')
+        button.btn.btn-sm.px-2(data-type="plus") +
+    td.total.align-middle.fw-bold.text-1000.text-end=data.total
+    td.align-middle.white-space-nowrap.text-end.pe-0.ps-3
+      button.btn.btn-sm.text-500.hover-text-600.me-2
+        span.fas.fa-trash
+
+
+mixin CartTable
+  -
+    var cartTableData = [
+      {
+        product:'Fitbit Sense Advanced Smartwatch with Tools for Heart Health, Stress Management & Skin Temperature Trends, Carbon/Graphite, One Size (S & L Bands)',
+        productImage:'/products/1.png',
+        color: 'Glossy black',
+        price:'$199',
+        size: 'XL',
+        quantity: 2,
+        total: '$398'
+      },
+      {
+        product:'iPhone 13 pro max-Pacific Blue-128GB storage',
+        productImage:'/products/2.png',
+        color: 'Glossy black',
+        price:'$150',
+        size: 'XL',
+        quantity: 2,
+        total: '$300'
+      },
+      {
+        product:'Apple MacBook Pro 13 inch-M1-8/256GB-space',
+        productImage:'/products/3.png',
+        color: 'Glossy Golden',
+        price:'$65',
+        size: '34mm',
+        quantity: 2,
+        total: '$130'
+      }
+    ]
+
+  #cartTable(data-list!={
+    valueNames: ["products", "color", "size", "price", "quantity", "total"],
+    page: 10
+  })
+    .table-responsive.scrollbar.mx-n1.px-1
+      table.table.fs--1.mb-0.border-top.border-200
+        thead
+          tr
+            th.sort.white-space-nowrap.align-middle.fs--2(scope='col')
+            th.sort.white-space-nowrap.align-middle(scope='col' style='min-width:250px;') PRODUCTS
+            th.sort.align-middle(scope='col' style='width:80px;' ) COLOR
+            th.sort.align-middle(scope='col' style='width:150px;') SIZE
+            th.sort.align-middle.text-end(scope='col' style='width:300px;') PRICE
+            th.sort.align-middle.ps-5(scope='col' style='width:200px;') QUANTITY
+            th.sort.align-middle.text-end(scope='col' style='width:250px;') TOTAL
+            th.sort.text-end.align-middle.pe-0(scope='col')
+        tbody.list#cart-table-body
+          each row,index in cartTableData
+            +CartTableRow(row,index)
+          tr.cart-table-row.btn-reveal-trigger
+            td.text-1100.fw-semi-bold.ps-0.fs-0(colspan=6) Items subtotal :
+            td.text-1100.fw-bold.text-end.fs-0 $691
+            td
+  //- .d-flex.flex-between-center.py-3.border-bottom.mb-6
+  //-   p.text-1100.fw-semi-bold.lh-sm.mb-0 Items subtotal :
+  //-   p.text-1100.fw-bold.lh-sm.mb-0 $691

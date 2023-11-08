@@ -1,0 +1,42 @@
+mixin Features 
+  +Section('container-small px-lg-7 px-xxl-3').pt-13.pb-10#feature
+    .text-center.mb-10.mb-md-5
+      h5.text-info.mb-3 Features
+      h2.mb-3.lh-base Complete suite of 
+        br.d-sm-none
+        | payment products.
+      p.mb-0 Focus only on functionalities for your digital products with Phoenix! Leave the UIs for us.
+      .text-center.mt-5
+        a.btn.btn-outline-primary(href="#!") See more
+          span.fa-solid.fa-angle-right.ms-2
+    -
+      var features = [
+        {
+          title: 'Recieve the signals instantly',
+          description: 'Phoenix allows you to receive every signal instantly and fruitfully. No need for long waits.',
+          lightImg: '34',
+          darkImg: '34_2'
+        },
+        {
+          title: 'Make everyday a joyride',
+          description: 'Phoenix helps you show reports and data in one place and make the journey a glee trip for everyone.',
+          lightImg: '35',
+          darkImg: '35_2'
+        },
+        {
+          title: 'See Your Revenue Grow',
+          description: 'Grow with Phoenix. We help you with everything you might need, We make it easy and keep it simple.',
+          lightImg: '36',
+          darkImg: '36_2'
+        }
+      ]
+    each feature, index in features
+      .row.flex-between-center.px-xl-11(class=`${index !== features.length - 1 && "mb-10 mb-md-9"}`)
+        .col-md-6.order-1.order-md-0.text-center.text-md-start
+          h4.mb-3= feature.title
+          p.mb-5= feature.description
+          a.btn.btn-link.me-2.p-0.fs--1(href='#!' role='button') Check Demo
+            i.fa-solid.fa-angle-right.ms-2
+        .col-md-5.mb-5.mb-md-0.text-center
+          img.w-75.w-md-100.d-dark-none(src=`${CWD}assets/img/spot-illustrations/${feature.lightImg}.png`, alt="")
+          img.w-75.w-md-100.d-light-none(src=`${CWD}assets/img/spot-illustrations/${feature.darkImg}.png`, alt="")

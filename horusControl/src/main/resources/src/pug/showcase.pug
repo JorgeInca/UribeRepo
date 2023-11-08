@@ -1,0 +1,35 @@
+extends  layouts/LayoutShowcase
+include  mixins/navbars/NavbarShowcase
+include  mixins/showcase/Header
+include  mixins/showcase/Demos
+include  mixins/showcase/AdvancedForms
+include  mixins/showcase/EssentialFeatures
+include  mixins/showcase/Feature
+include  mixins/showcase/ImportantApplications
+include  mixins/showcase/NecessaryPages
+include  mixins/showcase/FeatureFigma
+include  mixins/showcase/Faq
+include  mixins/showcase/Cta
+include  mixins/showcase/Prefooter
+
+append variables
+	- var hideSettingPanel = true;
+	- var attrsFooter = { class: 'd-flex justify-content-center bg-soft border-0'}
+
+append scripts
+	script(src=`${CWD}assets/js/showcase.js`)
+
+block mainContent
+	+Navbar
+	+Header
+	+Demos
+	+AdvancedForms
+	+EssentialsFeatures
+	+Feature
+	+ImportantApplications
+	+NecessaryPages
+	+FeatureFigma
+	+Faq
+	+Cta
+	+Prefooter
+	+Footer

@@ -1,0 +1,85 @@
+/* -------------------------------------------------------------------------- */
+/*                                    Badge                                   */
+/* -------------------------------------------------------------------------- */
+
+@mixin badge-light-variant($color, $borderColor) {
+  color: map-get($theme-colors-dark, $color);
+  background-color: map-get($theme-colors-light, $color);
+
+  &[href] {
+    @include hover-focus {
+      text-decoration: none;
+      color: map-get($theme-colors-dark, $color);
+    }
+  }
+}
+
+@mixin badge-phoenix-variant($color, $borderColor) {
+  color: map-get($theme-colors-dark, $color);
+  background-color: map-get($theme-colors-light, $color);
+  text-transform: uppercase;
+  border: 1px solid $borderColor;
+  padding: 2px 4px;
+  img {
+    margin-bottom: 2px;
+  }
+
+  &[href] {
+    @include hover-focus {
+      text-decoration: none;
+      color: map-get($theme-colors-dark, $color);
+    }
+  }
+}
+
+@each $color, $value in $theme-colors-light {
+  .badge-light-#{$color} {
+    @include badge-light-variant($color, map-get($light-badge-borders, $color));
+  }
+}
+
+.badge-phoenix {
+  text-transform: uppercase;
+  padding: 2px 8px;
+  background-color: var(--#{$prefix}badge-bg);
+  color: var(--#{$prefix}badge-color);
+  border: 1px solid var(--#{$prefix}badge-border-color);
+  .badge-label {
+    display: inline-block;
+    transform: translateY(toRem(1.4));
+  }
+
+  &[href] {
+    @include hover-focus {
+      text-decoration: none;
+    }
+  }
+}
+
+@each $color, $value in $theme-colors-light {
+  .badge-phoenix-#{$color} {
+    &[href] {
+      @include hover-focus {
+        color: map-get($theme-colors-dark, $color);
+      }
+    }
+  }
+}
+
+.badge-phoenix-warning {
+  img {
+    height: 10px;
+  }
+}
+
+.badge-tag {
+  background-color: var(--#{$prefix}gray-200);
+  color: var(--#{$prefix}gray-1000);
+  font-weight: $font-weight-bold;
+  font-size: map-get($font-sizes, '-2');
+  padding: map-get($spacers, 1) map-get($spacers, 2);
+  text-transform: uppercase;
+  @include hover-focus {
+    background-color: var(--#{$prefix}gray-300);
+  }
+}

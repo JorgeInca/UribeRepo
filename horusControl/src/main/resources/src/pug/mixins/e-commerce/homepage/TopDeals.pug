@@ -1,0 +1,125 @@
+mixin TopDeals
+  - 
+    var products = [
+      {
+        image: '6.png',
+        name: 'PlayStation 5 DualSense Wireless Controller',
+        star: 5,
+        rated: 67,
+        price: '125.00',
+        salePrice: '89.00',
+        colors: 2,
+        extra : 'dbrand skin available',
+        extraClass: 'text-1000 fw-bold mb-2'
+      },
+      {
+        image: '1.png',
+        name: 'Fitbit Sense Advanced Smartwatch with Tools for Heart Health, Stress Management & Skin Temperature ...',
+        verified: true,
+        star: 5,
+        rated: 74,
+        price: '49.99',
+        salePrice: '34.99',
+        off: '16%',
+        dealEndTime: 'days'
+      },
+      {
+        image: '2.png',
+        name: 'iPhone 13 pro max-Pacific Blue, 128GB storage',
+        star: 5,
+        rated: 33,
+        price: '899.99',
+        salePrice: '850.99',
+        colors: 5,
+        extra : 'Stock limited',
+        extraClass: 'text-1000 fw-bold mb-2'
+      },
+      {
+        image: '3.png',
+        name: 'Apple MacBook Pro 13 inch-M1-8/256GB-Space Gray',
+        star: 5,
+        rated: 97,
+        price: '1299.00',
+        salePrice: '1149.00',
+        colors: 2,
+        extra : 'Apple care included',
+        extraClass: 'text-1000 fw-bold mb-2'
+      },
+      {
+        image: '4.png',
+        name: 'Apple iMac 24" 4K Retina Display M1 8 Core CPU, 7 Core GPU, 256GB SSD, Green (MJV83ZP/A) 2021',
+        star: 5,
+        rated: 134,
+        price: '1499.00',
+        salePrice: '1399.00',
+        colors: 7,
+        extra : 'Exchange with kidney',
+        extraClass: 'text-1000 fw-bold mb-2'
+      },
+      {
+        image: '5.png',
+        name: 'Razer Kraken v3 x Wired 7.1 Surroung Sound Gaming headset',
+        star: 5,
+        rated: 59,
+        salePrice: '59.00',
+        colors: 2
+      },
+    ]
+  
+  .row.g-4.mb-6
+    .col-12.col-lg-9.col-xxl-10
+      .d-flex.flex-between-center.mb-3
+        .d-flex
+          span.fas.fa-bolt.text-warning.fs-2
+          h3.mx-2 Top Deals today
+          span.fas.fa-bolt.text-warning.fs-2
+        a.btn.btn-link.btn-lg.p-0.d-none.d-md-block(href="#!")
+          | Explore more
+          span.fas.fa-chevron-right.fs--1.ms-1
+      
+      .swiper-theme-container.products-slider
+        .swiper.swiper-container.theme-slider(data-swiper!={
+          slidesPerView: 1,
+          spaceBetween: 16,
+          breakpoints: {
+            450: {
+              slidesPerView: 2,
+              spaceBetween: 16,
+            },
+            768:{
+              slidesPerView: 3,
+              spaceBetween: 20,
+            },
+            1200: {
+              slidesPerView: 4,
+              spaceBetween: 16,
+            },
+            1540: {
+              slidesPerView: 5,
+              spaceBetween: 16,
+            },
+          },
+        })
+          .swiper-wrapper
+            each product in products
+              .swiper-slide
+                +Product(product)
+        .swiper-nav.swiper-product-nav
+          .swiper-button-next
+            span.fas.fa-chevron-right.nav-icon
+          .swiper-button-prev
+            span.fas.fa-chevron-left.nav-icon
+      
+      a.fw-bold.d-md-none.px-0(href="#!")
+        | Explore more
+        span.fas.fa-chevron-right.fs--1.ms-1
+      
+    .col-lg-3.d-none.d-lg-block.col-xxl-2
+      .h-100.position-relative.rounded-3.overflow-hidden
+       +Background({
+          image: `${CWD}assets/img/e-commerce/4.png`,
+        })
+        //- img.w-100(src=`${CWD}assets/img/e-commerce/4.png`, alt="")
+    .col-12.d-lg-none
+      a(href="#!")
+        img.w-100.rounded-3(src=`${CWD}assets/img/e-commerce/6.png`, alt="")

@@ -1,0 +1,66 @@
+extends ../../layouts/LayoutComponent
+
+prepend scripts
+  script(src=`${CWD}vendors/echarts/echarts.min.js`)
+
+append scripts
+  script(src=`${CWD}assets/js/echarts-example.js`)
+
+
+block component
+  .row.g-4.mb-9
+    .col-xl-6
+      +ComponentCard({title:'Basic line chart'})
+        // Find the JS file for the following chart at: src/js/charts/echarts/examples/basic-line-chart.js
+        // If you are not using gulp based workflow, you can find the transpiled code at: public/assets/js/echarts-example.js
+        .echart-line-chart-example(style='min-height:300px')
+    .col-xl-6
+      +ComponentCard({title:'Basic area line chart'})
+        // Find the JS file for the following chart at: src/js/charts/echarts/examples/area-line-chart.js
+        // If you are not using gulp based workflow, you can find the transpiled code at: public/assets/js/echarts-example.js
+        .echart-area-line-chart-example(style='min-height:300px')
+    .col-xl-6
+      +ComponentCard({title:'Stacked line chart'})
+        // Find the JS file for the following chart at: src/js/charts/echarts/examples/stacked-line-chart.js
+        // If you are not using gulp based workflow, you can find the transpiled code at: public/assets/js/echarts-example.js
+        .echart-stacked-line-chart-example(style='min-height:300px')
+    .col-xl-6
+      +ComponentCard({title:'Stacked area chart'})
+        // Find the JS file for the following chart at: src/js/charts/echarts/examples/stacked-area-chart.js
+        // If you are not using gulp based workflow, you can find the transpiled code at: public/assets/js/echarts-example.js
+        .echart-stacked-area-chart-example(style='min-height:300px')
+    .col-xl-6
+      +ComponentCard({title:'Line marker chart'})
+        // Find the JS file for the following chart at: src/js/charts/echarts/examples/line-marker-chart.js
+        // If you are not using gulp based workflow, you can find the transpiled code at: public/assets/js/echarts-example.js
+        .echart-line-marker-chart-example(style='min-height:350px')
+    .col-xl-6
+      +ComponentCard({title:'Area pieces chart'})
+        // Find the JS file for the following chart at: src/js/charts/echarts/examples/area-pieces-chart.js
+        // If you are not using gulp based workflow, you can find the transpiled code at: public/assets/js/echarts-example.js
+        .echart-area-pieces-chart-example(style='min-height:350px')
+    .col-xl-6
+      +ComponentCard({title:'Step line chart'})
+        // Find the JS file for the following chart at: src/js/charts/echarts/examples/step-line-chart.js
+        // If you are not using gulp based workflow, you can find the transpiled code at: public/assets/js/echarts-example.js
+        .echart-step-line-chart-example(style='min-height:300px')
+    .col-xl-6
+      +ComponentCard({title:'Line gradient chart'})
+        // Find the JS file for the following chart at: src/js/charts/echarts/examples/line-gradient-chart.js
+        // If you are not using gulp based workflow, you can find the transpiled code at: public/assets/js/echarts-example.js
+        .echart-line-gradient-chart-example(style='min-height:300px')
+    .col-xl-6
+      +ComponentCard({title:'Dynamic line chart'})
+        // Find the JS file for the following chart at: src/js/charts/echarts/examples/dynamic-line-chart.js
+        // If you are not using gulp based workflow, you can find the transpiled code at: public/assets/js/echarts-example.js
+        .echart-dynamic-line-chart-example(style='min-height:300px')
+    .col-xl-6
+      +ComponentCard({title:'Line log chart'})
+        // Find the JS file for the following chart at: src/js/charts/echarts/examples/line-log-chart.js
+        // If you are not using gulp based workflow, you can find the transpiled code at: public/assets/js/echarts-example.js
+        .echart-line-log-chart-example(style='min-height:300px')
+    .col-12
+      +ComponentCard({title:'Share dataset'})
+        // Find the JS file for the following chart at: src/js/charts/echarts/examples/share-dataset-chart.js
+        // If you are not using gulp based workflow, you can find the transpiled code at: public/assets/js/echarts-example.js
+        .echart-share-dataset-chart-example(style='min-height:500px')

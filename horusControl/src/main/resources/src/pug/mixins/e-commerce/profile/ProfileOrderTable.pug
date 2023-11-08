@@ -1,0 +1,162 @@
+mixin OrderTableRow(data,index)
+  tr.hover-actions-trigger.btn-reveal-trigger.position-static
+    td.order.align-middle.white-space-nowrap.py-2.ps-0
+      a.fw-semi-bold(href='#!' class=(data.active ? 'text-primary' : 'text-600 pointers-events-none text-decoration-none'))= `#${data.order}`
+    td.status.align-middle.white-space-nowrap.text-start.fw-bold.text-700.py-2
+      span.badge.badge-phoenix.fs--2(class=data.payment_status.type)
+        span.badge-label=data.payment_status.label
+        span.ms-1(data-feather=data.payment_status.icon style='height:12.8px;width:12.8px;')
+      //- span.badge.fs--2(class=data.payment_status.type)=data.payment_status.label
+      //-   img.ms-1(src=`${CWD}assets/img/icons/${data.payment_status.icon}.svg`, alt="")
+    td.delivery.align-middle.white-space-nowrap.text-900.py-2=data.delivery_type
+    td.total.align-middle.text-700.text-end.py-2=data.date
+    td.date.align-middle.fw-semi-bold.text-end.py-2(class=(data.active ? 'text-1000' : 'text-600'))=`$${data.total}`
+    td.align-middle.text-end.white-space-nowrap.pe-0.action.py-2
+      +DashboardDropdown
+
+
+mixin ProfileOrderTable
+  -
+    var orderTableData = [
+      {
+        order: 2453,
+        active:true,
+        total: 87,
+        payment_status: {
+          label: 'Shipped',
+          type: 'badge-phoenix-success',
+          icon:'check'
+        },
+        delivery_type: 'Cash on delivery',
+        date: 'Dec 12, 12:56 PM',
+      },
+      {
+        order: 2452,
+        active:true,
+        total: 7264,
+        payment_status : {
+          label: 'Ready to pickup',
+          type: 'badge-phoenix-info',
+          icon:'info'
+        },
+        delivery_type: 'Free shipping',
+        date: 'Dec 9, 2:28PM',
+      },
+      {
+        order: 2451,
+        active:true,
+        total: 375,
+        payment_status : {
+          label: 'Partially fulfilled',
+          type: 'badge-phoenix-warning',
+          icon:'clock'
+        },
+        delivery_type: 'Local pickup',
+        date: 'Dec 4, 12:56 PM',
+      },
+      {
+        order: 2450,
+        active:true,
+        total: 657,
+        payment_status : {
+          label: 'Canceled',
+          type: 'badge-phoenix-secondary',
+          icon:'x'
+        },
+        delivery_type: 'Standard shipping',
+        date: 'Dec 1, 4:07 AM',
+      },
+      {
+        order: 2449,
+        active:true,
+        total: 9562,
+        payment_status : {
+          label: 'fulfilled',
+          type: 'badge-phoenix-success',
+          icon:'check'
+        },
+        delivery_type: 'Express',
+        date: 'Nov 28, 7:28 PM',
+      },
+      {
+        order: 2448,
+        total: 256,
+        active:true,
+        payment_status : {
+          label: 'Unfulfilled',
+          type: 'badge-phoenix-danger',
+          icon:'check'
+        },
+        delivery_type: 'Local delivery',
+        date: 'Nov 24, 10:16 AM',
+      },
+      {
+        order: 2447,
+        total: 898,
+        active:false,
+        payment_status : {
+          label: 'Cancelled',
+          type: 'badge-phoenix-secondary',
+          icon:'x'
+        },
+        delivery_type: 'Standard shipping',
+        date: 'Nov 10, 12:00 PM',
+      },
+      {
+        order: 2446,
+        total: 4116,
+        active:true,
+        payment_status : {
+          label: 'shipped',
+          type: 'badge-phoenix-success',
+          icon:'check'
+        },
+        delivery_type: 'Express',
+        date: 'Nov 12, 12:20 PM',
+      },
+      {
+        order: 2445,
+        total: 4116,
+        active:false,
+        payment_status : {
+          label: 'fulfilled',
+          type: 'badge-phoenix-success',
+          icon:'check'
+        },
+        delivery_type: 'Free shipping',
+        date: 'Oct 19, 1:20 PM',
+      },
+    ]
+  #profileOrdersTable.border-top.border-bottom.border-200(data-list!={
+    valueNames: ["order", "status", "delivery", "date", "total"],
+    page: 6,
+    pagination: true
+  })
+    .table-responsive.scrollbar
+      table.table.fs--1.mb-0
+        thead
+          tr
+            th.sort.white-space-nowrap.align-middle.pe-3.ps-0(scope='col' data-sort="order" style='width:15%; min-width:140px') ORDER
+            th.sort.align-middle.pe-3(scope='col' data-sort="status" style='width:15%; min-width:180px') STATUS
+            th.sort.align-middle.text-start(scope='col' data-sort="delivery" style='width:20%; min-width:160px') DELIVERY METHOD
+            th.sort.align-middle.pe-0.text-end(scope='col' data-sort="date" style='width:15%; min-width:160px') DATE
+            th.sort.align-middle.text-end(scope='col' data-sort="total" style='width:15%; min-width:160px') TOTAL
+            th.align-middle.pe-0.text-end(scope='col' style='width:15%;') 
+        tbody.list#profile-order-table-body
+          each row,index in orderTableData
+            +OrderTableRow(row,index)
+    .row.align-items-center.justify-content-between.py-2.pe-0.fs--1
+      .col-auto.d-flex
+        p.mb-0.d-none.d-sm-block.me-3.fw-semi-bold.text-900(data-list-info)
+        a.fw-semi-bold(href='#!' data-list-view="*")
+          | View all
+          span.fas.fa-angle-right.ms-1(data-fa-transform='down-1')
+        a.fw-semi-bold.d-none(href='#!' data-list-view="less")
+          | View Less
+          span.fas.fa-angle-right.ms-1(data-fa-transform='down-1')
+      .col-auto.d-flex
+        button.page-link(data-list-pagination="prev")
+          span.fas.fa-chevron-left
+        ul.mb-0.pagination
+        button.page-link.pe-0(data-list-pagination="next")
+          span.fas.fa-chevron-right

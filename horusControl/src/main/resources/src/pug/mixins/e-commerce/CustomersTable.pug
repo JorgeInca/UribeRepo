@@ -1,0 +1,248 @@
+mixin CustomersTableRow(data,index)
+  tr.hover-actions-trigger.btn-reveal-trigger.position-static
+    td.fs--1.align-middle.ps-0.py-3
+      .form-check.mb-0.fs-0
+        input.form-check-input(type='checkbox' data-bulk-select-row!=data)
+    td.customer.align-middle.white-space-nowrap.pe-5
+      a(href=`${CWD}${paths['e-commerce-fe-profile']}`).d-flex.align-items-center.text-1100
+        .avatar.avatar-m
+          if data.customer.avatar
+            img.rounded-circle(src=`${CWD}assets/img${data.customer.avatar}`, alt="" class=data.customer.placeholder ? 'avatar-placeholder' : '')
+          else
+            .avatar-name.rounded-circle
+              span=data.customer.name.charAt(0).toUpperCase()
+        p.mb-0.ms-3.text-1100.fw-bold=data.customer.name
+    td.email.align-middle.white-space-nowrap.pe-5
+      a.fw-semi-bold(href=`mailto:${data.email}`)=data.email
+    td.total-orders.align-middle.white-space-nowrap.fw-semi-bold.text-end.text-1000=data.totalOrders
+    td.total-spent.align-middle.white-space-nowrap.fw-bold.text-end.ps-3.text-1100=`$ ${data.totalSpent}`
+    td.city.align-middle.white-space-nowrap.text-1000.ps-7=data.city
+    td.last-seen.align-middle.white-space-nowrap.text-700.text-end=data.lastSeen
+    td.last-order.align-middle.white-space-nowrap.text-700.text-end=data.lastOrder
+
+
+
+mixin CustomersTable
+  -
+    var customerTableData = [
+      {
+        customer:{
+          avatar: '/team/32.webp',
+          name: 'Carry Anna'
+        },
+        email:"annac34@gmail.com",
+        city:"Budapest",
+        totalOrders: 89,
+        totalSpent: 23987,
+        lastSeen: "34 min ago",
+        lastOrder:"Dec 12, 12:56 PM"
+      },
+      {
+        customer:{
+          avatar: '/team/avatar.webp',
+          name: 'Milind Mikuja',
+          placeholder: true
+        },
+        email:"mimiku@yahoo.com",
+        city:"Manchester",
+        totalOrders: 76,
+        totalSpent: 21567,
+        lastSeen: "6 hours ago",
+        lastOrder:"Dec 9, 2:28 PM"
+      },
+      {
+        customer:{
+          avatar: '/team/35.webp',
+          name: 'Stanly Drinkwater'
+        },
+        email:"stnlwasser@hotmail.com",
+        city:"Smallville",
+        totalOrders: 69,
+        totalSpent: 19872,
+        lastSeen: "43 min ago",
+        lastOrder:"Dec 4, 12:56 PM"
+      },
+      {
+        customer:{
+          avatar: '/team/57.webp',
+          name: 'Josef Stravinsky'
+        },
+        email:"Josefsky@sni.it",
+        city:"Metropolis",
+        totalOrders: 67,
+        totalSpent: 17996,
+        lastSeen: "2 hours ago",
+        lastOrder:"Dec 1,  4:07 AM"
+      },
+      {
+        customer:{
+          avatar: '/team/58.webp',
+          name: 'Igor Borvibson'
+        },
+        email:"vibigorr@technext.it",
+        city:"Central city",
+        totalOrders: 61,
+        totalSpent: 16785,
+        lastSeen: "5 days ago",
+        lastOrder:"Nov 28, 7:28 PM"
+      },
+      {
+        customer:{
+          avatar: '/team/59.webp',
+          name: 'Katerina Karenin'
+        },
+        email:"karkat99@gmail.com",
+        city:"Gotham",
+        totalOrders: 58,
+        totalSpent: 14956,
+        lastSeen: "2 weeks ago",
+        lastOrder:"Nov 24, 10:16 AM"
+      },
+      {
+        customer:{
+          avatar: '',
+          name: 'Roy Anderson'
+        },
+        email:"andersonroy@netflix.chill",
+        city:"Vancouver",
+        totalOrders: 52,
+        totalSpent: 12509,
+        lastSeen: "4 days ago",
+        lastOrder:"Nov 18, 5:43 PM"
+      },
+      {
+        customer:{
+          avatar: '/team/31.webp',
+          name: 'Martina scorcese'
+        },
+        email:"cesetina1@gmail.com",
+        city:"Viena",
+        totalOrders: 49,
+        totalSpent: 11003,
+        lastSeen: "6 min ago",
+        lastOrder:"Nov 18, 2:09 AM"
+      },
+      {
+        customer:{
+          avatar: '/team/33.webp',
+          name: 'Luis Bunuel'
+        },
+        email:"luisuel@live.com",
+        city:"Bangalore",
+        totalOrders: 44,
+        totalSpent: 7897,
+        lastSeen: "56 min ago",
+        lastOrder:"Nov 16, 3:22 PM"
+      },
+      {
+        customer:{
+          avatar: '/team/34.webp',
+          name: 'Jean Renoir'
+        },
+        email:"renoirjean1836@gmail.com",
+        city:"Chittagong",
+        totalOrders: 37,
+        totalSpent: 7781,
+        lastSeen: "Yesterday",
+        lastOrder:"Nov 09, 8:49 AM"
+      },
+      {
+        customer:{
+          avatar: '/team/29.webp',
+          name: 'Ricky Antony'
+        },
+        email:"ricky@example.com",
+        city:"New Jersey",
+        totalOrders: 33,
+        totalSpent: 7825,
+        lastSeen: "1 hour ago",
+        lastOrder:"Oct 19, 8:00 AM"
+      },
+      {
+        customer:{
+          avatar: '/team/3.webp',
+          name: 'Emma Watson'
+        },
+        email:"emma@example.com",
+        city:"New York",
+        totalOrders: 45,
+        totalSpent: 18975,
+        lastSeen: "6 hours ago",
+        lastOrder:"Oct 15, 12:00 PM"
+      },
+      {
+        customer:{
+          avatar: '/team/avatar.webp',
+          name: 'Jennifer Schramm',
+          placeholder: true
+        },
+        email:"jennifer@example.com",
+        city:"Charlotte",
+        totalOrders: 39,
+        totalSpent: 8967,
+        lastSeen: "12 hours ago",
+        lastOrder:"Oct 12, 11:00 AM"
+      },
+      {
+        customer:{
+          avatar: '/team/32.webp',
+          name: 'Raymond Mims'
+        },
+        email:"raymond@example.com",
+        city:"Artesia",
+        totalOrders: 30,
+        totalSpent: 14587,
+        lastSeen: "2 day ago",
+        lastOrder:"Oct 10, 8:30 AM"
+      },
+      {
+        customer:{
+          avatar: '/team/25.webp',
+          name: 'Michael Jenkins'
+        },
+        email:"jenkins@example.com",
+        city:"Philadelphia",
+        totalOrders: 43,
+        totalSpent: 45697,
+        lastSeen: "12 hours ago",
+        lastOrder:"Oct 3, 8:30 AM"
+      },
+    ]
+
+  .table-responsive.scrollbar-overlay.mx-n1.px-1
+    table.table.table-sm.fs--1.mb-0
+      thead
+        tr
+          th.white-space-nowrap.fs--1.align-middle.ps-0
+            .form-check.mb-0.fs-0
+              input.form-check-input#checkbox-bulk-customers-select(
+                type='checkbox' 
+                data-bulk-select!={
+                  body: "customers-table-body",
+                }
+              )
+          th.sort.align-middle.pe-5(scope='col' data-sort="customer" style='width:10%;') CUSTOMER
+          th.sort.align-middle.pe-5(scope='col' data-sort="email" style='width:20%;') EMAIL
+          th.sort.align-middle.text-end(scope='col' data-sort="total-orders" style='width:10%' ) ORDERS
+          th.sort.align-middle.text-end.ps-3(scope='col' data-sort="total-spent" style='width:10%' ) TOTAL SPENT
+          th.sort.align-middle.ps-7(scope='col' data-sort="city" style='width:25%;') CITY
+          th.sort.align-middle.text-end(scope='col' data-sort="last-seen" style='width:15%;') LAST SEEN
+          th.sort.align-middle.text-end.pe-0(scope='col' data-sort="last-order" style='width:10%;min-width: 150px;') LAST ORDER
+      tbody.list#customers-table-body
+        each row,index in customerTableData
+          +CustomersTableRow(row,index)
+  .row.align-items-center.justify-content-between.py-2.pe-0.fs--1
+    .col-auto.d-flex
+      p.mb-0.d-none.d-sm-block.me-3.fw-semi-bold.text-900(data-list-info)
+      a.fw-semi-bold(href='#!' data-list-view="*")
+        | View all
+        span.fas.fa-angle-right.ms-1(data-fa-transform='down-1')
+      a.fw-semi-bold.d-none(href='#!' data-list-view="less")
+        | View Less
+        span.fas.fa-angle-right.ms-1(data-fa-transform='down-1')
+    .col-auto.d-flex
+      button.page-link(data-list-pagination="prev")
+        span.fas.fa-chevron-left
+      ul.mb-0.pagination
+      button.page-link.pe-0(data-list-pagination="next")
+        span.fas.fa-chevron-right

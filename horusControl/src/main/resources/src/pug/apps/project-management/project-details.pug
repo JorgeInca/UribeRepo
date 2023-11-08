@@ -1,0 +1,105 @@
+extends ../../layouts/LayoutTheme
+include ../../mixins/dashboard/common
+include ../../mixins/dashboard/project-management/RecentActivity
+include ../../mixins/project-management/ProjectDetails
+include ../../mixins/project-management/ProjectDetailsTodo
+include ../../mixins/project-management/ProjectDetailsModal
+include ../../mixins/project-management/ToDoList
+include ../../mixins/dashboard/project-management/ToDo
+include ../../mixins/project-management/Common
+
+prepend styles
+  link(href=`${CWD}vendors/flatpickr/flatpickr.min.css`, rel='stylesheet')
+
+prepend scripts
+  script(src=`${CWD}vendors/echarts/echarts.min.js`)
+
+append scripts
+  script(src=`${CWD}assets/js/project-details.js`)
+
+append variables
+  - var attrsContent = { class: 'px-0 pt-9' };
+
+block content
+  .row.g-0
+    .col-12.col-xxl-8.px-0.bg-soft
+      .px-4.px-lg-6.pt-6.pb-9
+        .mb-5
+          .d-flex.justify-content-between
+            h2.text-black.fw-bolder.mb-2 Retrieving Old Repos to Redirect to a new URL
+            .font-sans-serif.btn-reveal-trigger
+              button.btn.btn-sm.dropdown-toggle.dropdown-caret-none.transition-none&attributes(attributes)(type='button' class=`btn-reveal${reveal ? '-' + reveal : ''}` id=id data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent")
+                span.fas.fa-ellipsis-h(class=iconClass)
+              .dropdown-menu.dropdown-menu-end.py-2(aria-labelledby=id)
+                a(href='#!').dropdown-item Edit
+                a(href='#!').dropdown-item.text-danger Delete
+                a(href='#!').dropdown-item Download
+                a(href='#!').dropdown-item Report abuse
+          span.badge.badge-phoenix.badge-phoenix-primary
+            | Ongoing
+            span.ms-1.uil.uil-stopwatch
+        .row.gx-0.gx-sm-5.gy-8.mb-8
+          .col-12.col-xl-3.col-xxl-4.pe-xl-0
+            .mb-4.mb-xl-7
+              .row.gx-0.gx-sm-7
+                .col-12.col-sm-auto
+                  table.lh-sm.mb-4.mb-sm-0.mb-xl-4
+                    tbody
+                      tr
+                        td.py-1(colspan='2')
+                          .d-flex
+                            span.fa-solid.fa-earth-americas.me-2.text-700.fs--1
+                            h5.text-900 Public project
+                      tr
+                        td.align-top.py-1
+                          .d-flex
+                            span.fa-solid.fa-user.me-2.text-700.fs--1
+                            h5.text-900.mb-0.text-nowrap Client :
+                        td.ps-1.py-1
+                          a.fw-semi-bold.d-block.lh-sm(href="#!") Gobble the Bleep Inc
+                      tr
+                        td.align-top.py-1
+                          .d-flex
+                            span.fa-regular.fa-credit-card.me-2.text-700.fs--1
+                            h5.text-900.mb-0.text-nowrap Budget :  
+                        td.fw-bold.ps-1.py-1.text-1000 $8,742
+                .col-12.col-sm-auto
+                  table.lh-sm
+                    tbody
+                      tr
+                        td.align-top.py-1.text-900.text-nowrap.fw-bold Started : 
+                        td.text-600.fw-semi-bold.ps-3 17th Nov, 2020
+                      tr
+                        td.align-top.py-1.text-900.text-nowrap.fw-bold Deadline :
+                        td.text-600.fw-semi-bold.ps-3 21st May, 2028
+                      tr
+                        td.align-top.py-1.text-900.text-nowrap.fw-bold Progress :
+                        td.text-warning.fw-semi-bold.ps-3 80%
+            div
+              .d-flex.align-items-center
+                span.fa-solid.fa-list-check.me-2.text-700.fs--1
+                h5.text-1100.mb-0.me-2 91
+                  span.text-900.fw-normal.ms-2 tasks
+                a.fw-bold.fs--1.mt-1(href="#!") See tasks 
+                  span.fa-solid.fa-chevron-right.me-2.fs--2
+          .col-12.col-xl-9.col-xxl-8
+            +TotalSalesChart
+          .col-12.col-sm-5.col-lg-4.col-xl-3.col-xxl-4
+            +WorkLoads
+          .col-12.col-sm-7.col-lg-8.col-xl-5
+            +MembersTags
+        h3.text-1100.mb-4 Project overview
+        p.text-800.mb-4 The new redirection team is happy to announce that we’ve fixed all our unresponsive URLs and redirected them to new URLs. The tremendous assistance from our support team and the dev team, as well as that of the team lead’s, this team has made an impossible possible within a week. They didn’t stop for a moment, and we got our pages working again for all the valuable users. 
+        p.text-800.mb-0 Join us in celebrating the massive success of data transferring and getting us a huge revenue by eating out. Free public viewing and a buffet is offered for the great team as well as for the other teams working with us. We’ll be checking out places for the best option available at hands and we’ll let you know the schedule once we decide on one.
+          a.fw-semi-bold(href="#!") read more 
+    .col-12.col-xxl-4.px-0.border-start-xxl.border-300.border-top-sm
+      .h-100
+        .bg-light.dark__bg-1100.h-100
+          .p-4.p-lg-6
+            h3.text-1000.mb-4.fw-bold Recent activity
+            +RecentActivityTimeline
+          +Files({itemPaddingClass: 'px-4 px-lg-6 py-4',titleClass:'px-4 px-lg-6',showAddBtn: false,imgMaxWidth:270})
+          .px-5.px-md-6.mt-3.mb-9
+            a.fw-bold.fs--1(href='#!')
+              span.fas.fa-plus.me-1
+              | Add file(s)

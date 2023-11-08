@@ -1,0 +1,176 @@
+append variables
+	-
+		var pricingCards= [
+			{
+				image:'pie.png',
+				category:'Starter',
+				price:'6',
+				cardClasses:'rounded-xl-end-0 rounded-start',
+				features:[ 
+					{
+						icon : 'fas fa-check text-primary',
+						label: 'Timeline',
+					},
+					{
+						icon : 'fas fa-check text-primary',
+						label: 'Advanced Search',
+					},
+					{
+						label: 'Custom fields',
+						newBadge: true
+					},
+					{
+						label:'Task dependencies',
+					},
+					{
+						label:'Private teams & projects',
+					}
+				],
+				buyBtnClass: 'btn-outline-primary',
+			},
+			{
+				image:'bolt.png',
+				category:'Team',
+				price:'12',
+				cardClasses:' rounded-top-0 rounded-xl-0 border border-2 border-primary dark__border-primary mt-5 mt-md-0',
+				features:[ 
+					{
+						icon : 'fas fa-check text-primary',
+						label: 'Timeline',
+					},
+					{
+						icon : 'fas fa-check text-primary',
+						label: 'Advanced Search',
+					},
+					{
+						icon : 'fas fa-check text-primary',
+						label: 'Custom fields',
+						newBadge: true
+					},
+					{
+						label:'Task dependencies',
+					},
+					{
+						label:'Private teams & projects',
+					}
+				],
+				buyBtnClass: 'btn-primary',
+			},
+			{
+				image:'edit.png',
+				category:'Business',
+				price:'23',
+				cardClasses:'rounded-start rounded-xl-start-0 mt-5 mt-md-0',
+				features:[ 
+					{
+						icon : 'fas fa-check text-primary',
+						label: 'Timeline',
+					},
+					{
+						icon : 'fas fa-check text-primary',
+						label: 'Advanced Search',
+					},
+					{
+						icon : 'fas fa-check text-primary',
+						label: 'Custom fields',
+						newBadge: true
+					},
+					{
+						icon : 'fas fa-star text-primary',
+						label:'Task dependencies',
+					},
+					{
+						label:'Private teams & projects',
+					}
+				],
+				buyBtnClass: 'btn-outline-primary',
+			},
+			{
+				image:'shield.png',
+				category:'Enterprise',
+				price:'40',
+				features:[ 
+					{
+						icon : 'fas fa-check text-primary',
+						label: 'Timeline',
+					},
+					{
+						icon : 'fas fa-check text-primary',
+						label: 'Advanced Search',
+					},
+					{
+						icon : 'fas fa-check text-primary',
+						label: 'Custom fields',
+						newBadge: true
+					},
+					{
+						icon : 'fas fa-star text-primary',
+						label:'Task dependencies',
+					},
+					{
+						icon : 'fas fa-star text-primary',
+						label:'Private teams & projects',
+					}
+				],
+				buyBtnClass: 'btn-outline-primary',
+			},
+		];
+
+mixin PriceList(features)
+	each feature in features
+		li.mb-4.d-flex.align-items-center
+			if feature.icon
+				span.fa-li
+					span(class=feature.icon)
+			span.text-800(style=feature.icon ? '--phoenix-text-opacity:1;' : '--phoenix-text-opacity:.5;') #{feature.label}
+			if feature.label === 'Custom fields'
+				span.badge.badge-phoenix.badge-phoenix-warning.ms-2.fs--2(class=feature.icon ? '' : 'opacity-50') New
+
+mixin PriceItem(config)
+	.px-5
+		.text-center.pt-5
+			img(src=`${CWD}assets/img/icons/illustrations/${config.image}` width=48 height=48 alt='' )
+			h3.fw-semi-bold.my-4=config.category
+		.text-center
+			h1.fw-semi-bold.text-primary $
+				span.fw-bolder= config.price
+				span.text-black.fs-1.ms-1.fw-bolder USD
+			h5.mb-4.text-900= config.month
+			button.btn.btn-lg.mb-6.w-100(class=config.buyBtnClass) Buy
+
+	ul.fa-ul.pricing-list
+		+PriceList(config.features)
+
+mixin Pricing
+	section.bg-white.pt-lg-0.pt-xl-8
+		+Background({image: `${CWD}assets/img/bg/bg-left-15.png`, attrs: { style: { 'background-position': 'left', 'background-size': 'auto',} }, className: 'd-none d-md-block' })
+		+Background({image: `${CWD}assets/img/bg/bg-right-15.png`, attrs: { style: { 'background-position': 'right', 'background-size': 'auto',} }, className: 'd-none d-md-block' })
+		.container-small.position-relative.px-lg-7.px-xxl-3
+			.row
+				.col-12.mb-4.text-center.text-sm-start
+					h4.text-primary.fw-bolder.mb-3 Pricing
+					h2 Choose the best deal for you
+				.col-md-6.text-center.text-sm-start
+					p Entice your customers with #{name} admin dashboard. Show your best deal in this section to help customers choose from your best offers and place them all in one place with this efficient template. If you are availing more than one 
+				.col-md-6.text-center.text-sm-start
+					p offer to your customers, let them compare among them and search for what they need to get. Show offer details here and entice them to buy.
+
+			.row.pt-9.g-3.g-xl-0
+				each card, index in pricingCards.slice(0,3)
+					.col-md-6.col-xl-3
+						.card.h-100(class=card.cardClasses)
+							if index==1
+								.position-absolute.d-flex.flex-center.bg-primary-100.rounded-top.py-1.end-0.start-0.badge-pricing 
+									p.text-primary-600.mb-0.dark__text-primary-200 Most popular
+							.card-body.px-6
+								+PriceItem(card)
+
+				.col-12.col-md-6.col-xl-3.ps-xl-3
+					.row.g-0.h-100.justify-content-center
+						.col-xl-12
+							.card.h-100.mt-5.mt-md-0&attributes(attributes)
+								.card-body
+									+PriceItem(pricingCards[3])
+				.col-12.text-center.mt-8
+					p For Enterprise Solution with Managed SMTP, Custom API setup, Dedicated Support, and more - 
+						a(href="#!")  Contact us

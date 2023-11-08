@@ -1,0 +1,31 @@
+extends ../index
+
+
+
+append variables
+  - var disableNavigationType = true;
+  - var disableVerticalNavbarAppearance = true;
+  - var disableHorizontalNavbarShape = true;
+
+append headScripts
+  script.
+    window.config.set({
+      phoenixNavbarTopShape: 'slim',
+      phoenixNavbarPosition: 'horizontal'
+    });
+  script.
+    document.documentElement.classList.add('navbar-horizontal');
+
+block navbarTop
+  +NavbarTopSlim({
+    toggleID: 'navbarTopCollapse',
+    links: false,
+    search: true
+    }).navbar-expand-lg(style='display:none')
+  script.
+    var navbarVertical = document.querySelector('.navbar-vertical');
+    var navbarTopSlim = document.querySelector('#navbarTopSlim');
+    var body = document.querySelector('body');
+    navbarVertical.remove()
+    navbarTopSlim.removeAttribute('style');
+    body.classList.add('nav-slim');

@@ -1,0 +1,64 @@
+extends ../../layouts/LayoutTheme
+include ../../mixins/dashboard/common
+include ../../mixins/crm/ReportsDetails
+//- include ../../mixins/crm/LeadsTable
+include ../../mixins/project-management/ToDoList
+include ../../mixins/dashboard/project-management/ToDo
+
+prepend styles
+	link(href=`${CWD}vendors/dropzone/dropzone.min.css`, rel='stylesheet')
+
+prepend scripts
+	script(src=`${CWD}vendors/dropzone/dropzone.min.js`)
+	script(src=`${CWD}vendors/echarts/echarts.min.js`)
+
+
+append variables
+	- 
+		var breadcrumb = [
+			{
+				label: 'Page 1',
+				href: '#!'
+			},
+			{
+				label: 'Page 2',
+				href: '#!',
+			},
+			{
+				label: 'Default',
+				href: '#!',
+				active: true
+			},
+		];
+
+block content
+	.pb-9
+		h2.mb-4 Purchasers and sellers
+		.row.g-3.justify-content-between.mb-4
+			.col-auto
+				.d-flex.flex-wrap.gap-2
+					button.btn.btn-primary
+						span.fas.fa-envelope.me-2
+						| Send mail
+					button.btn.btn-phoenix-primary
+						span.fas.fa-pencil.me-2
+						| Edit
+					button.btn.btn-phoenix-secondary.text-900
+						span.fa-solid.fa-file-export.fs--1.me-2
+						| Export
+			.col-auto
+				.d-flex
+					+Search({placeholder: 'Search by name'}).me-2.d-none.d-xl-block
+					button.btn.px-3.btn-phoenix-secondary.me-2.d-xl-none
+						span.fa-solid.fa-search
+					button.btn.px-3.btn-phoenix-primary(type='button' data-bs-toggle='modal' data-bs-target="#filterModal" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent")
+						span.fa-solid.fa-filter(data-fa-transform='down-3')
+					+FilterReportsModal
+		.row.gy-5
+			.col-xl-5.col-xxl-4
+				.card
+					.card-body
+						.echart-reports-details.mb-5(style='height:358px; width:100%')
+						+ChartReportsTable
+			.col-xl-7.col-xxl-8
+				+PurchasersSellersTable

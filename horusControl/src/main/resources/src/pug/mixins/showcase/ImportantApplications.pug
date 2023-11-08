@@ -1,0 +1,51 @@
+mixin ImportantApplications
+	section.py-md-10
+		//- +Background({image: `${CWD}assets/img/bg/28.png`,attrs: {style: {'background-position':'center right','background-size': '15%'}}, className: 'd-none d-lg-block',})
+		//- +Background({image: `${CWD}assets/img/bg/29.png`,attrs: {style: {'background-position':'center left','background-size': '15%'}}, className: 'd-none d-lg-block',})
+
+		.bg-holder(class='d-none d-lg-block', style={'background-image': `url(${CWD}assets/img/bg/29.png);background-position: left 10%; background-size: 15%;`} data-gsap-parallax!={y:'40%'})
+
+		.bg-holder(class='d-none d-lg-block', style={'background-image': `url(${CWD}assets/img/bg/28.png);background-position: right 10%; background-size: 15%;`} data-gsap-parallax!={y:'50%'})
+
+		.container-lg
+			.row.justify-content-center
+				.col-12.col-md-9.col-xl-8.col-xxl-6.text-center
+					h2.mb-6.lh-lg 
+						span.text-primary.position-relative Important applications
+							img.text-illustration-underline(src=`${CWD}assets/img/spot-illustrations/31.png`  alt="")
+						span.text-1000.fw-normal.ms-2 you’re definitely gonna need
+
+					//- .mb-11
+					//- 	.text-center
+					//- 		img.mb-7.shadow.rounded.mw-100(src=`${CWD}assets/img/sections/64.webp` width=550 alt="")
+					//- 		h4.text-1000.mb-3 Email
+					//- 		p.text-700.lh-sm.pb-4 You’ll get a pre-built email app with this template so that your customer-client communication remains smooth and steady. Enjoy thorough communication with us!
+					//- 		a.btn.btn-primary(href=`${CWD}${paths['email-inbox']}`) View email
+						
+			.row.justify-content-center.mt-11
+				.col-md-9.col-lg-6.col-xxl-4.mb-7.mb-lg-0
+					.text-center
+						img.mb-7.shadow.rounded.mw-100(src=`${CWD}assets/img/sections/64.webp` width=550 alt="")
+						h4.text-1000.mb-3 Email
+						p.text-700.lh-sm.pb-4 You’ll get a pre-built email app with this template so that your customer-client communication remains smooth and steady. Enjoy thorough communication with us!
+						a.btn.btn-primary(href=`${CWD}${paths['email-inbox']}`) View email
+				.col-md-9.col-lg-6.col-xxl-4
+					.text-center
+						img.mb-7.shadow.rounded.mw-100(src=`${CWD}assets/img/sections/66.webp` width='550' alt="")
+						h4.text-1000.mb-3 Chat
+						p.text-700.lh-sm.pb-4 Our pre-built web app will help you have steady communication with your customers and grow your business rigorously. Hopefully, you’ll enjoy using this web app in Phoenix!
+						a.btn.btn-primary.text-light(href=`${CWD}${paths['app-chat']}`) View chat
+
+			.row.justify-content-center.mt-11
+				.col-md-9.col-lg-6.col-xxl-4.mb-7.mb-lg-0
+					.text-center
+						img.mb-7.shadow.rounded.mw-100(src=`${CWD}assets/img/sections/65.webp` width='550' alt="")
+						h4.text-1000.mb-3 Calender
+						p.text-700.lh-sm.pb-4 Our calendar app will help you painlessly track all your trades. You can add, edit and revise the previous reminders and stay updated according to your schedule.
+						a.btn.btn-primary.text-light(href=`${CWD}${paths['app-calendar']}`) View calendar
+				.col-md-9.col-lg-6.col-xxl-4
+					.text-center
+						img.mb-7.shadow.rounded.mw-100(src=`${CWD}assets/img/sections/kanban.webp` width='550' alt="")
+						h4.text-1000.mb-3 Kanban
+						p.text-700.lh-sm.pb-4 Our pre-built web app will help you have steady communication with your customers and grow your business rigorously. Hopefully, you’ll enjoy using this web app in Phoenix!
+						a.btn.btn-primary.text-light(href=`${CWD}${paths['app-chat']}`) View chat

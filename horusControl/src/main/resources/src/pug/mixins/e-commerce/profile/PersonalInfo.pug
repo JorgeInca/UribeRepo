@@ -1,0 +1,51 @@
+mixin PersonalInfo
+  .row.g-3.mb-5
+    .col-12.col-lg-6
+      label.form-label.text-1000.fs-0.ps-0.text-capitalize.lh-sm(for="fullName" ) Full name
+      input#fullName.form-control(type='text' placeholder="Full name")
+    .col-12.col-lg-6
+      label.form-label.text-1000.fs-0.ps-0.text-capitalize.lh-sm(for="gender") Gender
+      select#gender.form-select
+        option(value='male') Male
+        option(value='female') Female
+        option(value='non-binary') Non-binary
+        option(value='not-to-say') Prefer not to say
+    .col-12.col-lg-6
+      label.form-label.text-1000.fs-0.ps-0.text-capitalize.lh-sm(for="email") Email
+      input#email.form-control(type='text' placeholder="Email")
+    .col-12.col-lg-6
+      .row.g-2.gy-lg-0
+        label.form-label.text-1000.fs-0.ps-1.text-capitalize.lh-sm.mb-1 Date of birth
+        .col-6.col-sm-2.col-lg-3.col-xl-2
+          select#date.form-select
+            - var n = 1
+            while n < 31
+              option(value=n)=n++
+        .col-6.col-sm-2.col-lg-3.col-xl-2
+          select#month.form-select
+            each month in monthsShort
+              option(value=month)=month
+        .col-12.col-sm-8.col-lg-6.col-xl-8
+          select#year.form-select
+            - var n = 1990
+            while n < 2023
+              option(value=n)=n++
+    .col-12.col-lg-6
+      label.form-label.text-1000.fw-bold.fs-0.ps-0.text-capitalize.lh-sm(for="phone") Phone
+      input#phone.form-control(type='text' placeholder="+1234567890")
+    .col-12.col-lg-6
+      label.form-label.text-1000.fw-bold.fs-0.ps-0.text-capitalize.lh-sm(for="alternative_phone") Alternative phone
+      input#alternative_phone.form-control(type='text' placeholder="+1234567890")
+    .col-12.col-lg-4
+      label.form-label.text-1000.fw-bold.fs-0.ps-0.text-capitalize.lh-sm(for="facebook") Facebook
+      input#facebook.form-control(type='text' placeholder="Facebook")
+    .col-12.col-lg-4
+      label.form-label.text-1000.fw-bold.fs-0.ps-0.text-capitalize.lh-sm(for="instagram") Instagram
+      input#instagram.form-control(type='text' placeholder="Instagram")
+    .col-12.col-lg-4
+      label.form-label.text-1000.fw-bold.fs-0.ps-0.text-capitalize.lh-sm(for="twitter") Twitter
+      input#twitter.form-control(type='text' placeholder="Twitter")
+  .text-end
+    button.btn.btn-primary.px-7 Save changes
+
+

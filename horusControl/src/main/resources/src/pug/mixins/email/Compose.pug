@@ -1,0 +1,27 @@
+mixin Compose 
+  .card&attributes(attributes)
+    .card-body
+      form.d-flex.flex-column.h-100
+        .row.g-3.mb-2
+          .col-4
+            input.form-control(type='email' placeholder='To')
+          .col-4
+            input.form-control(type='email' placeholder='CC')
+          .col-4
+            input.form-control(type='email' placeholder='BCC')
+          .col-12
+            input.form-control(type='text' placeholder='Subject')
+        .mb-3.flex-1
+          textarea.tinymce.email-textarea(name='content' data-tinymce!={height:'100%'})
+        .d-flex.justify-content-between.align-items-center
+          .d-flex
+            label.btn.btn-link.py-0.px-2.text-900.fs--1(for="emailAttachment") 
+              span.fa-solid.fa-paperclip
+            input#emailAttachment.d-none(type="file")
+            label.btn.btn-link.py-0.px-2.text-900.fs--1(for='emailPhotos')
+              span.fa-solid.fa-image
+            input#emailPhotos.d-none(type="file" accept='image/*')
+          .d-flex
+            button.btn.btn-link.text-900.fs--2.text-decoration-none Discard
+            button.btn.btn-primary.fs--2(type='submit') Send
+              span.fa-solid.fa-paper-plane.ms-1

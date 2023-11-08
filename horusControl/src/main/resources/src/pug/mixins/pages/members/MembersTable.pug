@@ -1,0 +1,232 @@
+mixin MemberTableRow(data,index)
+  tr.hover-actions-trigger.btn-reveal-trigger.position-static
+    td.fs--1.align-middle.ps-0.py-3
+      .form-check.mb-0.fs-0
+        input.form-check-input(type='checkbox' data-bulk-select-row!=data)
+    td.customer.align-middle.white-space-nowrap
+      a(href='#!').d-flex.align-items-center.text-900.text-hover-1000
+        .avatar.avatar-m
+          if data.customer.avatar
+            img.rounded-circle(src=`${CWD}assets/img${data.customer.avatar}`, alt="" class=data.customer.placeholder ? 'avatar-placeholder' : '' )
+          else
+            .avatar-name.rounded-circle
+              span=data.customer.name.charAt(0).toUpperCase()
+        h6.mb-0.ms-3.fw-semi-bold=data.customer.name
+    td.email.align-middle.white-space-nowrap
+      a.fw-semi-bold(href=`mailto:${data.email}`)=data.email
+    td.mobile_number.align-middle.white-space-nowrap
+      a.fw-bold.text-1100(href=`tel:${data.mobile}`)=data.mobile
+    td.city.align-middle.white-space-nowrap.text-900=data.city
+    td.last_active.align-middle.text-end.white-space-nowrap.text-700=data.lastActive
+    td.joined.align-middle.white-space-nowrap.text-700.text-end=data.joined
+
+
+
+mixin MembersTable
+  -
+    var memberTableData = [
+      {
+        customer:{
+          avatar: '/team/32.webp',
+          name: 'Carry Anna'
+        },
+        email:"annac34@gmail.com",
+        mobile:"+912346578",
+        city:"Budapest",
+        lastActive:"34 min ago",
+        joined:"Dec 12, 12:56 PM"
+      },
+      {
+        customer:{
+          avatar: '/team/avatar.webp',
+          name: 'Milind Mikuja',
+          placeholder: true
+        },
+        email:"mimiku@yahoo.com",
+        mobile:"+8801564768976",
+        city:"Manchester",
+        lastActive:"6 hours ago",
+        joined:"Dec 9, 2:28 PM"
+      },
+      {
+        customer:{
+          avatar: '/team/35.webp',
+          name: 'Stanly Drinkwater'
+        },
+        email:"stnlwasser@hotmail.com",
+        mobile:"+78675436798",
+        city:"Smallville",
+        lastActive:"43 min ago",
+        joined:"Dec 4, 12:56 PM"
+      },
+      {
+        customer:{
+          avatar: '/team/57.webp',
+          name: 'Josef Stravinsky'
+        },
+        email:"Josefsky@sni.it",
+        mobile:"+118796567894",
+        city:"Metropolis",
+        lastActive:"2 hours ago",
+        joined:"Dec 1,  4:07 AM"
+      },
+      {
+        customer:{
+          avatar: '/team/58.webp',
+          name: 'Igor Borvibson'
+        },
+        email:"vibigorr@technext.it",
+        mobile:"+65899655678",
+        city:"Central city",
+        lastActive:"5 days ago",
+        joined:"Nov 28, 7:28 PM"
+      },
+      {
+        customer:{
+          avatar: '/team/59.webp',
+          name: 'Katerina Karenin'
+        },
+        email:"karkat99@gmail.com",
+        mobile:"+00564327890",
+        city:"Gotham",
+        lastActive:"2 weeks ago",
+        joined:"Nov 24, 10:16 AM"
+      },
+      {
+        customer:{
+          avatar: '',
+          name: 'Roy Anderson'
+        },
+        email:"andersonroy@netflix.chill",
+        mobile:"+55890776",
+        city:"Vancouver",
+        lastActive:"4 days ago",
+        joined:"Nov 18, 5:43 PM"
+      },
+      {
+        customer:{
+          avatar: '/team/31.webp',
+          name: 'Martina scorcese'
+        },
+        email:"cesetina1@gmail.com",
+        mobile:"+666611896",
+        city:"Viena",
+        lastActive:"6 min ago",
+        joined:"Nov 18, 2:09 AM"
+      },
+      {
+        customer:{
+          avatar: '/team/33.webp',
+          name: 'Luis Bunuel'
+        },
+        email:"luisuel@live.com",
+        mobile:"+55786534",
+        city:"Bangalore",
+        lastActive:"56 min ago",
+        joined:"Nov 16, 3:22 PM"
+      },
+      {
+        customer:{
+          avatar: '/team/34.webp',
+          name: 'Jean Renoir'
+        },
+        email:"renoirjean1836@gmail.com",
+        mobile:"+8801765458767",
+        city:"Chittagong",
+        lastActive:"Yesterday",
+        joined:"Nov 09, 8:49 AM"
+      },
+      {
+        customer:{
+          avatar: '/team/29.webp',
+          name: 'Ricky Antony'
+        },
+        email:"ricky@example.com",
+        mobile:"+2012001851",
+        city:"New Jersey",
+        lastActive:"1 hour ago",
+        joined:"Oct 19, 8:00 AM"
+      },
+      {
+        customer:{
+          avatar: '/team/3.webp',
+          name: 'Emma Watson'
+        },
+        email:"emma@example.com",
+        mobile:"+2122288403",
+        city:"New York",
+        lastActive:"6 hours ago",
+        joined:"Oct 15, 12:00 PM"
+      },
+      {
+        customer:{
+          avatar: '/team/avatar.webp',
+          name: 'Jennifer Schramm',
+          placeholder: true
+        },
+        email:"jennifer@example.com",
+        mobile:"+8283829631",
+        city:"Charlotte",
+        lastActive:"12 hours ago",
+        joined:"Oct 12, 11:00 AM"
+      },
+      {
+        customer:{
+          avatar: '/team/32.webp',
+          name: 'Raymond Mims'
+        },
+        email:"raymond@example.com",
+        mobile:"+5624685646",
+        city:"Artesia",
+        lastActive:"2 day ago",
+        joined:"Oct 10, 8:30 AM"
+      },
+      {
+        customer:{
+          avatar: '/team/25.webp',
+          name: 'Michael Jenkins'
+        },
+        email:"jenkins@example.com",
+        mobile:"+3026138829",
+        city:"Philadelphia",
+        lastActive:"12 hours ago",
+        joined:"Oct 3, 8:30 AM"
+      },
+    ]
+  
+  .table-responsive.scrollbar.ms-n1.ps-1
+    table.table.table-sm.fs--1.mb-0
+      thead
+        tr
+          th.white-space-nowrap.fs--1.align-middle.ps-0
+            .form-check.mb-0.fs-0
+              input.form-check-input#checkbox-bulk-members-select(
+                type='checkbox' 
+                data-bulk-select!={
+                  body: "members-table-body",
+                }
+              )
+          th.sort.align-middle(scope='col' data-sort="customer" style='width:15%; min-width:200px;') CUSTOMER
+          th.sort.align-middle(scope='col' data-sort="email" style='width:15%; min-width:200px;') EMAIL
+          th.sort.align-middle.pe-3(scope='col' data-sort="mobile_number" style='width:20%; min-width:200px;' ) MOBILE NUMBER
+          th.sort.align-middle(scope='col' data-sort="city" style='width:10%;') CITY
+          th.sort.align-middle.text-end(scope='col' data-sort="last_active" style='width:21%;  min-width:200px;') LAST ACTIVE
+          th.sort.align-middle.text-end.pe-0(scope='col' data-sort="joined" style='width:19%;  min-width:200px;') JOINED
+      tbody.list#members-table-body
+        each row,index in memberTableData
+          +MemberTableRow(row,index)
+  .row.align-items-center.justify-content-between.py-2.pe-0.fs--1
+    .col-auto.d-flex
+      p.mb-0.d-none.d-sm-block.me-3.fw-semi-bold.text-900(data-list-info)
+      a.fw-semi-bold(href='#!' data-list-view="*")
+        | View all
+        span.fas.fa-angle-right.ms-1(data-fa-transform='down-1')
+      a.fw-semi-bold.d-none(href='#!' data-list-view="less")
+        | View Less
+        span.fas.fa-angle-right.ms-1(data-fa-transform='down-1')
+    .col-auto.d-flex
+      button.page-link(data-list-pagination="prev")
+        span.fas.fa-chevron-left
+      ul.mb-0.pagination
+      button.page-link.pe-0(data-list-pagination="next")
+        span.fas.fa-chevron-right

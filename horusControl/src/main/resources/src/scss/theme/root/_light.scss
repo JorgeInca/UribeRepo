@@ -1,0 +1,354 @@
+:root,
+:root.light,
+:root .light {
+  @each $color, $value in $grays {
+    --#{$prefix}gray-#{$color}: #{$value};
+  }
+
+  @each $color, $value in $grays-rgb {
+    --#{$prefix}gray-#{$color}-rgb: #{$value};
+  }
+
+  @each $color, $value in $theme-all-colors {
+    --#{$prefix}#{$color}: #{$value};
+  }
+
+  @each $color, $value in $theme-colors-rgb {
+    --#{$prefix}#{$color}-rgb: #{$value};
+  }
+
+  --#{$prefix}white: #{$white};
+  --#{$prefix}black: #{$black};
+  --#{$prefix}white-rgb: #{to-rgb($white)};
+  --#{$prefix}black-rgb: #{to-rgb($black)};
+
+  --#{$prefix}body-color-rgb: #{to-rgb($body-color)};
+  --#{$prefix}body-bg-rgb: #{to-rgb($body-bg)};
+
+  // Fonts
+
+  // Note: Use `inspect` for lists so that quoted items keep the quotes.
+  // See https://github.com/sass/sass/issues/2383#issuecomment-336349172
+  --#{$prefix}font-sans-serif: #{inspect($font-family-sans-serif)};
+  --#{$prefix}font-monospace: #{inspect($font-family-monospace)};
+  --#{$prefix}gradient: #{$gradient};
+  --#{$prefix}scroll-margin-top: 2.5rem;
+
+  // Root and body
+  // scss-docs-start root-body-variablesr
+  @if $font-size-root != null {
+    --#{$prefix}root-font-size: #{$font-size-root};
+  }
+  --#{$prefix}body-font-family: #{$font-family-base};
+  @include rfs($font-size-base, --#{$prefix}body-font-size);
+  --#{$prefix}body-font-weight: #{$font-weight-base};
+  --#{$prefix}body-line-height: #{$line-height-base};
+  --#{$prefix}body-color: #{$body-color};
+  @if $body-text-align != null {
+    --#{$prefix}body-text-align: #{$body-text-align};
+  }
+  --#{$prefix}body-bg: #{$body-bg};
+  // scss-docs-end root-body-variables
+
+  // scss-docs-start root-border-var
+  --#{$prefix}border-width: #{$border-width};
+  --#{$prefix}border-style: #{$border-style};
+  --#{$prefix}border-color: #{$border-color};
+  --#{$prefix}border-color-translucent: #{$border-color-translucent};
+
+  --#{$prefix}border-radius: #{$border-radius};
+  --#{$prefix}border-radius-sm: #{$border-radius-sm};
+  --#{$prefix}border-radius-lg: #{$border-radius-lg};
+  --#{$prefix}border-radius-xl: #{$border-radius-xl};
+  --#{$prefix}border-radius-2xl: #{$border-radius-2xl};
+  --#{$prefix}border-radius-pill: #{$border-radius-pill};
+  // scss-docs-end root-border-var
+
+  --#{$prefix}heading-color: #{$headings-color};
+
+  --#{$prefix}code-color: #{$code-color};
+
+  --#{$prefix}highlight-bg: #{$mark-bg};
+  //test
+  --#{$prefix}input-bg: #{$white};
+  --#{$prefix}input-color: #{$input-color};
+  --#{$prefix}input-border-color: #{map-get($grays, '300')};
+  --#{$prefix}input-group-addon-bg: #{$input-group-addon-bg};
+
+  /* -------------------------------------------------------------------------- */
+  /*                                Scrollbar                                   */
+  /* -------------------------------------------------------------------------- */
+
+  --#{$prefix}scrollbar-bg: #{rgba($gray-400, 0.55)};
+  /* -------------------------------------------------------------------------- */
+  /*                                Navbar                                      */
+  /* -------------------------------------------------------------------------- */
+
+  --#{$prefix}navbar-top-height: 4rem;
+  .nav-slim {
+    --#{$prefix}navbar-top-height: 1.7rem;
+  }
+  .dual-nav {
+    --#{$prefix}navbar-top-height: 7.25rem;
+  }
+
+  /* ------------------------------- navbar-top  ------------------------------- */
+  --#{$prefix}navbar-top-link-color: var(--#{$prefix}gray-900);
+  --#{$prefix}navbar-top-menu-bg-color: #{$white};
+  --#{$prefix}navbar-top-border-color: #{$gray-300};
+  --#{$prefix}navbar-top-link-hover-color: #{$gray-1000};
+  --#{$prefix}navbar-top-link-hover-bg: #{$gray-100};
+  --#{$prefix}navbar-top-link-active-color: var(--#{$prefix}primary);
+  --#{$prefix}navbar-top-dropdown-color: var(--#{$prefix}gray-900);
+  --#{$prefix}navbar-top-dropdown-hover-bg: #{$gray-100};
+
+  --#{$prefix}navbar-top-menu-margin: 1.5rem;
+  .navbar-slim {
+    --#{$prefix}navbar-top-menu-margin: 0.8rem;
+  }
+  &.dual-nav {
+    --#{$prefix}navbar-top-menu-margin: 1.3rem;
+  }
+
+  &:not(.dark) {
+    .navbar-darker {
+      --#{$prefix}navbar-top-dropdown-hover-bg: #{$gray-900};
+      --#{$prefix}navbar-top-dropdown-color: #{$gray-400};
+    }
+    .navbar-darker:not(.dark) {
+      .navbar-top-collapse {
+        &.show {
+          --#{$prefix}navbar-top-link-color: #{$gray-400}; //
+          --#{$prefix}navbar-top-menu-bg-color: #{$gray-1100};
+          --#{$prefix}navbar-top-border-color: #{map-get($dark-grays, '300')};
+          --#{$prefix}navbar-top-link-hover-color: #{$gray-300};
+          --#{$prefix}navbar-top-link-hover-bg: #{$gray-1000};
+
+          --#{$prefix}navbar-top-link-active-color: #{$gray-300};
+        }
+      }
+    }
+  }
+
+  /* ------------------------------- dual-nav ------------------------------- */
+
+  --#{$prefix}dual-nav-border-color: #{$dual-nav-border-color};
+  --#{$prefix}dual-nav-first-layer-bg: #{$dual-nav-first-layer-bg};
+
+  &.dual-nav {
+    &:not(.dark) {
+      .navbar-darker {
+        --#{$prefix}dual-nav-border-color: #{$gray-900};
+        --#{$prefix}dual-nav-first-layer-bg: #{map-get($dark-grays, 'soft')};
+        // --#{$prefix}navbar-top-bg-color: #{$gray-1000};
+
+        .search-box {
+          --#{$prefix}input-bg: #{$gray-1100};
+          --#{$prefix}input-border-color: #{map-get($dark-grays, '300')};
+          &.search-box-icon {
+            color: #{map-get($dark-grays, '500')};
+          }
+        }
+      }
+    }
+  }
+
+  /* ------------------------------- navbar-vertical light ------------------------------- */
+  --#{$prefix}navbar-vertical-border-color: #{$gray-300};
+  --#{$prefix}navbar-vertical-bg-color: #{$white};
+  --#{$prefix}navbar-vertical-label-color: #{$gray-600};
+  --#{$prefix}navbar-vertical-link-color: #{$gray-700};
+  --#{$prefix}navbar-vertical-link-hover-color: #{$gray-800};
+  --#{$prefix}navbar-vertical-link-hover-bg: #{$gray-100};
+  --#{$prefix}navbar-vertical-link-active-color: #{$primary};
+  --#{$prefix}navbar-vertical-link-disable-color: #{$gray-500}; //need to check
+  --#{$prefix}navbar-vertical-width: #{$navbar-vertical-width};
+  &.navbar-vertical-collapsed {
+    --#{$prefix}navbar-vertical-width: #{$navbar-vertical-collapse-width};
+  }
+
+  // --#{$prefix}navbar-vertical-link-text-active-color: #{$primary};
+
+  --#{$prefix}navbar-vertical-link-icon-color: #{$gray-800};
+  --#{$prefix}navbar-vertical-dropdown-indicator-color: #{$gray-500};
+
+  --#{$prefix}navbar-footer-border-color: #{$gray-300};
+  --#{$prefix}navbar-footer-border-color: #{map-get($grays, '300')};
+
+  // ----------- collapsed colors ----------------
+  --#{$prefix}navbar-vertical-hr-color: #{$gray-200};
+  --#{$prefix}navbar-vertical-collapsed-menu-bg: #{$white};
+  --#{$prefix}navbar-vertical-collapsed-menu-color: #{$gray-1000};
+
+  --#{$prefix}hamburger-menu-color: #{$gray-600};
+
+  /* ------------------------------- navbar-top ------------------------------- */
+  --#{$prefix}navbar-top-bg-color: #{$white};
+
+  /* --------------------------------- buttons -------------------------------- */
+
+  --#{$prefix}btn-hover-border-color: transparent;
+  --#{$prefix}btn-active-border-color: transparent;
+
+  /* ------------------------------- List Group ------------------------------- */
+  --#{$prefix}list-group-bg: #{$white};
+  --#{$prefix}list-group-action-hover-color: #{map-get($grays, '700')};
+  --#{$prefix}list-group-hover-bg: #{map-get($grays, '100')};
+
+  --#{$prefix}body-bg: #{$body-bg};
+  --#{$prefix}body-color: #{$body-color};
+  --#{$prefix}headings-color: #{map-get($grays, '900')};
+
+  --#{$prefix}link-hover-color: #{$link-hover-color};
+
+  /* ------------------------------- link-color ------------------------------- */
+  --#{$prefix}link-color: #{map-get($theme-colors, 'primary')};
+  // --#{$prefix}colored-link-100-hover-color: #{map-get($grays, '200')};
+
+  /* --------------------------------- choices -------------------------------- */
+  --#{$prefix}choices-inner-min-height: auto;
+  --#{$prefix}choices-item-has-no-choices-bg: #{$white};
+
+  /* -------------------------------- Flatpickr ------------------------------- */
+  --#{$prefix}flatpickr-calendar-input-bg: #{$input-bg};
+  --#{$prefix}flatpickr-calendar-bg: #{$gray-200};
+  --#{$prefix}flatpickr-current-month-color: #{$gray-900};
+  --#{$prefix}flatpickr-weekday-color: #{$gray-900};
+  --#{$prefix}flatpickr-calendar-day-hover-bg: #{rgba($gray-300, 0.5)};
+  --#{$prefix}flatpickr-weekend-days-color: #{$orange-500};
+  --#{$prefix}flatpickr-today-color: #{$white};
+  --#{$prefix}flatpickr-calendar-day-selected-bg: #{rgba($primary, 0.2)};
+
+  /* -------------------------------- Fullcalendar ------------------------------- */
+  --#{$prefix}calendar-bg: #{$gray-200};
+  --#{$prefix}calendar-border-color: #{$gray-soft};
+  // --#{$prefix}calendar-border-color: #{$white};
+
+  /* --------------------------------- wizard --------------------------------- */
+  --#{$prefix}theme-wizard-nav-item-circle-bg: #{map-get($grays, '100')};
+  --#{$prefix}theme-wizard-complete-color: #{map-get($theme-colors, 'success')};
+  --#{$prefix}theme-wizard-active-color: #{map-get($theme-colors, 'primary')};
+  --#{$prefix}border-opacity: 1;
+  /* --------------------------------- tinymce -------------------------------- */
+  --#{$prefix}tinymce-bg: var(--#{$prefix}input-bg);
+  --#{$prefix}tinymce-tox-tbtn-enabled-icon-color: var(--#{$prefix}gray-800);
+  /* -------------------------------- choices -------------------------------- */
+  --#{$prefix}choices-item-bg: #{$blue-100};
+  --#{$prefix}choices-item-color: #{$gray-1000};
+
+  /* ---------------------------------- docs ---------------------------------- */
+
+  --#{$prefix}docs-language-bg: #{map-get($grays, '1000')};
+
+  /* ------------------------------- form select ------------------------------ */
+  --#{$prefix}form-select-indicator: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTUwIiBoZWlnaHQ9IjE1MCIgdmlld0JveD0iMCAwIDE1MCAxNTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik03NS4zNDggMTI3LjE5MkM3Mi40MzgxIDEyNy4xOTIgNjkuODUxNCAxMjYuMjIyIDY3LjkxMTUgMTI0LjI4Mkw1LjgzMjE1IDYyLjIwMjNDMS42Mjg4NyA1OC4zMjIzIDEuNjI4ODcgNTEuNTMyNCA1LjgzMjE1IDQ3LjY1MjVDOS43MTIxMSA0My40NDkyIDE2LjUwMiA0My40NDkyIDIwLjM4MiA0Ny42NTI1TDc1LjM0OCAxMDIuMjk1TDEyOS45OTEgNDcuNjUyNUMxMzMuODcxIDQzLjQ0OTIgMTQwLjY2MSA0My40NDkyIDE0NC41NDEgNDcuNjUyNUMxNDguNzQ0IDUxLjUzMjQgMTQ4Ljc0NCA1OC4zMjIzIDE0NC41NDEgNjIuMjAyM0w4Mi40NjEzIDEyNC4yODJDODAuNTIxMyAxMjYuMjIyIDc3LjkzNDcgMTI3LjE5MiA3NS4zNDggMTI3LjE5MloiIGZpbGw9IiMzMTM3NEEiLz4KPC9zdmc+Cg==');
+  /* --------------------------------- Avatar --------------------------------- */
+  --#{$prefix}avatar-status-border-color: #{$white};
+  --#{$prefix}avatar-name-color: #{$blue-500};
+
+  /* ---------------------------------- link ---------------------------------- */
+  --#{$prefix}colored-link-100-hover-color: #{map-get($grays, '200')};
+
+  /* ---------------------------------- logo ---------------------------------- */
+  --#{$prefix}logo-text: #{$gray-600};
+
+  /* -------------------------- theme-control-toggle -------------------------- */
+  --#{$prefix}theme-control-toggle-bg: #{rgba(
+      map-get($theme-colors-300, 'warning'),
+      0.24
+    )};
+  --#{$prefix}theme-control-toggle-hover-bg: #{$warning};
+  --#{$prefix}theme-control-toggle-color: #{$warning};
+  --#{$prefix}theme-control-toggle-hover-color: #{map-get(
+      $theme-colors-soft,
+      'warning'
+    )};
+
+  /* ---------------------------------- Badge --------------------------------- */
+
+  @each $color, $value in $theme-colors-light {
+    .badge-phoenix-#{$color} {
+      --#{$prefix}badge-bg: #{map-get($theme-colors-light, $color)};
+      --#{$prefix}badge-color: #{map-get($theme-colors-dark, $color)};
+      --#{$prefix}badge-border-color: #{map-get($light-badge-borders, $color)};
+    }
+  }
+
+  /* ------------------------------- navbar-vertical light dark ------------------------------- */
+
+  &:not(.dark) {
+    .navbar-darker {
+      --#{$prefix}navbar-vertical-border-color: #{map-get($dark-grays, '200')};
+
+      --#{$prefix}navbar-vertical-bg-color: #{$gray-1000};
+      --#{$prefix}navbar-vertical-label-color: #{$gray-600};
+      --#{$prefix}navbar-vertical-link-color: #{$gray-400};
+      --#{$prefix}navbar-vertical-link-hover-color: #{$gray-100};
+      --#{$prefix}navbar-vertical-link-hover-bg: #{$gray-900};
+      --#{$prefix}navbar-vertical-link-active-color: #{$white};
+      --#{$prefix}navbar-vertical-link-disable-color: #{$gray-500};
+
+      --#{$prefix}navbar-vertical-link-icon-color: #{$gray-400}; //
+      // ----------- collapsed colors ----------------
+      --#{$prefix}navbar-vertical-hr-color: #{map-get($dark-grays, '400')};
+      --#{$prefix}navbar-vertical-collapsed-menu-bg: #{$gray-1000};
+      --#{$prefix}navbar-vertical-collapsed-menu-color: #{$gray-400};
+      // ----------- collapsed colors ----------------
+      --#{$prefix}logo-text: #{$gray-100};
+      --#{$prefix}navbar-footer-border-color: #{map-get($dark-grays, '200')};
+
+      //--------------- navbar top ---------------------------------
+      --#{$prefix}navbar-top-bg-color: #{$gray-1100};
+      --#{$prefix}nav-link-color: #{$gray-500};
+
+      .form-control {
+        color: #{$gray-600};
+      }
+      .search-box {
+        --#{$prefix}input-bg: #{$gray-1000};
+        --#{$prefix}input-border-color: #{map-get($dark-grays, '300')};
+        &.search-box-icon {
+          color: #{map-get($dark-grays, '500')};
+        }
+      }
+      ///-------------
+      --#{$prefix}theme-control-toggle-bg: #{rgba(
+          map-get($theme-colors-300, 'warning'),
+          0.18
+        )};
+      --#{$prefix}theme-control-toggle-hover-bg: #{rgba(
+          map-get($theme-colors, 'warning'),
+          0.7
+        )};
+      --#{$prefix}theme-control-toggle-color: #{map-get(
+          $theme-colors-300,
+          'warning'
+        )};
+      --#{$prefix}theme-control-toggle-hover-color: #{map-get(
+          $theme-colors-soft,
+          'warning'
+        )};
+      &.navbar-slim {
+        .navbar-brand span {
+          color: #{map-get($dark-grays, '1000')} !important;
+        }
+      }
+    }
+  }
+  /* -------------------------------- Kanban ------------------------------- */
+  --#{$prefix}kanban-bg: #{map-get($grays, '200')};
+  --#{$prefix}kanban-column-bg: #{map-get($grays, 'soft')};
+  --#{$prefix}ghost-bg: var(--#{$prefix}gray-100);
+  --#{$prefix}drag-bg: var(--#{$prefix}white);
+  --#{$prefix}kanban-column-hover-bg: var(--#{$prefix}white);
+
+  // .table-primary {
+  //   --#{$prefix}table-bg: var(--#{$prefix}primary-soft);
+  // }
+  // .table-secondary {
+  //   --#{$prefix}table-bg: var(--#{$prefix}gray-900);
+  // }
+  // .table-success {
+  //   --#{$prefix}table-bg: var(--#{$prefix}success-400);
+  // }
+}

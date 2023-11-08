@@ -1,0 +1,9 @@
+mixin RevealBtn
+  .btn-reveal-trigger
+    button.btn.btn-sm.dropdown-toggle.dropdown-caret-none.transition-none.d-flex&attributes(attributes)(type='button' class='btn-reveal' id=id data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent")
+      span.fas.fa-ellipsis-h(class=iconClass)
+    .dropdown-menu.dropdown-menu-end.py-2(aria-labelledby=id )
+      a(href='#!').dropdown-item Edit
+      a(href='#!').dropdown-item.text-danger Delete
+      a(href='#!').dropdown-item Download
+      a(href='#!').dropdown-item Report abuse

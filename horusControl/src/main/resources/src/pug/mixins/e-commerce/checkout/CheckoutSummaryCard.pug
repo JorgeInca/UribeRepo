@@ -1,0 +1,60 @@
+mixin CheckoutSummaryCard
+  .card.mt-3.mt-lg-0
+    .card-body
+      .d-flex.align-items-center.justify-content-between
+        h3.mb-0 Summary
+        button.btn.btn-link.pe-0(type='button') Edit cart
+
+      .border-dashed.border-bottom.mt-4
+        .ms-n2
+          .row.align-items-center.mb-2.g-3
+            .col-8.col-md-7.col-lg-8
+              .d-flex.align-items-center
+                img.me-2.ms-1(src=`${CWD}assets/img/products/1.png`, width="40" alt="")
+                h6.fw-semi-bold.text-1000.lh-base Fitbit Sense Advanced Smartwatch with... 
+            .col-2.col-md-3.col-lg-2
+              h6.fs--2.mb-0 x1
+            .col-2.ps-0
+              h5.mb-0.fw-semi-bold.text-end $398
+
+          .row.align-items-center.mb-2.g-3
+            .col-8.col-md-7.col-lg-8
+              .d-flex.align-items-center
+                img.me-2.ms-1(src=`${CWD}assets/img/products/2.png`, width="40" alt="")
+                h6.fw-semi-bold.text-1000.lh-base iPhone 13 pro max-Pacific Blue-128GB 
+            .col-2.col-md-3.col-lg-2
+              h6.fs--2.mb-0 x1
+            .col-2.ps-0
+              h5.mb-0.fw-semi-bold.text-end $398
+
+          .row.align-items-center.mb-5.g-3
+            .col-8.col-md-7.col-lg-8
+              .d-flex.align-items-center
+                img.me-2.ms-1(src=`${CWD}assets/img/products/3.png`, width="40" alt="")
+                h6.fw-semi-bold.text-1000.lh-base Apple MacBook Pro 13 inch-M1-8/256GB
+            .col-2.col-md-3.col-lg-2
+              h6.fs--2.mb-0 x1
+            .col-2.ps-0
+              h5.mb-0.fw-semi-bold.text-end $65
+
+      .border-dashed.border-bottom.mt-4         
+        .d-flex.justify-content-between.mb-2
+          h5.text-900.fw-semi-bold Items subtotal:        
+          h5.text-900.fw-semi-bold $691
+        .d-flex.justify-content-between.mb-2 
+          h5.text-900.fw-semi-bold Discount:       
+          h5.text-danger.fw-semi-bold -$59
+        .d-flex.justify-content-between.mb-2 
+          h5.text-900.fw-semi-bold Tax:        
+          h5.text-900.fw-semi-bold $126.20
+        .d-flex.justify-content-between.mb-2 
+          h5.text-900.fw-semi-bold Subtotal     
+          h5.text-900.fw-semi-bold $665
+        .d-flex.justify-content-between.mb-3
+          h5.text-900.fw-semi-bold Shipping Cost     
+          h5.text-900.fw-semi-bold $30  
+
+      .d-flex.justify-content-between.border-dashed-y.pt-3
+        h4.mb-0 Total :
+        h4.mb-0 $695.20
+

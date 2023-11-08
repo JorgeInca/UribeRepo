@@ -1,0 +1,19 @@
+/* -------------------------------------------------------------------------- */
+/*                                  Override                                  */
+/* -------------------------------------------------------------------------- */
+.dark {
+  @each $color, $value in $theme-all-colors {
+    .dark__bg-#{$color} {
+      background-color: $value !important;
+    }
+    .dark__text-#{$color} {
+      color: $value !important;
+    }
+  }
+  .dark__bg-1200 {
+    background-color: $dark-gray-soft !important;
+  }
+  ::selection {
+    background-color: $warning;
+  }
+}

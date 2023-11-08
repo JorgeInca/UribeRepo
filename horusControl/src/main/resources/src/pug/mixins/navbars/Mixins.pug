@@ -1,0 +1,554 @@
+include Search
+include NotificationDropdown
+include ToggleThemeBtn
+
+mixin LinkLooper(config)
+  if config.title
+    p.nav-link.mb-0.fw-bold=config.title
+  each page in config.vars
+    - var pageName = page.label ? page.label : page.name
+    if config.dropdownItem
+      a.dropdown-item.fw-semi-bold(href=page.name !== 'modal' ? `${CWD}${page.path}.html` : `${CWD}${page.path}` data-bs-toggle=page.name ==="modal" ? 'modal' : false)
+        +cleanText(pageName)
+        if page.badge
+          span.badge.rounded-pill.ms-2(class=`badge-soft-${page.badge.type}`)=page.badge.text
+
+    else
+      a.nav-link.fw-semi-bold(href=page.name !== 'modal' ? `${CWD}${page.path}.html` : `${CWD}${page.path}` data-bs-toggle=page.name ==="modal" ? 'modal' : false)
+        +cleanText(pageName)
+        if page.badge
+          span.badge.rounded-pill.ms-2(class=`badge-soft-${page.badge.type}`)=page.badge.text
+
+
+mixin NewTopNav(vars)
+  ul.navbar-nav(data-top-nav-dropdowns)
+    each item,index in vars.combo? sitemap.slice(0,5) : sitemap
+      li.nav-item.dropdown
+        if item.label
+          a.nav-link.dropdown-toggle.lh-1(href='#' role='button' data-bs-toggle='dropdown' aria-haspopup='true' aria-expanded='false' id=`${item.label}s`)
+            +cleanText(item.label)
+        .dropdown-menu.navbar-dropdown-caret.py-0(aria-labelledby=id=`${item.label}s`)
+
+          case item.label
+            when 'dashboard'
+              .dropdown-menu-content.py-2
+                +LinkLooper({dropdownItem: true,vars:item.pages[0].pages})
+            when 'apps'
+              - var routesCollection = [];
+              -
+                item.pages.map((page)=>{
+                  if(page.pages){
+                    page.pages.map((childrenPage)=>{
+                      if(childrenPage.pages){
+                        childrenPage.pages.map((grandChild)=>{
+                          routesCollection.push(grandChild)
+                        })
+                      } else {
+                        routesCollection.push(childrenPage)
+                      }
+                    })
+                  } else{
+                    return routesCollection.push(page)
+                  }
+                })
+              .dropdown-menu-content.navbar-top-card.p-3
+                .scrollbar.max-h-dropdown
+                  .row.gx-0
+                    .col-6
+                      .nav.flex-column
+                        +LinkLooper({title:"Admin",vars:routesCollection.slice(0,7)})
+                        +LinkLooper({title:"Landing",vars:routesCollection.slice(7,18)})
+
+                    .col-6
+                      .nav.flex-column
+                        +LinkLooper({title:"Projects",vars:routesCollection.slice(18,24)})
+                        +LinkLooper({title:"Email",vars:routesCollection.slice(24,27)})
+                        +LinkLooper({title:"Events",vars:routesCollection.slice(27,29)})
+                        +LinkLooper({title:"Social",vars:routesCollection.slice(29,31)})
+
+
+            when 'pages'
+              - var routesCollection = [];
+              -
+                item.pages.map((page)=>{
+                  if(page.pages){
+                    page.pages.map((childrenPage)=>{
+                      if(childrenPage.pages){
+                        childrenPage.pages.map((grandChild)=>{
+                          routesCollection.push(grandChild)
+                        })
+                      } else {
+                        routesCollection.push(childrenPage)
+                      }
+                    })
+                  } else{
+                    return routesCollection.push(page)
+                  }
+                })
+
+              .dropdown-menu-content.navbar-top-card.p-3
+                .scrollbar.max-h-dropdown
+                  .row.gx-0
+                    .col-6
+                      .nav.flex-column
+                        +LinkLooper({vars:routesCollection.slice(0,2)}) 
+                        +LinkLooper({title:"Pricing",vars:routesCollection.slice(2,4)})
+                        +LinkLooper({vars:routesCollection.slice(4,6)})
+                        +LinkLooper({title:"Split",vars:routesCollection.slice(14,19)})
+
+                    .col-6
+                      .nav.flex-column
+                        +LinkLooper({title:"Errors",vars:routesCollection.slice(6,8)})
+                        +LinkLooper({title:"Simple",vars:routesCollection.slice(8,14)})
+
+
+            when 'modules'
+              - var routesCollection = [];
+              -
+                item.pages.map((page)=>{
+                  if(page.pages){
+                    page.pages.map((childrenPage)=>{
+                      if(childrenPage.pages){
+                        childrenPage.pages.map((grandChild)=>{
+                          routesCollection.push(grandChild)
+                        })
+                      } else {
+                        routesCollection.push(childrenPage)
+                      }
+                    })
+                  } else{
+                    return routesCollection.push(page)
+                  }
+                })
+              .dropdown-menu-content.navbar-top-card.p-3
+                .scrollbar.max-h-dropdown
+                  .row.gx-0
+                    .col-6
+                      .nav.flex-column
+                        +LinkLooper({vars:routesCollection.slice(0,10)}) 
+                    .col-6
+                      .nav.flex-column
+                        +LinkLooper({vars:routesCollection.slice(10,20)}) 
+            when 'documentation'
+              - var routesCollection = [];
+              -
+                item.pages.map((page)=>{
+                  if(page.pages){
+                    page.pages.map((childrenPage)=>{
+                      if(childrenPage.pages){
+                        childrenPage.pages.map((grandChild)=>{
+                          routesCollection.push(grandChild)
+                        })
+                      } else {
+                        routesCollection.push(childrenPage)
+                      }
+                    })
+                  } else{
+                    return routesCollection.push(page)
+                  }
+                })
+              .dropdown-menu-content.py-2
+                +LinkLooper({dropdownItem: true, vars:routesCollection})
+
+            default
+              p You have #{friends} friends
+
+mixin NavbarSearch
+  +NavSearch({placeholder:'Search...',inputClass:'form-control-sm'}).d-none.d-lg-block(style='width:25rem')
+
+mixin NavSearch({placeholder,inputClass})
+  -
+    var recentlySearchedItems = [
+      { url: `${CWD}${paths['e-commerce-fe-product-details']}`, text: '<span class="fa-solid fa-clock-rotate-left" data-fa-transform="shrink-2"></span> Store Macbook' },
+      { url: `${CWD}${paths['e-commerce-fe-product-details']}`, text: ' <span class="fa-solid fa-clock-rotate-left" data-fa-transform="shrink-2"></span> MacBook Air - 13″'}
+    ]
+
+  -
+    var Products = [
+      {
+        url: `${CWD}${paths['e-commerce-fe-product-details']}`,
+        img: `${CWD}assets/img/products/60x60/3.png`,
+        file: true,
+        title: 'MacBook Air - 13″',
+        imgAttrs: { class: 'h-100 w-100 fit-cover rounded-3' },
+        text: '<span class="fw-medium text-600">8GB Memory - 1.6GHz - 128GB Storage</span>'
+      },
+      {
+        url: `${CWD}${paths['e-commerce-fe-product-details']}`,
+        img: `${CWD}assets/img/products/60x60/3.png`,
+        file: true,
+        title: 'MacBook Pro - 13″',
+        imgAttrs: { class: 'img-fluid' },
+        text: '<span class="fw-medium text-600 ms-2">30 Sep at 12:30 PM</span>'
+      }
+    ]
+
+  -
+    var QuickLinks = [
+      { url: `${CWD}${paths['e-commerce-fe-product-details']}`, text: '<span class="fa-solid fa-link text-900" data-fa-transform="shrink-2"></span> Support MacBook House' },
+      { url: `${CWD}${paths['e-commerce-fe-product-details']}`, text: ' <span class="fa-solid fa-link text-900" data-fa-transform="shrink-2"></span> Store MacBook″'}
+    ]
+
+  -
+    var suggestionFiles = [
+      { url: `${CWD}${paths['e-commerce-fe-product-details']}`, text: '<span class="fa-solid fa-file-zipper text-900" data-fa-transform="shrink-2"></span> Library MacBook folder.rar' },
+      { url: `${CWD}${paths['e-commerce-fe-product-details']}`, text: ' <span class="fa-solid fa-file-lines text-900" data-fa-transform="shrink-2"></span> Feature MacBook extensions.txt'},
+      { url: `${CWD}${paths['e-commerce-fe-product-details']}`, text: ' <span class="fa-solid fa-image text-900" data-fa-transform="shrink-2"></span> MacBook Pro_13.jpg'},
+    ]
+
+  -
+    var suggestionMembers = [
+      { url: `${CWD}${paths['members-page']}`, icon: {img: `team/40x40/10.webp`, size: 'l', status: 'online'}, title: 'Carry Anna', text: 'anna@technext.it',  },
+      { url: `${CWD}${paths['members-page']}`, icon: {img: `team/40x40/12.webp`, size: 'l'}, title: 'John Smith', text: 'smith@technext.it' },
+    ]
+
+  -
+    var RelatedSearch = [
+      { url: `${CWD}${paths['e-commerce-fe-product-details']}`, text: '<span class="fa-brands fa-firefox-browser text-900" data-fa-transform="shrink-2"></span> Search in the Web MacBook' },
+      { url: `${CWD}${paths['e-commerce-fe-product-details']}`, text: ' <span class="fa-brands fa-chrome text-900" data-fa-transform="shrink-2"></span> Store MacBook″'}
+    ]  
+
+  .search-box.navbar-top-search-box&attributes(attributes)(data-list!={valueNames: ['title']})
+    form.position-relative(data-bs-toggle="search" data-bs-display="static")
+      input.form-control.search-input.fuzzy-search.rounded-pill(type='search' placeholder=placeholder, aria-label='Search' class=inputClass)
+      = '\n' 
+      span.fas.fa-search.search-box-icon
+      = '\n' 
+    //- button.btn-close.position-absolute.end-0.top-50.translate-middle.shadow-none.p-1.me-1.fs--2(type="button" data-bs-dismiss="search")
+    .btn-close.position-absolute.end-0.top-50.translate-middle.cursor-pointer.shadow-none(data-bs-dismiss="search")
+      button.btn.btn-link.btn-close-falcon.p-0(aria-label="Close")
+    .dropdown-menu.border.border-300.font-base.start-0.py-0.overflow-hidden.w-100
+      .scrollbar-overlay(style="max-height: 30rem;")
+        .list.pb-3
+          +SearchTotalResult({text: `24 <span class="text-500">results</span>`})
+          hr.text-200.my-0
+          +SearchResultTitle({text: 'Recently Searched '})
+          +SearchedItems(recentlySearchedItems)
+          hr.text-200.my-0
+          +SearchResultTitle({text: 'Products'})
+          +SearchSuggestion(Products)
+          hr.text-200.my-0
+          +SearchResultTitle({text: 'Quick Links'})
+          +SearchedItems(QuickLinks)
+          hr.text-200.my-0
+          +SearchResultTitle({text: 'Files'})
+          +SearchedItems(suggestionFiles)
+          hr.text-200.my-0
+          +SearchResultTitle({text: 'Members'})
+          +SearchSuggestion(suggestionMembers)
+          hr.text-200.my-0
+          +SearchResultTitle({text: 'Related Searches'})
+          +SearchedItems(RelatedSearch)
+        .text-center
+          p.fallback.fw-bold.fs-1.d-none No Result Found.
+
+mixin NavbarBrand(config)
+  - var config = Object.assign({ image: true }, config)
+  //- a(href=`/`).navbar-brand&attributes(attributes)
+  a(href=`${CWD}${paths['default-dashboard']}`).navbar-brand&attributes(attributes)
+    if config.image
+      .d-flex.align-items-center(class=config.wrapperClass)
+        +Logo({textClass:'d-none d-sm-block'})
+    else
+      span(class=`${config.color}`) #{name}
+
+mixin NavbarToggleIcon(config)
+  = '\n'
+  button.btn.navbar-toggler.navbar-toggler-humburger-icon.hover-bg-transparent&attributes(attributes)
+    span.navbar-toggle-icon
+      span.toggle-line
+  = '\n'
+
+mixin NavbarIcons(config)
+  - var config = Object.assign({ search: false }, config)
+
+  ul.navbar-nav.navbar-nav-icons.flex-row
+    li.nav-item
+      +ToggleThemeBtn
+
+    if config.search === true
+      li.nav-item
+        a.nav-link(href='#' data-bs-toggle="modal" data-bs-target="#searchBoxModal")
+          span(data-feather='search' style="height:19px;width:19px;margin-bottom: 2px;")
+    li.nav-item.dropdown
+      = '\n'
+      a.nav-link(href='#' style="min-width: 2.5rem" role='button' data-bs-toggle='dropdown' aria-haspopup='true' aria-expanded='false' data-bs-auto-close="outside" )
+        span(data-feather='bell' style="height:20px;width:20px;")
+      = '\n'
+      +NotificationDropdown
+
+    li.nav-item.dropdown
+      = '\n'
+      a#navbarDropdownNindeDots.nav-link(href='#' role='button' data-bs-toggle='dropdown' aria-haspopup='true' data-bs-auto-close="outside" aria-expanded='false')
+        svg(width='16' height='16' viewbox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg')
+          circle(cx='2' cy='2' r='2' fill='currentColor')
+          circle(cx='2' cy='8' r='2' fill='currentColor')
+          circle(cx='2' cy='14' r='2' fill='currentColor')
+          circle(cx='8' cy='8' r='2' fill='currentColor')
+          circle(cx='8' cy='14' r='2' fill='currentColor')
+          circle(cx='14' cy='8' r='2' fill='currentColor')
+          circle(cx='14' cy='14' r='2' fill='currentColor')
+          circle(cx='8' cy='2' r='2' fill='currentColor')
+          circle(cx='14' cy='2' r='2' fill='currentColor')
+      = '\n'
+      +NineDotsDropdown
+    li.nav-item.dropdown
+      a#navbarDropdownUser.nav-link.lh-1.pe-0(href='#!' role='button' data-bs-toggle='dropdown' data-bs-auto-close="outside" aria-haspopup='true' aria-expanded='false')
+        +Avatar({img: 'team/40x40/57.webp', size: 'l', status: '', round: 'circle'})
+      +ProfileDropdown
+mixin NavbarIconsSlim
+  ul.navbar-nav.navbar-nav-icons.flex-row
+    li.nav-item
+      +ToggleThemeBtnSlim.theme-control-toggle-slim
+    li.nav-item 
+      a.nav-link(href='#' data-bs-toggle="modal" data-bs-target="#searchBoxModal")
+        span(data-feather='search' style="height:12px;width:12px;")
+    li.nav-item.dropdown
+      = '\n'
+      a#navbarDropdownNotification.nav-link(href='#' role='button' data-bs-toggle='dropdown' data-bs-auto-close="outside" aria-haspopup='true' aria-expanded='false')
+        span(data-feather='bell' style="height:12px;width:12px;")
+      = '\n'
+      +NotificationDropdown
+
+    li.nav-item.dropdown
+      = '\n'
+      a#navbarDropdownNindeDots.nav-link(href='#' role='button' data-bs-toggle='dropdown' aria-haspopup='true' data-bs-auto-close="outside" aria-expanded='false')
+        svg(width='10' height='10' viewbox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg')
+          circle(cx='2' cy='2' r='2' fill='currentColor')
+          circle(cx='2' cy='8' r='2' fill='currentColor')
+          circle(cx='2' cy='14' r='2' fill='currentColor')
+          circle(cx='8' cy='8' r='2' fill='currentColor')
+          circle(cx='8' cy='14' r='2' fill='currentColor')
+          circle(cx='14' cy='8' r='2' fill='currentColor')
+          circle(cx='14' cy='14' r='2' fill='currentColor')
+          circle(cx='8' cy='2' r='2' fill='currentColor')
+          circle(cx='14' cy='2' r='2' fill='currentColor')
+      = '\n'
+      +NineDotsDropdown
+
+    li.nav-item.dropdown
+      a#navbarDropdownUser.nav-link.lh-1.pe-0.white-space-nowrap(href='#!' role='button' data-bs-toggle='dropdown' aria-haspopup='true' data-bs-auto-close="outside" aria-expanded='false') Olivia 
+        span.fa-solid.fa-chevron-down.fs--2
+      +ProfileDropdown
+
+mixin NavbarLogo(toggleID)
+  .navbar-logo
+    +NavbarToggleIcon(type='button' data-bs-toggle='collapse' data-bs-target=`#${toggleID}`, aria-controls=toggleID, aria-expanded='false' aria-label='Toggle Navigation')
+      span.navbar-toggler-icon
+
+    +NavbarBrand.me-1.me-sm-3
+
+mixin NavbarLogoSlim(toggleID)
+  .navbar-logo
+    +NavbarToggleIcon(type='button' data-bs-toggle='collapse' data-bs-target=`#${toggleID}`, aria-controls=toggleID, aria-expanded='false' aria-label='Toggle Navigation')
+      span.navbar-toggler-icon
+    a.navbar-brand(href=`${CWD}${paths['default-dashboard']}`).navbar-brand&attributes(attributes)
+      | phoenix 
+      span.text-1000.d-none.d-sm-inline slim
+
+mixin ProfileDropdown 
+  .dropdown-menu.dropdown-menu-end.navbar-dropdown-caret.py-0.dropdown-profile.shadow.border.border-300(aria-labelledby='navbarDropdownUser')&attributes(attributes)
+    .card.position-relative.border-0
+      .card-body.p-0
+        .text-center.pt-4.pb-3
+          +Avatar({img: 'team/72x72/57.webp', size: 'xl', status: '', round: 'circle'})
+          h6.mt-2.text-black Jerry Seinfield
+        .mb-3.mx-3
+          input#statusUpdateInput.form-control.form-control-sm(type='text' placeholder='Update your status')
+      .overflow-auto.scrollbar(style="height: 10rem;")
+        ul.nav.d-flex.flex-column.mb-2.pb-1
+          li.nav-item
+            a.nav-link.px-3(href="#!")  
+              span.me-2.text-900(data-feather="user")
+              span Profile
+          li.nav-item
+            a.nav-link.px-3(href="#!")
+              span.me-2.text-900(data-feather="pie-chart")
+              | Dashboard
+          li.nav-item
+            a.nav-link.px-3(href="#!")  
+              span.me-2.text-900(data-feather="lock")
+              | Posts &amp; Activity
+          li.nav-item
+            a.nav-link.px-3(href="#!")  
+              span.me-2.text-900(data-feather="settings")
+              | Settings &amp; Privacy 
+          li.nav-item
+            a.nav-link.px-3(href="#!")  
+              span.me-2.text-900(data-feather="help-circle")
+              | Help Center
+          li.nav-item
+            a.nav-link.px-3(href="#!")  
+              span.me-2.text-900(data-feather="globe")
+              | Language
+
+      .card-footer.p-0.border-top    
+        ul.nav.d-flex.flex-column.my-3
+          li.nav-item
+            a.nav-link.px-3(href="#!")  
+              span.me-2.text-900(data-feather="user-plus")
+              | Add another account
+
+        hr
+        .px-3 
+          a.btn.btn-phoenix-secondary.d-flex.flex-center.w-100(href="#!") 
+            span.me-2(data-feather="log-out") 
+            | Sign out
+
+        .my-2.text-center.fw-bold.fs--2.text-600
+          a.text-600.me-1(href="#!") Privacy policy
+          | &bull;
+          a.text-600.mx-1(href="#!") Terms
+          | &bull;
+          a.text-600.ms-1(href="#!") Cookies
+
+mixin NineDotsMenuItem(config)
+  - var config = Object.assign({ title:'title', contentClass:'', link: '#!', width:'30'}, config);
+  .col-4
+    a.d-block.hover-bg-200.p-2.rounded-3.text-center.text-decoration-none.mb-3(href=`${config.link}`)
+      img(src=`${CWD}assets/img/${config.img}` alt='' width=`${config.width}`)
+      p.mb-0.text-black.text-truncate.fs--2.mt-1(class=`${config.img || config.icon ? 'pt-1' : ''}`)=config.title
+
+
+mixin NineDotsDropdown
+  .dropdown-menu.dropdown-menu-end.navbar-dropdown-caret.py-0.dropdown-nide-dots.shadow.border.border-300(aria-labelledby='navbarDropdownNindeDots')
+    .card.bg-white.position-relative.border-0
+      .card-body.pt-3.px-3.pb-0.overflow-auto.scrollbar(style="height: 20rem;")
+        .row.text-center.align-items-center.gx-0.gy-0
+          -
+            var brands = [
+              {img: 'nav-icons/behance.webp', title: 'Behance'},
+              {img: 'nav-icons/google-cloud.webp', title: 'Cloud'},
+              {img: 'nav-icons/slack.webp', title: 'Slack'},
+              {img: 'nav-icons/gitlab.webp', title: 'Gitlab'},
+              {img: 'nav-icons/bitbucket.webp', title: 'BitBucket'},
+              {img: 'nav-icons/google-drive.webp', title: 'Drive'},
+              {img: 'nav-icons/trello.webp', title: 'Trello'},
+              {img: 'nav-icons/figma.webp', title: 'Figma', width: '20'},
+              {img: 'nav-icons/twitter.webp', title: 'Twitter'},
+              {img: 'nav-icons/pinterest.webp', title: 'Pinterest'},
+              {img: 'nav-icons/ln.webp', title: 'Linkedin'},
+              {img: 'nav-icons/google-maps.webp', title: 'Maps'},
+              {img: 'nav-icons/google-photos.webp', title: 'Photos'},
+              {img: 'nav-icons/spotify.webp', title: 'Spotify'},
+            ];
+
+          each item in brands 
+            +NineDotsMenuItem(item)  
+
+//--------- navbar top new design --------------
+
+mixin navbarTopMenus(vars)
+  ul.navbar-nav.navbar-nav-top(data-dropdown-on-hover)
+    each item,index in sitemap
+      li.nav-item.dropdown
+        if item.label
+          - var label = item.label 
+          if item.label==='dashboard'
+            - var label = 'home'
+          a.nav-link.dropdown-toggle.lh-1(href=`#!` role='button' data-bs-toggle='dropdown' data-bs-auto-close="outside" aria-haspopup='true' aria-expanded='false')
+            span.uil.fs-0.me-2(class=item.icon)
+            +cleanText(label)
+          if item.pages
+            if item.megaMenu
+              +TopNavMegaMenu(item)
+            else
+              +TopNavItem(item)
+
+
+mixin TopNavItem(config)
+  ul.dropdown-menu.navbar-dropdown-caret
+    each page in config.pages
+      if page.pages 
+        if page.flat
+          each item in page.pages
+            +TopNavDropdownItem(item)
+        else
+          +TopNavLooper(page)
+      else
+        +TopNavDropdownItem(page)
+
+mixin TopNavLooper(config)
+
+  li.dropdown(class=`${config.dropdownInside? 'dropdown-inside': ''}`)
+    a.dropdown-item.dropdown-toggle(id=config.name href='#' data-bs-toggle="dropdown" data-bs-auto-close="outside")
+      .dropdown-item-wrapper
+        span.uil.fs-0.uil-angle-right.lh-1.dropdown-indicator-icon
+        span
+          +DropdownIcon(config)
+          +cleanText(config.name)
+    ul.dropdown-menu
+      each item in config.pages
+        if item.pages
+          +TopNavLooper(item)
+        else
+          +TopNavDropdownItem(item)
+
+mixin TopNavDropdownItem(page)
+  li
+    +TopNavDropdownLink({
+      url: page.pages ? `#${page.name}`: `${page.path}`,
+      icon: page.icon || page.topNavIcon,
+      iconSet: page.iconSet,
+      text: `${page.name}`,
+      badge: page.badge, 
+      hasHash: page.pages? false: true, 
+      isDisabled: page.disabled,
+      depth: 0,   
+    })
+
+mixin TopNavDropdownLink(config)
+  - var config = Object.assign({}, config)
+  - var { url, icon,iconSet, text, badge, hasHash, isDisabled, depth } = config;
+  - var href = hasHash ? text!=='modal' ? `${CWD}${url}.html` : `${CWD}${url}` : url
+
+  a.dropdown-item(href=href class=`${isDisabled ? 'nav-link-disable' :  href.includes(`${pathName}.html`) ? 'active' : ''}`)
+    .dropdown-item-wrapper
+      +DropdownIcon(config)
+      +cleanText(text)
+
+mixin DropdownIcon(config)
+  if config.iconSet == 'font-awesome'
+    span.me-2(class=config.icon)
+  else
+    span.me-2.uil(data-feather=config.icon || config.topNavIcon)
+
+mixin TopNavMegaMenu(config)
+  ul.dropdown-menu.navbar-dropdown-caret.dropdown-menu-card.py-0
+    .border-0.scrollbar(style='max-height: 60vh;')
+      .px-3.pt-4.pb-3.img-dropdown
+        .row.gx-4.gy-5
+          - var group1 = [];
+          - var group2 = [];
+          - var group3 = [];
+   
+          -group1.push(config.pages[4])
+          -group2.push(config.pages[0])
+          -group2.push(config.pages[1])
+          -group2.push(config.pages[3])
+          -group3.push(config.pages[2])
+          -group3.push(config.pages[5])
+
+          each group in [group2, group1, group3]
+            .col-12.col-sm-6.col-md-4
+              each item,index in group
+                .dropdown-item-group(class=index>0 ? 'mt-5': '')
+                  span.me-2(data-feather=item.icon style='stroke-width:2;')
+                  h6.dropdown-item-title
+                    +cleanText(item.name)
+
+                +TopNavMegaMenuIitemsLooper(item)
+
+mixin TopNavMegaMenuIitemsLooper(config)
+  each item in config.pages
+    if item.pages
+      +TopNavMegaMenuIitemsLooper(item)
+    else
+      +TopNavMegaMenuIitems(item)
+
+mixin TopNavMegaMenuIitems(config)
+  - var path= config.path
+  - var href = `${CWD}${path}.html`
+  a.dropdown-link(href=href class=href.includes(`${pathName}.html`) ? 'active' : '')
+    +cleanText(config.name)
+

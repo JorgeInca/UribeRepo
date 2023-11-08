@@ -1,0 +1,46 @@
+extends ../layouts/LayoutTheme
+include ../mixins/dashboard/common
+include ../mixins/pages/members/MembersTable
+
+
+append scripts
+  script(src=`${CWD}vendors/list.js/list.min.js`)
+  
+append variables
+  - 
+    var breadcrumb = [
+      {
+        label: 'Pages',
+        href: '#!'
+      },
+      {
+        label: 'Members',
+        href: '#!',
+        active: true
+      }
+    ];
+
+
+
+block content
+  h2.text-bold.text-1100.mb-5 Members
+  #members(data-list!={
+    valueNames: ["customer", "email", "mobile_number", "city", "last_active", "joined"],
+    page: 10,
+    pagination: true
+  })
+    .row.align-items-center.justify-content-between.g-3.mb-4
+      .col.col-auto
+        +Search({placeholder: 'Search members', inputClass: ''})
+      .col-auto
+        .d-flex.align-items-center
+          button.btn.btn-link.text-900.me-4.px-0
+            span.fa-solid.fa-file-export.fs--1.me-2
+            | Export
+          button.btn.btn-primary
+            span.fas.fa-plus.me-2
+            | Add member
+    .mx-n4.mx-lg-n6.px-4.px-lg-6.mb-9.bg-white.border-y.border-300.mt-2.position-relative.top-1
+      +MembersTable
+
+

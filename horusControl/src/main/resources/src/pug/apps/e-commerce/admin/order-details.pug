@@ -1,0 +1,66 @@
+extends ../../../layouts/LayoutTheme
+include ../../../mixins/dashboard/common
+include ../../../mixins/e-commerce/order-details/OrderTable
+include ../../../mixins/e-commerce/order-details/OrderDetailsCards
+
+
+append variables
+  - 
+    var breadcrumb = [
+      {
+        label: 'Page 1',
+        href: '#!'
+      },
+      {
+        label: 'Page 2',
+        href: '#!',
+      },
+      {
+        label: 'Default',
+        href: '#!',
+        active: true
+      },
+    ];
+
+block content
+  .mb-9
+    h2.mb-0 Order 
+      span #349
+    .d-sm-flex.flex-between-center.mb-3
+      p.text-800.lh-sm.mb-0.mt-2.mt-sm-0 Customer ID : 
+        a.fw-bold(href='#!')  2364847
+      .d-flex
+        button.btn.btn-link.pe-3.ps-0.text-900
+          span.fas.fa-print.me-2
+          | Print
+        button.btn.btn-link.px-3.text-900
+          span.fas.fa-undo.me-2
+          | Refund
+        .dropdown
+          button.btn.text-900.dropdown-toggle.dropdown-caret-none.ps-3.pe-0(type='button' data-bs-toggle='dropdown' aria-expanded='false')
+            | More action
+            span.fas.fa-chevron-down.ms-2
+          ul.dropdown-menu.dropdown-menu-end
+            li
+              a.dropdown-item(href='#') Action
+            li
+              a.dropdown-item(href='#') Another action
+            li
+              a.dropdown-item(href='#') Something else here
+
+    .row.g-5.gy-7
+      .col-12.col-xl-8.col-xxl-9
+        +OrderTable
+        .row.gx-4.gy-6.g-xl-7.justify-content-sm-center.justify-content-xl-start
+          .col-12.col-sm-auto
+            +BillingDetails
+          .col-12.col-sm-auto
+            +ShippingDetails
+          .col-12.col-sm-auto
+            +OtherDetails
+      .col-12.col-xl-4.col-xxl-3
+        .row
+          .col-12
+            +SummaryCard.mb-3
+          .col-12
+            +OrderStatusCard

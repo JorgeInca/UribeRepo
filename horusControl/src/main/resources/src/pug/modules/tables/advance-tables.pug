@@ -1,0 +1,587 @@
+extends ../../layouts/LayoutComponent
+include ../../mixins/dashboard/common
+
+
+append scripts
+  script(src=`${CWD}vendors/list.js/list.min.js`)
+
+append variables
+  -
+    var pageHeader = {
+      title: 'Advance Tables',
+      description: `${title} uses <b>List.Js</b> for advance table. List.Js is a Tiny, invisible and simple, yet powerful and incredibly fast vanilla JavaScript library that adds search, sort, filters and flexibility to plain HTML lists, tables, or anything.`,
+      url: `https://listjs.com/`,
+      linkText: 'Documentation for List.js',
+    }
+  -
+    var rightNav = [
+      {
+        name: 'Example',
+        id: '#example',
+      },
+      {
+        name: 'Pagination with numbering',
+        id: '#pagination-with-numbering',
+      },
+      {
+        name: 'Search Example',
+        id: '#search-example',
+      },
+      {
+        name: 'Filter Example',
+        id: '#filter-example',
+      },
+      {
+        name: 'Docs',
+        id: '#docs',
+      },
+    ]
+  -
+    var rows = [
+      {
+        name: 'Anna',
+        email: 'anna@example.com',
+        age: 18,
+      },
+      {
+        name: 'Homer',
+        email: 'homer@example.com',
+        age: 35,
+      },
+      {
+        name: 'Oscar',
+        email: 'oscar@example.com',
+        age: 52,
+      },
+      {
+        name: 'Emily',
+        email: 'emily@example.com',
+        age: 30,
+      },
+      {
+        name: 'Jara',
+        email: 'jara@example.com',
+        age: 25,
+      },
+      {
+        name: 'Clark',
+        email: 'clark@example.com',
+        age: 39,
+      },
+      {
+        name: 'Jennifer',
+        email: 'jennifer@example.com',
+        age: 52,
+      },
+      {
+        name: 'Tony',
+        email: 'tony@example.com',
+        age: 30,
+      },
+      {
+        name: 'Tom',
+        email: 'tom@example.com',
+        age: 25,
+      },
+      {
+        name: 'Michael',
+        email: 'michael@example.com',
+        age: 39,
+      },
+      {
+        name: 'Antony',
+        email: 'antony@example.com',
+        age: 39,
+      },
+      {
+        name: 'Raymond',
+        email: 'raymond@example.com',
+        age: 52,
+      },
+      {
+        name: 'Marie',
+        email: 'marie@example.com',
+        age: 30,
+      },
+      {
+        name: 'Cohen',
+        email: 'cohen@example.com',
+        age: 25,
+      },
+      {
+        name: 'Rowen',
+        email: 'rowen@example.com',
+        age: 39
+      },
+      {
+        name: 'John',
+        email: 'john@example.com',
+        age: 25
+      },
+      {
+        name: 'Emily',
+        email: 'emily@example.com',
+        age: 31
+      },
+      {
+        name: 'Alice',
+        email: 'alice@example.com',
+        age: 42
+      },
+      {
+        name: 'David',
+        email: 'david@example.com',
+        age: 29
+      },
+      {
+        name: 'Sullivan Benton',
+        email: 'sullivan@example.com',
+        age: 23
+      },
+      {
+        name: 'Uriah Nunez',
+        email: 'uriah@example.com',
+        age: 32
+      },
+      {
+        name: 'Terry Lynch',
+        email: 'terry@example.com',
+        age: 45
+      },
+      {
+        name: 'Lailah Green',
+        email: 'lailah@example.com',
+        age: 25
+      },
+      {
+        name: 'Phillip Mack',
+        email: 'phillip@example.com',
+        age: 21
+      },
+      {
+        name: 'Whitney Sawyer',
+        email: 'whitney@example.com',
+        age: 12
+      },
+      {
+        name: 'Jaliyah Ritter',
+        email: 'jaliyah@example.com',
+        age: 12
+      },
+      {
+        name: 'Clayton Arnold',
+        email: 'clayton@example.com',
+        age: 52
+      },
+      {
+        name: 'Jett Donovan',
+        email: 'jett@example.com',
+        age: 31
+      },
+      {
+        name: 'Javion Christensen',
+        email: 'javion@example.com',
+        age: 25
+      },
+      {
+        name: 'Brittany Griffin',
+        email: 'brittany@example.com',
+        age: 41
+      },
+      {
+        name: 'Dustin Middleton',
+        email: 'dustin@example.com',
+        age: 45
+      },
+      {
+        name: 'Janessa Mann',
+        email: 'janessa@example.com',
+        age: 65
+      },
+      {
+        name: 'Evangeline Santos',
+        email: 'evangeline@example.com',
+        age: 32
+      },
+      {
+        name: 'Parker Todd',
+        email: 'parker@example.com',
+        age: 41
+      },
+      {
+        name: 'Jaxson Gill',
+        email: 'jaxson@example.com',
+        age: 33
+      },
+      {
+        name: 'Lucille',
+        email: 'lucille@example.com',
+        age: 34
+      },
+      {
+        name: 'Terrell',
+        email: 'terrell@example.com',
+        age: 35
+      },
+      {
+        name: 'Shayna',
+        email: 'shayna@example.com',
+        age: 36
+      },
+      {
+        name: 'Alvaro',
+        email: 'alvaro@example.com',
+        age: 37
+      },
+      {
+        name: 'Clay',
+        email: 'clay@example.com',
+        age: 37
+      },
+      {
+        name: 'Oscar',
+        email: 'oscar@example.com',
+        age: 37
+      },
+      {
+        name: 'Tabitha',
+        email: 'tabitha@example.com',
+        age: 37
+      },
+      {
+        name: 'Jordon',
+        email: 'jordon@example.com',
+        age: 37
+      },
+    ]
+
+  -
+    var badges = [
+      {content: 'Success', type:'success', icon: 'fas fa-check'},
+      {content: 'Blocked', type:'secondary', icon: 'fas fa-ban'},
+      {content: 'Pending', type:'warning', icon: 'fas fa-stream'}
+    ];
+  -
+    var purchases = [
+      {
+        customer: 'Sylvia Plath',
+        email: 'john@gmail.com',
+        product: 'Slick - Drag & Drop Bootstrap Generator',
+        status:  badges[0],
+      },
+      {
+        customer: 'Homer',
+        email: 'sylvia@mail.ru',
+        product: 'Bose SoundSport Wireless Headphones',
+        status:  badges[2],
+      },
+      {
+        customer: 'Edgar Allan Poe',
+        email: 'edgar@yahoo.com',
+        product: 'All-New Fire HD 8 Kids Edition Tablet',
+        status:  badges[1],
+      },
+      {
+        customer: 'William Butler Yeats',
+        email: 'william@gmail.com',
+        product: 'Apple iPhone XR (64GB)',
+        status:  badges[0],
+      },
+      {
+        customer: 'Rabindranath Tagore',
+        email: 'tagore@twitter.com',
+        product: 'ASUS Chromebook C202SA-YS02 11.6"',
+        status:  badges[2],
+      },
+      {
+        customer: 'Emily Dickinson',
+        email: 'emily@gmail.com',
+        product: 'Mirari OK to Wake! Alarm Clock & Night-Light',
+        status:  badges[1],
+      },
+      {
+        customer: 'Giovanni Boccaccio',
+        email: 'giovanni@outlook.com',
+        product: 'Summer Infant Contoured Changing Pad',
+        status:  badges[2],
+      },
+      {
+        customer: 'Oscar Wilde',
+        email: 'oscar@hotmail.com',
+        product: 'Munchkin 6 Piece Fork and Spoon Set',
+        status:  badges[0],
+      },
+      {
+        customer: 'John Doe',
+        email: 'doe@gmail.com',
+        product: 'Falcon - Responsive Dashboard Template',
+        status:  badges[0],
+      },
+      {
+        customer: 'Emma Watson',
+        email: 'emma@gmail.com',
+        product: 'Apple iPhone XR (64GB)',
+        status:  badges[2],
+      }
+    ]
+
+block component
+  .mb-9
+    +ComponentCard({
+      title: 'Example'
+    }).mb-3
+      #tableExample(data-list!={
+        valueNames: ['name', 'email', 'age'],
+        page: 5,
+        pagination: true
+      })
+
+        .table-responsive
+          table.table.table-sm.fs--1.mb-0
+            thead
+              tr
+                th.sort.border-top.ps-3(data-sort="name") Name
+                th.sort.border-top(data-sort="email") Email
+                th.sort.border-top(data-sort="age") Age
+                th.sort.text-end.align-middle.pe-0.border-top(scope='col') ACTION
+            tbody.list
+              each row in rows
+                tr
+                  td.align-middle.ps-3.name=row.name
+                  td.align-middle.email=row.email
+                  td.align-middle.age=row.age
+                  td.align-middle.white-space-nowrap.text-end.pe-0
+                    +DashboardDropdown.fs--2
+        .d-flex.flex-between-center.pt-3
+          .pagination.d-none
+          p.mb-0.fs--1
+            ='\n'
+            span.d-none.d-sm-inline-block(data-list-info)
+            ='\n'
+            span.d-none.d-sm-inline-block  &mdash; 
+            ='\n'
+            a.fw-semi-bold(href='#!' data-list-view="*")
+              ='\n'
+              | View all
+              ='\n'
+              span.fas.fa-angle-right.ms-1(data-fa-transform='down-1')
+              ='\n'
+            a.fw-semi-bold.d-none(href='#!' data-list-view="less")
+              ='\n'
+              | View Less
+              ='\n'
+              span.fas.fa-angle-right.ms-1(data-fa-transform='down-1')
+              ='\n'
+          .d-flex
+            = '\n'
+            button.btn.btn-sm.btn-primary(type='button' data-list-pagination='prev')
+              span Previous
+            = '\n'
+            button.btn.btn-sm.btn-primary.px-4.ms-2(type='button' data-list-pagination='next')
+              span Next
+
+    +ComponentCard({
+      title: 'Pagination with numbering',
+      description:'Add <code> pagination </code> class for enabling number pagination. The following structure will enable number pagination with next and previous button.',
+    }).my-4
+      #tableExample2(data-list!={
+        valueNames: ['name', 'email', 'age'],
+        page: 5,
+        pagination: {
+          innerWindow: 2,
+          left: 1,
+          right: 1
+        },
+      })
+        .table-responsive
+          table.table.table-striped.table-sm.fs--1.mb-0
+            thead
+              tr
+                th.sort.border-top.ps-3(data-sort="name") Name
+                th.sort.border-top(data-sort="email") Email
+                th.sort.border-top(data-sort="age") Age
+                th.sort.text-end.align-middle.pe-0.border-top(scope='col') ACTION
+            tbody.list 
+              each row in rows
+                tr
+                  td.align-middle.ps-3.name=row.name
+                  td.align-middle.email=row.email
+                  td.align-middle.age=row.age
+                  td.align-middle.white-space-nowrap.text-end.pe-0
+                    +DashboardDropdown.fs--2
+
+        .d-flex.justify-content-center.mt-3
+          button.page-link(data-list-pagination="prev")
+            span.fas.fa-chevron-left
+          ul.mb-0.pagination
+          button.page-link.pe-0(data-list-pagination="next")
+            span.fas.fa-chevron-right
+
+    +ComponentCard({
+      title: 'Search Example',
+      description: `Add <code>search</code> class for enable data searching. The following structure will enable search feature.`
+    }).mb-3
+      #tableExample3(data-list!={
+        valueNames: ['name', 'email', 'age'],
+        page: 5,
+        pagination: true
+      })
+        +Search({placeholder:'Search', inputClass: 'form-control-sm'}).mb-3.mx-auto
+        .table-responsive
+          table.table.table-striped.table-sm.fs--1.mb-0
+            thead
+              tr
+                th.sort.border-top.ps-3(data-sort="name") Name
+                th.sort.border-top(data-sort="email") Email
+                th.sort.border-top(data-sort="age") Age
+                th.sort.text-end.align-middle.pe-0.border-top(scope='col') ACTION
+            tbody.list 
+              each row in rows
+                tr
+                  td.align-middle.ps-3.name=row.name
+                  td.align-middle.email=row.email
+                  td.align-middle.age=row.age
+                  td.align-middle.white-space-nowrap.text-end.pe-0
+                    +DashboardDropdown.fs--2
+
+        .d-flex.justify-content-between.mt-3
+          span.d-none.d-sm-inline-block(data-list-info)
+          .d-flex
+            button.page-link(data-list-pagination="prev")
+              span.fas.fa-chevron-left
+            ul.mb-0.pagination
+            button.page-link.pe-0(data-list-pagination="next")
+              span.fas.fa-chevron-right
+
+    +ComponentCard({
+      title: 'Filter Example',
+    }).mb-3
+      #tableExample4(data-list!={
+        valueNames: ['name', 'email', 'payment'],
+        page: 5,
+        pagination: true,
+        filter: {
+          key: 'payment'
+        }
+      })
+        .row.justify-content-end.g-0
+          .col-auto.px-3
+            select.form-select.form-select-sm.mb-3(data-list-filter)
+              option(selected='' value='') Select payment status
+              option(value='Pending') Pending
+              option(value='Success') Success
+              option(value='Blocked') Blocked
+        .table-responsive
+          table.table.table-sm.fs--1.mb-0
+            thead
+              tr.bg-light
+                th.sort.border-top.ps-3(data-sort="name") Customer
+                th.sort.border-top(data-sort="email") Email
+                th.sort.border-top.text-end.pe-3(data-sort="payment") Payment
+            tbody.list 
+              each row in purchases
+                tr
+                  td.align-middle.ps-3.name=row.customer
+                  td.align-middle.email=row.email
+                  td.align-middle.payment.text-end.py-3.pe-3
+                    .badge.badge-phoenix.fs--2(class=`badge-phoenix-${row.status.type}`)
+                      span.fw-bold= row.status.content
+                      span.ms-1(class=`${row.status.icon}`)
+        .d-flex.justify-content-center.mt-3
+          button.page-link(data-list-pagination="prev")
+            span.fas.fa-chevron-left
+          ul.mb-0.pagination
+          button.page-link.pe-0(data-list-pagination="next")
+            span.fas.fa-chevron-right
+
+    +ComponentCard({
+      title: 'Docs',
+      hideNavTab: true
+    }).my-4
+      p Integrate List in #{name} by following these easy steps: 
+      ul
+        li Set unique ID and add 
+          code data-list 
+          | attribute to the wrapper element  and list your column in 
+          code valueNames 
+          | property. 
+          +ComponentCardLib.my-1
+            #tableExample(data-list!={ valueNames: ["name", "email", "age"]})
+              // Your list content will go here
+        li To enable sorting in your column, add 
+          code data-sort 
+          | attribute and assign column name to the attribute. 
+
+          +ComponentCardLib.my-1
+            th.sort(data-sort="name") Customer
+        li Add 
+          code list 
+          | class to the content wrapper element.
+
+          +ComponentCardLib.my-1
+            tbody.list 
+              // Your value will go here
+
+        li Then wrap your value with column name as a class. For example, if your column name is 
+          code name 
+          | then the value will look like this:
+          +ComponentCardLib.my-1
+            td.name John Doe
+        li To add pagination add 
+          code .pagination 
+          | class inside your wrapper element
+        li To enable  button pagination add 
+          code data-list-pagination='prev' 
+          | and 
+          code data-list-pagination='next' 
+          | to the "Prev" and "Next" buttons respectively.
+        li To see the list info, add 
+          code data-list-info
+          |  attribute to a DOM element inside your wrapper element.
+
+    +ComponentCard({
+      title: 'Ajax Table',
+    }).mb-3
+      #advanceAjaxTable.table-list&attributes(attributes)
+        .table-responsive.scrollbar.mb-3
+          table.table.table-sm.fs--1.mb-0.overflow-hidden
+            thead.text-900
+              tr
+                th.sort.ps-3.pe-1.align-middle.white-space-nowrap(data-sort="orderId" style="min-width: 4.5rem;") Order
+                th.sort.pe-1.align-middle.white-space-nowrap(data-sort="customer" style="min-width: 8.5rem") Customer
+                th.sort.pe-1.align-middle.white-space-nowrap(data-sort="date").pe-7 Date
+                th.sort.pe-1.align-middle.white-space-nowrap(data-sort="address" style="min-width: 12.5rem;") Ship To
+                th.sort.pe-1.align-middle.white-space-nowrap(data-sort="deliveryType" style="min-width: 7rem") Delivery Type
+                th.sort.pe-1.align-middle.white-space-nowrap(data-sort="status" ).text-center Status
+                th.sort.pe-1.align-middle.white-space-nowrap(data-sort="amount").text-end Amount
+                th.no-sort
+            tbody.list
+
+        .d-flex.justify-content-center.mt-3
+          button.page-link(data-list-pagination="prev")
+            span.fas.fa-chevron-left
+          ul.mb-0.pagination
+          button.page-link.pe-0(data-list-pagination="next")
+            span.fas.fa-chevron-right 
+
+      .p-3
+        h4.mb-3 How to use
+        p If you are using Gulp based workflow, follow these easy steps:
+        ul
+          li Give your table a unique ID.
+          li Use the 
+            code advanceAjaxTableInit() 
+            | function from 
+            code src/js/advance-ajax-table.js 
+            | in a new JS file and update the ID.
+          li Import the file on 
+            code src/js/theme.js
+
+        p If you are not using Gulp based workflow:
+        ul 
+          li Give your table a unique ID.
+          li Find the   
+            code advanceAjaxTableInit() 
+            | function from 
+            code theme.js, 
+            | copy the code, and update the ID in a new function.

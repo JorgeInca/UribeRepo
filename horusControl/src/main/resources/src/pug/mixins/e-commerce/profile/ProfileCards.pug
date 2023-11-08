@@ -1,0 +1,60 @@
+mixin ProfileCard
+  .card&attributes(attributes)
+    .card-body
+      .border-bottom.border-dashed.border-300.pb-4
+        .row.align-items-center.g-3.g-sm-5.text-center.text-sm-start
+          .col-12.col-sm-auto
+            input#avatarFile.d-none(type="file")
+            label.cursor-pointer.avatar.avatar-5xl(for="avatarFile")
+              img.rounded-circle(src=`${CWD}assets/img/team/15.webp`, alt="")
+          .col-12.col-sm-auto.flex-1
+            h3 Ansolo Lazinatov
+            p.text-800 Joined 3 months ago
+            div
+              a.me-2(href='#!')
+                span.fab.fa-linkedin-in.text-400.hover-primary
+              a.me-2(href='#!')
+                span.fab.fa-facebook.text-400.hover-primary
+              a(href='#!')
+                span.fab.fa-twitter.text-400.hover-primary
+
+      //- .card-footer.border-0
+      .d-flex.flex-between-center.pt-4
+        div
+          h6.mb-2.text-800 Total Spent
+          h4.fs-1.text-1000.mb-0 $894
+        .text-end
+          h6.mb-2.text-800 Last Order
+          h4.fs-1.text-1000.mb-0 1 week ago
+        .text-end
+          h6.mb-2.text-800 Total Orders
+          h4.fs-1.text-1000.mb-0 97 
+
+mixin AddressCard
+  .card&attributes(attributes)
+    .card-body
+      .border-bottom.border-dashed.border-300
+        h4.mb-3.lh-sm.lh-xl-1 Default Address
+          button.btn.btn-link.p-0(type='button') 
+            span.fas.fa-edit.fs--1.ms-3.text-500
+
+      .pt-4.mb-7.mb-lg-4.mb-xl-7
+        .row.justify-content-between
+          .col-auto
+            h5.text-1000 Address
+          .col-auto
+            p.text-800 Vancouver, British Columbia
+              br
+              | Canada
+      //- .card-footer.border-0
+      .border-top.border-dashed.border-300.pt-4
+        .row.flex-between-center.mb-2
+          .col-auto
+            h5.text-1000.mb-0 Email
+          .col-auto
+            a.lh-1(href="mailto:shatinon@jeemail.com") shatinon@jeemail.com
+        .row.flex-between-center
+          .col-auto
+            h5.text-1000.mb-0 Phone
+          .col-auto
+            a(href="tel:+1234567890") +1234567890

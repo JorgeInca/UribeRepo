@@ -1,0 +1,260 @@
+
+mixin TopRegionsTableRow(data,index)
+  tr
+    td.white-space-nowrap.ps-0.country(style="width:32%")
+      .d-flex.align-items-center
+        h6.mb-0.me-3=`${index + 1}. ` 
+        a(href='#!')
+          .d-flex.align-items-center
+            img(src=`${CWD}assets${data.country.flag}`, alt='' width=24)
+            p.mb-0.ps-3.text-primary.fw-bold.fs--1=data.country.name
+    td.align-middle.users(style='width:17%')
+      h6.mb-0=data.users.number
+        span.text-700.fw-semi-bold.ms-2=`(${data.users.percantage})`
+    td.align-middle.text-end.transactions(style='width:17%')
+      h6.mb-0=data.transactions.number
+        span.text-700.fw-semi-bold.ms-2=`(${data.transactions.percantage})`
+    td.align-middle.text-end.revenue(style='width:17%')
+      h6.mb-0=`$${data.revenue.number}`
+        span.text-700.fw-semi-bold.ms-2=`(${data.revenue.percantage})`
+    td.align-middle.text-end.pe-0.conv-rate(style='width:17%')
+      h6=data.convRate
+
+mixin TopRegionsTable
+  div(data-list!={
+    valueNames: ["country", "users", "transactions", "revenue", "conv-rate"],
+    page: 5
+  })
+    .mb-5.mt-7
+      h3 Top regions by revenue
+      p.text-700 Where you generated most of the revenue
+    - 
+      var topRegionsTableData = [
+        {
+          country:{
+            name: 'India',
+            flag: '/img/country/india.png'
+          },
+          users: {
+            number: 92896,
+            percantage: '41.6%'
+          },
+          transactions: {
+            number: 67,
+            percantage: '34.3%'
+          },
+          revenue: {
+            number: 7560,
+            percantage: '36.9%'
+          },
+          convRate: '14.01%',
+        },
+        {
+          country:{
+            name: 'China',
+            flag: '/img/country/china.png'
+          },
+          users: {
+            number: 50496,
+            percantage: '32.8%'
+          },
+          transactions: {
+            number: 54,
+            percantage: '23.8%'
+          },
+          revenue: {
+            number: 6532,
+            percantage: '26.5%'
+          },
+          convRate: '23.56%',
+        },
+        {
+          country:{
+            name: 'USA',
+            flag: '/img/country/usa.png'
+          },
+          users: {
+            number: 45679,
+            percantage: '24.3%'
+          },
+          transactions: {
+            number: 35,
+            percantage: '19.7%'
+          },
+          revenue: {
+            number: 5432,
+            percantage: '16.9%'
+          },
+          convRate: '10.23%',
+        },
+        {
+          country:{
+            name: 'South Korea',
+            flag: '/img/country/south-korea.png'
+          },
+          users: {
+            number: 36453,
+            percantage: '19.7%'
+          },
+          transactions: {
+            number: 22,
+            percantage: '9.54%'
+          },
+          revenue: {
+            number: 4673,
+            percantage: '11.6%'
+          },
+          convRate: '8.85%',
+        },
+        {
+          country:{
+            name: 'Vietnam',
+            flag: '/img/country/vietnam.png'
+          },
+          users: {
+            number: 15007,
+            percantage: '11.9%'
+          },
+          transactions: {
+            number: 17,
+            percantage: '6.91%'
+          },
+          revenue: {
+            number: 2456,
+            percantage: '10.2%'
+          },
+          convRate: '6.01%',
+        },
+        {
+          country:{
+            name: 'Russia',
+            flag: '/img/country/russia.png'
+          },
+          users: {
+            number: 54215,
+            percantage: '32.9%'
+          },
+          transactions: {
+            number: 38,
+            percantage: '7.91%'
+          },
+          revenue: {
+            number: 3254,
+            percantage: '12.4%'
+          },
+          convRate: '6.21%',
+        },
+        {
+          country:{
+            name: 'Australia',
+            flag: '/img/country/australia.png'
+          },
+          users: {
+            number: 54789,
+            percantage: '12.7%'
+          },
+          transactions: {
+            number: 32,
+            percantage: '14.0%'
+          },
+          revenue: {
+            number: 3215,
+            percantage: '5.72%'
+          },
+          convRate: '12.02%',
+        },
+        {
+          country:{
+            name: 'England',
+            flag: '/img/country/england.png'
+          },
+          users: {
+            number: 14785,
+            percantage: '12.9%'
+          },
+          transactions: {
+            number: 11,
+            percantage: '32.91%'
+          },
+          revenue: {
+            number: 4745,
+            percantage: '10.2%'
+          },
+          convRate: '8.01%',
+        },
+        {
+          country:{
+            name: 'Indonesia',
+            flag: '/img/country/indonesia.png'
+          },
+          users: {
+            number: 32156,
+            percantage: '32.2%'
+          },
+          transactions: {
+            number: 89,
+            percantage: '12.0%'
+          },
+          revenue: {
+            number: 2456,
+            percantage: '23.2%'
+          },
+          convRate: '9.07%',
+        },
+        {
+          country:{
+            name: 'Japan',
+            flag: '/img/country/japan.png'
+          },
+          users: {
+            number: 12547,
+            percantage: '12.7%'
+          },
+          transactions: {
+            number: 21,
+            percantage: '14.91%'
+          },
+          revenue: {
+            number: 2541,
+            percantage: '23.2%'
+          },
+          convRate: '20.01%',
+        },
+      ]
+    .table-responsive.scrollbar
+      table.table.fs--2.mb-0
+        thead
+          tr
+            th.sort.border-top.border-200.ps-0.align-middle(scope='col' data-sort='country' style="width:32%") COUNTRY
+            th.sort.border-top.border-200.align-middle(scope='col' data-sort='users' style="width:17%") USERS
+            th.sort.border-top.border-200.text-end.align-middle(scope='col' data-sort='transactions' style="width:16%") TRANSACTIONS
+            th.sort.border-top.border-200.text-end.align-middle(scope='col' data-sort='revenue' style="width:20%") REVENUE
+            th.sort.border-top.border-200.text-end.pe-0.align-middle(scope='col' data-sort='conv-rate' style="width:17%") CONV. RATE
+        tr
+          td
+          td.align-middle.py-4
+            h4.mb-0.fw-normal 377,620
+          td.align-middle.text-end.py-4
+            h4.mb-0.fw-normal 236
+          td.align-middle.text-end.py-4
+            h4.mb-0.fw-normal $15,758
+          td.align-middle.text-end.py-4.pe-0
+            h4.mb-0.fw-normal 10.32%
+        tbody.list#table-regions-by-revenue
+          each row, index in topRegionsTableData
+            +TopRegionsTableRow(row,index)
+    .row.align-items-center.py-1
+      .pagination.d-none
+      .col.d-flex.fs--1
+        p.mb-0.d-none.d-sm-block.me-3.fw-semi-bold.text-900(data-list-info)
+      .col-auto.d-flex
+        = '\n'
+        button(type='button' title="Previous" data-list-pagination='prev').btn.btn-link.px-1.me-1
+          span.fas.fa-chevron-left.me-2
+          | Previous
+        button(type='button' title="Next" data-list-pagination='next').btn.btn-link.px-1.ms-1
+          | Next
+          span.fas.fa-chevron-right.ms-2
+
+
+

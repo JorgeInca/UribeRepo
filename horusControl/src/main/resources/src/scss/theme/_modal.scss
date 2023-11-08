@@ -1,0 +1,10 @@
+.modal-title {
+  font-size: map-get($font-sizes, 1);
+  color: var(--#{$prefix}gray-800);
+}
+
+@include media-breakpoint-up(md) {
+  .modal-md {
+    --#{$prefix}modal-width: 768px;
+  }
+}

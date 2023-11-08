@@ -1,0 +1,28 @@
+extends ../../../layouts/LayoutEcommerce
+include ../../../mixins/e-commerce/checkout/Checkout
+include ../../../mixins/e-commerce/checkout/CheckoutSummaryCard
+
+
+append variables
+  - var disableNavigationType = true;
+  - var disableHorizontalNavbarShape = true;
+  - var disableVerticalNavbarAppearance = true;
+  - var disableHorizontalNavbarAppearance = true;
+  - var activeNavItem = 'shipping-info';
+
+block ecomContent
+  +Section(null,'container-small cart').pt-5.pb-9
+    nav.mb-2(aria-label='breadcrumb')
+      ol.breadcrumb.mb-0
+        li.breadcrumb-item
+          a(href='#!') Page 1
+        li.breadcrumb-item
+          a(href='#!') Page 2
+        li.breadcrumb-item.active(aria-current='page') Default
+    h2.mb-5 Check out
+    .row
+      .col-lg-7.mb-4.mb-lg-0
+        form
+          +ShippingInfo
+      .col-lg-5.col-xl-4.offset-xl-1
+        +CheckoutSummaryCard

@@ -1,0 +1,113 @@
+append variables
+	-
+		var analyticsData = [
+			{
+				icon: 'uil-envelope text-primary',
+				number:'28,00',
+				text:'Total Emails',
+				class:'border-start-xxl border-end-xxl-0 border-bottom-xxl-0 border-end border-bottom pb-4 pb-xxl-0 '
+			},
+			{
+				icon: 'uil-envelope-upload text-info',
+				number:'1,866',
+				text:'Emails Sent',
+				class:'border-start-xxl border-end-xxl-0 border-bottom-xxl-0 border-end-md border-bottom pb-4 pb-xxl-0'
+			},
+			{
+				icon: 'uil-envelopes text-primary',
+				number:'1,366',
+				text:'Emails Delivered',
+				class:'border-start-xxl border-bottom-xxl-0 border-bottom border-end border-end-md-0 pb-4 pb-xxl-0 pt-4 pt-md-0'
+			},
+			{
+				icon: 'uil-envelope-open text-info',
+				number:'1,200',
+				text:'Emails Opened',
+				class:'border-start-xxl border-end-md border-end-xxl-0 border-bottom border-bottom-md-0 pb-4 pb-xxl-0 pt-4 pt-xxl-0'
+			},
+			{
+				icon: 'uil-envelope-check text-success',
+				number:'900',
+				text:'Emails Clicked',
+				class:'border-start-xxl border-end border-end-xxl-0 pb-md-4 pb-xxl-0 pt-4 pt-xxl-0'
+			},
+			{
+				icon: 'uil-envelope-block text-danger',
+				number:'500',
+				text:'Emails Bounce',
+				class:'border-start-xxl border-end-xxl pb-md-4 pb-xxl-0 pt-4 pt-xxl-0'
+			},
+		]	
+
+mixin SingleState(data)
+	.col-6.col-md-4.col-xxl-2.text-center(class=`${data.class}`)
+		span.uil.fs-3.lh-1(class=`${data.icon}`)
+		h1.fs-3.pt-3=data.number
+		p.fs--1.mb-0=data.text
+
+mixin Analytics
+	.row.justify-content-between
+		each item in analyticsData
+			+SingleState(item)
+
+
+mixin SalesTrends 
+	.row.justify-content-between.mb-4
+		.col-12
+			h3 Sales Trends
+			p.text-700 Updated inventory &amp; the sales report.
+		.col-12.d-flex
+			.d-flex
+				.fa-solid.fa-circle.text-info-300.me-2
+				h6.mb-0.me-3.lh-base Profit
+			.d-flex
+				.fa-solid.fa-circle.text-primary-200.dark__text-primary-300.me-2
+				h6.mb-0.lh-base Revenue
+	.echart-sales-trends(style='height:270px; width:100%')
+
+mixin CallCampaign 
+	.row.justify-content-between.mb-4
+		.col-auto
+			h3 Call Campaign Reports
+			p.text-700 All call campaigns succeeded.
+		.col-12.d-flex
+			.d-flex
+				.fa-solid.fa-circle.text-primary.me-2
+				h6.mb-0.me-3.lh-base Campaign
+	.echart-call-campaign(style='height:290px; width:100%')
+
+mixin EmailCampaign 
+	.scrollbar
+		h3 Email Campaign Reports
+		p.text-700 Paid and Verified for each piece of content
+		.echart-email-campaign-report.echart-contacts-width(style='')
+
+mixin MarketingCampaign 
+	.row.align-itms-center.mb-5.mb-sm-2.mb-md-4
+		.col-sm-8.col-md-12.col-lg-8.col-xl-12.col-xxl-8.mb-xl-2.mb-xxl-0
+			h3  Marketing Campaign Report
+			p.text-700.mb-lg-0 According to the sales data.
+		.col-sm-4.col-md-12.col-lg-4.col-xl-12.col-xxl-4
+			select.form-select.form-select
+				option Ally Aagaard
+				option Alec Haag
+				option Aagaard
+	.row.g-3.align-items-center
+		.col-sm-8.col-md-12.col-lg-8.col-xl-12.col-xxl-8
+			.echart-social-marketing-radar(style='min-height:320px; width:100%')
+		.col-sm-4.col-md-12.col-lg-4.col-xl-12.col-xxl-4.d-flex.justify-content-end-xxl.mt-0
+			.d-flex.flex-1.justify-content-center.d-sm-block.d-md-flex.d-lg-block.d-xl-flex.d-xxl-block
+				.mb-4.me-6.me-sm-0.me-md-6.me-lg-0.me-xl-6.me-xxl-0
+					.d-flex.align-items-center.mb-2
+						h4.mb-0 15,000
+						span.badge.badge-phoenix.badge-phoenix-primary.ms-2 +30.63%
+					.d-flex.align-items-center
+						.fa-solid.fa-circle.text-warning-300.me-2
+						h6.mb-0 Online Campaign
+				div
+					.d-flex.align-items-center.mb-2
+						h4.mb-0 5,000
+						span.badge.badge-phoenix.badge-phoenix-danger.ms-2 +13.52%
+					.d-flex.align-items-center
+						.fa-solid.fa-circle.text-primary-300.me-2
+						h6.mb-0 Offline Campaign

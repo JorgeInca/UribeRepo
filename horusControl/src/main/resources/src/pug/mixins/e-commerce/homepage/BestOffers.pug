@@ -1,0 +1,96 @@
+mixin BestOffers
+  - 
+    var products = [
+      {
+        image: '25.png',
+        name: 'RESPAWN 200 Racing Style Gaming Chair, in Gray RSP 200 GRY',
+        offer: '35%',
+        star: 5
+      },
+      {
+        image: '27.png',
+        name: 'LEVOIT Humidifiers for Bedroom Large Room 6L Warm and Cool Mist for...',
+        offer: '18%',
+        star: 4
+      },
+      {
+        image: '26.png',
+        name: 'NETGEAR Nighthawk Pro Gaming XR500 Wi-Fi Router with 4 Ethernet Ports...',
+        offer: '15%',
+        star: 5
+      },
+      {
+        image: '18.png',
+        name: 'Rachael Ray Cucina Bakeware Set Includes Nonstick Bread Baking Cookie Sheet...',
+        offer: '20%',
+        star: 3.5
+      },
+      {
+        image: '17.png',
+        name: 'Xbox Series S',
+        offer: '12%',
+        star: 5
+      },
+      {
+        image: '24.png',
+        name: 'FURINNO Computer Writing Desk, Walnut',
+        offer: '16%',
+        star: 5
+      },
+      {
+        name:'Seagate Portable 2TB External Hard Drive Portable HDD',
+        image:'18.png',
+        offer: '15%',
+        star: 4
+      },
+    ]
+  .mb-6
+    .d-flex.flex-between-center.mb-3
+      h3 Best Offers
+      a.fw-bold.d-none.d-md-block(href="#!")
+          | Explore more
+          span.fas.fa-chevron-right.fs--1.ms-1
+    .swiper-theme-container.products-slider
+      .swiper.swiper-container.theme-slider(data-swiper!={
+        slidesPerView: 1,
+        spaceBetween: 16,
+        breakpoints: {
+          450: {
+            slidesPerView: 2,
+            spaceBetween: 16,
+          },
+          576: {
+            slidesPerView: 3,
+            spaceBetween: 20,
+          },
+          768: {
+            slidesPerView: 4,
+            spaceBetween: 20,
+          },
+          992: {
+            slidesPerView: 5,
+            spaceBetween: 20,
+          },
+          1200: {
+            slidesPerView: 6,
+            spaceBetween: 16,
+          },
+        },
+      })
+        .swiper-wrapper
+          each product in products
+            .swiper-slide
+              +Product(product)
+      .swiper-nav
+        .swiper-button-next
+          span.fas.fa-chevron-right.nav-icon
+        .swiper-button-prev
+          span.fas.fa-chevron-left.nav-icon
+      
+    a.fw-bold.d-md-none(href="#!")
+        | Explore more
+        span.fas.fa-chevron-right.fs--1.ms-1
+
+
+        
+

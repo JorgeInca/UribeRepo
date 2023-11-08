@@ -1,0 +1,53 @@
+extends ../../layouts/LayoutTheme
+
+include ../../mixins/kanban/KanbanWizardForm
+include ../../mixins/kanban/KanbanCreateBoard
+
+
+
+prepend styles
+  //- link(href=`${CWD}vendors/sortablejs/sortable.min.css`, rel='stylesheet')
+
+prepend scripts
+  script(src=`${CWD}vendors/sortablejs/sortable.min.js`)
+  script(src=`${CWD}vendors/dropzone/dropzone.min.js`)
+append variables
+
+block content
+  .row 
+    .col-6
+      .d-flex.align-items-center
+        img(src=`${CWD}assets/img/kanban/board.png` alt='').me-3
+        h1.mb-0.text-1100.fw-semi-bold Phoenix Kanban
+      p.mt-3 Create a Kanban board by following the steps below
+  .kanban-create-board.row
+    .col-xxl-5.col-xl-6.col-12.pb-8.order-1.order-xl-0
+      .theme-wizard.theme-wizard-progress(data-theme-wizard data-create-board)
+        .mt-6.border-bottom-0
+          +WizardHeader({tab1:'#create-board-tab1',tab2:'#create-board-tab2',tab3:'#create-board-tab3',tab4:'#create-board-tab4',tab5:'#create-board-tab5'})
+        .mt-6
+          .pt-4.pb-0
+            +WizardContent({
+              name: 'create-board', 
+              formId: 'createBoardForm',
+              tab1: 'create-board-tab1',
+              tab2: 'create-board-tab2',
+              tab3: 'create-board-tab3',
+              tab4: 'create-board-tab4',
+              tab5: 'create-board-tab5',
+              validation: false,
+              url: `${CWD}${paths['forms-wizard']}`
+            })
+        .border-top-0.mt-10(data-wizard-footer)
+          .d-flex.pager.wizard.list-inline.mb-0
+            button.d-none(type="button" data-wizard-prev-btn).btn.btn-link.ps-0
+              span.fas.fa-chevron-left.me-1(data-fa-transform="shrink-3")
+              | Previous
+
+            .flex-1.text-end
+              button(type='submit' data-wizard-next-btn).btn.btn-primary.px-6.px-sm-6 Next
+                span.fas.fa-chevron-right.ms-1(data-fa-transform="shrink-3") 
+
+    .col-xxl-7.col-xl-6.col-12.text-center.kanban-board-bg
+      img(src=`${CWD}assets/img/kanban/board-ligth.png` alt='' style="top: 200px").d-dark-none.mt-5.position-sticky
+      img(src=`${CWD}assets/img/kanban/board-dark.png` alt='' style="top: 200px").d-light-none.position-sticky

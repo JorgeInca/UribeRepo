@@ -1,0 +1,33 @@
+extends ../index
+
+
+
+append variables
+  - var disableNavigationType = true;
+  //- - var disableVerticalNavbarAppearance = true;
+  - var disableHorizontalNavbarShape = true;
+
+
+block navbarTop
+  +NavbarCombo({
+      toggleID: 'navbarVerticalCollapse',
+      links: false,
+      search: true
+    }).navbar-expand-lg(style='display:none')
+
+  script.
+    var navbarTopShape = window.config.config.phoenixNavbarTopShape;
+    var navbarPosition = window.config.config.phoenixNavbarPosition;
+
+    var body = document.querySelector('body');
+    var navbarDefault = document.querySelector('#navbarDefault');
+    var navbarTopNew = document.querySelector('#navbarTopNew');
+    var navbarSlim = document.querySelector('#navbarSlim');
+    var navbarTopSlimNew = document.querySelector('#navbarTopSlimNew');
+    var navbarCombo = document.querySelector('#navbarCombo');
+
+    var documentElement = 	document.documentElement;
+    var navbarVertical = document.querySelector('.navbar-vertical');
+    navbarCombo.removeAttribute('style');
+    navbarVertical.removeAttribute('style');
+    documentElement.classList.add('navbar-combo')

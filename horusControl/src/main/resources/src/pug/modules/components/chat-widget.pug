@@ -1,0 +1,101 @@
+extends ../../layouts/LayoutComponent
+
+append variables
+  -
+    var pageHeader = {
+      title: 'Chat widget',
+      description: "A support chat widget built with CSS and JavaScript",
+      breadcrumb:[
+        {
+          name:'Components',
+          link:'#!'
+        },
+        {
+          name:'Chat widget',
+          active:true
+        },
+      ]
+    }
+  -
+    var rightNav = [
+      {
+        name: 'Structure',
+        id: '#structure',
+      },
+      {
+        name: 'Appearance',
+        id: '#appearance',
+      },
+      {
+        name: 'Position',
+        id: '#position',
+      }
+    ]
+
+block component
+  .mb-9
+    button.btn.btn-outline-primary.btn-support-chat Toggle chat widget
+    +ComponentCard({title: 'Structure', hideNavTab: true}).mb-4.mt-5
+
+      pre.scrollbar.my-5
+        code.language-html
+          +escape
+            doctype html
+            html
+              head ...
+              body 
+                main
+                  .container-fluid
+                    // navbar content goes here
+                    .content 
+                      // content goes here
+                  .support-chat-container
+                    // chat widget content gose here
+
+    +ComponentCard({title: 'Appearance', hideNavTab: true}).my-4
+      p You can control the chat widget appearance by clicking the toggle button on the settings panel.
+      h5.mb-3 Gulp based workflow
+      p.mb-2 To hide the chat widget, open 
+        code src/js/config.js 
+        | in your project directory and set 
+        code phoenixSupportChat: false 
+        | of 
+        code initialConfig 
+        | object.
+      pre.scrollbar.mb-5
+        code.lang-html.
+          const initialConfig = {
+            phoenixSupportChat: true || false,
+            ...
+          };
+      h5.mb-3 Without gulp based workflow
+      p.mb-2 To hide the chat widget, open 
+        code public/assets/js/config.js 
+        | in your project directory and set 
+        code phoenixSupportChat: false 
+        | of 
+        code initialConfig 
+        | object.
+      pre.scrollbar.mb-5
+        code.lang-html.
+          const initialConfig = {
+            phoenixSupportChat: true || false,
+            ...
+          };
+
+      p At the bottom right corner, you will find the widget button. By clicking the button, the 
+        code .show-chat 
+        | class will toggle and the chat will be shown or hidden.
+      pre.scrollbar.mt-3
+        code.language-html
+          +escape
+            .container-fluid.support-chat.show-chat
+
+    +ComponentCard({title: 'Position', hideNavTab: true}).my-4
+      p Initially, the chat widget will appear at the bottom right corner, you can add 
+        code .support-chat-start 
+        | class to take it to the bottom left corner.
+      pre.scrollbar.mt-3
+        code.language-html
+          +escape
+            .support-chat-container.support-chat-start

@@ -1,0 +1,208 @@
+extends ../../layouts/LayoutTheme
+
+append variables
+  - var attrsContent = { class: 'kanban-boards-content' };
+
+append styles
+  link(href=`${CWD}vendors/swiper/swiper-bundle.min.css`, rel='stylesheet')
+
+append scripts
+  script(src=`${CWD}vendors/swiper/swiper-bundle.min.js`)
+
+block content
+  .mb-9
+    .border-bottom.px-4.px-lg-6.pb-5
+      .row.justify-content-between.gy-4
+        .col-auto
+          h2 Kanban Boards 
+            span.text-700.fw-semi-bold (8)
+        .col-auto.d-flex.flex-wrap.gap-2
+          button.btn.px-4.btn-phoenix-primary.d-flex
+            span.fa-solid.fa-filter.me-1
+            span Filter
+          select.form-select.w-auto#select-deals
+            option Sort by - Last visited
+            option Sort by - Name (A - Z)
+            option Sort by - Name (Z - A)
+            option Sort by - Category
+            option  Sort by - Date created
+          +Search({placeholder: 'Search by name'})
+    .d-flex.flex-wrap.gap-3.border-bottom.px-4.px-lg-6.py-5
+      a(href=`${CWD}${paths['create-kanban-board']}`).btn.btn-primary.px-3.px-sm-5.px-md-10
+        span.fas.fa-plus.me-2
+        | Create New Board
+      button.btn.btn-phoenix-primary.px-3.px-sm-4.d-flex.text-900
+        span.fa-solid.fa-angles-down.me-sm-2
+        span.d-none.d-sm-block Import Bulk Tasks
+      a(href=`${CWD}${paths['app-calendar']}`).btn.btn-phoenix-primary.px-3.px-sm-4.d-flex.text-900
+        span.fa-solid.fa-calendar-xmark.me-sm-2
+        span.d-none.d-sm-block Upcoming Deadlines
+    .px-4.px-lg-6.py-5.border-bottom 
+      h4 Most Recent Boards
+      p.mb-4 Boards you’ve visited recently. Can be private or public boards. 
+        a(href="#!")  Change preference
+      -
+        var recentBoards = [
+          {
+            title: 'Issue Tickets',
+            category: 'Daily task',
+            boardColor: '#4788A8',
+            check: '44',
+            comment: '12',
+            xmark: '3',
+            users: ['team/1.webp', 'team/2.webp', 'team/3.webp', 'team/4.webp', 'team/avatar-placeholder.webp']
+          },
+          {
+            title: 'Falcon React',
+            category: 'Production line',
+            img: 'board-2',
+            check: '11',
+            comment: '29',
+            xmark: '9',
+            users: ['team/5.webp', 'team/6.webp', 'team/7.webp', 'team/8.webp', 'team/9.webp']
+          },
+          {
+            title: 'Rebuilding',
+            category: 'Production line',
+            img: 'board-3',
+            check: '13',
+            comment: '11',
+            xmark: '15',
+            users: ['team/10.webp', 'team/11.webp', 'team/12.webp', 'team/13.webp', 'team/avatar-placeholder.webp']
+          },
+          {
+            title: 'ThemePro Devs',
+            category: 'Project Management',
+            img: 'board-4',
+            check: '103',
+            comment: '2',
+            xmark: '20',
+            users: ['team/14.webp', 'team/15.webp', 'team/16.webp']
+          },
+        ]
+      +BoardSlider(recentBoards)
+
+    .px-4.px-lg-6.py-5.border-bottom 
+      h4 Your Boards
+      p.mb-4 Boards where you are either an Admin or a Member.
+      -
+        var yourBoards = [
+          {
+            title: 'Post Tracking',
+            category: 'Deals Tracking',
+            img: 'board-5',
+            check: '142',
+            comment: '21',
+            xmark: '100',
+            users: ['team/14.webp', 'team/19.webp', 'team/68.webp', 'team/69.webp', 'team/avatar-placeholder.webp']
+          },
+          {
+            title: 'Automation Team',
+            category: 'Remote team',
+            img: 'board-6',
+            check: '6',
+            comment: '761',
+            xmark: '2',
+            users: ['team/17.webp', 'team/18.webp', 'team/19.webp', 'team/20.webp']
+          },
+          {
+            title: 'Phoenix Kanban',
+            category: 'Project Management',
+            boardClass: 'bg-200',
+            check: '43',
+            comment: '22',
+            xmark: '17',
+            users: ['team/21.webp', 'team/19.webp', 'team/22.webp', 'team/23.webp', 'team/avatar-placeholder.webp']
+          },
+          {
+            title: 'Reconciling Backlogs',
+            category: 'Meeting Agenda',
+            img: 'board-8',
+            check: '23',
+            comment: '111',
+            xmark: '23',
+            users: ['team/24.webp', 'team/19.webp', 'team/avatar-placeholder.webp', 'team/68.webp', 'team/69.webp']
+          },
+        ]
+      +BoardSlider(yourBoards)
+
+    .px-4.px-lg-6.py-5.border-bottom 
+      h4 Private Boards
+      p.mb-4 Your eyes only
+      -
+        var privateBoards = [
+          {
+            title: 'Inventory update',
+            category: 'Shipping Process',
+            img: 'board-9',
+            check: '68',
+            comment: '31',
+            xmark: '14',
+            users: ['team/30.webp', 'team/31.webp', 'team/32.webp', 'team/33.webp', 'team/34.webp']
+          },
+        ]
+      +BoardSlider(privateBoards)
+    .text-center
+      button.btn.btn-phoenix-primary.mt-4
+        span.fa-solid.fa-box-archive.me-2
+        | Open Archive
+
+mixin Board(config)
+  a(href=`${CWD}${paths['app-kanban']}`).text-decoration-none
+    .card.overflow-hidden.bg-transparent.h-100
+      .position-relative
+        if config.img 
+          img(src=`${CWD}assets/img/kanban/${config.img}.png` style=`height: 128px;` alt='').w-100
+        else if config.boardColor
+          div(style=`height: 128px; background-color: ${config.boardColor}`)
+        else 
+          div(class=`${config.boardClass}` style='height: 128px')
+        .avatar-group.position-absolute(style='bottom: 1rem; left: 1.5rem')
+          each user in config.users
+            +Avatar({size: 'm', img: user}).border.border-white.rounded-circle
+      .card-body.d-flex.flex-column.justify-content-between
+        div
+          h3.text-900= config.title
+          p.text-700.mb-4= config.category
+        .d-flex.gap-4
+          h5.text-900
+            span.fa-solid.fa-list-check.text-700.me-1
+            | #{config.check}
+          h5.text-900
+            span.fa-solid.fa-comment.text-700.me-1
+            | #{config.comment}
+          h5.text-900
+            span.fa-solid.fa-calendar-xmark.text-700.me-1
+            | #{config.xmark}
+
+mixin BoardSlider(boards)
+  .swiper-theme-container
+    .swiper.swiper-container.theme-slider(data-swiper!={
+      slidesPerView: 1,
+      spaceBetween: 24,
+      speed: 800,
+      breakpoints: {
+        576: {
+          slidesPerView: 2,
+        },
+        1200: {
+          slidesPerView: 3,
+        },
+        1540: {
+          slidesPerView: 4,
+        },
+      },
+    })
+      .swiper-wrapper
+        each board in boards
+          .swiper-slide
+            +Board(board)
+        .swiper-slide
+          a(href=`${CWD}${paths['create-kanban-board']}`).btn.btn-phoenix-primary.d-flex.flex-center.h-100.w-100.fs-1.fw-semi-bold.text-truncate
+            span.fa-solid.fa-plus-circle.fs-0.me-2
+            | Create New Board
+    .swiper-nav
+      .swiper-button-next
+        span.fas.fa-chevron-right.nav-icon
+      .swiper-button-prev
+        span.fas.fa-chevron-left.nav-icon

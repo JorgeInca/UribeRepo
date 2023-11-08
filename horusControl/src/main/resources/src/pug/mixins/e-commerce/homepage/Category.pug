@@ -1,0 +1,70 @@
+mixin CategoryItem(data)
+  a.icon-nav-item(href='#!')
+    .icon-container.mb-2(class=`${data.bgClass ? data.bgClass : ''}`)
+      span.fs-4(class=data.icon)
+    p.nav-label=data.label
+
+mixin Categories
+  - 
+    var items = [
+      {
+        label: 'Deals',
+        bgClass: 'bg-warning-100 light',
+        icon: 'uil uil-star text-warning'
+      },
+      {
+        label: 'Grocery',
+        icon: 'uil uil-shopping-bag' 
+      },
+      {
+        label: 'Fashion',
+        iconClass: 'text-white',
+        selected: true,
+        icon: 'uil uil-watch-alt'
+      },
+      {
+        label: 'Mobile',
+        iconClass: 'text-900',
+        icon: 'uil uil-mobile-android'
+      },
+      {
+        label: 'Electronics',
+        icon: 'uil uil-monitor',
+        iconClass: 'uil uil-mobile-android'
+      },
+      {
+        label: 'Home',
+        icon: 'uil uil-estate',
+        iconClass: 'text-900'
+      },
+      {
+        label: 'Dining',
+        icon: 'uil uil-lamp',
+        iconClass: 'text-900'
+      },
+      {
+        label: 'Gifts',
+        icon: 'uil uil-gift',
+        iconClass: 'text-900'
+      },
+      {
+        label: 'Tools',
+        icon: 'uil uil-wrench',
+        iconClass: 'text-900'
+      },
+      {
+        label: 'Travel',
+        icon: 'uil uil-plane-departure',
+        iconClass: 'text-900'
+      },
+      {
+        label: 'Others',
+        icon: 'uil uil-palette',
+        iconClass: 'text-900'
+      },
+    ]
+    
+  .scrollbar
+    .d-flex.justify-content-between
+      each item in items 
+        +CategoryItem(item)

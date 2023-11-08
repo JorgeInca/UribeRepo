@@ -1,0 +1,63 @@
+extends ../../../layouts/LayoutTheme
+include ../../../mixins/dashboard/common
+include ../../../mixins/e-commerce/customer-details/CustomerCards
+include ../../../mixins/e-commerce/customer-details/CustomerOrdersTable
+include ../../../mixins/e-commerce/customer-details/CustomerWishlistTable
+include ../../../mixins/e-commerce/customer-details/CustomerRatingsTable
+
+append variables
+  - 
+    var breadcrumb = [
+      {
+        label: 'Page 1',
+        href: '#!'
+      },
+      {
+        label: 'Page 2',
+        href: '#!',
+      },
+      {
+        label: 'Default',
+        href: '#!',
+        active: true
+      },
+    ];
+
+
+block content
+  .mb-9
+    .row.align-items-center.justify-content-between.g-3.mb-4
+      .col-auto
+        h2.mb-0 Customer details
+      .col-auto
+        .row.g-3
+          .col-auto
+            button.btn.btn-phoenix-danger
+              span.fa-solid.fa-trash-can.me-2
+              | Delete customer
+          .col-auto
+            button.btn.btn-phoenix-secondary
+              span.fas.fa-key.me-2
+              | Reset password
+    .row.g-5
+      .col-12.col-xxl-4
+        .row.g-3.g-xxl-0.h-100
+          .col-12.col-md-7.col-xxl-12.mb-xxl-3
+            +CustomerProfileCard.h-100
+          .col-12.col-md-5.col-xxl-12.mb-xxl-3
+            +AddressCard.h-100
+          .col-12
+            +NotesCard.h-100
+      .col-12.col-xxl-8
+        .mb-6
+          h3.mb-4 Orders 
+            span.text-700.fw-normal (97)
+          +CustomerOrdersTable
+        .mb-6
+          h3.mb-4 Wishlist 
+            span.text-700.fw-normal (43)
+          +CustomerWishlistTable
+        div
+          h3.mb-4 Ratings & reviews 
+            span.text-700.fw-normal (43)
+          +CustomerRatingsTable

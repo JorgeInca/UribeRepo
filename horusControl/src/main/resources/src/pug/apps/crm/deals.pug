@@ -1,0 +1,58 @@
+extends ../../layouts/LayoutTheme
+include ../../mixins/dashboard/common
+include ../../mixins/crm/Deals
+include ../../mixins/crm/Reports
+
+prepend styles
+	link(href=`${CWD}vendors/choices/choices.min.css`, rel='stylesheet')
+	link(href=`${CWD}vendors/flatpickr/flatpickr.min.css`, rel='stylesheet')
+
+prepend scripts
+	script(src=`${CWD}vendors/choices/choices.min.js`)
+	script(src=`${CWD}vendors/sortablejs/sortable.min.js`)
+
+append variables
+	- var attrsContent = { class: 'kanban-deals-content' };
+	- var attrsBreadcrumb = { class: 'crm-deals-breadcrumb' };
+	-
+		var breadcrumb = [
+			{
+				label: 'Page 1',
+				href: '#!'
+			},
+			{
+				label: 'Page 2',
+				href: '#!',
+			},
+			{
+				label: 'Default',
+				href: '#!',
+				active: true
+			},
+		];
+
+block content
+	div
+		.px-4.px-lg-6
+			h2.my-4 Deals
+			.d-xl-flex.justify-content-between
+				.mb-3
+					button.btn.btn-primary.me-4(type='button' data-bs-toggle='modal' data-bs-target='#addDealModal' aria-haspopup="true" aria-expanded="false" data-bs-reference="parent")
+						span.fas.fa-plus.me-2
+						| Add Deal
+
+					button.btn.btn-link.text-900.px-0
+						span.fa-solid.fa-file-export.fs--1.me-2
+						| Export
+				.d-flex.mb-4
+					+Search({placeholder: 'Search by name'})
+					select.form-select.w-auto.mx-2#select-deals
+						option Deals
+					button.btn.px-3.btn-phoenix-secondary(type='button' data-bs-toggle='modal' data-bs-target='#reportsFilterModal' aria-haspopup="true" aria-expanded="false" data-bs-reference="parent")
+						span.fa-solid.fa-filter.text-primary(data-fa-transform='down-3')
+		+Deals
+
+append afterMainContent
+	+ReportsFilterModal
+	+AddDealModal
+	+AddStageModal

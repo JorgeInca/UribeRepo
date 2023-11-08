@@ -1,0 +1,136 @@
+/*-----------------------------------------------
+|   Zero Roadmap chart
+-----------------------------------------------*/
+.gantt-zero-roadmap {
+  .gantt-zero-roadmap-chart {
+    width: 100%;
+    height: 222px;
+  }
+  .btn-group {
+    .btn-check:checked {
+      + .btn {
+        border-color: var(--#{$prefix}gray-soft) transparent;
+      }
+    }
+  }
+  .gantt_container {
+    position: relative;
+    border: 0;
+    background: var(--#{$prefix}gray-soft);
+    .gantt_layout_cell,
+    .gantt_grid_scale,
+    .gantt_task_scale,
+    .gantt_row_task,
+    .gantt_task_row {
+      border-bottom: 0;
+      background: var(--#{$prefix}gray-soft);
+    }
+    .gantt_tree_content {
+      color: var(--#{$prefix}gray-900);
+      font-size: map-get($font-sizes, '-1');
+      font-weight: 600;
+      font-family: $font-family-sans-serif;
+    }
+    .gantt_task_line {
+      border: none;
+      background: var(--#{$prefix}info-100);
+      // margin: 0 2px;
+      border-radius: 2px;
+      border-left: 2px solid var(--#{$prefix}gray-soft);
+      border-right: 2px solid var(--#{$prefix}gray-soft);
+
+      .gantt_task_progress {
+        border-radius: 2px;
+      }
+      &.research {
+        .gantt_task_progress {
+          background: var(--#{$prefix}info-200);
+        }
+      }
+      &.planning {
+        .gantt_task_progress {
+          background: var(--#{$prefix}info-200);
+        }
+      }
+      &.design {
+        .gantt_task_progress {
+          background: var(--#{$prefix}info);
+        }
+      }
+      &.review {
+        .gantt_task_progress {
+          background: var(--#{$prefix}info-300);
+        }
+      }
+      &.develop {
+        .gantt_task_progress {
+          background: var(--#{$prefix}info);
+        }
+      }
+      &.review-2 {
+        .gantt_task_progress {
+          background: var(--#{$prefix}info-300);
+        }
+      }
+      &.gantt_selected {
+        box-shadow: none;
+      }
+    }
+
+    .gantt_scale_line {
+      border-width: 0;
+    }
+
+    .gantt_task_link .gantt_line_wrapper {
+      [class*='gantt_link_line_'] {
+        background-color: var(--#{$prefix}gray-300);
+      }
+    }
+    .gantt_grid_data {
+      .gantt_row.gantt_selected {
+        background: transparent;
+      }
+      .gantt_row {
+        &:hover {
+          background-color: transparent;
+        }
+      }
+    }
+  }
+  .gantt_link_arrow_right {
+    border-left-color: var(--#{$prefix}gray-300);
+  }
+  .gantt_link_arrow_left {
+    border-right-color: var(--#{$prefix}gray-300);
+  }
+  .gantt_row,
+  .gantt_task_row,
+  .grid_cell,
+  .gantt_task_scale,
+  .gantt_task_cell,
+  .gantt_grid_scale {
+    border-color: var(--#{$prefix}gray-200) !important;
+  }
+
+  .gantt_task_link:hover .gantt_line_wrapper div {
+    box-shadow: none;
+  }
+  .gantt_task_link:hover {
+    [class*='gantt_link_line_'] {
+      background-color: var(--#{$prefix}gray-400) !important;
+    }
+    .gantt_link_arrow_right {
+      border-left-color: var(--#{$prefix}gray-400);
+    }
+    .gantt_link_arrow_left {
+      border-right-color: var(--#{$prefix}gray-400);
+    }
+  }
+  .gantt_layout_cell {
+    &.gantt_ver_scroll,
+    &.gantt_hor_scroll {
+      @include chrome-scrollbar;
+      // height: 0;
+    }
+  }
+}

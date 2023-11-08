@@ -1,0 +1,65 @@
+mixin SingleStat(stat,isLast)
+  //- .d-flex.align-items-center(class=!isLast ? 'mb-3 mb-sm-0' : '' )
+  .d-flex.align-items-center
+    span.fs-4.lh-1(class=stat.iconClass)
+    .ms-2
+      .d-flex.align-items-end
+        h2.mb-0.me-2
+          |#{stat.count}
+        span.fs-1.fw-semi-bold.text-900=stat.title
+      p.text-800.fs--1.mb-0=stat.subtitle
+
+
+//- mixin SingleStat(stat,isLast)
+//-   .d-flex.align-items-start.mb-1
+//-     span.fs-4.lh-1.me-2(class=stat.iconClass)
+//-     div
+//-       .d-flex.d-xl-block.align-items-center
+//-         h2.mb-0.me-2=stat.count
+//-         h4.mb-0.text-900.fw-semi-bold=stat.title
+//-       p.text-800.fs--1.mb-0=stat.subtitle
+
+mixin Stats
+  -
+    const stats = [
+      {
+        icon:'illustrations/5.png',
+        //- title:'Running projects',
+        title:'Projects',
+        count:"32",
+        iconClass: 'uil uil-books text-primary-500',
+        subtitle:'Awating processing'
+      },
+      {
+        icon:'illustrations/6.png',
+        //- title:'Active members',
+        title:'Members',
+        iconClass: 'uil uil-users-alt text-success-500',
+        count:"94",
+        subtitle:'Working hard'
+      },
+      {
+        icon:'illustrations/7.png',
+        //- title:'Pending invoices',
+        title:'Invoices',
+        iconClass: 'uil uil-invoice text-warning-500',
+        count:"23",
+        subtitle:'Soon to be cleared'
+      },
+      {
+        icon:'illustrations/7.png',
+        //- title:'Projects restarted',
+        title:'Refunds',
+        iconClass: 'uil uil-refresh text-danger-500',
+        count:"3",
+        subtitle:'Fresh start'
+      },
+    ]
+  .row.align-items-center.g-3.g-xxl-0.h-100.align-content-between
+    each stat,index in stats
+      //- .col-12.col-sm-6.col-md-12.col-xl-3.col-xxl-12
+      .col-12.col-sm-6.col-md-3.col-lg-6.col-xl-3.col-xxl-12
+        //- +SingleStat(stat)
+        +SingleStat(stat,index === stats.length - 1 )
+  //- each stat,index in stats
+  //-   +SingleStat(stat,index === stats.length - 1 )

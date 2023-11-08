@@ -1,0 +1,194 @@
+extends ../../layouts/LayoutComponent
+
+append variables
+  -
+    var pageHeader = {
+      title: 'Vertical Navbar',
+      description:"Here is the default Phoenix's powerful, responsive vertical navigation. The following sections describe how you can customize both the responsive breakpoint and collapsing behavior.",
+      url:  `${CWD}${paths['demo-vertical-sidenav']}`,
+      linkText: 'Vertical navbar example',
+      dataAnchor: true
+    }
+  -
+    var horizontalNavbarSlimHeader = {
+      title: 'Horizontal navbar slim',
+      headerClass: 'mt-12',
+      description:"Pheonix provides another layout for navbar vertical with navbar slim.",
+      url: `${CWD}${paths['demo-topnav-slim']}`,
+      linkText: 'Navbar slim example',
+      dataAnchor: true
+    }
+
+block component
+
+  +ComponentCard({title: 'Navbar vertical structure', hideNavTab: true}).mb-4.mt-5
+
+    pre.scrollbar.my-5
+      code.language-html
+        +escape
+          doctype html
+          html
+            head ...
+            body 
+              main
+                .container-fluid
+                  nav.navbar.navbar-vertical.navbar-expand-lg
+                    // navbar vertical content goes here
+                  nav.navbar.navbar-top.navbar-expand
+                    // navbar top content goes here
+                  .content 
+                    //  content goes here
+  +ComponentCard({title: 'Responsive behavior ', hideNavTab: true}).my-4
+    p.mb-0 Phoenix used the Bootstrap's 
+      code .navbar-expand{-sm|-md|-lg|-xl|-xxl} 
+      |  classes in 
+      code .navbar-vertical 
+      | element to decide when the navbar vertical will expand or not.
+    pre.scrollbar.mt-5
+      code.language-html
+        +escape
+          nav.navbar.navbar-vertical.navbar-expand-lg
+
+  +ComponentCard({title: 'Collapsing behavior', hideNavTab: true}).my-4
+    p You can control the default collapsing behavior of phoenix's vertical navigation - whether it will show up with the collapsed or expanded state when the page loads.
+    p.mb-0 From your project directory, If you are using gulp version open 
+      code src/js/config.js 
+      | or if you are using directly from the public folder open 
+      code public/assets/js/config.js 
+      | and set 
+      code phoenixIsNavbarVerticalCollapsed: true 
+      | of 
+      code initialConfig 
+      | object to collapse the Vertical Navigation by default
+    pre.scrollbar.mt-5
+      code.lang-html.
+        const initialConfig = {
+          phoenixIsNavbarVerticalCollapsed: false,
+          ...
+        };
+
+  +ComponentCard({title: 'Vertical Navbar appearance', hideNavTab: true}).my-4
+    p You can control Navbar vertical style of phoenix's between defaults and darker.
+    p From your project directory, If you are using gulp version open 
+      code src/js/config.js 
+      | or if you are using directly from the public folder open 
+      code public/assets/js/config.js 
+      | and set 
+      code phoenixNavbarVerticalStyle: 'darker' 
+      | of 
+      code initialConfig 
+      | object to collapse the Vertical Navigation by default
+
+    pre.scrollbar.my-5
+      code.lang-html.
+        const initialConfig = {
+          phoenixNavbarVerticalStyle: 'default' || 'darker',
+          ...
+        };
+    p.mb-0 Or to change navbar vertical color just add 
+      code navbar-darker 
+      | css class with 
+      code navber-vertical 
+      | class
+    pre.scrollbar.mt-3
+      code.language-html
+        +escape
+          nav.navbar.navbar-vertical.navbar-expand-lg.navbar-darker
+
+  +ComponentCard({title: 'Customize', hideNavTab: true}).my-4
+    p #{name} allow you to customize your Navbar Vertical with SCSS or CSS variables. The available options are listed below: 
+    - 
+      var items = [
+        {
+          title: 'Background color',
+          scssVar: '$navbar-vertical-bg-color',
+          cssVar: '--phoenix-navbar-vertical-bg-color',
+          egValue: '#141824'
+        },
+        {
+          title: 'Border color',
+          scssVar: '$navbar-vertical-border-color',
+          cssVar: '--phoenix-navbar-vertical-border-color',
+          egValue: '#31374a'
+        },
+        {
+          title: 'label color',
+          scssVar: '$navbar-vertical-label-color',
+          cssVar: '--phoenix-navbar-vertical-label-color',
+          egValue: '#6e7891'
+        },
+        {
+          title: 'Link color',
+          scssVar: '$navbar-vertical-link-color',
+          cssVar: '--phoenix-navbar-vertical-link-color',
+          egValue: '#9fa6bc'
+        },
+        {
+          title: 'Link hover background',
+          scssVar: '$navbar-vertical-link-hover-bg',
+          cssVar: '--phoenix-navbar-vertical-link-hover-bg',
+          egValue: '#31374a'
+        },
+        {
+          title: 'Link hover color',
+          scssVar: '$navbar-vertical-link-hover-color',
+          cssVar: '--phoenix-navbar-vertical-link-hover-color',
+          egValue: '#eff2f6'
+        },
+        {
+          title: 'Link active color',
+          scssVar: '$navbar-vertical-link-active-color',
+          cssVar: '--phoenix-navbar-vertical-link-active-color',
+          egValue: '#fff'
+        },
+        //- {
+        //-   title: 'Link disable color',
+        //-   scssVar: '$navbar-vertical-link-disable-color',
+        //-   cssVar: '--phoenix-navbar-vertical-link-disable-color',
+        //-   egValue: '#efefef'
+        //- },
+        //- {
+        //-   title: 'Collapsed menu color',
+        //-   scssVar: '$navbar-vertical-collapsed-menu-color',
+        //-   cssVar: '--phoenix-navbar-vertical-collapsed-menu-color',
+        //-   egValue: '#85a9ff'
+        //- },
+        {
+          title: 'Horizontal rule',
+          scssVar: '$navbar-vertical-hr-color',
+          cssVar: '--phoenix-navbar-vertical-hr-color',
+          egValue: '#3e465b'
+        },
+        //- {
+        //-   title: 'Link icon color',
+        //-   scssVar: '$navbar-vertical-link-icon-color',
+        //-   cssVar: '--phoenix-navbar-vertical-link-icon-color',
+        //-   egValue: '#adc5ff'
+        //- },
+        {
+          title: 'Dropdown indicator color',
+          scssVar: '$navbar-vertical-dropdown-indicator-color',
+          cssVar: '--phoenix-navbar-vertical-dropdown-indicator-color',
+          egValue: '#8a94ad'
+        },
+      ]
+    each item in items 
+      +CustomizeBlock(item)
+
+mixin CustomizeBlock(config)
+  h5= config.title
+  p.my-2 To change the #{config.title.toLowerCase()} of the Navbar Vertical , update the SCSS variable 
+    code= config.scssVar
+    |  in your 
+    code _user-variables.scss 
+    | or CSS variable 
+    code= config.cssVar
+    |  in your 
+    code public/assets/css/user.css. 
+    | Example:
+  +ComponentCardLib('css').mb-4.
+    //- _user-variables.scss
+    #{config.scssVar}: #{config.egValue};
+    or,
+    //- public/assets/css/user.css
+    #{config.cssVar}: #{config.egValue};

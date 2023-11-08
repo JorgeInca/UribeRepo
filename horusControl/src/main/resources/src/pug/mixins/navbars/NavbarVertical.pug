@@ -1,0 +1,147 @@
+include Mixins
+
+mixin LinkTopParent(config)
+  - var config = Object.assign({}, config)
+  - var { url, icon,iconSet, text, badge, hasHash, isDisabled, depth, dot, innerPage } = config;
+  - var href = hasHash ? text!=='modal' ? `${CWD}${url}.html` : `${CWD}${url}` : url
+  a.nav-link(
+    href=href
+    class=`${isDisabled ? 'nav-link-disable' :  href.includes(`${pathName}.html`) ? 'active' : ''}`
+  )&attributes(attributes)
+    .d-flex.align-items-center
+      if !hasHash
+        .dropdown-indicator-icon
+          span.fas.fa-caret-right
+      if icon
+        span.nav-link-icon
+          if iconSet == 'font-awesome'
+            span(class=icon)
+          else
+            span(data-feather=icon)
+      if (depth < 1) && hasHash
+        span.nav-link-text-wrapper
+          span.nav-link-text
+            +cleanText(text)
+      else 
+        span.nav-link-text
+          +cleanText(text)
+      if badge
+        span.badge.ms-2(class=`badge badge-phoenix badge-phoenix-${badge.type} ${!innerPage ? 'nav-link-badge' : ''}`)=badge.text
+      if dot 
+        span.fa-solid.fa-circle.text-info.ms-1.new-page-indicator(style='font-size: 6px' class=`${badge ? 'd-none' : ''}`)
+
+
+
+mixin PageLooper(page,label, depth = 0, target='#navbarVerticalCollapse')
+  -
+    function show(pages){
+
+      const checkLink = (page)=>{
+        if(page.path === pathName){
+          return true;
+        }
+        return page.hasOwnProperty('pages') && page.pages.some(checkLink)
+      }
+      return pages.some(checkLink)
+    }
+  if page.pages
+    .parent-wrapper(class= `${ depth<1 ? 'label-1' : ''}`)
+
+      ul.nav.collapse.parent( data-bs-parent=target class=`${ show(page.pages) || page.open ? 'show': ''}` id=`nv-${page.name}`)
+        if(depth < 1)
+          li.collapsed-nav-item-title.d-none
+            +cleanText(page.name)
+        each innerPage in page.pages
+          li.nav-item
+            +LinkTopParent({
+              url: innerPage.pages ? `#nv-${innerPage.name}`:`${innerPage.path}`,
+              text: innerPage.name,
+              badge: innerPage.badge,
+              icon: innerPage.icon,
+              iconSet: innerPage.iconSet,
+              isDisabled: innerPage.disabled,
+              hasHash: innerPage.pages ? false : true,
+              dot: innerPage.dot,
+              innerPage: true
+            })(
+              class= innerPage.pages ? `dropdown-indicator`: ''
+              data-bs-toggle=innerPage.pages? "collapse" : innerPage.name === "modal" ? 'modal': ''
+              aria-expanded=(innerPage.pages && show(innerPage.pages)) || innerPage.open ? 'true' : 'false'
+              aria-controls=innerPage.pages && `nv-${innerPage.name}`
+            )
+            // more inner pages
+            +PageLooper(innerPage,label, depth + 1, `#${page.name}`)
+
+mixin Looper(sitemap)
+  -
+    function show(pages){
+      const checkLink = (page)=>{
+        if(page.path === pathName){
+          return true;
+        }
+        return page.hasOwnProperty('pages') && page.pages.some(checkLink)
+      }
+      return pages.some(checkLink)
+    }
+  each item, index in sitemap
+    li.nav-item
+      if item.label && !item.labelDisabled
+        // label
+        p.navbar-vertical-label
+          +cleanText(`${item.label}`)
+        hr.navbar-vertical-line
+
+      if item.pages
+        each page in item.pages
+          // parent pages
+          div.nav-item-wrapper
+            +LinkTopParent({
+              url: page.pages ? `#nv-${page.name}`: `${page.path}`,
+              icon: page.icon,
+              iconSet: page.iconSet,
+              text: `${page.name}`,
+              badge: page.badge, 
+              hasHash: page.pages? false: true, 
+              isDisabled: page.disabled,
+              depth: 0,
+              dot: page.dot,
+            })(
+              role="button"
+              class= page.pages? 'dropdown-indicator label-1': 'label-1'
+              data-bs-toggle=page.pages? "collapse" : page.name ==="modal" ? 'modal': ''
+              aria-expanded=page.pages && show(page.pages) ? 'true' : 'false'
+              aria-controls=page.pages && `nv-${page.name}`
+            )
+            //- data-bs-target=page.name==="modal" && "#authentication-modal"
+            +PageLooper(page,item.label)
+      else
+        +LinkTopParent({
+          url: item.path,
+          text: item.name,
+          badge: item.badge,
+          icon: item.icon,
+          iconSet: item.iconSet,
+          isDisabled: item.disabled,
+          hasHash: true,
+          dot: item.dot,
+        })
+
+
+mixin NavbarVertical(config)
+  - var config = Object.assign({comboNav: false}, config)
+  nav.navbar.navbar-vertical&attributes(attributes)
+    script.
+      var navbarStyle = window.config.config.phoenixNavbarStyle;
+      if (navbarStyle && navbarStyle !== 'transparent') {
+        document.querySelector('body').classList.add(`navbar-${navbarStyle}`);
+      }
+    #navbarVerticalCollapse.collapse.navbar-collapse
+      // scrollbar removed
+      .navbar-vertical-content
+        ul.navbar-nav.flex-column#navbarVerticalNav
+          +Looper(sitemap)
+    .navbar-vertical-footer
+      button.btn.navbar-vertical-toggle.border-0.fw-semi-bold.w-100.white-space-nowrap.d-flex.align-items-center
+        span.uil.uil-left-arrow-to-left.fs-0
+        span.uil.uil-arrow-from-right.fs-0
+        span.navbar-vertical-footer-text.ms-2 Collapsed View

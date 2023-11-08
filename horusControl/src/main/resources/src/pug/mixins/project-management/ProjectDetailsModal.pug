@@ -1,0 +1,392 @@
+append variables
+  -
+    var assigness = [
+      {
+        avatar: 'team/60.webp',
+        name: 'Emma Watson'
+      },
+      {
+        avatar: 'team/58.webp',
+        name: 'Igor Borvibson'
+      },
+      {
+        avatar: 'team/59.webp',
+        name: 'Katerina Karenin'
+      },
+      {
+        avatar: 'team/34.webp',
+        name: 'Jean Renoir'
+      },
+    ]
+  -
+    var addToCardItems = [
+      {
+        icon:'fa-solid fa-user-plus',
+        label: 'Assignee'
+      },
+      {
+        icon: 'fa-solid fa-tag',
+        label: 'Labels'
+      },
+      {
+        icon: 'fa-solid fa-paperclip',
+        label: 'Attachments'
+      },
+      {
+        icon: 'fa-solid fa-square-check',
+        label: 'Checklist'
+      },
+      {
+        icon: 'fa-solid fa-calendar-days',
+        label: 'Dates'
+      },
+    ]
+  -
+    var actionItems = [
+      {
+        icon:'fa-solid fa-arrow-right',
+        label: 'Move'
+      },
+      {
+        icon: 'fa-solid fa-copy',
+        label: 'Copy'
+      },
+      {
+        icon: 'fa-solid fa-trash',
+        label: 'Remove'
+      },
+      {
+        icon: 'fa-solid fa-box-archive',
+        label: 'Archive'
+      },
+      {
+        icon: 'fa-solid fa-share-nodes',
+        label: 'Share'
+      },
+    ]
+
+
+mixin ProjectsCardViewModal
+  #projectsCardViewModal.modal.fade(tabindex='-1' aria-labelledby='projectsCardViewModal' aria-hidden='true')
+    .modal-dialog.modal-md
+      .modal-content.overflow-hidden
+        .modal-header.position-relative.p-0
+          input#projectCoverInput.d-none(type="file")
+          label.position-absolute.top-0.start-0(for="projectCoverInput")
+            span.project-modal-btn.d-inline-block.bg-white.rounded-2.py-2.px-3.fs--1.fw-bolder.mt-3.ms-3.cursor-pointer
+              span.fa-solid.fa-image.me-1
+              | Change
+          button.btn.btn-circle.project-modal-btn.position-absolute.end-0.top-0.mt-3.me-3.bg-white(data-bs-dismiss="modal" )
+            span.fa-solid.fa-xmark.text-900
+          img.w-100(src=`${CWD}assets/img/generic/43.png`, alt="" style="max-height: 200px;min-height: 150px;")
+        .modal-body.p-5.px-md-6
+          .row.g-5
+            .col-12.col-md-9
+              .mb-4
+                h3.fw-bolder.lh-sm It was popularised in the 1960s with the release of Letraset
+                p.text-1000.fw-semi-bold.mb-0 In list
+                  a.ms-1.fw-bold(href="#!") Review 
+              +Progressbar.mb-4
+              h6.text-800.mb-2 Due date
+              .flatpickr-input-container.flatpickr-input-sm.w-50.mb-3
+                input.form-control.form-control-sm.ps-6.datetimepicker#datepicker(type="text" data-options!={dateFormat:'M j, Y',disableMobile:true,defaultDate: "Mar 1, 2022"})
+                span.uil.uil-calendar-alt.flatpickr-icon.text-700.mt-1
+              .mb-3
+                +Assigness(assigness)
+              .mb-5
+                +Labels
+              .mb-6
+                +Description.mb-2
+              +ModalNotification.rounded-2.p-4.mb-3
+              +ModalNotificationComment.pb-3.border-bottom.mb-6
+              .mb-6
+                +ModalTodoList
+              +ModalFiles
+
+            .col-12.col-md-3
+              h5.text-800.mb-3 Add to card
+              .mb-6
+                each item in addToCardItems
+                  button.btn.btn-sm.btn-soft-secondary.rounded-3.mb-2.d-flex.align-items-center.w-100
+                    span.me-2(class=item.icon)
+                    | #{item.label}
+              h5.text-800.mb-3 Actions
+              .mb-6
+                each item in actionItems
+                  button.btn.btn-sm.btn-soft-secondary.rounded-3.mb-2.d-flex.align-items-center.w-100
+                    span.me-2(class=item.icon)
+                    | #{item.label}
+
+
+mixin ProjectsBoardViewModal
+  #projectsBoardViewModal.modal.fade(tabindex='-1' aria-labelledby='projectsBoardViewModal' aria-hidden='true')
+    .modal-dialog.modal-xl
+      .modal-content.overflow-hidden
+        .modal-header.position-relative.p-0
+          input#projectModalTwoCoverInput.d-none(type="file")
+          label.position-absolute.top-0.start-0(for="projectModalTwoCoverInput")
+            span.project-modal-btn.d-inline-block.bg-white.dark__text-white.rounded-2.py-2.px-3.fs--1.fw-bolder.mt-3.ms-3.cursor-pointer
+              span.fa-solid.fa-image.me-1
+              | Change
+          button.btn.btn-circle.project-modal-btn.position-absolute.end-0.top-0.mt-3.me-3.bg-white(data-bs-dismiss="modal" )
+            span.fa-solid.fa-xmark.text-900.dark__text-white
+          img.w-100(src=`${CWD}assets/img/generic/43.png`, alt="" style="max-height: 280px;min-height: 150px;")
+        .modal-body.p-0
+          .row.gx-0.gy-3.border-bottom.border-300.px-5.px-lg-6.py-4.p-xl-0
+            .col-12.col-xl-5.border-end-xl.border-300
+              //- .px-xl-6
+              .row.h-100.align-items-center.px-xl-6.justify-content-between.justify-content-xl-start
+                .col-auto
+                  p.text-700.fs--2.fw-semi-bold.mb-0 Created
+                  p.text-1000.fs--1.mb-0 Jan 3, 3:24 pm
+                .col-7.col-lg-6
+                  .flatpickr-input-container.flatpickr-input-sm
+                    input.form-control.form-control-sm.ps-6.datetimepicker#datepicker(type="text" data-options!={dateFormat:'M j, Y',disableMobile:true,defaultDate: "Mar 1, 2022"})
+                    span.uil.uil-calendar-alt.flatpickr-icon.text-700
+            .col-12.col-xl-7
+              .px-xl-6.py-xl-4
+                .row.g-2.align-items-center
+                  .col-auto.col-12.col-lg-auto.d-flex.flex-1
+                    .dropdown
+                      button.d-none.d-sm-block.btn.btn-soft-secondary.dropdown-toggle.dropdown-caret-none.d-flex.align-items-center.me-2(type='button' data-bs-toggle='dropdown' aria-haspopup='true' aria-expanded='false') 
+                        | Add to card               
+                        span.fa-solid.fa-plus.ms-2  
+                      button.d-sm-none.btn.btn-icon.btn-icon-lg.btn-soft-secondary.dropdown-toggle.dropdown-caret-none.d-flex.align-items-center.me-2(type='button' data-bs-toggle='dropdown' aria-haspopup='true' aria-expanded='false')              
+                        span.fa-solid.fa-plus 
+                      .dropdown-menu.dropdown-menu-end.px-2(aria-labelledby=id )
+                        each item,index in addToCardItems
+                          button.btn.btn-sm.btn-soft-secondary.rounded-2.d-flex.align-items-center.w-100(class=index !== addToCardItems.length - 1 ? 'mb-2' : '')
+                            span.me-2(class=item.icon)
+                            | #{item.label}
+                    .dropdown
+                      button.btn.btn-icon.btn-icon-lg.bg-100.text-1100.hover-bg-200.rounded-2.me-2(type='button' data-bs-toggle='dropdown' aria-haspopup='true' aria-expanded='false') 
+                        span.fa-solid.fa-ellipsis-vertical
+                      .dropdown-menu.dropdown-menu-end.px-2(aria-labelledby=id )
+                        each item,index in actionItems
+                          button.btn.btn-sm.btn-soft-secondary.rounded-2.d-flex.align-items-center.w-100(class=index !== actionItems.length - 1 ? 'mb-2' : '')
+                            span.me-2(class=item.icon)
+                            | #{item.label}
+                  .col-auto.col-lg-auto.d-flex
+                    .dropdown
+                      button.btn.btn-soft-info.dropdown-toggle.dropdown-caret-none.d-flex.align-items-center.me-2(type='button' data-bs-toggle='dropdown' aria-haspopup='true' aria-expanded='false') 
+                        | Review               
+                        span.fa-solid.fa-angle-down.ms-2   
+                      .dropdown-menu.dropdown-menu-end.py-2
+                        a(href='#!').dropdown-item View
+                        a(href='#!').dropdown-item Export
+                        .dropdown-divider
+                        a(href='#!').dropdown-item.text-danger Remove
+                    .btn.btn-soft-secondary.btn-icon.btn-icon-lg
+                      span.fa-solid.fa-check
+          .row.g-0
+            .col-12.col-xl-5.border-end.border-300
+              .px-5.px-lg-6.py-4
+
+                h3.fw-bolder.lh-sm.mb-5 It was popularised in the 1960s with the release of Letraset
+                +Progressbar.mb-5
+
+                .mb-4
+                  +Assigness(assigness)
+                .mb-5
+                  +Labels
+                .mb-3
+                  +Description.mb-2
+              +ModalNotification.px-5.px-lg-6.py-4
+                .mt-4
+                  +ModalNotificationComment
+
+            .col-12.col-xl-7
+              .px-5.px-lg-6.py-4
+                .mb-7
+                  +ModalTwoTodoList
+                +ModalFiles
+
+
+
+
+mixin ModalNotificationComment
+  textarea.form-control.form-control.mb-3(rows="3" placeholder='Add comment')
+  .d-flex.flex-between-center&attributes(attributes)
+    .d-flex
+      button.btn.btn-sm.px-2.py-0
+        span.fa-solid.fa-image.text-600.fs-0
+      button.btn.btn-sm.px-2.py-0
+        span.fa-solid.fa-calendar-days.text-600.fs-0
+      button.btn.btn-sm.px-2.py-0
+        span.fa-solid.fa-location-dot.text-600.fs-0
+      button.btn.btn-sm.px-2.py-0
+        span.fa-solid.fa-tag.text-600.fs-0
+    button.btn.btn-sm.btn-primary.px-6 Comment
+
+mixin ModalNotification 
+  .bg-100&attributes(attributes)
+    .row.justify-contnet-between.border-bottom.g-0.gy-2.pb-3
+      .col-12.col-sm
+        p.fs--1.text-800.mb-2
+          a.fw-semi-bold(href="#!") Anthony Van Dyck 
+          | uploaded a file 
+        img.rounded-2.mb-2(src=`${CWD}assets/img/generic/42.png`, alt="" width=220)
+        p.text-1000.fw-semi-bold.fs--1.mb-0 Fruit blast
+      .col-12.col-sm-auto
+        p.text-800.fw-semi-bold.fs--2.mb-0 Oct 3 at 4:38 pm
+    .row.justify-contnet-between.border-bottom.g-0.gy-1.py-3.align-items-center
+      .col-12.col-sm
+        p.fs--1.text-800.mb-0
+          span.text-1000.fw-semi-bold.me-1 You
+          | created this task
+      .col-12.col-sm-auto
+        p.text-800.fw-semi-bold.fs--2.mb-0 Oct 4 at 12:18 pm
+    .row.justify-contnet-between.border-bottom.g-0.gy-1.py-3.align-items-center
+      .col-12.col-sm
+        p.fs--1.text-800.mb-1
+          a.fw-semi-bold(href="#!") Kazimir Malevich 
+          | added a subtask
+        .d-flex
+          p.mb-0.fs--1.fw-semi-bold.text-1000
+            span.fa-solid.fa-circle.text-primary(data-fa-transform='shrink-8') 
+            | Doing
+          span.text-800.fs--1.mx-2 to
+          p.mb-0.fs--1.fw-semi-bold.text-1000
+            span.fa-solid.fa-circle.text-primary(data-fa-transform='shrink-8') 
+            | Review
+      .col-12.col-sm-auto
+        p.text-800.fw-semi-bold.fs--2.mb-0 Oct 5 at 9:59 am
+    //- .py-3
+    .row.justify-contnet-between.gx-2.align-items-center.pt-3
+      .col.col-auto
+        +Avatar({size: 'm', img: '/team/30.webp', status: 'online', round: 'circle' })
+      .col.col-auto.flex-1
+        p.fs--1.text-800.mb-0
+          a.fw-semi-bold(href="#!") Peter Paul Rubens 
+          | commented
+      .col-12.col-sm-auto.order-1.order-sm-0
+        p.text-800.fw-semi-bold.fs--2.mb-0 Oct 5 at 9:59 am
+      .col-12.col-sm-11.ms-6
+        //- .bg-white.rounded-3.px-3.py-2
+        p.text-900.fs--1.mb-0 Great job on the Phoenix template! The overall design and layout are visually appealing and user-friendly.
+    block
+
+mixin ModalTodoList
+  .mb-7
+    h4.mb-4 To do list 
+      span.text-700.fw-normal.fs-2 (23)
+    +TodoSearchBar.mb-3
+    .mb-3
+      each todo,index in todoList
+        +ModalTodoItem(todo,index,index === todoList.length - 1)
+    a.fw-bold.fs--1.mt-4(href='#!')
+      span.fas.fa-plus.me-1
+      | Add new task
+
+mixin ModalTwoTodoList
+  h4.mb-4 To do list 
+    span.text-700.fw-normal.fs-2 (23)
+  +TodoSearchBar.mb-3
+  each todo,index in todoList.slice(0,6) 
+    +TodoListItem(todo,index)
+  a.fw-bold.fs--1.mt-4(href='#!')
+    span.fas.fa-plus.me-1
+    | Add new task
+
+
+mixin ActionBtn
+  button.btn.btn-sm.dropdown-toggle.dropdown-caret-none.transition-none(type='button' id=id data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent")
+    span.fas.fa-ellipsis-h
+  .dropdown-menu.dropdown-menu-end.py-2
+    a(href='#!').dropdown-item Edit
+    a(href='#!').dropdown-item.text-danger Delete
+    a(href='#!').dropdown-item Download
+    a(href='#!').dropdown-item Report abuse
+
+mixin ModalFiles
+  -
+    var files = [
+      {
+        icon: '',
+        name: '',
+        size: '',
+        author: '',
+
+      }
+    ]
+  h4.mb-3 Files
+  .border-top.border-300.pt-3.pb-4
+    .me-n3
+      .d-flex.flex-between-center
+        .d-flex.mb-1
+          span.fa-solid.fa-image.me-2.text-700.fs--1
+          p.text-1000.mb-0.lh-1 Silly_sight_1.png
+        +ActionBtn
+      p.fs--1.text-700.mb-2
+        span 768 kb
+        span.text-400.mx-1 | 
+        a(href="#!") Shantinan Mekalan 
+        span.text-400.mx-1 | 
+        span.text-nowrap 21st Dec, 12:56 PM
+      img(src=`${CWD}assets/img/generic/40.png` alt='').rounded-2
+  .border-top.border-300.py-3
+    .me-n3
+      .d-flex.flex-between-center
+        .d-flex.mb-1
+          span.fa-solid.fa-image.me-2.text-700.fs--1
+          p.text-1000.mb-0.lh-1 Silly_sight_1.png
+        +ActionBtn
+      p.fs--1.text-700.mb-1
+        span 12.8 mb
+        span.text-400.mx-1 | 
+        a(href="#!") Yves Tanguy 
+        span.text-400.mx-1 | 
+        span.text-nowrap 19th Dec, 08:56 PM
+
+  .border-top.border-bottom.border-300.py-3.mb-3
+    .me-n3
+      .d-flex.flex-between-center
+        .d-flex.align-items-center.mb-1
+          span.fa-solid.fa-file-lines.me-2.fs--1.text-700
+          p.text-1000.mb-0.lh-1 Project.txt
+        +ActionBtn
+      p.fs--1.text-700.mb-1
+        span 123 kb
+        span.text-400.mx-1 |
+        a(href="#!") Shantinan Mekalan
+        span.text-400.mx-1 |
+        span.text-nowrap 12th Dec, 12:56 PM
+  a.fw-bold.fs--1(href='#!')
+    span.fas.fa-plus.me-1
+    | Add file(s)
+
+mixin Labels
+  h6.text-800.mb-2 Labels
+  .d-flex.align-items-center
+    span.badge.badge-phoenix.badge-phoenix-info.fs--2.me-2 INFO
+    span.badge.badge-phoenix.badge-phoenix-warning.fs--2.me-2 URGENT
+    span.badge.badge-phoenix.badge-phoenix-success.fs--2.me-2 DONE
+    a.text-900.fw-bolder.fs--1.lh-1.text-decoration-none(href="#!") 
+      span.fa-solid.fa-plus.me-1
+      | Add another
+
+mixin Assigness(members)
+  h6.text-800.mb-2 Assigness
+  .d-flex
+    each member in members 
+      .dropdown
+        a.dropdown-toggle.dropdown-caret-none.d-inline-block(href='#' role='button' data-bs-toggle='dropdown' aria-expanded='false' data-bs-auto-close="outside")
+          +Avatar({size: 'm', img: `${member.avatar}`, round: 'circle'}).me-1
+        +AvatarDropdownMenu(member) 
+    button.btn.btn-sm.btn-phoenix-secondary.btn-circle
+      span.fa-solid.fa-plus
+
+mixin Description
+  .d-flex.align-items-center&attributes(attributes)
+    h4.me-3 Description
+    button.btn.btn-link.p-0
+      span.fa-solid.fa-pen
+  p.text-1000
+    | The female circus horse-rider is a recurring subject in Chagall’s work. In 1926 the art dealer Ambroise Vollard invited Chagall to make a project based on the circus. They visited Paris’s historic Cirque d’Hiver Bouglione together; Vollard lent Chagall his private box seats. Chagall completed 19 gouaches...
+    a.fw-semi-bold(href="#!") see more 
+
+mixin Progressbar
+  .d-flex.align-items-center&attributes(attributes)
+    p.text-1000.fw-700.mb-0.me-2 64%
+    .progress.bg-300.flex-1
+      .progress-bar.bg-800.rounded-3(role='progressbar' style='width: 64%')

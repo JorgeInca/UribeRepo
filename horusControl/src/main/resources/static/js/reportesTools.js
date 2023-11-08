@@ -420,16 +420,16 @@ function pruebaAWSSave() {
 function getRiesgoTexto(riesgoTexto) {
 
 		if( riesgoTexto === "ALTO" ){
-			return '<span class="badge badge-danger">' + riesgoTexto + 	'</span>';
+			return '<span class="badge badge-phoenix fs--2 badge-phoenix-danger">' + riesgoTexto + 	'</span>';
 		}
 		if( riesgoTexto === "MEDIO" ){
-			return '<span class="badge badge-warning">' + riesgoTexto + 	'</span>';
+			return '<span class="badge badge-phoenix fs--2 badge-phoenix-warning">' + riesgoTexto + 	'</span>';
 		}
 		if( riesgoTexto === "BAJO" ){
-			return '<span class="badge badge-success">' + riesgoTexto + 	'</span>';
+			return '<span class="badge badge-phoenix fs--2 badge-phoenix-success">' + riesgoTexto + 	'</span>';
 		}
 		if( riesgoTexto === "PENDIENTE" ){
-			return '<span class="badge badge-primary">' + riesgoTexto + 	'</span>';
+			return '<span class="badge badge-phoenix fs--2 badge-phoenix-primary">' + riesgoTexto + 	'</span>';
 		}
 	
 }

@@ -1,0 +1,82 @@
+extends ../../../layouts/LayoutComponent
+
+append variables
+  -
+    var pageHeader = {
+      title: 'Navbar',
+      description: 'Documentation and examples for Bootstrap’s powerful, responsive navigation header, the navbar. Includes support for branding, navigation, and more, including support for Bootstrap collapse plugin.',
+      url: `https://getbootstrap.com/docs/${bootstrapVersion}/components/navbar/`,
+      linkText: 'Navbar on Bootstrap',
+    }
+  -
+    var rightNav = [
+      {
+        name: 'Navbar Light',
+        id: '#navbar-light',
+      },
+      {
+        name: 'Navbar Dark',
+        id: '#navbar-dark',
+      },
+    ]
+
+block component
+  .mb-9
+    +ComponentCard({
+      title:'Navbar Light'
+    }).my-4
+      nav.navbar.navbar-expand-lg.bg-light.navbar-light
+        .container-fluid
+          a.navbar-brand(href='#') Navbar
+          button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#navbarLightExample' aria-controls='navbarLightExample' aria-expanded='false' aria-label='Toggle navigation')
+            span.navbar-toggler-icon
+          #navbarLightExample.collapse.navbar-collapse
+            ul.navbar-nav.me-auto.mb-2.mb-lg-0
+              li.nav-item
+                a.nav-link.active(aria-current='page' href='#') Home
+              li.nav-item
+                a.nav-link(href='#') Link
+              li.nav-item.dropdown
+                a#navbarLightExampleDropdown.nav-link.dropdown-toggle(href='#' role='button' data-bs-toggle='dropdown' aria-expanded='false') Dropdown
+                .dropdown-menu.py-0(aria-labelledby='navbarLightExampleDropdown')
+                  .bg-white.dark__bg-1000.py-2.rounded-3
+                    a.dropdown-item(href='#') Action
+                    a.dropdown-item(href='#') Another action
+                    hr.dropdown-divider
+                    a.dropdown-item(href='#') Something else here
+              li.nav-item
+                a.nav-link.disabled(href='#' tabindex='-1' aria-disabled='true') Disabled
+            form.d-flex
+              input.form-control.me-2(type='search' placeholder='Search' aria-label='Search')
+              button.btn.btn-phoenix-primary(type='submit') Search
+
+    +ComponentCard({
+      title:'Navbar Dark'
+    }).my-4
+      nav.navbar.navbar-expand-lg.bg-dark.navbar-dark.light
+        .container-fluid
+          a.navbar-brand.text-white(href='#') Navbar
+          button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#navbarSuccessExample' aria-controls='navbarSuccessExample' aria-expanded='false' aria-label='Toggle navigation')
+            span.navbar-toggler-icon
+          #navbarSuccessExample.collapse.navbar-collapse
+            ul.navbar-nav.me-auto.mb-2.mb-lg-0.text-white
+              li.nav-item
+                a.nav-link.active(aria-current='page' href='#') Home
+              li.nav-item
+                a.nav-link(href='#') Link
+              li.nav-item.dropdown
+                a#navbarSuccessExampleDropdown.nav-link.dropdown-toggle(href='#' role='button' data-bs-toggle='dropdown' aria-expanded='false') Dropdown
+                .dropdown-menu.py-0(aria-labelledby='navbarSuccessExampleDropdown')
+                  .bg-white.dark__bg-1000.py-2.rounded-3
+                    a.dropdown-item(href='#') Action
+                    a.dropdown-item(href='#') Another action
+                    hr.dropdown-divider
+                    a.dropdown-item(href='#') Something else here
+              li.nav-item
+                a.nav-link.disabled(href='#' tabindex='-1' aria-disabled='true') Disabled
+            form.d-flex
+              input.form-control.me-2(type='search' placeholder='Search' aria-label='Search')
+              button.btn.btn-phoenix-primary(type='submit') Search
+
+
+

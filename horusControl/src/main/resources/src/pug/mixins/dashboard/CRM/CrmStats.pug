@@ -1,0 +1,64 @@
+mixin CrmStats
+  .row.g-3.mb-3
+    .col-sm-6.col-md-4.col-xl-3.col-xxl-4
+      .card.h-100
+        .card-body
+          .d-flex.d-sm-block.justify-content-between
+            .border-bottom-sm.mb-sm-4
+              .d-flex.align-items-center
+                .d-flex.align-items-center.icon-wrapper-sm.shadow-primary-100(style="transform: rotate(-7.45deg);")
+                  span.fa-solid.fa-phone-alt.text-primary.fs-1.z-index-1.ms-2
+                p.text-700.fs--1.mb-0.ms-2.mt-3 Outgoing call
+              p.text-primary.mt-2.fs-2.fw-bold.mb-0.mb-sm-4 3 
+                span.fs-0.text-900.lh-lg Leads Today
+            .d-flex.flex-column.justify-content-center.flex-between-end.d-sm-block.text-end.text-sm-start
+              span.badge.badge-phoenix.badge-phoenix-success.fs--2.mb-2 +24.5%
+              p.mb-0.fs--1.text-700 Than Yesterday
+    .col-sm-6.col-md-4.col-xl-3.col-xxl-4
+      .card.h-100
+        .card-body
+          .d-flex.d-sm-block.justify-content-between
+            .border-bottom-sm.mb-sm-4
+              .d-flex.align-items-center
+                .d-flex.align-items-center.icon-wrapper-sm.shadow-info-100(style="transform: rotate(-7.45deg);")
+                  span.fa-solid.fa-calendar.text-info.fs-1.z-index-1.ms-2
+                p.text-700.fs--1.mb-0.ms-2.mt-3 Outgoing call
+              p.text-info.mt-2.fs-2.fw-bold.mb-0.mb-sm-4 12 
+                span.fs-0.text-900.lh-lg This Week
+            .d-flex.flex-column.justify-content-center.flex-between-end.d-sm-block.text-end.text-sm-start
+              span.badge.badge-phoenix.badge-phoenix-warning.fs--2.mb-2 +24.5%
+              p.mb-0.fs--1.text-700 Than last week
+    .col-md-4.col-xl-6.col-xxl-4.gy-5.gy-md-3
+      .border-bottom
+        h5.pb-4.border-bottom Top 5 Lead Sources
+        ul.list-group.list-group-flush
+          li.list-group-item.bg-transparent.list-group-crm.fw-bold.text-900.fs--1.py-2
+            .d-flex.justify-content-between
+              span.fw-normal.fs--1.mx-1 
+                span.fw-bold 1. 
+                | None 
+              span (65)
+          li.list-group-item.bg-transparent.list-group-crm.fw-bold.text-900.fs--1.py-2  
+            .d-flex.justify-content-between
+              span.fw-normal.mx-1
+                span.fw-bold 2. 
+                | Online Store
+              span (74)
+          li.list-group-item.bg-transparent.list-group-crm.fw-bold.text-900.fs--1.py-2 
+            .d-flex.justify-content-between
+              span.fw-normal.fs--1.mx-1
+                span.fw-bold 3.
+                |  Advertisement
+              span (32)
+          li.list-group-item.bg-transparent.list-group-crm.fw-bold.text-900.fs--1.py-2
+            .d-flex.justify-content-between
+              span.fw-normal.fs--1.mx-1
+                span.fw-bold 4.
+                | Seminar Partner
+              span (25)
+          li.list-group-item.bg-transparent.list-group-crm.fw-bold.text-900.fs--1.py-2
+            .d-flex.justify-content-between
+              span.fw-normal.fs--1.mx-1  
+                span.fw-bold 5.
+                | Partner
+              span (23)

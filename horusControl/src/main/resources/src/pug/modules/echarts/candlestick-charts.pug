@@ -1,0 +1,21 @@
+extends ../../layouts/LayoutComponent
+
+prepend scripts
+  script(src=`${CWD}vendors/echarts/echarts.min.js`)
+
+append scripts
+  script(src=`${CWD}assets/js/echarts-example.js`)
+
+
+block component
+  .row.g-4.mb-9
+    .col-xl-6
+      +ComponentCard({title:'Basic candlestick chart'})
+        // Find the JS file for the following chart at: src/js/charts/echarts/examples/basic-candlestick-chart.js
+        // If you are not using gulp based workflow, you can find the transpiled code at: public/assets/js/echarts-example.js
+        .echart-basic-candlestick-chart-example(style='min-height:300px')
+    .col-xl-6
+      +ComponentCard({title:'Candlestick mixed  chart'})
+        // Find the JS file for the following chart at: src/js/charts/echarts/examples/candlestick-mixed-chart.js
+        // If you are not using gulp based workflow, you can find the transpiled code at: public/assets/js/echarts-example.js
+        .echart-candlestick-mixed-chart-example(style='min-height:300px')

@@ -1,0 +1,126 @@
+mixin SummaryCard
+  .card&attributes(attributes)
+    .card-body
+      h3.card-title.mb-4 Summary
+      div
+        .d-flex.justify-content-between
+          p.text-900.fw-semi-bold Items subtotal :
+          p.text-1100.fw-semi-bold $691
+        .d-flex.justify-content-between
+          p.text-900.fw-semi-bold Discount :
+          p.text-danger.fw-semi-bold -$59
+        .d-flex.justify-content-between
+          p.text-900.fw-semi-bold Tax :
+          p.text-1100.fw-semi-bold $126.20
+        .d-flex.justify-content-between
+          p.text-900.fw-semi-bold Subtotal :
+          p.text-1100.fw-semi-bold $665
+        .d-flex.justify-content-between
+          p.text-900.fw-semi-bold Shipping Cost :
+          p.text-1100.fw-semi-bold $30
+      .d-flex.justify-content-between.border-top.border-dashed.pt-4
+        h4.mb-0 Total :
+        h4.mb-0 $695.20
+
+
+mixin OrderStatusCard
+  .card&attributes(attributes)
+    .card-body
+      h3.card-title.mb-4 Order Status
+      h6.mb-2 Payment status
+      select.form-select.mb-4(aria-label='delivery type')
+        option(value='cod') Processing
+        option(value='card') Canceled
+        option(value='paypal') Completed
+      h6.mb-2 Fulfillment status
+      select.form-select(aria-label='delivery type')
+        option(value='cod') Unfulfilled
+        option(value='card') Fulfilled
+        option(value='paypal') Pending
+
+
+mixin BillingDetails
+  h4.mb-5 Billing details
+  .row.g-4.flex-sm-column
+    .col-6.col-sm-12
+      .d-flex.align-items-center.mb-1
+        span.me-2(data-feather="user" style='stroke-width:2.5;')
+        h6.mb-0 Customer
+      a.fs--1.ms-4(href="#!") Shatinon Mekalan
+    .col-6.col-sm-12
+      .d-flex.align-items-center.mb-1
+        span.me-2(data-feather="mail" style='stroke-width:2.5;')
+        h6.mb-0 Email
+      a.fs--1.ms-4(href="mailto:shatinon@jeemail.com:") shatinon@jeemail.com
+    .col-6.col-sm-12.order-sm-1
+      .d-flex.align-items-center.mb-1
+        span.me-2(data-feather="home" style='stroke-width:2.5;')
+        h6.mb-0 Address
+      .ms-4
+        p.text-800.mb-0.fs--1 Shatinon Mekalan
+        p.text-800.mb-0.fs--1 Vancouver, British Columbia,
+          br.d-none.d-sm-block
+          | Canada
+    .col-6.col-sm-12
+      .d-flex.align-items-center.mb-1
+        span.me-2(data-feather="phone" style='stroke-width:2.5;')   
+        h6.mb-0 Phone
+      a.fs--1.ms-4(href="tel:+1234567890") +1234567890
+
+mixin ShippingDetails
+  h4.mb-5 Shipping details
+  .row.g-4.flex-sm-column
+    .col-6.col-sm-12
+      .d-flex.align-items-center.mb-1
+        span.me-2(data-feather="mail" style='stroke-width:2.5;')   
+        h6.mb-0 Email
+      a.fs--1.ms-4(href="mailto:shatinon@jeemail.com:") shatinon@jeemail.com
+    .col-6.col-sm-12
+      .d-flex.align-items-center.mb-1
+        span.me-2(data-feather="phone" style='stroke-width:2.5;')   
+        h6.mb-0 Phone
+      a.fs--1.ms-4(href="tel:+1234567890") +1234567890
+    .col-6.col-sm-12.order-sm-1
+      .d-flex.align-items-center.mb-1
+        span.me-2(data-feather="home" style='stroke-width:2.5;')   
+        h6.mb-0 Address
+      .ms-4
+        p.text-800.mb-0.fs--1 Shatinon Mekalan
+        p.text-800.mb-0.fs--1 Vancouver, British Columbia 
+          br
+          | Canada
+    .col-6.col-sm-12
+      .d-flex.align-items-center.mb-1
+        span.me-2(data-feather="calendar" style='stroke-width:2.5;')
+        h6.mb-0 Shipping Date
+      p.mb-0.text-800.fs--1.ms-4 12 Nov, 2021
+
+mixin OtherDetails
+  h4.mb-5 Other details
+  .row.g-4.flex-sm-column
+    .col-6.col-sm-12
+      .d-flex.align-items-center.mb-1
+        span.me-2(data-feather="shopping-bag" style='stroke-width:2.5;')
+        h6.mb-0 Gift order
+      a.mb-0.text-800.fs--1.ms-4 Yes
+    .col-6.col-sm-12
+      .d-flex.align-items-center.mb-1
+        span.me-2(data-feather="package" style='stroke-width:2.5;')   
+        h6.mb-0 Wraping
+      p.mb-0.text-800.fs--1.ms-4 Magic wrapper
+    .col-6.col-sm-12
+      .d-flex.align-items-center.mb-1
+        span.me-2(data-feather="file-text" style='stroke-width:2.5;')   
+        h6.mb-0 Recipient
+      p.mb-0.text-800.fs--1.ms-4 Monjito Shiniga
+    .col-6.col-sm-12
+      .d-flex.align-items-center.mb-1
+        span.me-2(data-feather="mail" style='stroke-width:2.5;')   
+        h6.mb-0 Gift Meaasge
+      .ms-4
+        p.text-800.fs--1.mb-0 Happy Birthday Shiniga 
+          br 
+          | Lots of Love Buga Buga!!
+        p.mb-0.text-800.fs--1 Yours, 
+          br
+          | Mekalan

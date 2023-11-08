@@ -1,0 +1,243 @@
+mixin ProfilePostList(count)
+	-
+		var PostList = [
+			{
+				name:'Erza Bridgest',
+				avatar: '/team/9.webp',
+				time:'35 mins ago',
+				location: 'Mustafar, British Columbia',
+				post:'Melancholy is sadness that has taken on lightness.',
+				images:[
+					{
+						classes:'col-3',
+						src: 'gallery/22.png',
+					},
+					{
+						classes:'col-3',
+						src: 'gallery/23.png',
+					},
+					{
+						classes:'col-6',
+						src: 'gallery/24.png',
+					},
+				],
+					comments:[
+						{
+							name:'Mamur Fechetti',
+							avatar: '/team/30.webp',
+							time:'35 mins ago',
+
+							classes:'pt-4',
+							comment:'How long did it take to create this? It appears that you quickly produced the second one.',
+							reply:[
+								{
+									name:'Zingko Kudobum',
+									avatar: '/team/62.webp',
+									time:'5 mins ago',
+									comment:`I am so clever that sometimes I don't understand a single word of what I am saying.`
+								},
+							]
+						},
+					] ,
+				commentInputAvatar: '/team/9.webp',
+				likes:'345 Likes',
+				comment:'45 Comments',
+				shares:'56 shares',
+			},
+			{
+				name:'Erza Bridgest',
+				avatar: '/team/9.webp',
+				time:'3 days ago',
+				location:'Lothal, USA',
+				post:`A guy enters a bakery while carrying a 25-pound haddock.
+					He asks the baker if he makes fish cakes. The rather perplexed baker responds in the negative.
+					The guy responds "That's unfortunate.Today is his birthday"`,
+				commentInputAvatar: '/team/20.webp',
+				likes:'23 Likes',
+				comment:'9 Comments',
+				shares:'3 shares',
+			},
+			{
+				name:'Zingko Kudobum',
+				avatar: '/team/9.webp',
+				time:'35 mins ago', 
+				location: 'Consett, UK',
+				post:'Fear can hold you prisoner. Hope can set you free. - King',
+				images:[
+					{
+						classes:'col-3',
+						src: 'gallery/25.png',
+					},
+					{
+						classes:'col-3',
+						src: 'gallery/26.png',
+					},
+				],
+				comments:[
+					{
+						name:'Sutanuka Gomez',
+						avatar: '/team/14.webp',
+						time:'35 mins ago',
+						classes:'pt-4',
+						comment:'Time is the best teacher; Unfortunately it kills all its students!',
+						reply:[
+							{
+								name:'Zingko Kudobum',
+								avatar: '/team/27.webp',
+								time:'5 mins ago',
+								comment:'If you’re too open-minded, your brains will fall out.!'
+							},
+						]
+					},
+				] ,
+				commentInputAvatar: '/team/14.webp',
+				likes:'345 Likes',
+				comment:'45 Comments',
+				shares:'56 shares',
+			},
+		]
+	each post,index in PostList.slice(0,count)
+		+Post(post,index)
+
+mixin ProfileCard
+	- 
+		var dropdownItems = [
+			{
+				label: 'Followers',
+				icon: 'fa-solid fa-user-group'
+			},
+			{
+				label: 'Communities',
+				icon: 'fa-solid fa-users'
+			},
+			{
+				label: 'Media Files',
+				icon: 'fa-solid fa-photo-film'
+			},
+			{
+				label: ' Events',
+				icon: 'fa-solid fa-calendar-days fs-0'
+			},
+			{
+				label: 'Games',
+				icon: 'fa-solid fa-dice'
+			},
+			{
+				label: 'Settings',
+				icon: 'fa-solid fa-user-gear'
+			},
+			{
+				label: 'Mute Conversation',
+				icon: 'fa-solid fa-bell-slash'
+			},
+			{
+				label: 'Manage Settings',
+				icon: 'fa-solid fa-gear'
+			},
+			{
+				label: 'Get help',
+				icon: 'fa-solid fa-hand-holding-heart'
+			},
+			{
+				label: 'Report Account',
+				icon: 'fa-solid fa-flag'
+			},
+			{
+				label: 'Block Account',
+				icon: 'fa-solid fa-ban'
+			},
+		]
+	.card&attributes(attributes)
+		.card-header.hover-actions-trigger.d-flex.justify-content-center.align-items-end.position-relative.mb-7.mb-xxl-0(style="min-height: 214px; ")
+			+Background({image: `${CWD}assets/img/generic/cover-photo.png`,  className: 'rounded-top' })
+				input#upload-cover-image.d-none(type="file")
+				label.cover-image-file-input(for="upload-cover-image")
+				.hover-actions.end-0.bottom-0.pe-1.pb-2.text-white
+					span.fa-solid.fa-camera.me-2.overlay-icon
+
+			input#upload-porfile-picture.d-none(type="file")
+			.hoverbox.feed-profile(style='width: 150px; height: 150px')
+				.hoverbox-content.bg-black.rounded-circle.d-flex.flex-center.z-index-1(style="--phoenix-bg-opacity: .56;")
+					span.fa-solid.fa-camera.fs-7.text-300.light
+				.position-relative.bg-400.rounded-circle.cursor-pointer.d-flex.flex-center.mb-xxl-7
+					.avatar.avatar-5xl
+						img.rounded-circle(src=`${CWD}assets/img/team/9.webp` alt='').rounded-circle.bg-white.img-thumbnail.shadow-sm
+					label.w-100.h-100.position-absolute.z-index-1(for="upload-porfile-picture")
+		.card-body
+			.row.justify-content-xl-between
+				.col-auto
+					.d-flex.flex-wrap.mb-3.align-items-center
+						h2.me-2 Erza Bridgest
+						span.fw-semi-bold.fs-1.text-1100 u/hansolo
+					.mb-5
+						.d-md-flex.align-items-center
+							.d-flex.align-items-center
+								span.fa-solid.fa-user-group.fs--1.text-700.me-2.me-lg-1.me-xl-2
+								a(href="#!").text-1100
+									span.fs-1.fw-bold.text-600.hover-text-1100 1297 
+										span.fw-semi-bold.ms-1.me-4 Followers
+
+							.d-flex.align-items-center
+								span.fa-solid.fa-user-check.fs--1.text-700.me-2.me-lg-1.me-xl-2
+								a(href="#!").text-1100
+									span.fs-1.fw-bold.text-600.hover-text-1100 3971 
+										span.fw-semi-bold.ms-1.me-4 Following
+
+							.d-flex.align-items-center
+								span.fa-solid.fa-location-dot.fs--1.text-700.me-2.me-lg-1.me-xl-2
+								a(href="#!").text-1100
+									span.fs-1.fw-semi-bold.text-600.hover-text-1100 Vancouver, Lothal
+
+					p.fs-2.text-800 “Whenever you find yourself on the side of the majority, it is time to pause and reflect.”
+				.col-auto
+					.row.g-2
+						.col-auto.order-xxl-2
+							button.btn.btn-primary.lh-1
+								span.fa-solid.fa-user-plus.me-2
+								| Follow Request
+						.col-auto.order-xxl-1
+							button.btn.btn-phoenix-primary.lh-1
+								span.fa-solid.fa-message.me-2
+								| Send Message
+						.col-auto
+							.position-static
+								button.btn.btn-phoenix-secondary.lh-1(data-bs-toggle='dropdown' data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent")
+									span.fa-solid.fa-chevron-down.me-2
+									|	More
+								.dropdown-menu.dropdown-menu-end.py-2
+									each item in dropdownItems.slice(0,6)
+										a(href='#!').dropdown-item.d-xl-none
+											span(class=item.icon).text-800.me-2
+											span #{item.label}
+									each item in dropdownItems.slice(6,11)
+										a(href='#!').dropdown-item
+											span(class=item.icon).text-800.me-2
+											span #{item.label}
+
+
+mixin ProfileNavigationTwo
+	.d-flex.pb-4.align-items-end.border-bottom.border-dashed
+		h3.flex-1.mb-0 You and Erza
+		a.fw-bold.fs--1(href="#!") See details
+	.row.g-0.mb-5.mb-lg-0
+		.col-12.border-1.border-bottom.py-2
+			a(href="#!").btn.btn-link.ps-2.fs-0.text-800.hover-primary.fw-semi-bold.d-flex
+				span.fa-solid.fa-user-group.me-2.mb-2.mb-xxl-0
+				| 432 Common Followers
+		.col-12.border-1.border-bottom.py-2
+			a(href="#!").btn.btn-link.ps-2.fs-0.text-800.hover-primary.fw-semi-bold.d-flex
+				span.fa-solid.fa-users.me-2.mb-2.mb-xxl-0
+				| 21 Communities
+		.col-12.border-1.border-bottom.py-2
+			a(href="#!").btn.btn-link.ps-2.fs-0.text-800.hover-primary.fw-semi-bold.d-flex
+				span.fa-solid.fa-tags.me-2.mb-2.mb-xxl-0
+				| 12 Tagged Images
+		.col-12.border-1.border-bottom.py-2
+			a(href="#!").btn.btn-link.ps-2.fs-0.text-800.hover-primary.fw-semi-bold.d-flex
+				span.fa-solid.fa-calendar-days.me-2.mb-2.mb-xxl-0
+				| 3 Common Events
+		.col-12.border-1.border-bottom.py-2
+			a(href="#!").btn.btn-link.ps-2.fs-0.text-800.hover-primary.fw-semi-bold.d-flex
+				span.fa-solid.fa-location-dot.me-2.mb-2.mb-xxl-0
+				| 45 Common Check-ins
+

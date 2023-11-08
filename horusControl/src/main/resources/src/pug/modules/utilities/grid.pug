@@ -1,0 +1,102 @@
+extends ../../layouts/LayoutComponent
+include ../../mixins/utilities/Grid
+
+
+append variables
+
+  -
+    var pageHeader = {
+      title: 'Grid',
+      description: 'Use our powerful mobile-first flexbox grid to build layouts of all shapes and sizes thanks to a twelve column system, six default responsive tiers, Sass variables and mixins, and dozens of predefined classes.',
+      url: `https://getbootstrap.com/docs/${bootstrapVersion}/layout/grid/`,
+      linkText: 'Grid on Bootstrap'
+    }
+  -
+    var rightNav = [
+      {
+        name: 'Grid options',
+        id: '#grid-options',
+      },
+      {
+        name: 'Equal-width',
+        id: '#equal-width',
+      },
+      {
+        name: 'Column width',
+        id: '#column-width',
+      },
+      {
+        name: 'Stacked to horizontal',
+        id: '#stacked-to-horizontal',
+      },
+      {
+        name: 'Mix and match',
+        id: '#mix-and-match',
+      },
+      {
+        name: 'Row columns',
+        id: '#row-columns',
+      },
+      {
+        name: 'Nesting',
+        id: '#nesting',
+      },
+    ]
+
+block component
+  .mb-9
+    +ComponentCard({
+      title: 'Grid options',
+      description: `While Bootstrap uses <code>.col-</code>, <code>.col-sm-</code>, <code>.col-md-</code>, <code>.col-lg-</code> and <code>.col-xl-</code>, we introduced a new breakpoint, <code>.col-xxl-</code> for the massive screen size.`,
+      anchor:true,
+      descriptionClass:'mt-2'
+    }).my-5
+      +GridTable
+
+    +ComponentCard({
+      title: 'Equal-width',
+      description: `For example, here are two grid layouts that apply to every device and viewport, from xs to xxl. Add any number of unit-less classes for each breakpoint you need and every column will be the same width.`,
+      anchor:true,
+      descriptionClass:'mt-2'
+    }).my-5
+      +GridEqualWidth
+
+    +ComponentCard({
+      title: 'Column width',
+      description: `Auto-layout for flexbox grid columns also means you can set the width of one column and have the sibling columns automatically resize around it. You may use predefined grid classes (as shown below), grid mixins, or inline widths. Note that the other columns will resize no matter the width of the center column.`,
+      anchor:true,
+      descriptionClass:'mt-2'
+    }).my-5
+      +GridColumnWidth
+
+    +ComponentCard({
+      title: 'Stacked to horizontal',
+      description: `Using a single set of <code>.col-sm-*</code> classes, you can create a basic grid system that starts out stacked and becomes horizontal at the small breakpoint (<code>sm</code>).`,
+      anchor:true,
+      descriptionClass:'mt-2'
+    }).my-5
+      +StackedToHorizontal
+
+    +ComponentCard({
+      title: 'Mix and match',
+      description: `Don’t want your columns to simply stack in some grid tiers? Use a combination of different classes for each tier as needed. See the example below for a better idea of how it all works.`,
+      anchor:true,
+      descriptionClass:'mt-2'
+    }).my-5
+      +GridMixAndMatch
+
+    +ComponentCard({
+      title: 'Row columns',
+      description: `Use the responsive <code>.row-cols-*</code> classes to quickly set the number of columns that best render your content and layout. Whereas normal <code>.col-*</code> classes apply to the individual columns (e.g., <code>.col-md-4</code>), the row columns classes are set on the parent .row as a shortcut. With <code>.row-cols-auto</code> you can give the columns their natural width. <br/> Use these row columns classes to quickly create basic grid layouts or to control your card layouts.`,
+      anchor:true,
+      descriptionClass:'mt-2'
+    }).my-5
+      +GridRowColumns
+
+    +ComponentCard({
+      title: 'Nesting',
+      description: `To nest your content with the default grid, add a new <code>.row</code> and set of <code>.col-sm-*</code> columns within an existing <code>.col-sm-*</code> column. Nested rows should include a set of columns that add up to 12 or fewer (it is not required that you use all 12 available columns).`,
+      anchor:true,
+      descriptionClass:'mt-2'
+    }).my-5
+      +GridNesting

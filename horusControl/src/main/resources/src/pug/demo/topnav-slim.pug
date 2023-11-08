@@ -1,0 +1,37 @@
+extends ../index
+
+
+append variables
+  - 
+    var attrsBody = {
+      class: 'nav-slim'
+    }
+
+  - var disableNavigationType = true;
+  - var disableVerticalNavbarAppearance = true;
+  - var disableHorizontalNavbarShape = true;
+  
+append headScripts
+  script.
+    window.config.set({
+      phoenixNavbarTopShape: 'slim'
+    });
+
+block navbarTop
+  +TopNavSlim({
+      toggleID: 'navbarVerticalCollapse',
+      links: false,
+      search: true
+    }).navbar-expand
+  script.
+    var body = document.querySelector('body');
+    var topNavSlim = document.querySelector('#topNavSlim');
+    var navbarVertical = document.querySelector('.navbar-vertical');
+
+    topNavSlim.style.display='block';
+    navbarVertical.removeAttribute('style');
+    body.classList.add('nav-slim');
+    topNavSlim.classList.add('navbar-darker');
+
+
+  

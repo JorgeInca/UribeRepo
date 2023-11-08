@@ -1,0 +1,156 @@
+mixin ChatThreadDeatils(thread)
+  -
+    var galleryImages = [
+      {
+        image: 'chat/2.png'
+      },
+      {
+        image: 'chat/3.png'
+      },
+      {
+        image: 'chat/4.png'
+      },
+      {
+        image: 'chat/5.png'
+      },
+      {
+        image: 'chat/6.png'
+      },
+      {
+        image: 'chat/7.png'
+      },
+      {
+        image: 'chat/8.png'
+      },
+      {
+        image: 'chat/9.png'
+      },
+      {
+        image: 'chat/10.png'
+      },
+      {
+        image: 'chat/11.png'
+      },
+      {
+        image: 'chat/12.png'
+      },
+      {
+        image: 'chat/13.png'
+      },
+      {
+        image: 'chat/14.png'
+      },
+      {
+        image: 'chat/2.png'
+      },
+    ]
+  -
+    var files = [
+      {
+        name: 'Federico_godarf_design.zip',
+        size: '53.34 MB',
+        date: 'Dec 8, 2011',
+        icon: 'fa-solid fa-file-zipper',
+        format: 'zip'
+      },
+      {
+        name: 'Restart_lyf.bat',
+        size: '11.13 KB',
+        date: 'Dec 2, 2011',
+        icon: 'fa-solid fa-file-code',
+        format: 'bat'
+      },
+      {
+        name: 'Fake lorem ipsum fr fr.txt',
+        size: '11.13 KB',
+        date: 'Dec 2, 2011',
+        icon: 'fa-solid fa-file-lines',
+        format: 'txt'
+      },
+      {
+        name: 'Unsupported file format.mad',
+        size: '11.13 KB',
+        date: 'Dec 2, 2011',
+        icon: 'fa-solid fa-file-circle-exclamation',
+        format: 'mad'
+      },
+    ]
+  .border-bottom.p-4
+    .d-flex.flex-between-center
+      button.btn.p-0(data-phoenix-dismiss="offcanvas")
+        span.fa-solid.fa-chevron-left.text-700
+      button.btn.p-0.btn-reveal.dropdown-toggle.dropdown-caret-none.transition-none(type='button' data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent")
+        span.fas.fa-ellipsis-v.text-700
+      .dropdown-menu.dropdown-menu-end.py-2(aria-labelledby=id )
+        a(href='#!').dropdown-item View
+        a(href='#!').dropdown-item Export
+        .dropdown-divider
+        a(href='#!').dropdown-item.text-danger Remove
+    .d-flex.flex-column.align-items-center.text-center
+      .avatar.avatar-4xl.mb-2
+        img.rounded-circle.border.border-2.border-white(class=thread.placeholder ? 'avatar-placeholder' : '' src=`${CWD}assets/img/${thread.avatar}`, alt='')
+      h4.fw-semi-bold.mb-3=thread.name
+      .d-flex
+        button.btn.btn-primary.btn-icon.fs--2.me-1
+          span.fas.fa-phone
+        button.btn.btn-primary.btn-icon.fs--2.me-1
+          span.fas.fa-video
+        button.btn.btn-phoenix-secondary.btn-icon.fs--2
+          span.fas.fa-search
+  .p-4.px-sm-5.scrollbar
+    button.btn.d-block.p-0.fw-semi-bold.mb-3
+      span.fa-solid.fa-user-pen.me-3
+      | Nickname
+    button.btn.d-block.p-0.fw-semi-bold.mb-3
+      span.fa-solid.fa-palette.me-3
+      | Change Color
+    button.btn.d-block.p-0.fw-semi-bold.mb-5
+      span.fa-solid.fa-user-plus.me-3
+      | Create Group Chat
+    .d-flex.mb-5
+      span.fa-solid.fa-photo-film.me-3.fs--1
+      div
+        h6.fw-semi-bold.mb-2 Shared Media
+        .row.g-2
+          each image in galleryImages
+            .col-auto
+              a(href=`${CWD}assets/img/${image.image}` data-gallery=`gallery`) 
+                img.fit-cover.rounded-2.hover-bg-200(src=`${CWD}assets/img/${image.image}` alt="" height=100 width=100)
+    .mb-5
+      .d-flex
+        span.fa-solid.fa-folder.me-3.fs--1
+        .flex-1
+          h6.fw-semi-bold.border-bottom.pb-2.mb-0 Shared Files
+          .mb-2
+            each file in files
+              .border-bottom.d-flex.align-items-center.justify-content-between
+                a.text-decoration-none.d-flex.align-items-center.py-3(href="#!")
+                  .btn-icon.btn-icon-lg.border.border-500.rounded-3.text-500.flex-column.me-2
+                    span.fs-0.mb-1(class=file.icon)
+                    p.mb-0.fs--2.fw-bold.lh-1=file.format
+                  .flex-1
+                    h6.text-900.line-clamp-1=file.name
+                    .d-flex.align-items-center.lh-1
+                      p.fs--2.mb-0.text-700.fw-semi-bold=file.size
+                      span.fa-solid.fa-circle.text-500.fs--2(data-fa-transform="shrink-12")
+                      p.fs--2.mb-0.text-700.fw-semi-bold=file.date
+                button.btn.p-0
+                  span.fa-regular.fa-arrow-alt-circle-down.fs-0.text-700
+          a.btn.btn-link.fs--2.p-0(href="#!")
+            | See 19 more 
+            span.fa-solid.fa-chevron-down.ms-1
+    button.btn.d-block.p-0.fw-semi-bold.mb-3
+      span.fa-solid.fa-bell-slash.me-3
+      | Mute Conversation
+    button.btn.d-block.p-0.fw-semi-bold.mb-3
+      span.fa-solid.fa-gear.me-3
+      | Manage Settings
+    button.btn.d-block.p-0.fw-semi-bold.mb-3
+      span.fa-solid.fa-hand-holding-heart.me-3
+      | Get help
+    button.btn.d-block.p-0.fw-semi-bold.mb-3
+      span.fa-solid.fa-flag.me-3
+      | Report Account
+    button.btn.d-block.p-0.fw-semi-bold
+      span.fa-solid.fa-ban.me-3
+      | Block Account

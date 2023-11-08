@@ -1,0 +1,28 @@
+mixin HeroHeader 
+  section.pb-8.overflow-hidden#home
+    .hero-header-container-alternate.position-relative
+      .container-small.px-lg-7.px-xxl-3
+        .row.align-items-center
+          .col-12.col-lg-6.pt-8.pb-6.position-relative.z-index-5.text-center.text-lg-start
+            h1.fs-5.fs-md-6.fs-xl-7.fw-black.mb-4
+              span.text-gradient-info.me-3 Elegance
+              | for
+              br
+              | your web app
+            p.mb-5.pe-xl-10 Standard, modern and Elegant solution for your next web app so you don’t have to look further. Sign up or check the demo below.
+            a.btn.btn-lg.btn-primary.rounded-pill.me-3(href='#!' role='button') Sign up
+            a.btn.btn-link.me-2.fs-0.p-0(href='#!' role='button') Check Demo
+              span.fa-solid.fa-angle-right.ms-2.fs--1
+          .col-12.col-lg-auto.d-none.d-lg-block
+            .hero-image-container.position-absolute.h-100.end-0.d-flex.align-items-center
+              .position-relative
+                .position-absolute.end-0.hero-image-container-overlay(style='transform: skewY(-8deg).')
+                img.position-absolute.end-0.hero-image-container-bg(src=`${CWD}assets/img/bg/bg-36.png`, alt="")
+                img.w-100.d-dark-none.rounded-2.hero-image-shadow(src=`${CWD}assets/img/bg/bg-34.png` alt='hero-header')
+                img.w-100.d-light-none.rounded-2.hero-image-shadow(src=`${CWD}assets/img/bg/bg-35.png` alt='hero-header')
+      .container-small.px-md-8.mb-8.d-lg-none
+        .position-relative
+          .position-absolute.end-0.hero-image-container-overlay
+          img.position-absolute.top-50.hero-image-container-bg(src=`${CWD}assets/img/bg/bg-39.png`, alt="")
+          img.img-fluid.ms-auto.d-dark-none.rounded-2.hero-image-shadow(src=`${CWD}assets/img/bg/bg-34.png` alt='hero-header')
+          img.img-fluid.ms-auto.d-light-none.rounded-2.hero-image-shadow(src=`${CWD}assets/img/bg/bg-35.png` alt='hero-header')

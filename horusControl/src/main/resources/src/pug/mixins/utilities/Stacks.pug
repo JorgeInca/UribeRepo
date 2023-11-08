@@ -1,0 +1,41 @@
+mixin StacksVerticalLayout
+  .vstack.gap-3
+    .bg-body-tertiary.border.bg-200 First item
+    .bg-body-tertiary.border.bg-200 Second item
+    .bg-body-tertiary.border.bg-200 Third item
+
+
+mixin StacksHorizontalLayout
+  .hstack.gap-3
+    .bg-body-tertiary.border.bg-200 First item
+    .bg-body-tertiary.border.bg-200 Second item
+    .bg-body-tertiary.border.bg-200 Third item
+
+
+mixin StacksMerginUtilities
+  .hstack.gap-3
+    .bg-body-tertiary.border.bg-200 First item
+    .bg-body-tertiary.border.bg-200.ms-auto Second item
+    .bg-body-tertiary.border.bg-200 Third item
+
+
+mixin StacksVerticalRules
+  .hstack.gap-3
+    .bg-body-tertiary.border.bg-200 First item
+    .bg-body-tertiary.border.bg-200.ms-auto Second item
+    .vr.bg-200
+    .bg-body-tertiary.border.bg-200 Third item
+
+
+mixin StackButtons
+  .vstack.gap-2.col-md-5.mx-auto
+    button.btn.btn-secondary(type="button") Save changes
+    button.btn.btn-outline-secondary(type="button") Cancel
+
+
+mixin StacksInlineForm
+  .hstack.gap-3
+    input.form-control.me-auto(type="text" placeholder="Add your item here..." aria-label="Add your item here...")
+    button.btn.btn-secondary(type="button") Submit
+    .vr.bg-200
+    button.btn.btn-outline-danger(type="button") Reset

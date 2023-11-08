@@ -1,0 +1,137 @@
+extends ../../layouts/LayoutTheme
+
+
+prepend styles
+	link(href=`${CWD}vendors/choices/choices.min.css`, rel='stylesheet')
+	link(href=`${CWD}vendors/flatpickr/flatpickr.min.css`, rel='stylesheet')
+
+prepend scripts
+	script(src=`${CWD}vendors/choices/choices.min.js`)
+
+append variables
+	- 
+		var breadcrumb = [
+			{
+				label: 'Page 1',
+				href: '#!'
+			},
+			{
+				label: 'Page 2',
+				href: '#!',
+			},
+			{
+				label: 'Default',
+				href: '#!',
+				active: true
+			},
+		];
+
+block content
+
+	h2.mb-4 Create a project
+	.row 
+		.col-xl-9
+			form.row.g-3.mb-6
+				.col-sm-6.col-md-8
+					.form-floating
+						input.form-control#floatingInputGrid(type='text' placeholder='Project title')
+						label(for='floatingInputGrid') Project title
+				.col-sm-6.col-md-4
+					.form-floating
+						select.form-select#floatingSelectTask
+							option(selected) Select task view
+							option(value='1') technical
+							option(value='2') external
+							option(value='3') organizational
+						label(for='floatingSelectTask') Defult task view
+
+				.col-sm-6.col-md-4
+					.form-floating
+						select.form-select#floatingSelectPrivacy
+							option(selected) Select privacy
+							option(value='1') Data Privacy One
+							option(value='2') Data Privacy Two
+							option(value='3') Data Privacy Three
+						label(for='floatingSelectPrivacy') Project privacy
+
+				.col-sm-6.col-md-4
+					.form-floating
+						select.form-select#floatingSelectTeam
+							option(selected) Select team
+							option(value='1') Team One
+							option(value='2') Team Two
+							option(value='3') Team Three
+						label(for='floatingSelectTeam') Team	
+
+				.col-sm-6.col-md-4
+					.form-floating
+						select.form-select#floatingSelectAssignees
+							option(selected) Select assignees 
+							option(value='1') One
+							option(value='2') Two
+							option(value='3') Three
+						label(for='floatingSelectAssignees') People	
+				.col-sm-6.col-md-4
+					.form-floating
+						select.form-select#floatingSelectAdmin
+							option(selected) Select admin
+							option(value='1') Data Privacy One
+							option(value='2') Data Privacy Two
+							option(value='3') Data Privacy Three
+						label(for='floatingSelectAdmin') Project Lead
+
+				.col-sm-6.col-md-4
+
+					.flatpickr-input-container
+						.form-floating
+							input#floatingInputStartDate.form-control.datetimepicker(type='text' placeholder='end date', data-options!={disableMobile:true})
+							label.ps-6(for='floatingInputStartDate') Start date
+							span.uil.uil-calendar-alt.flatpickr-icon.text-700
+
+				.col-sm-6.col-md-4
+					.flatpickr-input-container
+						.form-floating
+							input#floatingInputDeadline.form-control.datetimepicker(type='text' placeholder='deadline', data-options!={disableMobile:true})
+							label.ps-6(for='floatingInputDeadline') Deadline
+							span.uil.uil-calendar-alt.flatpickr-icon.text-700
+					//- .form-floating
+					//- 	input.form-control#floatingInputDeadline(type='date' placeholder='Project title')
+					//- 	label(for='floatingInputDeadline') Deadline
+				.col-12.gy-6
+					.form-floating
+						textarea#floatingProjectOverview.form-control(placeholder='Leave a comment here' style='height: 100px')
+						label(for='floatingProjectOverview') project overview
+
+				.col-md-6.gy-6
+					.form-floating
+						select.form-select#floatingSelectClient
+							option(selected) Select client
+							option(value='1') Client One
+							option(value='2') Client Two
+							option(value='3') Client Three
+						label(for='floatingSelectClient') client
+
+				.col-md-6.gy-6
+					.form-floating
+						input.form-control#floatingInputBudget(type='text' placeholder='Budget')
+						label(for='floatingInputBudget') Budget
+
+				.col-12.gy-6
+					select.form-select#organizerMultiple(data-choices multiple data-options!={removeItemButton: true,placeholder: true})
+						option(value="") Add tags
+						option Stupidity
+						option Jerry
+						option Not_the_mouse
+						option Rick
+						option Biology
+						option Neurology
+						option Brainlessness
+				.col-12.gy-6
+					.row.g-3.justify-content-end
+						.col-auto
+							button.btn.btn-phoenix-primary.px-5 Cancel
+						.col-auto
+							button.btn.btn-primary.px-5.px-sm-15 Create Project
+
+
+

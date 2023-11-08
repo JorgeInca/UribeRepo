@@ -1,0 +1,18 @@
+extends ../index
+
+
+append variables
+  - var disableNavigationType = true;
+  - var disableHorizontalNavbarShape = true;
+
+
+append navbarTop
+  script.
+    var navbarTop = document.querySelector('.navbar-top');
+    var navbarVertical = document.querySelector('.navbar-vertical');
+    window.config.set({
+      phoenixNavbarVerticalStyle: 'darker',
+      phoenixNavbarTopStyle: 'darker'
+    });
+    navbarTop.classList.add('navbar-darker');
+    navbarVertical.classList.add('navbar-darker');

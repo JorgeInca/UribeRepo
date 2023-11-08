@@ -1,0 +1,112 @@
+extends ../../../layouts/LayoutEcommerce
+include ../../../mixins/e-commerce/profile/ProfileWishListTable
+
+append scripts
+  script(src!=`https://maps.googleapis.com/maps/api/js?key=${APIGmap}&callback=initMap` async)
+
+
+
+append variables
+  - var disableNavigationType = true;
+  - var disableHorizontalNavbarShape = true;
+  - var disableVerticalNavbarAppearance = true;
+  - var disableHorizontalNavbarAppearance = true;
+   - var activeNavItem = 'order-tracking';
+  -
+    var timelineItems = [
+      {
+        date: '23 August, 2023',
+        time: '10:30 AM',
+        icon: 'fa-solid fa-check',
+        bgClass: 'success dark__bg-success',
+        borderClass: 'border-success',
+        title: 'Order is processing',
+        content: 'Your package is ready for the seller to prepare.'
+      },
+      {
+        date: '25 August, 2023',
+        time: '11:30 AM',
+        icon: 'fa-solid fa-check',
+        bgClass: 'success dark__bg-success',
+        borderClass: 'border-warning',
+        title: 'Picked Up',
+        content: 'Your package has been picked up from the seller.'
+      },
+      {
+        date: '27 August, 2023',
+        time: '6:30 AM',
+        icon: 'fa-solid fa-truck-ramp-box',
+        bgClass: 'warning dark__bg-warning',
+        borderClass: 'border-dashed border-400',
+        title: 'Ready to Ship',
+        content: 'Your package is now ready to be shipped.'
+      },
+      {
+        date: 'Estimated time',
+        time: '29 August, 2023',
+        icon: 'fa-solid fa-truck',
+        bgClass: '400',
+        borderClass: 'border-dashed border-400',
+        title: 'Shipped',
+        content: 'Pending'
+      },
+      {
+        date: 'Estimated time',
+        time: '30 August, 2023',
+        icon: 'fa-solid fa-truck-fast',
+        bgClass: '400',
+        title: 'Delivered',
+        content: 'Pending'
+      },
+    ]
+  
+block ecomContent
+  +Section(null,'container-small cart').pt-5.pb-9
+    nav.mb-2(aria-label='breadcrumb')
+      ol.breadcrumb.mb-0
+        li.breadcrumb-item
+          a(href='#!') Page 1
+        li.breadcrumb-item
+          a(href='#!') Page 2
+        li.breadcrumb-item.active(aria-current='page') Default
+    .d-flex.flex-wrap.justify-content-between.align-items-end.mb-5
+      div
+        h2 Order #234 Status
+        p.text-800.mb-0 Payment Via  
+          a.fw-bold(href='#!') Cash on delivery
+          |,
+          br.d-sm-none
+          span.ms-sm-1 Nov 12, 2021, 8:54AM.
+      button.btn.btn-outline-primary.mt-3
+        span.fa-solid.fa-phone.me-2
+        | Call Support
+    .row.gy-9.gx-5
+      .col-12.col-lg-6
+        .border.border-300.rounded-3.overflow-hidden.h-100
+          .googlemap.h-100.min-vh-50(data-googlemap data-latlng='40.7228022,-74.0020158' data-scrollwheel='false',  data-zoom='15')
+            .marker-content.py-2
+              h5 Google map    
+              p.mb-0 A nice template for your site.
+                br
+                | Customize it as you want.
+      .col-12.col-lg-6
+        .timeline-vertical
+          each item,index in timelineItems
+            .timeline-item
+              .row.g-md-3.align-items-center(class=index !== timelineItems.length - 1 ? 'mb-8 mb-lg-10' : '')
+                .col-12.col-md-auto.d-flex
+                  .timeline-item-date.text-end.order-1.order-md-0.me-md-4
+                    p.fs--2.fw-semi-bold.text-700.mb-0=item.date 
+                      br.d-none.d-md-block
+                      |  #{item.time}
+                  .timeline-item-bar.position-relative.me-3.me-md-0.border-400
+                    .icon-item.icon-item-sm(class=`bg-${item.bgClass}`)
+                      span(class=item.icon).text-white.dark__text-white.fs--2
+                    if index !== timelineItems.length - 1 
+                      span.timeline-bar.border-end(class=`${item.borderClass}`)
+                .col
+                  .timeline-item-content.ps-6.ps-md-3
+                    h4=item.title
+                    p.fs--1.text-800.mb-0=item.content
+
+

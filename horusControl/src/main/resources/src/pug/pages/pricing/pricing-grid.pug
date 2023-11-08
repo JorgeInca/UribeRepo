@@ -1,0 +1,21 @@
+extends ../../layouts/LayoutTheme
+include ../../mixins/pages/pricing/PricingGrid
+
+append variables
+	-
+		var breadcrumb = [
+			{
+				label: 'Pages',
+				href: '#!'
+			},
+			{
+				label: 'Pricing-grid',
+				href: '#!',
+				active: true
+			}
+		];
+
+block content
+	.pb-9
+		h2.mb-7 Pricing
+		+PricingGridView

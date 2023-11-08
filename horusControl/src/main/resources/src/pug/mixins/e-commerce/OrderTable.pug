@@ -1,0 +1,374 @@
+mixin OrderTableRow(data,index)
+  tr.hover-actions-trigger.btn-reveal-trigger.position-static
+    td.fs--1.align-middle.px-0.py-3
+      .form-check.mb-0.fs-0
+        input.form-check-input(type='checkbox' data-bulk-select-row!=data)
+    td.order.align-middle.white-space-nowrap.py-0
+      a.fw-semi-bold(href='#!')= `#${data.order}`
+    td.total.align-middle.text-end.fw-semi-bold.text-1000=`$${data.total}`
+    td.customer.align-middle.white-space-nowrap.ps-8
+      a(href=`${CWD}${paths['e-commerce-fe-profile']}`).d-flex.align-items-center.text-900
+        .avatar.avatar-m
+          if data.customer.avatar
+            img.rounded-circle(src=`${CWD}assets/img${data.customer.avatar}`, alt="" class=data.customer.placeholder ? 'avatar-placeholder' : '')
+          else
+            .avatar-name.rounded-circle
+              span=data.customer.name.charAt(0).toUpperCase()
+        h6.mb-0.ms-3.text-900=data.customer.name
+    td.payment_status.align-middle.white-space-nowrap.text-start.fw-bold.text-700
+      span.badge.badge-phoenix.fs--2(class=data.payment_status.type)
+        span.badge-label=data.payment_status.label
+        //- span.uil.uil-stopwatch.fs--1
+        span.ms-1(data-feather=data.payment_status.icon style='height:12.8px;width:12.8px;')
+    td.fulfilment_status.align-middle.white-space-nowrap.text-start.fw-bold.text-700
+      span.badge.badge-phoenix.fs--2(class=data.fulfilment_status.type)
+        span.badge-label=data.fulfilment_status.label
+        span.ms-1(data-feather=data.fulfilment_status.icon style='height:12.8px;width:12.8px;')
+
+    td.delivery_type.align-middle.white-space-nowrap.text-900.fs--1.text-start=data.delivery_type
+    td.date.align-middle.white-space-nowrap.text-700.fs--1.ps-4.text-end=data.date
+
+
+mixin OrderTable
+  -
+    var orderTableData = [
+      {
+        order: 2453,
+        total: 87,
+        customer:{
+          avatar: '/team/32.webp',
+          name: 'Carry Anna'
+        },
+        payment_status: {
+          label: 'Complete',
+          type: 'badge-phoenix-success',
+          icon:'check'
+        },
+        fulfilment_status : {
+          label: 'Cancelled',
+          type: 'badge-phoenix-secondary',
+          icon:'x'
+        },
+        delivery_type: 'Cash on delivery',
+        date: 'Dec 12, 12:56 PM',
+      },
+      {
+        order: 2452,
+        total: 7264,
+        customer:{
+          avatar: '',
+          name: 'Milind Mikuja'
+        },
+        fulfilment_status: {
+          label: 'Ready to pickup',
+          type: 'badge-phoenix-info',
+          icon:'info'
+        },
+        payment_status : {
+          label: 'Cancelled',
+          type: 'badge-phoenix-secondary',
+          icon:'x'
+        },
+        delivery_type: 'Free shipping',
+        date: 'Dec 9, 2:28PM',
+      },
+      {
+        order: 2451,
+        total: 375,
+        customer:{
+          avatar: '/team/35.webp',
+          name: 'Stanly Drinkwater'
+        },
+        payment_status : {
+          label: 'Pending',
+          type: 'badge-phoenix-warning',
+          icon:'clock'
+        },
+        fulfilment_status: {
+          label: 'Completed',
+          type: 'badge-phoenix-success',
+          icon:'check'
+        },
+        delivery_type: 'Local pickup',
+        date: 'Dec 4, 12:56 PM',
+      },
+      {
+        order: 2450,
+        total: 657,
+        customer:{
+          avatar: '/team/57.webp',
+          name: 'Josef Stravinsky'
+        },
+        payment_status : {
+          label: 'Cancelled',
+          type: 'badge-phoenix-secondary',
+          icon:'x'
+        },
+        fulfilment_status: {
+          label: 'Partially Fulfiled',
+          type: 'badge-phoenix-warning',
+          icon:'clock'
+        },
+        delivery_type: 'Standard shipping',
+        date: 'Dec 1, 4:07 AM',
+      },
+      {
+        order: 2449,
+        total: 9562,
+        customer:{
+          avatar: '/team/58.webp',
+          name: 'Igor Borvibson'
+        },
+        payment_status : {
+          label: 'Failed',
+          type: 'badge-phoenix-danger',
+          icon:'x'
+        },
+        fulfilment_status: {
+          label: 'Partially Fulfiled',
+          type: 'badge-phoenix-success',
+          icon:'check'
+        },
+        delivery_type: 'Express',
+        date: 'Nov 28, 7:28 PM',
+      },
+      {
+        order: 2448,
+        total: 46,
+        customer:{
+          avatar: '/team/59.webp',
+          name: 'Katerina Karenin'
+        },
+        payment_status : {
+          label: 'Paid',
+          type: 'badge-phoenix-success',
+          icon:'check'
+        },
+        fulfilment_status: {
+          label: 'Unfulfiled',
+          type: 'badge-phoenix-danger',
+          icon:'x'
+        },
+        delivery_type: 'Local delivery',
+        date: 'Nov 24, 10:16 AM',
+      },
+      {
+        order: 2447,
+        total: 953,
+        customer:{
+          avatar: '',
+          name: 'Roy Anderson'
+        },
+        payment_status : {
+          label: 'Pending',
+          type: 'badge-phoenix-warning',
+          icon:'clock'
+        },
+        fulfilment_status: {
+          label: 'Fulfiled',
+          type: 'badge-phoenix-success',
+          icon:'check'
+        },
+        delivery_type: 'Cash on delivery',
+        date: 'Nov 18, 5:43 PM',
+      },
+      {
+        order: 2446,
+        total: 12,
+        customer:{
+          avatar: '/team/31.webp',
+          name: 'Martina scorcese'
+        },
+        payment_status : {
+          label: 'Pending',
+          type: 'badge-phoenix-warning',
+          icon:'clock'
+        },
+        fulfilment_status: {
+          label: 'Fulfiled',
+          type: 'badge-phoenix-success',
+          icon:'check'
+        },
+        delivery_type: 'Standard shipping',
+        date: 'Nov 18, 2:09 AM',
+      },
+      {
+        order: 2445,
+        total: 3927,
+        customer:{
+          avatar: '/team/33.webp',
+          name: 'Luis Bunuel'
+        },
+        payment_status : {
+          label: 'Paid',
+          type: 'badge-phoenix-success',
+          icon:'check'
+        },
+        fulfilment_status: {
+          label: 'Canceled',
+          type: 'badge-phoenix-secondary',
+          icon: 'x'
+        },
+        delivery_type: 'Cash on delivery',
+        date: 'Nov 16, 3:22 PM',
+      },
+      {
+        order: 2444,
+        total: 5937,
+        customer:{
+          avatar: '/team/34.webp',
+          name: 'Jean Renoir'
+        },
+        payment_status : {
+          label: 'Paid',
+          type: 'badge-phoenix-success',
+          icon:'check'
+        },
+        fulfilment_status: {
+          label: 'Ready to pickup',
+          type: 'badge-phoenix-secondary',
+          icon: 'info'
+        },
+        delivery_type: 'Local pickup',
+        date: 'Nov 09, 8:49 AM',
+      },
+      {
+        order: 2443,
+        total: 124,
+        customer:{
+          avatar: '/team/29.webp',
+          name: 'Ricky Antony'
+        },
+        payment_status : {
+          label: 'Failed',
+          type: 'badge-phoenix-danger',
+          icon:'x'
+        },
+        fulfilment_status: {
+          label: 'Unfulfiled',
+          type: 'badge-phoenix-danger',
+          icon:'x'
+        },
+        delivery_type: 'Cash on delivery',
+        date: 'Nov 05, 4:35 PM',
+      },
+      {
+        order: 2442,
+        total: 542,
+        customer:{
+          avatar: '/team/3.webp',
+          name: 'Emma Watson'
+        },
+        payment_status : {
+          label: 'Pending',
+          type: 'badge-phoenix-warning',
+          icon:'clock'
+        },
+        fulfilment_status: {
+          label: 'Fulfiled',
+          type: 'badge-phoenix-success',
+          icon:'check'
+        },
+        delivery_type: 'Standard shipping',
+        date: 'Nov 05, 12:00 PM',
+      },
+      {
+        order: 2441,
+        total: 1480,
+        customer:{
+          avatar: '/team/avatar.webp',
+          name: 'Jennifer Schramm',
+          placeholder: true
+        },
+        payment_status : {
+          label: 'Paid',
+          type: 'badge-phoenix-success',
+          icon:'check'
+        },
+        fulfilment_status: {
+          label: 'Ready to pickup',
+          type: 'badge-phoenix-info',
+          icon:'info'
+        },
+        delivery_type: 'Local delivery',
+        date: 'Nov 02, 2:00 AM',
+      },
+      {
+        order: 2440,
+        total: 80,
+        customer:{
+          avatar: '/team/25.webp',
+          name: 'Michael Jenkins'
+        },
+        payment_status : {
+          label: 'Cancelled',
+          type: 'badge-phoenix-secondary',
+          icon:'x'
+        },
+        fulfilment_status: {
+          label: 'Unfulfiled',
+          type: 'badge-phoenix-danger',
+          icon:'x'
+        },
+        delivery_type: 'Free shipping',
+        date: 'Oct 30, 4:25 PM',
+      },
+      {
+        order: 2439,
+        total: 999,
+        customer:{
+          avatar: '/team/32.webp',
+          name: 'Raymond Mims'
+        },
+        payment_status : {
+          label: 'Pending',
+          type: 'badge-phoenix-warning',
+          icon:'clock'
+        },
+        fulfilment_status: {
+          label: 'Fulfiled',
+          type: 'badge-phoenix-success',
+          icon:'check'
+        },
+        delivery_type: 'Cash on delivery',
+        date: 'Oct 28, 3:00 PM',
+      },
+    ]
+
+  .table-responsive.scrollbar.mx-n1.px-1
+    table.table.table-sm.fs--1.mb-0
+      thead
+        tr
+          th.white-space-nowrap.fs--1.align-middle.ps-0(style='width:26px;')
+            .form-check.mb-0.fs-0
+              input.form-check-input#checkbox-bulk-order-select(
+                type='checkbox' 
+                data-bulk-select!={
+                  body: "order-table-body",
+                }
+              )
+          th.sort.white-space-nowrap.align-middle.pe-3(scope='col' data-sort="order" style='width:5%;') ORDER
+          th.sort.align-middle.text-end(scope='col' data-sort="total" style='width:6%;') TOTAL
+          th.sort.align-middle.ps-8(scope='col' data-sort="customer" style='width:28%; min-width: 250px;' ) CUSTOMER
+          th.sort.align-middle.pe-3(scope='col' data-sort="payment_status" style='width:10%;') PAYMENT STATUS
+          th.sort.align-middle.text-start.pe-3(scope='col' data-sort="fulfilment_status" style='width:12%; min-width: 200px;') FULFILMENT STATUS
+          th.sort.align-middle.text-start(scope='col' data-sort="delivery_type" style='width:30%;') DELIVERY TYPE
+          th.sort.align-middle.text-end.pe-0(scope='col' data-sort="date") DATE
+      tbody.list#order-table-body
+        each row,index in orderTableData
+          +OrderTableRow(row,index)
+  .row.align-items-center.justify-content-between.py-2.pe-0.fs--1
+    .col-auto.d-flex
+      p.mb-0.d-none.d-sm-block.me-3.fw-semi-bold.text-900(data-list-info)
+      a.fw-semi-bold(href='#!' data-list-view="*")
+        | View all
+        span.fas.fa-angle-right.ms-1(data-fa-transform='down-1')
+      a.fw-semi-bold.d-none(href='#!' data-list-view="less")
+        | View Less
+        span.fas.fa-angle-right.ms-1(data-fa-transform='down-1')
+    .col-auto.d-flex
+      button.page-link(data-list-pagination="prev")
+        span.fas.fa-chevron-left
+      ul.mb-0.pagination
+      button.page-link.pe-0(data-list-pagination="next")
+        span.fas.fa-chevron-right

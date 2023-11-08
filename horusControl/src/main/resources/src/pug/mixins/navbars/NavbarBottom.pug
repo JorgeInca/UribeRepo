@@ -1,0 +1,20 @@
+mixin NavbarBottom(active)
+  .navbar-bottom&attributes(attributes)
+    .nav
+      a.nav-link(class=active === 'home' ? 'active' : '' aria-current='page', href=`${CWD}${paths['social-feed']}`)
+        span.fa-solid.fa-home.nav-icon
+        span.nav-label Home
+      a.nav-link(class=active === 'profile' ? 'active' : '' href=`${CWD}${paths['social-profile']}`)
+        span.fa-solid.fa-user.nav-icon
+        span.nav-label Profile
+      a.nav-link(href='#!')
+        span.fa-solid.fa-image.nav-icon
+        span.nav-label Photos
+      a.nav-link(href=`${CWD}apps/chat.html`)
+        span.fa-solid.fa-message.nav-icon
+        span.nav-label Messages
+      a.nav-link(href=`${CWD}${paths['event-detail']}`)
+        span.fa-solid.fa-calendar-days.nav-icon
+        span.nav-label Events
+
+

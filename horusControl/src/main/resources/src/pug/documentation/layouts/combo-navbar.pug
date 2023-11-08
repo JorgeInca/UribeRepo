@@ -1,0 +1,152 @@
+extends ../../layouts/LayoutComponent
+
+append variables
+  -
+    var pageHeader = {
+      title: 'Combo Navbar',
+      description:"Here is the default Phoenix's powerful, responsive vertical navigation. The following sections describe how you can customize both the responsive breakpoint and collapsing behavior.",
+      url:  `${CWD}${paths['demo-combo-nav']}`,
+      linkText: 'Combo navbar example',
+      dataAnchor: true
+    }
+  -
+    var horizontalNavbarSlimHeader = {
+      title: 'Combo navbar slim',
+      headerClass: 'mt-12',
+      description:"Pheonix provides another layout for navbar vertical with navbar slim.",
+      url: `${CWD}${paths['demo-combo-nav-slim']}`,
+      linkText: 'Combo navbar slim example',
+      dataAnchor: true
+    }
+
+block component
+
+  +ComponentCard({title: 'Navbar combo structure', hideNavTab: true}).mb-4.mt-5
+    p.mb-0 Add 
+      code .navbar-combo 
+      | class in 
+      code Html 
+      | element to start with horizontal-navbar
+
+    pre.scrollbar.my-5
+      code.language-html
+        +escape
+          doctype html
+          html.navbar-combo
+            head ...
+            body 
+              main
+                .container-fluid
+                  nav.navbar.navbar-vertical.navbar-expand-lg
+                    // navbar vertical content goes here
+                  nav.navbar.navbar-top.navbar-expand
+                    // navbar top content goes here
+                  .content 
+                    //  content goes here
+  +ComponentCard({title: 'Responsive behavior ', hideNavTab: true}).my-4
+    p.mb-0 Phoenix used the Bootstrap's 
+      code .navbar-expand{-sm|-md|-lg|-xl|-xxl} 
+      |  classes in 
+      code .navbar 
+      | element to decide when the navbar vertical will expand or not.
+    pre.scrollbar.mt-5
+      code.language-html
+        +escape
+          nav.navbar.navbar-vertical.navbar-expand-lg
+          nav.navbar.navbar-top.navbar-expand-lg(data-move-target="navbarVerticalNav" data-navbar-top="combo")
+
+  +ComponentCard({title: 'Collapsing behavior', hideNavTab: true}).my-4
+    p You can control the default collapsing behavior of phoenix's vertical navigation - whether it will show up with the collapsed or expanded state when the page loads.
+    p.mb-0 From your project directory, If you are using gulp version open 
+      code src/js/config.js 
+      | or if you are using directly from the public folder open 
+      code public/assets/js/theme.js 
+      | and set 
+      code phoenixIsNavbarVerticalCollapsed: true 
+      | of 
+      code CONFIG 
+      | object to collapse the Vertical Navigation by default
+    pre.scrollbar.mt-5
+      code.lang-html.
+        const CONFIG = {
+          phoenixIsNavbarVerticalCollapsed: false,
+          ...
+        };
+
+  +ComponentCard({title: 'Vertical Navbar appearance', hideNavTab: true}).my-4
+    p You can control Navbar vertical style of phoenix's between defaults and darker.
+    p From your project directory, If you are using gulp version open 
+      code src/js/config.js 
+      | or if you are using directly from the public folder open 
+      code public/assets/js/theme.js 
+      | and set 
+      code phoenixNavbarVerticalStyle: 'darker' 
+      | of 
+      code CONFIG 
+      | object to collapse the Vertical Navigation by default
+          
+    pre.scrollbar.my-5
+      code.lang-html.
+        const CONFIG = {
+          phoenixNavbarVerticalStyle: 'default' || 'darker',
+          ...
+        };
+    p.mb-0 Or to change navbar vertical color just add 
+      code navbar-darker 
+      | css class with 
+      code navber-vertical 
+      | class
+    pre.scrollbar.mt-3
+      code.language-html
+        +escape
+          nav.navbar.navbar-vertical.navbar-expand-lg.navbar-darker
+
+  +ComponentCard({title: 'Horizontal Navbar appearance', hideNavTab: true}).my-4
+    p You can control top nav style of vertical navbar between defaults and darker.
+    p.mb-0 From your project directory, If you are using gulp version open 
+      code src/js/config.js 
+      | or if you are using directly from the public folder open 
+      code public/assets/js/theme.js 
+      | and set 
+      code phoenixNavbarTopStyle: darker 
+      | of 
+      code CONFIG 
+      | object to collapse the Vertical Navigation by default
+    
+    pre.scrollbar.my-5
+      code.lang-html.
+        const CONFIG = {
+          phoenixNavbarTopStyle: 'default' || 'darker',
+          ...
+        };
+
+    p.mb-0 Or to change navbar vertical color just add 
+      code navbar-darker 
+      | css class with 
+      code navber-vertical 
+      | class
+    pre.scrollbar.mt-3
+      code.language-html
+        +escape
+          nav.navbar.navbar-top.navbar-darker
+
+  +PageHeader(horizontalNavbarSlimHeader)
+
+  +ComponentCard({title: 'Navbar slim structure', hideNavTab: true}).my-4
+    
+
+    pre.scrollbar.my-5
+      code.language-html
+        +escape
+          doctype html
+          html.navbar-combo
+            head ...
+            body.nav-slim 
+              main
+                .container-fluid
+                  nav.navbar.navbar-vertical.navbar-expand-lg
+                    // navbar vertical content goes here
+                  nav.navbar.navbar-top.navbar-slim 
+                    // navbar top slim content goes here
+                  .content 
+                    //  content goes here

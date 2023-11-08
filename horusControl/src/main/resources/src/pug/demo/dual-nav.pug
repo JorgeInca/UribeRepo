@@ -1,0 +1,23 @@
+extends ../index
+
+
+
+append variables
+  - var disableNavigationType = true;
+  - var disableVerticalNavbarAppearance = true;
+  - var disableHorizontalNavbarShape = true;
+
+append headScripts
+  script.
+    document.documentElement.classList.add('dual-nav');
+
+block navbarTop
+  +DualNav({
+    toggleID: 'navbarTopCollapse',
+    links: false,
+    search: true
+    }).navbar-expand-lg(style='display:none')
+  script.
+    var navbarVertical = document.querySelector('.navbar-vertical');
+    navbarVertical.remove();
+    dualNav.removeAttribute('style');

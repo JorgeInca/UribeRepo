@@ -1,0 +1,44 @@
+mixin FlyCard
+  //- .d-flex.justify-content-end
+    //- .card.border.border-300.h-100(style='max-width:520px;')
+  .card.border.border-300.h-100.w-100.overflow-hidden
+    +Background({
+      image: `${CWD}assets/img/spot-illustrations/32.png`,
+      attrs: {
+        style: 'background-position: top right;',
+        class:'d-block bg-card'
+      }
+    })
+    .d-dark-none
+      +Background({
+        image: `${CWD}assets/img/spot-illustrations/21.png`,
+        attrs: {
+          style: 'background-position: bottom right; background-size: auto;',
+          class:'d-none d-sm-block d-xl-none d-xxl-block bg-card'
+        }
+      })
+    .d-light-none
+      +Background({
+        image: `${CWD}assets/img/spot-illustrations/dark_21.png`,
+        attrs: {
+          style: 'background-position: bottom right; background-size: auto;',
+          class:'d-none d-sm-block d-xl-none d-xxl-block bg-card'
+        }
+      })
+      
+    .card-body.px-5.position-relative
+      .badge.badge-phoenix.fs--2.badge-phoenix-warning.mb-4
+        span.fw-bold Coming soon
+        span.fa-solid.fa-award.ms-1
+      h3.mb-5 Early bird gets the warm leads!
+      p.text-700.fw-semi-bold Phoenix CRM Dashboard is coming to 
+        br.d-none.d-sm-block
+        | market soon for fulfilling your every 
+        br.d-none.d-sm-block
+        | CRM related needs. 
+    .card-footer.border-0.py-0.px-5.z-index-1
+      p.text-700.fw-semi-bold Follow 
+        a(href="https://themewagon.com/") ThemeWagon 
+        | at 
+        br.d-none.d-xxl-block
+        |Bootstrap Marketplace for updates.

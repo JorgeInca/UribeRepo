@@ -1,0 +1,128 @@
+mixin KanbanOffcanvas
+  .phoenix-offcanvas.phoenix-offcanvas-end.bg-100.position-fixed(tabindex='-1' id="offcanvasKanban" style='max-width: 445px')
+    .offcanvas-header 
+      h3.offcanvas-title Phoenix Kanban
+      button.btn.p-1.fw-bolder(type='button' data-phoenix-dismiss='offcanvas' aria-label='Close')
+        span.fas.fa-times.fs-0  
+    .offcanvas-body 
+      h4.text-1000.fw-semi-bold.mb-0.mt-6 Admins 
+      .d-flex.align-items-center.mt-3&attributes(attributes)
+
+        .dropdown
+          -
+            var admin = {
+                name: 'Sasha Blaus',
+                avatar: '/team/14.webp',
+              }
+            
+          a.dropdown-toggle.dropdown-caret-none.d-inline-block(href='#', role='button', data-bs-toggle='dropdown', aria-expanded='false' data-bs-auto-close="outside")
+            +Avatar({size: 'xl', img: `${admin.avatar}`, round: 'circle'}).me-3.border.border-white.rounded-pill
+          +AvatarDropdownMenu(admin) 
+        .flex-1
+          a.text-decoration-none.text-1000.lh-1.fw-semi-bold(href="#!") Sasha Blaus
+          h6.mb-0.lh-1.text-1000.fw-semi-bold @potatogirl
+
+      h4.text-1000.fw-semi-bold.mb-0.mt-5.mb-3 Members
+        -
+          var members = [
+            {
+              name: 'Tyrion Lannister',
+              avatar: '/team/33.webp',
+            },
+            {
+              name: 'Milind Mikuja',
+              avatar: '/team/30.webp'
+            },
+            {
+              name: 'Stanly Drinkwater',
+              avatar: '/team/31.webp'
+            },
+            {
+              name: 'Josef Stravinsky',
+              avatar: '/team/60.webp'
+            },
+            {
+              name: 'Igor Borvibson',
+              avatar: '/team/65.webp'
+            }
+          ]
+      .d-flex
+        each member in members
+          .dropdown
+            a.dropdown-toggle.dropdown-caret-none.d-inline-block(href='#', role='button', data-bs-toggle='dropdown', aria-expanded='false' data-bs-auto-close="outside")
+              +Avatar({size: 'm', img: `${member.avatar}`, round: 'circle'}).me-2.border.border-white.rounded-pill
+            +AvatarDropdownMenu(member) 
+
+      h4.text-1000.fw-semi-bold.mb-0.mt-3.mb-3 Guests
+        -
+          var guests = [
+            {
+              name: 'Tyrion Lannister',
+              avatar: '/team/2.webp',
+            },
+            {
+              name: 'Milind Mikuja',
+              avatar: '/team/3.webp'
+            },
+            {
+              name: 'Stanly Drinkwater',
+              avatar: '/team/4.webp'
+            },
+            {
+              name: 'Josef Stravinsky',
+              avatar: '/team/5.webp'
+            }
+          ]
+      .d-flex
+        each member in guests
+          .dropdown
+            a.dropdown-toggle.dropdown-caret-none.d-inline-block(href='#', role='button', data-bs-toggle='dropdown', aria-expanded='false' data-bs-auto-close="outside")
+              +Avatar({size: 'm', img: `${member.avatar}`, round: 'circle'}).me-2.border.border-white.rounded-pill
+            +AvatarDropdownMenu(member) 
+      h4.text-1000.fw-semi-bold.mb-0.mt-7.mb-3.border-bottom.pb-3 Description 
+        span.fas.fa-pencil.text-900.fs--1.ms-3.cursor-pointer(data-fa-transform='up-2')
+      p Phoenix is a rich and complex symbol that continues to capture the imagination of people across cultures and time periods. Whether seen as a symbol of hope, renewal, or mystery, the Phoenix remains an enduring icon of the human spirit.
+
+      ul.list-unstyled.mb-0
+        -
+          var items = [ 
+            {
+              title: 'Board Setting'
+            },
+            {
+              title: 'Duplicate Board'
+            },
+            {
+              title: 'Manage Labels'
+            },
+            {
+              title: 'Go to Archive'
+            },
+            {
+              title: 'Print'
+            },
+            {
+              title: 'Export As'
+            },
+            {
+              title: 'Integrations'
+            },
+            {
+              title: 'Privacy Settings'
+            },
+            {
+              title: 'Automation'
+            },
+            {
+              title: 'Leave Board',
+              class: 'text-danger pb-0'
+            },
+          ];
+        each item, index in items 
+          li
+            a.text-1000.fw-semi-bold.text-decoration-none.d-flex.flex-between-center.py-3(href='#!' class=`${item.class? item.class: ''} ${index !== items.length-1 ? 'border-bottom': 'pb-0'}`)
+              span #{item.title}
+              if index !== items.length-1
+                span.fas.fa-angle-right.fs--1.me-3
+
+  .phoenix-offcanvas-backdrop(data-phoenix-backdrop)

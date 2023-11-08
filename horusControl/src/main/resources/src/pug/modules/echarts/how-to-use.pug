@@ -1,0 +1,108 @@
+extends ../../layouts/LayoutComponent
+
+append variables
+
+  -
+    var pageHeader = {
+      title: 'How to use',
+      description: `A powerful, interactive charting and visualization library for browser.`,
+      url: `https://echarts.apache.org/en/option.html#title`,
+      linkText: 'Documentation for EChart'
+    }
+
+  -
+    var rightNav = [
+      {
+        name: 'JavaScript',
+        id: '#javascript',
+      },
+      {
+        name: 'Getting Started',
+        id: '#getting-started',
+      },
+      {
+        name: 'Responsive',
+        id: '#responsive',
+      },
+      {
+        name: 'Echart inside a Tab',
+        id: '#echart-inside-a-tab',
+      },
+    ]
+
+prepend scripts
+  script(src=`${CWD}vendors/echarts/echarts.min.js`)
+
+append scripts
+  script(src=`${CWD}assets/js/ecommerce-dashboard.js`)
+
+block component
+  +ComponentCard({title: 'JavaScript', hideNavTab: true}).mb-4
+    +ComponentCardLib
+      script(src=`vendors/echarts/echarts.min.js`)
+
+  +ComponentCard({title: 'Getting Started', hideNavTab: true}).mb-4
+    h5.mb-3 For gulp based workflow:
+    p To add a new chart using Echarts, follow the steps below: 
+    ul
+      li Add an HTML element with a unique class name. For example: 
+        +ComponentCardLib 
+          .echart-total-sales-chart
+      li Give a height of the chart element in CSS
+      li Add a JavaScript file into 
+        code src/js 
+        | directory and write a function to initialize the Echart with the required options.
+        br
+        strong Tips: 
+        | Select any chart of #{name} which you want to duplicate, copy the file and replace the class name and options.
+
+      li import and call the function into the corresponding javascript file of the current page. For example: 
+        code ecommerce-dashboard.js, 
+        code projectmanagement-dashboard.js, 
+        code [your-custom-page].js 
+        | etc.
+    h5.mt-5.mb-3 If you're not using gulp: 
+    p If you are not using gulp based workflow and want to add Echart, Follow the steps below:
+    ul
+      li Add an HTML element with a unique class name. For example: 
+        +ComponentCardLib 
+          .echart-total-sales-chart()
+      li Give a height of the chart element in CSS
+      li Write a function to initialize the echart with the class name added in the first step and pass the necessary options into the corresponding javascript file of the current page, such as 
+        code public/assets/js/ecommerce-dashboard.js, 
+        code public/assets/js/projectmanagement-dashboard.js, 
+        code public/assets/js/[your-custom-page].js 
+        | etc.
+        br
+        strong Tips: 
+        | Select the chart you want to duplicate and copy the chart's code from the corresponding javascript file or 
+        code public/assets/js/echart-example.js
+        |. Then place the code bottom of your selected js file, for example, 
+        code public/assets/js/ecommerce-dashboard.js, 
+        code public/assets/js/projectmanagement-dashboard.js, 
+        | or 
+        code public/assets/js/[your-custom-page].js 
+        | file and replace the class name and the options.
+      li Call the function you made in previous step.
+
+  +ComponentCard({title: 'Responsive', hideNavTab: true}).mb-4
+    p.mb-0 To responsive Echarts just add 
+      code  
+      | in your dom element. #{name} will take the 
+      code true 
+      | value and will resize the charts when container size changes.
+
+  +ComponentCard({
+    title: 'Echart inside a Tab',
+    description:`To set any echarts inside Bootstrap tab component in ${name}, follow the steps below:</p><ul><li>Add <code>data-tab-has-echart </code>attribute to the <code>.nav-tab </code>element.</li><li>Then add <code>data-echart-tab </code>attribute to the Echart element.</li></ul><p>By following these steps multiple echart can be added in a tab or multiple tabs with Echarts also be placed.`,
+    }).mb-4
+    ul#echart-tab-example.echart-tab-example.nav.nav-tabs.mb-3(role='tablist' data-tab-has-echarts)
+      li.nav-item(role='presentation')
+        button#bar-chart-tab.nav-link.active(data-bs-toggle='tab' data-bs-target='#bar-chart' type='button' role='tab' aria-controls='bar-chart' aria-selected='false') Bar Chart
+      li.nav-item(role='presentation')
+        button#line-charts-tab.nav-link(data-bs-toggle='tab' data-bs-target='#line-charts' type='button' role='tab' aria-controls='line-charts' aria-selected='false') Line Chart
+    #echart-tab-example-content.tab-content
+      #bar-chart.tab-pane.fade.show.active(role='tabpanel' aria-labelledby='bar-chart-tab') 
+        .echart-projection-actual(style='height: 300px' data-echart-tab)
+      #line-charts.tab-pane.fade(role='tabpanel' aria-labelledby='line-charts-tab') 
+        .echart-total-sales-chart(style='height: 300px' data-echart-tab)

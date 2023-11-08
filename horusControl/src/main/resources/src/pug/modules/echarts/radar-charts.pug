@@ -1,0 +1,26 @@
+extends ../../layouts/LayoutComponent
+
+prepend scripts
+  script(src=`${CWD}vendors/echarts/echarts.min.js`)
+
+append scripts
+  script(src=`${CWD}assets/js/echarts-example.js`)
+
+
+block component
+  .row.g-4.mb-9
+    .col-12
+      +ComponentCard({title:'Radar chart'})
+        // Find the JS file for the following chart at: src/js/charts/echarts/examples/radar-chart.js
+        // If you are not using gulp based workflow, you can find the transpiled code at: public/assets/js/echarts-example.js
+        .echart-radar-chart-example(style='min-height:300px')
+    .col-12
+      +ComponentCard({title:'Radar customized chart'})
+        // Find the JS file for the following chart at: src/js/charts/echarts/examples/radar-customized-chart.js
+        // If you are not using gulp based workflow, you can find the transpiled code at: public/assets/js/echarts-example.js
+        .echart-radar-customized-chart-example
+    .col-12
+      +ComponentCard({title:'Radar multiple chart'})
+        // Find the JS file for the following chart at: src/js/charts/echarts/examples/radar-multiple-chart.js
+        // If you are not using gulp based workflow, you can find the transpiled code at: public/assets/js/echarts-example.js
+        .echart-radar-multiple-chart-example

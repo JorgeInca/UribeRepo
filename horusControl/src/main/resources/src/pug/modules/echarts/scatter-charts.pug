@@ -1,0 +1,31 @@
+extends ../../layouts/LayoutComponent
+
+prepend scripts
+  script(src=`${CWD}vendors/echarts/echarts.min.js`)
+
+append scripts
+  script(src=`${CWD}assets/js/echarts-example.js`)
+
+
+block component
+  .row.g-4.mb-9
+    .col-xl-6
+      +ComponentCard({title:'Basic scatter chart'})
+        // Find the JS file for the following chart at: src/js/charts/echarts/examples/basic-scatter-chart.js
+        // If you are not using gulp based workflow, you can find the transpiled code at: public/assets/js/echarts-example.js
+        .echart-basic-scatter-chart-example(style='min-height:300px')
+    .col-xl-6
+      +ComponentCard({title:'Bubble chart'})
+        // Find the JS file for the following chart at: src/js/charts/echarts/examples/bubble-chart.js
+        // If you are not using gulp based workflow, you can find the transpiled code at: public/assets/js/echarts-example.js
+        .echart-bubble-chart-example(style='min-height:300px')
+    .col-12
+      +ComponentCard({title:'Quartet scatter chart'})
+        // Find the JS file for the following chart at: src/js/charts/echarts/examples/quartet-scatter-chart.js
+        // If you are not using gulp based workflow, you can find the transpiled code at: public/assets/js/echarts-example.js
+        .echart-quartet-scatter-chart-example
+    .col-12
+      +ComponentCard({title:'Single axis scatter chart'})
+        // Find the JS file for the following chart at: src/js/charts/echarts/examples/single-axis-scatter-chart.js
+        // If you are not using gulp based workflow, you can find the transpiled code at: public/assets/js/echarts-example.js
+        .echart-single-axis-scatter-chart-example(style="min-height: 500px;")

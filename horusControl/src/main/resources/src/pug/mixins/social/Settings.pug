@@ -1,0 +1,175 @@
+mixin SettingsProfileCard
+	.card&attributes(attributes)
+		.card-header.hover-actions-trigger.position-relative.mb-6(style="min-height: 130px; ")
+			.bg-holder.rounded-top(style=`background-image: linear-gradient(0deg, #000000 -3%, rgba(0, 0, 0, 0) 83%), url(${CWD}assets/img/generic/59.png)`)
+				input#upload-settings-cover-image.d-none(type="file")
+				label.cover-image-file-input(for="upload-settings-cover-image")
+				.hover-actions.end-0.bottom-0.pe-1.pb-2.text-white
+					span.fa-solid.fa-camera.me-2
+			input#upload-settings-porfile-picture.d-none(type="file")
+			label.avatar.avatar-4xl.status-online.feed-avatar-profile.cursor-pointer(for="upload-settings-porfile-picture")
+				img(src=`${CWD}assets/img/team/20.webp` width=200 alt='').rounded-circle.img-thumbnail.bg-white.shadow-sm
+
+		.card-body
+			.row
+				.col-12
+					.d-flex.flex-wrap.mb-2.align-items-center
+						h3.me-2 Ansolo Lazinatov
+						span.fw-normal.fs-0 u/hansolo
+					.d-flex.d-xl-block.d-xxl-flex.align-items-center
+						.d-flex.mb-xl-2.mb-xxl-0
+							span.fa-solid.fa-user-group.fs--2.me-2.me-lg-1.me-xl-2
+							h6.d-inline-block.mb-0 1297
+								span.fw-semi-bold.ms-1.me-4 Followers
+						.d-flex
+							span.fa-solid.fa-user-check.fs--2.me-2.me-lg-1.me-xl-2
+							h6.d-block.d-xl-inline-block.mb-0 3971
+								span.fw-semi-bold.ms-1 Following
+
+mixin LeftSidebar
+	.border-bottom.border-dashed.pb-3.mb-4
+		h5.text-900.mb-3 Who will be able to see your profile?
+		.form-check
+			input#onlyMe.form-check-input(type='radio', checked name='profiileVisibility')
+			label.form-check-label.fs-0(for='onlyMe') Only me
+		.form-check
+			input#myFollowers.form-check-input(type='radio' name='profiileVisibility')
+			label.form-check-label.fs-0(for='myFollowers') My followers
+		.form-check
+			input#everyone.form-check-input(type='radio' name='profiileVisibility')
+			label.form-check-label.fs-0(for='everyone') Everyone
+
+	.border-bottom.border-dashed.pb-3.mb-4
+		h5.text-900.mb-3 Who can tag you?
+		.form-check
+			input#tagGroupMembers.form-check-input(type='radio', checked name='tagPermission')
+			label.form-check-label.fs-0(for='tagGroupMembers') Group Members
+		.form-check
+			input#tagEveryone.form-check-input(type='radio' name='tagPermission')
+			label.form-check-label.fs-0(for='tagEveryone') Everyone
+
+	.border-bottom.border-dashed.pb-3.mb-4
+		.form-check
+			input#showEmail.form-check-input(type='checkbox' name='showEmail')
+			label.form-check-label.fs-0(for='showEmail') Allow users to show your email
+		.form-check
+			input#showExperiences.form-check-input(type='checkbox' name='showExperiences')
+			label.form-check-label.fs-0(for='showExperiences') Allow users to show your experiences
+		.form-check
+			input#showFollowers.form-check-input(type='checkbox', checked name='showFollowers')
+			label.form-check-label.fs-0(for='showFollowers') Allow users to show your followers
+
+	.mb-4
+		.form-check.form-switch
+			input#showPhone.form-check-input(type='checkbox', checked name='showPhone')
+			label.form-check-label.fs-0(for='showPhone') Show your phone number
+		.form-check.form-switch
+			input#permitFollow.form-check-input(type='checkbox', checked name='permitFollow')
+			label.form-check-label.fs-0(for='permitFollow') Permit users to follow you.
+
+mixin PersonalInformation
+	.mb-6
+		h4.mb-4 Personal Information
+		.row.g-3
+			.col-12.col-sm-6
+				.form-icon-container
+					.form-floating
+						input#firstName.form-control.form-icon-input(type='text' placeholder='First Name')
+						label.text-700.form-icon-label(for='firstName') FIRST NAME
+					span.fa-solid.fa-user.text-900.fs--1.form-icon
+			.col-12.col-sm-6
+				.form-icon-container
+					.form-floating
+						input#lastName.form-control.form-icon-input(type='text' placeholder='Last Name')
+						label.text-700.form-icon-label(for='lastName') LAST NAME
+					span.fa-solid.fa-user.text-900.fs--1.form-icon
+			.col-12.col-sm-6
+				.form-icon-container
+					.form-floating
+						input#emailSocial.form-control.form-icon-input(type='email' placeholder='Email')
+						label.text-700.form-icon-label(for='emailSocial') ENTER YOUR EMAIL
+					span.fa-solid.fa-envelope.text-900.fs--1.form-icon
+			.col-12.col-sm-6
+				.form-icon-container
+					.form-floating
+						input#phone.form-control.form-icon-input(type='tel' placeholder='Phone' )
+						label.text-700.form-icon-label(for='phone') ENTER YOUR PHONE
+					span.fa-solid.fa-phone.text-900.fs--1.form-icon
+			.col-12.col-sm-6
+				.form-icon-container
+					.form-floating
+						textarea#info.form-control.form-icon-input(style='height: 115px;' placeholder='Info' )
+						label.text-700.form-icon-label(for='info') Info
+					span.fa-solid.fa-circle-info.text-900.fs--1.form-icon
+
+mixin CompanyInfo
+	h4.mb-4 Company Info
+	.form-icon-container.mb-3
+		.form-floating
+			input#companyName.form-control.form-icon-input(type='text' placeholder='Company Name' )
+			label.text-700.form-icon-label(for='companyName') COMPANY NAME
+		span.fa-solid.fa-building.text-900.fs--1.form-icon
+
+	.form-icon-container
+		.form-floating
+			input#website.form-control.form-icon-input(type='text' placeholder='Website' )
+			label.text-700.form-icon-label(for='website') Website
+		span.fa-solid.fa-globe.text-900.fs--1.form-icon
+
+mixin ChangePassword
+	h4.mb-4 Change Password
+	.form-icon-container.mb-3
+		.form-floating
+			input#oldPassword.form-control.form-icon-input(type='password' placeholder='Old password' )
+			label.text-700.form-icon-label(for='oldPassword') Old Password
+		span.fa-solid.fa-lock.text-900.fs--1.form-icon
+	.form-icon-container.mb-3
+		.form-floating
+			input#newPassword.form-control.form-icon-input(type='password' placeholder='New password' )
+			label.text-700.form-icon-label(for='newPassword') New Password
+		span.fa-solid.fa-key.text-900.fs--1.form-icon
+	.form-icon-container
+		.form-floating
+			input#newPassword2.form-control.form-icon-input(type='password' placeholder='Confirm New password' )
+			label.text-700.form-icon-label(for='newPassword2') Confirm New Password
+		span.fa-solid.fa-key.text-900.fs--1.form-icon
+
+mixin Social
+	h4.mb-4 Social
+	.row.g-3
+		.col-12.col-sm-6
+			.form-icon-container
+				.form-floating
+					input#facebook.form-control.form-icon-input(type='text' placeholder='Facebook')
+					label.text-700.form-icon-label(for='facebook') Facebook
+				span.fa-brands.fa-facebook.text-900.fs--1.form-icon
+		.col-12.col-sm-6
+			.form-icon-container
+				.form-floating
+					input#twitter.form-control.form-icon-input(type='text' placeholder='Twitter')
+					label.text-700.form-icon-label(for='twitter') Twitter
+				span.fa-brands.fa-twitter.text-900.fs--1.form-icon
+		.col-12.col-sm-6
+			.form-icon-container
+				.form-floating
+					input#linkedin.form-control.form-icon-input(type='text' placeholder='Linkedin')
+					label.text-700.form-icon-label(for='linkedin') linkedin
+				span.fa-brands.fa-linkedin-in.text-900.fs--1.form-icon
+		.col-12.col-sm-6
+			.form-icon-container
+				.form-floating
+					input#youtube.form-control.form-icon-input(type='text' placeholder='youtube')
+					label.text-700.form-icon-label(for='youtube') youtube
+				span.fa-brands.fa-youtube.text-900.fs--1.form-icon
+		.col-12.col-sm-6
+			.form-icon-container
+				.form-floating
+					input#artstation.form-control.form-icon-input(type='text' placeholder='artstation')
+					label.text-700.form-icon-label(for='artstation') artstation
+				span.fa-brands.fa-artstation.text-900.fs--1.form-icon
+		.col-12.col-sm-6
+			.form-icon-container
+				.form-floating
+					input#behance.form-control.form-icon-input(type='text' placeholder='behance')
+					label.text-700.form-icon-label(for='behance') behance
+				span.fa-brands.fa-behance.text-900.fs--1.form-icon

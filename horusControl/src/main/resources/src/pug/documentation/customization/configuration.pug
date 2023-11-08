@@ -1,0 +1,150 @@
+extends ../../layouts/LayoutComponent
+
+
+append variables
+
+  -
+    var pageHeader = {
+      title: 'Setting up configuration',
+      description: 'Phoenix has a global configuration system. You can change the theme settings with a single global javascript object.'
+    }
+
+  -
+    var rightNav = [
+      {
+        name: 'Setting configuration',
+        id: '#setting-configuration',
+      },
+      {
+        name: 'Available Options',
+        id: '#available-options',
+      },
+    ]
+
+block component
+  +ComponentCard({
+    title: 'Setting configuration',
+    anchor: true,
+    hideNavTab: true,
+    descriptionClass:'mt-2'
+  }).my-5
+    h5 For Gulp based workflow
+    p Edit the 
+      code src/js/config.js
+      |  file.
+
+    h5 If you are not using Gulp based workflow
+    p Edit the 
+      code public/assets/js/config.js
+      |  file.
+
+    h5.fs-0 Configuration object:
+    pre
+      code.lang-js.
+        const initialConfig = {
+          phoenixIsNavbarVerticalCollapsed: false,
+          phoenixTheme: 'light',
+          phoenixNavbarTopStyle: 'default',
+          phoenixNavbarVerticalStyle: 'default',
+          phoenixNavbarPosition: 'vertical',
+          phoenixNavbarTopShape: 'default',
+          phoenixIsRTL: false,
+          phoenixSupportChat: true
+        };
+
+  +ComponentCard({
+    title: 'Available Options',
+    anchor: true,
+    hideNavTab: true,
+    descriptionClass:'mt-2'
+  }).my-5
+    .table-responsive.scrollbar
+      table.table.table-bordered.border.border-200.fs--1.mb-0
+        thead.bg-200.text-900
+          tr
+            th.white-space-nowrap Option
+            th.white-space-nowrap Type
+            th.white-space-nowrap Defaults
+            th.white-space-nowrap(style='min-width: 20rem') Description
+        tbody
+          tr  
+            td.ps-2.white-space-nowrap phoenixIsNavbarVerticalCollapsed
+            td.white-space-nowrap(style='min-width: 7rem')
+              code Boolean
+            td.white-space-nowrap(style='min-width: 7rem')
+              code false
+            td.pe-2 Set 
+              code true
+              |  to make the vertical navbar stay collapsed when the page loads. 
+          tr
+            td.ps-2.white-space-nowrap phoenixTheme
+            td
+              code string 
+            td.white-space-nowrap  
+              code light 
+            td.pe-2 This option is for setting up the default color mode (
+              code dark
+              |  or 
+              code light
+              | ) for your project. Set 
+              code dark
+              |  to make the default color mode dark.
+          tr
+            td.ps-2.white-space-nowrap phoenixNavbarTopStyle
+            td
+              code string 
+            td.white-space-nowrap  
+              code default 
+            td.pe-2 Set 
+              code darker 
+              | to make the top navbar darker when the page loads.
+          tr
+            td.ps-2.white-space-nowrap phoenixNavbarVerticalStyle
+            td
+              code string 
+            td.white-space-nowrap  
+              code default 
+            td.pe-2 Set 
+              code darker 
+              | to make the vertical navbar darker when the page loads.
+          tr
+            td.ps-2.white-space-nowrap phoenixNavbarPosition
+            td
+              code string 
+            td.white-space-nowrap  
+              code vertical 
+            td.pe-2 This option is for changing the navigation type. Available values:
+              ul.mb-0
+                li
+                  code vertical
+                li
+                  code horizontal
+                li
+                  code combo
+          tr
+            td.ps-2.white-space-nowrap phoenixNavbarTopShape
+            td
+              code string 
+            td.white-space-nowrap  
+              code default 
+            td.pe-2 Set 
+              code slim 
+              | to make the top navbar slim when the page loads.
+          tr
+            td.ps-2.white-space-nowrap phoenixIsRTL
+            td
+              code Boolean
+            td
+              code false
+            td.pe-2 Use 
+              code true
+              |  to make the whole layout RTL (Right to Left). Recommended for languages such as Arabic, Hebrew, or other RTL languages.
+          tr
+            td.ps-2.white-space-nowrap phoenixSupportChat
+            td.white-space-nowrap 
+              code Boolean 
+            td.white-space-nowrap 
+              code true
+            td.pe-2 This option is for showing the chat widget. Set 
+              code false 
+              | to hide the chat widget when the page loads.

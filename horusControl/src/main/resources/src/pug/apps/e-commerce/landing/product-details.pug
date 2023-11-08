@@ -1,0 +1,256 @@
+extends ../../../layouts/LayoutEcommerce
+//- extends ../../../layouts/LayoutTheme
+include ../../../mixins/e-commerce/Topbar
+include ../../../mixins/e-commerce/Navbar
+include ../../../mixins/e-commerce/homepage/Category
+include ../../../mixins/e-commerce/homepage/TopDeals
+include ../../../mixins/e-commerce/homepage/TopElectronics
+include ../../../mixins/e-commerce/homepage/BestOffers
+include ../../../mixins/e-commerce/homepage/Cta
+include ../../../mixins/e-commerce/homepage/common
+include ../../../mixins/common/Rating
+include ../../../mixins/e-commerce/product-details/Reviews
+include ../../../mixins/e-commerce/product-details/Details
+include ../../../mixins/e-commerce/product-details/SimilarProducts
+include ../../../mixins/e-commerce/product-details/ProductDetailsCard
+include ../../../mixins/dashboard/common
+
+
+append variables
+  - var disableNavigationType = true;
+  - var disableHorizontalNavbarShape = true;
+  - var disableVerticalNavbarAppearance = true;
+  - var disableHorizontalNavbarAppearance = true;
+
+prepend styles
+  link(href=`${CWD}vendors/swiper/swiper-bundle.min.css`, rel='stylesheet')
+  link(href=`${CWD}vendors/dropzone/dropzone.min.css`, rel='stylesheet')
+  link(href=`${CWD}vendors/glightbox/glightbox.min.css`, rel='stylesheet')
+
+prepend scripts
+  script(src=`${CWD}vendors/swiper/swiper-bundle.min.js`)
+  script(src=`${CWD}vendors/dropzone/dropzone.min.js`)
+  script(src=`${CWD}vendors/rater-js/index.js`)
+  script(src=`${CWD}vendors/glightbox/glightbox.min.js`) 
+
+block ecomContent
+
+  .pt-5.pb-9
+    +Section(null,'container-small').py-0
+      nav.mb-3(aria-label='breadcrumb')
+        ol.breadcrumb.mb-0
+          li.breadcrumb-item
+            a(href='#') Fashion
+          li.breadcrumb-item
+            a(href='#') Womens fashion
+          li.breadcrumb-item
+            a(href='#') Footwear
+          li.breadcrumb-item.active(aria-current='page') Hills
+      +Details
+    +Section(null,'container-small').py-0
+      ul#productTab.nav.nav-underline.mb-4(role='tablist')
+        li.nav-item
+          a#description-tab.nav-link.active(data-bs-toggle='tab' href='#tab-description' role='tab' aria-controls='tab-description' aria-selected='true') Description
+        li.nav-item
+          a#specification-tab.nav-link(data-bs-toggle='tab' href='#tab-specification' role='tab' aria-controls='tab-specification' aria-selected='false') Specification
+        li.nav-item
+          a#reviews-tab.nav-link(data-bs-toggle='tab' href='#tab-reviews' role='tab' aria-controls='tab-reviews' aria-selected='false') Ratings &amp; reviews
+      .row.gx-3.gy-7
+        .col-12.col-lg-7.col-xl-8 
+          #productTabContent.tab-content
+            #tab-description.tab-pane.pe-lg-6.pe-xl-12.fade.show.active.text-1100(role='tabpanel' aria-labelledby='description-tab')
+              p.mb-5 CUPERTINO, CA , The M1 CPU allows Apple to deliver an all-new iMac with a lot more compact and impressively thin design. The new iMac delivers tremendous performance in an 11.5-millimeter-thin design with a stunning side profile that almost vanishes. iMac includes a 24-inch 4.5K Retina display with 11.3 million pixels, 500 nits of brightness, and over a billion colors, giving a beautiful and vivid viewing experience. It is available in a variety of striking colors to match a user's own style and brighten any area. A 1080p FaceTime HD camera, studio-quality mics, and a six-speaker sound system are all included in the new iMac, making it the greatest camera and audio system ever in a Mac. Touch ID is also making its debut on the iMac, making it easier than ever to securely log in, make Apple Pay transactions, and switch user accounts with the touch of a finger. Apps launch at lightning speed, everyday chores seem astonishingly fast and fluid, and demanding workloads like editing 4K video and working with large photos are faster than ever before thanks to the power and performance of M1 and macOS Big Sur.
+              a(href=`${CWD}assets/img/products/23.png` data-gallery=`gallery-description`)
+                img.img-fluid.mb-5.rounded-3(src=`${CWD}assets/img/products/23.png`, alt="")
+              p.mb-0 The new iMac joins Apple's fantastic M1-powered Mac family, which includes the MacBook Air, 13-inch MacBook Pro, and Mac mini, and represents yet another step ahead in the company's shift to Apple silicon. Customers may order iMac starting Friday, April 30. It's the most personal, powerful, capable, and enjoyable it's ever been. In the second half of May, the iMac will be available."M1 is a huge step forward for the Mac," said Greg Joswiak, Apple's senior vice president of Worldwide Marketing. "Today, we're delighted to present the all-new iMac, the first Mac developed around the groundbreaking M1 processor." "The new iMac takes everything people love about iMac to an entirely new level, with its beautiful design in seven breathtaking colors, its immersive 4.5K Retina display, the greatest camera, mics, and speakers ever in a Mac, and Touch ID, combined with M1's incredible performance and macOS Big Sur's power."
+            #tab-specification.tab-pane.pe-lg-6.pe-xl-12.fade(role='tabpanel' aria-labelledby='specification-tab')
+              h3.mb-0.ms-4.fw-bold Processor/Chipset
+              table.table
+                thead
+                  tr
+                    th(style='width: 40%') 
+                    th(style='width: 60%')
+                tbody
+                  tr
+                    td.bg-100.align-middle
+                      h6.mb-0.text-900.text-uppercase.fw-bolder.px-4.fs--1.lh-sm Chip name
+                    td.px-5.mb-0 Apple M1 chip
+                  tr
+                    td.bg-100.align-middle
+                      h6.mb-0.text-900.text-uppercase.fw-bolder.px-4.fs--1.lh-sm Cpu core
+                    td.px-5.mb-0 8 (4 performance and 4 efficiency)
+                  tr
+                    td.bg-100.align-middle
+                      h6.mb-0.text-900.text-uppercase.fw-bolder.px-4.fs--1.lh-sm Gpu core
+                    td.px-5.mb-0 7
+                  tr
+                    td.bg-100.align-middle
+                      h6.mb-0.text-900.text-uppercase.fw-bolder.px-4.fs--1.lh-sm Neural engine
+                    td.px-5.mb-0 16 cores
+              //- processor end
+              h3.mb-0.mt-6.ms-4.fw-bold Storage
+              table.table
+                thead
+                  tr
+                    th(style='width: 40%')
+                    th(style='width: 60%')
+                tbody
+                  tr
+                    td.bg-100.align-middle
+                      h6.mb-0.text-900.text-uppercase.fw-bolder.px-4.fs--1.lh-sm Memory
+                    td.px-5.mb-0 8 GB unified
+                  tr
+                    td.bg-100.align-middle
+                      h6.mb-0.text-900.text-uppercase.fw-bolder.px-4.fs--1.lh-sm SSD
+                    td.px-5.mb-0 256 GB
+              //- Storage end
+              h3.mb-0.mt-6.ms-4.fw-bold Display
+              table.table
+                thead
+                  tr
+                    th(style='width: 40%') 
+                    th(style='width: 60%')
+                tbody
+                  tr
+                    td.bg-100.align-middle
+                      h6.mb-0.text-900.text-uppercase.fw-bolder.px-4.fs--1.lh-sm Display type
+                    td.px-5.mb-0 Retina
+                  tr
+                    td.bg-100.align-middle
+                      h6.mb-0.text-900.text-uppercase.fw-bolder.px-4.fs--1.lh-sm Size
+                    td.px-5.mb-0 24”  (actual diagonal 23.5”)
+                  tr
+                    td.bg-100.align-middle
+                      h6.mb-0.text-900.text-uppercase.fw-bolder.px-4.fs--1.lh-sm Resolution
+                    td.px-5.mb-0 4480 x 2520 
+                  tr
+                    td.bg-100.align-middle
+                      h6.mb-0.text-900.text-uppercase.fw-bolder.px-4.fs--1.lh-sm Brightness
+                    td.px-5.mb-0 500 nits
+                //- Display end
+              h3.mb-0.mt-6.ms-4.fw-bold Additional Specifications
+              table.table
+                thead
+                  tr
+                    th(style='width: 40%') 
+                    th(style='width: 60%')
+                tbody
+                  tr
+                    td.bg-100.align-middle
+                      h6.mb-0.text-900.text-uppercase.fw-bolder.px-4.fs--1.lh-sm Camera
+                    td.px-5.mb-0 1080p FaceTime HD camera
+                  tr
+                    td.bg-100
+                      h6.mb-0.mt-1.text-900.text-uppercase.fw-bolder.px-4.fs--1.lh-sm Video 
+                    td.px-5.mb-0 Full native resolution on built-in display at 1 billion colors; 
+                      br 
+                      | One external display with up to 6K resolution at 60Hz
+                  tr
+                    td.bg-100
+                      h6.mb-0.mt-1.text-900.text-uppercase.fw-bolder.px-4.fs--1.lh-sm Audio
+                    td.px-5.mb-0 High-fidelity six-speaker with force-cancelling woofers 
+                      br 
+                      | Wide stereo sound 
+                      br
+                      | Spatial audio with Dolby Atmos3
+                      br
+                      | Studio-quality three-mic array with directional beamforming
+                  tr
+                    td.bg-100
+                      h6.mb-0.mt-1.text-900.text-uppercase.fw-bolder.px-4.fs--1.lh-sm Inputs 
+                    td.px-5.mb-0 Magic Keyboard
+                      br
+                      | Magic Mouse
+                  tr
+                    td.bg-100
+                      h6.mb-0.mt-1.text-900.text-uppercase.fw-bolder.px-4.fs--1.lh-sm Wireless  
+                    td.px-5.mb-0 802.11ax Wi-Fi 6 (IEEE 802.11a/b/g/n/ac compatible)
+                      br
+                      | Bluetooth 5.0 wireless technology
+                  tr
+                    td.bg-100
+                      h6.mb-0.mt-1.text-900.text-uppercase.fw-bolder.px-4.fs--1.lh-sm I/O &amp; expantions 
+                    td.px-5.mb-0 Thunderbolt / USB 4 ports x 2
+                      br
+                      | 3.5 mm headphone jack
+                      br
+                      | Gigabit Ethernet
+                      br
+                      | USB 3 ports x2
+                  tr
+                    td.bg-100.align-middle
+                      h6.mb-0.text-900.text-uppercase.fw-bolder.px-4.fs--1.lh-sm Operating System
+                    td.px-5.mb-0 macOS Monterey    
+              //- Additional Specifications end
+              h3.mb-3.mt-6.ms-4.fw-bold In The Box
+              p.lh-sm.border-top.mb-0.py-3.px-4 iMac 24”
+              p.lh-sm.border-top.mb-0.py-3.px-4 Magic Keyboard 
+              p.lh-sm.border-top.mb-0.py-3.px-4 Magic Mouse
+              p.lh-sm.border-top.mb-0.py-3.px-4 143W power adapter
+              p.lh-sm.border-top.mb-0.py-3.px-4 2m Power Cord
+              p.lh-sm.border-y.mb-0.py-3.px-4 USB-C to Lightning Cable
+            #tab-reviews.tab-pane.fade(role='tabpanel' aria-labelledby='reviews-tab')
+              .bg-white.rounded-3.p-4.border.border-200
+                .row.g-3.justify-content-between.mb-4
+                  .col-auto
+                    .d-flex.align-items-center.flex-wrap
+                      h2.fw-bolder.me-3 4.9
+                        span.fs-0.text-500.fw-bold /5
+                      .me-3
+                        +Rating(4.5).fs-2
+                      p.text-900.mb-0.fw-semi-bold.fs-1 6548 ratings and 567 reviews
+                  .col-auto
+                    button.btn.btn-primary.rounded-pill(data-bs-toggle="modal" data-bs-target="#reviewModal") Rate this product
+                    #reviewModal.modal.fade(tabindex='-1' aria-hidden='true')
+                      .modal-dialog.modal-dialog-centered
+                        .modal-content.p-4
+                          .d-flex.flex-between-center.mb-2
+                            h5.modal-title.fs-0.mb-0 Your rating
+                            button.btn.p-0.fs--2 Clear
+
+                          .mb-3(data-rater!={starSize:32, step: .5})
+                          .mb-3
+                            h5.text-1000.mb-3 Your review
+                            textarea#reviewTextarea.form-control(rows='5' placeholder='Write your review') 
+
+                          .dropzone.dropzone-multiple.p-0.mb-3#my-awesome-dropzone(data-dropzone)
+                            .fallback
+                              input(name='file' type='file', multiple)
+                            .dz-preview.d-flex.flex-wrap
+
+                              .border.bg-white.rounded-3.d-flex.flex-center.position-relative.me-2.mb-2(style='height:80px;width:80px;')
+                                img(src=`${CWD}assets/img/products/23.png` alt="..." data-dz-thumbnail).dz-image
+                                a(href="#!" data-dz-remove).dz-remove.text-400
+                                  span(data-feather='x')
+                            .dz-message.text-600.fw-bold.fs--1.p-4(data-dz-message) 
+                              | Drag your photo here 
+                              span.text-800 or 
+                              button.btn.btn-link.p-0 Browse from device 
+                              br
+                              img.mt-3(src=`${CWD}assets/img/icons/image-icon.png`, width=24 alt="").me-2
+
+                          .d-sm-flex.flex-between-center
+                            .form-check.flex-1
+                              input#reviewAnonymously.form-check-input(type='checkbox' value='' checked='')
+                              label.form-check-label.mb-0.text-1100.fw-semi-bold(for='reviewAnonymously')
+                                | Review anonymously
+                            button.btn.ps-0(data-bs-dismiss='modal') Close
+                            button.btn.btn-primary.rounded-pill Submit
+                +Reviews
+        .col-12.col-lg-5.col-xl-4
+          +ProductDetailsCard
+  +Section.py-0.mb-9
+    +SimilarProducts
+
+
+
+
+
+
+
+
+
+
+
+
+

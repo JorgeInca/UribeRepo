@@ -1,0 +1,37 @@
+mixin WizardContent(config)
+  - var config = Object.assign({ url: `${CWD}${paths['wizard-auth']}` }, config)
+  .tab-content
+    .tab-pane.active(role="tabpanel" aria-labelledby=config.tab1.split('#').pop() id=config.tab1)
+      +AccountForm(config)
+    .tab-pane(role="tabpanel" aria-labelledby=config.tab2.split('#').pop() id=config.tab2)
+      +PersonalForm(config)
+    .tab-pane(role="tabpanel" aria-labelledby=config.tab3.split('#').pop() id=config.tab3)
+      +BillingForm(config)
+    .tab-pane(role="tabpanel" aria-labelledby=config.tab4.split('#').pop() id=config.tab4)
+      .row.flex-center.pb-8.pt-4.gx-3.gy-4
+        .col-12.col-sm-auto
+          .text-center.text-sm-start
+            img(src=`${CWD}assets/img/spot-illustrations/38.webp`, alt="" width=220).d-dark-none
+            img(src=`${CWD}assets/img/spot-illustrations/dark_38.webp`, alt="" width=220).d-light-none
+        .col-12.col-sm-auto
+          .text-center.text-sm-start
+            h5.mb-3 You are all set!
+            p.text-1100.fs--1 Now you can access your account
+              br
+              | anytime anywhere
+            a(href=config.url).btn.btn-primary.px-6 Start Over
+
+mixin ErrorModalContent
+  .modal-header.border-100.p-3
+    .h4.text-800.mb-0 Access Denied!
+    button.btn.btn-link.text-danger.position-absolute.top-0.end-0.mt-2.me-2(data-bs-dismiss="modal")
+      span.fas.fa-times
+  .modal-body.px-4.py-6
+    .d-flex.align-items-center
+      img.me-4(src=`${CWD}assets/img/icons/stop.png`, alt="")
+      .flex-1
+        p.mb-0.fw-semi-bold.text-700 You do not have the link to access. Please start 
+          br
+          | over to get access for the next session.
+          br
+          | Thank You!

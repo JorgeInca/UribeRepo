@@ -1,0 +1,63 @@
+mixin Testimonial
+	.position-relative
+		+Background({image: `${CWD}assets/img/bg/13.png`, attrs: { style: { 'background-size': 'auto', 'background-position': 'right',} }, className: 'z-index-2 d-none d-md-block' })
+		+Background({image: `${CWD}assets/img/bg/bg-12.png`, attrs: { style: { 'background-size': 'auto', 'background-position': 'left',} }, className: 'z-index-2 d-none d-md-block d-lg-none d-xl-block' })
+		.bottom-0.start-0.end-0.bg-white
+			svg.w-100.text-soft( viewBox='0 0 1920 368' fill='none' xmlns='http://www.w3.org/2000/svg')
+				path(d='M1920 0.44L0 367.74V0H1920V0.44Z' fill='currentColor')
+		section.pb-0.bg-white.overflow-hidden.position-static
+			.container-small.px-lg-7.px-xxl-3
+				.row 
+					.col-lg-6.mb-6.text-center.text-lg-start.z-index-2
+						h4.text-primary.fw-bolder.mb-3 Testimonial
+						h2.mb-3.text-black More than 2 Millions happy
+							br
+							| Customers and counting
+						p.mb-5 You may now concentrate on the functionality and other   
+							br.d-none.d-sm-block
+							| aspects of your web products thanks to Phoenix's strength
+							br.d-none.d-sm-block
+							| before leaving the UI design to us. It is simple to complete
+							br.d-none.d-sm-block
+							| the work after checking and double-checking.
+
+					.col-lg-6.z-index-2
+						#carouselExampleIndicators.carousel.slide(data-bs-ride='carousel')
+							.carousel-inner
+								.carousel-item.active
+									.row.g-1.g-lg-0.g-xl-1.pb-lg-3.pb-xl-0.ps-lg-1.ps-xl-0
+										.col-lg-6.col-xl-5.text-center
+											.testimonial-avatar-container.d-inline-block.position-relative
+												+Background({image: `${CWD}assets/img/bg/bg-2.png`, attrs: { style: {'background-size': 'contain',} }, className: '' })
+												img.rounded-3.mb-lg-0.opacity-100.position-relative(src=`${CWD}assets/img/team/61.webp` width='153' height='153' alt='')
+										.col-lg-6.col-xl-7.text-center.text-lg-start
+											.mb-4.light
+												+Rating('5','primary')
+											h3.fs-1.fs-xl-2.mb-5.lh-sm.me-md-7.me-lg-0 Brilliant app!  Will definitely going to be my first choice starting from today
+											h6 Monica Gomez
+											h6.fw-normal UX designer, Google
+								.carousel-item
+									.row.g-1.g-lg-0.g-xl-1.pb-lg-3.pb-xl-0.ps-lg-1.ps-xl-0
+										.col-lg-6.col-xl-5.text-center
+											.testimonial-avatar-container.d-inline-block.position-relative
+												+Background({image: `${CWD}assets/img/bg/bg-2.png`, attrs: { style: {'background-size': 'contain',} }, className: '' })
+												img.rounded-3.mb-lg-0.opacity-100.position-relative(src=`${CWD}assets/img/team/8.webp` width='154' alt='')
+										.col-lg-6.col-xl-7.text-center.text-lg-start
+											.mb-4.light
+												+Rating('5','primary')
+											h3.fs-1.fs-xl-2.mb-5.lh-sm.me-md-7.me-lg-0 “Excellent to work with and comfortable to customize. This is what I was looking for till the date!”
+											h6 Marc Chiasson
+											h6.fw-normal UX designer, Adobe
+								.carousel-item
+									.row.g-1.g-lg-0.g-xl-1.pb-lg-3.pb-xl-0.ps-lg-1.ps-xl-0
+										.col-lg-6.col-xl-5.text-center
+											.testimonial-avatar-container.d-inline-block.position-relative
+												+Background({image: `${CWD}assets/img/bg/bg-2.png`, attrs: { style: { 'background-size': 'contain',} }, className: '' })
+												img.rounded-3.mb-lg-0.opacity-100.position-relative(src=`${CWD}assets/img/team/35.webp` width='154' alt='')
+										.col-lg-6.col-xl-7.text-center.text-lg-start
+											.mb-4.light
+												+Rating('5','primary')
+											h3.fs-1.fs-xl-2.mb-5.lh-sm.me-md-7.me-lg-0 “Phoenix is all you can ask for. This is perfect fit for everything you might want to work on!”
+											h6 Axel Barry
+											h6.fw-normal UX designer, Apple
+

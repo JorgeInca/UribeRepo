@@ -1,0 +1,25 @@
+extends ../../../layouts/LayoutTheme
+include ../../../layouts/LayoutSplitAuth
+
+
+block wrapperContent
+  +LayoutSplitBasic({img:40})
+    .text-center
+      h4.text-1000 Enter the verification code
+      p.text-700.mb-0 An email containing a 6-digit verification code has been sent to the email address - exa*********.com 
+      P.fs--2.mb-5 Don’t have access? 
+        a(href="#!") Use another method
+      form.verification-form(data-2FA-varification)
+        .d-flex.align-items-center.gap-2.mb-3
+          input.form-control.px-2.text-center(type="number") 
+          input.form-control.px-2.text-center(type="number" disabled) 
+          input.form-control.px-2.text-center(type="number" disabled) 
+          span -
+          input.form-control.px-2.text-center(type="number" disabled) 
+          input.form-control.px-2.text-center(type="number" disabled) 
+          input.form-control.px-2.text-center(type="number" disabled) 
+        .form-check.text-start.mb-4
+          input.form-check-input#2fa-checkbox(type="checkbox")
+          label(for="2fa-checkbox") Don’t ask again on this device
+        Button.btn.btn-primary.w-100.mb-5(type='submit') Varify
+        a.fs--1(href="#!") Didn’t receive the code? 

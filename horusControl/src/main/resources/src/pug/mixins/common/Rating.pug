@@ -1,0 +1,9 @@
+mixin Rating(rating,color='warning')
+  - for(var i = 0; i < 5; i++){
+    if(i < Math.floor(rating))
+      span.fa.fa-star(class=`text-${color}`)&attributes(attributes)
+    else if( rating > i && rating < i+1 )
+      span.fa.fa-star-half-alt.star-icon(class=`text-${color}`)&attributes(attributes)
+    else
+      span.fa-regular.fa-star.text-warning-300&attributes(attributes)
+  - }

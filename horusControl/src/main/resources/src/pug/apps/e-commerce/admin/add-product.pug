@@ -1,0 +1,63 @@
+extends ../../../layouts/LayoutTheme
+include ../../../mixins/dashboard/common
+include ../../../mixins/e-commerce/order-details/OrderTable
+include ../../../mixins/e-commerce/add-product/OrganizeCard
+include ../../../mixins/e-commerce/add-product/VariantCard
+include ../../../mixins/e-commerce/add-product/ProductDescription
+include ../../../mixins/e-commerce/add-product/DisplayImage
+include ../../../mixins/e-commerce/add-product/Pricing
+include ../../../mixins/dashboard/common
+
+prepend styles
+  link(href=`${CWD}vendors/dropzone/dropzone.min.css`, rel='stylesheet')
+  link(href=`${CWD}vendors/choices/choices.min.css`, rel='stylesheet')
+  link(href=`${CWD}vendors/flatpickr/flatpickr.min.css`, rel='stylesheet')
+
+prepend scripts
+  script(src=`${CWD}vendors/tinymce/tinymce.min.js`)
+  script(src=`${CWD}vendors/dropzone/dropzone.min.js`)
+  script(src=`${CWD}vendors/choices/choices.min.js`)
+
+
+append variables
+  - 
+    var breadcrumb = [
+      {
+        label: 'Page 1',
+        href: '#!',
+      },
+      {
+        label: 'Page 2',
+        href: '#!',
+      },
+      {
+        label: 'Default',
+        href: '#!',
+        active: true
+      },
+    ];
+
+block content
+  form.mb-9
+    .row.g-3.flex-between-end.mb-5
+      .col-auto
+        h2.mb-2 Add a product
+        h5.text-700.fw-semi-bold Orders placed across your store
+      .col-auto
+        button.btn.btn-phoenix-secondary.me-2.mb-2.mb-sm-0(type='button') Discard
+        button.btn.btn-phoenix-primary.me-2.mb-2.mb-sm-0(type='button') Save draft
+        button.btn.btn-primary.mb-2.mb-sm-0(type='submit') Publish product
+    .row.g-5
+      .col-12.col-xl-8
+        +ProductDescription
+
+        +DisplayImage
+
+        +Pricing
+
+      .col-12.col-xl-4
+        .row.g-2
+          .col-12.col-xl-12
+            +OrganizeCard.mb-3
+          .col-12.col-xl-12
+            +VariantCard

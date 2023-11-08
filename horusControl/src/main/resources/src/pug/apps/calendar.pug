@@ -1,0 +1,80 @@
+extends ../layouts/LayoutTheme
+include ../mixins/social/Profile
+include ../mixins/calendar/Mixins
+include ../mixins/common/Form
+append variables
+  
+  - var today = new Date();
+  - var toString = (number) => number.toString().padStart(2, '0');
+  - var date = toString(today.getDate())
+  - var month = today.getMonth();
+  - var currentMonth = month > 11 ? toString(1) : toString(month + 1);
+  -
+    var events = [
+      {
+        title: 'Bootcamp',
+        start: `${today.getFullYear()}-${currentMonth}-${date}`,
+      }
+    ]
+  -
+    var views = [
+      {
+        title: 'Month',
+        value: 'dayGridMonth',
+        active: true
+      },
+      {
+        title: 'Week',
+        value: 'timeGridWeek'
+      }
+    ]
+
+prepend styles
+  link(href=`${CWD}vendors/fullcalendar/main.min.css`, rel='stylesheet')
+  link(href=`${CWD}vendors/flatpickr/flatpickr.min.css`, rel='stylesheet')
+
+prepend scripts
+  script(src=`${CWD}vendors/fullcalendar/main.min.js`)
+  script(src=`${CWD}vendors/dayjs/dayjs.min.js`)
+  
+append scripts
+  script(src=`${CWD}assets/js/calendar.js`)
+
+block content
+  .row.g-0.mb-4.align-items-center
+    .col-5.col-md-6
+      h4.mb-0.text-1100.fw-bold.fs-md-2
+        span.calendar-day.d-block.d-md-inline.mb-1
+        span.px-3.fw-thin.text-400.d-none.d-md-inline |
+        span.calendar-date
+
+    .col-7.col-md-6.d-flex.justify-content-end
+      button.btn.btn-link.text-900.px-0.me-2.me-md-4
+        span.fa-solid.fa-sync.fs--2.me-2
+        span.d-none.d-md-inline Sync Now
+      button.btn.btn-primary.btn-sm(type="button" data-bs-toggle="modal" data-bs-target="#addEventModal") 
+        span.fas.fa-plus.pe-2.fs--2
+        | Add new task 
+  .mx-n4.px-4.mx-lg-n6.px-lg-6.border-y.border-200
+    .row.py-3.gy-3.gx-0
+      .col-6.col-md-4.order-1.d-flex.align-items-center
+        button.btn.btn-sm.btn-phoenix-primary.px-4(data-event="today") Today
+      .col-12.col-md-4.order-md-1.d-flex.align-items-center.justify-content-center
+        button.btn.icon-item.icon-item-sm.shadow-none.text-1100.p-0(type="button" data-event="prev" title="Previous")
+          span.fas.fa-chevron-left
+        h3.px-3.text-1100.fw-semi-bold.calendar-title.mb-0      
+        button.btn.icon-item.icon-item-sm.shadow-none.text-1100.p-0(type="button" data-event="next" title="Next")
+          span.fas.fa-chevron-right
+
+      .col-6.col-md-4.ms-auto.order-1.d-flex.justify-content-end
+        div
+          .btn-group.btn-group-sm(role="group")
+            each view, index in views
+              button.btn.btn-phoenix-secondary(data-fc-view=view.value class=view.active && 'active-view' )=view.title
+
+
+  .calendar-outline.mt-6.mb-9#appCalendar
+
+append afterContent
+  +CalendarEventDetailsModal
+  +CalendarAddEventModal

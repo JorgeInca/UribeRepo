@@ -1,0 +1,95 @@
+extends ../../../layouts/LayoutTheme
+include ../../../mixins/dashboard/common
+include ../../../mixins/e-commerce/ProductsTable
+
+append variables
+  - 
+    var breadcrumb = [
+      {
+        label: 'Page 1',
+        href: '#!'
+      },
+      {
+        label: 'Page 2',
+        href: '#!',
+      },
+      {
+        label: 'Default',
+        href: '#!',
+        active: true
+      },
+    ];
+
+block content
+  .mb-9
+    .row.g-3.mb-4
+      .col-auto
+        h2.mb-0 Products
+    ul.nav.nav-links.mb-3.mb-lg-2.mx-n3
+      li.nav-item
+        a.nav-link.active(aria-current='page' href='#')
+          span All 
+          span.text-700.fw-semi-bold (68817)
+      li.nav-item
+        a.nav-link(href='#')
+          span Published 
+          span.text-700.fw-semi-bold (70348)
+      li.nav-item
+        a.nav-link(href='#')
+          span Drafts 
+          span.text-700.fw-semi-bold (17)
+      li.nav-item
+        a.nav-link(href='#')
+          span On discount 
+          span.text-700.fw-semi-bold (810)
+
+    #products(data-list!={
+      valueNames: ["product", "price", "category", "tags", "vendor", "time"],
+      page: 10,
+      pagination: true
+    })
+      .mb-4
+        .d-flex.flex-wrap.gap-3
+          +Search({placeholder: 'Search products'})
+          .scrollbar.overflow-hidden-y
+            .btn-group.position-static(role='group')
+              .btn-group.position-static.text-nowrap
+                button.btn.btn-phoenix-secondary.px-7.flex-shrink-0(type='button' data-bs-toggle='dropdown' data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent") 
+                  | Category
+                  span.fas.fa-angle-down.ms-2
+                ul.dropdown-menu
+                  li
+                    a.dropdown-item(href='#') Action
+                  li
+                    a.dropdown-item(href='#') Another action
+                  li
+                    a.dropdown-item(href='#') Something else here
+                  li
+                    hr.dropdown-divider
+                  li
+                    a.dropdown-item(href='#') Separated link
+              .btn-group.position-static.text-nowrap
+                button.btn.btn-sm.btn-phoenix-secondary.px-7.flex-shrink-0(type='button' data-bs-toggle='dropdown' data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent") 
+                  | Vendor
+                  span.fas.fa-angle-down.ms-2
+                ul.dropdown-menu
+                  li
+                    a.dropdown-item(href='#') Action
+                  li
+                    a.dropdown-item(href='#') Another action
+                  li
+                    a.dropdown-item(href='#') Something else here
+                  li
+                    hr.dropdown-divider
+                  li
+                    a.dropdown-item(href='#') Separated link
+              button.btn.btn-sm.btn-phoenix-secondary.px-7.flex-shrink-0 More filters
+          .ms-xxl-auto
+            button.btn.btn-link.text-900.me-4.px-0
+              span.fa-solid.fa-file-export.fs--1.me-2
+              | Export
+            button.btn.btn-primary#addBtn
+              span.fas.fa-plus.me-2
+              | Add product
+      .mx-n4.px-4.mx-lg-n6.px-lg-6.bg-white.border-top.border-bottom.border-200.position-relative.top-1
+        +ProductTable

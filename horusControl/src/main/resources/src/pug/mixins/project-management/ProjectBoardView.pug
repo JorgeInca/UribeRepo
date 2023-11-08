@@ -1,0 +1,155 @@
+append variables
+  -
+    var projects = [
+      {
+        title:"Project Doughnut Dungeon",
+        bg: `51.png`,
+        badge : {
+          label: 'Ongoing',
+          type: 'badge-phoenix-primary',
+        },
+      },
+      {
+        title:"Project Doughnut Dungeon",
+        bg: `52.png`,
+        badge : {
+          label: 'Completed',
+          type: 'badge-phoenix-warning',
+        },
+      },
+      {
+        title:"Harnessing stupidity from Jerry the Mortypop",
+        bg: `53.png`,
+        badge : {
+          label: 'Completed',
+          type: 'badge-phoenix-warning',
+        },
+      },
+      {
+        title:"Making the Butterflies shoot each other dead",
+        bg: `54.png`,
+        badge : {
+          label: 'Inactive',
+          type: 'badge-phoenix-info',
+        },
+      },
+      {
+        title:"The chewing gum attack",
+        bg: `55.png`,
+        badge : {
+          label: 'Completed',
+          type: 'badge-phoenix-warning',
+        },
+      },
+      {
+        title:"Water resistant mosquito killer gun, version 2.1.0",
+        bg: `56.png`,
+        badge : {
+          label: 'Ongoing',
+          type: 'badge-phoenix-primary',
+        },
+      },
+      {
+        title:"Water resistant mosquito killer gun, version 2.1.0",
+        bg: `57.png`,
+        badge : {
+          label: 'Completed',
+          type: 'badge-phoenix-warning',
+        },
+      },
+    ];
+
+mixin ProjectCard(config)
+  .card.h-100
+    .card-body
+      h4.mb-2.line-clamp-1=config.title
+      span.badge.badge-phoenix.fs--2.mb-4(class=config.status.type)=config.status.label
+      .d-flex.align-items-center.mb-2
+        span.fa-solid.fa-user.me-2.text-700.fs--1.fw-extra-bold
+        p.fw-bold.mb-0.text-truncate.lh-1 Client : 
+          span.fw-semi-bold.text-primary.ms-1=config.client
+      .d-flex.align-items-center.mb-4
+        span.fa-solid.fa-credit-card.me-2.text-700.fs--1.fw-extra-bold
+        p.fw-bold.mb-0.lh-1 Budget : 
+          span.ms-1.text-1100=config.budget
+      .d-flex.justify-content-between.text-700.fw-semi-bold
+        p.mb-2  Progress
+        p.mb-2.text-1100=config.progress
+      .progress(class=`${config.progressbarBgColor}`)
+        .progress-bar.rounded(role='progressbar' aria-label='Success example' style=`width: ${config.progress}`	aria-valuenow='25' aria-valuemin='0' aria-valuemax='100' class=`${config.progressBarBg}`)
+
+      .d-flex.align-items-center.mt-4
+        p.mb-0.fw-bold.fs--1 Started :
+          span.fw-semi-bold.text-600.ms-1= config.started
+      .d-flex.align-items-center.mt-2
+        p.mb-0.fw-bold.fs--1 Deadline : 
+          span.fw-semi-bold.text-600.ms-1= config.deadline
+
+      .d-flex.d-lg-block.d-xl-flex.justify-content-between.align-items-center.mt-3
+        .avatar-group.avatar-group-dense
+          each image in config.assigness
+            +Avatar(Object.assign({size: 'm',  round: 'circle'},image)).rounded-circle
+          if config.more
+            +Avatar({size: 'm', more: config.more, round: 'circle'}).rounded-circle
+        .mt-lg-3.mt-xl-0 
+          i.fa-solid.fa-list-check.me-1
+          p.d-inline-block.fw-bold.mb-0=config.task
+            span.fw-normal 	Task
+
+mixin ProjectBoardView
+  .row.gx-6.gy-3.mb-4.align-items-center
+    .col-auto
+      h2.mb-0 Projects
+        span.fw-normal.text-700.ms-3 (32)
+    .col-auto
+      a.btn.btn-primary.px-5(href=`${CWD}${paths['project-management-create-new']}`)
+        span.fa-solid.fa-plus.me-2
+        | Add new project
+  .row.justify-content-between.align-items-end.mb-4.g-3
+    .col-12.col-sm-auto
+      ul.nav.nav-links.mx-n2
+        li.nav-item
+          a.nav-link.px-2.py-1.active(aria-current='page' href='#')
+            span All
+            span.text-700.fw-semi-bold (32)
+        li.nav-item
+          a.nav-link.px-2.py-1(href='#')
+            span Ongoing
+            span.text-700.fw-semi-bold (14)
+        li.nav-item
+          a.nav-link.px-2.py-1(href='#')
+            span Cancelled
+            span.text-700.fw-semi-bold (2)
+        li.nav-item
+          a.nav-link.px-2.py-1(href='#')
+            span Finished
+            span.text-700.fw-semi-bold (14)
+        li.nav-item
+          a.nav-link.px-2.py-1(href='#')
+            span Postponed
+            span.text-700.fw-semi-bold (2)
+    .col-12.col-sm-auto
+      .d-flex.align-items-center
+        +Search({placeholder: 'Search projects'}).me-3
+        +ViewButtons('board')
+  .row.g-3.mb-9
+    each project in projects
+      .col-12.col-sm-6.col-md-4.col-xxl-3
+        .btn-reveal-trigger.position-relative.rounded-2.overflow-hidden.p-4(style='height: 236px;')
+          .bg-holder(style=`background-image: linear-gradient(180deg, rgba(0, 0, 0, 0) 39.41%, rgba(0, 0, 0, 0.4) 100%), url(${CWD}assets/img/generic/${project.bg})`)
+          //- .hover-actions
+
+          .position-relative.h-100.d-flex.flex-column.justify-content-between
+            .d-flex.justify-content-between.align-items-center
+              span.badge.badge-phoenix.fs--2.light(class=project.badge.type)=project.badge.label
+              .z-index-2
+                button.btn.btn-icon.btn-reveal.dropdown-toggle.dropdown-caret-none.transition-none(data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent")
+                  span.fas.fa-ellipsis-v
+                .dropdown-menu.dropdown-menu-end.py-2(aria-labelledby=id )
+                  a(href='#!').dropdown-item View
+                  a(href='#!').dropdown-item Export
+                  .dropdown-divider
+                  a(href='#!').dropdown-item.text-danger Remove
+            h3.text-white.light.fw-bold.line-clamp-2=project.title
+          a.stretched-link(href="#projectsBoardViewModal" data-bs-toggle='modal')
+  +ProjectsBoardViewModal

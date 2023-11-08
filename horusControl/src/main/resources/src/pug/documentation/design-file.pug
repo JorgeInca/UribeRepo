@@ -1,0 +1,19 @@
+extends ../layouts/LayoutComponent
+
+append variables
+  -
+    var pageHeader = {
+      title: 'Design',
+    }
+
+block component
+  +ComponentCard({title: 'Figma file',hideNavTab: true}).my-4
+    h5(data-anchor) To play with the design:
+    ul
+      li 
+        a(href="https://www.figma.com/" target="_blank") Download Figma
+      li Open the Figma link from the 
+        code README.md
+      li This file is 
+        code "read-only". 
+        | So, to customize the design on your own, you have to duplicate the Figma file and start the editing process on the copied file.

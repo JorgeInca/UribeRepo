@@ -1,0 +1,73 @@
+extends ../../layouts/LayoutTheme
+
+append variables
+  - 
+    var breadcrumb = [
+      {
+        label: 'Pages',
+        href: '#!'
+      },
+      {
+        label: 'Faq',
+        href: '#!',
+        active: true
+      }
+    ];
+
+block content
+  h2.mb-5 FAQ
+  h5.mb-3 How can we help?
+  p.text-700 Search for the topic you need help with  or 
+    a(href='#!') contact our support
+  +Search({placeholder: 'Search'}).mb-8.w-100(style='max-width:25rem;')
+  .accordion
+    .accordion-item.border-top.border-300
+      h2#headingOne.accordion-header
+        button.accordion-button(type='button' data-bs-toggle='collapse' data-bs-target='#collapseOne' aria-expanded='false' aria-controls='collapseOne')
+          | What’s your return policy?
+      #collapseOne.accordion-collapse.collapse.show(aria-labelledby='headingOne' data-bs-parent='#accordionExample')
+        .accordion-body.pt-0
+          | At the time of shipment, we assure that your product will be free of defects in materials and workmanship and will conform to the specifications outlined on the lot-specific datasheet included with the product. Please contact our technical support services if you have a technical issue with a product :
+          a(href="mailto:phoenix@email.com") Email: phoenix@support.com.
+          | If the team concludes that the product does not adhere to the requirements mentioned on the datasheet, we will provide a free replacement or a full refund of the product's invoice price.
+    .accordion-item
+      h2#headingTwo.accordion-header
+        button.accordion-button.collapsed(type='button' data-bs-toggle='collapse' data-bs-target='#collapseTwo' aria-expanded='true' aria-controls='collapseOne')
+          | I ordered the wrong product. 
+          br.d-sm-none
+          | What should I do?
+      #collapseTwo.accordion-collapse.collapse(aria-labelledby='headingTwo' data-bs-parent='#accordionExample')
+        .accordion-body.pt-0
+          | We would consider accepting the return of the merchandise, subject to an 20% restocking fee plus any shipping and handling fees. The customer is liable for shipping costs for both the returned product and the new replacement product, both to and from our facility. All returns require prior authorisation from us and must be mailed back to us within seven business days of receiving the goods. Products must be returned in the same or equivalent packing (i.e., cold and insulated) in which they were shipped (i.e., cold and insulated). Once we get the item, we will ship out the replacement item.
+    .accordion-item
+      h2#headingThree.accordion-header
+        button.accordion-button.collapsed(type='button' data-bs-toggle='collapse' data-bs-target='#collapseThree' aria-expanded='false' aria-controls='collapseOne')
+          | How do I cancel my order?
+      #collapseThree.accordion-collapse.collapse(aria-labelledby='headingThree' data-bs-parent='#accordionExample')
+        .accordion-body.pt-0
+          | If you must cancel your order, please call 
+          a(href="tel:+871406-7509") (871) 406-7509
+          |  Please note that we attempt to process and dispatch orders the same day (if received before 1pm PST), and once your product has shipped, our return policy will apply.
+    .accordion-item
+      h2#headingFour.accordion-header
+        button.accordion-button.collapsed(type='button' data-bs-toggle='collapse' data-bs-target='#collapseFour' aria-expanded='false' aria-controls='collapseOne')
+          | What are your shipping &amp; 
+          br.d-sm-none
+          | handling charges?
+      #collapseFour.accordion-collapse.collapse(aria-labelledby='headingFour' data-bs-parent='#accordionExample')
+        .accordion-body.pt-0
+          | Our handling fee is a flat rate of $20. The shipping costs vary depending on your location and the items you've purchased. For an exact shipping cost estimate, please proceed through the checkout process and enter your items and address.
+    .accordion-item
+      h2#headingFive.accordion-header
+        button.accordion-button.collapsed(type='button' data-bs-toggle='collapse' data-bs-target='#collapseFive' aria-expanded='false' aria-controls='collapseOne')
+          | Do you accept purchase orders?
+      #collapseFive.accordion-collapse.collapse(aria-labelledby='headingFive' data-bs-parent='#accordionExample')
+        .accordion-body.pt-0
+          | Yes. Please include your purchase order number at online checkout, or clearly label it on a faxed or emailed purchase order. Please give the relevant email or mailing address for your accounts payable department so that the invoice can be sent to the appropriate location.
+
+  .text-center.py-11
+    h3.text-black Still can’t find your answer?
+    p.text-900 We are happy to help
+    button.btn.btn-sm.btn-outline-primary.btn-support-chat
+      span.fas.fa-comment.me-2
+      | Chat with us

@@ -1,0 +1,285 @@
+mixin LeadsTableRow(data,index)
+	-
+		var contactsData = [
+			'Ally Aagaard', 'Lyla Nicole', 'Kylia Abbott', 'Bryce Abbott', 'Jase Adams','Jim Aldridge','Zackry Aldridge','Daniel Alexander','Robert Alimentato','Alex Abadi',
+		]		
+	tr.hover-actions-trigger.btn-reveal-trigger.position-static
+		td.fs--1.align-middle
+			.form-check.mb-0.fs-0
+				input.form-check-input(type='checkbox' data-bulk-select-row!=data)
+
+		td.name.align-middle.white-space-nowrap.ps-0
+			.d-flex.align-items-center
+				a(href="#!") 
+					.avatar.avatar-xl.me-3
+						if data.customer.avatar
+							img.rounded-circle(src=`${CWD}assets/img${data.customer.avatar}`, alt="" class=data.customer.placeholder ? 'avatar-placeholder' : '' )
+						else
+							.avatar-name.rounded-circle
+								span=data.customer.name.charAt(0).toUpperCase()
+				div
+					a(href='#!').fs-0.fw-bold=data.customer.name
+					.d-flex.align-items-center
+						p.mb-0.text-1000.fw-semi-bold.fs--1.me-2=data.customer.designation
+						span.badge.badge-phoenix(class=data.customer.status.type)=data.customer.status.label
+		td.email.align-middle.white-space-nowrap.fw-semi-bold.ps-4.border-end
+			a.text-1000(href=`mailto:${data.email}`)=data.email
+		td.phone.align-middle.white-space-nowrap.fw-semi-bold.ps-4.border-end
+			a.text-1000(href=`tel:${data.phone.replace(/\s/g, '')}`)=data.phone
+		td.contact.align-middle.white-space-nowrap.ps-4.border-end.fw-semi-bold.text-1000=data.contact
+		td.company.align-middle.white-space-nowrap.text-600.ps-4.border-end.fw-semi-bold.text-1000=data.company
+		td.date.align-middle.white-space-nowrap.text-600.ps-4.text-700=data.date
+		td.align-middle.white-space-nowrap.text-end.pe-0.ps-4
+			+DashboardDropdown.fs--2
+
+mixin LealsTable
+	-
+		var lealsTableData = [
+			{
+				customer:{
+					avatar: '/team/32.webp',
+					name: 'Anthoney Michael',
+					designation:'VP Accounting',
+					status:{
+						label: 'new lead',
+						type: 'badge-phoenix-primary',
+					}
+				},
+				email:"anth125@gmail.com",
+				phone:"+1-202-555-0126",
+				contact:`Ally Aagaard`,
+				company:`Google.inc`,
+				date:`Jan 01, 12:56 PM`,
+			},
+			{
+				customer:{
+				avatar: '/team/33.webp',
+				name: 'Jacob Russell',
+				designation:'Executive Manager',
+					status:{
+						label: 'Cancelled',
+						type: 'badge-phoenix-secondary',
+					}
+				},
+				email:"jacob@yahoo.com",
+				phone:"+1-202-555-0135",
+				contact:`Alex Abadi`,
+				company:`Google.inc`,
+				date:`Dec 31, 11:51 PM`,
+			},
+			{
+				customer:{
+					avatar: '/team/34.webp',
+					name: 'Diego Anthony',
+					designation:'CEO',
+					status:{
+						label: 'In progress',
+						type: 'badge-phoenix-info',
+					}
+				},
+				email:"diego20@hotmail.com",
+				phone:"+44 1632 960970",
+				contact:`Lyla Nicole`,
+				company:`Adobe Inc.`,
+				date:`Dec 29, 02:11 AM`,
+			},
+			{
+				customer:{
+					avatar: '/team/35.webp',
+					name: 'Austin James',
+					designation:'Creative Director',
+					status:{
+						label: 'Cold lead',
+						type: 'badge-phoenix-warning',
+					}
+				},
+				email:"austin@sni.it",
+				phone:"+44 1632 960970",
+				contact:`Kylia Abbott`,
+				company:`Facebook`,
+				date:`Dec 28, 10:56 PM`,
+			},
+			{
+				customer:{
+					avatar: '/team/24.webp',
+					name: 'Sarah Lynn',
+					designation:'Accountant',
+					status:{
+						label: 'won lead',
+						type: 'badge-phoenix-success',
+					}
+				},
+				email:"sarah@technext.it",
+				phone:"+1-202-555-0177",
+				contact:`Bryce Abbott`,
+				company:`Twitter`,
+				date:`Dec 27, 11:43 PM`,
+			},
+			{
+				customer:{
+					avatar: '/team/29.webp',
+					name: 'Reyna Denise',
+					designation:'Executive Manager',
+					status:{
+						label: 'new lead',
+						type: 'badge-phoenix-info',
+					}
+				},
+				email:"reyna99@gmail.com",
+				phone:"+44 1632 960958",
+				contact:`Jase Adams`,
+				company:`Twitter`,
+				date:`Dec 25, 12:55 PM`,
+			},
+			{
+				customer:{
+					avatar: '/team/65.webp',
+					name: 'Roy Anderson',
+					designation:'System Admin',
+					status:{
+						label: 'Canceled',
+						type: 'badge-phoenix-secondary',
+					}
+				},
+				email:"andersonroy@netflix.chill",
+				phone:"+1-613-555-0109",
+				contact:`Jim Aldridge`,
+				company:`Google.inc`,
+				date:`Dec 24, 09:52 PM`,
+			},
+			{
+				customer:{
+					avatar: '/team/63.webp',
+					name: 'Emily Beazley',
+					designation:'Marketing Executive',
+					status:{
+						label: 'New Lead',
+						type: 'badge-phoenix-info',
+					}
+				},
+				email:"beazley1@gmail.com",
+				phone:"+61 1900 654 321",
+				contact:`Zackry Aldridge`,
+				company:`Instagram`,
+				date:`Dec 22, 08:45 PM`,
+			},
+			{
+				customer:{
+					avatar: '/team/31.webp',
+					name: 'Layla Beckstrand',
+					designation:'Junior Executive',
+					status:{
+						label: 'cold lead',
+						type: 'badge-phoenix-warning',
+					}
+				},
+				email:"layla@live.com",
+				phone:"+36 55 116 068",
+				contact:`Daniel Alexander`,
+				company:`Linkedin`,
+				date:`Dec 20, 06:32 PM`,
+			},
+			{
+				customer:{
+					avatar: '/team/26.webp',
+					name: 'Olivia Bensinger',
+					designation:'Chief Tech Officer',
+					status:{
+						label: 'won lead',
+						type: 'badge-phoenix-success',
+					}
+				},
+				email:"olivia1986@gmail.com",
+				phone:"+44 1632 960248",
+				contact:`Sam Alimentato`,
+				company:`Google.inc`,
+				date:`Dec 19, 10:44 PM`,
+			},
+
+			{
+				customer:{
+					avatar: '/team/73.webp',
+					name: 'Emily Beazley',
+					designation:'Marketing Executive',
+					status:{
+						label: 'New Lead',
+						type: 'badge-phoenix-info',
+					}
+				},
+				email:"beazley1@gmail.com",
+				phone:"+61 1900 654 321",
+				contact:`Zackry Aldridge`,
+				company:`Instagram`,
+				date:`Dec 22, 08:45 PM`,
+			},
+			{
+				customer:{
+					avatar: '/team/75.webp',
+					name: 'Roy Anderson',
+					designation:'System Admin',
+					status:{
+						label: 'Canceled',
+						type: 'badge-phoenix-secondary',
+					}
+				},
+				email:"andersonroy@netflix.chill",
+				phone:"+1-613-555-0109",
+				contact:`Jim Aldridge`,
+				company:`Google.inc`,
+				date:`Dec 24, 09:52 PM`,
+			},
+		]
+
+	.table-responsive.scrollbar.mx-n1.px-1.border-top
+		table.table.fs--1.mb-0.leads-table
+			thead
+				tr
+					th.white-space-nowrap.fs--1.align-middle.ps-0(style="max-width:20px; width:18px;")
+						.form-check.mb-0.fs-0
+							input.form-check-input(
+								type='checkbox'
+								data-bulk-select!={
+									body: "leal-tables-body",
+								}
+							)
+					th.sort.white-space-nowrap.align-middle.text-uppercase.ps-0(scope='col' data-sort="name" style='width:25%;') Name
+					th.sort.align-middle.ps-4.pe-5.text-uppercase.border-end(scope='col' data-sort="email" style='width:15%;')
+						.d-inline-flex.flex-center
+							.d-flex.align-items-center.px-1.py-1.bg-success-100.rounded.me-2
+								span.text-success-600.dark__text-success-300(data-feather="mail")
+							span Email
+					th.sort.align-middle.ps-4.pe-5.text-uppercase.border-end(scope='col' data-sort="phone" style='width:15%; min-width: 180px;')
+						.d-inline-flex.flex-center
+							.d-flex.align-items-center.px-1.py-1.bg-primary-100.rounded.me-2
+								span.text-primary-600.dark__text-primary-300(data-feather="phone")
+							span Phone
+					th.sort.align-middle.ps-4.pe-5.text-uppercase.border-end(scope='col' data-sort="contact" style='width:15%;')
+						.d-inline-flex.flex-center
+							.d-flex.align-items-center.px-1.py-1.bg-info-100.rounded.me-2
+								span.text-info-600.dark__text-info-300(data-feather="user")
+							span Contact name
+					th.sort.align-middle.ps-4.pe-5.text-uppercase.border-end(scope='col' data-sort="company" style='width:15%;')
+						.d-inline-flex.flex-center
+							.d-flex.align-items-center.px-1.py-1.bg-warning-100.rounded.me-2
+								span.text-warning-600.dark__text-warning-300(data-feather="grid")
+							span Company name
+					th.sort.align-middle.ps-4.pe-5.text-uppercase(scope='col' data-sort="date" style='width:15%;') Create date
+					th.sort.text-end.align-middle.pe-0.ps-4(scope='col')
+			tbody.list#leal-tables-body
+				each row,index in lealsTableData
+					+LeadsTableRow(row,index)
+	.row.align-items-center.justify-content-end.py-4.pe-0.fs--1
+		.col-auto.d-flex
+			p.mb-0.d-none.d-sm-block.me-3.fw-semi-bold.text-900(data-list-info)
+			a.fw-semi-bold(href='#!' data-list-view="*")
+				| View all
+				span.fas.fa-angle-right.ms-1(data-fa-transform='down-1')
+			a.fw-semi-bold.d-none(href='#!' data-list-view="less")
+				| View Less
+				span.fas.fa-angle-right.ms-1(data-fa-transform='down-1')
+		.col-auto.d-flex
+			button.page-link(data-list-pagination="prev")
+				span.fas.fa-chevron-left
+			ul.mb-0.pagination
+			button.page-link.pe-0(data-list-pagination="next")
+				span.fas.fa-chevron-right

@@ -1,0 +1,104 @@
+mixin InvoiceTable
+  -
+    var tableData = [
+      {
+        sl: 1,
+        product: 'Fitbit Sense Advanced Smartwatch with Tools for Heart Health, Stress Management & Skin Temperature Trends, Carbon/Graphite, One Size (S & L Bands)',
+        color: 'Glossy black',
+        size: 'XL',
+        quantity: 02,
+        price: '$299',
+        taxRate: '2.5%',
+        taxType: 'VAT',
+        tax: '$199',
+        total: '$398',
+      },
+      {
+        sl: 2,
+        product:'2021 Apple 12.9-inch iPad Pro (Wi‑Fi, 128GB) - Space Gray',
+        color: 'Black',
+        size: 'Pro',
+        quantity: 01,
+        price: '$199',
+        taxRate: '2.75%',
+        taxType: 'VAT',
+        tax: '$199',
+        total: '$398',
+      },
+      {
+        sl: 1,
+        product:'PlayStation 5 DualSense Wireless Controller',
+        color: 'White',
+        size: 'Regular',
+        quantity: 01,
+        price: '$185',
+        taxRate: '3.5%',
+        taxType: 'VAT',
+        tax: '$199',
+        total: '$398',
+      },
+    ]
+  .px-0
+    .table-responsive.scrollbar
+      table.table.fs--1.text-900.mb-0
+        thead.bg-200
+          tr
+            th(scope='col' style='width: 24px;')
+            th(scope='col' style='min-width: 60px;') SL NO.
+            th(scope='col' style='min-width: 360px;') Products
+            th.ps-5(scope='col' style='min-width: 150px;') Color
+            th(scope='col' style='width: 60px;') Size
+            th.text-end(scope='col' style='width: 80px;') Quantity
+            th.text-end(scope='col' style='width: 100px;') Price
+            th.text-end(scope='col' style='width: 138px;') Tax Rate
+            th.text-center(scope='col' style='width: 80px;') Tax Type
+            th.text-end(scope='col' style='min-width: 92px;') Tax
+            th.text-end(scope='col' style='min-width: 60px;') Total
+            th(scope='col' style='width: 24px;')
+        tbody
+          each row,index in tableData
+            tr
+              td.border-0
+              td.align-middle(class=index!==tableData.length-1 ? '':'border-0')=row.sl
+              td.align-middle(class=index!==tableData.length-1 ? '':'border-0')
+                p.line-clamp-1.mb-0.fw-semi-bold=row.product
+              td.align-middle.ps-5(class=index!==tableData.length-1 ? '':'border-0')=row.color
+              td.align-middle.text-700.fw-semi-bold(class=index!==tableData.length-1 ? '':'border-0')=row.size
+              td.align-middle.text-end.text-1000.fw-semi-bold(class=index!==tableData.length-1 ? '':'border-0')=row.quantity
+              td.align-middle.text-end.fw-semi-bold(class=index!==tableData.length-1 ? '':'border-0')=row.price
+              td.align-middle.text-end(class=index!==tableData.length-1 ? '':'border-0')=row.taxRate
+              td.align-middle.text-center.fw-semi-bold(class=index!==tableData.length-1 ? '':'border-0')=row.taxType
+              td.align-middle.text-end.fw-semi-bold(class=index!==tableData.length-1 ? '':'border-0')=row.tax
+              td.align-middle.text-end.fw-semi-bold(class=index!==tableData.length-1 ? '':'border-0')=row.total
+              td.border-0
+          tr.bg-200
+            td
+            td.align-middle.fw-semi-bold(colspan=9) Subtotal
+            td.align-middle.text-end.fw-bold $398
+            td
+          tr
+            td.border-0
+            td(colspan=6)
+            td.align-middle.fw-bold.ps-15(colspan=2) Shipping Cost
+            td.align-middle.text-end.fw-semi-bold(colspan=2) $50
+            td.border-0
+          tr
+            td
+            td(colspan=6)
+            td.align-middle.fw-bold.ps-15(colspan=2) Discount/Voucher
+            td.align-middle.text-end.fw-semi-bold.text-danger(colspan=2) -$50
+            td
+          tr.bg-200
+            td.align-middle.ps-4.fw-bold.text-1000(colspan=3) Grand Total
+            td.align-middle.fw-bold.text-1000(colspan=7) Three Hundred and Ninenty Eight USD
+            td.align-middle.text-end.fw-bold $398
+            td
+
+
+    .text-end.py-9.border-bottom.border-300
+      img.mb-3(src=`${CWD}assets/img/logos/phoenix-mart.png`, alt="")
+      h4 Authorized Signatory
+    .text-center.py-4.mb-9
+      p.mb-0 Thank you for buying with Phoenix | 2022 © 
+        a(href='https://themewagon.com/') Themewagon
+    

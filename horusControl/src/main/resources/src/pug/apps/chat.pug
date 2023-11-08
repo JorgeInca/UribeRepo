@@ -1,0 +1,56 @@
+extends ../layouts/LayoutTheme
+include ../mixins/chat/ChatData
+include ../mixins/chat/ChatThreadDetails
+include ../mixins/chat/ChatSidebar
+include ../mixins/chat/ChatContent
+
+prepend styles
+  link(href=`${CWD}vendors/glightbox/glightbox.min.css`, rel='stylesheet')
+prepend scripts
+  script(src=`${CWD}vendors/glightbox/glightbox.min.js`)
+  script(src='https://unpkg.com/picmo@5.7.6/dist/umd/index.js')
+  script(src='https://unpkg.com/@picmo/popup-picker@5.7.6/dist/umd/index.js')
+  script(src=`${CWD}vendors/lottie/lottie.min.js`)
+
+block content
+  .chat.d-flex.phoenix-offcanvas-container.pt-1.mt-n1.mb-9
+    .card.p-3.p-xl-1.mt-xl-n1.chat-sidebar.me-3.phoenix-offcanvas.phoenix-offcanvas-start#chat-sidebar
+      button.btn.d-none.d-sm-block.d-xl-none.mb-2(data-bs-toggle="modal" data-bs-target="#chatSearchBoxModal")
+        span.fa-solid.fa-magnifying-glass.text-600.fs-1
+      .d-none.d-sm-block.d-xl-none.mb-5
+        button.btn.w-100.mx-auto(type='button' data-bs-toggle='dropdown' data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent")
+          span.fa-solid.fa-bars.text-600.fs-1
+        ul.dropdown-menu.dropdown-menu-end.p-0
+          li
+            a.dropdown-item(href='#!') All
+          li
+            a.dropdown-item(href='#!') Read
+          li
+            a.dropdown-item(href='#!') Unread
+
+      .form-icon-container.mb-4.d-sm-none.d-xl-block
+        input.form-control.form-icon-input(type='text' placeholder='People, Groups and Messages')
+        span.fas.fa-user.text-900.fs--1.form-icon
+
+      ul#contactListTab.nav.nav-phoenix-pills.mb-5.d-sm-none.d-xl-flex(data-chat-thread-tab role='tablist')
+        li.nav-item(role="presentation")
+          a.nav-link.cursor-pointer.active(data-bs-toggle='tab' data-chat-thread-list='all' role='tab' aria-selected='true') All
+        li.nav-item(role="presentation")
+          a.nav-link.cursor-pointer(data-bs-toggle='tab' role='tab' data-chat-thread-list='read' aria-selected='false') Read
+        li.nav-item(role="presentation")
+          a.nav-link.cursor-pointer(data-bs-toggle='tab' role='tab' data-chat-thread-list='unread' aria-selected='false') Unread
+      +ChatSidebar
+
+
+      //- .bg-white.h-100.rounded-3.border.border-300
+    .chat-content.tab-content.flex-1
+      +ChatContent
+    .phoenix-offcanvas-backdrop.d-lg-none(data-phoenix-backdrop style='top: 0;')
+    #chatSearchBoxModal.modal.fade(tabindex='-1' aria-hidden='true' data-bs-backdrop="true" data-phoenix-modal style='--phoenix-backdrop-opacity: 1;')
+      .modal-dialog
+        .modal-content.mt-15
+          .modal-body.p-0
+            .chat-search-box
+              .form-icon-container
+                input.form-control.py-3.form-icon-input.rounded-1(type='text' autofocus placeholder='Search People, Groups and Messages')
+                span.fa-solid.fa-magnifying-glass.fs--1.form-icon

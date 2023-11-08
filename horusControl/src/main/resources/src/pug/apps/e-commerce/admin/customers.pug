@@ -1,0 +1,100 @@
+extends ../../../layouts/LayoutTheme
+include ../../../mixins/dashboard/common
+include ../../../mixins/e-commerce/CustomersTable
+
+
+append variables
+  - 
+    var breadcrumb = [
+      {
+        label: 'Page 1',
+        href: '#!'
+      },
+      {
+        label: 'Page 2',
+        href: '#!',
+      },
+      {
+        label: 'Default',
+        href: '#!',
+        active: true
+      },
+    ];
+
+
+block content
+  .mb-9
+    .row.g-2.mb-4
+      .col-auto
+        h2.mb-0 Customers
+
+    ul.nav.nav-links.mb-3.mb-lg-2.mx-n3
+      li.nav-item
+        a.nav-link.active(aria-current='page' href='#')
+          span All 
+          span.text-700.fw-semi-bold (68817)
+      li.nav-item
+        a.nav-link(href='#')
+          span New 
+          span.text-700.fw-semi-bold (6)
+      li.nav-item
+        a.nav-link(href='#')
+          span Abandoned checkouts 
+          span.text-700.fw-semi-bold (17)
+      li.nav-item
+        a.nav-link(href='#')
+          span Locals 
+          span.text-700.fw-semi-bold (6,810)
+      li.nav-item
+        a.nav-link(href='#')
+          span Email subscribers 
+          span.text-700.fw-semi-bold (8)
+      li.nav-item
+        a.nav-link(href='#')
+          span Top reviews 
+          span.text-700.fw-semi-bold (2)
+
+    #products(data-list!={
+      valueNames: ["customer", "email", "total-orders", "total-spent", "city", "last-seen", "last-order"],
+      page: 10,
+      pagination: true
+    })
+      .mb-4
+        .row.g-3
+          .col-auto
+            +Search({placeholder: 'Search customers'})
+          .col-auto.scrollbar.overflow-hidden-y.flex-grow-1
+            .btn-group.position-static(role='group')
+              .btn-group.position-static.text-nowrap
+                button.btn.btn-phoenix-secondary.px-7.flex-shrink-0(type='button' data-bs-toggle='dropdown' data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent") 
+                  | Country
+                  span.fas.fa-angle-down.ms-2
+                ul.dropdown-menu
+                  li
+                    a.dropdown-item(href='#') US
+                  li
+                    a.dropdown-item(href='#') Uk
+                  li
+                    a.dropdown-item(href='#') Australia
+              .btn-group.position-static.text-nowrap
+                button.btn.btn-sm.btn-phoenix-secondary.px-7.flex-shrink-0(type='button' data-bs-toggle='dropdown' data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent") 
+                  | VIP
+                  span.fas.fa-angle-down.ms-2
+                ul.dropdown-menu
+                  li
+                    a.dropdown-item(href='#') VIP 1
+                  li
+                    a.dropdown-item(href='#') VIP 2
+                  li
+                    a.dropdown-item(href='#') VIP 3
+                  li
+              button.btn.btn-phoenix-secondary.px-7.flex-shrink-0 More filters
+          .col-auto
+            button.btn.btn-link.text-900.me-4.px-0
+              span.fa-solid.fa-file-export.fs--1.me-2
+              | Export
+            button.btn.btn-primary
+              span.fas.fa-plus.me-2
+              | Add customer
+      .mx-n4.px-4.mx-lg-n6.px-lg-6.bg-white.border-top.border-bottom.border-200.position-relative.top-1
+        +CustomersTable

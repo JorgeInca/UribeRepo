@@ -1,0 +1,276 @@
+mixin PricingCard(data, name)
+	div.h-100
+		input.pricing-plan-radio.d-none(type="radio" name=name id=data.value  checked=data.defaultChecked  class=data.badge ? 'pricing-plan-recommended' : '')
+		.position-relative.h-100
+			label.stretched-link(for=`${data.value}`)
+			.card.h-100.overflow-hidden.cursor-pointer(class=`${data.selected ? 'bg-warning-soft border-warning warning-boxshadow pricing-business-plus' : ''}`)
+				+Background({image: `${CWD}assets/img/bg/${data.bg}.png`, attrs: { style: { 'background-position': 'left bottom', 'background-size': 'auto',} }, className: 'd-dark-none' })
+				+Background({image: `${CWD}assets/img/bg/${data.darkBg || data.bg}.png`, attrs: { style: { 'background-position': 'left bottom', 'background-size': 'auto',} }, className: 'd-light-none' })
+				.card-body.d-flex.flex-column.justify-content-between.position-relative
+					.d-flex.justify-content-between
+						.mb-5.mb-md-0.mb-lg-5.me-3
+							.d-sm-flex.align-items-center.mb-3
+								h3.mb-0=data.title
+								if data.badge
+									span.badge.ms-sm-3.text-uppercase.fs--2(class=`bg-${data.badge.bg}`)=data.badge.label
+							p.fs--1.text-700!=data.description
+							.d-flex.align-items-end.mb-md-5.mb-lg-0
+								h4.fw-bolder.me-1=data.price
+								if(data.price !== 'Free')
+									h5.fs--1.fw-normal.text-700.ms-1=data.duration
+								else
+									h5.fs--1.fw-normal.text-700.ms-1 Forever
+						img.d-dark-none(src=`${CWD}assets/img/spot-illustrations/${data.img}.png`, width=54 height=54  alt="")
+						img.d-light-none(src=`${CWD}assets/img/spot-illustrations/${data.imgDark || data.img}.png`, width=54 height=54  alt="")
+					.row.flex-1.justify-content-end
+						.col-sm-8.col-md-12
+							.d-sm-flex.d-md-block.d-lg-flex.justify-content-end.align-items-end.h-100
+								ul.list-unstyled.mb-0.border-start-sm.border-start-md-0.border-start-lg.ps-sm-5.ps-md-0.ps-lg-5(class=`${data.border}`)
+									each feature in data.features
+										li.d-flex.align-items-center
+											span.uil.uil-check-circle.text-success.me-2
+											span.text-700.fw-semi-bold!=feature	
+					//- a.stretched-link(href='#!')
+
+mixin PricingRecommendedCard(data, name)
+	div.h-100
+		input.pricing-plan-radio.d-none(type="radio" name=name id=data.value  checked=data.defaultChecked  class=data.badge ? 'pricing-plan-recommended' : '')
+		.position-relative.h-100
+			label.stretched-link(for=`${data.value}`)
+			.card.h-100.overflow-hidden.cursor-pointer(class=`${data.selected ? 'bg-warning-soft border-warning warning-boxshadow pricing-business-plus' : ''}`)
+				+Background({image: `${CWD}assets/img/bg/${data.bg}.png`, attrs: { style: { 'background-position': 'left bottom', 'background-size': 'auto',} }, className: 'd-dark-none' })
+				+Background({image: `${CWD}assets/img/bg/${data.darkBg || data.bg}.png`, attrs: { style: { 'background-position': 'left bottom', 'background-size': 'auto',} }, className: 'd-light-none' })
+				.card-body.d-flex.flex-column.justify-content-between.position-relative
+					.d-flex.justify-content-between
+						.mb-5.mb-md-0.mb-lg-5.me-3
+							.d-sm-flex.d-md-block.d-lg-flex.align-items-center.mb-3
+								h3.mb-0=data.title
+								if data.badge
+									span.badge.ms-sm-3.ms-md-0.ms-lg-3.text-uppercase.fs--2(class=`bg-${data.badge.bg}`)=data.badge.label
+							p.fs--1.text-700!=data.description
+							.d-flex.align-items-end.mb-md-5.mb-lg-0
+								h4.fw-bolder.me-1=data.price
+								if(data.price !== 'Free')
+									h5.fs--1.fw-normal.text-700.ms-1=data.duration
+								else
+									h5.fs--1.fw-normal.text-700.ms-1 Forever	
+						img.d-dark-none(src=`${CWD}assets/img/spot-illustrations/${data.img}.png`, width=54 height=54  alt="")
+						img.d-light-none(src=`${CWD}assets/img/spot-illustrations/${data.imgDark}.png`, width=54 height=54  alt="")
+					.row.flex-1.justify-content-end
+						.col-sm-8.col-md-12
+							.d-sm-flex.d-md-block.d-lg-flex.justify-content-end.align-items-end.h-100
+								ul.list-unstyled.mb-0.border-start-sm.border-start-md-0.border-start-lg.ps-sm-5.ps-md-0.ps-lg-5(class=`${data.border}`)
+									each feature in data.features
+										li.d-flex.align-items-center
+											span.uil.uil-check-circle.text-success.me-2
+											span.text-700.fw-semi-bold!=feature	
+					//- a.stretched-link(href='#!')
+
+mixin PackageList(data)
+	.rounded-3.py-2.px-3.bg-white.d-flex.align-items-center.mb-3
+		span.fas.fa-check.text-primary.me-3.fs--1
+		p.mb-0.text-800!=data.item
+		if data.badge
+			span.badge.badge-phoenix.badge-phoenix-primary.ms-2 New
+
+mixin PricingGridView
+	-
+		var cards = [
+			{
+				defaultChecked: true,
+				value:'startup',
+				title: 'Startup',
+				duration:'Per month',
+				description: `For individuals who are interested <br> in giving it a shot first.`,
+				img:'rocket',
+				imgDark: 'rocket-dark',
+				bg:'8',
+				darkBg: '8-dark',
+				price: 'Free',
+				package: '/ month',
+				border: 'border-200',
+				features:[['Up to 4 Members'],	['3 Collaboration projects'],]  
+			},
+			{
+				value:'standard',
+				title: 'Standard',
+				duration:'Per month',
+				description: 'For teams that need to create <br> project plans with confidence.',
+				img:'bag-2',
+				imgDark: 'bag-2-dark',
+				bg:'9',
+				darkBg:'9-dark',
+				price: '$14.99',
+				package: '/ month',
+				border: 'border-200',
+				features:[['Up to 8 Members'], ['Create & Share libraries'],	['10 Collaboration projects'],]
+			},
+			{
+				value:'businessPlus',
+				title: 'Business Plus',
+				duration:'Per month',
+				description: 'For teams that need to manage <br> work across initiatives.',
+				img:'star',
+				imgDark: 'star-dark',
+				bg:'bg-11',
+				darkBg:'bg-11-dark',
+				price: '$49.99',
+				package: '/ month',
+				border: 'border-warning-300',
+				badge:{
+					label: 'recommended',
+					bg:'warning',
+				},
+				selected:true,
+				features:[['Technical Supports'],	['Up to 20 Members'], ['Create & Share libraries'], ['<span class="fw-bold">Unlimited</span> Collaboration']]
+			},
+			{
+				value:'enterprise',
+				title: 'Enterprise',
+				duration:'Per month',
+				description: 'For organizations that need <br> additional security and support.',
+				img:'shield-2',
+				imgDark: 'shield-2-dark',
+				bg:'10',
+				darkBg: '10-dark',
+				price: '$149.99',
+				package: '/ month',
+				border: 'border-200',
+				features:['24/7 VIP Support',	'Automated analytics','<span class="fw-bold">Unlimited</span> Members*', 'Create & Share libraries', 'Centralized billing']
+			},
+			{
+				defaultChecked: true,
+				value:'startupYearly',
+				title: 'Startup',
+				duration:'Per year',
+				description: `For individuals who are interested <br> in giving it a shot first.`,
+				img:'rocket',
+				imgDark: 'rocket-dark',
+				bg:'8',
+				darkBg: '8-dark',
+				price: 'Free',
+				package: '/ month',
+				border: 'border-200',
+				features:[['Up to 4 Members'],['3 Collaboration projects'],]  
+			},
+			{
+				value:'standardYearly',
+				title: 'Standard',
+				duration:'Per year',
+				description: 'For teams that need to create <br> project plans with confidence.',
+				img:'bag-2',
+				imgDark: 'bag-2-dark',
+				bg:'9',
+				darkBg: '9-dark',
+				price: '$179.88',
+				package: '/ month',
+				border: 'border-200',
+				features:[['Up to 8 Members'], ['Create & Share libraries'],	['10 Collaboration projects'],]
+			},
+			{
+				value:'businessPlusYearly',
+				title: 'Business Plus',
+				duration:'Per year',
+				description: 'For teams that need to manage <br> work across initiatives.',
+				img:'star',
+				imgDark:'star-dark',
+				bg:'bg-11',
+				darkBg:'bg-11-dark',
+				price: '$599.88',
+				package: '/ month',
+				border: 'border-200',
+				badge:{
+					label: 'recommended',
+					bg:'warning',
+				},
+				selected:true,
+				features:[['Technical Supports'],	['Up to 20 Members'], ['Create & Share libraries'], ['<span class="fw-bold">Unlimited</span> Collaboration']]
+
+			},
+			{
+				value:'enterpriseYearly',
+				title: 'Enterprise',
+				duration:'Per year',
+				description: 'For organizations that need <br> additional security and support.',
+				img:'shield-2',
+				imgDark: 'shield-2-dark',
+				bg:'10',
+				darkBg: '10-dark',
+				price: '$1,799.88',
+				package: '/ month',
+				border: 'border-200',
+				features:['24/7 VIP Support',	'Automated analytics','<span class="fw-bold">Unlimited</span> Members*', 'Create & Share libraries', 'Centralized billing']
+			},
+		]
+
+	-
+		var packageList = [
+			{
+				item:'Timeline',
+			},
+			{
+				item:'Advanced Search',
+			},
+			{
+				item:'Custom fields',
+				badge: true,
+			},
+			{
+				item:'Task dependencies',
+			},
+			{
+				item:'20TB of additional space ',
+			},
+			{
+				item:'Bandwidth of  Upto 1 Gbps',
+			},
+			{
+				item:'Private teams & projects',
+			},
+			{
+				item:'Private teams & projects',
+			},
+
+		]	
+	.row
+		.col-xl-12.col-xxl-9.mb-1
+			.tabs.mb-7
+				ul.nav.nav-underline.nav-tabs.mb-3#nav-tab(role='tablist')
+					li.nav-item(role='presentation')
+						button.nav-link#pills-year-tab(data-bs-toggle='pill' data-bs-target='#pills-year' type='button' role='tab' aria-controls='pills-year' aria-selected='false') Yearly
+					li.nav-item(role='presentation')
+						button.nav-link.active#pills-month-tab(data-bs-toggle='pill' data-bs-target='#pills-month' type='button' role='tab' aria-controls='pills-month' aria-selected='true') Monthly
+				.tab-content#pills-tabContent
+					.tab-pane.fade.show.active#pills-month(role='tabpanel' aria-labelledby='pills-month-tab') 
+						.row.g-3
+							each card,index in cards.slice(0,4)
+								if index === 2
+									.col-12.col-md-6.col-lg-12.col-xl-6
+										+PricingRecommendedCard(card,'pricingMonthly')
+								else
+									.col-12.col-md-6.col-lg-12.col-xl-6
+										+PricingCard(card,'pricingMonthly')
+				.tab-content#pills-tabContentYear
+					.tab-pane.fade#pills-year(role='tabpanel' aria-labelledby='pills-year-tab') 
+						.row.g-3
+							each card in cards.slice(4,8)
+								.col-12.col-md-6.col-lg-12.col-xl-6
+									+PricingCard(card,'pricingYearly')
+			div
+				p.mb-0 Business Starter, Business Standard, and Business Plus plans can be purchased for a maximum of 300 users. There is no 
+					br.d-none.d-xl-block.d-xxl-none
+					| maximum user limit for Enterprise plans.
+				p.fw-semi-bold Phoenix customers may have access to additional features for a limited 
+					br.d-none.d-sm-block.d-lg-none
+					| promotional period.
+				.d-grid.d-sm-flex
+					button.btn.btn-lg.btn-primary.d-sm-flex.align-items-center.mb-3.mb-sm-0.me-sm-3.px-sm-8 Subscribe Now
+						span.fas.fa-angle-right.ms-1
+					button.btn.btn-lg.btn-outline-primary.px-sm-7 Start 7 days free Trial
+
+		.col.col-xxl-3.mt-8
+			h3.fw-semi-bold.mb-3 Included in our all packages
+			.row
+				each list,index in packageList
+					.col-md-6.col-xxl-12
+						+PackageList(list)

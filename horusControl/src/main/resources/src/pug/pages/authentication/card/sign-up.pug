@@ -1,0 +1,40 @@
+extends ../../../layouts/LayoutTheme
+include ../../../layouts/LayoutCardAuth
+
+block wrapperContent
+  +LayoutCardBasic({img:37, page: 'sign-up'})
+    .auth-form-box
+      .text-center.mb-7
+        a(href=`${CWD}${paths['default-dashboard']}`).d-flex.flex-center.text-decoration-none.mb-4
+          +Logo({text:false,width:58}).fw-bolder.fs-5.d-inline-block
+        h3.text-1000 Sign Up
+        p.text-700 Create your account today
+      +SocialButtons({title:'Sign up'})
+      .position-relative.mt-4
+        hr.bg-200
+        .divider-content-center.bg-white or use email
+      form
+        .mb-3.text-start
+          label.form-label(for='name') Name
+          input#name.form-control(type='text' placeholder='Name')
+        .mb-3.text-start
+          label.form-label(for='email') Email address
+          input#email.form-control(type='email' placeholder='name@example.com')
+        .row.g-3.mb-3
+          .col-xl-6
+            label.form-label(for='password') Password
+            input#password.form-control.form-icon-input(type='password' placeholder='Password')
+          .col-xl-6
+            label.form-label(for='confirmPassword') Confirm Password
+            input#confirmPassword.form-control.form-icon-input(type='password' placeholder='Confirm Password')
+        .form-check.mb-3
+          input#termsService.form-check-input(type='checkbox')
+          label.form-label.fs--1.text-none(for='termsService')
+            | I accept the 
+            a(href='#!') terms 
+            | and 
+            a(href='#!') privacy policy
+
+        button.btn.btn-primary.w-100.mb-3 Sign up
+        .text-center
+          a.fs--1.fw-bold(href=`${CWD}${paths['card-signin']}`) Sign in to an existing account

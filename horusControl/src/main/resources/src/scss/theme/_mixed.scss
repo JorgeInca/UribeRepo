@@ -1,0 +1,427 @@
+/*-----------------------------------------------
+|   Object fit and Z-index
+-----------------------------------------------*/
+.fit-cover {
+  object-fit: cover;
+}
+
+/*-----------------------------------------------
+|   Sidebar
+-----------------------------------------------*/
+.sticky-sidebar {
+  position: sticky;
+  z-index: $zindex-sticky;
+  top: $navbar-top-height + 1;
+}
+
+/*-----------------------------------------------
+|   Custom circle
+-----------------------------------------------*/
+.circle-dashed {
+  border: 1px dashed var(--#{$prefix}primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  width: 3.5rem;
+  height: 3.5rem;
+}
+
+/*-----------------------------------------------
+|   Miscellaneous
+-----------------------------------------------*/
+
+.hover-text-decoration-none {
+  @include hover-focus {
+    text-decoration: none;
+  }
+}
+.resize-none {
+  resize: none;
+}
+
+.collapsed .collapse-icon {
+  transition: $transition-base;
+  transform: rotate(0deg);
+}
+.collapse-icon {
+  transition: $transition-base;
+  transform: rotate(90deg);
+}
+
+[data-dismiss='dropdown'],
+[data-bs-offset-top],
+[data-bs-toggle='collapse'],
+[data-bs-toggle='tooltip'],
+[data-bs-toggle='popover'] {
+  * {
+    pointer-events: none;
+  }
+}
+
+/*-----------------------------------------------
+|   Outline
+-----------------------------------------------*/
+
+.outline-none {
+  outline: none;
+  box-shadow: none;
+  @include hover-focus {
+    outline: none;
+    box-shadow: none;
+  }
+}
+
+/*-----------------------------------------------
+|   Vertical Line (used in kanban header)
+-----------------------------------------------*/
+.vertical-line {
+  &:after {
+    position: absolute;
+    content: '';
+    height: 75%;
+    width: 1px;
+    background: var(--#{$prefix}gray-300);
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  &.vertical-line-400 {
+    &:after {
+      background-color: var(--#{$prefix}gray-400);
+    }
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/*                                 Transition                                 */
+/* -------------------------------------------------------------------------- */
+
+.transition-base {
+  transition: $transition-base;
+}
+.transition-none {
+  transition: none;
+}
+
+.fsp-75 {
+  font-size: 75%;
+}
+
+/* -------------------------------------------------------------------------- */
+/*                                    Width                                   */
+/* -------------------------------------------------------------------------- */
+
+// used in chat
+.min-w-0 {
+  min-width: 0;
+}
+
+/* -------------------------------------------------------------------------- */
+/*                                Terms sidebar                               */
+/* -------------------------------------------------------------------------- */
+
+.terms-sidebar {
+  .nav-link {
+    color: var(--#{$prefix}gray-500);
+    font-weight: $font-weight-medium;
+    font-family: $font-family-sans-serif;
+    &.active {
+      color: var(--#{$prefix}primary);
+    }
+  }
+}
+
+.divider-content-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  padding-left: map-get($spacers, 2);
+  padding-right: map-get($spacers, 2);
+  background-color: var(--#{$prefix}body-bg);
+  font-family: $font-family-sans-serif;
+  font-size: map-get($font-sizes, '-1');
+  color: var(--#{$prefix}gray-600);
+  white-space: nowrap;
+  font-weight: $font-weight-bold;
+  .bg-auth-card & {
+    .dark & {
+      background-color: $dark-gray-soft !important;
+    }
+  }
+}
+
+.btn-check[data-theme-control]:checked + label {
+  display: none;
+}
+/* -------------------------------------------------------------------------- */
+/*                                    Height                                  */
+/* -------------------------------------------------------------------------- */
+
+html {
+  position: relative;
+}
+.content {
+  min-height: 100vh;
+  // min-height: calc(100vh - $navbar-top-height);
+  padding: $content-padding-top map-get($spacers, 4) $content-padding-bottom
+    map-get($spacers, 4);
+  // position: relative;
+  padding-bottom: $footer-height + 2;
+  @include media-breakpoint-up(sm) {
+    padding-bottom: $footer-height;
+  }
+}
+.footer {
+  bottom: 0;
+  width: 100%;
+  height: $footer-height + 2;
+  border-top: 1px solid $navbar-footer-border-color;
+  padding: 0 map-get($spacers, 4);
+  left: 0;
+  @include media-breakpoint-up(sm) {
+    height: $footer-height;
+  }
+  @include media-breakpoint-up(lg) {
+    padding: 0 map-get($spacers, 6);
+  }
+}
+
+.bullet-item {
+  height: 0.5rem;
+  width: 1rem;
+  border-radius: 2px;
+}
+
+/* -------------------------------------------------------------------------- */
+/*                                    Logo                                    */
+/* -------------------------------------------------------------------------- */
+
+.logo-text {
+  font-size: 1.63625rem;
+  color: var(--#{$prefix}logo-text);
+  line-height: 1.2;
+  font-weight: $font-weight-semi-bold;
+  letter-spacing: -0.04em;
+  margin-bottom: 0;
+}
+
+.notification-card {
+  &.unread {
+    background-color: var(--#{$prefix}gray-100);
+    .dark & {
+      background-color: var(--#{$prefix}white);
+    }
+  }
+}
+.notification-card:hover {
+  background-color: var(--#{$prefix}gray-200) !important;
+}
+.notification-dropdown-toggle {
+  &:hover {
+    border-color: var(--#{$prefix}gray-300);
+    background: transparent;
+  }
+}
+
+.square-icon-btn {
+  height: 1.875rem;
+  width: 1.875rem;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pricing-column-title-box {
+  height: 105px;
+}
+
+// Pricing Grid
+.pricing--hover {
+  @include hover-focus {
+    .warning-boxshadow {
+      box-shadow: 0px 0px 0px 4px rgba(229, 120, 11, 0.2);
+      border-radius: 0.5rem;
+      outline: 0;
+    }
+    .border-warning-300 {
+      --#{$prefix}border-color: #{$orange-300};
+    }
+  }
+}
+.pricing-plan-radio {
+  + {
+    label {
+      border: 1px solid transparent;
+      border-radius: 0.5rem;
+    }
+  }
+  &:checked {
+    + {
+      div {
+        .card {
+          border: 1px solid var(--#{$prefix}primary-300);
+          box-shadow: 0px 0px 0px 4px rgba(56, 116, 255, 0.2);
+        }
+      }
+    }
+  }
+  &.pricing-plan-recommended {
+    &:checked {
+      + {
+        div {
+          .card {
+            border: 1px solid var(--#{$prefix}warning-300);
+            box-shadow: 0px 0px 0px 4px rgba(229, 120, 11, 0.2);
+          }
+        }
+      }
+    }
+  }
+}
+
+.dark {
+  .footer-bg {
+    opacity: 0.6;
+  }
+}
+
+.text-illustration-underline {
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+}
+
+.bg-linear-gradient {
+  background: linear-gradient(
+    95.11deg,
+    #f24e1e -21.8%,
+    #ff7262 -2.23%,
+    #a259ff 46.16%,
+    #1abcfe 79.11%,
+    #0acf83 116.18%
+  );
+}
+
+// ---- hover bg transparent
+.hover-bg-transparent {
+  &:hover,
+  &:focus {
+    background-color: transparent !important;
+  }
+}
+
+/* ------------------------------ font-awesome ------------------------------ */
+.fa-ul {
+  [dir='rtl'] & {
+    --fa-li-margin: -0.5em !important;
+    &.pricing {
+      margin-left: var(--fa-li-margin, 2.5em) !important;
+    }
+  }
+  margin-left: var(--fa-li-margin, 2.5em);
+  .fa-li {
+    left: calc(var(--fa-li-width, 2em) * -1) !important;
+  }
+}
+.page-title-sticky-top {
+  @include media-breakpoint-up(xl) {
+    position: sticky;
+    top: calc(var(--phoenix-navbar-top-height) + 3.725rem);
+  }
+}
+
+.pricing-business-plus {
+  .dark & {
+    background-color: rgba($warning, 0.08) !important;
+    border: 1px solid rgba($warning, 0.2);
+  }
+}
+
+// echarts example
+.echart-quartet-scatter-chart-example {
+  min-height: 31.25rem;
+
+  @include media-breakpoint-down(md) {
+    min-height: 65.625rem;
+  }
+}
+.echart-radar-customized-chart-example {
+  height: 22rem;
+
+  @include media-breakpoint-down(xl) {
+    height: 45rem;
+  }
+}
+.echart-radar-multiple-chart-example {
+  height: 21rem;
+
+  @include media-breakpoint-down(xxl) {
+    height: 35rem;
+  }
+  @include media-breakpoint-down(lg) {
+    height: 50rem;
+  }
+}
+
+.simplebar-scrollspy {
+  .nav {
+    min-width: 850px;
+    .nav-item {
+      .nav-link {
+        &.active {
+          color: var(--#{$prefix}primary) !important;
+          border-bottom: 1px solid var(--#{$prefix}primary) !important;
+        }
+      }
+    }
+  }
+}
+
+.faq-list {
+  li {
+    .fa-circle {
+      font-size: 6px;
+      margin-right: 1.25rem;
+      margin-top: 6px;
+      color: var(--#{$prefix}gray-400);
+    }
+  }
+}
+.faq-title-box {
+  top: map-get($spacers, 5);
+  width: 90%;
+  @include media-breakpoint-up(md) {
+    width: 75%;
+  }
+  @include media-breakpoint-up(xl) {
+    width: 55%;
+  }
+}
+
+.subtask-checkbox {
+  .dark & {
+    background-color: $gray-1100;
+    &:checked {
+      background-color: $primary;
+    }
+  }
+}
+/*-----------------------------------------------
+|   fontawesome stack icon border color
+-----------------------------------------------*/
+.stack-circle path {
+  stroke: var(--#{$prefix}body-bg);
+  stroke-width: 60;
+}
+
+/*-----------------------------------------------
+|   action dropdown btn
+-----------------------------------------------*/
+.action-btn{
+  min-height: 32px;
+  min-width: 45px;
+}

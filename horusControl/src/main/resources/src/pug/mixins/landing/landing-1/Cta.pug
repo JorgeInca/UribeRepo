@@ -1,0 +1,22 @@
+mixin Cta
+	+Section('container-small px-lg-7 px-xxl-3').bg-white.pb-0
+		.row.justify-content-center
+			.col-12.text-center
+				.card.py-md-9.px-md-13.border-0.z-index-1.shadow-lg.cta-card
+					+Background({image: `${CWD}assets/img/bg/bg-18.png`, attrs: { style: { 'background-position': 'right', 'background-size': 'auto',} } })
+					.card-body.position-relative
+						img.img-fluid.mb-5.d-dark-none(src=`${CWD}assets/img/spot-illustrations/27.png` width=210 alt='...')
+						img.img-fluid.mb-5.d-light-none(src=`${CWD}assets/img/spot-illustrations/dark_27.png`  width=210 alt='...')
+						.d-flex.align-items-center.fw-bold.justify-content-center.mb-3
+							p.mb-0 2008 Premium Icons 
+							span.text-primary.fa-solid.fa-circle(data-fa-transform="shrink-12")
+							p.mb-0 Included FREE with it
+						h1.fs-2.fs-sm-4.fs-lg-6.fw-bolder.lh-sm.mb-3 Join
+							span.gradient-text-primary.mx-2 Phoenix
+							span Today
+
+						form.d-flex.justify-content-center.mb-3.px-xxl-12
+							.d-grid.d-sm-block
+							input.form-control.me-3#ctaEmail1(type='email' placeholder='Email' aria-describedby='ctaEmail1')
+							button.btn.btn-primary(type='submit') Subscribe
+						p Best support in the world, Only Phoenix can ensure	

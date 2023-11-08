@@ -1,0 +1,20 @@
+extends ../../layouts/LayoutEmail
+include ../../mixins/email/EmailDetails
+include ../../mixins/email/Compose
+
+
+append variables
+	- var attrsContent = { class: 'pt-0' };
+
+prepend scripts
+	script(src=`${CWD}vendors/tinymce/tinymce.min.js`)
+
+block pageContent
+	.col-3.d-none.d-xxl-block
+		.scrollbar.email-content
+			.px-lg-1
+				+InboxToolbar
+				each email,index in emails
+					+EmailRow(email,index === emails.length - 1)
+	.col
+		+Compose.email-content

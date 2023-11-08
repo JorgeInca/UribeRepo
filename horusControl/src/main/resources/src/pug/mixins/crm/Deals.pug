@@ -1,0 +1,716 @@
+mixin DealsCol(data)
+	.card.mb-3
+		.card-body
+			a.dropdown-indicator-icon.position-absolute.text-700(href=`#collapseWidthDeals-${data.id}` role="button" data-bs-toggle='collapse' aria-expanded='false' aria-controls=`collapseWidthDeals-${data.id}`)
+				span.fa-solid.fa-angle-down
+			.d-flex.align-items-center.justify-content-between.mb-3
+				.d-flex
+					span.me-2(data-feather="clock" style='stroke-width:2;')
+					p.mb-0.fs--1.fw-semi-bold.text-700.date=data.date
+						span.text-500=data.time
+
+			.deals-items-head.d-flex.align-items-center.mb-2
+				a.text-primary.fw-bold.line-clamp-1.me-3.mb-0.fs-1(href=`${CWD}${paths['crm-deal-details']}`)=data.title
+				p.deals-category.fs--2.mb-0.mt-1.d-none
+					span.me-1.text-500(data-feather="grid" style='stroke-width:2; height: 12px; width: 12px')
+					| #{data.category}
+				p.ms-auto.fs--1.text-1100.fw-semi-bold.mb-0.deals-revenue=data.revenue
+			.deals-company-agent.d-flex.flex-between-center
+				.d-flex.align-items-center
+					span.uil.uil-user.me-2
+					p.text-800.fw-bold.fs--1.mb-0=data.company
+				.d-flex.align-items-center
+					span.uil.uil-headphones.me-2
+					p.text-800.fw-bold.fs--1.mb-0=data.agent
+
+			.collapse(id=`collapseWidthDeals-${data.id}`)
+				.d-flex.gap-2.mb-5
+					span.badge.badge-phoenix(class=`badge-phoenix-${data.badge.variant}`)= data.badge.label
+					span.badge.badge-phoenix(class=`badge-phoenix-${data.priority.variant}`)= data.priority.label
+				table.mb-4.w-100.table-stats.table-stats
+					tr
+						th
+						th
+						th
+					tr
+						td.py-1
+							.d-flex.align-items-center
+								span.me-2.text-700(data-feather="dollar-sign")
+								p.fw-semi-bold.fs--1.mb-0.text-700 Expected Revenue
+						td.py-1.d-none.d-sm-block.pe-sm-2 :
+						td.py-1
+							p.ps-6.ps-sm-0.fw-semi-bold.fs--1.mb-0.mb-0.pb-3.pb-sm-0.text-1100 #{data.revenue}
+					tr
+						td.py-1
+							.d-flex.align-items-center
+								span.me-2.text-700(data-feather="user" style="width:16px; height:16px")
+								p.fw-semi-bold.fs--1.mb-0.text-700 Company Name
+						td.py-1.d-none.d-sm-block.pe-sm-2 :
+						td.py-1
+							p.ps-6.ps-sm-0.fw-semi-bold.fs--1.mb-0.mb-0.pb-3.pb-sm-0.text-1100.d-flex.align-items-center.gap-2 #{data.company}
+								a(href="#!") 
+									span.fa-solid.fa-square-phone.text-700
+								a(href="#!") 
+									span.fa-solid.fa-square-envelope.text-700
+								a(href="#!") 
+									span.fab.fa-whatsapp-square.text-700
+					tr
+						td.py-1
+							.d-flex.align-items-center
+								span.me-2.text-700(data-feather="calendar" style="width:16px; height:16px")
+								p.fw-semi-bold.fs--1.mb-0.text-700 Closing Date &amp; Time
+						td.py-1.d-none.d-sm-block.pe-sm-2 :
+						td.py-1
+							p.ps-6.ps-sm-0.fw-semi-bold.fs--1.mb-0.mb-0.pb-3.pb-sm-0.text-1100 #{data.closingDate}
+								span #{data.closingTime}
+					tr
+						td.py-1
+							.d-flex.align-items-center
+								span.me-2.text-700(data-feather="headphones" style="width:16px; height:16px")
+								p.fw-semi-bold.fs--1.mb-0.text-700 Assigned Agent	
+						td.py-1.d-none.d-sm-block.pe-sm-2 :
+						td.py-1
+							select.form-select.form-select-sm.py-0.ms-n3.border-0.shadow-none
+								each agent in ['Ally Aagaard','Lonnie Kub', 'Aida Moen', 'Niko Koss', 'Alec Haag', 'Ola Smith', 'Leif Walsh', 'Brain Cole', 'Reese Mann']
+									option(selected= agent === data.agent) #{agent}
+
+				p.fs--1.mb-1  Probability:
+				.progress(style='height:8px')
+					.progress-bar.rounded-pill(class=`bg-${data.probability.variant}` role='progressbar' style=`width: ${data.probability.value}%` aria-valuenow=`${data.probability.value}` aria-valuemin='0' aria-valuemax='100')
+
+mixin AddStageModal
+	#addStageModal.modal.fade(data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addStageModal" aria-hidden="true")
+		.modal-dialog.modal-dialog-centered
+			.modal-content 
+				.modal-body.p-4
+					h4.mb-3 Stage name
+					input.form-control(type="text")
+				.modal-footer.border-0.pt-0.px-4.pb-4
+					button.btn.btn-link.text-danger.px-3.m-0(data-bs-dismiss="modal" aria-label="Close") Cancel
+					button.btn.btn-primary.px-6.m-0 Add
+
+
+mixin Deals
+	-
+		var dealsData = [
+			{
+				title: 'New',
+				revenue: '$37,000.00',
+				items: [
+					{
+						id: 1,
+						title:'Jo_Td01',
+						revenue:'$14,000.00',
+						category:'Financial',
+						date:'Dec 30, 2022',
+						time:' . 2:15 PM',
+						closingDate: '27-12-2022',
+						closingTime: ' . 11:19 PM',
+						company:'Knitkake.inc',
+						agent:'Ally Aagaard',
+						badge: {
+							label: 'new',
+							variant: 'info'
+						},
+						priority: {
+							label: 'Urgent',
+							variant: 'danger'
+						},
+						probability: {
+							value: '20',
+							variant: 'info'
+						}
+					},
+					{
+						id: 2,
+						title:'Dimensions for Printing',
+						revenue:'$23,000.00',
+						category:'Marketplace',
+						date:'Dec 29, 2022',
+						time:' . 12:15 PM',
+						closingDate: '25-12-2022',
+						closingTime: ' . 2:00 PM',
+						company:'Kibikaba Clothings',
+						agent:'Lonnie Kub',
+						badge: {
+							label: 'New',
+							variant: 'info',
+						},
+						priority: {
+							label: 'Medium',
+							variant: 'success'
+						},
+						probability: {
+							value: '20',
+							variant: 'info'
+						}
+					},
+				],
+			},
+			{
+				title: 'In Progress',
+				revenue: '$101,300.00',
+				items: [
+					{
+						id: 3,
+						title:'True and True Attorneys',
+						revenue:'$33,000.00',
+						category:'Financial',
+						date:'Dec 30, 2022',
+						time:' . 06:15 PM',
+						closingDate: '27-12-2022',
+						closingTime: ' . 11:19 PM',
+						company:'PBR Holdings',
+						agent:'Aida Moen',
+						badge: {
+							label: 'In Progress',
+							variant: 'primary'
+						},
+						priority: {
+							label: 'High',
+							variant: 'warning'
+						},
+						probability: {
+							value: '40',
+							variant: 'primary'
+						}
+					},
+					{
+						id: 4,
+						title:'The Morlong Corporation',
+						revenue:'$45,300.00',
+						category:'Marketplace',
+						date:'Dec 30, 2022',
+						time:' . 08:20 PM',
+						closingDate: '26-12-2022',
+						closingTime: ' . 12:10 PM',
+						company:'Giraffes Studio',
+						agent:'Niko Koss',
+						badge: {
+							label: 'In Progress',
+							variant: 'primary',
+						},
+						priority: {
+							label: 'Low',
+							variant: 'info'
+						},
+						probability: {
+							value: '40',
+							variant: 'primary'
+						}
+					},
+					{
+						id: 5,
+						title:'Product List',
+						revenue:'$23,000.00',
+						category:'Marketplace',
+						date:'Dec 30, 2022',
+						time:' . 3:25 PM',
+						closingDate: '27-12-2022',
+						closingTime: ' . 11:19 PM',
+						company:'Birds eye',
+						agent:'Alec Haag',
+						badge: {
+							label: 'In Progress',
+							variant: 'primary',
+						},
+						priority: {
+							label: 'Urgent',
+							variant: 'danger'
+						},
+						probability: {
+							value: '40',
+							variant: 'primary'
+						}
+					},
+				],
+			},
+			{
+				title: 'Pending',
+				revenue: '$23,400.00',
+				items: [
+					{
+						id: 6,
+						title:'Printing Services by Feltz',
+						revenue:'$23,400.00',
+						category:'Marketplace',
+						date:'Dec 30, 2022',
+						time:' . 3:15 PM',
+						closingDate: '27-12-2022',
+						closingTime: ' . 11:19 PM',
+						company:'Ant Family',
+						agent:'Ally Aagaard',
+						badge: {
+							label: 'Pending',
+							variant: 'warning'
+						},
+						priority: {
+							label: 'High',
+							variant: 'warning'
+						},
+						probability: {
+							value: '60',
+							variant: 'warning'
+						}
+					},
+				],
+			},
+			{
+				title: 'Canceled',
+				revenue: '$260.00',
+				items: [
+					{
+						id: 7,
+						title:'SP Flat Plate',
+						revenue:'$14,000.00',
+						category:'Financial',
+						date:'Dec 31, 2022',
+						time:' . 01:30 PM',
+						closingDate: '29-12-2022',
+						closingTime: ' . 01:30 PM',
+						company:'Ant Family',
+						agent:'Ola Smith',
+						badge: {
+							label: 'Canceled',
+							variant: 'secondary'
+						},
+						priority: {
+							label: 'Medium',
+							variant: 'success'
+						},
+						probability: {
+							value: '80',
+							variant: '300'
+						}
+					},
+					{
+						id: 8,
+						title:'Ventilated Pipe',
+						revenue:'$14,000.00',
+						category:'Marketplace',
+						date:'Dec 31, 2022',
+						time:' . 2:15 PM',
+						closingDate: '29-12-2022',
+						closingTime: ' . 02:15 PM',
+						company:'Giraffes Studio',
+						agent:'Leif Walsh',
+						badge: {
+							label: 'Canceled',
+							variant: 'secondary'
+						},
+						priority: {
+							label: 'Low',
+							variant: 'info'
+						},
+						probability: {
+							value: '80',
+							variant: '300'
+						}
+					},
+				],
+			},
+			{
+				title: 'Completed',
+				revenue: '$1,650.00',
+				items: [
+					{
+						id: 9,
+						title:'Product Shipping',
+						revenue:'$15,000.00',
+						category:'Financial',
+						date:'Dec 29, 2022',
+						time:' . 03:12 PM',
+						closingDate: '27-12-2022',
+						closingTime: ' . 11:19 PM',
+						company:'Birds eye',
+						agent:'Brain Cole',
+						badge: {
+							label: 'Completed',
+							variant: 'success'
+						},
+						priority: {
+							label: 'Urgent',
+							variant: 'danger'
+						},
+						probability: {
+							value: '100',
+							variant: 'success'
+						}
+					},
+					{
+						id: 10,
+						title:'Product List',
+						revenue:'$33,00.00',
+						category:'Financial',
+						date:'Dec 29, 2022',
+						time:' . 06:15 PM',
+						closingDate: '28-12-2022',
+						closingTime: ' . 12:20 PM',
+						company:'Ink Incorporated',
+						agent:'Reese Mann',
+						badge: {
+							label: 'Completed',
+							variant: 'success'
+						},
+						priority: {
+							label: 'Low',
+							variant: 'info'
+						},
+						probability: {
+							value: '100',
+							variant: 'success'
+						}
+					},
+					{
+						id: 11,
+						title:'Dimensions for Printing',
+						revenue:'$23,400.00',
+						category:'Marketplace',
+						date:'Dec 29, 2022',
+						time:' . 2:15 PM',
+						closingDate: '28-12-2022',
+						closingTime: ' . 02:19 PM',
+						company:'Slim Apes',
+						agent:'Ally Aagaard',
+						badge: {
+							label: 'Completed',
+							variant: 'success'
+						},
+						priority: {
+							label: 'Urgent',
+							variant: 'danger'
+						},
+						probability: {
+							value: '100',
+							variant: 'success'
+						}
+					},
+				],
+			}
+		]
+
+	.px-4.px-lg-6.scrollbar(data-kanban-container)
+		.deals
+			each colData in dealsData
+				.deals-col.me-4
+					.d-flex.align-items-center.justify-content-between.position-sticky.top-0.z-index-1.bg-soft
+						div 
+							h5.mb-2= colData.title
+							p.fs--1.text-700.mb-1 Forecast Revenue:
+							h4.mb-3= colData.revenue
+						.d-flex.gap-3
+							button.btn.p-0(type='button' data-bs-toggle='modal' data-bs-target='#addDealModal' aria-haspopup="true" aria-expanded="false" data-bs-reference="parent")
+								span.fa-solid.fa-plus
+							button.btn.p-0(type='button' data-bs-toggle='dropdown' data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent")
+								span.fas.fa-ellipsis-h.fs--2
+							ul.dropdown-menu.dropdown-menu-end
+								li
+									a.dropdown-item(href='#') Edit
+								li
+									a.dropdown-item(href='#') Add meeting
+								li
+									a.dropdown-item(href='#') See all connected contacts
+								li
+									a.dropdown-item(href='#') Clone
+								li
+									a.dropdown-item(href='#') Delete
+								li
+									a.dropdown-item(href='#') Display only bad deals
+					.scrollbar.deals-items-container
+						.w-100.min-vh-50(data-sortable)
+							each data in colData.items
+								div
+									+DealsCol(data, colData.variant)
+			.deals-col.position-relative
+				.d-flex.flex-center.flex-column.h-100
+					h3.mb-4 Add new stage
+					button.btn.btn-sm.btn-primary(type='button' data-bs-toggle='modal' data-bs-target='#addStageModal' aria-haspopup="true" aria-expanded="false" data-bs-reference="parent")
+						span.fa-solid.fa-plus.me-2
+						| New Stage
+
+
+mixin AddDealModal 
+	#addDealModal.modal.fade(data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addDealModal" aria-hidden="true")
+		.modal-dialog.modal-xl.modal-dialog-centered
+			.modal-content.bg-100.p-6
+				.modal-header.border-0.p-0.mb-2
+					h3.mb-0 Deal Informations
+					button.btn.btn-sm.btn-phoenix-secondary(data-bs-dismiss="modal" aria-label="Close")
+						span.fas.fa-times.text-danger
+				.modal-body.px-0
+					.row.g-4
+						.col-lg-6
+							.mb-4
+								label.text-1000.fw-bold.mb-2 Deal Owner
+								select.form-select
+									option Select
+									option Ally Aagaard
+									option Aida Moen
+									option Niko Koss
+									option Alec Haag
+									option Lonnie Kub
+									option Ola Smith
+							.mb-4
+								label.text-1000.fw-bold.mb-2 Deal Name
+								input.form-control(type='text' placeholder='Enter deal name')
+							.mb-4
+								.row.g-3
+									.col-sm-6.col-lg-12.col-xl-6
+										label.text-1000.fw-bold.mb-2 Deal Amount
+										.row.g-2
+											.col
+												input.form-control(type='number' placeholder='$ Enter amount')
+											.col-auto
+												select.form-select
+													option USD
+													option GBP
+													option EUR
+													option JPY
+													option CAD
+													option AUD
+													option CNY
+													option CHF
+													option ZAR
+													option BRL
+													option RUB
+													option INR
+													option MXN
+													option NZD
+													option SGD
+													option HKD
+													option KRW
+													option SEK
+													option NOK
+													option TRY
+									.col-sm-6.col-lg-12.col-xl-6
+										label.text-1000.fw-bold.mb-2 Deal Code
+										input.form-control(type='text' placeholder='Enter deals code')
+							.mb-4
+								label.text-1000.fw-bold.mb-2 Deal Type
+									button.btn.btn-link.p-0.ms-3
+										span.fa-solid.fa-plus.me-1
+										span Add new
+								select.form-select
+									option Select
+									option Buy One Get One Free
+									option Clearance sale
+									option Bundle deals
+									option Free shipping
+									option Loyalty programs
+									option Limited-time offers
+									option Refer-a-friend discounts
+									option Seasonal sales
+									option Membership discounts
+							.mb-4
+								label.text-1000.fw-bold.mb-2 Category
+									button.btn.btn-link.p-0.ms-3
+										span.fa-solid.fa-plus.me-1
+										span Add new
+								select.form-select
+									option Select
+									option Financial
+									option Marketplace
+									option Travel
+									option E-commerce
+									option Cloud Computing
+							.mb-4
+								.row.g-3
+									.col-sm-6.col-lg-12.col-xl-6
+										label.text-1000.fw-bold.mb-2 Probability (%)
+										input.form-control(type='text' placeholder='Enter value')
+									.col-sm-6.col-lg-12.col-xl-6
+										label.text-1000.fw-bold.mb-2 Expected Revenue
+										.row.g-2
+											.col
+												input.form-control(type='number' placeholder='$ Enter amount')
+											.col-auto
+												select.form-select
+													option USD
+													option GBP
+													option EUR
+													option JPY
+													option CAD
+													option AUD
+													option CNY
+													option CHF
+													option ZAR
+													option BRL
+													option RUB
+													option INR
+													option MXN
+													option NZD
+													option SGD
+													option HKD
+													option KRW
+													option SEK
+													option NOK
+													option TRY
+
+							div
+								.row.g-3
+									.col-6
+										label.text-1000.fw-bold.mb-2 Stage
+										select.form-select
+											option Select
+											option New
+											option In Progress
+											option Pending
+											option Canceled
+											option Completed
+									.col-6
+										label.text-1000.fw-bold.mb-2 Priority
+										select.form-select
+											option Urgent
+											option High
+											option Medium
+											option Low
+						.col-lg-6
+							.mb-4
+								label.text-1000.fw-bold.mb-2 Contact Name
+								input.form-control(type='text' placeholder='Enter contact name')
+							.mb-4
+								.row.g-3
+									.col-6
+										label.text-1000.fw-bold.mb-2 Phone Number
+										input.form-control(type='text' placeholder='Enter phone number')
+									.col-6
+										label.text-1000.fw-bold.mb-2 Email Address
+										input.form-control(type='text' placeholder='Enter email address')
+							.mb-4
+								label.text-1000.fw-bold.mb-2 Lead Source
+									button.btn.btn-link.p-0.ms-3
+										span.fa-solid.fa-plus.me-1
+										span Add new
+								select.form-select
+									option Select
+									option Referrals
+									option Former Clients
+									option Competitors
+									option Business & sales
+									option Google resources
+									option Linkedin
+									option Marketing
+							.mb-4
+								label.text-1000.fw-bold.mb-2 Campaign Source
+									button.btn.btn-link.p-0.ms-3
+										span.fa-solid.fa-plus.me-1
+										span Add new
+								select.form-select
+									option Select
+									option Online Campaign
+									option Offline Campaign
+							.mb-4
+								label.text-1000.fw-bold.mb-2 Time Zone
+								select.form-select
+									option GMT-12:00 Etc/GMT-12
+									option GMT-11:00 Etc/GMT-11
+									option GMT-11:00 Pacific/Midway
+									option GMT-10:00 America/Adak
+									option GMT-09:00 America/Anchorage
+									option GMT-09:00 Pacific/Gambier
+									option GMT-08:00 America/Dawson_Creek
+									option GMT-08:00 America/Ensenada
+									option GMT-08:00 America/Los_Angeles
+									option GMT-07:00 America/Chihuahua
+									option GMT-07:00 America/Denver
+									option GMT-06:00 America/Belize
+									option GMT-06:00 America/Cancun
+									option GMT-06:00 America/Chicago
+									option GMT-06:00 Chile/EasterIsland
+									option GMT-05:00 America/Bogota
+									option GMT-05:00 America/Havana
+									option GMT-05:00 America/New_York
+									option GMT-04:30 America/Caracas
+									option GMT-04:00 America/Campo_Grande
+									option GMT-04:00 America/Glace_Bay
+									option GMT-04:00 America/Goose_Bay
+									option GMT-04:00 America/Santiago
+									option GMT-04:00 America/La_Paz
+									option GMT-03:00 America/Argentina/Buenos_Aires
+									option GMT-03:00 America/Montevideo
+									option GMT-03:00 America/Araguaina
+									option GMT-03:00 America/Godthab
+									option GMT-03:00 America/Miquelon
+									option GMT-03:00 America/Sao_Paulo
+									option GMT-03:30 America/St_Johns
+									option GMT-02:00 America/Noronha
+									option GMT-01:00 Atlantic/Cape_Verde
+									option GMT Europe/Belfast
+									option GMT Africa/Abidjan
+									option GMT Europe/Dublin
+									option GMT Europe/Lisbon
+									option GMT Europe/London
+									option UTC UTC
+									option GMT+01:00 Africa/Algiers
+									option GMT+01:00 Africa/Windhoek
+									option GMT+01:00 Atlantic/Azores
+									option GMT+01:00 Atlantic/Stanley
+									option GMT+01:00 Europe/Amsterdam
+									option GMT+01:00 Europe/Belgrade
+									option GMT+01:00 Europe/Brussels
+									option GMT+02:00 Africa/Cairo
+									option GMT+02:00 Africa/Blantyre
+									option GMT+02:00 Asia/Beirut
+									option GMT+02:00 Asia/Damascus
+									option GMT+02:00 Asia/Gaza
+									option GMT+02:00 Asia/Jerusalem
+									option GMT+03:00 Africa/Addis_Ababa
+									option GMT+03:00 Asia/Riyadh89
+									option GMT+03:00 Europe/Minsk
+									option GMT+03:30 Asia/Tehran
+									option GMT+04:00 Asia/Dubai
+									option GMT+04:00 Asia/Yerevan
+									option GMT+04:00 Europe/Moscow
+									option GMT+04:30 Asia/Kabul
+									option GMT+05:00 Asia/Tashkent
+									option GMT+05:30 Asia/Kolkata
+									option GMT+05:45 Asia/Katmandu
+									option GMT+06:00 Asia/Dhaka
+									option GMT+06:00 Asia/Yekaterinburg
+									option GMT+06:30 Asia/Rangoon
+									option GMT+07:00 Asia/Bangkok
+									option GMT+07:00 Asia/Novosibirsk
+									option GMT+08:00 Etc/GMT+8
+									option GMT+08:00 Asia/Hong_Kong
+									option GMT+08:00 Asia/Krasnoyarsk
+									option GMT+08:00 Australia/Perth
+									option GMT+08:45 Australia/Eucla
+									option GMT+09:00 Asia/Irkutsk
+									option GMT+09:00 Asia/Seoul
+									option GMT+09:00 Asia/Tokyo
+									option GMT+09:30 Australia/Adelaide
+									option GMT+09:30 Australia/Darwin
+									option GMT+09:30 Pacific/Marquesas
+									option GMT+10:00 Etc/GMT+10
+									option GMT+10:00 Australia/Brisbane
+									option GMT+10:00 Australia/Hobart
+									option GMT+10:00 Asia/Yakutsk
+									option GMT+10:30 Australia/Lord_Howe
+									option GMT+11:00 Asia/Vladivostok
+									option GMT+11:30 Pacific/Norfolk
+									option GMT+12:00 Etc/GMT+12
+									option GMT+12:00 Asia/Anadyr
+									option GMT+12:00 Asia/Magadan
+									option GMT+12:00 Pacific/Auckland
+									option GMT+12:45 Pacific/Chatham
+									option GMT+13:00 Pacific/Tongatapu
+									option GMT+14:00 Pacific/Kiritimati
+							.mb-4
+								.row.g-3
+									.col-6
+										label.text-1000.fw-bold.mb-2 Create Date
+										input.form-control.datetimepicker(type='text' placeholder='dd / mm / yyyy', data-options!={disableMobile:true})
+									.col-6
+										label.text-1000.fw-bold.mb-2 Start Time
+										input.form-control.datetimepicker(type="text" placeholder="H:i" data-options!={enableTime:true, noCalendar: true, dateFormat:'H:i',disableMobile:true,})
+							div
+								.row.g-3
+									.col-6
+										label.text-1000.fw-bold.mb-2 Closing Date
+										input.form-control.datetimepicker(type='text' placeholder='dd / mm / yyyy', data-options!={disableMobile:true})
+									.col-6
+										label.text-1000.fw-bold.mb-2 Closing Time
+										input.form-control.datetimepicker(type="text" placeholder="H:i" data-options!={enableTime:true, noCalendar: true, dateFormat:'H:i',disableMobile:true,})
+				.modal-footer.border-0.pt-6.px-0.pb-0
+					button.btn.btn-link.text-danger.px-3.my-0(data-bs-dismiss="modal" aria-label="Close") Cancel
+					button.btn.btn-primary.my-0 Create Deal

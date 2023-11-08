@@ -1,0 +1,35 @@
+mixin OrganizeCard
+  .card&attributes(attributes)
+    .card-body
+      h4.card-title.mb-4 Organize
+      .row.gx-3
+        .col-12.col-sm-6.col-xl-12
+          .mb-4
+            .d-flex.flex-wrap.mb-2
+              h5.mb-0.text-1000.me-2 Category
+              a.fw-bold.fs--1(href='#!') Add new category
+            select.form-select.mb-3(aria-label='category')
+              option(value='men-cloth') Men's Clothing
+              option(value='women-cloth') Womens's Clothing
+              option(value='kid-cloth') Kid's Clothing
+        .col-12.col-sm-6.col-xl-12
+          .mb-4
+            .d-flex.flex-wrap.mb-2
+              h5.mb-0.text-1000.me-2 Vendor
+              a.fw-bold.fs--1(href='#!') Add new vendor
+            select.form-select.mb-3(aria-label='category')
+              option(value='men-cloth') Men's Clothing
+              option(value='women-cloth') Womens's Clothing
+              option(value='kid-cloth') Kid's Clothing
+        .col-12.col-sm-6.col-xl-12     
+          .mb-4
+            h5.mb-2.text-1000 Collection
+            input.form-control.mb-xl-3(type='text' placeholder='Collection')
+        .col-12.col-sm-6.col-xl-12
+          .d-flex.flex-wrap.mb-2
+            h5.mb-0.text-1000.me-2 Tags
+            a.fw-bold.fs--1.lh-sm(href='#!') View all tags
+          select.form-select(aria-label='category')
+            option(value='men-cloth') Men's Clothing
+            option(value='women-cloth') Womens's Clothing
+            option(value='kid-cloth') Kid's Clothing

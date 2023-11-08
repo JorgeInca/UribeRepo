@@ -1,0 +1,71 @@
+append variables
+	-
+		var pagesItems = [
+			{
+				pageThumb: 'sections/21.webp',
+				pageName: 'Profile',
+				className:'justify-content-center justify-content-lg-end',
+				pageLink:`${CWD}${paths['social-profile']}`,
+			},
+			{
+				pageThumb: 'sections/22.webp',
+				pageName: 'Pricing',
+				className:'justify-content-center justify-content-lg-start',
+				pageLink:`${CWD}pages/pages/pricing/pricing-column.html`,
+				pageLink:`${CWD}${paths['pricing-column']}`,
+			},
+				{
+				pageThumb: 'sections/23.webp',
+				pageName: 'FAQ',
+				className:'justify-content-center justify-content-lg-end',
+				pageLink:`${CWD}${paths['faq-accordion']}`,
+			},
+			{
+				pageThumb: 'sections/24.webp',
+				pageName: 'Notifications',
+				className:'justify-content-center justify-content-lg-start',
+				pageLink:`${CWD}${paths['notifications-page']}`,
+			},
+				{
+				pageThumb: 'sections/25.webp',
+				pageName: 'Authentication',
+				className:'justify-content-center justify-content-lg-end',
+				pageLink:`${CWD}pages/authentication/split/sign-in.html`,
+				pageLink:`${CWD}${paths['split-signin']}`,
+			},
+			{
+				pageThumb: 'sections/26.webp',
+				pageName: 'Event',
+				className:'justify-content-center justify-content-lg-start',
+				pageLink:`${CWD}apps/events/event-detail.html`,
+				pageLink:`${CWD}${paths['event-detail']}`,
+			},
+
+		];
+
+mixin Page(config)
+	.col-lg-6.position-relative.page-container
+		.d-flex.px-4.pt-6(class=`${config.className}`)
+			.text-center
+				.img-container.w-100
+					img.img-fluid.page-thumb.rounded.z-index-2(
+						src=`${CWD}assets/img/${config.pageThumb}` alt=""
+					)
+					//- img.img-fluid.page-thumb.rounded.z-index-2(
+					//- 	src=`${CWD}assets/img/sections/${config.pageThumb}.png`
+					//- 	srcset=`${CWD}assets/img/sections/${config.pageThumb}.png 225w, ${CWD}assets/img/sections/${config.pageThumb}.png 300w`
+					//- )
+				h5.py-4.text-1000=config.pageName
+
+		a(href=`${config.pageLink}`).stretched-link
+
+mixin NecessaryPages
+	+Section('container-fluid').pb-13
+		.row.justify-content-center
+			.col-12.col-lg-9.col-xl-8.col-xxl-6.text-center
+				h2.mb-6.text-1000.fw-normal Smartly designed
+					span.text-primary.position-relative.fw-bolder.ms-2 necessary pages
+						img.w-100.text-illustration-underline(src=`${CWD}assets/img/spot-illustrations/31.png`, alt="")
+		.row
+			each item in pagesItems
+				+Page(item)

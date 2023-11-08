@@ -1,0 +1,45 @@
+extends ../../../layouts/LayoutEcommerce
+include ../../../mixins/e-commerce/invoice/InvoiceDetails
+include ../../../mixins/e-commerce/invoice/InvoiceTable
+
+
+append variables
+  - var disableNavigationType = true;
+  - var disableHorizontalNavbarShape = true;
+  - var disableVerticalNavbarAppearance = true;
+  - var disableHorizontalNavbarAppearance = true;
+
+block ecomContent
+  +Section(null,'container-small').pt-5.pb-9.bg-white.dark__bg-1200.border-top.border-300
+    nav.mb-2(aria-label='breadcrumb')
+      ol.breadcrumb.mb-0
+        li.breadcrumb-item
+          a(href='#!') Page 1
+        li.breadcrumb-item
+          a(href='#!') Page 2
+        li.breadcrumb-item.active(aria-current='page') Default
+    .d-flex.justify-content-between.align-items-end.mb-4
+      h2.mb-0 Invoice
+      div
+        button.btn.btn-phoenix-secondary.me-2
+          span.fa-solid.fa-download.me-sm-2
+          span.d-none.d-sm-inline-block Download Invoice
+        button.btn.btn-phoenix-secondary
+          span.fa-solid.fa-print.me-sm-2
+          span.d-none.d-sm-inline-block Print
+    +InvoiceDetails
+    +InvoiceTable
+    .d-flex.justify-content-between
+      button.btn.btn-primary
+        span.fa-solid.fa-bag-shopping.me-2
+        | Browse more items
+      div
+        button.btn.btn-phoenix-secondary.me-2
+          span.fa-solid.fa-download.me-sm-2
+          span.d-none.d-sm-inline-block Download Invoice
+        button.btn.btn-phoenix-secondary
+          span.fa-solid.fa-print.me-sm-2
+          span.d-none.d-sm-inline-block Print
+
+
+

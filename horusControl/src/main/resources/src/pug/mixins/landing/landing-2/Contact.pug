@@ -1,0 +1,54 @@
+mixin Contact
+  +Section('container-small px-lg-7 px-xxl-3').pb-10.pb-xl-14
+    .text-center.mb-7
+      h5.text-info.mb-3 Contact
+      h2.mb-2 Choose the best deal for you
+    .row
+      .col-12.mb-10
+        .googlemap(data-googlemap data-gmap data-latlng='40.7228022,-74.0020158' data-scrollwheel='false' data-zoom='15' style='height: 381px; border-radius:1.5rem;')
+          .marker-content.py-3
+            h5 Google map
+            p A nice template for your site.
+              br
+              | Customize it as you want.
+    .row.g-5.g-lg-5
+      .col-md-6.mb-5.mb-md-0.text-center.text-md-start
+        h3.mb-3 Stay connected
+        p.mb-5 Stay connected with Phoenix's Help Center; Phoenix is available for your necessities at all times.
+        .d-flex.flex-column.align-items-center.align-items-md-start.gap-3.gap-md-0
+          .d-md-flex.align-items-center
+            .icon-wrapper.shadow-info
+              span.uil.uil-phone.text-primary.light.fs-4.z-index-1.ms-2
+            .flex-1.ms-3
+              a(href="tel:+871406-7509").link-900 (871) 406-7509
+          .d-md-flex.align-items-center
+            .icon-wrapper.shadow-info
+              span.uil.uil-envelope.text-primary.light.fs-4.z-index-1.ms-2
+            .flex-1.ms-3
+              a(href="mailto:phoenix@email.com").fw-semi-bold.text-900 phoenix@email.com
+          .mb-6.d-md-flex.align-items-center
+            .icon-wrapper.shadow-info
+              span.uil.uil-map-marker.text-primary.light.fs-4.z-index-1.ms-2
+            .flex-1.ms-3
+              a(href="#!").fw-semi-bold.text-900 39163 Amir Drive Suite 802
+          .d-flex
+            a(href="#!")
+              span.fa-brands.fa-facebook.fs-2.text-primary.me-3
+            a(href="#!")
+              span.fa-brands.fa-twitter.fs-2.text-primary.me-3
+            a(href="#!")
+              span.fa-brands.fa-linkedin-in.fs-2.text-primary
+
+      .col-md-6.text-center.text-md-start
+        h3.mb-3 Drop us a line
+        p.mb-7 If you have any query or suggestion , we are open to learn from you, Lets talk, reach us anytime.
+        form.row.g-4
+          .col-12
+            input.form-control.bg-white(type="text" name="name" placeholder="Name" required)
+          .col-12
+            input.form-control.bg-white(type="email" name="email" placeholder="Email" required)
+          .col-12
+            textarea.form-control.bg-white(rows="6" name="message" placeholder="Message" required)
+          .col-12.d-grid
+            button(type="submit").btn.btn-outline-primary Submit
+          .feedback

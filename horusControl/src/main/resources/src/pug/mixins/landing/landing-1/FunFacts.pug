@@ -1,0 +1,40 @@
+mixin FunFacts
+	.position-relative
+		+Background({image: `${CWD}assets/img/bg/bg-13.png`, className: 'world-map-bg' })
+		+Background({image: `${CWD}assets/img/bg/bg-right-21.png`, attrs: { style: { 'background-size': 'auto', 'background-position': 'right',} }, className: 'z-index-2 opacity-25' })
+		+Background({image: `${CWD}assets/img/bg/bg-left-21.png`, attrs: { style: { 'background-size': 'auto', 'background-position': 'left',} }, className: 'z-index-2 mt-9 opacity-25' })
+		svg.w-100.text-white.position-relative(preserveAspectRatio="none" viewBox='0 0 1920 368' fill='none' xmlns='http://www.w3.org/2000/svg')
+			path(d='M1920 0.44L0 367.74V0H1920V0.44Z' fill='currentColor')
+		section.overflow-hidden.z-index-2
+			.container-small.light.px-lg-7.px-xxl-3
+				.position-relative
+					.row.mb-6
+						.col-xl-6.text-center.text-md-start
+							h2.text-white.mb-2 Being used by millions of users
+							h1.fs-md-5.fs-xl-6.fw-black.text-gradient-info.text-uppercase.mb-4.mb-md-0 WORLDWIDE
+						.col-xl-6.text-center.text-md-start
+							p.text-white You can get all the reports, data analysis, and growth maps you need with the help of Phoenix's power, and you may review and modify them whenever you want. These features make this dashboard outstanding.
+					.row
+						.col-xl-8.text-center.text-md-start.mb-6.mb-xl-0
+							.d-md-flex.justify-content-md-between
+								.mb-6.mb-md-0.me-4
+									h1.display-1.text-white.fw-bolder(data-countup!={endValue: 125, duration: 10, suffix: '+'} ) 0 
+										span +
+									p.text-white Every month, there are more
+										br.d-md-none.d-lg-block
+										| than 125+ sales.
+								.mb-6.mb-md-0.me-4
+									h1.display-1.text-white.fw-bolder(data-countup!={endValue: 308, duration: 10,suffix: 'k' } ) 0
+									p.text-white We have 308+ active paid.
+										br.d-md-none.d-lg-block
+										| subscribers.
+								.mb-6.mb-md-0.me-4
+									h1.display-1.text-white.fw-bolder(data-countup!={endValue: 12, duration: .5} ) 0
+									p.text-white We have won 12 awards so
+										br.d-md-none.d-lg-block
+										| far with great success.				
+						.col-xl-4.text-center.text-md-start
+							img.img-fluid(src=`${CWD}assets/img/generic/capterra.png` alt='')
+		//- div
+		svg.text-white.w-100.position-relative(viewBox='0 0 1920 368' fill='none' xmlns='http://www.w3.org/2000/svg')
+			path(d='M0 368L1920 0.730011L1920 368L0 368Z' fill='currentColor')

@@ -1,0 +1,134 @@
+extends ../../layouts/LayoutTheme
+
+append variables
+  - 
+    var breadcrumb = [
+      {
+        label: 'Pages',
+        href: '#!'
+      },
+      {
+        label: 'Pricing',
+        href: '#!',
+        active: true
+      }
+    ];
+
+mixin PricingCard(data)
+  img.mb-4.d-dark-none(src=`${CWD}assets/img/spot-illustrations/${data.icon}`, alt="", width='120' height="96")
+  img.mb-4.d-light-none(src=`${CWD}assets/img/spot-illustrations/dark_${data.icon}`, alt="", width='120' height="96")
+  .mb-sm-5.pricing-column-title-box
+    h3.mb-2=data.title
+    p.text-800.mb-0.pe-3!=data.description
+  .d-flex.align-items-center.mb-4
+    h3.display-3.fw-bolder=data.price
+    if(data.price !== 'Free')
+      h5.fs-0.fw-normal.ms-1 / month
+  button.btn.btn-lg.w-100.mb-6(class=data.buyBtnClass) Buy
+  h5.mb-4 What’s included
+  ul.fa-ul(style='--fa-li-margin: 1.5em;')
+    li.text-800.mb-2
+        span.fa-li
+          span.fas.fa-check.text-primary
+        | Timeline
+    li.mb-2(class=data.features.advanced_search ? 'text-900' : 'text-500')
+      span.fa-li.me-2.stack-icon-item
+        span.fa-stack.fs--3
+          span.fas.fa-circle.fa-stack-2x(class=data.features.advanced_search ? 'text-success' : 'text-300')
+          span.fas.fa-stack-1x.fa-inverse(class=data.features.advanced_search ? 'fa-check text-white' : 'fa-times text-600')
+      | Advanced Search
+    li.mb-2(class=data.features.custom_fields ? 'text-900' : 'text-500')
+      span.fa-li.me-2.stack-icon-item
+        span.fa-stack.fs--3
+          span.fas.fa-circle.fa-stack-2x(class=data.features.custom_fields ? 'text-success' : 'text-300')
+          span.fas.fa-stack-1x.fa-inverse(class=data.features.custom_fields ? 'fa-check text-white' : 'fa-times text-600')
+      | Custom fields
+      if data.features.newBadge
+        span.badge.badge-phoenix.badge-phoenix-primary.ms-2.fs--2 New
+    li.mb-2(class=data.features.task_dependencies ? 'text-900' : 'text-500')
+      span.fa-li.me-2.stack-icon-item
+        span.fa-stack.fs--3
+          span.fas.fa-circle.fa-stack-2x(class=data.features.task_dependencies ? 'text-success' : 'text-300')
+          span.fas.fa-stack-1x.fa-inverse(class=data.features.task_dependencies ? 'fa-check text-white' : 'fa-times text-600')
+      | Task dependencies
+    li.mb-2(class=data.features.private_teams ? 'text-900' : 'text-500')
+      span.fa-li.me-2.stack-icon-item
+        span.fa-stack.fs--3
+          span.fas.fa-circle.fa-stack-2x(class=data.features.private_teams ? 'text-success' : 'text-300')
+          span.fas.fa-stack-1x.fa-inverse(class=data.features.private_teams ? 'fa-check text-white' : 'fa-times text-600')
+      | Private teams & projects
+
+
+block content
+  -
+    var cards = [
+      {
+        title: 'Learner',
+        icon:'13.png',
+        description: 'For individuals who are interested in giving it a shot first.',
+        //- description: 'For the people who are interested in giving it a shot for the first time.',
+        price: 'Free',
+        buyBtnClass: 'btn-outline-primary',
+        features: {
+          timeline: true,
+          advanced_search: false,
+          custom_fields: false,
+          task_dependencies: false,
+          private_teams: false,
+          newBadge: false
+        },
+      },
+      {
+        title: 'Starter',
+        icon:'14.png',
+        description: 'For teams that need to create project plans with confidence.',
+        //- description: 'For teams who are in need to be able to confidently create project plans.',
+        price: '$14.99',
+        buyBtnClass: 'btn-outline-primary',
+        features: {
+          timeline: true,
+          advanced_search: true,
+          custom_fields: false,
+          task_dependencies: false,
+          private_teams: false,
+          newBadge: false
+        },
+      },
+      {
+        title: 'Team',
+        icon:'15.png',
+        description: 'For teams that need to manage work across initiatives.',
+        //- description: 'For groups which are tasked with coordinating work on a variety of projects.',
+        price: '$49.99',
+        buyBtnClass: 'btn-primary',
+        features: {
+          timeline: true,
+          advanced_search: true,
+          custom_fields: true,
+          task_dependencies: false,
+          private_teams: false,
+          newBadge: true
+        }
+      },
+      {
+        title: 'Industry',
+        icon:'16.png',
+        description: 'For organizations that need additional security and support.',
+        //- description: 'For enterprises with requirement of additional security and assistance.',
+        price: '$149.99',
+        buyBtnClass: 'btn-outline-primary',
+        features: {
+          timeline: true,
+          advanced_search: true,
+          custom_fields: true,
+          task_dependencies: true,
+          private_teams: true,
+          newBadge: true
+        },
+      },
+    ]
+  h2.mb-7 Pricing
+  .row.g-7.g-lg-11.mb-7
+    each card in cards
+      .col-12.col-sm-6.col-xxl-3
+        +PricingCard(card)

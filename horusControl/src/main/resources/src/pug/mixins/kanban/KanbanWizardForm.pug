@@ -1,0 +1,226 @@
+mixin Step1(config)
+  form(id=`${config.formId}1` class=config.validation && 'needs-validation' novalidate data-wizard-form='1')
+    .form-floating
+      input.form-control(type='text' name=`${config.name}-name` id=`${config.name}wizard-name` required=config.validation placeholder='Event title' value="New Kanban Board")
+      label(for=`${config.name}wizard-name`) BOARD NAME
+
+    .form-floating.mt-4
+      select.form-select(name=`${config.name}-type` id=`${config.name}wizard-type` required=config.validation)
+        option(selected disabled value='') Select event type
+        option(value='1') technical
+        option(value='2') external
+        option(value='3') organizational
+      label(for=`${config.name}wizard-type`) BOARD TYPE
+
+
+    .form-floating.mt-4
+      textarea.form-control(placeholder='Leave a comment here' name=`${config.name}-message` id=`${config.name}-wizard-des` style='height: 128px')
+      label(for=`${config.name}-wizard-des`) DESCRIPTION (OPTIONAL)
+
+
+mixin Step2(config)
+  form(id=`${config.formId}2` class=config.validation && 'needs-validation' novalidate data-wizard-form='2')
+    .kanban-column-item
+      .kanban-column-input-container.flex-grow-1
+        .form-floating.position-relative
+          input(type="text" name="column1" placeholder="column1" value="Unassaigned" id=config.name+"-wizard-column1" required=config.validation).form-control
+          span.fa-solid.fa-bars.kanban-column-icon.text-700.fs--1
+          label.ps-6(for=config.name+"-wizard-column1") COLUMN 1
+          span.fa-solid.fa-circle-xmark.text-300.position-absolute.top-50.end-0.translate-middle-y.me-2
+      .ms-3  
+        input.kanban-color-picker(type='color' name="column1Color" value='#6E7891' id=config.name+"-wizard-color-column1") 
+
+    .kanban-column-item
+      .kanban-column-input-container.flex-grow-1
+        .form-floating.position-relative
+          input(type="text" name="column2" placeholder="column2" value="To Do" id=config.name+"-wizard-column2" required=config.validation).form-control
+          span.fa-solid.fa-bars.kanban-column-icon.text-700.fs--1
+          label.ps-6(for=config.name+"-wizard-column2") COLUMN 2
+          span.fa-solid.fa-circle-xmark.text-300.position-absolute.top-50.end-0.translate-middle-y.me-2
+      .ms-3
+        input.kanban-color-picker(type='color' name="column2color" value='#25B003' id=config.name+"-wizard-color-column2") 
+
+    .kanban-column-item
+      .kanban-column-input-container.flex-grow-1
+        .form-floating.position-relative
+          input(type="text" name="column3" placeholder="column3" value="Doing" id=config.name+"-wizard-column3" required=config.validation).form-control
+          span.fa-solid.fa-bars.kanban-column-icon.text-700.fs--1
+          label.ps-6(for=config.name+"-wizard-column3") COLUMN 3
+          span.fa-solid.fa-circle-xmark.text-300.position-absolute.top-50.end-0.translate-middle-y.me-2
+
+      .ms-3
+        input.kanban-color-picker(type='color' name="column3Color" value='#EC1F00' id=config.name+"-wizard-color-column3") 
+  .d-grid 
+    button.btn.btn-lg.btn-phoenix-secondary.fs--1.bg-100
+      span.fas.fa-plus.me-2(data-fa-transform='shrink-3')
+      | Add New Column
+
+mixin Step3(config)
+  -
+    var colors = [
+      '#ffffff', '#F5F8FF', '#EFF2F6', '#E3E6ED', '#CBD0DD', '#85A9FF', '#60C6FF', '#90D67F', '#F48270', '#FFCC85',
+      '#3874FF', '#0097EB', '#25B003', '#EC1F00', '#E5780B', '#004DFF', '#0080C7', '#23890B', '#CC1B00', '#D6700A',
+      '#000000', '#222834',
+    ]
+  form(id=`${config.formId}3` class=config.validation && 'needs-validation' novalidate data-wizard-form='3')
+    ul#myTab.nav.nav-underline.border-bottom(role='tablist')
+      li.nav-item
+        a#color-tab.nav-link.active(data-bs-toggle='tab' href='#tab-color' role='tab' aria-controls='tab-color' aria-selected='true') 
+          span.fas.fa-palette.me-2
+          | Solid color
+      li.nav-item
+        a#bg-tab.nav-link(data-bs-toggle='tab' href='#tab-bg' role='tab' aria-controls='tab-bg' aria-selected='false') 
+          span.fas.fa-envelope.me-2
+          | Image
+    #myTabContent.tab-content.mt-10
+      #tab-color.tab-pane.fade.show.active(role='tabpanel' aria-labelledby='color-tab')
+        .d-flex.flex-wrap
+          each color,index in colors 
+            .me-3.mb-4
+              input.btn-check.kanban-swatch-radio(type="radio" value=color checked=index===0  ? true : false name="board-bg" id=`color${index}`)
+              label.btn.btn-primary.kanban-swatch-label.kanban-swatch-btn-shadow(for=`color${index}` style=`background-color: ${color}`)
+
+          .me-3.mb-4(style="display:none")
+            input.btn-check(data-custom-color-radio type="radio" value='#eeeeee' name="board-bg" )
+            //- label.btn.btn-primary.kanban-swatch-label.kanban-swatch-btn-shadow(for=`color${index}` style=`background-color: ${color}`)
+          .me-3.mb-4
+            input.btn-check(data-custom-color-input type="color" id=`customColorInput`)
+            label.btn.btn-outline-secondary.align-self-start.rounded-pill.kanban-swatch-btn-shadow(for=`customColorInput` )
+              span.fas.fa-plus.me-2(data-fa-transform='shrink-3') 
+              | CUSTOM COLOR
+
+          .me-3.mb-4
+            // you pass hex color through data-random-color as arrsy; data-random-color=['#ffffff', '#000000']
+            input.btn-check.kanban-swatch-radio(type="radio" data-random-color checked=index===0  ? true : false name="board-bg" value='' id=`Randomcolor`)
+            label.btn.btn-outline-danger.align-self-start.rounded-pill.kanban-swatch-btn-shadow(for=`Randomcolor`)
+              span.fa-solid.fa-shuffle.me-2(data-fa-transform='shrink-3') 
+              | RANDOM
+
+      #tab-bg.tab-pane.fade(role='tabpanel' aria-labelledby='bg-tab')
+        .row.g-3.mb-4
+          each img,index in ['bg1','bg2','bg3','bg4','bg5','bg6'] 
+            .col-6
+              input.btn-check.kanban-swatch-radio(type="radio" value=`assets/img/kanban/${img}.jpg` checked=index===0  ? true : false name="board-img" id=`img${index}`)
+              label.kanban-radio-bg-image.w-100(for=`img${index}`)
+                img(src=`${CWD}assets/img/kanban/${img}.jpg` alt="" style="height: 100px").me-2.cursor-pointer.rounded-3.fit-cover.w-100
+          .col-12
+            input.btn-check.kanban-swatch-radio(type="radio" name="board-custom-image" id=`boardCustomImage`)
+            .dropzone.dropzone-multiple.p-0.w-100#dropzone(data-dropzone data-options!={ url: 'valid/url', maxFiles: 1, dictDefaultMessage: 'Choose or Drop a file here' })
+              .fallback
+                input(type="file" name="file")
+              .dz-message.text-600.text-center.py-3(data-dz-message) or, Add a custom background
+                br
+                img.mt-3(src=`${CWD}assets/img/icons/image-icon.png`, width=30 alt="")
+              .dz-preview.dz-preview-multiple.m-0.d-flex.flex-column       
+                .d-flex.pb-3.border-bottom.media.px-2
+                  .border.border-300.p-2.rounded-2.me-2
+                    img.rounded-2(src=`${CWD}assets/img/icons/file.png` alt="..." data-dz-thumbnail).dz-image
+                  .flex-1.d-flex.flex-between-center
+                    div
+                      h6(data-dz-name)
+                      .d-flex.align-items-center
+                        p.mb-0.fs--1.text-400.lh-1(data-dz-size)
+                        .dz-progress
+                          span.dz-upload(data-dz-uploadprogress='')
+                      span.fs--2.text-danger(data-dz-errormessage)
+                    .dropdown.font-sans-serif
+                      button.btn.btn-link.text-600.btn-sm.dropdown-toggle.btn-reveal.dropdown-caret-none(type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
+                        span.fas.fa-ellipsis-h
+                      .dropdown-menu.dropdown-menu-end.border.py-2
+                        a.dropdown-item(href="#!" data-dz-remove) Remove File
+
+mixin Step4(config)
+  -
+    var tags= [
+      {
+        icon: 'package',
+        color: 'primary',
+        text: 'Feature'
+      },
+      {
+        icon: 'check',
+        color: 'success',
+        text: 'Completed'
+      },
+      {
+        icon: 'alert-triangle',
+        color: 'warning',
+        text: 'issue'
+      },
+      {
+        icon: 'alert-octagon',
+        color: 'danger',
+        text: 'bug'
+      },
+    ]
+  form(id=`${config.formId}4` class=config.validation && 'needs-validation' novalidate data-wizard-form='4')
+    each item,index in tags
+      input.d-none(name=`tag${index + 1}` value=tags[index] )
+      .position-relative.kanban-tag
+        span.badge.badge-phoenix.d-flex.flex-between-center.mb-5.fs--1.px-4.py-2.kanban-tag-badge(class=`badge-phoenix-${item.color}`)
+          span.badge-label.text-capitalize.lh-base=item.text
+          span.ms-1(data-feather=item.icon style='height:15.8px;width:12.8px;')
+        = '\n'
+        .position-absolute.top-0.end-0.d-flex
+          button(type='button').btn.btn-phoenix-secondary.fs--1.bg-transparent.lh-1.kanban-tag-action-icons.me-1
+            span.fas.fa-pencil(data-fa-transform='shrink-5')
+          button(type='button').btn.btn-phoenix-danger.fs--1.bg-transparent.lh-1.kanban-tag-action-icons
+            span.fas.fa-trash(data-fa-transform='shrink-5')
+  .d-grid 
+    button.btn.btn-phoenix-secondary.fs--1.bg-100.py-2.lh-base
+      span.fas.fa-plus.me-2(data-fa-transform='shrink-3')
+      | Create Custom Tag
+
+mixin Step5(config)
+  //- #kanbanBoardStep5.kanban-radio-collapse
+  form(id=`${config.formId}5` class=config.validation && 'needs-validation' novalidate data-wizard-form='5').kanban-radio-collapse
+    .mb-4.form-check
+      input.form-check-input(type="radio" checked name="accessType" value="type1" id=`accessType1` data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-controls="collapseOne")
+      label.form-check-label(for=`accessType1`) Anyone with shareable link can access
+      .collapse.accordion-collapse.show(id="collapseOne" role="tabpanel" aria-labelledby="accessType1" data-bs-parent="#createBoardForm5" aria-expanded="true")
+        .row.g-3.mt-2
+          .col-md-9
+            .form-floating.position-relative
+              input.form-control#invite-link(type='text' name='shareableLink' value='https://themewagon.com/phoenix' placeholder='Shareable link')
+              label(for='invite-link') SHAREABLE LINK
+              button#dataCopy(type='button' data-copy="#invite-link" data-bs-placement="top" title="click to copy").btn.btn-link.position-absolute.top-50.end-0.translate-middle-y.text-400
+                span.fa-regular.fa-paste.fa-lg
+          .col-md-3
+            .form-floating
+              select.form-select#guestSelect(name="role")
+                option(value='guest' selected) Guest
+                option(value='member') Member
+              label(for='guestSelect') ADD AS
+
+    .mb-4.form-check
+      input.form-check-input(type="radio" value="type2" name="accessType" id=`accessType2` data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-controls="collapseTwo")
+      label.form-check-label(for=`accessType2`) Only invited people can access
+      .collapse.accordion-collapse(id="collapseTwo" role="tabpanel" aria-labelledby="accessType2" data-bs-parent="#createBoardForm5") 
+        .row.g-3.mt-2
+          .col-md-9
+            .form-floating
+              input.form-control#floatingEventInput(type='text' name="user" placeholder='Event title')
+              label(for='floatingEventInput') ADD PEOPLE (ID OR EMAIL)
+          .col-md-3
+            .form-floating
+              select.form-select#memberSelect
+                option(value='member' selected) Member
+                option(value='admin') Admin
+                option(value='developer') Developer
+              label(for='memberSelect') ADD AS
+          .col-md-12
+            .form-floating
+              textarea.form-control(placeholder='Leave a ME here' name="message" id=`${config.name}-wizard-message` style='height: 128px')
+              label(for=`${config.name}-wizard-message`) ADD A MESSAGE (OPTIONAL)
+            .d-grid.mt-3
+              button.btn.btn-outline-primary Invite
+                span.fa-solid.fa-envelope.ms-2(data-fa-transform='shrink-3')
+    .border-top-0.mt-1(data-wizard-create-board-submit)
+      .d-flex.pager.wizard.list-inline.mb-0
+        button(type="button" data-board-prev-btn).btn.btn-link.ps-0
+          span.fas.fa-chevron-left.me-1(data-fa-transform="shrink-3")
+          | Previous
+
+        .flex-1.text-end
+          button(type='submit').btn.btn-primary.px-6.px-sm-6 Submit
+            span.fas.fa-chevron-right.ms-1(data-fa-transform="shrink-3") 

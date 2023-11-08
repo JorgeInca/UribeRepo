@@ -1,0 +1,13 @@
+mixin Prefooter 
+	+Section('container-small').bg-100.py-6
+		.row.align-items-center
+			.col-md-6.text-center.text-md-start
+				.d-md-flex.align-items-center.mb-2
+					img(src='assets/img/icons/logo.png' alt='phoenix' width='27')
+					p.logo-text.text-600.ms-2 phoenix
+				p.pe-md-5 Thank you for downloading Phoenix to create, customize and grow with it! Enjoy Phoenix!
+			.col-md-6
+				.d-lg-flex.justify-content-lg-end.text-center
+					a(href=`${CWD}documentation/getting-started.html`).me-4 Documentation
+					a(href="mailto:support@themewagon.com").me-4 Support
+					a(href=`${CWD}changelog.html`) Changelog

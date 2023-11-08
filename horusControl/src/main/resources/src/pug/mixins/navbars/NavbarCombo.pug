@@ -1,0 +1,16 @@
+include Mixins
+include ../common/Avatar
+
+mixin NavbarCombo(config)
+  nav.navbar.navbar-top.fixed-top#navbarCombo&attributes(attributes)(data-navbar-top='combo' data-move-target='#navbarVerticalNav')
+    +NavbarLogo(config.toggleID)
+    #navbarTopCollapse.collapse.navbar-collapse.navbar-top-collapse.order-1.order-lg-0.justify-content-center
+      +navbarTopMenus
+    +NavbarIcons({search:true})
+
+mixin NavbarComboSlim(config)
+  nav.navbar.navbar-top.fixed-top.navbar-slim.justify-content-between#navbarComboSlim&attributes(attributes)(data-navbar-top='combo' data-move-target='#navbarVerticalNav')
+    +NavbarLogoSlim(config.toggleID)
+    #navbarTopCollapse.collapse.navbar-collapse.navbar-top-collapse.order-1.order-lg-0.justify-content-center
+      +navbarTopMenus
+    +NavbarIconsSlim

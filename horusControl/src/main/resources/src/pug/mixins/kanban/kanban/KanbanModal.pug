@@ -1,0 +1,302 @@
+mixin KanbanItemDetailsModal
+  #KanbanItemDetailsModal.modal.fade(tabindex='-1' aria-hidden='true')
+    .modal-dialog.modal-fullscreen-md-down.modal-md.modal-dialog-centered
+      .modal-content.overflow-hidden
+        .modal-body.p-0
+          .position-relative(style='height:200px; width:100%')
+            +Background({
+              image: `${CWD}assets/img/kanban/modal-bg.jpg`,
+            })
+          .row.gy-4.py-0.gx-0
+            .col-lg-8.col-12
+              .row.mt-0.gy-4.pb-3.gx-0.px-3
+                .col-4.col-sm-3
+                  h6.text-600.fw-bolder.lh-sm.mt-1 TITLE 
+                .col-8.col-sm-9
+                  h4.mb-0.text-1100.lh-sm Reproduced below for those interested
+
+                .col-4.col-sm-3
+                  h6.text-600.fw-bolder.lh-sm.mt-1 DESCRIPTION 
+                .col-8.col-sm-9
+                  P.fs--1.mb-0 Reproduced below for those interested" is a phrase used to provide additional content or details for individuals who have expressed interest in a particular topic. It signals that what follows is optional and caters specifically to those who want to delve deeper into the subject matter.
+
+                .col-4.col-sm-3
+                  h6.text-600.fw-bolder.lh-sm.mt-1 BOARD 
+                .col-8.col-sm-9
+                  P.mb-0.text-1100.fw-semi-bold Phoenix
+
+                .col-4.col-sm-3
+                  h6.text-600.fw-bolder.lh-sm.mt-1 COLUMN 
+                .col-8.col-sm-9
+                  P.mb-0.text-1100.fw-semi-bold.d-inline-block.kanban-column-underline-warning Doing
+
+                .col-4.col-sm-3
+                  h6.text-600.fw-bolder.lh-sm.mt-1 ASSAIGNED TO 
+                .col-8.col-sm-9
+                  -
+                    var kanbanUsers = [
+                      {
+                        avatar:'team/30.webp',
+                        name: 'Stanly Drinkwater'
+                      },
+                      {
+                        avatar:'team/60.webp',
+                        name: 'Emma Watson'
+                      },
+                      {
+                        avatar:'team/25.webp',
+                        name: 'Igor Borvibson'
+                      }
+                    ];
+                  //- P.mb-0.text-1100.fw-semi-bold Members
+                  .d-flex.align-items-center
+                    each user in kanbanUsers
+                      a.dropdown-toggle.dropdown-caret-none.d-inline-block(href='#' role='button' data-bs-toggle='dropdown' aria-expanded='false' data-bs-auto-close="outside")
+                        +Avatar({
+                          size: 's',
+                          img: user.avatar,
+                          round: 'circle',
+                          imgClass:user.avatar==="team/avatar.webp" ? 'avatar-placeholder' : ''
+                        }).me-1
+                      +AvatarDropdownMenu(user) 
+
+                .col-4.col-sm-3
+                  h6.text-600.fw-bolder.lh-sm.mt-1 PRIORITY 
+                .col-8.col-sm-9
+                  P.mb-0.text-1100.fw-semi-bold
+                    span.fa.fa-circle.m(class=`text-warning` data-fa-transform="shrink-6 down-1" )
+                    |High
+
+                .col-4.col-sm-3
+                  h6.text-600.fw-bolder.lh-sm.mt-1 CATEGORY 
+                .col-8.col-sm-9
+                  //- P.mb-0.text-1100.fw-semi-bold 
+                  span.badge.badge-phoenix.fs--2(class=`badge-phoenix-danger`)
+                    span
+                      +cleanText('bug')
+                    span.ms-1.fas.fa-bug(class='item.icon' data-fa-transform="up-2" style="height:7.8px;width:7.8px;")
+
+                .col-4.col-sm-3
+                  h6.text-600.fw-bolder.lh-sm.mt-1 ATTACHMENTS  
+                .col-8.col-sm-9
+                  .border-bottom.d-flex.flex-row.pb-3
+                    img(src=`${CWD}assets/img/kanban/a1.jpg`, width=64 height=64 alt="").rounded-3
+                    .flex-1.ms-3.d-flex.flex-column
+                      h5.lh-sm Silly_sight_1.png
+                      p.lh-1.fs--1.text-700.fw-medium.mb-0 21st Decemver, 12:56 PM
+                      .d-flex.text-700.mt-auto
+                        span.fas.fa-comment.me-3(data-fa-transform="shrink-4")
+                        span.fas.fa-trash.me-3(data-fa-transform="shrink-4")
+                        span.fas.fa-pencil(data-fa-transform="shrink-4")
+
+                  .border-bottom.d-flex.flex-row.pb-3.mt-3
+                    .border.rounded-3.flex-center.d-flex(style="width:64px; height: 64px")
+                      .fa-solid.fa-file-zipper.fa-2x.text-400
+                    .flex-1.ms-3.d-flex.flex-column
+                      h5.lh-sm All_images.zip
+                      p.lh-1.fs--1.text-700.fw-medium.mb-0 21st Decemver, 12:56 PM
+                      .d-flex.text-700.mt-auto
+                        span.fas.fa-comment.me-3(data-fa-transform="shrink-4")
+                        span.fas.fa-trash.me-3(data-fa-transform="shrink-4")
+                        span.fas.fa-pencil(data-fa-transform="shrink-4")
+
+                  button.btn.btn-link.ps-0
+                    span.fas.fa-plus.me-2(data-fa-transform="shrink-3")
+                    | Add an Attachment
+
+            .col-lg-4.border-start-lg
+              .scrollbar(style='max-height: 667px;')
+                .px-3
+                  h5.mb-3.mt-4 Actions
+                  -
+                    var actions = [
+                      {
+                        icon: 'fa-solid fa-file-export',
+                        title: 'Move'
+                      },
+                      {
+                        icon: 'fa-solid fa-clone',
+                        title: 'Duplicate'
+                      },
+                      {
+                        icon: 'fa-solid fa-share-nodes',
+                        title: 'Share'
+                      },
+                      {
+                        icon: 'fa-solid fa-square-plus',
+                        title: 'Create template'
+                      },
+                      {
+                        icon: 'fa-solid fa-arrows-up-to-line',
+                        title: 'Jump to top'
+                      },
+                      {
+                        icon: 'fa-solid fa-box-archive',
+                        title: 'Move to Archive'
+                      },
+                      {
+                        icon: 'fa-solid fa-trash-can',
+                        title: 'Move to Trash'
+                      },
+                      {
+                        icon: 'fa-solid fa-download',
+                        title: 'Print/Download'
+                      },
+                    ]
+                  ul.nav.flex-column.flex-sm-row.flex-lg-column.list-unstyled
+                    each item in actions 
+                      li.kanban-action-item.lh-sm.nav-item.me-2
+                        a(href='#!').nav-link.text-1100.fw-semi-bold.fs--1.stretched-link
+                          span.me-2(class=item.icon)
+                          | #{item.title}
+                  -
+                    var activities = [
+                      {
+                        task: '<span class="fw-bold"> Alfen Loebe </span> Moved the task <a href="#!">"the standard chunk" </a>from <span class="fw-bold">Doing</span> to <span class="fw-bold">To Do</span>',
+                        time: '10:41 AM',
+                        date: 'Aughst 7,2022',
+                        icon: 'fas fa-random',
+                        iconColor: 'warning'
+                      },
+                      {
+                        task: '<span class="fw-bold"> Jessie Samson </span> Attached image3.png to the task <a href="#!">"the standard chunk" </a>',
+                        time: '10:41 AM',
+                        date: 'Aughst 7,2022',
+                        icon: 'fa-solid fa-paperclip',
+                        iconColor: 'info'
+                      },
+                      {
+                        task: '<span class="fw-bold"> Alfen Loebe </span> Moved the task <a href="#!">"the standard chunk" </a>from <span class="fw-bold">Doing</span> to <span class="fw-bold">To Do</span>',
+                        time: '10:41 AM',
+                        date: 'Aughst 7,2022',
+                        icon: 'fas fa-plus',
+                        iconColor: 'info'
+                      },
+                      {
+                        task: '<span class="fw-bold"> Alfen Loebe </span> Moved the task <a href="#!">"the standard chunk" </a>from <span class="fw-bold">Doing</span> to <span class="fw-bold">To Do</span>',
+                        time: '10:41 AM',
+                        date: 'Aughst 7,2022',
+                        icon: 'fas fa-random',
+                        iconColor: 'primary'
+                      }
+
+                    ]
+                  h5.mt-6 Activities
+                  each item,index in activities
+                    .d-flex(class=`${ activities.length-1 === index ? '': 'border-bottom' } `)
+                      .pt-3(class='text-'+item.iconColor)
+                        span.border.rounded-pill.p-1(data-fa-transform='shrink-4' class=item.icon )
+                      .activity-item.ps-2.py-3
+                        p.mb-1.fs--1 !{item.task}
+                        .d-flex 
+                          p.mb-0.fs--1.me-3 
+                            span.fa-regular.fa-clock.me-1
+                            | #{item.time}
+                          p.mb-0.fs--1 #{item.date}
+
+        .modal-footer.justify-content-between
+          button.btn.p-1(type='button' data-bs-dismiss='modal' aria-label='Close')
+            span.fas.fa-times.fs--2.me-1(data-fa-transform="up-1")
+            | Close
+          button.btn.btn-phoenix-primary.px-6(type='button' data-bs-target="#kanbanAddTask" data-bs-toggle='modal') Edit
+            span.fas.fa-edit.ms-2(data-fa-transform='shrink-3')
+
+mixin KanbanAddTask 
+  #kanbanAddTask.modal.fade(tabindex='-1' aria-hidden='true')
+    .modal-dialog.modal-fullscreen-sm-down.modal-xl.modal-dialog-centered
+      .modal-content
+        .modal-body
+          .row.gx-3.gy-4
+            .col-sm-6.col-md-12
+              .form-floating
+                input.form-control#kanbanTaskTitle(type='text' placeholder='title' value="") 
+                label(for='kanbanTaskTitle') Title
+            .col-12.gy-4
+              .form-floating
+                textarea#floatingProjectDescription.form-control(placeholder='Leave a comment here' style='height: 128px')
+                label(for='floatingProjectDescription') ADD A DESCRIPTION
+            .col-12.gy-4
+              .dropzone.dropzone-multiple.bg-transparent.p-0#Kanbandropzone(data-dropzone data-options!={ url: 'valid/url', maxFiles: 1, dictDefaultMessage: 'Choose or Drop a file here' })
+                .fallback
+                  input(type="file" name="file")
+                .dz-message.py-3(data-dz-message)
+                  .dz-message-text.text-center.text-800
+                    img(src=`${CWD}assets/img/icons/image-icon.png`, width=24 alt="").mb-2
+                    br
+                    | Add cover image 
+
+                .dz-preview.dz-preview-multiple.m-0.d-flex.flex-column  
+                  .d-flex.pb-3.border-bottom.media.px-2
+                    .border.border-dashed.border-300.p-2.rounded-2.me-2
+                      img.rounded-2(src=`${CWD}assets/img/icons/file.png` alt="..." data-dz-thumbnail).dz-image
+                    .flex-1.d-flex.flex-between-center
+                      div
+                        h6(data-dz-name)
+                        .d-flex.align-items-center
+                          p.mb-0.fs--1.text-400.lh-1(data-dz-size)
+                          .dz-progress
+                            span.dz-upload(data-dz-uploadprogress='')
+                        span.fs--2.text-danger(data-dz-errormessage)
+                      .dropdown.font-sans-serif
+                        button.btn.btn-link.text-600.btn-sm.dropdown-toggle.btn-reveal.dropdown-caret-none(type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
+                          span.fas.fa-ellipsis-h
+                        .dropdown-menu.dropdown-menu-end.border.py-2
+                          a.dropdown-item(href="#!" data-dz-remove) Remove File
+
+            .col-sm-4
+              .form-floating
+                select.form-select#TaskType
+                  option(selected) Phoenix
+                  option(value='2') Boreas
+                  option(value='3') Erebus
+                label(for='TaskType') BORAD TYPE
+            .col-sm-4
+              .form-floating
+                select.form-select#KanbanColumnType
+                  option(selected) Unassigned
+                  option(value='2') To do
+                  option(value='3') Doing
+                  option(value='3') Review
+                  option(value='3') Release
+                label(for='KanbanColumnType') COLUMN
+            .col-sm-4
+              .form-floating
+                select.form-select#KanbanPlaceNumber
+                  option(selected) 01
+                  option(value='2') 02
+                  option(value='3') 03
+                label(for='KanbanPlaceNumber') PLACE
+
+            .col-sm-12
+              .form-floating
+                select.form-select#KanbanAssignedMember
+                  option(selected value='1') Unassigned (Default)
+                  option(value='2') Richard Dawkins
+                  option(value='3') Ashley Garrett
+                  option(value='4') Barbara Lucas
+                  option(value='5') Woodrow Burton
+                label(for='KanbanAssignedMember') ASSIGNED TO
+
+            .col-sm-12
+              .form-floating
+                select.form-select#KanbanPriorityLavel
+                  option(selected) Low (Default)
+                  option(value='2') High
+                  option(value='2') Medium
+                  option(value='2') Urgent
+                label(for='KanbanPriorityLavel') PRIORITY
+
+            .col-sm-12
+              .form-floating
+                select.form-select#KanbanCategoryType
+                  option(selected) UNASSIGNED (Default)
+                  option(value='2') Feature
+                  option(value='2') Bug
+                  option(value='2') Issue
+                label(for='KanbanCategoryType') CATEGORY
+
+        .modal-footer.justify-content-between
+          button.btn.p-1(type='button' data-bs-dismiss='modal' aria-label='Close')
+            span.fas.fa-times.fs--2.me-1(data-fa-transform="up-1")
+            | Close
+          button.btn.btn-primary.px-6(type='button' data-bs-dismiss='modal') Done

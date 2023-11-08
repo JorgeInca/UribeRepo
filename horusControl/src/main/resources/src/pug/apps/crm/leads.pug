@@ -1,0 +1,99 @@
+extends ../../layouts/LayoutTheme
+include ../../mixins/dashboard/common
+include ../../mixins/crm/LeadsTable
+
+prepend styles
+	link(href=`${CWD}vendors/choices/choices.min.css`, rel='stylesheet')
+	link(href=`${CWD}vendors/flatpickr/flatpickr.min.css`, rel='stylesheet')
+
+prepend scripts
+	script(src=`${CWD}vendors/choices/choices.min.js`)
+
+append variables
+	-
+		var breadcrumb = [
+			{
+				label: 'Page 1',
+				href: '#!'
+			},
+			{
+				label: 'Page 2',
+				href: '#!',
+			},
+			{
+				label: 'Default',
+				href: '#!',
+				active: true
+			},
+		];
+
+block content
+	.pb-6
+		h2.mb-4 25 Leads
+		#lealsTable(data-list!={
+			valueNames: ["name", "email", "phone", "contact", "company", "date"],
+			page: 10,
+			pagination: true
+		})
+			.row.g-3.justify-content-between.mb-4
+				.col-auto
+					.d-md-flex.justify-content-between
+						div
+							button.btn.btn-primary.me-4
+								span.fas.fa-plus.me-2
+								| Create Lead
+
+							button.btn.btn-link.text-900.px-0
+								span.fa-solid.fa-file-export.fs--1.me-2
+								| Export
+				.col-auto
+					.d-flex
+						+Search({placeholder: 'Search by name'}).me-2
+						.flatpickr-input-container.me-2
+							input.form-control.ps-6.datetimepicker#datepicker(type="text" data-options!={dateFormat:'M j, Y',disableMobile:true,defaultDate: "Mar 1, 2022"})
+							span.uil.uil-calendar-alt.flatpickr-icon.text-700
+						button.btn.px-3.btn-phoenix-secondary(type='button' data-bs-toggle='modal' data-bs-target="#filterModal" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent")
+							span.fa-solid.fa-filter.text-primary(data-fa-transform='down-3')
+						+FilterModal
+
+			+LealsTable
+
+mixin FilterModal
+	#filterModal.modal.fade(tabindex="-1")
+		.modal-dialog.modal-dialog-centered
+			.modal-content.border
+				form#addEventForm(autocomplete="off")&attributes(attributes)
+					.modal-header.border-200.p-4
+						h5.modal-title.text-1000.fs-2.lh-sm Filter
+						button.btn.p-1.text-900(type='button' data-bs-dismiss='modal' aria-label='Close')
+							span.fas.fa-times.fs--1
+					.modal-body.pt-4.pb-2.px-4
+						.mb-3
+							label.fw-bold.mb-2.text-1000(for='leadStatus') Lead Status
+							select.form-select#leadStatus
+								option(value="newLead" selected) New Lead
+								option(value="coldLead") Cold Lead
+								option(value="wonLead") Won Lead
+								option(value="canceled") Canceled
+						.mb-3
+							label.fw-bold.mb-2.text-1000(for='createDate') Create Date
+							select.form-select#createDate
+								option(value="today" selected) Today
+								option(value="last7Days") Last 7 Days
+								option(value="last30Days") Last 30 Days
+								option(value="chooseATimePeriod") Choose a time period
+						.mb-3
+							label.fw-bold.mb-2.text-1000(for='designation') Designation
+							select.form-select#designation
+								option(value="VPAccounting" selected) VP Accounting
+								option(value="ceo") CEO
+								option(value="creativeDirector") Creative Director
+								option(value="accountant") Accountant
+								option(value="executiveManager") Executive Manager
+
+
+					.modal-footer.d-flex.justify-content-end.align-items-center.px-4.pb-4.border-0.pt-3
+						button.btn.btn-sm.btn-phoenix-primary.px-4.fs--2.my-0(type="submit") 
+							span.fas.fa-arrows-rotate.me-2.fs--2
+							| Reset
+						button.btn.btn-sm.btn-primary.px-9.fs--2.my-0(type="submit") Done

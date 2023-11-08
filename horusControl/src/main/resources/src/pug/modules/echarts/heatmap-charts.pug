@@ -1,0 +1,21 @@
+extends ../../layouts/LayoutComponent
+
+prepend scripts
+  script(src=`${CWD}vendors/echarts/echarts.min.js`)
+
+append scripts
+  script(src=`${CWD}assets/js/echarts-example.js`)
+
+
+block component
+  .row.g-4.mb-9
+    .col-xl-6
+      +ComponentCard({title:'Heatmap chart'})
+        // Find the JS file for the following chart at: src/js/charts/echarts/examples/heatmap-chart.js
+        // If you are not using gulp based workflow, you can find the transpiled code at: public/assets/js/echarts-example.js
+        .echart-heatmap-chart-example(style='min-height:350px')
+    .col-xl-6
+      +ComponentCard({title:'Heatmap single series chart'})
+        // Find the JS file for the following chart at: src/js/charts/echarts/examples/heatmap-single-series-chart.js
+        // If you are not using gulp based workflow, you can find the transpiled code at: public/assets/js/echarts-example.js
+        .echart-heatmap-single-series-chart-example(style='min-height:350px')

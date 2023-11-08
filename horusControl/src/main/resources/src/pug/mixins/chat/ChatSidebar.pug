@@ -1,0 +1,21 @@
+mixin ChatSidebar
+  .scrollbar
+    #contactListTabContent.tab-content
+      div(data-chat-thread-tab-content)
+        ul.nav.chat-thread-tab.flex-column.list
+          each thread,index in threads
+            li.nav-item(role="presentation" class=`${thread.unread ? 'unread' : 'read'}` )
+              a.nav-link.d-flex.align-items-center.justify-content-center.p-2(class=`${thread.unread ? 'unread' : ''} ${index === 0 ? 'active' : ''}` data-bs-toggle='tab', data-chat-thread href=`#tab-thread-${thread.id}`, role='tab' aria-selected='true')
+                .avatar.avatar-xl.status-online.position-relative.me-2.me-sm-0.me-xl-2
+                  img.rounded-circle.border.border-2.border-white(class=thread.placeholder ? 'avatar-placeholder' : '' src=`${CWD}assets/img/${thread.avatar}`, alt='')
+                  if thread.badge 
+                    span.bg-primary.rounded-circle.top-0.end-0.position-absolute.text-white.d-flex.flex-center.fs--2.fw-semi-bold.d-none.d-sm-flex.d-xl-none.lh-1(style='height: 1rem; width: 1rem;')=thread.badge
+                .flex-1.d-sm-none.d-xl-block
+                  .d-flex.justify-content-between.align-items-center
+                    h5.text-900.fw-normal.name.text-nowrap=thread.name
+                    p.fs--2.text-600.mb-0.text-nowrap=thread.time
+                  .d-flex.justify-content-between
+                    p.fs--1.mb-0.line-clamp-1.text-600.message=thread.message
+                    if thread.badge 
+                      span.badge.badge-phoenix.badge-phoenix-primary.px-1.unread-badge=thread.badge
+                        | +

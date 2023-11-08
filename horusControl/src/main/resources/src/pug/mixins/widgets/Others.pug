@@ -1,0 +1,40 @@
+include WidgetSectionTitle
+include ../dashboard/project-management/FlyCard
+include ../e-commerce/customer-details/CustomerCards
+include ../e-commerce/order-details/OrderDetailsCards
+include ../crm/DealDetails
+include ../crm/LeadDetails
+
+mixin Others
+  +WidgetSectionTitle({
+    transform: 'shrink-2',
+    icon: 'fas fa-folder-plus',
+    title: 'Others',
+    subtitle: `Get more awesome cards for showing your different types of content..`
+  }).mb-4#scrollspyOthers.pt-7
+  .row.g-3.mb-3
+    .col-xl-6.col-xxl-5
+      +FlyCard
+    .col-xl-6.col-xxl-7
+      +FeedTextarea.mb-5.h-100
+  .row.g-3
+    .col-xl-4
+      .row.gy-3.h-100
+        .col-12
+          +NotesCard.mb-3.h-100
+        .col-12
+          +DealProfileCard.mb-3.h-100
+    .col-xl-4
+      .row.gy-3.h-100
+        .col-12
+          +CustomerProfileCard.mb-3.h-100
+        .col-12
+          +AddressCard.mb-3.h-100
+        .col-12
+          +SummaryCard.mb-3.h-100
+    .col-xl-4 
+      .row.gy-3.h-100
+        .col-12
+          +AboutThisLead.mb-3.h-100
+        .col-12
+          +LeadProfileCard.h-100

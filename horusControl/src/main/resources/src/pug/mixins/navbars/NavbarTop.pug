@@ -1,0 +1,26 @@
+include Mixins
+include ../common/Avatar
+
+mixin NavbarTop(config)
+  nav.navbar.navbar-top.fixed-top#navbarTop&attributes(attributes) 
+    +NavbarLogo(config.toggleID)
+    .collapse.navbar-collapse.navbar-top-collapse.order-1.order-lg-0.justify-content-center(id=config.navbarCollapseID ? config.navbarCollapseID : config.toggleID)
+      +navbarTopMenus
+    +NavbarIcons({search:true})
+
+mixin NavbarTopSlim(config)
+  nav.navbar.navbar-top.navbar-slim.justify-content-between.fixed-top#navbarTopSlim&attributes(attributes)
+    +NavbarLogoSlim(config.toggleID)
+    #navbarTopCollapse.collapse.navbar-collapse.navbar-top-collapse.order-1.order-lg-0.justify-content-center
+      +navbarTopMenus
+    +NavbarIconsSlim
+
+mixin DualNav(config)
+  nav.navbar.navbar-top.fixed-top#dualNav&attributes(attributes)
+    .w-100
+      .d-flex.flex-between-center.dual-nav-first-layer
+        +NavbarLogo(config.toggleID)
+        +NavbarSearch
+        +NavbarIcons
+      .collapse.navbar-collapse.navbar-top-collapse.justify-content-center(id=config.navbarCollapseID ? config.navbarCollapseID : config.toggleID)
+        +navbarTopMenus

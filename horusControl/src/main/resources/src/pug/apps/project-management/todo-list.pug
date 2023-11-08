@@ -1,0 +1,37 @@
+extends ../../layouts/LayoutTheme
+include ../../mixins/project-management/ToDoList
+include ../../mixins/dashboard/common
+include ../../mixins/project-management/Common
+
+prepend styles
+  link(href=`${CWD}vendors/choices/choices.min.css`, rel='stylesheet')
+  link(href=`${CWD}vendors/flatpickr/flatpickr.min.css`, rel='stylesheet')
+
+prepend scripts
+  script(src=`${CWD}vendors/choices/choices.min.js`)
+
+
+block content
+  .mb-9
+    h2.mb-4 Todo list
+      span.text-700.fw-normal (23)
+    .row.align-items-center.g-3.mb-3
+      .col-sm-auto
+        +Search({placeholder: 'Search tasks'})
+      .col-sm-auto
+        .d-flex
+          a.btn.btn-link.p-0.ms-sm-3.fs--1.text-700.hover-text-primary.fw-bold(href='#!')
+            span.fas.fa-filter.me-1.fw-extra-bold.fs--2
+            |23 tasks
+          a.btn.btn-link.p-0.ms-3.fs--1.text-700.hover-text-primary.fw-bold(href='#!')
+            span.fas.fa-sort.me-1.fw-extra-bold.fs--2
+            |Sorting
+    .mb-4.todo-list
+      each item, index in todoList
+        +TodoPageListItem(item,index,index === todoList.length - 1)
+        +ToDoOffcanvas(item.task,index)
+    a.fw-bold.fs--1.mt-4(href='#!')
+      span.fas.fa-plus.me-1
+      | Add new task
+
+

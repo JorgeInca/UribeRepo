@@ -1,0 +1,78 @@
+append variables
+	-
+		var blogs= [
+			{
+				image:'blog-1.png',
+				views:'2563',
+				heart:'125',
+				comments:'125',
+				category:'SEO',
+				title:'Top 10 ways to Ace SEO for your business',
+			},
+			{
+				image:'blog-2.png',
+				views:'1256',
+				heart:'325',
+				comments:'32',
+				category:'Marketing',
+				title:'Top 12 Marketing strategies you can take',
+			},
+			{
+				image:'blog-3.png',
+				views:'142',
+				heart:'123',
+				comments:'22',
+				category:'Marketing',
+				title:'The top 7 methods to improve as a marketer',
+			},
+			{
+				image:'blog-4.png',
+				views:'2563',
+				heart:'325',
+				comments:'112',
+				category:'Tech',
+				title:'Best places for a tech job in U.S',
+			},
+
+		];
+
+mixin BlogItems(config)
+	.col-sm-6.col-lg-3.mb-3.mb-md-0
+		.card.text-white.h-100
+			img.rounded-top(src=`${CWD}assets/img/blog/${config.image}`  alt='...').h-100.fit-cover
+			.card-body.rounded-top
+				.d-flex.align-items-cente.mb-3
+					.d-flex.align-items-center.me-3
+						a.btn-link.text-decoration-none.d-flex.align-items-center(href='#!')
+							span.fa-solid.fa-eye.text-500.me-1
+							span.text-900.fs--2.lh-1=config.views
+					.d-flex.align-items-center.me-3
+						a.btn-link.text-decoration-none.d-flex.align-items-center(href='#!')
+							span.fa-solid.fa-heart.text-500.me-1
+							span.text-900.fs--2.lh-1=config.heart
+					.d-flex.align-items-center
+						a.btn-link.text-decoration-none.d-flex.align-items-center(href='#!')
+							span.fa-solid.fa-comment.text-500.me-1
+							span.text-900.fs--2.lh-1=config.comments
+				span.badge.badge-phoenix.badge-phoenix-primary.mb-2=config.category
+				h4.fw-bold.mb-3.lh-sm.line-clamp-2=config.title
+				a.btn-link.px-0.d-flex.align-items-center.fs--1.fw-bold(href='#!' role='button') Read more
+					span.fa-solid.fa-angle-right.ms-2
+
+mixin Blog
+	+Section('container-small px-lg-7 px-xxl-3').bg-white#blog
+		.row
+			.col-12.mb-4.text-center.text-sm-start
+				h4.text-primary.fw-bolder.mb-3 Blog
+				h2 Latest articles
+			.col-lg-6.text-center.text-sm-start
+				p See the latest articles we published with this dashboard. Your customers will be happy to find all the latest posts in one place. This menu efficiently shows all related topics from search filters and provides the customers with what
+			.col-lg-6.text-center.text-sm-start
+				p they need. Also you can just educate your customers about everything they need to know and follow to avail a service with you. This menu is the one to show them that.
+
+		.row.h-100.g-3.justify-content-center
+			each blog in blogs
+				+BlogItems(blog)
+		.text-center.mt-6
+			a.btn.btn-outline-primary(href="#!") View All
+				span.fa-solid.fa-angle-right.ms-2

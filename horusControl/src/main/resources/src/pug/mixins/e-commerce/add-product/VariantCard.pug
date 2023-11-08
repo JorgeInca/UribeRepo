@@ -1,0 +1,37 @@
+mixin VariantCard
+  .card&attributes(attributes)
+    .card-body
+      h4.card-title.mb-4 Variants
+      .row.g-3
+        .col-12.col-sm-6.col-xl-12
+          .border-bottom.border-dashed.border-sm-0.border-bottom-xl.pb-4
+            .d-flex.flex-wrap.mb-2
+              h5.text-1000.me-2 Option 1
+              a.fw-bold.fs--1(href='#!') Remove
+            select.form-select.mb-3
+              option(value='size') Size
+              option(value='color') Color
+              option(value='weight') Weight
+              option(value='smell') Smell
+            .product-variant-select-menu
+              select.form-select.mb-3(data-choices multiple data-options!={removeItemButton: true,placeholder: true})
+                option(value='size') 4x6 in
+                option(value='color') 9x6 in
+                option(value='weight') 11x8 in
+        .col-12.col-sm-6.col-xl-12
+          .d-flex.flex-wrap.mb-2
+            h5.text-1000.me-2 Option 2
+            a.fw-bold.fs--1(href='#!') Remove
+          select.form-select.mb-3
+            option(value='size') Size
+            option(value='color') Color
+            option(value='weight') Weight
+            option(value='smell') Smell
+          .product-variant-select-menu.mb-3
+            select.form-select.mb-3(data-choices multiple data-options!={removeItemButton: true,placeholder: true})
+              option(value='size') 4x6 in
+              option(value='color') 9x6 in
+              option(value='weight') 11x8 in
+      button.btn.btn-phoenix-primary.w-100(type='button') Add another option
+
+        

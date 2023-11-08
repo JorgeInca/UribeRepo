@@ -1,0 +1,13 @@
+extends ../../layouts/LayoutEmail
+
+append variables
+	- var showComposeBtn = true;
+
+block pageContent
+	.col-lg
+		.px-lg-1
+			+InboxToolbar(true)
+			each email,index in emails
+				+EmailRow(email,index === emails.length - 1)
+
+

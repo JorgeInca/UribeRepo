@@ -1,0 +1,115 @@
+{
+  "rtl": true,
+  "dir": {
+    "dev": "public",
+    "prod": "build"
+  },
+  "style": {
+    "src": "src/scss/**/*.scss",
+    "dest": "assets/css"
+  },
+  "script": {
+    "src": [
+      "src/js/utils.js",
+      "src/js/detector.js",
+      "src/js/node.js",
+      "src/js/**/!(utils | detector | node)*.js",
+      "!src/js/emoji-button.js",
+      "!src/js/charts/echarts/examples/*.js",
+      "!src/js/theme/charts/echarts/echarts-example.js",
+      "!src/js/flatpickr.js",
+      "!src/js/config.js",
+      "!src/js/phoenix.js",
+      "src/js/phoenix.js",
+      "src/js/config.js"
+    ],
+    "configNavbar": "src/js/config.js",
+    "echartsExample": [
+      "src/js/utils.js",
+      "src/js/charts/echarts/echarts-utils.js",
+      "src/js/charts/echarts/examples/*.js",
+      "!src/js/theme/charts/echarts/echarts-example.js",
+      "src/js/theme/charts/echarts/echarts-example.js"
+    ],
+    "bundles": [
+      {
+        "path": "src/js/phoenix.js",
+        "name": "phoenix"
+      },
+      {
+        "path": "src/js/pages/ecommerce-dashboard.js",
+        "name": "ecommerce"
+      },
+      {
+        "path": "src/js/pages/projectmanagement-dashboard.js",
+        "name": "projectManagement"
+      },
+      {
+        "path": "src/js/pages/crm-dashboard",
+        "name": "crm"
+      },
+      {
+        "path": "src/js/pages/crm-analytics",
+        "name": "crm-analytics"
+      },
+      {
+        "path": "src/js/pages/project-details.js",
+        "name": "projectDetails"
+      },
+      {
+        "path": "src/js/pages/calendar.js",
+        "name": "calendar"
+      },
+      {
+        "path": "src/js/pages/showcase.js",
+        "name": "showcase"
+      },
+      {
+        "path": "src/js/config.js",
+        "name": "config"
+      },
+      {
+        "path": "src/js/theme/charts/echarts/echarts-example.js",
+        "name": "echarts-example"
+      }
+    ],
+    "dest": "assets/js"
+  },
+  "pug": {
+    "base": "src/pug",
+    "src": {
+      "all": "src/pug/**/*.pug",
+      "pages": [
+        "*.pug",
+        "apps/**/*.pug",
+        "authentication/**/*.pug",
+        "dashboard/**/*.pug",
+        "demo/**/*.pug",
+        "documentation/**/*.pug",
+        "modules/**/*.pug",
+        "pages/**/*.pug"
+      ]
+    },
+    "dest": ""
+  },
+  "product": {
+    "paths": [
+      "gulp/**/*.*",
+      "public/**/*.*",
+      "src/**/*.*",
+      ".babelrc",
+      ".eslintignore",
+      ".eslintrc.json",
+      ".gitignore",
+      ".npmrc",
+      ".prettierrc",
+      "gulpfile.js",
+      "jsconfig.json",
+      "package-lock.json",
+      "package.json",
+      "README.md",
+      "vendors.json"
+    ]
+  },
+  "watch": ["assets/img", "assets/data", "assets/video", "vendors"]
+}

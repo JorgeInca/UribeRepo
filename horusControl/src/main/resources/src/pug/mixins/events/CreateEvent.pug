@@ -1,0 +1,221 @@
+mixin EventDetails 
+	h4.fs-1.mb-0 Event Details
+	.col-sm-6.col-md-12
+		.form-floating
+			input.form-control#floatingEventInput(type='text' placeholder='Event title')
+			label(for='floatingEventInput') Event title
+	.col-sm-6.col-md-6
+		.form-floating
+			select.form-select#floatingSelectTask
+				option(selected) Select event type
+				option(value='1') technical
+				option(value='2') external
+				option(value='3') organizational
+			label(for='floatingSelectTask') type
+
+	.col-sm-6.col-md-6
+		.form-floating
+			select.form-select#floatingSelectPrivacy
+				option(selected) Select topic
+				option(value='1') Data select topic One
+				option(value='2') Data select topic Two
+				option(value='3') Data select topic Three
+			label(for='floatingSelectPrivacy') topic
+	.col-12.mt-4
+		.form-check.form-check-inline
+			input.form-check-input#inlineRadio1(type='radio' name='inlineRadioOptions' value='option1' checked)
+			label.form-check-label(for='inlineRadio1') Online
+		.form-check.form-check-inline
+			input.form-check-input#inlineRadio2(type='radio' name='inlineRadioOptions' value='option2')
+			label.form-check-label(for='inlineRadio2') Offline
+		.form-check.form-check-inline
+			input.form-check-input#inlineRadio3(type='radio' name='inlineRadioOptions' value='option3')
+			label.form-check-label(for='inlineRadio3') Both
+	.col-sm-6.col-md-12.mt-md-0.mt-lg-1
+		.form-floating
+			input.form-control#floatingVenueInput(type='text' placeholder='Venue')
+			label(for='floatingVenueInput') Venue
+	.col-sm-6.col-md-4
+		.form-floating
+			select.form-select#floatingSelectCountry
+				option(selected) Select Country
+				option(value='1') Country One
+				option(value='2') Country Two
+				option(value='3') Country Three
+			label(for='floatingSelectCountry') Country
+
+	.col-sm-6.col-md-4
+		.form-floating
+			select.form-select#floatingSelectState
+				option(selected) Select State 
+				option(value='1') One
+				option(value='2') Two
+				option(value='3') Three
+			label(for='floatingSelectState')  State
+
+	.col-sm-6.col-md-4
+		.form-floating
+			select.form-select#floatingSelectCity
+				option(selected) Select city
+				option(value='1') Data Privacy One
+				option(value='2') Data Privacy Two
+				option(value='3') Data Privacy Three
+			label(for='floatingSelectCity') City
+
+mixin CreateEvent
+	.row.g-5
+		.col-xl-8
+			.row.gx-3.gy-4
+				+EventDetails
+
+				h4.fs-1.mt-7 Schedule
+
+				.col-sm-6
+					.flatpickr-input-container
+						.form-floating
+							input#startDatepicker.form-control.datetimepicker(type='text' placeholder='start date', data-options!={disableMobile:true})
+							span.uil.uil-calendar-alt.flatpickr-icon.text-700
+							label.ps-6(for='startDatepicker') Start date
+				.col-sm-6
+					.form-floating
+						input.form-control.datetimepicker#timepickerEvent(type="text" placeholder="H:i" data-options!={enableTime:true, noCalendar: true, dateFormat:'H:i',disableMobile:true,})
+						label(for="timepickerEvent") Start Time
+				.col-sm-6
+					.flatpickr-input-container
+						.form-floating
+							input#endDatepicker.form-control.datetimepicker(type='text' placeholder='end date', data-options!={disableMobile:true})
+							span.uil.uil-calendar-alt.flatpickr-icon.text-700
+							label.ps-6(for='endDatepicker') End date
+				.col-sm-6
+					.form-floating
+						input.form-control.datetimepicker#timepickerEvent2(type="text" placeholder="H:i" data-options!={enableTime:true, noCalendar: true, dateFormat:'H:i',disableMobile:true,})
+						label(for="timepickerEvent2") End Time
+
+
+				.col-sm-6
+					.form-floating
+						select.form-select#floatingSelectTimeZone
+							option(selected) Select time zone
+							option(value='1') Data Privacy One
+							option(value='2') Data Privacy Two
+							option(value='3') Data Privacy Three
+						label(for='floatingSelectTimeZone') Time zone
+
+				.col-sm-6
+					.flatpickr-input-container
+						.form-floating
+							input#datepicker.form-control.datetimepicker(type='text' placeholder='registration deadline', data-options!={disableMobile:true})
+							label(for='datepicker') Registration deadline
+
+				.col-12.gy-6
+					.form-floating
+						textarea#floatingProjectDescription.form-control(placeholder='Leave a comment here' style='height: 128px')
+						label(for='floatingProjectDescription') Description
+				.col-sm-6.gy-6
+					.form-floating
+						input.form-control#floatingOrganizersInput(type='text' placeholder='ORGANIZERS')
+						label(for='floatingOrganizersInput') ORGANIZERS
+				.col-sm-6.gy-6
+					.form-floating
+						input.form-control#floatingSponsorsInput(type='text' placeholder='SPONSORS')
+						label(for='floatingSponsorsInput') SPONSORS
+				.col-12.gy-6
+					.dropzone.dropzone-multiple.p-0.mb-5#my-awesome-dropzone(data-dropzone)
+						.fallback
+							input(name='file' type='file', multiple)
+						.dz-preview.d-flex.flex-wrap
+							.border.bg-white.rounded-3.d-flex.flex-center.position-relative.me-2.mb-2(style='height:80px;width:80px;')
+								img(src=`${CWD}assets/img/products/23.png` alt="..." data-dz-thumbnail).dz-image
+								a(href="#!" data-dz-remove).dz-remove.text-400
+									span(data-feather='x')
+						.dz-message.text-600.text-center(data-dz-message) 
+							| Drag your photo here 
+							span.text-800 or 
+							button.btn.btn-link.p-0(type='button') Browse from device 
+							br
+							img.mt-3(src=`${CWD}assets/img/icons/image-icon.png`, width=40 alt="").me-2
+
+				.col-12
+					div(style="--phoenix-choices-inner-min-height: 128px;")
+						select.form-select.mb-3(data-choices multiple data-options!={removeItemButton: true,placeholder: true})
+							option(value="") Add tags
+							option(value='MUSIC') Music
+							option(value='CONCEERT') CONCEERT
+							option(value='GREATEST SHOW ON EARTH') GREATEST SHOW ON EARTH		
+		.col-xl-4
+			.border-bottom.pb-6.mb-6
+				h4.fs-1.mb-4 Privacy
+				.form-check.mb-2
+					input.form-check-input#exampleRadios1(type='radio' name='exampleRadios' value='option1' checked)
+					label.form-check-label.fw-normal(for='exampleRadios1')
+						| On Phoenix, our distribution partners, and search engines,
+						br
+						| anybody can find the event	
+				.form-check.mb-0
+					input.form-check-input#exampleRadios2(type='radio' name='exampleRadios' value='option2')
+					label.form-check-label.fw-normal(for='exampleRadios2')
+						| Only the individuals you select have access to it.
+			.border-bottom.mb-6
+				.form-check
+					input.form-check-input#flexChecked(type='checkbox' checked)
+					label.form-check-label.fw-bold.fs-0.mb-5(for='flexChecked') Show the number of available tickets
+			h4.fs-1.mb-4 Ticket pricing
+			.form-check.form-check-inline
+				input.form-check-input#freeTicket(type='radio' name='inlineRadioOptions' value='freeTicket' checked)
+				label.form-check-label(for='freeTicket') Free
+			.form-check.form-check-inline
+				input.form-check-input#paidTicket(type='radio' name='inlineRadioOptions' value='paidTicket')
+				label.form-check-label(for='paidTicket') Paid
+			.row.g-3.mb-7.mt-1.border-bottom.pb-5
+				.col-6.col.col-xl-7
+					h4.fs--1 Option
+				.col-6.col-xl-5
+					h4.fs--1 Price
+				.col-6.col-xl-7
+					input.form-control(type='text' placeholder='Top Gallery')
+				.col-6.col-xl-5
+					input.form-control(type='number' placeholder='$0.0')
+				.col-6.col-xl-7
+					input.form-control(type='text' placeholder='VIP' )
+				.col-6.col-xl-5
+					input.form-control(type='number' placeholder='$0.0')
+				.col-6.col-xl-7
+					input.form-control(type='text' placeholder='Front row')
+				.col-6.col-xl-5
+					input.form-control(type='number' placeholder='$0.0')
+				.col-12
+					button.btn.btn-link.p-0(type='button')
+						span.fa-solid.fa-plus.me-2
+						|Add an option	
+
+			h4.fs-1.mb-3 Custom fields
+			.row.g-3.mb-3
+				.col-md-6.col-lg-12.col-xl-6
+					label.form-label(for='inputName') Name
+					input.form-control#inputName(type='text' placeholder='Item name (e.g. Special T-shirt)')
+				.col-md-6.col-lg-12.col-xl-6
+					label.form-label(for='inputState1') Type
+					select#inputState1.form-select
+						option(value='') Choose...
+						option(value='') Type One
+						option(value='') Type Two
+				.col-12
+					label.form-label(for='filedOptions') Field options
+					textarea#filedOptions.form-control(placeholder='Description' rows='6')
+			.row.g-3
+				.col-md-6.col-lg-12.col-xl-6
+					label.form-label(for='inputName2') Name
+					input.form-control#inputName2(type='text' placeholder='Item name (e.g. Special T-shirt)')
+				.col-md-6.col-lg-12.col-xl-6
+					label.form-label(for='inputState2') Type
+					select#inputState2.form-select
+						option(value='') Choose...
+						option(value='') Type Three
+						option(value='') Type Four
+				.col-12
+					label.form-label(for='filedOptions2') Field options
+					textarea#filedOptions2.form-control(placeholder='Description' rows='6')
+				.col-12
+					button.btn.btn-link.p-0(type='button')
+						span.fa-solid.fa-plus.me-2
+						| Add an item

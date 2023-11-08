@@ -1,0 +1,92 @@
+extends ../../../layouts/LayoutComponent
+
+append variables
+  -
+    var pageHeader = {
+      title: 'Date Picker',
+      description: `Lightweight, powerful javascript datetime picker with no dependencies.`,
+      url: `https://flatpickr.js.org/`,
+      linkText: 'Documentation for Flatpickr',
+    }
+
+prepend styles
+  link(href=`${CWD}vendors/flatpickr/flatpickr.min.css`, rel='stylesheet')
+
+prepend scripts
+  //- script(src=`${CWD}assets/js/flatpickr.js`)
+
+block component
+  .mb-9
+    .row.g-3.my-4
+      .col-xl-6
+        +ComponentCard({
+          title: 'Date Picker',
+          anchor: true,
+        })
+          = '\n'
+          label.form-label(for="datepicker") Start Date
+          = '\n'  
+          input.form-control.datetimepicker#datepicker(type="text" placeholder="dd/mm/yyyy" data-options!={disableMobile:true, dateFormat:'d/m/Y',})
+          = '\n'
+      .col-xl-6
+        +ComponentCard({
+          title: 'Time Picker',
+          anchor: true,
+        })
+          = '\n'
+          label.form-label(for="timepicker1") Start Time
+          = '\n'  
+          input.form-control.datetimepicker#timepicker1(type="text" placeholder="hour : minute" data-options!={enableTime:true, noCalendar: true, dateFormat:'H:i',disableMobile:true,})
+          = '\n'
+      .col-xl-6
+        +ComponentCard({
+          title: 'Date Time Picker',
+          anchor: true,
+        })
+          = '\n'
+          label.form-label(for="datetimepicker") Start Date
+          = '\n'  
+          input.form-control.datetimepicker#datetimepicker(type="text" placeholder="dd/mm/yyyy hour : minute" data-options!={enableTime: true, dateFormat:'d/m/y H:i',disableMobile:true})
+          = '\n'
+      .col-xl-6
+        +ComponentCard({
+          title: 'Range',
+          anchor: true,
+        })
+          = '\n'
+          label.form-label(for="timepicker2") Select Time Range
+          = '\n'  
+          input.form-control.datetimepicker#timepicker2(type="text" placeholder="d/m/y to d/m/y" data-options!={mode:'range', dateFormat:'d/m/y',disableMobile:true})
+          = '\n'
+      .col-lg-12
+        +ComponentCard({
+          title: 'Validation',
+          description: 'Pass <code>"allowInput":true</code> through <code>data-options</code> attribute to apply the form validation.',
+          anchor: true,
+        })
+          form.needs-validation(novalidate)
+            .mb-3
+              label.form-label(for="datepickerVal")  Date
+              input.form-control.datetimepicker#datepickerVal(type="text" placeholder="d/m/y" required data-options!={disableMobile:true, allowInput: true})
+              .invalid-feedback This field is required
+
+            .mb-3
+              label.form-label(for="dateTimepickerVal") Date & Time
+              input.form-control.datetimepicker#dateTimepickerVal(type="text" required placeholder="d/m/y H:i" data-options!={enableTime: true, dateFormat:'d/m/y H:i',disableMobile:true, allowInput: true})
+              .invalid-feedback This field is required
+
+
+            button.btn.btn-primary(type="submit") Submit form
+    +ComponentCard({
+      title: 'Stylesheet',
+      hideNavTab: true
+    }).my-4
+      +ComponentCardLib
+        link(href=`vendors/flatpickr/flatpickr.min.css`, rel='stylesheet')
+
+    +ComponentCard({
+      title: 'Javascript',
+      hideNavTab: true
+    }).my-4
+      +ComponentCardLib
+        script(src=`assets/js/flatpickr.js`)

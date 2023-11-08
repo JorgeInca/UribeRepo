@@ -1,0 +1,35 @@
+mixin HeroHeader
+	section.bg-white.pb-8#home
+		.container-small.hero-header-container.px-lg-7.px-xxl-3
+			.row.align-items-center
+				.col-12.col-lg-auto.order-0.order-md-1.text-end.order-1
+					.position-relative.p-5.p-md-7.d-lg-none
+						+Background({
+							image: `${CWD}assets/img/bg/bg-23.png`,
+							attrs: {
+								style: {
+									'background-size': 'contain'
+								}
+							}
+						})
+						.position-relative
+							img.w-100.shadow-lg.d-dark-none.rounded-2(src=`${CWD}assets/img/bg/bg-31.png` alt='hero-header')
+							img.w-100.shadow-lg.d-light-none.rounded-2(src=`${CWD}assets/img/bg/bg-30.png` alt='hero-header')
+					.hero-image-container.position-absolute.top-0.bottom-0.end-0.d-none.d-lg-block
+						.position-relative.h-100.w-100
+							.position-absolute.h-100.top-0.d-flex.align-items-center.end-0.hero-image-container-bg
+								img.pt-7.pt-md-0.w-100(src=`${CWD}assets/img/bg/bg-1-2.png` alt='hero-header')
+							.position-absolute.h-100.top-0.d-flex.align-items-center.end-0
+								img.pt-7.pt-md-0.w-100.shadow-lg.d-dark-none.rounded-2(src=`${CWD}assets/img/bg/bg-28.png` alt='hero-header')
+								img.pt-7.pt-md-0.w-100.shadow-lg.d-light-none.rounded-2(src=`${CWD}assets/img/bg/bg-29.png` alt='hero-header')
+
+				.col-12.col-lg-6.text-lg-start.text-center.pt-8.pb-6.order-0.position-relative
+					h1.fs-5.fs-lg-6.fs-md-7.fs-lg-6.fs-xl-7.fs.fw-black.mb-4
+						span.text-primary.me-3 Elegance
+						| for
+						br
+						| your web app
+					p.mb-5 Standard, modern and Elegant solution for your next web app so you don’t have to look further. Sign up or check the demo below.
+					a.btn.btn-lg.btn-primary.rounded-pill.me-3(href='#!' role='button') Sign up
+					a.btn.btn-link.me-2.fs-0.p-0(href='#!' role='button') Check Demo
+						span.fa-solid.fa-angle-right.ms-2.fs--1

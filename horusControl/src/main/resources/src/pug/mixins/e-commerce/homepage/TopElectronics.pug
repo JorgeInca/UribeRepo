@@ -1,0 +1,126 @@
+mixin TopElectronics
+  - 
+    var products = [
+      {
+        image: '5.png',
+        name: 'Razer Kraken v3 x Wired 7.1 Surroung Sound Gaming headset',
+        star: 5,
+        rated: 59,
+        salePrice: '59.00',
+        colors: 2
+      },
+      {
+        image: '7.png',
+        name: '2021 Apple 12.9-inch iPad Pro (Wi‑Fi, 128GB) - Space Gray',
+        star: 5,
+        rated: 13,
+        salePrice: '799.00',
+        colors: 2,
+      },
+      {
+        image: '12.png',
+        name: 'HORI Racing Wheel Apex for PlayStation 4/3, and PC',
+        star: 5,
+        rated: 64,
+        salePrice: '299.00',
+        colors: 1,
+        extra: 'Leather cover add-on available',
+        extraClass: 'text-1000 fs--1 mb-0 fw-bold',
+        extra2: 'supports Windows 11',
+        extra2Class: 'text-700 fs--1 mb-2',
+
+      },
+      {
+        image: '1.png',
+        name: 'Amazfit T-Rex Pro Smart Watch with GPS, Outdoor Fitness Watch for Men, Military Standard Certified',
+        verified: true,
+        wishListed : true,
+        star: 5,
+        rated: 32,
+        salePrice: '20.00',
+        off: '16%',
+        dealEndTime: '24 hours'
+      },
+      {
+        image: '16.png',
+        name: 'Apple AirPods Pro',
+        star: 5,
+        rated: 39,
+        salePrice: '59.00',
+        colors: 3,
+        extra: 'Free with iPhone 5s',
+        extraClass: 'text-1000 fs--1 mb-0 fw-bold',
+        extra2: 'Ships to Canada',
+        extra2Class: 'text-700 fs--1 mb-2',
+      },
+      {
+        image: '10.png',
+        name: 'Apple Magic Mouse (Wireless, Rechargable) - Silver',
+        star: 1,
+        rated: 6,
+        salePrice: '89.00',
+        colors: 2,
+        extra: 'Bundle available',
+        extraClass: 'text-1000 fs--1 mb-0 fw-bold',
+        extra2: 'Charger not included',
+        extra2Class: 'text-700 fs--1 mb-2',
+      },
+      {
+        name:'Amazon Basics Matte Black Wired Keyboard - US Layout (QWERTY)',
+        image:'8.png',
+        salePrice: '98.00',
+        star: 3,
+        rated: 7,
+        colors: 1,
+      },
+    ]
+  .mb-6
+    .d-flex.flex-between-center.mb-3
+      h3 Top Electronics
+      a.fw-bold.d-none.d-md-block(href="#!")
+        | Explore more
+        span.fas.fa-chevron-right.fs--1.ms-1
+    .swiper-theme-container.products-slider
+      .swiper.swiper-container.theme-slider(data-swiper!={
+        slidesPerView: 1,
+        spaceBetween: 16,
+        breakpoints: {
+          450: {
+            slidesPerView: 2,
+            spaceBetween: 16,
+          },
+          576: {
+            slidesPerView: 3,
+            spaceBetween: 20,
+          },
+          768: {
+            slidesPerView: 4,
+            spaceBetween: 20,
+          },
+          992: {
+            slidesPerView: 5,
+            spaceBetween: 20,
+          },
+          1200: {
+            slidesPerView: 6,
+            spaceBetween: 16,
+          },
+        },
+      })
+        .swiper-wrapper
+          each product in products
+            .swiper-slide
+              +Product(product)
+      .swiper-nav
+        .swiper-button-next
+          span.fas.fa-chevron-right.nav-icon
+        .swiper-button-prev
+          span.fas.fa-chevron-left.nav-icon
+
+    a.fw-bold.d-md-none(href="#!")
+      | Explore more
+      span.fas.fa-chevron-right.fs--1.ms-1
+
+
+        
+

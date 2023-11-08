@@ -1,0 +1,17 @@
+extends ../../../layouts/LayoutTheme
+include ../../../layouts/LayoutSplitAuth
+
+block wrapperContent
+  +LayoutSplitBasic({logo: false, img: 31})
+    .text-center.mb-6.mx-auto
+      img.mb-7.d-dark-none(src=`${CWD}assets/img/spot-illustrations/1.png` alt='phoenix')
+      img.mb-7.d-light-none(src=`${CWD}assets/img/spot-illustrations/dark_1.png` alt='phoenix')
+      .mb-6
+        h4.text-1000 Come back soon!
+        p.text-700 Thanks for using #{title}. 
+          br.d-lg-none
+          | You are now successfully signed out.
+      .d-grid
+        a.btn.btn-primary(href=`${CWD}${paths['split-signin']}`)
+          span.fas.fa-angle-left.me-2
+          | Go to sign in page

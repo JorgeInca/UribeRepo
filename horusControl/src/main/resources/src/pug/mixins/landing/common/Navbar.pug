@@ -1,0 +1,36 @@
+
+mixin Navbar
+	.bg-white.sticky-top.landing-navbar(data-navbar-shadow-on-scroll)
+		nav.navbar.navbar-expand-lg.container-small.px-3.px-lg-7.px-xxl-3
+			a.navbar-brand.flex-1.flex-lg-grow-0(href=`${CWD}${paths['default-dashboard']}`)
+				+Logo
+			.d-lg-none
+				+ToggleThemeBtn('themeControlToggleSm')
+			button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation')
+				span.navbar-toggler-icon
+			.collapse.navbar-collapse#navbarSupportedContent
+				.border-bottom.border-bottom-lg-0.mb-2
+					+Search({placeholder: 'Search', inputClass:'rounded-pill my-4'}).d-inline.d-lg-none
+				ul.navbar-nav.me-auto.mb-2.mb-lg-0
+					li.nav-item.border-bottom.border-bottom-lg-0
+						a.nav-link.lh-1.py-0.fs--1.fw-bold.py-3.active(aria-current='page' href='#') Home
+					li.nav-item.border-bottom.border-bottom-lg-0
+						a.nav-link.lh-1.py-0.fs--1.fw-bold.py-3(href='#feature') Features
+					li.nav-item.border-bottom.border-bottom-lg-0
+						a.nav-link.lh-1.py-0.fs--1.fw-bold.py-3(href='#blog') Blog
+					li.nav-item
+						a.nav-link.lh-1.py-0.fs--1.fw-bold.py-3(href='#team') Team
+				.d-grid.d-lg-flex.align-items-center
+					div.nav-item.d-flex.align-items-center.d-none.d-lg-block.pe-2
+						+ToggleThemeBtn('themeControlToggle')
+					a.text-700.hover-text-1100.px-2.d-none.d-lg-inline.lh-sm(href='#' data-bs-toggle="modal" data-bs-target="#searchBoxModal")
+						span(data-feather='search' style="height: 20px; width: 20px;")
+					a.btn.btn-link.text-900.order-1.order-lg-0.ps-4.me-lg-2(href=`${CWD}${paths['simple-signin']}`) Sign in
+					a.btn.btn-phoenix-primary.order-0(href=`${CWD}${paths['simple-signup']}`)
+						span.fw-bold Sign Up
+
+	#searchBoxModal.modal.fade(tabindex='-1' aria-hidden='true' data-bs-backdrop="true" data-phoenix-modal style='--phoenix-backdrop-opacity: 1;')
+		.modal-dialog
+			.modal-content.mt-15.rounded-pill
+				.modal-body.p-0
+					+NavSearch({placeholder:'Search...',inputClass:'form-control-lg'})(style='width: auto')

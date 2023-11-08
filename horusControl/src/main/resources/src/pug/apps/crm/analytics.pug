@@ -1,0 +1,54 @@
+extends ../../layouts/LayoutTheme
+include ../../mixins/crm/Analytics
+
+prepend styles
+	link(href=`${CWD}vendors/dropzone/dropzone.min.css`, rel='stylesheet')
+	link(href=`${CWD}vendors/flatpickr/flatpickr.min.css`, rel='stylesheet')
+
+prepend scripts
+	script(src=`${CWD}vendors/dropzone/dropzone.min.js`)
+	script(src=`${CWD}vendors/echarts/echarts.min.js`)
+
+append scripts
+	script(src=`${CWD}assets/js/crm-analytics.js`)
+
+append variables
+	- 
+		var breadcrumb = [
+			{
+				label: 'Page 1',
+				href: '#!'
+			},
+			{
+				label: 'Page 2',
+				href: '#!',
+			},
+			{
+				label: 'Default',
+				href: '#!',
+				active: true
+			},
+		];
+
+block content
+	.pb-6
+		.row.align-items-center.justify-content-between.g-3.mb-6
+			.col-12.col-md-auto
+				h2.mb-0 Analytics
+			.col-12.col-md-auto
+				.flatpickr-input-container
+					input.form-control.ps-6.datetimepicker#datepicker(type="text" data-options!={dateFormat:'M j, Y',disableMobile:true,defaultDate: "Mar 1, 2022"})
+					span.uil.uil-calendar-alt.flatpickr-icon.text-700
+		.px-3.mb-6
+			+Analytics
+		.mx-n4.px-4.mx-lg-n6.px-lg-6.bg-white.pt-6.pb-3.border-y.border-300
+			.row.gx-6
+				.col-12.col-md-6.col-lg-12.col-xl-6.mb-5.mb-md-3.mb-lg-5.mb-xl-2.mb-xxl-3
+					+EmailCampaign
+				.col-12.col-md-6.col-lg-12.col-xl-6.mb-1.mb-sm-0
+					+MarketingCampaign
+		.row.pt-6.gy-7.gx-6
+			.col-12.col-md-6
+				+SalesTrends
+			.col-12.col-md-6
+				+CallCampaign

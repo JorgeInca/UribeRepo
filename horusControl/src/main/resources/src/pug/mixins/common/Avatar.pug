@@ -1,0 +1,88 @@
+mixin Avatar(config)
+  - var config = Object.assign({size: '2xl', round: 'circle', img: 'team/avatar.webp', contentClass: '' }, config)
+  .avatar(class=`${config.status ? `avatar-${config.size} status-${config.status}` : `avatar-${config.size}`} ${config.bordered ? 'avatar-bordered' : ''}`)&attributes(attributes)
+    if config.name
+      .avatar-name(class=`rounded-${config.round}`)
+        span
+          +getFirstLetter(config.name)
+    else if config.more
+      .avatar-name(class=`rounded-${config.round} ${config.contentClass}`)
+        span=config.more
+    else if config.emoji
+      .avatar-emoji(class=`rounded-${config.round} ${config.contentClass}`)
+        span(role='img' aria-label='Emoji')!=config.emoji
+    else if config.icon
+      .avatar-name(class=`rounded-${config.round} ${config.contentClass}`)
+        span!=config.icon
+    else if config.type === 'group'
+      .rounded-circle.overflow-hidden.h-100.d-flex
+        .w-50.border-end
+          img(src=`${CWD}assets/img/${config.img[0]}`, alt="")
+        .w-50.d-flex.flex-column
+          img(src=`${CWD}assets/img/${config.img[1]}`, alt="").h-50.border-bottom
+          img(src=`${CWD}assets/img/${config.img[2]}`, alt="").h-50
+
+    else if config.img
+      = '\n'
+      img(src=`${CWD}assets/img/${config.img}` alt='' class=`rounded-${config.round} ${config.imgClass ? config.imgClass : ''}`)
+      = '\n'
+
+mixin AvatarDropdownMenu(details)
+  .dropdown-menu.avatar-dropdown-menu.p-0.overflow-hidden(style='width: 320px;')
+    .position-relative
+      +Background({
+        image: `${CWD}assets/img/bg/bg-32.png`,
+        className: 'z-index--1',
+        attrs: {
+          style: 'background-size: auto;',
+        }
+      })
+      .p-3
+        .text-end
+          button.btn.p-0.me-2
+            span.fa-solid.fa-user-plus.text-white.light
+          button.btn.p-0
+            span.fa-solid.fa-ellipsis.text-white.light
+        .text-center
+          if details.avatar
+            .avatar.avatar-xl.status-online.position-relative.me-2.me-sm-0.me-xl-2.mb-2
+              img.rounded-circle.border.border-white(src=`${CWD}assets/img/${details.avatar}`, alt='')
+          if details.avatar === ''
+            .avatar.avatar-xl.status-online.position-relative.me-2.me-sm-0.me-xl-2.mb-2
+              .avatar-name.rounded-circle
+                span=details.name.charAt(0).toUpperCase()
+          h6.text-white.light=details.name
+          p.text-600.fw-semi-bold.fs--2.mb-2 @tyrion222
+          .d-flex.flex-center.mb-3
+            h6.text-white.light.mb-0 224 
+              span.fw-normal.text-300 connections
+            span.fa-solid.fa-circle.text-700.mx-1(data-fa-transform="shrink-10 up-2")
+            h6.text-white.light.mb-0 23 
+              span.fw-normal.text-300 mutual
+    .bg-white
+      .p-3.border-bottom
+        .d-flex.justify-content-between
+          .d-flex
+            button.btn.btn-phoenix-secondary.btn-icon.btn-icon-lg.me-2
+              span.fa-solid.fa-phone
+            button.btn.btn-phoenix-secondary.btn-icon.btn-icon-lg.me-2
+              span.fa-solid.fa-message
+            button.btn.btn-phoenix-secondary.btn-icon.btn-icon-lg
+              span.fa-solid.fa-video
+          button.btn.btn-phoenix-primary
+            span.fa-solid.fa-envelope.me-2
+            | Send Email
+      ul.nav.d-flex.flex-column.py-3.border-bottom
+        li.nav-item
+          a.nav-link.px-3.d-flex.flex-between-center(href="#!")  
+            span.me-2.text-900.d-inline-block(data-feather="clipboard")
+            span.text-1000.flex-1 Assigned Projects
+            span.fa-solid.fa-chevron-right.fs--3
+        li.nav-item
+          a.nav-link.px-3.d-flex.flex-between-center(href="#!")  
+            span.me-2.text-900(data-feather="pie-chart")
+            span.text-1000.flex-1 View activiy
+            span.fa-solid.fa-chevron-right.fs--3
+    .p-3.d-flex.justify-content-between
+      a(href="#!").btn.btn-link.p-0.text-decoration-none Details 
+      a(href="#!").btn.btn-link.p-0.text-decoration-none.text-danger Unassign 

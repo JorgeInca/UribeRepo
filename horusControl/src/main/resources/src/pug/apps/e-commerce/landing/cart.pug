@@ -1,0 +1,27 @@
+extends ../../../layouts/LayoutEcommerce
+include ../../../mixins/e-commerce/cart/CartTable
+include ../../../mixins/e-commerce/cart/SummaryCard
+
+
+
+append variables
+  - var disableNavigationType = true;
+  - var disableHorizontalNavbarShape = true;
+  - var disableVerticalNavbarAppearance = true;
+  - var disableHorizontalNavbarAppearance = true;
+  
+block ecomContent
+  +Section(null,'container-small cart').pt-5.pb-9
+    nav.mb-2(aria-label='breadcrumb')
+      ol.breadcrumb.mb-0
+        li.breadcrumb-item
+          a(href='#!') Page 1
+        li.breadcrumb-item
+          a(href='#!') Page 2
+        li.breadcrumb-item.active(aria-current='page') Default
+    h2.mb-6 Cart
+    .row.g-5
+      .col-12.col-lg-8
+        +CartTable
+      .col-12.col-lg-4
+        +CartSummaryCard

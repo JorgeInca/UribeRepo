@@ -1,0 +1,86 @@
+append variables
+	-
+		var teams= [
+			{
+				image:'62.webp',
+				name:'John Smith',
+				designation:'CEO, Global Cheat',
+			},
+			{
+				image:'63.webp',
+				name:'Marc Chiasson',
+				designation:'Vice President',
+			},
+			{
+				image:'64.webp',
+				name:'Lilah Lola',
+				designation:'Marketing Manager',
+			},
+			{
+				image:'65.webp',
+				name:'Thomas Doe',
+				designation:'UX Designer',
+
+			},
+				{
+				image:'66.webp',
+				name:'Alan Casey',
+				designation:'Front End Developer',
+			},
+			{
+				image:'67.webp',
+				name:'Narokin Hijita',
+				designation:'CEO, Global Cheat',
+			},
+			{
+				image:'68.webp',
+				name:'Narokin Hijita',
+				designation:'CEO, Global Cheat',
+			},
+			{
+				image:'69.webp',
+				name:'Narokin Hijita',
+				designation:'CEO, Global Cheat',
+
+			},
+
+		];
+
+mixin Team(config)
+	.text-center.mt-5.position-relative
+		.team-avatar-container.d-inline-block.position-relative
+			+Background({image: `${CWD}assets/img/bg/bg-21.png`, attrs: { style: { 'background-size': 'contain',} }, className: '' })
+			img.img-fluid.rounded.mb-3.position-relative(src=`${CWD}assets/img/team/${config.image}`  alt='...')
+		h4=config.name
+		h6.mb-3.fw-semi-bold=config.designation
+		a(href="#!")
+			span.fa-brands.fa-facebook.text-primary.me-3
+		a(href="#!")
+			span.fa-brands.fa-twitter.text-primary.me-3
+		a(href="#!")
+			span.fa-brands.fa-linkedin-in.text-primary
+
+mixin Teams
+	section#team
+		//- +Background({image: `${CWD}assets/img/bg/bg-17.png`, className: 'z-index-2' })
+		+Background({image: `${CWD}assets/img/bg/bg-left-17.png`, attrs: { style: { 'background-size': 'auto','background-position':'left center'} }, className: 'z-index-2' })
+		+Background({image: `${CWD}assets/img/bg/bg-right-17.png`, attrs: { style: { 'background-size': 'auto','background-position':'right center'} }, className: 'z-index-2' })
+		.position-absolute.top-0.end-0.start-0
+			svg.w-100.text-white(preserveAspectRatio="none" viewBox='0 0 1920 368' fill='none' xmlns='http://www.w3.org/2000/svg')
+				path(d='M1920 0.44L0 367.74V0H1920V0.44Z' fill='currentColor')
+		.position-absolute.bottom-0.end-0.start-0
+			svg.text-white.w-100(viewBox='0 0 1920 368' fill='none' xmlns='http://www.w3.org/2000/svg')
+				path(d='M0 368L1920 0.730011L1920 368L0 368Z' fill='currentColor')
+		.container-small.position-relative.py-1.px-lg-7.px-xxl-3(style="z-index:10")
+			.row
+				.col-12.mb-4.text-center.text-sm-start
+					h4.text-primary.fw-bolder.mb-3 Team
+					h2 Our small team behind our success
+				.col-md-6.text-center.text-sm-start
+					p We have a small but strong development team to follow up on the development process. Reach out to us for further information.
+				.col-md-6.text-center.text-sm-start
+					p The team is ready to answer all your questions within minutes. The efficient team is always at your beck and call.
+			.row.align-items-center.ps-lg-11.pe-lg-9
+				each member in teams
+					.col-sm-6.col-md-4.col-lg-3
+						+Team(member)

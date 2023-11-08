@@ -1,0 +1,22 @@
+mixin ModalTodoItem(item,index,isLast)
+  .row.justify-content-between.align-items-md-center.hover-actions-trigger.btn-reveal-trigger.border-200.py-3.gx-0(class=isLast ? 'border-top border-bottom' : 'border-top')
+    .col-12
+      div(data-todo-offcanvas-toogle data-todo-offcanvas-target=`todoOffcanvas-${index + 1}`)
+        .form-check.mb-1.mb-md-0.d-flex.align-items-center.lh-1
+          input.form-check-input.flex-shrink-0.form-check-line-through.mt-0.me-2(type="checkbox" id=`checkbox-todo-${index}` class= `form-check-input-${item.color}`)
+          label.form-check-label.mb-0.fs-0.me-2.line-clamp-1(for=`checkbox-todo-${index}`)=item.task
+          if item.badge
+            span.badge.badge-phoenix.fs--2.ms-auto(class=`badge-phoenix-${item.badge.variant}`)= item.badge.label
+    .col-12
+      .d-flex.ms-4.lh-1.align-items-center
+        if item.attachment
+          button.btn.p-0.text-700.fs--2.me-2
+            span.fas.fa-paperclip.me-1
+            |#{item.attachment}
+        if item.list
+          button.btn.p-0.text-warning.fs--2.me-2
+            span.fas.fa-tasks.me-1
+            |#{item.list}
+        p.text-700.fs--2.mb-md-0.me-2.mb-0=item.date
+        p.text-700.fs--2.fw-bold.mb-md-0.mb-0=item.time
+

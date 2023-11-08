@@ -1,0 +1,8 @@
+mixin WizardPager
+  .d-flex.pager.wizard.list-inline.mb-0
+    button.d-none(type="button" data-wizard-prev-btn).btn.btn-link.ps-0
+      span.fas.fa-chevron-left.me-1(data-fa-transform="shrink-3")
+      | Previous
+    .flex-1.text-end
+      button(type='submit' data-wizard-next-btn).btn.btn-primary.px-6.px-sm-6 Next
+        span.fas.fa-chevron-right.ms-1(data-fa-transform="shrink-3") 

@@ -1,0 +1,6 @@
+mixin ProductDescription
+  h4.mb-3 Product Title
+  input.form-control.mb-5(type='text' placeholder='Write title here...')
+  .mb-6
+    h4.mb-3  Product Description
+    textarea.tinymce(name='content' data-tinymce!={height: '15rem', placeholder: 'Write a description here...',})

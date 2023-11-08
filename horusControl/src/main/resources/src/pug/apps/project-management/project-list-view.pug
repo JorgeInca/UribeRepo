@@ -1,0 +1,31 @@
+extends ../../layouts/LayoutTheme
+include ../../mixins/dashboard/common
+include ../../mixins/project-management/ProjectListView
+include ../../mixins/project-management/Common
+
+
+prepend styles
+
+prepend scripts
+
+append variables
+	- 
+		var breadcrumb = [
+			{
+				label: 'Page 1',
+				href: '#!'
+			},
+			{
+				label: 'Page 2',
+				href: '#!',
+			},
+			{
+				label: 'Default',
+				href: '#!',
+				active: true
+			},
+		];
+
+block content
+	.mb-9
+		+ProjectList

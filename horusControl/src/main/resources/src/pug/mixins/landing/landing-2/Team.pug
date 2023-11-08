@@ -1,0 +1,74 @@
+append variables
+  -
+    var team = [
+      {
+        image:'70.webp',
+        name:'Brett Bezos',
+        designation:'CEO',
+      },
+      {
+        image:'15.webp',
+        name:'Lucas Murray',
+        designation:'General Manager',
+      },
+      {
+        image:'71.webp',
+        name:'Casey Andrews',
+        designation:'IT Specialist',
+      },
+      {
+        image:'72.webp',
+        name:'Poppy Russell',
+        designation:'Frontend Dev',
+
+      },
+        {
+        image:'73.webp',
+        name:'Emma Knowles',
+        designation:'Backend Dev',
+      },
+      {
+        image:'74.webp',
+        name:'Megan Holmes',
+        designation:'HR',
+      },
+      {
+        image:'75.webp',
+        name:'Cameron Fletcher',
+        designation:'UX/UI Designer',
+      },
+      {
+        image:'20.webp',
+        name:'Amber Norris',
+        designation:'Consultant',
+      },
+      {
+        image:'76.webp',
+        name:'Scooby',
+        designation:'Dog',
+      },
+    ];
+
+mixin Member(config)
+  .text-center 
+    img.w-70.w-sm-100.rounded-4.mb-3(src=`${CWD}assets/img/team/${config.image}`, alt="")
+    h4= config.name 
+    h5.fw-semi-bold= config.designation
+
+mixin Team
+  section.alternate-landing-team#team
+    .position-absolute.w-100.h-100.start-0.end-0.top-0.bg-soft-primary.dark__bg-1000(style='transform: skewY(-6deg); transform-origin: right')
+    +Background({image: `${CWD}assets/img/bg/bg-left-23.png`, attrs: { style: { 'background-size': 'auto','background-position':'left center'}}, className: "d-none d-xl-block"})
+    +Background({image: `${CWD}assets/img/bg/bg-right-23.png`, attrs: { style: { 'background-size': 'auto','background-position':'right center'}}, className: "d-none d-xl-block"})
+    .text-center.mb-11.position-relative
+      h5.text-info.mb-3 Team
+      h2.mb-2 Our small team behind 
+        br.d-sm-none
+        | our success
+    .container-small.position-relative
+      .row.justify-content-center
+        .col-lg-8.col-xl-6
+          .row.gx-3.gy-6.justify-content-center
+            each member in team 
+              .col-sm-6.col-md-4
+                +Member(member)

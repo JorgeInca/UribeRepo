@@ -1,0 +1,33 @@
+include WidgetSectionTitle
+include ../social/Profile
+include ../social/Feed
+include ../events/EventDetail
+
+
+mixin Users
+  +WidgetSectionTitle({
+    transform: 'shrink-4',
+    icon: 'fas fa-user-friends',
+    title: 'Users & Feed',
+    subtitle: `User engagement and personalized content presentation.`
+  }).mb-5#scrollspyUsers.pt-7
+  +ProfileCard.mb-5
+  .row.gx-5 
+    .col-xxl-8
+      +PostList(1)
+    .col-xxl-4 
+      +EventTitle
+      +Events
+  .row.g-5
+    .col-xxl-8 
+      +EventDescription.mb-0
+    .col-xxl-4 
+      +FeedProfileCard.h-100
+  .mt-5
+    .row.g-5
+      .col-xl-4
+        +Messages
+      .col-xl-4
+        +Photos
+      .col-xl-4
+        +ProfileNavigation

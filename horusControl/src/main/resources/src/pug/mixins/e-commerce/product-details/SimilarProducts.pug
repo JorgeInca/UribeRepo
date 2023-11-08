@@ -1,0 +1,120 @@
+mixin SimilarProducts
+  - 
+    var products = [
+      {
+        image: '1.png',
+        name: 'Fitbit Sense Advanced Smartwatch with Tools for Heart Health, Stress Management &amp; Skin Temperature Trends Carbon/Graphite, One Size (S & L Bands)',
+        star: 5,
+        rated: 59,
+        price: '49.99',
+        salePrice: '34.99',
+        colors: 2
+      },
+      {
+        image: '3.png',
+        name: 'Apple MacBook Pro 13 inch-M1-8/256GB-Space Gray',
+        star: 5,
+        rated: 13,
+        price: '1299.00',
+        salePrice: '1149.00',
+        extra: 'Apple care included',
+        extraClass : 'text-1000 fw-bold mb-2',
+        colors: 2,
+      },
+      {
+        image: '5.png',
+        name: 'Razer Kraken v3 x Wired 7.1 Surroung Sound Gaming headset',
+        star: 5,
+        rated: 64,
+        salePrice: '59.00',
+        colors: 1,
+      },
+      {
+        image: '2.png',
+        name: 'iPhone 13 pro max-Pacific Blue, 128GB storage',
+        verified: true,
+        star: 5,
+        rated: 32,
+        price: '899.99',
+        salePrice: '855.00',
+        extra: 'Stock limited',
+        extraClass : 'text-1000 fw-bold mb-2',
+        colors: 5,
+      },
+      {
+        image: '16.png',
+        name: 'Apple AirPods Pro',
+        star: 5,
+        rated: 39,
+        salePrice: '59.00',
+        colors: 3,
+        extra : 'free with iPhone 5s',
+        extraClass: 'text-1000 fw-bold mb-1',
+        extra2 : 'Ships to Canada',
+        extra2Class: 'text-700 mb-2'
+      },
+      {
+        image: '10.png',
+        name: 'Apple Magic Mouse (Wireless, Rechargable) - Silver',
+        star: 5,
+        rated: 6,
+        salePrice: '89.00',
+        extra : 'Bundle availabe',
+        extraClass: 'text-1000 fw-bold mb-1',
+        extra2 : 'Charger not included',
+        extra2Class: 'text-700 mb-2',
+        colors: 2
+      },
+      {
+        image: '6.png',
+        name: 'PlayStation 5 DualSense Wireless Controller',
+        star: 5,
+        rated: 67,
+        price: '125.00',
+        salePrice: '89.00',
+        colors: 2,
+      }
+    ]
+
+  .d-flex.flex-between-center.mb-3
+    div
+      h3 Similar Products
+      p.mb-0.text-700.fw-semi-bold Essential for a better life
+    button.btn.btn-sm.btn-phoenix-primary View all
+
+  .swiper-theme-container.products-slider
+    .swiper.swiper-container.theme-slider(data-swiper!={
+      slidesPerView: 1,
+      spaceBetween: 16,
+      breakpoints: {
+        450: {
+          slidesPerView: 2,
+          spaceBetween: 16,
+        },
+        768: {
+          slidesPerView: 3,
+          spaceBetween: 16,
+        },
+        992: {
+          slidesPerView: 4,
+          spaceBetween: 16,
+        },
+        1200: {
+          slidesPerView: 5,
+          spaceBetween: 16,
+        },
+        1540: {
+          slidesPerView: 6,
+          spaceBetween: 16,
+        },
+      },
+    })
+      .swiper-wrapper
+        each product in products
+          .swiper-slide
+            +Product(product)
+    .swiper-nav
+      .swiper-button-next
+        span.fas.fa-chevron-right.nav-icon
+      .swiper-button-prev
+        span.fas.fa-chevron-left.nav-icon

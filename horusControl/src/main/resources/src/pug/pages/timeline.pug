@@ -1,0 +1,154 @@
+extends ../layouts/LayoutTheme
+
+append variables
+  - var attrsBreadcrumb = { class: 'breadcrumb-sticky-top' };
+  - 
+    var breadcrumb = [
+      {
+        label: 'Pages',
+        href: '#!',
+      },
+      {
+        label: 'Timeline',
+        href: '#!',
+        active: true
+      }
+    ];
+
+mixin Timeline(items)
+  .timeline-basic.mb-9
+    each item, index in items
+      .timeline-item
+        .row.g-3
+          .col-auto
+            .timeline-item-bar.position-relative
+              .icon-item.icon-item-md.rounded-7.border
+                span(class=`${item.icon} text-${item.iconColor}`).fs--1
+              if index !== items.length - 1
+                span.timeline-bar.border-end.border-dashed.border-300
+          .col
+            .d-flex.justify-content-between
+              .d-flex.mb-2
+                h6.lh-sm.mb-0.me-2.text-800.timeline-item-title!=item.title
+                if item.file 
+                  h6.mb-0.fs--1
+                    span.fa-solid.fa-file-pdf.me-1.text-700
+                    a(href=`#!`)=item.file
+              p.text-500.fs--1.mb-0.text-nowrap.timeline-time
+                span.fa-regular.fa-clock.me-1
+                | #{item.time}
+            h6.fs--2.fw-normal(class=`${index !== items.length -1 && 'mb-3'}`) by 
+              a(href='#!').fw-semi-bold=item.tasker
+            p.fs--1.text-800.w-sm-60(class=`${index !== items.length - 1 ? 'mb-5': 'mb-0'}`)=item.content
+
+block content
+  -
+    var timelineItem = [
+      {
+        date: 'Today',
+        items: [
+          {
+            time: '4:33pm',
+            icon: 'fa-solid fa-clipboard',
+            iconColor: 'success',
+            title: `Assigned to serve as the <br class='d-sm-none'> project's director`,
+            content: 'Utilizing best practices to better leverage our assets, we must engage in black sky leadership thinking, not the usual band-aid solution.',
+            tasker: 'John N. Ward'
+          },
+          {
+            time: '6:30pm',
+            icon: 'fa-solid fa-envelope',
+            iconColor: 'danger',
+            title: 'Quary about purchased <br class="d-sm-none"> soccer socks',
+            content: 'I’ve come across your posts and found some favorable deals on your page. I’ve added a load of products to the cart and I don’t know the payment options you avail. Also, can you enlighten me about any discount.',
+            tasker: 'Edward Hopper',
+          },
+          {
+            time: '9:33pm',
+            icon: 'fa-solid fa-video',
+            iconColor: 'info',
+            title: 'Onboarding Meeting',
+            content: '',
+            tasker: 'John N. Ward',
+          }
+        ]
+      },
+      {
+        date: '15 October, 2022',
+        items: [
+          {
+            time: '1:30pm',
+            icon: 'fa-solid fa-swatchbook',
+            iconColor: 'primary',
+            title: 'Designing the dungeon',
+            content: 'To get off the runway and paradigm shift, we should take  brass tacks with above-the-board actionable analytics, ramp up with viral partnering, not the usual goat rodeo putting socks on an octopus. ',
+            tasker: 'John N. Ward'
+          },
+          {
+            time: '8:32pm',
+            icon: 'fa-solid fa-skull-crossbones',
+            iconColor: 'danger',
+            title: 'How to take the headache <br class="d-sm-none"> out of Order',
+            content: 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters.',
+            tasker: 'Edward Hopper',
+          },
+          {
+            time: '9:30pm',
+            icon: 'fa-solid fa-stethoscope',
+            iconColor: 'primary',
+            title: 'Mandatory routine checkup',
+            content: 'To get the bitter butter out and take the better butter into the bitter dough to make a bitter bread and broad donut, not the usual yellow butter, but the white butterless butter.',
+            tasker: 'Eye before Thy Hospital',
+          },
+          {
+            time: '8:30pm',
+            icon: 'fa-solid fa-utensils',
+            iconColor: 'success',
+            title: 'Making bad butter better',
+            content: "Check how long a fish might live out of water and if you can check the pulse to see if it's alive or not though it's okay to eat fish cause they don't have any feelings.",
+            tasker: 'Edward Hopper',
+          },
+          {
+            time: '10:33pm',
+            icon: 'fa-solid fa-rocket',
+            iconColor: 'info',
+            title: 'Launching Phoenix',
+            content: '',
+            tasker: 'John N. Ward',
+          },
+        ]
+      },
+      {
+        date: '20 October, 2022',
+        items: [
+          {
+            time: '8:32pm',
+            icon: 'fa-solid fa-screwdriver-wrench',
+            iconColor: 'warning',
+            title: 'To take the ants out',
+            content: 'Many ants are crawling into my PC and now they live in there to get highly skilled in web development and programming language that will make them earn better than the humans so that they’ll be able to buy off all the sugar out of the market.',
+            tasker: 'Edward Hopper',
+          },
+          {
+            time: '10:33pm',
+            icon: 'fa-solid fa-paperclip',
+            iconColor: 'info',
+            title: 'Added file',
+            content: '',
+            tasker: 'John N. Ward',
+            file: 'Readme.pdf'
+          }
+        ]
+      }
+    ]
+  h2.text-bold.mb-5.page-title-sticky-top Timeline
+  .row.gx-xl-8.gx-xxl-11
+    .col-xl-5.p-xxl-7
+      .ms-xxl-3.d-none.d-xl-block.position-sticky(style='top: 30%')
+        img.d-dark-none.img-fluid(src=`${CWD}assets/img/spot-illustrations/timeline.png`, alt="")
+        img.d-light-none.img-fluid(src=`${CWD}assets/img/spot-illustrations/timeline-dark.png`, alt="")
+    .col-xl-7.scrollbar 
+      div
+        each item in timelineItem
+          h4.py-3.border-y.border-300.mb-5.ms-8= item.date 
+          +Timeline(item.items)

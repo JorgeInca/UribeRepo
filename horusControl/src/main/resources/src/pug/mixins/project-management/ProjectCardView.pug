@@ -1,0 +1,295 @@
+append variables
+  -
+    var cards = [
+      {
+        title:"Project Doughnut Dungeon",
+        status : {
+          label: 'completed',
+          type: 'badge-phoenix-success',
+          icon:'info'
+        },
+        client: ' Gusteau’s Restaurant',
+        budget:'8,742$',
+        started:'	17th Nov. 2020',
+        deadline:'	21st May 2028',
+        assigness:[
+          {
+            avatar: `team/34.webp`,
+            name: 'Jean Renoir'
+          },
+          {
+            avatar: `team/59.webp`,
+            name: 'Katerina Karenin',
+          },
+          {
+            avatar: `team/35.webp`,
+            name: 'Stanly Drinkwater'
+          },
+          {
+            avatar: `team/58.webp`,
+            name: 'Igor Borvibson'
+          },
+        ],
+        more: '+4',
+        task: '287',
+        progressBarBg:'bg-success',
+        progressbarBgColor:'bg-success-100',
+        progress:'100%',
+      },
+      {
+        title:"Water resistant mosquito killer gun",
+        status : {
+          label: 'inactive',
+          type: 'badge-phoenix-warning',
+          icon:'info'
+        },
+        client: ' Monsters.Inc',
+        budget:'10,500$',
+        started:'	8th Mar. 2021',
+        deadline:'	15th Sept. 2022',
+        assigness:[
+          {
+            avatar: `team/1.webp`,
+            name: 'Ricky Antony'
+
+          },
+
+          {
+            avatar: `team/2.webp`,
+            name: 'Raymond Mims'
+          },
+        ],
+        task: '125',
+        progressBarBg:'bg-warning',
+        progressbarBgColor:'bg-warning-100',
+        progress:'76%',
+      },
+      {
+        title:"Execution of Micky the foul mouse",
+        status : {
+          label: 'ongoing',
+          type: 'badge-phoenix-primary',
+          icon:'info'
+        },
+        client: ' Dashney Peeps Corp.',
+        budget:'18,976$',
+        started:'	17th Nov. 2020',
+        deadline:'	23rd Sept. 2026',
+        assigness:[
+          {
+            avatar: `team/20.webp`,
+            name: 'Emma Watson'
+
+          },
+          {
+            avatar: '',
+            name: 'Raymond Mims',
+          },
+          {
+            avatar: `team/35.webp`,
+            name: 'Stanly Drinkwater'
+          },
+          {
+            avatar: `team/58.webp`,
+            name: 'Igor Borvibson'
+          },
+        ],
+        task: '72',
+        progressBarBg:'bg-primary',
+        progressbarBgColor:'bg-primary-100',
+        progress:'89%',
+      },
+      {
+        title:"Harnessing stupidity from Jerry",
+        status : {
+          label: 'Critical',
+          type: 'badge-phoenix-danger',
+          icon:'info'
+        },
+        client: ' Gobble the Bleep Inc',
+        budget:'8,742$',
+        started:'	1st Jan. 2016',
+        deadline:'	4th Apr. 2022',
+        assigness:[
+          {
+            avatar: `team/11.webp`,
+            name: 'Roy Anderson'
+
+          },
+          {
+            avatar: `team/12.webp`,
+            name: 'Luis Bunuel'
+          },
+          {
+            avatar: `team/13.webp`,
+            name: 'Raymond Mims'
+          },
+        ],
+        task: '91',
+        progressBarBg:'bg-danger',
+        progressbarBgColor:'bg-danger-100',
+        progress:'15%',
+      },
+      {
+        title:"Making the Butterflies shoot each other dead",
+        status : {
+          label: 'ongoing',
+          type: 'badge-phoenix-primary',
+          icon:'info'
+        },
+        client:' Monsters.Inc',
+        budget:'35,000$',
+        started:'	24th Dec. 2019',
+        deadline:'	15th Jan. 2024',
+        assigness:[
+          {
+            avatar: `team/14.webp`,
+            name: 'Martina scorcese'
+
+          },
+          {
+            avatar: `team/16.webp`,
+            name: 'Katerina Karenin'
+
+          },
+          {
+            avatar: `team/18.webp`,
+            name: 'Martina scorcese'
+          },
+          {
+            avatar: `team/20.webp`,
+            name: 'Emma Watson'
+          },
+        ],
+        more: '+2',
+        task: '134',
+        progressBarBg:'bg-primary',
+        progressbarBgColor:'bg-primary-100',
+        progress:'76%',
+      },
+      {
+        title:"The chewing gum attack",
+        status : {
+          label: 'Cancelled',
+          type: 'badge-phoenix-secondary',
+          icon:'info'
+        },
+        client:' DablewGuys Studio',
+        budget:'250$',
+        started:'	4th Aug. 2018',
+        deadline:'	22nd Oct. 2023',
+        assigness:[
+          {
+            avatar: `team/31.webp`,
+            name: 'Martina scorcese'
+
+          },
+          {
+            avatar: `team/33.webp`,
+            name: 'Luis Bunuel'
+          },
+        ],
+        task: '28',
+        progressBarBg:'bg-700',
+        progressbarBgColor:'bg-200',
+        progress:'32%',
+      },
+    ];
+
+mixin ProjectCard(config)
+  .card.h-100.hover-actions-trigger
+    .card-body
+      .d-flex.align-items-center
+        h4.mb-2.line-clamp-1.lh-sm.flex-1.me-5=config.title
+        .hover-actions.top-0.end-0.mt-4.me-4
+          button.btn.btn-primary.btn-icon.flex-shrink-0(data-bs-toggle='modal' data-bs-target='#projectsCardViewModal')
+            span.fa-solid.fa-chevron-right
+      span.badge.badge-phoenix.fs--2.mb-4(class=config.status.type)= config.status.label
+      .d-flex.align-items-center.mb-2
+        span.fa-solid.fa-user.me-2.text-700.fs--1.fw-extra-bold
+        p.fw-bold.mb-0.text-truncate.lh-1 Client : 
+          span.fw-semi-bold.text-primary.ms-1=config.client
+      .d-flex.align-items-center.mb-4
+        span.fa-solid.fa-credit-card.me-2.text-700.fs--1.fw-extra-bold
+        p.fw-bold.mb-0.lh-1 Budget : 
+          span.ms-1.text-1100=config.budget
+      .d-flex.justify-content-between.text-700.fw-semi-bold
+        p.mb-2  Progress
+        p.mb-2.text-1100=config.progress
+      .progress(class=`${config.progressbarBgColor}`)
+        .progress-bar.rounded(role='progressbar' aria-label='Success example' style=`width: ${config.progress}`	aria-valuenow='25' aria-valuemin='0' aria-valuemax='100' class=`${config.progressBarBg}`)
+
+      .d-flex.align-items-center.mt-4
+        p.mb-0.fw-bold.fs--1 Started :
+          span.fw-semi-bold.text-600.ms-1= config.started
+      .d-flex.align-items-center.mt-2
+        p.mb-0.fw-bold.fs--1 Deadline : 
+          span.fw-semi-bold.text-600.ms-1= config.deadline
+
+      .d-flex.d-lg-block.d-xl-flex.justify-content-between.align-items-center.mt-3
+        .avatar-group
+          each member in config.assigness
+            a.dropdown-toggle.dropdown-caret-none.d-inline-block(href='#' role='button' data-bs-toggle='dropdown' aria-expanded='false' data-bs-auto-close="outside")
+              if member.avatar
+                +Avatar({
+                  size: 'm',
+                  img: member.avatar,
+                  round: 'circle',
+                  imgClass:member.avatar==="team/avatar.webp" ? 'avatar-placeholder' : ''
+              }).rounded-circle
+              else if member.avatar === ''
+                .avatar.avatar-m
+                  .avatar-name.rounded-circle
+                    span=member.name.charAt(0).toUpperCase()
+            +AvatarDropdownMenu(member) 
+          if config.more
+            +Avatar({size: 'm', more: config.more, round: 'circle'}).rounded-circle
+        .mt-lg-3.mt-xl-0 
+          i.fa-solid.fa-list-check.me-1
+          p.d-inline-block.fw-bold.mb-0=config.task
+            span.fw-normal 	Task
+
+mixin ProjectCardView 
+  .row.gx-6.gy-3.mb-4.align-items-center
+    .col-auto
+      h2.mb-0 Projects
+        span.fw-normal.text-700.ms-3 (32)
+    .col-auto
+      a.btn.btn-primary.px-5(href=`${CWD}${paths['project-management-create-new']}`)
+        i.fa-solid.fa-plus.me-2
+        | Add new project
+  .row.justify-content-between.align-items-end.mb-4.g-3
+    .col-12.col-sm-auto
+      ul.nav.nav-links.mx-n2
+        li.nav-item
+          a.nav-link.px-2.py-1.active(aria-current='page' href='#')
+            span All
+            span.text-700.fw-semi-bold (32)
+        li.nav-item
+          a.nav-link.px-2.py-1(href='#')
+            span Ongoing
+            span.text-700.fw-semi-bold (14)
+        li.nav-item
+          a.nav-link.px-2.py-1(href='#')
+            span Cancelled
+            span.text-700.fw-semi-bold (2)
+        li.nav-item
+          a.nav-link.px-2.py-1(href='#')
+            span Finished
+            span.text-700.fw-semi-bold (14)
+        li.nav-item
+          a.nav-link.px-2.py-1(href='#')
+            span Postponed
+            span.text-700.fw-semi-bold (2)
+    .col-12.col-sm-auto
+      .d-flex.align-items-center
+        +Search({placeholder: 'Search projects'}).me-3
+        +ViewButtons('card')
+  .row.row-cols-1.row-cols-sm-2.row-cols-lg-3.row-cols-xxl-4.g-3.mb-9
+    each card in cards
+      .col
+        +ProjectCard(card)
+  +ProjectsCardViewModal
+
+
+

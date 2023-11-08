@@ -1,0 +1,28 @@
+extends LayoutTheme
+include ../mixins/dashboard/common
+include ../mixins/email/Common
+
+append variables
+  - var attrsContent = { class: 'pt-0', showComposeBtn };
+
+block content
+  .email-container
+    .row.gx-lg-6.gx-3.py-4.z-index-2.position-sticky.bg-soft.email-header
+      .col-auto
+        a.btn.btn-primary.email-sidebar-width.d-none.d-lg-block(href=`${CWD}${paths['email-compose']}`) Compose
+        button.btn.px-3.btn-phoenix-secondary.text-700.d-lg-none(data-phoenix-toggle='offcanvas' data-phoenix-target='#emailSidebarColumn')
+          span.fa-solid.fa-bars
+      if(showComposeBtn)
+        .col-auto.d-lg-none
+          a.btn.btn-primary.px-3.px-sm-4(href=`${CWD}${paths['email-compose']}`) 
+            span.d-none.d-sm-inline-block Compose
+            span.d-sm-none.fas.fa-plus
+      .col-auto.flex-1
+        +Search({placeholder: 'Search ...'}).w-100
+    .row.g-lg-6.mb-8
+      .col-lg-auto
+        .email-sidebar.email-sidebar-width.bg-soft.phoenix-offcanvas.phoenix-offcanvas-fixed#emailSidebarColumn
+          +EmailSidebar
+        .phoenix-offcanvas-backdrop.d-lg-none(data-phoenix-backdrop style='top: 0;')
+      block pageContent
+

@@ -1,0 +1,35 @@
+extends ../../layouts/LayoutTheme
+include ../../mixins/dashboard/common
+include ../../mixins/project-management/ProjectCardView
+include ../../mixins/dashboard/project-management/RecentActivity
+include ../../mixins/project-management/ProjectDetails
+include ../../mixins/project-management/ProjectDetailsTodo
+include ../../mixins/project-management/ProjectDetailsModal
+include ../../mixins/project-management/ToDoList
+include ../../mixins/dashboard/project-management/ToDo
+include ../../mixins/project-management/Common
+
+
+prepend styles
+	link(href=`${CWD}vendors/flatpickr/flatpickr.min.css`, rel='stylesheet')
+
+append variables
+	- 
+		var breadcrumb = [
+			{
+				label: 'Page 1',
+				href: '#!'
+			},
+			{
+				label: 'Page 2',
+				href: '#!',
+			},
+			{
+				label: 'Default',
+				href: '#!',
+				active: true
+			},
+		];
+
+block content
+	+ProjectCardView

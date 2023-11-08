@@ -1,0 +1,147 @@
+extends ../layouts/LayoutTheme
+include ../mixins/common/Avatar
+include  ../mixins/dashboard/common
+
+append variables
+  - 
+    var breadcrumb = [
+      {
+        label: 'Pages',
+        href: '#!'
+      },
+      {
+        label: 'Notifications',
+        href: '#!',
+        active: true
+      }
+    ];
+  -
+    var today= [
+      { 
+        avatar: 'team/30.webp',
+        name: "Jessie Samson",
+        text: "<span class='me-1'>💬</span>Mentioned you in a comment",
+        textBold:" \"Well done! Proud of you ❤️ \" ",
+        ago:"10m",
+        icon:"fas fa-clock",
+        time:"10:41 AM ",
+        date:"August 7,2021",
+        read: true
+      },
+      { 
+        name:"Jane Foster",
+        text:"<span class='me-1'>📅</span>Created an event",
+        textBold:" Rome holidays",
+        ago:"20m",
+        icon:"fas fa-clock",
+        time:"10:20 AM ",
+        date:"August 7,2021",
+        read: false
+      },
+      { 
+        avatar:'team/avatar.webp',
+        avatarPlaceholder: true,
+        name:"Jessie Samson",
+        text:"<span class='me-1'>👍</span>Liked your comment",
+        textBold:" \"Amazing Works️\"",
+        ago:"1h",
+        icon:"fas fa-clock",
+        time:"9:30 AM ",
+        date:"August 7,2021",
+        read: false
+      },
+    ]
+  -
+    var yesterday= [
+      { 
+        avatar:'team/57.webp',
+        name:"Kiera Anderson",
+        text:"<span class='me-1'>💬</span>Mentioned you in a comment",
+        textBold:" \"This is too good to be true!\"",
+        ago:"",
+        icon:"fas fa-clock",
+        time:"9:11 AM ",
+        date:"August 7,2021",
+        read: false
+      },
+      { 
+        avatar:'team/59.webp',
+        name:"Herman Carter",
+        text:"<span class='me-1'>👤</span>Tagged you in a",
+        textBold:" post",
+        ago:"",
+        icon:"fas fa-clock",
+        time:"10:58 PM ",
+        date:"August 7,2021",
+        read: false
+      },
+      { 
+        avatar:'team/58.webp',
+        name:"Benjamin Button",
+        text:"<span class='me-1'>👍</span>Liked your comment",
+        textBold:" \"Welcome to the team️\"",
+        ago:"",
+        icon:"fas fa-clock",
+        time:"10:18 AM ",
+        date:"August 7,2021",
+        read: true
+      },
+      { 
+        avatar:'team/60.webp',
+        name:"Aron Paul",
+        text:"<span class='me-1'>📷</span>Tagged you in a",
+        textBold:" photo",
+        ago:"",
+        icon:"fas fa-clock",
+        time:"9:53 AM ",
+        date:"August 7,2021",
+        read: true
+      },
+      { 
+        avatar:'team/34.webp',
+        name:"Rick Sanchez",
+        text:"<span class='me-1'>💬</span>Mentioned you in a comment",
+        textBold:" \"You need to see these amazing photos️\"",
+        ago:"",
+        icon:"fas fa-clock",
+        time:"9:45 AM ",
+        date:"August 7,2021",
+        read: true
+      }
+    ]
+
+mixin NotificationItem(info)
+  .d-flex.align-items-center.justify-content-between.py-3.border-300.px-lg-6.px-4.notification-card.border-top(class=info.read ? 'read' : 'unread' )
+    div.d-flex
+      .avatar.avatar-xl.me-3
+        if info.avatar
+          img.rounded-circle(src=`${CWD}assets/img/${info.avatar}`, alt="" class=info.avatarPlaceholder ? 'avatar-placeholder' : '')
+        else
+          .avatar-name.rounded-circle
+            span=info.name.charAt(0).toUpperCase()
+      .me-3.flex-1.mt-2
+        h4.fs--1.text-black=info.name
+        p.fs--1.text-1000!=info.text
+          span.fw-bold=info.textBold
+          span.ms-2.text-600.fw-bold.fs--2=info.ago
+        p.text-800.fs--1.mb-0
+          span.me-1(class=`${info.icon}`)
+          span.fw-bold=info.time 
+          | #{info.date}
+    .font-sans-serif
+      button.btn.fs--2.btn-sm.dropdown-toggle.dropdown-caret-none.transition-none.notification-dropdown-toggle(type='button' data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent")
+        span.fas.fa-ellipsis-h.fs--2.text-900
+      .dropdown-menu.dropdown-menu-end.py-2(aria-labelledby=id )
+        a(href='#!').dropdown-item Mark as unread
+
+block content
+
+  h2.mb-5 Notifications
+  h5.text-black.mb-3 Today
+  .mx-n4.mx-lg-n6.mb-5.border-bottom.border-300
+    each item in today
+      +NotificationItem(item)
+  h5.text-semi-bold.text-black.mb-3 Yesterday
+  .mx-n4.mx-lg-n6.mb-9.border-bottom.border-300
+    each item in yesterday
+      +NotificationItem(item)

@@ -1,0 +1,373 @@
+mixin ProjectListTableRow(data,index)
+	tr.position-static
+		td.align-middle.time.white-space-nowrap.ps-0.projectName.py-4
+			a.fw-bold.fs-0(href="#")=data.text
+		td.align-middle.white-space-nowrap.assigness.ps-3.py-4
+			.avatar-group.avatar-group-dense
+				each member in data.assigness
+					a.dropdown-toggle.dropdown-caret-none.d-inline-block(href='#' role='button' data-bs-toggle='dropdown' aria-expanded='false' data-bs-auto-close="outside")
+						if member.avatar
+							+Avatar({
+								size: 's',
+								img: member.avatar,
+								round: 'circle',
+								imgClass:member.avatar==="team/avatar.webp" ? 'avatar-placeholder' : ''
+						}).rounded-circle
+						else if member.avatar === ''
+							.avatar.avatar-s
+								.avatar-name.rounded-circle
+									span=member.name.charAt(0).toUpperCase()
+					+AvatarDropdownMenu(member) 
+				if data.more
+					+Avatar({size: 's', more: data.more, round: 'circle'}).rounded-circle
+
+		td.align-middle.white-space-nowrap.start.ps-3.py-4
+			p.mb-0.fs--1.text-900=data.start
+		td.align-middle.white-space-nowrap.deadline.ps-3.py-4
+			p.mb-0.fs--1.text-900=data.deadline
+		td.align-middle.white-space-nowrap.task.ps-3.py-4
+			p.fw-bo.text-900.fs--1.mb-0=data.task
+		td.align-middle.white-space-nowrap.ps-3.projectprogress
+			p.text-800.fs--2.mb-0 #{data.progress.min} / #{data.progress.max}
+			.progress(style="height:3px;")
+				.progress-bar.bg-success(style=`width: ${(data.progress.min/data.progress.max)*100}%` role="progressbar" aria-valuenow='25' aria-valuemin="0" aria-valuemax='100')
+		td.align-middle.white-space-nowrap.text-end.statuses
+			span.badge.badge-phoenix.fs--2(class=data.status.type)=data.status.label
+		td.align-middle.text-end.white-space-nowrap.pe-0.action
+			+DashboardDropdown.fs--2
+
+
+mixin ProjectListTable
+	-
+		var latestReviewsTableData = [
+			{
+				text:'Project Doughnut Dungeon',
+				start:'Nov 17, 2020',
+				deadline:'May 21, 2028',
+				task:'287',
+				assigness:[
+					{
+						avatar: `team/34.webp`,
+						name: 'Jean Renoir'
+					},
+					{
+						avatar: `team/59.webp`,
+						name: 'Katerina Karenin',
+					},
+					{
+						avatar: `team/35.webp`,
+						name: 'Stanly Drinkwater'
+					},
+					{
+						avatar: `team/58.webp`,
+						name: 'Igor Borvibson'
+					},
+				],
+				more: '+2',
+				progress:{
+					min:'145',
+					max:'145'
+				},
+				status : {
+					label: 'completed',
+					type: 'badge-phoenix-success',
+					icon:'info'
+				},
+				progressbar:{
+					info:30,
+					danger:5,
+					warning:45,
+					success:15
+				}
+			},
+			{
+				text:'Water resistant mosquito killer gun',
+				assigness:[
+					{
+						avatar: `team/1.webp`,
+						name: 'Ricky Antony'
+
+					},
+
+					{
+						avatar: `team/2.webp`,
+						name: 'Raymond Mims'
+					},
+				],
+				start:'Mar 08, 2021',
+				deadline:'Sep 15, 2022',
+				task:'125',
+				progress:{
+					min:'148',
+					max:'223'
+				},
+				progressbar:{
+					info:20,
+					danger:15,
+					warning:45,
+					success:30
+				},
+				status : {
+					label: 'inactive',
+					type: 'badge-phoenix-warning',
+					icon:'info'
+				},
+			},
+			{
+				text:'Execution of Micky the foul mouse',
+				assigness:[
+					{
+						avatar: `team/20.webp`,
+						name: 'Emma Watson'
+
+					},
+					{
+						avatar: '',
+						name: 'Raymond Mims',
+					},
+					{
+						avatar: `team/35.webp`,
+						name: 'Stanly Drinkwater'
+					},
+					{
+						avatar: `team/58.webp`,
+						name: 'Igor Borvibson'
+					},
+				],
+				start:'Nov 17, 2020',
+				deadline:'Sep 23, 2026',
+				task:'72',
+				progress:{
+					min:'277',
+					max:'539'
+				},
+				progressbar:{
+					info:10,
+					danger:10,
+					warning:35,
+					success:45
+				},
+					status : {
+					label: 'ongoing',
+					type: 'badge-phoenix-primary'
+				},
+			},
+			{
+				text:'Harnessing stupidity from Jerry',
+				assigness:[
+					{
+						avatar: `team/11.webp`,
+						name: 'Roy Anderson'
+
+					},
+					{
+						avatar: `team/12.webp`,
+						name: 'Luis Bunuel'
+					},
+					{
+						avatar: `team/13.webp`,
+						name: 'Raymond Mims'
+					},
+				],
+				start:'Jan 01, 2016',
+				deadline:'Apr 04, 2022',
+				task:'91',
+				progress:{
+					min:'169',
+					max:'394'
+				},
+				progressbar:{
+					info:25,
+					danger:35,
+					warning:20,
+					success:15
+				},
+				status : {
+					label: 'Critical',
+					type: 'badge-phoenix-danger'
+				},
+			},
+			{
+				text:'Making the Butterflies shoot each other dead',
+				assigness:[
+					{
+						avatar: `team/14.webp`,
+						name: 'Martina scorcese'
+
+					},
+					{
+						avatar: `team/16.webp`,
+						name: 'Katerina Karenin'
+
+					},
+					{
+						avatar: `team/18.webp`,
+						name: 'Martina scorcese'
+					},
+					{
+						avatar: `team/20.webp`,
+						name: 'Emma Watson'
+					},
+
+				],
+				more: '+3',
+				name: 'R',
+				start:'Dec 24, 2019',
+				deadline:'Jan 15, 2024',
+				task:'134',
+				progress:{
+					min:'600',
+					max:'600'
+				},
+				progressbar:{
+					info:24,
+					danger:5,
+					warning:35,
+					success:35
+				},
+				status : {
+					label: 'ongoing',
+					type: 'badge-phoenix-primary'
+				},
+			},
+			{
+				text:'The chewing gum attack',
+				assigness:[
+					{
+						avatar: `team/31.webp`,
+						name: 'Martina scorcese'
+
+					},
+					{
+						avatar: `team/33.webp`,
+						name: 'Luis Bunuel'
+					},
+				],
+				start:'Aug 4, 2018',
+				deadline:'Oct 22, 2023',
+				task:'24',
+				progress:{
+					min:'600',
+					max:'600'
+				},
+				progressbar:{
+					info:24,
+					danger:5,
+					warning:35,
+					success:35
+				},
+				status : {
+					label: 'Cancelled',
+					type: 'badge-phoenix-secondary'
+				},
+			},
+			{
+				text:'Olga Dies Dreaming by Xóchitl González',
+				assigness:[
+					{
+						avatar: `team/11.webp`,
+						name: 'Roy Anderson'
+
+					},
+					{
+						avatar: `team/12.webp`,
+						name: 'Luis Bunuel'
+					},
+					{
+						avatar: `team/13.webp`,
+						name: 'Raymond Mims'
+					},
+				],
+				start:'Jan 01, 2018',
+				deadline:'Jan 04, 2022',
+				task:'80',
+				progress:{
+					min:'150',
+					max:'294'
+				},
+				progressbar:{
+					info:25,
+					danger:35,
+					warning:20,
+					success:15
+				},
+				status : {
+					label: 'Critical',
+					type: 'badge-phoenix-danger',
+				},
+			},
+		]
+
+	.table-responsive.scrollbar
+		table.table.fs--1.mb-0.border-top.border-200
+			thead
+				tr
+					th.sort.white-space-nowrap.align-middle.ps-0(scope='col' data-sort="projectName" style='width:30%;' ) PROJECT NAME
+					th.sort.align-middle.ps-3(scope='col' data-sort="assigness" style='width:10%;') ASSIGNESS
+					th.sort.align-middle.ps-3(scope='col' data-sort="start" style='width:10%;') START DATE
+					th.sort.align-middle.ps-3(scope='col' data-sort="deadline" style='width:15%;') DEADLINE
+					th.sort.align-middle.ps-3(scope='col' data-sort="task" style='width:12%;' ) TASK
+					th.sort.align-middle.ps-3(scope='col' data-sort="projectprogress" style='width:5%;' ) PROGRESS
+					th.sort.align-middle.text-end(scope='col' data-sort="statuses" style='width:10%;') STATUS
+					th.sort.align-middle.text-end(scope='col' style='width:10%;' )
+			tbody.list#project-list-table-body
+				each row,index in latestReviewsTableData
+					+ProjectListTableRow(row,index)
+
+mixin ProjectList
+	#projectSummary(data-list!={
+		valueNames: ["projectName", "assigness", "start", "deadline", "task","projectprogress","status","action"],
+		page: 6,
+		pagination: true
+	})
+		.row.mb-4.gx-6.gy-3.align-items-center
+			.col-auto
+				h2.mb-0 Projects
+					span.fw-normal.text-700.ms-3 (32)
+			.col-auto
+				a.btn.btn-primary.px-5(href=`${CWD}${paths['project-management-create-new']}`)
+					i.fa-solid.fa-plus.me-2
+					| Add new project
+		.row.g-3.justify-content-between.align-items-end.mb-4
+			.col-12.col-sm-auto
+				ul.nav.nav-links.mx-n2
+					li.nav-item
+						a.nav-link.px-2.py-1.active(aria-current='page' href='#')
+							span All
+							span.text-700.fw-semi-bold (32)
+					li.nav-item
+						a.nav-link.px-2.py-1(href='#')
+							span Ongoing
+							span.text-700.fw-semi-bold (14)
+					li.nav-item
+						a.nav-link.px-2.py-1(href='#')
+							span Cancelled
+							span.text-700.fw-semi-bold (2)
+					li.nav-item
+						a.nav-link.px-2.py-1(href='#')
+							span Finished
+							span.text-700.fw-semi-bold (14)
+					li.nav-item
+						a.nav-link.px-2.py-1(href='#')
+							span Postponed
+							span.text-700.fw-semi-bold (2)
+			.col-12.col-sm-auto
+				.d-flex.align-items-center
+					+Search({placeholder: 'Search projects'}).me-3
+					+ViewButtons('list')
+		+ProjectListTable
+		.d-flex.flex-wrap.align-items-center.justify-content-between.py-3.pe-0.fs--1.border-bottom.border-200
+			.d-flex
+				p.mb-0.d-none.d-sm-block.me-3.fw-semi-bold.text-900(data-list-info)
+				a.fw-semi-bold(href='#!' data-list-view="*")
+					| View all
+					span.fas.fa-angle-right.ms-1(data-fa-transform='down-1')
+				a.fw-semi-bold.d-none(href='#!' data-list-view="less")
+					| View Less
+					span.fas.fa-angle-right.ms-1(data-fa-transform='down-1')
+			.d-flex
+				button.page-link(data-list-pagination="prev")
+					span.fas.fa-chevron-left
+				ul.mb-0.pagination
+				button.page-link.pe-0(data-list-pagination="next")
+					span.fas.fa-chevron-right

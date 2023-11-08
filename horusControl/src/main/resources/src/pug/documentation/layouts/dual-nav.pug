@@ -1,0 +1,74 @@
+extends ../../layouts/LayoutComponent
+
+append variables
+  -
+    var pageHeader = {
+      title: 'Dual Nav',
+      description:"Dual Nav is a different horizontal layout system in Phoenix.",
+      url: `${CWD}${paths['demo-dual-nav']}`,
+      linkText: 'Dual nav example',
+      dataAnchor: true
+    }
+
+block component
+
+  +ComponentCard({title: 'Dual Nav structure', hideNavTab: true}).mb-4.mt-5
+    p.mb-0 Add 
+      code .dual-nav 
+      | class in 
+      code Html 
+      | element to start with dual nav.
+
+
+    pre.scrollbar.my-5
+      code.language-html
+        +escape
+          doctype html
+          html.dual-nav
+            head ...
+            body 
+              main
+                .container-fluid
+                  nav.navbar.navbar-top.fixed-top.navbar-expand-lg
+                    // navbar dual content goes here
+                  .content 
+                    //  content goes here
+  +ComponentCard({title: 'Responsive behavior ', hideNavTab: true}).my-4
+    p.mb-0 Phoenix used the Bootstrap's 
+      code .navbar-expand{-sm|-md|-lg|-xl|-xxl} 
+      |  classes in 
+      code .navbar-top 
+      | element to decide when the navbar top will expand or not.
+    pre.scrollbar.mt-5
+      code.language-html
+        +escape
+          nav.navbar.navbar-top.fixed-top.navbar-expand-lg
+
+  +ComponentCard({title: 'Dual Nav appearance', hideNavTab: true}).my-4
+    p You can control top nav style of vertical navbar between defaults and darker.
+    p.mb-0 From your project directory, If you are using gulp version open 
+      code src/js/config.js 
+      | or if you are using directly from the public folder open 
+      code public/assets/js/theme.js 
+      | and set 
+      code phoenixNavbarTopStyle: darker 
+      | of 
+      code CONFIG 
+      | object to collapse the Vertical Navigation by default
+    
+    pre.scrollbar.my-5
+      code.lang-html.
+        const CONFIG = {
+          phoenixNavbarTopStyle: 'default' || 'darker',
+          ...
+        };
+
+    p.mb-0 Or to change navbar vertical color just add 
+      code navbar-darker 
+      | css class with 
+      code navber-vertical 
+      | class
+    pre.scrollbar.mt-3
+      code.language-html
+        +escape
+          nav.navbar.navbar-top.navbar-darker

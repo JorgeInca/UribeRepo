@@ -1,0 +1,11 @@
+mixin DashboardDropdown(id, reveal ,iconClass='fs--2') 
+  .font-sans-serif.btn-reveal-trigger.position-static
+    button.btn.btn-sm.dropdown-toggle.dropdown-caret-none.transition-none&attributes(attributes)(type='button' class=`btn-reveal${reveal ? '-' + reveal : ''}` id=id data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent")
+      span.fas.fa-ellipsis-h(class=iconClass)
+    .dropdown-menu.dropdown-menu-end.py-2(aria-labelledby=id )
+      a(href='#!').dropdown-item View
+      a(href='#!').dropdown-item Export
+      .dropdown-divider
+      a(href='#!').dropdown-item.text-danger Remove
+
+

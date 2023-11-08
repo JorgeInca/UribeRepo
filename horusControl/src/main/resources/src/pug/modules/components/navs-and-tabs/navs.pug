@@ -1,0 +1,93 @@
+extends ../../../layouts/LayoutComponent
+
+append variables
+  -
+    var pageHeader = {
+      title: 'Navs',
+      description: 'Documentation and examples of how to use Bootstrap’s included navigation components.',
+      url: `https://getbootstrap.com/docs/${bootstrapVersion}/components/navs-tabs/`,
+      linkText: 'Navs on Bootstrap',
+    }
+  -
+    var rightNav = [
+      {
+        name: 'Horizontal',
+        id: '#horizontal',
+      },
+      {
+        name: 'Vertical',
+        id: '#vertical',
+      },
+      {
+        name: 'Pills',
+        id: '#pills',
+      },
+      {
+        name: 'Fill and justify',
+        id: '#fill-and-justify',
+      }
+    ]
+
+block component
+  .mb-9
+    +ComponentCard({
+      title:'Horizontal'
+    }).my-4
+      ul.nav
+        li.nav-item
+          a.nav-link.active(aria-current='page' href='#') Active
+        li.nav-item
+          a.nav-link(href='#') Link
+        li.nav-item
+          a.nav-link(href='#') Link
+        li.nav-item
+          a.nav-link.disabled Disabled
+
+    +ComponentCard({
+      title:'Vertical'
+    }).my-4
+      ul.nav.flex-column
+        li.nav-item
+          a.nav-link.active(aria-current='page' href='#') Active
+        li.nav-item
+          a.nav-link(href='#') Link
+        li.nav-item
+          a.nav-link(href='#') Link
+        li.nav-item
+          a.nav-link.disabled Disabled
+
+    +ComponentCard({
+      title:'Pills'
+    }).my-4
+      ul.nav.nav-pills
+        li.nav-item
+          a.nav-link.active(aria-current='page' href='#') Active
+        li.nav-item
+          a.nav-link(href='#') Link
+        li.nav-item
+          a.nav-link(href='#') Link
+        li.nav-item
+          a.nav-link.disabled Disabled
+
+    +ComponentCard({
+      title:'Fill and justify'
+    }).my-4
+      ul.nav.nav-pills.nav-fill.mb-4
+        li.nav-item
+          a.nav-link.active(aria-current='page' href='#') Active
+        li.nav-item
+          a.nav-link(href='#') Much longer nav link
+        li.nav-item
+          a.nav-link(href='#') Link
+        li.nav-item
+          a.nav-link.disabled Disabled
+      ul.nav.nav-pills.nav-justified
+        li.nav-item
+          a.nav-link.active(aria-current='page' href='#') Active
+        li.nav-item
+          a.nav-link(href='#') Much longer nav link
+        li.nav-item
+          a.nav-link(href='#') Link
+        li.nav-item
+          a.nav-link.disabled Disabled
+

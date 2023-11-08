@@ -1,0 +1,46 @@
+extends Layout
+include ../mixins/common/Logo
+include ../mixins/common/Footer
+include ../mixins/common/Card
+include ../mixins/common/Rating
+include ../mixins/layouts/LayoutContent
+include ../mixins/layouts/LayoutContentProd
+include ../mixins/navbars/NavbarVertical
+include ../mixins/navbars/TopNav
+include ../mixins/navbars/NavbarTop
+include ../mixins/navbars/NavbarCombo
+include ../mixins/common/RevealBtn
+include ../mixins/common/SettingsPanel
+include ../mixins/Variables
+
+
+append variables
+  - var attrsBody = {  };
+  - var breakPoint = 'lg';
+
+append headScripts
+  script(src=`${CWD}vendors/imagesloaded/imagesloaded.pkgd.min.js`)
+  script(src=`${CWD}assets/js/config.js`)
+
+block styles
+  link(rel='preconnect', href='https://fonts.googleapis.com')
+  link(rel='preconnect', href='https://fonts.gstatic.com', crossorigin='')
+  link(href='https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap', rel='stylesheet')
+
+  link(href=`${CWD}assets/css/theme.min.css`, type="text/css" rel='stylesheet' id="style-default")
+  link(href=`${CWD}assets/css/user.min.css`, type="text/css" rel='stylesheet' id="user-style-default")
+  script.
+    document.documentElement.classList.remove('dark');
+
+append layoutScripts
+  script(src=`${CWD}vendors/lodash/lodash.min.js`)
+  script(src=`https://polyfill.io/v3/polyfill.min.js?features=window.scroll`)
+
+block mainContent
+  //- +LayoutContentProd
+  if ENV === 'PROD'
+    +LayoutContentProd
+  else
+    +LayoutContent
+   
+block afterMainContent

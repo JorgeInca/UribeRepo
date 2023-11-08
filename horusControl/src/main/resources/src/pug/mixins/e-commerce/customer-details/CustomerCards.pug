@@ -1,0 +1,84 @@
+mixin CustomerProfileCard
+  .card&attributes(attributes)
+    .card-body.d-flex.flex-column.justify-content-between.pb-3
+      .row.align-items-center.g-5.mb-3.text-center.text-sm-start
+        .col-12.col-sm-auto.mb-sm-2
+          .avatar.avatar-5xl
+            img.rounded-circle(src=`${CWD}assets/img/team/15.webp`, alt="")
+        .col-12.col-sm-auto.flex-1
+          h3 Ansolo Lazinatov
+          p.text-800 Joined 3 months ago
+          div
+            a.me-2(href='#!')
+              span.fab.fa-linkedin-in.text-400.hover-primary
+            a.me-2(href='#!')
+              span.fab.fa-facebook.text-400.hover-primary
+            a(href='#!')
+              span.fab.fa-twitter.text-400.hover-primary
+
+      .d-flex.flex-between-center.border-top.border-dashed.border-300.pt-4
+        div
+          h6 Following
+          p.fs-1.text-800.mb-0 297
+        div
+          h6 Projects
+          p.fs-1.text-800.mb-0 56
+        div
+          h6 Completion
+          p.fs-1.text-800.mb-0 97
+
+
+mixin Note(note,isLast)
+  .fs--1.fw-semi-bold(class=`${!isLast ? 'pb-3 mb-4 border-bottom border-dashed border-300' : ''}`)
+    p.text-1000.mb-1=note.note
+    .text-end
+      p.text-600.mb-0=note.date
+
+mixin NotesCard
+  -
+    var notes = [
+      {
+        note: 'Gave us a nice feedback',
+        date: '12 Nov, 2020'
+      },
+      {
+        note: 'Customer added product to cart and then forgot to checkout. Later knocked the customer support to ask about update on shipping. Later, settled on “One day Shipping” though “Free delivery” was preferred. Overall good behavior.',
+        date: '23 Dec, 2019'
+      },
+      {
+        note: 'User of this support ticket won a 100% off coupon and received top-notch service from the technical support engineer. Along with providing a good review, user highly appreciated the team.',
+        date: '2 Oct, 2019'
+      },
+      {
+        note: 'Customer returned and bought 2 related items, which is currently being shipped. Customer chose “One day Shipping”. Additional notes were added regarding customised wrapping. Customer submitted positive review.',
+        date: '26 Apr, 2019'
+      },
+    ]
+  .card&attributes(attributes)
+    .card-body
+      h3.mb-4 Notes on Customer
+      textarea.form-control.mb-3(rows="4")
+      button.btn.btn-phoenix-primary.w-100.mb-4 Add Note
+      each note,index in notes
+        +Note(note,index === notes.length - 1)
+
+
+mixin AddressCard
+  .card&attributes(attributes)
+    .card-body.pb-3
+      .d-flex.align-items-center.mb-3
+        h3.me-1 Default Address
+        button.btn.btn-link.p-0
+          span.fas.fa-pen.fs-0.ms-3.text-500
+
+      h5.text-800 Address
+      p.text-800 Shatinon Mekalan
+        br
+        | Vancouver, British Columbia
+        br
+        | Canada
+      .mb-3
+        h5.text-800 Email
+        a(href="mailto:shatinon@jeemail.com") shatinon@jeemail.com
+      h5.text-800 Phone
+      a.text-800(href="tel:+1234567890") +1234567890

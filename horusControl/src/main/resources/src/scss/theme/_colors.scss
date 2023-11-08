@@ -1,0 +1,371 @@
+//*-----------------------------------------------
+//|   Color System
+//-----------------------------------------------*/
+
+$white: #fff !default;
+$gray-soft: #f5f7fa !default; //(245, 247, 250)
+$gray-100: #eff2f6 !default; //(239, 242, 246)
+$gray-200: #e3e6ed !default; //(227, 230, 237)
+$gray-300: #cbd0dd !default; //(203, 208, 221)
+$gray-400: #9fa6bc !default; //(159, 166, 188)
+$gray-500: #8a94ad !default; //(138, 148, 173)
+$gray-600: #6e7891 !default; //(110, 120, 145)
+$gray-700: #525b75 !default; //(82, 91, 117)
+$gray-800: #3e465b !default; //(62, 70, 91)
+$gray-900: #31374a !default; //(49, 55, 74)
+$gray-1000: #222834 !default; //(34, 40, 52)
+$gray-1100: #141824 !default; //(20, 24, 36)
+$black: #000000 !default;
+
+$dark-gray-soft: #0f111a !default;
+// $grays: () !default;
+$grays: (
+  'soft': $gray-soft,
+  '100': $gray-100,
+  '200': $gray-200,
+  '300': $gray-300,
+  '400': $gray-400,
+  '500': $gray-500,
+  '600': $gray-600,
+  '700': $gray-700,
+  '800': $gray-800,
+  '900': $gray-900,
+  '1000': $gray-1000,
+  '1100': $gray-1100
+) !default;
+
+$common: (
+  'white': $white,
+  'black': $black
+) !default;
+
+$dark-common: (
+  'white': $gray-1100,
+  'black': $gray-100
+) !default;
+
+$dark-grays: (
+  'soft': $dark-gray-soft,
+  '100': $gray-1000,
+  '200': $gray-900,
+  '300': #373e53,
+  '400': $gray-800,
+  '500': $gray-700,
+  '600': $gray-500,
+  '700': $gray-500,
+  '800': #949db5,
+  '900': $gray-400,
+  '1000': $gray-300,
+  '1100': $gray-200
+) !default;
+
+//*-----------------------------------------------
+//|   Solid Colors
+//-----------------------------------------------*/
+$blue: #3874ff !default;
+$red: #ed2000 !default;
+$orange: #e5780b !default;
+$green: #25b003 !default;
+$cyan: #0097eb !default;
+
+$colors: (
+  'blue': $blue,
+  'red': $red,
+  'orange': $orange,
+  'green': $green,
+  'cyan': $cyan,
+  'white': $white,
+  'black': $black,
+  'gray': $gray-600,
+  'gray-dark': $gray-1100
+) !default;
+
+//*-----------------------------------------------
+//|   Theme Colors
+//-----------------------------------------------*/
+$primary: $blue !default;
+$secondary: $gray-900 !default;
+$success: $green !default;
+$info: $cyan !default;
+$warning: $orange !default;
+$danger: $red !default;
+$light: $gray-100 !default;
+$dark: $gray-1100 !default;
+
+$theme-colors-variant: (
+  'primary': 'blue',
+  'secondary': 'gray',
+  'success': 'green',
+  'info': 'cyan',
+  'warning': 'orange',
+  'danger': 'red',
+  'light': 'light',
+  'dark': 'dark'
+) !default;
+
+$theme-colors: (
+  'primary': $primary,
+  'secondary': $secondary,
+  'success': $success,
+  'info': $info,
+  'warning': $warning,
+  'danger': $danger,
+  'light': $light,
+  'dark': $dark
+) !default;
+
+$blue-soft: #f5f8ff !default;
+$blue-100: #e5edff !default;
+$blue-200: #adc5ff !default;
+$blue-300: #85a9ff !default;
+$blue-400: $blue !default;
+$blue-500: #004dff !default;
+$blue-600: #003cc7 !default;
+
+$blues: (
+  'blue-soft': $blue-soft,
+  'blue-100': $blue-100,
+  'blue-200': $blue-200,
+  'blue-300': $blue-300,
+  'blue-400': $blue-400,
+  'blue-500': $blue-500,
+  'blue-600': $blue-600
+) !default;
+
+$red-soft: #ffedeb !default;
+$red-100: #ffe0db !default;
+$red-200: #fabcb3 !default;
+$red-300: #f48270 !default;
+$red-400: $red !default;
+$red-500: #cc1b00 !default;
+$red-600: #b81800 !default;
+
+$reds: (
+  'red-soft': $red-soft,
+  'red-100': $red-100,
+  'red-200': $red-200,
+  'red-300': $red-300,
+  'red-400': $red-400,
+  'red-500': $red-500,
+  'red-600': $red-600
+) !default;
+
+$green-soft: #f0fdec !default;
+$green-100: #d9fbd0 !default;
+$green-200: #bee8b4 !default;
+$green-300: #90d67f !default;
+$green-400: $green !default;
+$green-500: #23890b !default;
+$green-600: #1c6c09 !default;
+
+$greens: (
+  'green-soft': $green-soft,
+  'green-100': $green-100,
+  'green-200': $green-200,
+  'green-300': $green-300,
+  'green-400': $green-400,
+  'green-500': $green-500,
+  'green-600': $green-600
+) !default;
+
+$orange-soft: #fff6e0 !default;
+$orange-100: #ffefca !default;
+$orange-200: #ffe6ad !default;
+$orange-300: #ffcc85 !default;
+$orange-400: $orange !default;
+$orange-500: #d6700a !default;
+$orange-600: #bc3803 !default;
+
+$oranges: (
+  'orange-soft': $orange-soft,
+  'orange-100': $orange-100,
+  'orange-200': $orange-200,
+  'orange-300': $orange-300,
+  'orange-400': $orange-400,
+  'orange-500': $orange-500,
+  'orange-600': $orange-600
+) !default;
+
+$cyan-soft: #f0faff !default;
+$cyan-100: #c7ebff !default;
+$cyan-200: #96d9ff !default;
+$cyan-300: #60c6ff !default;
+$cyan-400: $cyan !default;
+$cyan-500: #0080c7 !default;
+$cyan-600: #005585 !default;
+
+$cyans: (
+  'cyan-soft': $cyan-soft,
+  'cyan-100': $cyan-100,
+  'cyan-200': $cyan-200,
+  'cyan-300': $cyan-300,
+  'cyan-400': $cyan-400,
+  'cyan-500': $cyan-500,
+  'cyan-600': $cyan-600
+) !default;
+
+$theme-colors-soft: (
+  'primary': $blue-soft,
+  'secondary': $gray-soft,
+  'success': $green-soft,
+  'info': $cyan-soft,
+  'warning': $orange-soft,
+  'danger': $red-soft
+) !default;
+
+$theme-colors-light: (
+  'primary': $blue-100,
+  'secondary': $gray-200,
+  'success': $green-100,
+  'info': $cyan-100,
+  'warning': $orange-100,
+  'danger': $red-100
+) !default;
+
+$theme-colors-300: (
+  'primary': $blue-300,
+  'secondary': $gray-300,
+  'success': $green-300,
+  'info': $cyan-300,
+  'warning': $orange-300,
+  'danger': $red-300
+) !default;
+
+$theme-colors-dark: (
+  'primary': $blue-600,
+  'secondary': $gray-1100,
+  'success': $green-600,
+  'info': $cyan-600,
+  'warning': $orange-600,
+  'danger': $red-600
+) !default;
+
+$theme-hover-colors: (
+  'primary': $blue-500,
+  'secondary': $gray-1000,
+  'success': $green-500,
+  'info': $cyan-500,
+  'warning': $orange-500,
+  'danger': $red-500
+) !default;
+
+//*-----------------------------------------------
+//|   Brand colors
+//-----------------------------------------------*/
+$linkedin: #0077b5 !default;
+$facebook: #3c5a99 !default;
+$twitter: #1da1f2 !default;
+$google-plus: #dd4b39 !default;
+$github: #333333 !default;
+$youtube: #ff0001 !default;
+$bootstrap: #6f45a9 !default;
+$css3: #203ccf !default;
+$html5: #bf4b2c !default;
+$sass: #c55589 !default;
+$gulp: #d54049 !default;
+$w3c: #255997 !default;
+
+$brand-colors: (
+  'facebook': $facebook,
+  'google-plus': $google-plus,
+  'twitter': $twitter,
+  'linkedin': $linkedin,
+  'youtube': $youtube,
+  'github': $github,
+  'bootstrap': $bootstrap,
+  'css3': $css3,
+  'html5': $html5,
+  'sass': $sass,
+  'gulp': $gulp,
+  'w3c': $w3c
+) !default;
+
+$button-colors: map-remove($theme-colors, 'light', 'dark') !default;
+
+$dark-theme-colors: (
+  'primary': $blue-300,
+  'secondary': $secondary,
+  'success': $green-300,
+  'info': $cyan-300,
+  'warning': $orange-300,
+  'danger': $red-300,
+  'light': rgba(map-get($dark-grays, '200'), 0.25),
+  'dark': $light
+) !default;
+
+$theme-used-colors: (
+  'primary-soft': $blue-soft,
+  'primary-100': $blue-100,
+  'primary-200': $blue-200,
+  'primary-300': $blue-300,
+  'primary-500': $blue-500,
+  'primary-600': $blue-600,
+  'warning-soft': $orange-soft,
+  'warning-100': $orange-100,
+  'warning-200': $orange-200,
+  'warning-300': $orange-300,
+  'warning-500': $orange-500,
+  'warning-600': $orange-600,
+  'danger-300': $red-300,
+  'danger-100': $red-100,
+  'danger-200': $red-200,
+  'danger-500': $red-500,
+  'danger-600': $red-600,
+  'success-100': $green-100,
+  'success-200': $green-200,
+  'success-300': $green-300,
+  'success-500': $green-500,
+  'success-600': $green-600,
+  'info-100': $cyan-100,
+  'info-200': $cyan-200,
+  'info-300': $cyan-300,
+  'info-500': $cyan-500,
+  'info-600': $cyan-600
+) !default;
+
+$dark-info-100: #1a2532 !default;
+
+$dark-theme-used-colors: (
+  'primary-soft': $blue-soft,
+  'primary-100': #1d2332,
+  'primary-200': $blue-200,
+  'primary-300': $blue-300,
+  'primary-500': $blue-400,
+  'primary-600': $blue-600,
+  'warning-soft': $orange-soft,
+  'warning-100': #272528,
+  'warning-200': $orange-200,
+  'warning-300': $orange-300,
+  'warning-500': $orange-400,
+  'warning-600': $orange-600,
+  'danger-300': $red-300,
+  'danger-200': $red-200,
+  'danger-100': #262026,
+  'danger-500': $red-500,
+  'danger-600': $red-600,
+  'success-100': #1e2628,
+  'success-200': $green-200,
+  'success-300': $green-300,
+  'success-500': $green-400,
+  'success-600': $green-600,
+  'info-100': $dark-info-100,
+  'info-200': $cyan-200,
+  'info-300': $cyan-300,
+  'info-500': $cyan-400,
+  'info-600': $cyan-600
+) !default;
+
+$theme-all-colors: map-merge-multiple(
+  $grays,
+  $brand-colors,
+  $theme-colors,
+  $theme-used-colors,
+  $common
+) !default;
+
+$dark-theme-all-colors: map-merge-multiple(
+  $dark-grays,
+  $dark-theme-colors,
+  $dark-theme-used-colors,
+  $dark-common
+) !default;

@@ -1,0 +1,262 @@
+extends ../../layouts/LayoutComponent
+include ../../mixins/dashboard/common
+
+
+append scripts
+  script(src=`${CWD}vendors/list.js/list.min.js`)
+
+append variables
+  -
+    var pageHeader = {
+      title: 'Bulk Select',
+      description: `Bulk select allows users to check multiple checkboxes at once and toggles a UI for bulk actions to be performed for the selected items.`,
+    }
+  -
+    var rightNav = [
+      {
+        name: 'Docs',
+        id: '#docs',
+      },
+      {
+        name: 'Example',
+        id: '#example',
+      },
+    ]
+  -
+    var rows = [
+      {
+        name: 'Anna',
+        email: 'anna@example.com',
+        age: 18,
+      },
+      {
+        name: 'Homer',
+        email: 'homer@example.com',
+        age: 35,
+      },
+      {
+        name: 'Oscar',
+        email: 'oscar@example.com',
+        age: 52,
+      },
+      {
+        name: 'Emily',
+        email: 'emily@example.com',
+        age: 30,
+      },
+      {
+        name: 'Jara',
+        email: 'jara@example.com',
+        age: 25,
+      },
+      {
+        name: 'Clark',
+        email: 'clark@example.com',
+        age: 39,
+      },
+      {
+        name: 'Jennifer',
+        email: 'jennifer@example.com',
+        age: 52,
+      },
+      {
+        name: 'Tony',
+        email: 'tony@example.com',
+        age: 30,
+      },
+      {
+        name: 'Tom',
+        email: 'tom@example.com',
+        age: 25,
+      },
+      {
+        name: 'Michael',
+        email: 'michael@example.com',
+        age: 39,
+      },
+      {
+        name: 'Antony',
+        email: 'antony@example.com',
+        age: 39,
+      },
+      {
+        name: 'Raymond',
+        email: 'raymond@example.com',
+        age: 52,
+      },
+      {
+        name: 'Marie',
+        email: 'marie@example.com',
+        age: 30,
+      },
+      {
+        name: 'Cohen',
+        email: 'cohen@example.com',
+        age: 25,
+      },
+      {
+        name: 'Rowen',
+        email: 'rowen@example.com',
+        age: 39,
+      },
+    ]
+
+
+
+block component
+  .mb-9
+    +ComponentCard({
+      title: 'Docs',
+      hideNavTab: true
+    }).my-4
+      h5 Bulk select consist of this following parts: 
+      ul
+        li The main checkbox, which is used for checking all the other checkboxes, the attribute 
+          code data-bulk-select
+          |  is used to define that item.
+        li Three(3) elements can be hooked with bulk select: 
+          code body
+          | , 
+          code actions
+          | , 
+          code replacedElement
+          | .
+          +ComponentCardLib
+            input.form-check-input(
+              type='checkbox'
+              data-bulk-select!={
+                body: "bulk-select-body",
+                actions: "bulk-select-actions",
+                replacedElement: "bulk-select-replace-element"
+              }
+            )
+          p.mb-0 These ids definded in these keys are used to hook the respective elements.
+        li
+          code body:
+          |  The target checkboxes are wrapped using a unique id defined in 
+          code body
+          | . In this example 
+          code bulk-select-body
+          | . Every targeted checkbox within this wrapper is marked with the data attribute 
+          code data-bulk-select-row.
+          | You will get the value passed in this attribute as return value of 
+          code getSelectedRows 
+          | method in JS.
+        li
+          code actions:
+          |  The target actions are wrapped using a unique id defined in 
+          code actions
+          | . The element with this id (in 
+          code example bulk-select-actions
+          | ) will be toggled by checking the main checkbox.
+        li
+          code replacedElement:
+          |  The target replaced element with action are wrapped using a unique id defined in 
+          code replacedElement
+          | . Bulk select actions will be replaced with the content of this element with this id (in example 
+          code bulk-select-replace-element
+          | )
+      h5 Javascript
+      ul  
+        li
+          code getInstance: 
+          | Static method which allows you to get the 
+          strong BulkSelect 
+          | instance associated to a DOM element, you can use it like this:  
+          code window.phoenix.BulkSelect.getInstance(element)
+        li
+          code getSelectedRows: 
+          | Get the selected rows data by invoking 
+          code getSelectedRows 
+          | method on the 
+          code BulkSelect 
+          | instance
+          .border.rounded-2.p-3.bg-primary-100
+            code const bulkSelectEl = document.getElementById('bulk-select-example');
+            br
+            code const bulkSelectInstance = window.phoenix.BulkSelect.getInstance(bulkSelectEl);
+
+
+
+    +ComponentCard({
+      title: 'Example'
+    }).mb-3
+      .d-flex.align-items-center.justify-content-end.my-3&attributes(attributes)
+        #bulk-select-replace-element
+          button(type='button').btn.btn-phoenix-success.btn-sm
+            span.fas.fa-plus(data-fa-transform="shrink-3 down-2")
+            span.ms-1 New
+        #bulk-select-actions.d-none.ms-3
+          .d-flex
+            select.form-select.form-select-sm(aria-label='Bulk actions')
+              option(selected) Bulk actions
+              option(value='Delete') Delete
+              option(value='Archive') Archive
+            button.btn.btn-phoenix-danger.btn-sm.ms-2(type='button') Apply
+      #tableExample(data-list!={
+        valueNames: ['name', 'email', 'age'],
+        page: 5,
+        pagination: true
+      })
+
+        .table-responsive.mx-n1.px-1
+          table.table.table-sm.border-top.border-200.fs--1.mb-0
+            thead
+              tr
+                th.white-space-nowrap.fs--1.align-middle.ps-0(style="max-width:20px; width:18px;")
+                  .form-check.mb-0.fs-0
+                    input.form-check-input#bulk-select-example(
+                      type='checkbox' 
+                      data-bulk-select!={
+                        body: "bulk-select-body",
+                        actions: "bulk-select-actions",
+                        replacedElement: "bulk-select-replace-element"
+                      }
+                    )
+                th.sort.align-middle.ps-3(data-sort="name") Name
+                th.sort.align-middle(data-sort="email") Email
+                th.sort.align-middle(data-sort="age") Age
+                th.sort.text-end.align-middle.pe-0(scope='col') ACTION
+            tbody.list#bulk-select-body
+              each row in rows
+                tr
+                  td.fs--1.align-middle
+                    .form-check.mb-0.fs-0
+                      input.form-check-input(type='checkbox' data-bulk-select-row=row)
+                  td.align-middle.ps-3.name=row.name
+                  td.align-middle.email=row.email
+                  td.align-middle.age=row.age
+                  td.align-middle.white-space-nowrap.text-end.pe-0
+                    +DashboardDropdown.fs--2
+        .d-flex.flex-between-center.pt-3.mb-3
+          .pagination.d-none
+          p.mb-0.fs--1
+            ='\n'
+            span.d-none.d-sm-inline-block(data-list-info)
+            ='\n'
+            span.d-none.d-sm-inline-block  &mdash; 
+            ='\n'
+            a.fw-semi-bold(href='#!' data-list-view="*")
+              ='\n'
+              | View all
+              ='\n'
+              span.fas.fa-angle-right.ms-1(data-fa-transform='down-1')
+              ='\n'
+            a.fw-semi-bold.d-none(href='#!' data-list-view="less")
+              ='\n'
+              | View Less
+              ='\n'
+              span.fas.fa-angle-right.ms-1(data-fa-transform='down-1')
+              ='\n'
+          .d-flex
+            = '\n'
+            button.btn.btn-sm.btn-primary(type='button' data-list-pagination='prev')
+              span Previous
+            = '\n'
+            button.btn.btn-sm.btn-primary.px-4.ms-2(type='button' data-list-pagination='next')
+              span Next
+        p.mb-2 Click the button to get selected rows
+        button.btn.btn-warning(data-selected-rows) Get Selected Rows
+        pre#selectedRows
+
+

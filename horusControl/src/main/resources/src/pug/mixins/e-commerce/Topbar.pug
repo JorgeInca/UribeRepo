@@ -1,0 +1,26 @@
+mixin Topbar
+  .ecommerce-topbar
+    nav.navbar.navbar-expand-lg.navbar-light.px-0
+      .row.gx-0.gy-2.w-100.flex-between-center
+        .col-auto
+          a.text-decoration-none(href=`${CWD}${paths['default-dashboard']}`)
+            +Logo
+        .col-auto.order-md-1
+          ul.navbar-nav.navbar-nav-icons.flex-row.me-n2
+            li.nav-item.d-flex.align-items-center
+              +ToggleThemeBtn
+            li.nav-item
+              a.nav-link.px-2.icon-indicator.icon-indicator-primary(href=`${CWD}${paths['e-commerce-fe-cart']}` role='button')
+                span.text-700(data-feather='shopping-cart' style="height:20px;width:20px;")
+                span.icon-indicator-number 3
+            li.nav-item.dropdown
+              a#navbarTopDropdownNotification.nav-link.px-2.icon-indicator.icon-indicator-sm.icon-indicator-danger(href='#' role='button' data-bs-toggle='dropdown' data-bs-auto-close="outside" aria-haspopup='true' aria-expanded='false')
+                span.text-700(data-feather='bell' style="height:20px;width:20px;")
+              +NotificationDropdown.mt-2
+      
+            li.nav-item.dropdown
+              a#navbarDropdownUser.nav-link.px-2(href='#' role='button' data-bs-toggle='dropdown' data-bs-auto-close="outside" aria-haspopup='true' aria-expanded='false')
+                span.text-700(data-feather='user' style="height:20px;width:20px;")
+              +ProfileDropdown.mt-2
+        .col-12.col-md-6
+          +Search({placeholder: 'Search', inputClass: 'form-control-sm'}).ecommerce-search-box.w-100

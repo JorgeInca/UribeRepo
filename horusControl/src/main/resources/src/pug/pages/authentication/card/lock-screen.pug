@@ -1,0 +1,17 @@
+extends ../../../layouts/LayoutTheme
+include ../../../layouts/LayoutCardAuth
+
+block wrapperContent
+  +LayoutCardBasic({img:37})
+    .auth-form-box
+      .text-center.mb-5
+        .avatar.avatar-4xl.mb-4
+          img.rounded-circle(src=`${CWD}assets/img/team/30.webp`, alt='')
+        h2.text-1000 
+          span.fw-normal Hello 
+          | John Smith
+        p.text-700 Enter your password to access 
+          br.d-sm-none.d-md-block.d-xxl-none
+          | the admin
+      input#password.form-control.mb-3(type='password' placeholder='Enter Password')
+      a.btn.btn-primary.w-100(href=`${CWD}${paths['default-dashboard']}`) Sign In

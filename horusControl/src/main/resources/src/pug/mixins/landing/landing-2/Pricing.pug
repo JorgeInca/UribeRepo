@@ -1,0 +1,120 @@
+append variables
+  -
+    var pricingItems= [
+      {
+        category:'Starter',
+        price:'15',
+        cardClasses:'border-0',
+        features:[ 
+          {
+            icon : 'fas fa-check text-primary',
+            label: 'Timeline',
+          },
+          {
+            label: 'Advanced Search',
+          },
+          {
+            label: 'Custom fields',
+          },
+          {
+            label:'Task dependencies',
+          },
+          {
+            label:'Private teams & projects',
+          }
+        ],
+        buyBtnClass: 'btn-outline-primary',
+      },
+      {
+        category:'Business',
+        price:'23',
+        cardClasses:'border border-2 border-info rounded-4',
+        features:[ 
+          {
+            icon : 'fas fa-check text-primary',
+            label: 'Timeline',
+          },
+          {
+            icon : 'fas fa-check text-primary',
+            label: 'Advanced Search',
+          },
+          {
+            icon : 'fas fa-check text-primary',
+            label: 'Custom fields',
+            badge: true
+          },
+          {
+            label:'Task dependencies',
+          },
+          {
+            label:'Private teams & projects',
+          }
+        ],
+        buyBtnClass: 'btn-primary',
+      },
+      {
+        category:'Enterprise',
+        price:'40',
+        cardClasses:'border-0',
+        features:[ 
+          {
+            icon : 'fas fa-check text-primary',
+            label: 'Timeline',
+          },
+          {
+            icon : 'fas fa-check text-primary',
+            label: 'Advanced Search',
+          },
+          {
+            icon : 'fas fa-check text-primary',
+            label: 'Custom fields',
+          },
+          {
+            icon : 'fas fa-check text-primary',
+            label:'Task dependencies',
+          },
+          {
+            icon : 'fas fa-check text-primary',
+            label:'Private teams & projects',
+          }
+        ],
+        buyBtnClass: 'btn-outline-primary',
+      },
+    ];
+
+mixin PricingList(config, index, features)
+  li.d-flex.align-items-center(class=`${index === features.length - 1 ? 'mb-0': 'mb-3'}`)
+    span.fa-li
+      span(class=config.icon)
+    p.mb-0= config.label
+    if config.badge
+      span.badge.badge-phoenix.badge-phoenix-info.ms-2.fs--2(class=config.icon ? '' : 'opacity-50') Info
+
+mixin Pricing 
+  +Section('container-small px-lg-7 px-xxl-3').position-static.pt-15.pt-md-5.pt-lg-2
+    .text-center.mb-3.mb-lg-7
+      h5.text-info.mb-3 Pricing
+      h2.mb-2 Choose the best deal for you
+    .row.g-3.mb-7.mb-lg-11
+      each item in pricingItems
+        .col-lg-4
+          .pricing-card
+            .card.bg-transparent(class=item.cardClasses)
+              .card-body.p-7
+                h3.mb-5= item.category
+                h1.fs-5.d-flex.align-items-center.gap-1.mb-3 $#{item.price}
+                  span.fs-0.fw-normal / month
+                button.btn.btn-lg.w-100.mb-7(class=item.buyBtnClass) Buy
+                h5.mb-4 What’s included
+                ul.fa-ul.ps-4.m-0.pricing
+                  each listItem, index in item.features
+                    +PricingList(listItem, index, item.features)
+    .card.rounded-4.border-0.offer-card
+      .card-body.d-md-flex.align-items-center.gap-4.py-5
+        img.mb-4.mb-md-0.d-dark-none(src=`${CWD}assets/img/spot-illustrations/air-plane.png`, width="155" alt="")
+        img.mb-4.mb-md-0.d-light-none(src=`${CWD}assets/img/spot-illustrations/air-plane-dark.png`, width="155" alt="")
+        div
+          p Business Starter, Business Standard, and Business Plus plans can be purchased for a maximum of 300 users. There is no minimum or maximum user limit for Enterprise plans.
+          p.mb-6 Phoenix customers may have access to additional features for a limited promotional period
+          a.btn.btn-link.me-2.p-0.fs--1(href='#!' role='button') Contact Support
+            i.fa-solid.fa-angle-right.ms-2

@@ -1,0 +1,19 @@
+mixin Cta
+  .row.flex-center.mb-15.mt-11.gy-6
+    .col-auto
+      img(src=`${CWD}assets/img/spot-illustrations/light_30.png`, alt="" width=305).d-dark-none
+      img(src=`${CWD}assets/img/spot-illustrations/dark_30.png`, alt="" width=305).d-light-none
+    .col-auto
+      .text-center.text-lg-start
+        h3.text-1000.mb-2
+          span.fw-semi-bold Want to have the 
+          | ultimate 
+          br.d-md-none
+          | customer experience?
+        h1.display-3.fw-semi-bold.mb-4 Become a 
+          span.text-primary.fw-bolder member 
+          | today!
+        a.btn.btn-lg.btn-primary.px-7(href=`${CWD}${paths['simple-signup']}`)
+          | Sign up
+          span.fas.fa-chevron-right.ms-2.fs--1
+

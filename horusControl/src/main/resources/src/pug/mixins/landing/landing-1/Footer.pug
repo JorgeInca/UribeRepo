@@ -1,0 +1,47 @@
+mixin FooterList(...items)
+	each item in items
+		li.mb-1
+			a.text-500.hover-text-100.light(href='#!')
+				=item
+
+
+mixin FooterLanding
+	.position-relative
+		+Background({image: `${CWD}assets/img/bg/bg-19.png`, attrs: { style: { 'background-size': 'auto',} }, className: 'footer-bg' })
+		+Background({image: `${CWD}assets/img/bg/bg-right-20.png`, attrs: { style: { 'background-position': 'right', 'background-size': 'auto',} }, className: '' })
+		+Background({image: `${CWD}assets/img/bg/bg-left-20.png`, attrs: { style: { 'background-position': 'left', 'background-size': 'auto',} }, className: '' })
+		.position-relative
+			svg.w-100.text-white(preserveAspectRatio="none" viewBox='0 0 1920 368' fill='none' xmlns='http://www.w3.org/2000/svg')
+				path(d='M1920 0.44L0 367.74V0H1920V0.44Z' fill='currentColor')
+			+Section('container-small px-lg-7 px-xxl-3').footer-default
+				.row.position-relative
+					.col-12.col-sm-12.col-lg-5.mb-4.order-0.order-sm-0
+						a(href='#')
+							img.mb-3(src=`${CWD}assets/img/icons/logo-white.png` height="48" alt='' ) 
+						h3.text-white.light phoenix
+						p.text-white.opacity-50.light All over the world. Alice in 
+							br
+							| wonderland and other places.
+					.col-lg-7
+						.row.justify-content-between
+							.col-6.col-sm-4.col-lg-3.mb-3.order-2.order-sm-1
+								.border-dashed.border-start.border-primary-300.ps-3(style="--phoenix-border-opacity: .2;")
+									h5.fw-bolder.mb-2.text-light.light Help
+									ul.list-unstyled.mb-3
+										+FooterList('About','Contact','Developers',)
+								.border-dashed.border-start.border-primary-300.ps-3(style="--phoenix-border-opacity: .2;")
+									h5.lh-lg.fw-bolder.mb-2.text-light.light Follow
+									ul.list-unstyled.mb-2
+										+FooterList('Facebook','Twitter','Linkedin')
+
+							.col-6.col-sm-4.col-lg-3.mb-3.order-3.order-sm-2
+								.border-dashed.border-start.border-primary-300.ps-3(style="--phoenix-border-opacity: .2;")
+									h5.lh-lg.fw-bold.text-light.mb-2.light Support
+									ul.list-unstyled.mb-md-2
+										+FooterList('Privacy','Community','Contact','Blog','FAQ','Project','Team')
+
+							.col-6.col-sm-4.col-lg-3.mb-3.order-3.order-sm-2
+								.border-dashed.border-start.border-primary-300.ps-3(style="--phoenix-border-opacity: .2;")
+									h5.lh-lg.fw-bold.text-light.mb-2.light  Info
+									ul.list-unstyled.mb-md-2
+										+FooterList('Personal','NFT System','Agency','Contact','About')

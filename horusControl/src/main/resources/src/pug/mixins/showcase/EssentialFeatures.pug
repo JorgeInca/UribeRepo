@@ -1,0 +1,97 @@
+append variables
+	-
+		var essentialFeatures = [
+			{
+				icon: '11',
+				border:'border-end-0 border-end-sm',
+				title: `Built on <span class='text-bootstrap me-1 fw-bold'>Bootstrap 5</span>`,
+			},
+			{
+				icon: '12',
+				border:'border-end-0 border-end-sm',
+				title: `Styled with<span class='text-css3 ms-1 fw-bold'>CSS3</span>`,
+			},
+			{
+				icon: '13',
+				border:'border-end-0 border-end-sm border-end-lg-0',
+				title: `Coded with <span class='text-html5 me-1 fw-bold'>HTML5</span>`,
+			},
+			{
+				icon: '14',
+				border:'border-end-0 border-end-sm',
+				title: `<span class='text-info fw-bold'>Clean </span> design`,
+			},
+			{
+				icon: '16',
+				border:'border-end-0 border-end-sm',
+				title: `<span class='text-success ms-1 fw-bold'>Cross-browser</span> tested`,
+			},
+			{
+				icon: '15',
+				border:'border-end-0',
+				title: `<span class='text-sass ms-1 fw-bold'>SASS</span> Supported`,
+			},
+			{
+				icon: '17',
+				border:'border-end',
+				title: `<span class='text-gulp me-1 fw-bold'>Gulp</span>based workflow`,
+			},
+			{
+				icon: '19',
+				border:'border-end',
+				title: `Interactive <span class='text-warning fw-bold'>components</span>`,
+			},
+			{
+				icon: '18',
+				border:'border-end-0 border-end-sm border-end-lg-0',
+				title: `Collection of <span class='text-info fw-bold'>pages</span>`,
+			},
+			{
+				icon: '22',
+				border:'border-end',
+				title: `<span class='text-warning ms-1 fw-bold'>Chart JS &amp;</span> , ECharts `,
+			},
+			{
+				icon: '21',
+				border:'border-end',
+				title: `<span class='text-info ms-1 fw-bold'>Dark/Light</span> Layouts`,
+			},
+			{
+				icon: '23',
+				border:'border-end-0',
+				title: `<span class='text-success ms-1 fw-bold'>FontAwesome 6</span> icons`,
+			},
+			{
+				icon: '24',
+				border:'border-end',
+				title: `Opinionated <span class='text-success fw-bold'>code formatter</span>`,
+			},
+			{
+				icon: '25',
+				border:'border-end',
+				title: `<span class='text-w3c me-1 fw-bold'>W3C</span>validated`,
+			},
+			{
+				icon: '26',
+				border:'border-end-0',
+				title: `10+ <span class='text-warning fw-bold'>layouts</span>`,
+			},
+		
+		];
+
+mixin EssentialsFeature(config)
+	.col-12.col-sm-4.px-0
+		.mb-10.text-center(class=`${config.border}`)
+			img.img-fluid.mb-4(src=`${CWD}assets/img/icons/illustrations/${config.icon}.png` alt="")
+			p!=config.title
+
+mixin EssentialsFeatures 
+	+Section('container-lg').bg-100.pt-14
+		.row.justify-content-center
+			.col-12.col-lg-9.col-xl-8.col-xxl-6.text-center
+				h2.text-1000.fw-normal.mb-13.lh-sm Packed with
+					span.text-primary.ms-2.position-relative.fw-bolder.d-inline-flex essential features
+						img.text-illustration-underline(src=`${CWD}assets/img/spot-illustrations/31.png`, alt="")
+				.row
+					each item in essentialFeatures
+						+EssentialsFeature(item)

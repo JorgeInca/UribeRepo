@@ -1,0 +1,40 @@
+extends ../../layouts/LayoutTheme
+include ../../mixins/events/CreateEvent
+
+
+prepend styles
+	link(href=`${CWD}vendors/flatpickr/flatpickr.min.css`, rel='stylesheet')
+	link(href=`${CWD}vendors/choices/choices.min.css`, rel='stylesheet')
+
+prepend scripts
+	script(src=`${CWD}vendors/choices/choices.min.js`)
+	script(src=`${CWD}vendors/dropzone/dropzone.min.js`)
+
+append variables
+	- 
+		var breadcrumb = [
+			{
+				label: 'Page 1',
+				href: '#!'
+			},
+			{
+				label: 'Page 2',
+				href: '#!',
+			},
+			{
+				label: 'Default',
+				href: '#!',
+				active: true
+			},
+		];
+
+block content
+	form.mb-9
+		.row.justify-content-between.align-items-end.g-3.mb-5
+			.col-12.col-sm-auto.col-xl-8
+				h2.mb-0 Create an Event
+			.col-12.col-sm-auto.col-xl-4
+				.d-flex
+					button.btn.btn-phoenix-primary.px-5.me-2 Save
+					a(href=`${CWD}${paths['event-detail']}`).btn.btn-primary.px-5.w-100.text-nowrap Publish event
+		+CreateEvent

@@ -1,0 +1,41 @@
+extends ../../layouts/LayoutComponent
+
+prepend scripts
+  script(src=`${CWD}vendors/echarts/echarts.min.js`)
+
+append scripts
+  script(src=`${CWD}assets/js/echarts-example.js`)
+
+
+block component
+  .row.g-4.mb-9
+    .col-xl-6
+      +ComponentCard({title:'Basic gauge chart'})
+        // Find the JS file for the following chart at: src/js/charts/echarts/examples/basic-gauge-chart.js
+        // If you are not using gulp based workflow, you can find the transpiled code at: public/assets/js/echarts-example.js
+        .echart-basic-gauge-chart-example(style='min-height:300px')
+    .col-xl-6
+      +ComponentCard({title:'Gauge progress chart'})
+        // Find the JS file for the following chart at: src/js/charts/echarts/examples/gauge-progress-chart.js
+        // If you are not using gulp based workflow, you can find the transpiled code at: public/assets/js/echarts-example.js
+        .echart-gauge-progress-chart-example(style='min-height:300px')
+    .col-xl-6
+      +ComponentCard({title:'Gauge ring chart'})
+        // Find the JS file for the following chart at: src/js/charts/echarts/examples/gauge-ring-chart.js
+        // If you are not using gulp based workflow, you can find the transpiled code at: public/assets/js/echarts-example.js
+        .echart-gauge-ring-chart-example(style='min-height:300px')
+    .col-xl-6
+      +ComponentCard({title:'Gauge multi ring chart'})
+        // Find the JS file for the following chart at: src/js/charts/echarts/examples/gauge-multi-ring-chart.js
+        // If you are not using gulp based workflow, you can find the transpiled code at: public/assets/js/echarts-example.js
+        .echart-gauge-multiring-chart-example(style='min-height:300px')
+    .col-xl-6
+      +ComponentCard({title:'Gauge multi title chart'})
+        // Find the JS file for the following chart at: src/js/charts/echarts/examples/gauge-multi-title-chart.js
+        // If you are not using gulp based workflow, you can find the transpiled code at: public/assets/js/echarts-example.js
+        .echart-gauge-multi-title-chart-example(style='min-height:300px')
+    .col-xl-6
+      +ComponentCard({title:'Gauge grade chart'})
+        // Find the JS file for the following chart at: src/js/charts/echarts/examples/gauge-grade-chart.js
+        // If you are not using gulp based workflow, you can find the transpiled code at: public/assets/js/echarts-example.js
+        .echart-gauge-grade-chart-example(style='min-height:300px')

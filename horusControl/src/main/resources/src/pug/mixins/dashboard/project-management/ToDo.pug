@@ -1,0 +1,172 @@
+include ../../project-management/ToDoList
+include ../../project-management/Common
+append variables
+  -
+    var todoList = [
+      {
+        task: 'Designing the dungeon',
+        badge: {
+          label: 'DRAFT',
+          variant: 'primary'
+        },
+        attachment: 2,
+        date: '12 Nov, 2021',
+        time: '12:00 PM'
+      },
+      {
+        task: 'Hiring a motion graphic designer',
+        badge: {
+          label: "URGENT",
+          variant: 'warning'
+        },
+        date: "12 Nov, 2021",
+        time: '12:00 PM',
+        attachment: 2,
+        list: 3,
+      },
+      {
+        task: 'Daily Meetings Purpose, participants',
+        badge: {
+          label: "ON PROCESS",
+          variant: 'info'
+        },
+        date: "12 Dec, 2021",
+        time: '05:00 AM',
+        attachment: 4,
+      },
+      {
+        task: 'Finalizing the geometric shapes',
+        date: "12 Nov, 2021",
+        time: '12:00 PM',
+        attachment: 3,
+      },
+      {
+        task: 'Daily meeting with team members',
+        date: "1 Nov, 2021",
+        time: '12:00 PM',
+      },
+      {
+        task: 'Daily Standup Meetings',
+        date: "13 Nov, 2021",
+        time: '10:00 PM',
+      },
+      {
+        task: 'Procrastinate for a month',
+        badge: {
+          label: "ON PROCESS",
+          variant: 'info'
+        },
+        date: "12 Nov, 2021",
+        time: '12:00 PM',
+        attachment: 3,
+      },
+      {
+        task: 'warming up',
+        date: "12 Nov, 2021",
+        time: '12:00 PM',
+        attachment: 3,
+        badge: {
+          label: "CLOSE",
+          variant: 'info'
+        },
+      },
+      {
+        task: 'Make ready for release',
+        date: "2o Nov, 2021",
+        time: '1:00 AM',
+        attachment: 2,
+      },
+    ];
+
+mixin TodoSearchBar(justifyClass="justify-content-between")
+  .row.align-items-center.g-0(class=justifyClass)&attributes(attributes)
+    .col-12.col-sm-auto
+      +Search({placeholder: 'Search tasks'}).w-100.mb-2.mb-sm-0(style='max-width:30rem;')
+    .col-auto.d-flex
+      p.mb-0.ms-sm-3.fs--1.text-700.fw-bold
+        span.fas.fa-filter.me-1.fw-extra-bold.fs--2
+        |23 tasks
+      button.btn.btn-link.p-0.ms-3.fs--1.text-primary.fw-bold
+        span.fas.fa-sort.me-1.fw-extra-bold.fs--2
+        |Sorting
+
+mixin CardToDoListManagement
+  .card.todo-list&attributes(attributes).h-100
+    .card-header.border-bottom-0.pb-0
+      .row.justify-content-between.align-items-center.mb-4
+        .col-auto
+          h3.text-1100 To do
+          p.mb-0.text-700 Task assigned to me
+        .col-auto.w-100.w-md-auto
+          +TodoSearchBar
+    .card-body.py-0.scrollbar.to-do-list-body
+      each item, index in todoList
+        +DashboardTodoListItem(item,index,index === todoList.length - 1)
+      +ToDoModal
+    .card-footer.border-0
+      a.fw-bold.fs--1.mt-4(href='#!')
+        span.fas.fa-plus.me-1
+        |Add new task
+
+
+mixin DashboardTodoListItem(item,index,isLast)
+  .d-flex.hover-actions-trigger.py-3(class=isLast ? 'border-top border-bottom' : 'border-top')
+    input.form-check-input.form-check-input-todolist.flex-shrink-0.my-1.me-2(type="checkbox" id=`checkbox-todo-${index}` class= `form-check-input-${item.color}` data-event-propagation-prevent)
+    .row.justify-content-between.align-items-md-center.btn-reveal-trigger.border-200.gx-0.flex-1.cursor-pointer(  data-bs-toggle="modal" data-bs-target="#exampleModal")
+      .col-12.col-md-auto.col-xl-12.col-xxl-auto
+        .mb-1.mb-md-0.d-flex.align-items-center.lh-1
+          label.form-check-label.mb-1.mb-md-0.mb-xl-1.mb-xxl-0.fs-0.me-2.line-clamp-1.text-900.cursor-pointer=item.task
+          if item.badge
+            span.badge.badge-phoenix.ms-auto.fs--2(class=`badge-phoenix-${item.badge.variant}`)= item.badge.label
+      .col-12.col-md-auto.col-xl-12.col-xxl-auto
+        .d-flex.lh-1.align-items-center
+          if item.attachment
+            a(href="#!").text-700.fw-bold.fs--2.me-2
+              span.fas.fa-paperclip.me-1
+              |#{item.attachment}
+          if item.list
+            a(href="#!").text-warning.fw-bold.fs--2.me-2
+              span.fas.fa-tasks.me-1
+              |#{item.list}
+          p.text-700.fs--2.mb-md-0.me-2.me-md-3.me-xl-2.me-xxl-3.mb-0=item.date
+
+          .hover-md-hide.hover-xl-show.hover-xxl-hide
+            p.text-700.fs--2.fw-bold.mb-md-0.mb-0.ps-md-3.ps-xl-0.ps-xxl-3.border-start-md.border-xl-0.border-start-xxl.border-300=item.time
+    .d-none.d-md-block.d-xl-none.d-xxl-block.end-0.position-absolute(style='top: 23%;' data-event-propagation-prevent)
+      .hover-actions.end-0(data-event-propagation-prevent)
+        button.btn.btn-phoenix-secondary.btn-icon.me-1.fs--2.text-900.px-0.me-1(data-event-propagation-prevent)
+          span.fas.fa-edit
+        button.btn.btn-phoenix-secondary.btn-icon.fs--2.text-danger.px-0(data-event-propagation-prevent)
+          span.fas.fa-trash
+
+
+mixin ToDoModal
+  #exampleModal.modal.fade(tabindex='-1' aria-hidden='true')
+    .modal-dialog.modal-xl
+      .modal-content.bg-soft.overflow-hidden
+        .modal-header.px-6.py-5.border-300.pe-sm-5.px-md-6.dark__bg-1100
+          h3.text-1000.fw-bolder.mb-0 Designing the Dungeon Blueprint
+          button.btn.btn-phoenix-secondary.btn-icon.btn-icon-xl.flex-shrink-0(type='button' data-bs-dismiss='modal' aria-label='Close')
+            span.fa-solid.fa-xmark
+        .modal-body.bg-100.px-6.py-0
+          .row.gx-14
+            .col-12.col-lg-7.border-end-lg.border-300
+              .py-6
+                .mb-7
+                  .d-flex.align-items-center.mb-3
+                    h4.text-900.me-3 Description
+                    a(href="#!").btn.btn-link.text-decoration-none.p-0
+                      span.fa-solid.fa-pen
+                  p.text-1000.mb-0 The female circus horse-rider is a recurring subject in Chagall’s work. In 1926 the art dealer Ambroise Vollard invited Chagall to make a project based on the circus. They visited Paris’s historic Cirque d’Hiver Bouglione together; Vollard lent Chagall his private box seats. Chagall completed 19 gouaches Chagall’s work. In 1926 the art dealer Ambroise Vollard invited Chagall to make a project based on the circus.
+                .mb-7
+                  +SubTasks
+                .mb-3
+                  +Files({itemPaddingClass: 'px-0 pt-4 pb-3',imgMaxWidth:230})
+                a.fw-bold.fs--1(href='#!')
+                  span.fas.fa-plus.me-1
+                  | Add file(s)
+            .col-12.col-lg-5
+              .py-6
+                h4.mb-4.text-black Others Information
+                +OthersInformation
+

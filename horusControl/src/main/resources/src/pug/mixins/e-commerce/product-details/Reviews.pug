@@ -1,0 +1,92 @@
+mixin Review(review,index)
+  .mb-4.hover-actions-trigger.btn-reveal-trigger
+    .d-flex.justify-content-between
+      h5.mb-2
+        +Rating(review.star)
+        span.text-800.ms-1  by
+        |  #{review.customer}
+      //- +DashboardDropdown(`review-menu-${index + 1}`,null, 'fs--1')
+      +DashboardDropdown
+    
+    p.text-700.fs--1.mb-1=review.date
+    p.text-1000(class=review.images ? 'mb-3' : 'mb-1')=review.review
+    if review.images
+      .row.g-2.mb-2
+        each image in review.images
+          .col-auto
+            a(href=`${CWD}assets/img${image}` data-gallery=`gallery-${index}`)
+              img.w-100(src=`${CWD}assets/img${image}`, alt="" height=164)
+    
+    if review.reply
+      .d-flex
+        span.fas.fa-reply.fa-rotate-180.me-2
+        div
+          h5=`Respond from ${review.reply.from}`
+            span.text-700.fs--1.ms-2=`${review.reply.time}`
+          p.text-1000.mb-0=`${review.reply.text}`
+    .hover-actions.top-0
+      button.btn.btn-sm.btn-phoenix-secondary.me-2
+        span.fas.fa-thumbs-up
+      button.btn.btn-sm.btn-phoenix-secondary.me-1
+        span.fas.fa-thumbs-down
+    
+mixin Reviews
+  -
+    var reviews = [
+      {
+        star: 5,
+        customer: 'Zingko Kudobum',
+        date: '35 mins ago',
+        review: '100% satisfied',
+        images:[ '/e-commerce/review-11.jpg', '/e-commerce/review-12.jpg', '/e-commerce/review-13.jpg' ],
+        replies: 48,
+        reply:{
+          text: 'Thank you for your valuable feedback',
+          from: 'store',
+          time: '5 mins ago'
+        }
+      },
+      {
+        star: 4,
+        customer: 'Piere Auguste Renoir',
+        date: '23 Oct, 12:09 PM',
+        review: "Since the spring loaded event, I've been wanting an iMac, and it's exceeded my expectations. The screen is clear, the colors are vibrant (I got the blue one! ), and the performance is more than adequate for my needs as a college student. That's how good it is.",
+        replies: 3
+      },
+      {
+        star: 3.5,
+        customer: 'Abel Kablmann ',
+        date: '21 Oct, 12:00 PM',
+        review: "Over the years, I've preferred Apple products. My job has allowed me to use Windows products on laptops and PCs. I've owned Windows laptops and desktops for home use in the past and will never use them again.",
+        replies: 13
+      },
+      {
+        star: 5,
+        customer: 'Pennywise Alfred',
+        date: '35 mins ago',
+        review: 'Nice and beautiful product.',
+        images:[ '/e-commerce/review-14.jpg', '/e-commerce/review-15.jpg', '/e-commerce/review-16.jpg' ],
+        replies: 48,
+      },
+    ]
+  each review,index in reviews
+    +Review(review,index)
+  .d-flex.justify-content-center
+    nav
+      ul.pagination.mb-0
+        li.page-item
+          a.page-link(href='#!')
+            span.fas.fa-chevron-left  
+        li.page-item
+          a.page-link(href='#!') 1
+        li.page-item
+          a.page-link(href='#!') 2
+        li.page-item
+          a.page-link(href='#!') 3
+        li.page-item.active
+          a.page-link(href='#!') 4
+        li.page-item
+          a.page-link(href='#!') 5
+        li.page-item
+          a.page-link(href='#!')
+            span.fas.fa-chevron-right

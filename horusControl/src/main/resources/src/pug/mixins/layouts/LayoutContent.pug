@@ -1,0 +1,58 @@
+
+append variables
+  - var attrsFooter = { class: 'position-absolute'}
+mixin LayoutContent  
+
+  //- div.container-fluid.px-0&attributes(attrsLayout)
+  //- script.
+
+  block wrapperContent
+    block beforeContent
+      block navbarVertical
+        +NavbarVertical.navbar-expand-lg
+
+      block navbarHorizontal
+        block navbarTop 
+          +TopNav({
+            toggleID: 'navbarVerticalCollapse',
+            links: false,
+            search: true
+          }).navbar-expand
+
+        #searchBoxModal.modal.fade(tabindex='-1' aria-hidden='true' data-bs-backdrop="true" data-phoenix-modal style='--phoenix-backdrop-opacity: 1;')
+          .modal-dialog
+            .modal-content.mt-15.rounded-pill
+              .modal-body.p-0
+                +NavSearch({placeholder:'Search...',inputClass:'form-control-lg'})(style='width: auto')
+
+
+
+    .content()&attributes(attrsContent)
+      if breadcrumb
+        nav.mb-2(aria-label='breadcrumb')&attributes(attrsBreadcrumb)
+          ol.breadcrumb.mb-0
+            each item in breadcrumb
+              if item.active
+                li.breadcrumb-item.active=item.label
+              else
+                li.breadcrumb-item
+                  a(href=item.href)=item.label
+
+      block content
+
+      if footer
+        +Footer
+
+    block afterContent
+  script.
+    var navbarTopStyle = window.config.config.phoenixNavbarTopStyle;
+    var navbarTop = document.querySelector('.navbar-top');
+    if(navbarTopStyle === 'darker'){
+      navbarTop.classList.add('navbar-darker');
+    }
+
+    var navbarVerticalStyle = window.config.config.phoenixNavbarVerticalStyle;
+    var navbarVertical = document.querySelector('.navbar-vertical');
+    if(navbarVertical && navbarVerticalStyle === 'darker'){
+      navbarVertical.classList.add('navbar-darker');
+    }

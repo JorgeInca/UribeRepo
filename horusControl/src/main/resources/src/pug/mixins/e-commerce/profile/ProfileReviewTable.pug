@@ -1,0 +1,131 @@
+mixin CustomerRatingsTableRow(data,index)
+  tr.hover-actions-trigger.btn-reveal-trigger.position-static
+    td.align-middle.product.pe-3
+      a.fw-semi-bold.line-clamp-1(href=`${CWD}${paths['e-commerce-fe-product-details']}`)=data.product
+    td.align-middle.rating.white-space-nowrap.fs--2
+      +Rating(data.rating)
+    td.align-middle.review.pe-7
+      p.fw-semi-bold.text-1000.mb-0.line-clamp-2!=data.review
+    td.align-middle.status.pe-9
+      span.badge.badge-phoenix.fs--2(class=`badge-phoenix-${data.status.badge}`)=data.status.title
+        span.ms-1(data-feather=data.status.icon style='height:12.8px;width:12.8px;')
+    td.align-middle.text-end.date.white-space-nowrap
+      p.text-700.mb-0=data.time
+    td.align-middle.white-space-nowrap.text-end.pe-0
+      +DashboardDropdown
+
+
+mixin ProfileReviewTable
+  -
+    var customerRatingsTableData = [
+      {
+        product:'Fitbit Sense Advanced Smartwatch with Tools for Heart Health, Stress Management & Skin Temperature Trends, Carbon/Graphite, One Size (S & L Bands)',
+        rating: 4,
+        review:'This Fitbit is fantastic! I was trying to be in better shape and needed some motivation, so I decided to treat myself to a new Fitbit.',
+        status: {
+          title: 'Approaved',
+          badge: 'success',
+          icon:'check'
+        },
+        time:'Just now'
+      },
+      {
+        product:'iPhone 13 pro max-Pacific Blue-128GB storage',
+        rating:4,
+        review:'The order was delivered ahead of schedule. To give us additional time, you should leave the packaging sealed with plastic.',
+        status: {
+          title: 'Pending',
+          badge: 'warning',
+          icon:'clock'
+        },
+        time:'Dec 9, 2:28 PM'
+      },
+      {
+        product:'Apple MacBook Pro 13 inch-M1-8/256GB-space',
+        rating: 4.5,
+        review: "It's a Mac, after all. Once you've gone Mac, there's no going back. My first Mac lasted over nine years, and this is my second.",
+        status: {
+          title: 'Approaved',
+          badge: 'success',
+          icon:'check'
+        },
+        time:'Dec 4, 12:56 PM'
+      },
+      {
+        product:'Apple iMac 24" 4K Retina Display M1 8 Core CPU, 7 Core GPU, 256GB SSD, Green (MJV83ZP/A) 2021',
+        rating: 3,
+        review: "Personally, I like the minimalist style, but I wouldn't choose it if I were searching for a computer that I would use frequently. It's not horrible in terms of speed and power",
+        status: {
+          title: 'Approaved',
+          badge: 'success',
+          icon:'check'
+        },
+        time:'Nov 28, 7:28 PM'
+      },
+      {
+        product:'Razer Kraken v3 x Wired 7.1 Surroung Sound Gaming headset',
+        rating: 5,
+        review:'It performs exactly as expected. There are three of these in the family.',
+        status: {
+          title: 'Cancelled',
+          badge: 'secondary',
+          icon:'x'
+        },
+        time:'Nov 24, 10:16 AM'
+      },
+      {
+        product:'PlayStation 5 DualSense Wireless Controller',
+        rating: 5,
+        review:'The controller is quite comfy for me. Despite its increased size, the controller still fits well in my hands.',
+        status: {
+          title: 'Approaved',
+          badge: 'success',
+          icon:'check'
+        },
+        time:'Just now'
+      },
+      {
+        product:'2021 Apple 12.9-inch iPad Pro (Wi‑Fi, 128GB) - Space Gray',
+        rating: 4,
+        review:'The response time and service I received when contacted the designers were Phenomenal!',
+        status: {
+          title: 'Pending',
+          badge: 'warning',
+          icon:'fas fa-stopwatch'
+        },
+        time:'Nov 07, 9:00 PM'
+      }
+    ]
+  #profileRatingTable.border-y(data-list!={
+    valueNames: ["product", "rating", "review", "status", "date"],
+    page: 6,
+    pagination: true
+  })
+    .table-responsive.scrollbar
+      table.table.fs--1.mb-0
+        thead
+          tr
+            th.sort.white-space-nowrap.align-middle(scope='col' style='min-width:220px;' data-sort="product") PRODUCT
+            th.sort.align-middle(scope='col' data-sort="rating" style='max-width:10%;') RATING
+            th.sort.align-middle(scope='col' style='min-width:480px' data-sort="review") REVIEW
+            th.sort.align-middle(scope='col' style='max-width:12%;' data-sort="status") STATUS
+            th.sort.text-end.align-middle(scope='col' style='max-width:10%;' data-sort="date") DATE
+            th.sort.text-end.pe-0.align-middle(scope='col' style='width: 7%') 
+        tbody.list#profile-review-table-body
+          each row,index in customerRatingsTableData
+            +CustomerRatingsTableRow(row,index)
+    .row.align-items-center.justify-content-between.py-2.pe-0.fs--1
+      .col-auto.d-flex
+        p.mb-0.d-none.d-sm-block.me-3.fw-semi-bold.text-900(data-list-info)
+        a.fw-semi-bold(href='#!' data-list-view="*")
+          | View all
+          span.fas.fa-angle-right.ms-1(data-fa-transform='down-1')
+        a.fw-semi-bold.d-none(href='#!' data-list-view="less")
+          | View Less
+          span.fas.fa-angle-right.ms-1(data-fa-transform='down-1')
+      .col-auto.d-flex
+        button.page-link(data-list-pagination="prev")
+          span.fas.fa-chevron-left
+        ul.mb-0.pagination
+        button.page-link.pe-0(data-list-pagination="next")
+          span.fas.fa-chevron-right

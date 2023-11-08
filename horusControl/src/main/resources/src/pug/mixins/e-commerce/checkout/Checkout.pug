@@ -1,0 +1,237 @@
+mixin ShippingDetails 
+	.d-flex.align-items-end
+		h3.mb-0.me-3 Shipping Details
+		button.btn.btn-link.p-0(type='button') Edit
+	table.table.table-borderless.mt-4
+		tbody
+			tr
+				td.py-2.ps-0
+					.d-flex
+						span.fs-5.me-2(data-feather="user" style="height:16px; width:16px;") 
+						h5.lh-sm.me-4 Name
+				td.py-2.fw-bold.lh-sm :
+				td.py-2.px-3
+					h5.lh-sm.fw-normal.text-800 Shatinon Mekalan
+			tr
+				td.py-2.ps-0
+					.d-flex
+						span.fs-5.me-2(data-feather="home" style="height:16px; width:16px;") 
+						h5.lh-sm.me-4 Address
+				td.py-2.fw-bold.lh-sm :
+				td.py-2.px-3 
+					h5.lh-lg.fw-normal.text-800 Apt: 6/B, 192 Edsel Road, Van Nuys <br>  California, USA 96580
+			tr
+				td.py-2.ps-0
+					.d-flex
+						span.fs-5.me-2(data-feather="phone" style="height:16px; width:16px;") 
+						h5.lh-sm.me-4 Phone
+				td.py-2.fw-bold.lh-sm :		
+				td.py-2.px-3 
+					h5.lh-sm.fw-normal.text-800 818-414-4092
+
+mixin BillingInfo
+	h3 Billing Details
+	.form-check
+		input.form-check-input#sameAsShipping(type='checkbox' checked)
+		label.form-check-label.fs-0.fw-normal(for='sameAsShipping').
+			Same as shipping address
+
+	table.table.table-borderless.mt-4
+		tbody
+			tr
+				td.py-2.ps-0
+					.d-flex
+						span.fs-5.me-2(data-feather="user" style="height:16px; width:16px;") 
+						h5.lh-sm.me-4 Name
+				td.py-2.fw-bold.lh-sm :
+				td.py-2.px-3
+					h5.lh-sm.fw-normal.text-800 Shatinon Mekalan
+			tr
+				td.py-2.ps-0
+					.d-flex
+						span.fs-5.me-2(data-feather="home" style="height:16px; width:16px;") 
+						h5.lh-sm.me-4 Address
+				td.py-2.fw-bold.lh-sm :
+				td.py-2.px-3 
+					h5.lh-lg.fw-normal.text-800 Apt: 6/B, 192 Edsel Road, Van Nuys <br>  California, USA 96580
+			tr
+				td.py-2.ps-0
+					.d-flex
+						span.fs-5.me-2(data-feather="phone" style="height:16px; width:16px;") 
+						h5.lh-sm.me-4 Phone
+				td.py-2.fw-bold.lh-sm :
+				td.py-2.px-3 
+					h5.lh-sm.fw-normal.text-800 818-414-4092
+
+mixin ShippingRadio(data)
+	.col-12.col-md-6
+		.d-flex.flex-wrap.align-items-center.mb-3
+			.form-check.mb-0
+				input.form-check-input(type='radio' name='shippingRadio' checked=data.checked id=data.id)
+				label.form-check-label.fs-0.text-900(for=data.id)=data.shipping
+			span.d-inline-block.text-1100.fw-bold.ms-2=data.price
+
+			if data.badge
+				span.badge.badge-phoenix.badge-phoenix-warning.ms-2.ms-lg-4.ms-xl-2=data.badge
+		.ps-4
+			h6.text-700.mb-2 Est. delivery:
+				!=data.date
+			h6.text-info.lh-base.mb-0=data.time
+
+mixin DeliveryType(data)
+	h3.mb-5 Delivery Type
+	-
+		var shippings = [
+			{
+				shipping: 'Free Shipping',
+				id: 'free_shipping',
+				price: '$0.00',
+				date: 'Jun 21 – Jul 20',
+				time:'Get Free Shipped products in Time!'
+			},
+			{
+				shipping: 'Two days Shipping',
+				id: 'two_days_shipping',
+				price: '$20.00',
+				date: 'Jun 21 – Jul 20',
+				time:'Everything faster with minimum shipping fee.'
+			},
+			{
+				shipping: 'Standard Shipping',
+				id: 'standard_shipping',
+				price: '$10.00',
+				date: 'Jun 21 – Jul 20',
+				time:'Get timely delivery with economy shipping.'
+			},
+			{
+				shipping: 'One day Shipping',
+				id: 'one_day_shipping',
+				badge: 'Popular',
+				checked:true,
+				price: '$30.00',
+				date: 'Jun 21 – Jul 20',
+				time:'Highest priority shipping at the lowest cost.'
+			},
+		]
+	.row.gy-6
+		each shipping in shippings 
+			+ShippingRadio(shipping)
+
+mixin PaymentMethod
+	h3.mb-5 Payment Method
+	.row.g-4.mb-7
+		.col-12
+			.row.gx-lg-11
+				.col-12.col-md-auto
+					.d-flex
+						.form-check
+							input.form-check-input#creditCard(type='radio' name='paymentMethod' checked)
+							label.form-check-label.fs-0.text-900.me-3(for='creditCard') Credit card
+						img.h-100.me-2.ms-4.ms-md-0(src=`${CWD}assets/img/logos/visa.png`, alt="")
+						img.h-100.me-2(src=`${CWD}assets/img/logos/discover.png`, alt="")
+						img.h-100.me-2(src=`${CWD}assets/img/logos/mastercard.png`, alt="")
+						img.h-100(src=`${CWD}assets/img/logos/american_express.png`, alt="")
+				.col-12.col-md-auto
+					.form-check
+						input.form-check-input#paypal(type='radio' name='paymentMethod')
+						label.form-check-label.fs-0.text-900(for='paypal') Paypal	
+				.col-12.col-md-auto
+					.form-check
+						input.form-check-input#coupon(type='radio' name='paymentMethod')
+						label.form-check-label.fs-0.text-900(for='coupon') Coupon	
+		.col-md-6
+			label.form-label.fs-0.text-1000.ps-0.text-none(for='selectCard') Select card
+			select#selectCard.form-select.text-black
+				option(selected='selected') select a card
+				option(value='visa') Visa
+				option(value='discover') Discover
+				option(value='mastercard') Mastercard
+				option(value='american-express') American Express
+		.col-md-6
+			label.form-label.fs-0.text-1000.ps-0.text-none(for='inputCardNumber') Card number
+			input#inputCardNumber.form-control(type='number' placeholder="Enter card number" aria-label="Card number")
+		.col-12
+			label.form-label.fs-0.text-1000.ps-0.text-none(for='inputName') Full name
+			input#inputName.form-control(type='text' placeholder='Ansolo Lazinatov' aria-label="Full name")
+		.col-md-6
+			label.form-label.fs-0.text-1000.ps-0.text-none Expires on
+			.d-flex
+				select.form-select.text-black.me-3
+					option(selected='selected') Month
+					option January
+					option February
+					option March
+				select.form-select.text-black
+					option(selected='selected') Year
+					- var n = 1990
+						while n < 2023
+							option(value=n)=n++
+		.col-md-6
+			label.form-label.fs-0.text-1000.ps-0.text-none(for='inputCardCVC') CVC
+			input#inputCardCVC.form-control(type='number' placeholder="Enter a valid CVC" aria-label="CVC")
+		.col-12
+			.form-check
+				input#gridCheck.form-check-input(type='checkbox')
+				label.form-check-label.text-black.fs-0(for='gridCheck') Save Card Details
+	.row.g-2.mb-5.mb-lg-0
+		.col-md-8.col-lg-9.d-grid
+			button.btn.btn-primary(type='submit') Pay $695.20
+		.col-md-4.col-lg-3.d-grid
+			button.btn.btn-phoenix-secondary.text-nowrap(type='submit') Save Order and Exit
+
+
+mixin ShippingInfo
+	h3.mb-5 Shipping Info
+	.row.g-4
+		.col-12
+			label.form-label.fs-0.text-1000.ps-0.text-none(for='inputName') Full name
+			input#inputName.form-control(type='text' placeholder='Full name')
+
+		.col-md-6
+			label.form-label.fs-0.text-1000.ps-0.text-none(for='inputEmail') Email
+			input#inputEmail.form-control(type='email' placeholder='Email')
+
+		.col-md-6
+			label.form-label.fs-0.text-1000.ps-0.text-none(for='inputPhone') Phone
+			input#inputPhone.form-control(type='tel' placeholder='+1234567890')
+
+		.col-12
+			label.form-label.fs-0.text-1000.ps-0.text-none(for='inputAddress1') Address line 1
+			input#inputAddress1.form-control(type='text' placeholder='Address line 1')
+
+		.col-12
+			label.form-label.fs-0.text-1000.ps-0.text-none(for='inputAddress2') Address line 2
+			input#inputAddress2.form-control(type='text' placeholder='Address line 2')
+
+		.col-md-4
+			label.form-label.fs-0.text-1000.ps-0.text-none(for='inputCity') City
+			select#inputCity.form-select.text-black
+				option(selected='selected') Van Nuys
+				option(value='los-angeles') Los Angeles
+				option(value='chicago') Chicago
+				option(value='houston') Houston
+
+		.col-md-4
+			label.form-label.fs-0.text-1000.ps-0.text-none(for='inputState') State
+			select#inputState.form-select.text-black
+				option(selected='selected') California
+				option(value='Alaska') Alaska
+				option(value='alabama') Alabama
+				option(value='florida') Florida
+
+		.col-md-4
+			label.form-label.fs-0.text-1000.ps-0.text-none(for='inputZipCode') Zip code
+			input#inputZipCode.form-control.number-arrows-none(type='number' placeholder='Zip code')
+
+		.col-md-4.mb-3
+			label.form-label.fs-0.text-1000.ps-0.text-none(for='inputCountry') Country
+			select#inputCountry.form-select.text-black
+				option(selected='selected') USA
+				option(value='uk') UK
+				option(value='aus') AUS
+				option(value='nz') NZ
+
+		.col-12
+			button.btn.btn-primary.px-8.px-sm-11.me-2(type='submit') Save
+			button.btn.btn-phoenix-secondary.text-nowrap(type='submit') Exit Without Saving
+

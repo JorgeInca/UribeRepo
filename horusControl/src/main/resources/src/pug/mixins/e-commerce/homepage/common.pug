@@ -1,0 +1,41 @@
+mixin Product(product)
+  .position-relative.text-decoration-none.product-card.h-100
+    .d-flex.flex-column.justify-content-between.h-100
+      div
+        .border.border-1.rounded-3.position-relative.mb-3
+          button.btn.rounded-circle.p-0.d-flex.flex-center.btn-wish.z-index-2.d-toggle-container(class=`${product.wishListed ? 'btn-primary' : 'btn-outline-primary'}` data-bs-toggle="tooltip" data-bs-placement="top" title!=product.wishListed ? 'Remove from wishlist' : 'Add to wishlist')
+            if product.wishListed 
+              span.fas.fa-heart
+            else
+              span.fas.fa-heart.d-block-hover
+              span.far.fa-heart.d-none-hover
+          img.img-fluid(src=`${CWD}assets/img/products/${product.image}`, alt="")
+          if product.verified
+            span.badge.bg-success.fs--2.product-verified-badge Verified
+              span.fas.fa-check.ms-1
+        a.stretched-link(href=`${CWD}${paths['e-commerce-fe-product-details']}`)
+          h6.mb-2.lh-sm.line-clamp-3.product-name=product.name
+        if product.star
+          p.fs--1
+            +Rating(product.star)
+            if product.rated
+              span.text-500.fw-semi-bold.ms-1=`(${product.rated} people rated)`
+      div
+        if product.extra
+          p.fs--1(class=product.extraClass)=product.extra 
+        if product.extra2
+          p.fs--1(class=product.extra2Class)=product.extra2
+        if product.salePrice
+          if product.price
+            .d-flex.align-items-center.mb-1
+              p.me-2.text-900.text-decoration-line-through.mb-0=`$${product.price}`
+              h3.text-1100.mb-0=`$${product.salePrice}`
+          else
+            h3.text-1100=`$${product.salePrice}`
+        if product.colors
+          p.text-700.fw-semi-bold.fs--1.lh-1(class=`${product.dealEndTime ? '' : 'mb-0'}`)=`${product.colors} colors`
+        if product.dealEndTime
+          p.text-success.fw-bold.fs--1.lh-1.mb-0=`Deal time ends in ${product.dealEndTime}`
+        if product.offer
+          h6.text-success.lh-1.mb-0=`${product.offer} off`
+

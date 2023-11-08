@@ -1,0 +1,70 @@
+mixin DropDownReportsFilter
+	button.btn.px-3.btn-phoenix-secondary(type='button' data-bs-toggle='modal' data-bs-target='#reportsFilterModal' aria-haspopup="true" aria-expanded="false" data-bs-reference="parent")
+		span.fa-solid.fa-filter.text-primary(data-fa-transform='down-3')
+	+ReportsFilterModal
+
+mixin ReportsFilterModal
+	#reportsFilterModal.modal.fade(tabindex="-1")
+		.modal-dialog.modal-dialog-centered
+			.modal-content.border
+				form#addEventForm(autocomplete="off")&attributes(attributes)
+					.modal-header.border-200.p-4
+						h5.modal-title.text-1000.fs-2.lh-sm Filter
+						button.btn.p-1.text-danger(type='button' data-bs-dismiss='modal' aria-label='Close')
+							span.fas.fa-times.fs--1  				
+					.modal-body.pt-4.pb-2.px-4
+						.mb-3
+							label.fw-bold.mb-2.text-1000(for='priority') Priority
+							select.form-select#priority
+								option(value="urgent" selected) Urgent
+								option(value="medium") Medium 
+								option(value="high") High
+								option(value="low") Low
+						.mb-3
+							label.fw-bold.mb-2.text-1000(for='createDate') Create Date
+							select.form-select#createDate
+								option(value="today" selected) Today
+								option(value="last7Days") Last 7 Days
+								option(value="last30Days") Last 30 Days
+								option(value="chooseATimePeriod") Choose a time period
+						.mb-3
+							label.fw-bold.mb-2.text-1000(for='category') Category
+							select.form-select#category
+								option(value="salesReports" selected) Sales Reports
+								option(value="hrReports") HR Reports
+								option(value="marketingReports") Marketing Reports
+								option(value="administrativeReports") Administrative Reports
+
+
+					.modal-footer.d-flex.justify-content-end.align-items-center.px-4.pb-4.border-0.pt-3
+						button.btn.btn-sm.btn-phoenix-primary.px-4.fs--2.my-0(type="submit") 
+							span.fas.fa-arrows-rotate.me-2.fs--2
+							| Reset
+						button.btn.btn-sm.btn-primary.px-9.fs--2.my-0(type="submit") Done
+
+mixin Reports(config)
+	.card.h-100
+		.card-body
+			.border-bottom
+				.d-flex.align-items-start.mb-1
+					.form-check.mb-0
+						input.form-check-input(type='checkbox')
+					.d-sm-flex.align-items-center.ps-2
+						a(href=`${CWD}${paths['crm-reports-details']}`).fw-bold.fs-1.lh-sm.title.line-clamp-1.me-sm-4=config.title
+						.d-flex.align-items-center
+							span.fa-solid.fa-circle.me-1(class=config.priority.iconClass data-fa-transform="shrink-6 up-1")
+							span.fw-bold.fs--1.text-900.lh-2=config.priority.label
+				p.fs--1.fw-semi-bold.text-900.ms-4.text.mb-4.ps-2=config.text
+			.row.g-1.g-sm-3.mt-2.lh-1
+				.col-12.col-sm-auto.flex-1.text-truncate
+					a(href="#!").fw-semi-bold.fs--1
+						span.fa-regular.fa-folder.me-2.reportsby
+						=config.reportsby
+				.col-12.col-sm-auto
+					.d-flex.align-items-center
+						span.me-2(data-feather="grid" style='stroke-width:2;')
+						p.mb-0.fs--1.fw-semi-bold.text-700.reports=config.reports
+				.col-12.col-sm-auto
+					.d-flex.align-items-center
+						span.me-2(data-feather="clock" style='stroke-width:2;')
+						p.mb-0.fs--1.fw-semi-bold.text-700.date=config.date

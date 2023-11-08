@@ -1,0 +1,126 @@
+extends ../../layouts/LayoutComponent
+include ../../mixins/common/Avatar
+
+append variables
+  -
+    var pageHeader = {
+      title: 'Avatars',
+      description: 'Use avater of different shapes and sizes with a single component.',
+      breadcrumb:[
+        {
+          name:'Components',
+          link:'#!'
+        },
+        {
+          name:'Avatars',
+          active:true
+        },
+      ]
+    }
+  - var status = ['online', 'offline', 'away', 'do-not-disturb'];
+  - var sizes = ['5xl','4xl','3xl','2xl','xl', 'l', 'm', 's'];
+  - var avatars = ['team/30.webp', 'team/57.webp', 'team/25.webp', 'team/8.webp', 'team/58.webp', 'team/59.webp', 'team/3.webp', 'team/28.webp']
+  -
+    var roadMapUsers = [
+      {
+        img:'team/30.webp',
+      },
+      {
+        img:'team/57.webp',
+      },
+      {
+        img:'team/25.webp',
+      },
+      {
+        img:'team/8.webp',
+      },
+      {
+        img:'team/58.webp',
+      },
+      {
+        more:'+3',
+      },
+    ];
+  -
+    var rightNav = [
+      {
+        name: 'Circular',
+        id: '#circular',
+      },
+      {
+        name: 'Square',
+        id: '#square',
+      },
+      {
+        name: 'Soft',
+        id: '#soft',
+      },
+      {
+        name: 'Content',
+        id: '#content',
+      },
+      {
+        name: 'Name',
+        id: '#name',
+      },
+      {
+        name: 'Emoji',
+        id: '#emoji',
+      },
+      {
+        name: 'Status',
+        id: '#status',
+      },
+      {
+        name: 'Sizes',
+        id: '#sizes',
+      },
+      {
+        name: 'Avatar Group',
+        id: '#avatar-group',
+      },
+    ]
+
+
+block component
+  .row.mb-9
+    .col-md-4.col-sm-6 
+      +ComponentCard({title:'Circular'}).my-4
+        +Avatar({size: 'xl', img: avatars[0], round: 'circle'})
+
+    .col-md-4.col-sm-6 
+      +ComponentCard({title:'Square'}).my-4
+        +Avatar({size: 'xl', img: avatars[0], round: 'none'})
+
+    .col-md-4.col-sm-6 
+      +ComponentCard({title:'Soft'}).my-4
+        +Avatar({size: 'xl', img: avatars[0], round: 'soft'})
+
+    .col-md-4.col-sm-6 
+      +ComponentCard({title:'Content'}).my-4
+        +Avatar({size: 'xl', more: '+2'})
+
+    .col-md-4.col-sm-6 
+      +ComponentCard({title:'Name'}).my-4
+        +Avatar({size: 'xl', name: 'Asif'})
+
+    .col-md-4.col-sm-6 
+      +ComponentCard({title:'Emoji'}).my-4
+        +Avatar({size: 'xl', emoji: '🎁', round: 'circle' })
+
+    .col-lg-6 
+      +ComponentCard({title:'Status'}).my-4
+        each stat in status
+          +Avatar({size: 'xl', img: avatars[0], status: stat, round: 'circle' }).me-4
+
+    .col-lg-6 
+      +ComponentCard({title:'Sizes'}).my-4
+        each size in sizes
+          +Avatar({size: size, img: avatars[0], bordered: true, round: 'circle' }).me-4
+
+    .col-12 
+      +ComponentCard({title:'Avatar Group'}).mt-4
+        each size,index in sizes 
+          .avatar-group(class=index !== 3 ? 'mb-4' : '')
+            each user in roadMapUsers
+              +Avatar(Object.assign({size: size},user))

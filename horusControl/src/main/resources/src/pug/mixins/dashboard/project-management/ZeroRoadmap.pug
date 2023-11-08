@@ -1,0 +1,27 @@
+mixin ZeroRoadmap
+  .mx-xxl-0
+    h3 Project: zero Roadmap
+    p.text-700 Phase 2 is now ongoing
+
+    .gantt-zero-roadmap
+      .row.g-2.flex-between-center.mb-3
+        .col-12.col-sm-auto
+          .d-flex
+            .d-flex.align-items-end.me-3
+              label.form-check-label.mb-0.me-2.lh-1.text-900(for='progress') Progress
+              .form-check.form-switch.min-h-auto.mb-0
+                input#progress.form-check-input(type='checkbox' checked='' data-gantt-progress)
+            .d-flex.align-items-end.flex-1
+              label.form-check-label.mb-0.me-2.lh-1.text-900(for='links') Links
+              .form-check.form-switch.min-h-auto.flex-1.mb-0
+                input#links.form-check-input(type='checkbox' checked='' data-gantt-links)
+        .col-12.col-sm-auto
+          .btn-group(role='group' data-gantt-scale)
+            input#weekView.btn-check(type='radio' name='scaleView' value='week' checked='')
+            label.btn.btn-phoenix-secondary.hover-bg-100.fs--2.py-1.mb-0(for='weekView') Week
+            input#monthView.btn-check(type='radio' name='scaleView' value='month')
+            label.btn.btn-phoenix-secondary.hover-bg-100.fs--2.py-1.mb-0(for='monthView') Month
+            input#yearView.btn-check(type='radio' name='scaleView' value='year')
+            label.btn.btn-phoenix-secondary.hover-bg-100.fs--2.py-1.mb-0(for='yearView') Year
+
+      .gantt-zero-roadmap-chart

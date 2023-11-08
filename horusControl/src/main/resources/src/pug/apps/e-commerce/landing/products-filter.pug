@@ -1,0 +1,495 @@
+extends ../../../layouts/LayoutEcommerce
+include ../../../mixins/e-commerce/homepage/common
+//- include ../../mixins/e-commerce/checkout/CheckoutSummaryCard
+//- src/pug/mixins/e-commerce/homepage/common.pug
+
+append variables
+	- var disableNavigationType = true;
+	- var disableHorizontalNavbarShape = true;
+	- var disableVerticalNavbarAppearance = true;
+	- var disableHorizontalNavbarAppearance = true;
+	- var activeNavItem = 'products';
+	- 
+		var products = [
+			{
+				image: '6.png',
+				name: 'PlayStation 5 DualSense Wireless Controller',
+				star: 5,
+				rated: 67,
+				price: '125.00',
+				salePrice: '89.00',
+				colors: 2,
+				extra : 'dbrand skin available',
+				extraClass: 'text-700 mb-2'
+			},
+			{
+				image: '1.png',
+				name: 'Fitbit Sense Advanced Smartwatch with Tools for Heart Health, Stress Management &amp; Skin Temperature ...',
+				verified: true,
+				star: 5,
+				rated: 74,
+				price: '49.99',
+				salePrice: '34.99',
+				off: '16%',
+				dealEndTime: 'days'
+			},
+			{
+				image: '2.png',
+				name: 'iPhone 13 pro max-Pacific Blue, 128GB storage',
+				star: 5,
+				rated: 33,
+				price: '899.99',
+				salePrice: '850.99',
+				colors: 5,
+				extra : 'Stock limited',
+				extraClass: 'text-1000 fw-bold mb-2'
+			},
+			{
+				image: '3.png',
+				name: 'Apple MacBook Pro 13 inch-M1-8/256GB-Space Gray',
+				star: 5,
+				rated: 97,
+				price: '12.00',
+				salePrice: '11.00',
+				colors: 2,
+				extra : 'Apple care included',
+				extraClass: 'text-1000 fw-bold mb-2'
+			},
+			{
+				image: '4.png',
+				name: 'Apple iMac 24" 4K Retina Display M1 8 Core CPU, 7 Core GPU, 256GB SSD, Green (MJV83ZP/A) 2021',
+				star: 5,
+				rated: 134,
+				price: '1499.00',
+				salePrice: '1399.00',
+				colors: 7,
+				extra : 'Exchange with kidney',
+				extraClass: 'text-1000 fw-bold mb-2'
+			},
+			{
+				image: '5.png',
+				name: 'Razer Kraken v3 x Wired 7.1 Surroung Sound Gaming headset',
+				star: 5,
+				rated: 59,
+				salePrice: '59.00',
+				colors: 2
+			},
+			{
+				image: '7.png',
+				name: '2021 Apple 12.9-inch iPad Pro (Wi‑Fi, 128GB) - Space Gray',
+				star: 5,
+				rated: 13,
+				salePrice: '799.00',
+				colors: 2,
+			},
+			{
+				image: '12.png',
+				name: 'HORI Racing Wheel Apex for PlayStation 4/3, and PC',
+				star: 5,
+				rated: 64,
+				salePrice: '299.00',
+				colors: 1,
+			},
+			{
+				image: '1.png',
+				name: 'Amazfit T-Rex Pro Smart Watch with GPS, Outdoor Fitness Watch for Men, Military Standard Certified',
+				verified: true,
+				wishListed : true,
+				star: 5,
+				rated: 32,
+				salePrice: '20.00',
+				off: '16%',
+				dealEndTime: '24 hours'
+			},
+			{
+				image: '16.png',
+				name: 'Apple AirPods Pro',
+				star: 5,
+				rated: 39,
+				salePrice: '59.00',
+				colors: 3
+			},
+			{
+				image: '10.png',
+				name: 'Apple Magic Mouse (Wireless, Rechargable) - Silver',
+				star: 5,
+				rated: 6,
+				salePrice: '89.00',
+				colors: 2
+			},
+			{
+				image: '25.png',
+				name: 'RESPAWN 200 Racing Style Gaming Chair, in Gray RSP 200 GRY',
+				star: 5,
+				rated: 8,
+				salePrice: '499.00',
+				colors: 2
+			},
+			{
+				image: '27.png',
+				name: 'LEVOIT Humidifiers for Bedroom Large Room 6L Warm and Cool Mist for...',
+				star: 5,
+				rated: 3,
+				salePrice: '299.00',
+				colors: 3
+			},
+			{
+				image: '26.png',
+				name: 'NETGEAR Nighthawk Pro Gaming XR500 Wi-Fi Router with 4 Ethernet Ports...',
+				star: 5,
+				rated: 8,
+				salePrice: '49.00',
+				colors: 4
+			},
+			{
+				image: '18.png',
+				name: 'Rachael Ray Cucina Bakeware Set Includes Nonstick Bread Baking Cookie Sheet...',
+				star: 5,
+				rated: 1,
+				salePrice: '29.00',
+				colors: 3
+			},
+			{
+				image: '17.png',
+				name: 'Xbox Series S',
+				star: 5,
+				rated: 6,
+				salePrice: '19.00',
+				colors: 2
+			},
+			{
+				image: '24.png',
+				name: 'FURINNO Computer Writing Desk, Walnut',
+				star: 5,
+				rated: 8,
+				salePrice: '199.00',
+				colors: 2
+			},
+			{
+				image: '20.png',
+				name: 'ASUS TUF Gaming F15 Gaming Laptop',
+				star: 4,
+				rated: 3,
+				salePrice: '150.00',
+				colors: 2
+			},
+		]
+
+append scripts
+
+block ecomContent
+	+Section(null,'product-filter-container').pt-5.pb-9
+		button.btn.btn-sm.btn-phoenix-secondary.text-700.mb-5.d-lg-none(data-phoenix-toggle='offcanvas' data-phoenix-target='#productFilterColumn') 
+			span.fa-solid.fa-filter.me-2
+			| Filter
+		.row
+			.col-lg-3.col-xxl-2.ps-2.ps-xxl-3
+				.product-filter-offcanvas.bg-soft.scrollbar.phoenix-offcanvas.phoenix-offcanvas-fixed#productFilterColumn
+					.d-flex.justify-content-between.align-items-center.mb-3
+						h3.mb-0 Filters
+						button.btn.d-lg-none.p-0(data-phoenix-dismiss="offcanvas")
+							span.uil.uil-times.fs-0
+
+					a.btn.px-0.d-block.collapse-indicator(data-bs-toggle='collapse' href='#collapseAvailability' role='button' aria-expanded='true' aria-controls='collapseAvailability')
+						.d-flex.align-items-center.justify-content-between.w-100
+							.fs-0.text-1000 Availability
+							span.fa-solid.fa-angle-down.toggle-icon.text-500
+
+					.collapse.show#collapseAvailability
+						.mb-2
+							.form-check.mb-0
+								input.form-check-input.mt-0#inStockInput(type='checkbox' name='color' checked)
+								label.form-check-label.d-block.lh-sm.fs-0.text-900.fw-normal.mb-0(for='inStockInput') In stock
+							.form-check.mb-0
+								input.form-check-input.mt-0#preBookInput(type='checkbox' name='color')
+								label.form-check-label.d-block.lh-sm.fs-0.text-900.fw-normal.mb-0(for='preBookInput') Pre-book
+							.form-check.mb-0
+								input.form-check-input.mt-0#outOfStockInput(type='checkbox' name='color')
+								label.form-check-label.d-block.lh-sm.fs-0.text-900.fw-normal.mb-0(for='outOfStockInput') Out of stock
+
+					a.btn.px-0.d-block.collapse-indicator(data-bs-toggle='collapse' href='#collapseColorFamily' role='button' aria-expanded='true' aria-controls='collapseColorFamily')
+						.d-flex.align-items-center.justify-content-between.w-100
+							.fs-0.text-1000 Color family
+							span.fa-solid.fa-angle-down.toggle-icon.text-500
+
+					.collapse.show#collapseColorFamily
+						.mb-2
+							.form-check.mb-0
+								input.form-check-input.mt-0#flexCheckBlack(type='checkbox' name='color' checked)
+								label.form-check-label.d-block.lh-sm.fs-0.text-900.fw-normal.mb-0(for='flexCheckBlack') Black
+							.form-check.mb-0
+								input.form-check-input.mt-0#flexCheckBlue(type='checkbox' name='color')
+								label.form-check-label.d-block.lh-sm.fs-0.text-900.fw-normal.mb-0(for='flexCheckBlue') Blue
+							.form-check.mb-0
+								input.form-check-input.mt-0#flexCheckRed(type='checkbox' name='color')
+								label.form-check-label.d-block.lh-sm.fs-0.text-900.fw-normal.mb-0(for='flexCheckRed') Red
+
+					a.btn.px-0.d-block.collapse-indicator(data-bs-toggle='collapse' href='#collapseBrands' role='button' aria-expanded='true' aria-controls='collapseBrands')
+						.d-flex.align-items-center.justify-content-between.w-100
+							.fs-0.text-1000 Brands
+							span.fa-solid.fa-angle-down.toggle-icon.text-500
+
+					.collapse.show#collapseBrands
+						.mb-2
+							.form-check.mb-0
+								input.form-check-input.mt-0#flexCheckBlackberry(type='checkbox' name='brands' checked)
+								label.form-check-label.d-block.lh-sm.fs-0.text-900.fw-normal.mb-0(for='flexCheckBlackberry').
+									Blackberry
+
+							.form-check.mb-0
+								input.form-check-input.mt-0#flexCheckApple(type='checkbox' name='brands')
+								label.form-check-label.d-block.lh-sm.fs-0.text-900.fw-normal.mb-0(for='flexCheckApple').
+									Apple	
+
+							.form-check.mb-0
+								input.form-check-input.mt-0#flexCheckNokia(type='checkbox' name='brands')
+								label.form-check-label.d-block.lh-sm.fs-0.text-900.fw-normal.mb-0(for='flexCheckNokia').
+									Nokia
+
+							.form-check.mb-0
+								input.form-check-input.mt-0#flexCheckSony(type='checkbox' name='brands')
+								label.form-check-label.d-block.lh-sm.fs-0.text-900.fw-normal.mb-0(for='flexCheckSony').
+									Sony
+
+							.form-check.mb-0
+								input.form-check-input.mt-0#flexCheckLG(type='checkbox' name='brands')
+								label.form-check-label.d-block.lh-sm.fs-0.text-900.mb-0.fw-normal(for='flexCheckLG').
+									LG				
+
+					a.btn.px-0.d-block.collapse-indicator(data-bs-toggle='collapse' href='#collapsePriceRange' role='button' aria-expanded='true' aria-controls='collapsePriceRange')
+						.d-flex.align-items-center.justify-content-between.w-100
+							.fs-0.text-1000 Price range
+							span.fa-solid.fa-angle-down.toggle-icon.text-500
+					.collapse.show#collapsePriceRange
+						.d-flex.justify-content-between.mb-3
+							.input-group.me-2
+								input.form-control(type='text' aria-label='First name' placeholder='Min')
+								input.form-control(type='text' aria-label='Last name' placeholder='Max')
+							button.btn.btn-phoenix-primary.border-300.px-3(type='button') Go
+
+					a.btn.px-0.y-4.d-block.collapse-indicator(data-bs-toggle='collapse' href='#collapseRating' role='button' aria-expanded='true' aria-controls='collapseRating')
+						.d-flex.align-items-center.justify-content-between.w-100
+							.fs-0.text-1000 Rating
+							span.fa-solid.fa-angle-down.toggle-icon.text-500
+					.collapse.show#collapseRating
+						.d-flex.align-items-center.mb-1
+							input.form-check-input.me-3#flexRadio1(type='radio' name='flexRadio')
+							+Rating(5).fs--1.me-1
+						.d-flex.align-items-center.mb-1
+							input.form-check-input.me-3#flexRadio2(type='radio' name='flexRadio')
+							+Rating(4).fs--1.me-1
+							p.ms-1.mb-0 &amp; above
+						.d-flex.align-items-center.mb-1
+							input.form-check-input.me-3#flexRadio3(type='radio' name='flexRadio')
+							+Rating(3).fs--1.me-1
+							p.ms-1.mb-0 &amp; above 
+						.d-flex.align-items-center.mb-1
+							input.form-check-input.me-3#flexRadio4(type='radio' name='flexRadio')
+							+Rating(2).fs--1.me-1
+							p.ms-1.mb-0 &amp; above
+						.d-flex.align-items-center.mb-3
+							input.form-check-input.me-3#flexRadio5(type='radio' name='flexRadio')
+							+Rating(1).fs--1.me-1
+							p.ms-1.mb-0 &amp; above	
+
+					a.btn.px-0.d-block.collapse-indicator(data-bs-toggle='collapse' href='#collapseDisplayType' role='button' aria-expanded='true' aria-controls='collapseDisplayType')
+						.d-flex.align-items-center.justify-content-between.w-100
+							.fs-0.text-1000 Display type
+							span.fa-solid.fa-angle-down.toggle-icon.text-500
+
+					.collapse.show#collapseDisplayType
+						.mb-2
+							.form-check.mb-0
+								input.form-check-input.mt-0#lcdInput(type='checkbox' name='displayType' checked)
+								label.form-check-label.d-block.lh-sm.fs-0.text-900.fw-normal.mb-0(for='lcdInput') LCD
+
+							.form-check.mb-0
+								input.form-check-input.mt-0#ipsInput(type='checkbox' name='displayType')
+								label.form-check-label.d-block.lh-sm.fs-0.text-900.fw-normal.mb-0(for='ipsInput') IPS
+							.form-check.mb-0
+								input.form-check-input.mt-0#oledInput(type='checkbox' name='displayType')
+								label.form-check-label.d-block.lh-sm.fs-0.text-900.fw-normal.mb-0(for='oledInput') OLED
+							.form-check.mb-0
+								input.form-check-input.mt-0#amoledInput(type='checkbox' name='displayType')
+								label.form-check-label.d-block.lh-sm.fs-0.text-900.fw-normal.mb-0(for='amoledInput') AMOLED
+							.form-check.mb-0
+								input.form-check-input.mt-0#retinaInput(type='checkbox' name='displayType')
+								label.form-check-label.d-block.lh-sm.fs-0.text-900.fw-normal.mb-0(for='retinaInput') Retina
+
+					a.btn.px-0.d-block.collapse-indicator(data-bs-toggle='collapse' href='#collapseCondition' role='button' aria-expanded='true' aria-controls='collapseCondition')
+						.d-flex.align-items-center.justify-content-between.w-100
+							.fs-0.text-1000 Condition
+							span.fa-solid.fa-angle-down.toggle-icon.text-500
+
+					.collapse.show#collapseCondition
+						.mb-2
+							.form-check.mb-0
+								input.form-check-input.mt-0#newInput(type='checkbox' name='condition' checked)
+								label.form-check-label.d-block.lh-sm.fs-0.text-900.fw-normal.mb-0(for='newInput') New
+
+							.form-check.mb-0
+								input.form-check-input.mt-0#usedInput(type='checkbox' name='condition')
+								label.form-check-label.d-block.lh-sm.fs-0.text-900.fw-normal.mb-0(for='usedInput') Used
+
+							.form-check.mb-0
+								input.form-check-input.mt-0#refurbrishedInput(type='checkbox' name='condition')
+								label.form-check-label.d-block.lh-sm.fs-0.text-900.fw-normal.mb-0(for='refurbrishedInput') Refurbrished
+
+
+					a.btn.px-0.d-block.collapse-indicator(data-bs-toggle='collapse' href='#collapseDelivery' role='button' aria-expanded='true' aria-controls='collapseDelivery')
+						.d-flex.align-items-center.justify-content-between.w-100
+							.fs-0.text-1000 Delivery
+							span.fa-solid.fa-angle-down.toggle-icon.text-500
+
+					.collapse.show#collapseDelivery
+						.mb-2
+							.form-check.mb-0
+								input.form-check-input.mt-0#freeShippingInput(type='checkbox' name='delivery' checked)
+								label.form-check-label.d-block.lh-sm.fs-0.text-900.fw-normal.mb-0(for='freeShippingInput') Free Shipping
+
+							.form-check.mb-0
+								input.form-check-input.mt-0#oneDayShippingInput(type='checkbox' name='delivery')
+								label.form-check-label.d-block.lh-sm.fs-0.text-900.fw-normal.mb-0(for='oneDayShippingInput') One-day Shipping
+
+							.form-check.mb-0
+								input.form-check-input.mt-0#codInput(type='checkbox' name='delivery')
+								label.form-check-label.d-block.lh-sm.fs-0.text-900.fw-normal.mb-0(for='codInput') Cash on Delivery
+
+					a.btn.px-0.d-block.collapse-indicator(data-bs-toggle='collapse' href='#collapseCampaign' role='button' aria-expanded='true' aria-controls='collapseCampaign')
+						.d-flex.align-items-center.justify-content-between.w-100
+							.fs-0.text-1000 Campaign
+							span.fa-solid.fa-angle-down.toggle-icon.text-500
+
+					.collapse.show#collapseCampaign
+						.mb-2
+							.form-check.mb-0
+								input.form-check-input.mt-0#summerSaleInput(type='checkbox' name='campaign')
+								label.form-check-label.d-block.lh-sm.fs-0.text-900.fw-normal.mb-0(for='summerSaleInput') Summer Sale
+							.form-check.mb-0
+								input.form-check-input.mt-0#marchMadnessInput(type='checkbox' name='campaign')
+								label.form-check-label.d-block.lh-sm.fs-0.text-900.fw-normal.mb-0(for='marchMadnessInput') March Madness
+							.form-check.mb-0
+								input.form-check-input.mt-0#flashSaleInput(type='checkbox' name='campaign')
+								label.form-check-label.d-block.lh-sm.fs-0.text-900.fw-normal.mb-0(for='flashSaleInput') Flash Sale
+							.form-check.mb-0
+								input.form-check-input.mt-0#bogoBlastInput(type='checkbox' name='campaign')
+								label.form-check-label.d-block.lh-sm.fs-0.text-900.fw-normal.mb-0(for='bogoBlastInput') BOGO Blast
+
+
+					a.btn.px-0.d-block.collapse-indicator(data-bs-toggle='collapse' href='#collapseWarranty' role='button' aria-expanded='true' aria-controls='collapseWarranty')
+						.d-flex.align-items-center.justify-content-between.w-100
+							.fs-0.text-1000 Warranty
+							span.fa-solid.fa-angle-down.toggle-icon.text-500
+
+					.collapse.show#collapseWarranty
+						.mb-2
+							.form-check.mb-0
+								input.form-check-input.mt-0#threeMonthInput(type='checkbox' name='warranty')
+								label.form-check-label.d-block.lh-sm.fs-0.text-900.fw-normal.mb-0(for='threeMonthInput') 3 months
+							.form-check.mb-0
+								input.form-check-input.mt-0#sixMonthInput(type='checkbox' name='warranty')
+								label.form-check-label.d-block.lh-sm.fs-0.text-900.fw-normal.mb-0(for='sixMonthInput') 6 months
+							.form-check.mb-0
+								input.form-check-input.mt-0#oneYearInput(type='checkbox' name='warranty')
+								label.form-check-label.d-block.lh-sm.fs-0.text-900.fw-normal.mb-0(for='oneYearInput') 1 year
+							.form-check.mb-0
+								input.form-check-input.mt-0#twoYearsInput(type='checkbox' name='warranty')
+								label.form-check-label.d-block.lh-sm.fs-0.text-900.fw-normal.mb-0(for='twoYearsInput') 2 years
+							.form-check.mb-0
+								input.form-check-input.mt-0#threeYearsInput(type='checkbox' name='warranty')
+								label.form-check-label.d-block.lh-sm.fs-0.text-900.fw-normal.mb-0(for='threeYearsInput') 3 years
+							.form-check.mb-0
+								input.form-check-input.mt-0#fiveYearsInput(type='checkbox' name='warranty')
+								label.form-check-label.d-block.lh-sm.fs-0.text-900.fw-normal.mb-0(for='fiveYearsInput') 5 years
+
+
+					a.btn.px-0.d-block.collapse-indicator(data-bs-toggle='collapse' href='#collapseWarrantyType' role='button' aria-expanded='true' aria-controls='collapseWarrantyType')
+						.d-flex.align-items-center.justify-content-between.w-100
+							.fs-0.text-1000 Warranty Type
+							span.fa-solid.fa-angle-down.toggle-icon.text-500
+
+					.collapse.show#collapseWarrantyType
+						.mb-2
+							.form-check.mb-0x
+								input.form-check-input.mt-0#replacementInput(type='checkbox' name='warrantyType')
+								label.form-check-label.d-block.lh-sm.fs-0.text-900.fw-normal.mb-0(for='replacementInput') Replacement
+							.form-check.mb-0
+								input.form-check-input.mt-0#serviceInput(type='checkbox' name='warrantyType')
+								label.form-check-label.d-block.lh-sm.fs-0.text-900.fw-normal.mb-0(for='serviceInput') Service
+							.form-check.mb-0
+								input.form-check-input.mt-0#partialCoveregeInput(type='checkbox' name='warrantyType')
+								label.form-check-label.d-block.lh-sm.fs-0.text-900.fw-normal.mb-0(for='partialCoveregeInput') Partial Coverage
+							.form-check.mb-0
+								input.form-check-input.mt-0#appleCareInput(type='checkbox' name='warrantyType')
+								label.form-check-label.d-block.lh-sm.fs-0.text-900.fw-normal.mb-0(for='appleCareInput') Apple Care
+							.form-check.mb-0
+								input.form-check-input.mt-0#moneyBackInput(type='checkbox' name='warrantyType')
+								label.form-check-label.d-block.lh-sm.fs-0.text-900.fw-normal.mb-0(for='moneyBackInput') Money back
+							.form-check.mb-0
+								input.form-check-input.mt-0#extendableInput(type='checkbox' name='warrantyType')
+								label.form-check-label.d-block.lh-sm.fs-0.text-900.fw-normal.mb-0(for='extendableInput') Extendable
+
+
+					a.btn.px-0.d-block.collapse-indicator(data-bs-toggle='collapse' href='#collapseCertification' role='button' aria-expanded='true' aria-controls='collapseCertification')
+						.d-flex.align-items-center.justify-content-between.w-100
+							.fs-0.text-1000 Certification
+							span.fa-solid.fa-angle-down.toggle-icon.text-500
+
+					.collapse.show#collapseCertification
+						div
+							.form-check.mb-0
+								input.form-check-input.mt-0#rohsInput(type='checkbox' name='certification')
+								label.form-check-label.d-block.lh-sm.fs-0.text-900.fw-normal.mb-0(for='rohsInput') RoHS
+							.form-check.mb-0
+								input.form-check-input.mt-0#fccInput(type='checkbox' name='certification')
+								label.form-check-label.d-block.lh-sm.fs-0.text-900.fw-normal.mb-0(for='fccInput') FCC
+							.form-check.mb-0
+								input.form-check-input.mt-0#conflictInput(type='checkbox' name='certification')
+								label.form-check-label.d-block.lh-sm.fs-0.text-900.fw-normal.mb-0(for='conflictInput') Conflict Free
+							.form-check.mb-0
+								input.form-check-input.mt-0#isoOneInput(type='checkbox' name='certification')
+								label.form-check-label.d-block.lh-sm.fs-0.text-900.fw-normal.mb-0(for='isoOneInput') ISO 9001:2015
+							.form-check.mb-0
+								input.form-check-input.mt-0#isoTwoInput(type='checkbox' name='certification')
+								label.form-check-label.d-block.lh-sm.fs-0.text-900.fw-normal.mb-0(for='isoTwoInput') ISO 27001:2013
+							.form-check.mb-0
+								input.form-check-input.mt-0#isoThreeInput(type='checkbox' name='certification')
+								label.form-check-label.d-block.lh-sm.fs-0.text-900.fw-normal.mb-0(for='isoThreeInput') IEC 61000-4-2
+
+				.phoenix-offcanvas-backdrop.d-lg-none(data-phoenix-backdrop)
+
+			.col-lg-9.col-xxl-10
+				.row.gx-3.gy-6.mb-8
+					each product in products
+						.col-12.col-sm-6.col-md-4.col-xxl-2
+							.product-card-container.h-100
+								+Product(product)
+
+				.d-flex.justify-content-end
+					nav(aria-label='Page navigation example')
+						ul.pagination.mb-0
+							li.page-item
+								= '\n'
+								a.page-link(href='#')  
+									= '\n'
+									span.fas.fa-chevron-left 
+									= '\n'
+							li.page-item
+								= '\n'
+								a.page-link(href='#') 1
+							li.page-item
+								= '\n'
+								a.page-link(href='#') 2
+							li.page-item
+								= '\n'
+								a.page-link(href='#') 3
+							li.page-item.active(aria-current='page')
+								= '\n'
+								a.page-link(href='#') 4
+							li.page-item
+								= '\n'
+								a.page-link(href='#') 5
+							li.page-item
+								= '\n'
+								a.page-link(href='#') 
+									span.fas.fa-chevron-right

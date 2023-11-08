@@ -1,0 +1,297 @@
+mixin ProjectSummeryTableRow(data,index)
+  //- tr.hover-actions-trigger.btn-reveal-trigger.position-static
+  tr.position-static
+    td.align-middle.time.white-space-nowrap.ps-0.project
+      a.fw-bold.fs-0(href="#")=data.text
+    td.align-middle.white-space-nowrap.assigness.ps-3
+      .avatar-group.avatar-group-dense
+        each member in data.assigness
+          a.dropdown-toggle.dropdown-caret-none.d-inline-block(href='#' role='button' data-bs-toggle='dropdown' aria-expanded='false' data-bs-auto-close="outside")
+            if member.avatar
+              +Avatar({
+                size: 's',
+                img: member.avatar,
+                round: 'circle',
+                imgClass:member.avatar==="team/avatar.webp" ? 'avatar-placeholder' : ''
+            }).rounded-circle
+            else if member.avatar === ''
+              .avatar.avatar-s
+                .avatar-name.rounded-circle
+                  span=member.name.charAt(0).toUpperCase()
+          +AvatarDropdownMenu(member) 
+        if data.more
+          +Avatar({size: 's', more: data.more, round: 'circle'}).rounded-circle
+    td.align-middle.white-space-nowrap.start.ps-3
+      p.mb-0.fs--1.text-900=data.start
+    td.align-middle.white-space-nowrap.deadline.ps-3
+      p.mb-0.fs--1.text-900=data.deadline
+    td.align-middle.white-space-nowrap.calculation.ps-3
+      if data.cost 
+        p.fw-bold.text-1100.fs--1.mb-0=data.cost 
+        p.fw-semi-bold.fs--2.text-700.mb-0 Cost
+      if data.icon
+        button.btn.btn-phoenix-secondary.square-icon-btn
+          span.fas.fa-plus
+      if data.estimation
+        p.fw-bold.text-1100.fs--1.mb-0=data.estimation 
+        p.fw-semi-bold.fs--2.text-700.mb-0 Estimation
+      if data.budget
+        p.fw-bold.text-1100.fs--1.mb-0=data.budget
+        p.fw-semi-bold.fs--2.text-700.mb-0 Budget
+    td.align-middle.white-space-nowrap.ps-3.projectprogress
+      p.text-800.fs--2.mb-0 #{data.progress.min} / #{data.progress.max}
+      .progress(style="height:3px;")
+        .progress-bar.bg-success(style=`width: ${(data.progress.min/data.progress.max)*100}%` aria-valuenow='25' aria-valuemin="0" aria-valuemax='100' role="progressbar")
+    td.align-middle.white-space-nowrap.ps-8.status
+      .progress.progress-stack.mt-3(style="height:3px;")
+        .progress-bar.bg-info(style=`width:${data.progressbar.info}%` aria-valuenow='25' aria-valuemin="0" aria-valuemax='100' role="progressbar" )
+        .progress-bar.bg-danger(style=`width:${data.progressbar.danger}%` aria-valuenow='25' aria-valuemin="0" aria-valuemax='100' data-bs-toggle="tooltip" data-bs-placement="top" title="5% Damage" role="progressbar")
+        .progress-bar.bg-warning(style=`width:${data.progressbar.warning}%` aria-valuenow='25' aria-valuemin="0" aria-valuemax='100' data-bs-toggle="tooltip" data-bs-placement="top" title="45% Damage" role="progressbar" )
+        .progress-bar.bg-success(style=`width:${data.progressbar.success}%` aria-valuenow='25' aria-valuemin="0" aria-valuemax='100' data-bs-toggle="tooltip" data-bs-placement="top" title="15% Damage" role="progressbar" )
+    td.align-middle.text-end.white-space-nowrap.pe-0.action
+      +DashboardDropdown.fs--2
+
+
+
+
+
+mixin ProjectSummeryTable
+  -
+    var latestReviewsTableData = [
+      {
+        text:'Making the Butterflies shoot each other dead',
+        start:'Dec 12, 2018',
+        deadline:'Dec 12, 2026',
+        cost:'$4',
+        assigness:[
+          {
+            name: 'Michael Jenkins',
+            avatar: 'team/9.webp',
+          },
+          {
+            name: 'Ansolo Lazinatov',
+            avatar: 'team/25.webp',
+          },
+          {
+            name: 'Jennifer Schramm',
+            avatar: 'team/32.webp',
+          },
+          {
+            name: 'Kristine Cadena',
+            avatar: 'team/avatar.webp',
+          },
+        ],
+        more: '+3',
+        progress:{
+          min:'145',
+          max:'145'
+        },
+        progressbar:{
+          info:30,
+          danger:5,
+          warning:45,
+          success:15
+        }
+      },
+      {
+        text:'Project Doughnut Dungeon',
+        assigness:[
+          {
+            name: 'Woodrow Burton',
+            avatar: 'team/22.webp',
+          },
+          {
+            name: 'Ashley Garrett',
+            avatar: 'team/28.webp',
+          },
+          {
+            name: 'Raymond Mims',
+            avatar: '',
+          },
+        ],
+        start:'Jan 9, 2019',
+        deadline:'Dec 9, 2022',
+        icon:true,
+        progress:{
+          min:'148',
+          max:'223'
+        },
+        progressbar:{
+          info:20,
+          danger:15,
+          warning:45,
+          success:30
+        }
+      },
+      {
+        text:'The Chewing Gum Attack',
+        assigness:[
+          {
+            name: 'Jean Renoir',
+            avatar: 'team/34.webp',
+          },
+          {
+            name: 'Katerina Karenin',
+            avatar: 'team/59.webp',
+          },
+        ],
+        start:'Sep 4, 2019',
+        deadline:'Dec 4, 2021',
+        estimation:'$657k',
+        progress:{
+          min:'277',
+          max:'539'
+        },
+        progressbar:{
+          info:10,
+          danger:10,
+          warning:35,
+          success:45
+        }
+      },
+      {
+        text:'Execution of Micky the foul mouse',
+        assigness:[
+          {
+            name: 'Luis Bunuel',
+            avatar: 'team/1.webp',
+          },
+          {
+            name: 'Kristine Cadena',
+            avatar: 'team/avatar.webp',
+          },
+          {
+            name: 'Ricky Antony',
+            avatar: 'team/5.webp',
+          },
+          {
+            name: 'Roy Anderson',
+            avatar: 'team/11.webp',
+          },
+        ],
+        start:'Nov 1, 2019',
+        deadline:'Dec 1, 2024',
+        icon:true,
+        progress:{
+          min:'16',
+          max:'56'
+        },
+        progressbar:{
+          info:45,
+          danger:15,
+          warning:20,
+          success:20
+        }
+      },
+
+      {
+        text:'Harnessing stupidity from Jerry',
+        assigness:[
+          {
+            name: 'Michael Jenkins',
+            avatar: 'team/21.webp',
+          },
+          {
+            name: 'Kristine Cadena',
+            avatar: 'team/23.webp',
+          },
+          {
+            name: 'Ricky Antony',
+            avatar: 'team/25.webp',
+          },
+        ],
+        start:'Dec 28, 2019',
+        deadline:'Nov 28, 2021',
+        icon:true,
+        progress:{
+          min:'169',
+          max:'394'
+        },
+        progressbar:{
+          info:25,
+          danger:35,
+          warning:20,
+          success:15
+        }
+      },
+      {
+        text:'Water resistant mosquito killer gun',
+        assigness:[
+          {
+            name: 'Stanly Drinkwater',
+            avatar: 'team/30.webp',
+          },
+          {
+            name: 'Kristine Cadena',
+            avatar: 'team/avatar.webp',
+          },
+          {
+            name: 'Katerina Karenin',
+            avatar: 'team/59.webp',
+          },
+          {
+            name: 'Martina scorcese',
+            avatar: 'team/31.webp',
+          },
+          {
+            name: 'Roy Anderson',
+            avatar: '',
+          },
+        ],
+        start:'Feb 24, 2020',
+        deadline:'Nov 24, 2021',
+        budget:'$55k',
+        progress:{
+          min:'600',
+          max:'600'
+        },
+        progressbar:{
+          info:24,
+          danger:5,
+          warning:35,
+          success:35
+        }
+      }
+    ]
+  .table-responsive.ms-n1.ps-1.scrollbar
+    table.table.fs--1.mb-0.border-top.border-200
+      thead
+        tr
+          th.sort.white-space-nowrap.align-middle.ps-0(scope='col' data-sort="project" style='width:30%;' ) PROJECT NAME
+          th.sort.align-middle.ps-3(scope='col' data-sort="assigness" style='width:10%;') ASSIGNESS
+          th.sort.align-middle.ps-3(scope='col' data-sort="start" style='width:10%;') START DATE
+          th.sort.align-middle.ps-3(scope='col' data-sort="deadline" style='width:15%;') DEADLINE
+          th.sort.align-middle.ps-3(scope='col' data-sort="calculation" style='width:12%;' ) CALCULATION
+          th.sort.align-middle.ps-3(scope='col' data-sort="projectprogress" style='width:5%;' ) PROGRESS
+          th.sort.align-middle.ps-8(scope='col' data-sort="status" style='width:10%;') STATUS
+          th.sort.align-middle.text-end(scope='col' style='width:10%;' )
+      tbody.list#project-summary-table-body
+        each row,index in latestReviewsTableData
+          +ProjectSummeryTableRow(row,index)
+
+mixin ProjectSummery
+  #projectSummary(data-list!={
+    valueNames: ["project", "assigness", "start", "deadline", "calculation","projectprogress","status","action"],
+    page: 6,
+    pagination: true
+  })
+    .row.align-items-end.justify-content-between.pb-4.g-3
+      .col-auto
+        h3 Projects
+        p.text-700.lh-sm.mb-0 Brief summary of all projects
+    +ProjectSummeryTable
+    .row.align-items-center.justify-content-between.py-2.pe-0.fs--1
+      .col-auto.d-flex
+        p.mb-0.d-none.d-sm-block.me-3.fw-semi-bold.text-900(data-list-info)
+        a.fw-semi-bold(href='#!' data-list-view="*")
+          | View all
+          span.fas.fa-angle-right.ms-1(data-fa-transform='down-1')
+        a.fw-semi-bold.d-none(href='#!' data-list-view="less")
+          | View Less
+          span.fas.fa-angle-right.ms-1(data-fa-transform='down-1')
+      .col-auto.d-flex
+        button.page-link(data-list-pagination="prev")
+          span.fas.fa-chevron-left
+        ul.mb-0.pagination
+        button.page-link.pe-0(data-list-pagination="next")
+          span.fas.fa-chevron-right

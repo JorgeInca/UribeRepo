@@ -1,0 +1,38 @@
+extends ../../../layouts/LayoutComponent
+
+append variables
+  -
+    var pageHeader = {
+      title: 'Tabs',
+      description: 'Takes the basic nav and adds the <code>.nav-tabs</code> class to generate a tabbed interface. Use them to create tabbable regions with Bootstrap tab JavaScript plugin.',
+      url: `https://getbootstrap.com/docs/${bootstrapVersion}/components/navs-tabs/#tabs`,
+      linkText: 'Tabs on Bootstrap',
+    }
+  -
+    var rightNav = [
+      {
+        name: 'Basic Example',
+        id: '#basic-example',
+      },
+    ]
+
+block component
+  .mb-9
+    +ComponentCard({
+      title:'Basic Example',
+      description: `Takes the basic nav and adds the <code>.nav-tabs</code> class to generate a tabbed interface. Use them to create tabbable regions with our tab JavaScript plugin.`
+    }).my-4
+      ul#myTab.nav.nav-underline(role='tablist')
+        li.nav-item
+          a#home-tab.nav-link.active(data-bs-toggle='tab' href='#tab-home' role='tab' aria-controls='tab-home' aria-selected='true') Home
+        li.nav-item
+          a#profile-tab.nav-link(data-bs-toggle='tab' href='#tab-profile' role='tab' aria-controls='tab-profile' aria-selected='false') Profile
+        li.nav-item
+          a#contact-tab.nav-link(data-bs-toggle='tab' href='#tab-contact' role='tab' aria-controls='tab-contact' aria-selected='false') Contact
+      #myTabContent.tab-content.mt-3
+        #tab-home.tab-pane.fade.show.active(role='tabpanel' aria-labelledby='home-tab')
+          | Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone.
+        #tab-profile.tab-pane.fade(role='tabpanel' aria-labelledby='profile-tab')
+          | Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic.
+        #tab-contact.tab-pane.fade(role='tabpanel' aria-labelledby='contact-tab')
+          | Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred pitchfork.

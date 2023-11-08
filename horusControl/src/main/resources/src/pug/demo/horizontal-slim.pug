@@ -1,0 +1,41 @@
+extends ../dashboard/project-management
+
+
+append variables
+  - 
+    var attrsBody = {
+      class: 'nav-slim'
+    }
+
+  - var disableNavigationType = true;
+  - var disableVerticalNavbarAppearance = true;
+  - var disableHorizontalNavbarShape = true;
+  
+append headScripts
+  script.
+    window.config.set({
+      phoenixNavbarTopShape: 'slim',
+      phoenixNavbarPosition: 'horizontal'
+    });
+
+block navbarTop
+  +NavbarTopSlim({
+    toggleID: 'navbarTopCollapse',
+    links: false,
+    search: true
+  }).navbar-expand-lg(style='display:none')
+
+  script.
+    var body = document.querySelector('body');
+    var navbarTopSlim = document.querySelector('#navbarTopSlim');
+    var navbarVertical = document.querySelector('.navbar-vertical');
+    var navbarTop = document.querySelector('.navbar-top');
+    var documentElement = document.documentElement;
+
+    navbarVertical.remove();
+    navbarTopSlim.removeAttribute('style');
+    navbarTop.classList.add('navbar-darker');
+    body.classList.add('nav-slim');
+    documentElement.classList.add('navbar-horizontal');
+
+  

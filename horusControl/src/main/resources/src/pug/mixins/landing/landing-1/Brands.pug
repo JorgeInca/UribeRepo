@@ -1,0 +1,16 @@
+mixin Brand(image)
+	.col-6.col-md-3
+		.p-2.p-lg-5.d-flex.flex-center.h-100&attributes(attributes)
+			img(src=`${CWD}assets/img/brand2/${image}` alt='').w-100
+
+mixin Brands
+	+Section('container-small px-lg-7 px-xxl-3').py-5.pt-xl-13.bg-white
+		.row.g-0
+			+Brand('netflix-n.png').border-1.border-dashed.border-bottom.border-end
+			+Brand('blender.png').border-1.border-dashed.border-bottom.border-end-md
+			+Brand('upwork.png').border-1.border-dashed.border-bottom.border-end.border-end-md
+			+Brand('facebook-f.png').border-1.border-dashed.border-bottom.border-end-lg-0
+			+Brand('pocket.png').border-1.border-dashed.border-end.border-bottom.border-bottom-md-0
+			+Brand('mail-bluster-1.png').border-1.border-dashed.border-end-md.border-bottom.border-bottom-md-0
+			+Brand('discord.png').border-1.border-dashed.border-end
+			+Brand('google-g.png').border-1.border-dashed.border-end-lg-0

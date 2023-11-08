@@ -1,0 +1,52 @@
+extends ../../layouts/LayoutComponent
+
+append variables
+	-
+		var pageHeader = {
+			title: 'Calendar',
+			description: 'Phoenix uses FullCalendar for calendar component. FullCalendar is full-sized drag & drop event calendar.',
+			url: `https://fullcalendar.io/`,
+			linkText: 'FullCalendar Documentation',
+		}
+	- var today = new Date();
+	- var toString = (number) => number.toString().padStart(2, '0');
+	- var date = toString(today.getDate())
+	- var month = today.getMonth();
+	- var currentMonth = month > 11 ? toString(1) : toString(month + 1);
+	-
+		var events = [
+			{
+				title: 'Bootcamp',
+				start: `${today.getFullYear()}-${currentMonth}-${date}`,
+			}
+		]
+
+prepend styles
+	link(href=`${CWD}vendors/fullcalendar/main.min.css`, rel='stylesheet')
+	link(href=`${CWD}vendors/flatpickr/flatpickr.min.css`, rel='stylesheet')
+
+prepend scripts
+	script(src=`${CWD}vendors/fullcalendar/main.min.js`)
+	script(src=`${CWD}vendors/dayjs/dayjs.min.js`)
+
+block component
+
+	+ComponentCard({
+		title:'Calendar Example',
+		description:`Basic example of FullCalendar with default options in ${name}. You can also pass the extra options using <code>data-calendar </code> attribute.<a href="${CWD}${paths['app-calendar']}" target="_blank">See advanced implementation of fullCalendar </a>`,
+	}).my-4
+		div(data-calendar!={events})
+
+	+ComponentCard({
+		title: 'Stylesheet',
+		hideNavTab: true
+	}).my-4
+		+ComponentCardLib 
+			script(src=`vendors/fullcalendar/main.min.js` rel="stylesheet")
+
+	+ComponentCard({
+		title: 'Javascript',
+		hideNavTab: true
+	}).my-4
+		+ComponentCardLib 
+			script(src=`vendors/sortablejs/sortable.min.js`)

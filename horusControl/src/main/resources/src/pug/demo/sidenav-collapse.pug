@@ -1,0 +1,8 @@
+extends ../dashboard/project-management
+
+append headScripts
+  script.
+    window.config.set({
+      phoenixIsNavbarVerticalCollapsed: true
+    });
+    document.documentElement.classList.add('navbar-vertical-collapsed');

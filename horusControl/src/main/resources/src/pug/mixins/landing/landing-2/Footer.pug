@@ -1,0 +1,24 @@
+mixin FooterLanding
+  +Section("container-small px-lg-7 px-xxl-3").bg-1100.dark__bg-1000
+    .row.gx-xxl-8.gy-5.align-items-center.mb-5
+      .col-xl-auto.text-center
+        a(href='#')
+          img(src=`${CWD}assets/img/icons/logo-white.png` height="48" alt='' )
+      .col-xl-auto.flex-1
+        ul.list-unstyled.d-flex.justify-content-center.flex-wrap.mb-0.border-end-xl.border-dashed.border-800.gap-3.gap-xl-8.pe-xl-5.pe-xxl-8.w-75.w-md-100.mx-auto
+          each item in ["Contact us", "Newsroom", "Opportunities", "Login", "Sign Up", "Support", "FAQ"]
+            li
+              a.text-300.dark__text-300(href="")= item
+      .col-xl-auto
+        .d-flex.align-items-center.justify-content-center.gap-8
+          a.text-white.dark__text-white(href="#!") 
+            span.fa-brands.fa-facebook
+          a.text-white.dark__text-white(href="#!") 
+            span.fa-brands.fa-twitter
+          a.text-white.dark__text-white(href="#!") 
+            span.fa-brands.fa-linkedin-in
+    hr.text-800
+    .d-sm-flex.flex-between-center.text-center
+      p.text-600.mb-0 Copyright © Company Name
+      p.text-600.mb-0 Made with love by 
+        a(href="https://themewagon.com") ThemeWagon

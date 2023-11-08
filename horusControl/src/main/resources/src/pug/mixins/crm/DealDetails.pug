@@ -1,0 +1,475 @@
+mixin DealProfileCard
+	.card&attributes(attributes)
+		.card-body
+			.row.align-items-center.g-3
+				.col-12.col-sm-auto.flex-1
+					h3.fw-bolder.mb-2.line-clamp-1 Start-Up Growth Suite
+					.d-flex.align-items-center.mb-4
+						h5.mb-0.me-4 USD $12,000.00
+						h5.fw-semi-bold
+							span.d-inline-block.lh-sm.me-1(data-feather="grid" style='height:16px;width:16px;')
+							span.d-inline-block.lh-sm Financial
+
+					.d-md-flex.d-xl-block.align-items-center.justify-content-between.mb-5
+						.d-flex.align-items-center.mb-3.mb-md-0.mb-xl-3
+							.avatar.avatar-xl.me-3
+								img.rounded-circle(src=`${CWD}assets/img/team/72x72/58.webp`, alt="")
+							div
+								h5 Ansolo Lazinatov
+								.dropdown
+									a(href="#!" class="text-800 dropdown-toggle text-decoration-none dropdown-caret-none" data-bs-toggle="dropdown" aria-expanded="false") 
+										| Owner
+										span.fa-solid.fa-caret-down.text-800.fs--1.ms-2
+									.dropdown-menu.shadow-sm(style="min-width:20rem")
+										.card.position-relative.border-0
+											.card-body.p-0
+												.mx-3
+													h4.mb-3.fw-bold Switch ownership
+													h5.mb-3 Deal Owner
+
+													select.form-select.mb-3(aria-label='Default select')
+														option(selected) Select
+														option(value='1') Jerry Seinfield
+														option(value='2') Anthoney Michael
+														option(value='3') Ansolo Lazinatov
+													.text-end
+														button.btn.btn-link.text-danger(type='button') Cancel
+														button.btn.btn-sm.btn-primary.px-5(type='button') Save
+						div
+							span.badge.badge-phoenix.badge-phoenix-success.me-2 Success
+							span.badge.badge-phoenix.badge-phoenix-danger.me-2 Lost
+							span.badge.badge-phoenix.badge-phoenix-secondary Close
+
+					.progress.mb-2(style='height:5px')
+						.progress-bar.bg-primary-200(role='progressbar' style='width: 40%' aria-valuenow='25' aria-valuemin='0' aria-valuemax='100')
+					.d-flex.align-items-center.justify-content-between
+						p.mb-0  New
+						div
+							span.d-inline-block.lh-sm.me-1(data-feather="clock" style='height:16px;width:16px;')
+							span.d-inline-block.lh-sm  Dec 15, 05:00AM
+
+mixin OtherInformation
+	.card&attributes(attributes)
+		.card-body
+			h4.mb-5 Others Information
+			.row.g-3
+				.col-12
+					.mb-4
+						.d-flex.flex-wrap.justify-content-between.mb-2
+							h5.mb-0.text-1000.me-2 Category
+							a.fw-bold.fs--1(href='#!') Add new category
+						select.form-select.mb-3(aria-label='category')
+							option(value='financial') Financial
+							option(value='marketplace') Marketplace
+							option(value='travel') Travel
+							option(value='e-commerce') E-commerce
+							option(value='cloud-computing') Cloud Computing
+
+					.mb-4
+						h5.mb-0.text-1000.mb-2 Priority
+						select.form-select.mb-3(aria-label='priority')
+							option(value='low') Low
+							option(value='high') High
+							option(value='medium') Medium
+							option(value='urgent') Urgent
+
+					.mb-4
+						h5.mb-0.text-1000.mb-2 Stage
+						select.form-select.mb-3(aria-label='stage')
+							option(value='new') New
+							option(value='in-progress') In Progress
+							option(value='pending') Pending
+							option(value='canceled') Canceled
+							option(value='completed') Completed
+
+					.mb-4
+						.d-flex.flex-wrap.justify-content-between.mb-2
+							h5.mb-0.text-1000.me-2 Lead Source
+							a.fw-bold.fs--1(href='#!') Add new
+						select.form-select.mb-3(aria-label='lead-source')
+							option(value='referrals') Referrals
+							option(value='former_clients') Former Clients
+							option(value='competitors') Competitors
+							option(value='business_sales') Business &amp; sales
+							option(value='google_resources') Google resources
+							option(value='linkedin') Linkedin
+							option(value='marketing') Marketing
+
+					div
+						.d-flex.flex-wrap.justify-content-between.mb-2
+							h5.mb-0.text-1000.me-2 Campaign Source
+							a.fw-bold.fs--1(href='#!') Add new
+						select.form-select(aria-label='lead-source')
+							option(value='online_campaign') Online Campaign
+							option(value='offline_campaign') Offline Campaign
+
+mixin PrintingDimensions
+	.card&attributes(attributes)
+		.card-body
+			.row.g-4.g-xl-1.g-xxl-3.justify-content-between
+				.col-sm-auto
+					.d-sm-block.d-inline-flex.d-md-flex.flex-xl-column.flex-xxl-row.align-items-center.align-items-xl-start.align-items-xxl-center
+						.d-flex.bg-success-100.rounded.flex-center.me-3.mb-sm-3.mb-md-0.mb-xl-3.mb-xxl-0(style="width:32px; height:32px")
+							span.text-success-600.dark__text-success-300(data-feather="dollar-sign" style="width:24px; height:24px")
+						div
+							p.fw-bold.mb-1 Deal Amount
+							h4.fw-bolder.text-nowrap $12,000.00
+				.col-sm-auto
+					.d-sm-block.d-inline-flex.d-md-flex.flex-xl-column.flex-xxl-row.align-items-center.align-items-xl-start.align-items-xxl-center.border-start-sm.ps-sm-5
+						.d-flex.bg-info-100.rounded.flex-center.me-3.mb-sm-3.mb-md-0.mb-xl-3.mb-xxl-0(style="width:32px; height:32px")
+							span.text-info-600.dark__text-info-300(data-feather="code" style="width:24px; height:24px")
+						div
+							p.fw-bold.mb-1 Deal Code
+							h4.fw-bolder.text-nowrap PHO1234
+				.col-sm-auto
+					.d-sm-block.d-inline-flex.d-md-flex.flex-xl-column.flex-xxl-row.align-items-center.align-items-xl-start.align-items-xxl-center.border-start-sm.ps-sm-5
+						.d-flex.bg-primary-100.rounded.flex-center.me-3.mb-sm-3.mb-md-0.mb-xl-3.mb-xxl-0(style="width:32px; height:32px")
+							span.text-primary-600.dark__text-primary-300(data-feather="layout" style="width:24px; height:24px")
+						div
+							p.fw-bold.mb-1 Deal Type
+							h4.fw-bolder.text-nowrap New Business
+
+mixin DealsDetailsInfo
+	.px-xl-4&attributes(attributes)
+		.row.mx-0.mx-sm-3.mx-lg-0.px-lg-0
+			.col-sm-12.col-xxl-6.border-bottom.border-end-xxl.py-3
+				table.w-100.table-stats.table-stats
+					tr
+						th
+						th
+						th
+					tr
+						td.py-2
+							.d-inline-flex.align-items-center
+								.d-flex.bg-success-100.rounded-circle.flex-center.me-3(style="width:24px; height:24px")
+									span.text-success-600.dark__text-success-300(data-feather="bar-chart-2" style="width:16px; height:16px")
+								p.fw-bold.mb-0 Probability (%)
+						td.py-2.d-none.d-sm-block.pe-sm-2 :
+						td.py-2
+							p.ps-6.ps-sm-0.fw-semi-bold.mb-0.mb-0.pb-3.pb-sm-0 12.5
+					tr
+						td.py-2
+							.d-flex.align-items-center
+								.d-flex.bg-info-100.rounded-circle.flex-center.me-3(style="width:24px; height:24px")
+									span.text-info-600.dark__text-info-300(data-feather="trending-up" style="width:16px; height:16px")
+								p.fw-bold.mb-0 Revenue
+						td.py-2.d-none.d-sm-block.pe-sm-2 :
+						td.py-2
+							p.ps-6.ps-sm-0.fw-semi-bold.mb-0 $1,500.00
+
+			.col-sm-12.col-xxl-6.border-bottom.py-3
+				table.w-100.table-stats
+					tr
+						th
+						th
+						th
+					tr
+						td.py-2
+							.d-inline-flex.align-items-center
+								.d-flex.bg-primary-100.rounded-circle.flex-center.me-3(style="width:24px; height:24px")
+									span.text-primary-600.dark__text-primary-300(data-feather="phone" style="width:16px; height:16px")
+								p.fw-bold.mb-0 Phone
+						td.py-2.d-none.d-sm-block.pe-sm-2 :
+						td.py-2
+							a.ps-6.ps-sm-0.fw-semi-bold.mb-0.pb-3.pb-sm-0.text-900(href="tel:+11123456789") +11 123 456 789
+					tr
+						td.py-2
+							.d-flex.align-items-center
+								.d-flex.bg-warning-100.rounded-circle.flex-center.me-3(style="width:24px; height:24px")
+									span.text-warning-600.dark__text-warning-300(data-feather="mail" style="width:16px; height:16px")
+								p.fw-bold.mb-0 Email
+						td.py-2.d-none.d-sm-block.pe-sm-2 :
+						td.py-2
+							a.ps-6.ps-sm-0.fw-semi-bold.mb-0.text-900(href="mailto:jacksonpol@email.com") jacksonpol@email.com
+
+			.col-sm-12.col-xxl-6.border-end-xxl.border-bottom.border-bottom-xxl-0.py-3
+				table.w-100.table-stats
+					tr
+						th
+						th
+						th
+					tr
+						td.py-2
+							.d-inline-flex.align-items-center
+								.d-flex.bg-success-100.rounded-circle.flex-center.me-3(style="width:24px; height:24px")
+									span.text-success-600.dark__text-success-300(data-feather="users" style="width:16px; height:16px")
+								p.fw-bold.mb-0 Contact Name
+						td.py-2.d-none.d-sm-block.pe-sm-2 :
+						td.py-2
+							.ps-6.ps-sm-0.fw-semi-bold.mb-0.pb-3.pb-sm-0 Jackson Pollock
+					tr
+						td.py-2
+							.d-flex.align-items-center
+								.d-flex.bg-info-100.rounded-circle.flex-center.me-3(style="width:24px; height:24px")
+									span.text-info-600.dark__text-info-300(data-feather="edit" style="width:16px; height:16px")
+								p.fw-bold.mb-0 Modified By
+						td.py-2.d-none.d-sm-block.pe-sm-2 :
+						td.py-2
+							.ps-6.ps-sm-0.fw-semi-bold.mb-0 Ansolo Lazinatov
+
+			.col-sm-12.col-xxl-6.py-3
+				table.w-100.table-stats
+					tr
+						th
+						th
+						th
+					tr
+						td.py-2
+							.d-inline-flex.align-items-center
+								.d-flex.bg-info-100.rounded-circle.flex-center.me-3(style="width:24px; height:24px")
+									span.text-info-600.dark__text-info-300(data-feather="clock" style="width:16px; height:16px")
+								p.fw-bold.mb-0 Create Date
+						td.py-2.d-none.d-sm-block.pe-sm-2 :
+						td.py-2
+							.ps-6.ps-sm-0.fw-semi-bold.mb-0.pb-3.pb-sm-0 Nov 30, 2022
+					tr
+						td.py-2
+							.d-flex.align-items-center
+								.d-flex.bg-warning-100.rounded-circle.flex-center.me-3(style="width:24px; height:24px")
+									span.text-warning-600.dark__text-warning-300(data-feather="clock" style="width:16px; height:16px")
+								p.fw-bold.mb-0 Closing Date
+						td.py-2.d-none.d-sm-block.pe-sm-2 :
+						td.py-2
+							.ps-6.ps-sm-0.fw-semi-bold.mb-0 Dec 15, 2022
+
+mixin Activity(data,isLast)
+	div(class=isLast ? 'pt-4': 'border-bottom py-4')
+		.d-flex
+			.d-flex.bg-primary-100.rounded-circle.flex-center.me-3(style="width:25px; height:25px" class=`${data.iconBg}`)
+				span.fa-solid.text-primary-600.dark__text-primary-300.fs--1(class=`${data.icon}`)
+			.flex-1
+				.d-flex.justify-content-between.flex-column.flex-xl-row.mb-2.mb-sm-0
+					.flex-1.me-2
+						h5.text-1000.lh-sm=data.title
+						p.fs--1.mb-0 by
+							a(href="#!").ms-1=data.name
+					.fs--1
+						span.fa-regular.fa-calendar-days.text-primary.me-2
+						span.fw-semi-bold=data.date
+				if data.text		
+					p.fs--1.mb-0=data.text
+
+mixin ActivitySearchBar(justifyClass="justify-content-between")
+	.row.align-items-center.g-3.justify-content-between(class=justifyClass)&attributes(attributes)
+		.col-12.col-sm-auto
+			+Search({placeholder: 'Search Activity'}).mb-2.mb-sm-0
+		.col-auto
+			button.btn.btn-phoenix-primary.px-6 Add Activity
+
+mixin Notes(data, isLast)
+	.border-2.border-dashed(class=isLast ? '': 'mb-4 pb-4 border-bottom')
+		if data.text
+			p.mb-1.text-1000=data.text
+		.d-flex
+			.fs--1.text-600
+				span.fa-solid.fa-clock.me-2
+				span.fw-semi-bold.me-1=data.date
+			p.fs--1.mb-0.text-600 by
+				a(href="#!").ms-1.fw-semi-bold=data.name
+//- Call Table
+mixin MeetingSearchBar(justifyClass="justify-content-between")
+	.row.align-items-center.g-2.flex-wrap(class=justifyClass)&attributes(attributes)
+		.col-12.col-sm-auto
+			+Search({placeholder: 'Search meeting'}).mb-2.mb-sm-0
+		.col-auto.d-flex.flex-md-grow-1
+			p.mb-0.fs--1.text-700.fw-bold
+				span.fas.fa-filter.me-1.fw-extra-bold.fs--2
+				|23 tasks
+			button.btn.btn-link.p-0.ms-3.fs--1.text-primary.fw-bold.text-decoration-none
+				span.fas.fa-sort.me-1.fw-extra-bold.fs--2
+				|Sorting
+		.col-auto
+			button.btn.btn-primary
+				span.fa-solid.fa-plus.me-2
+				| Add Meeting	
+
+mixin Meeting(data)
+	.card.h-100
+		.card-body
+			.d-flex.justify-content-between.align-items-start.flex-wrap.mb-4.gap-2
+				.mb-3.mb-sm-0
+					h4.line-clamp-1.mb-2.mb-sm-1=data.title
+					div
+						span.uil.uil-calendar-alt.text-primary.me-2
+						span.fw-semi-bold.text-800.fs--1=data.date.from
+						span.text-600  to
+						span.fw-semi-bold.text-800.fs--1=data.date.to
+						span.text-800.fs--1=data.date.duration
+				.avatar-group.avatar-group-dense
+					if data.name
+						+Avatar({size: 's', name: data.name, round: 'circle'}).rounded-circle
+					each image in data.assigness
+						+Avatar({
+							size: 's',
+							img: `team/${image}`,
+							round: 'circle',
+							imgClass:image==="avatar.webp" ? 'avatar-placeholder' : ''
+						}).rounded-circle
+					if data.more
+						+Avatar({size: 's', more: data.more, round: 'circle'}).rounded-circle
+
+			.d-flex.align-items-center
+				span.badge.badge-phoenix.me-2(class=data.badge.color)=data.badge.text
+				.d-flex.align-items-center.flex-1
+					span.fa-solid.fa-circle.me-1(class=data.priority.iconClass data-fa-transform="shrink-6 up-1")
+					span.fw-bold.fs--1.text-900=data.priority.label
+				button.btn.btn-phoenix-primary
+					span.fa-solid.fa-video.me-2.d-none.d-sm-inline-block
+					| Join
+
+
+mixin CallTableRow(data,index)
+	tr.hover-actions-trigger.btn-reveal-trigger.position-static
+		td.fs--1.align-middle.px-0.py-3
+			.form-check.mb-0.fs-0
+				input.form-check-input(type='checkbox' data-bulk-select-row!=data)
+		td.name.align-middle.white-space-nowrap.py-2.ps-0
+			a(href="#!").d-flex.align-items-center.text-1000
+				.avatar.avatar-m.me-3(class=`status-${data.Name.status}`)
+					if data.Name.avatar
+						img.rounded-circle(src=`${CWD}assets/img${data.Name.avatar}`, alt="" class=data.Name.placeholder ? 'avatar-placeholder' : '' )
+					else
+						.avatar-name.rounded-circle
+							span=data.Name.name.charAt(0).toUpperCase()
+				h6.mb-0.text-1000.fw-bold=data.Name.name
+		td.description.align-middle.white-space-nowrap.text-start.fw-bold.text-700.py-2.pe-6=data.description
+		td.create_date.text-end.align-middle.white-space-nowrap.text-900.py-2=data.date
+		td.create_by.align-middle.white-space-nowrap.fw-semi-bold.text-1000=data.creatBy
+
+		td.last_activity.align-middle.text-center.py-2
+			.d-flex.align-items-center.flex-1
+				span.fa-solid.fa-clock.me-1(class=data.lastActivity.iconColor data-fa-transform="shrink-2 up-1")
+				span.fw-bold.fs--1.text-900=data.lastActivity.label
+		td.align-middle.text-end.white-space-nowrap.pe-0.action.py-2
+			+DashboardDropdown
+
+mixin CallTable
+	-
+		var callTableData = [
+			{
+				Name:{
+					avatar: '/team/35.webp',
+					name: 'Ansolo Lazinatov',
+					status:'online',
+				},
+				description:'Purchasing-Related Vendors',
+				date: 'Dec 29, 2021',
+				creatBy:'Ansolo Lazinarov',
+				lastActivity:{
+					iconColor:'text-success',
+					label:'Active',
+				}
+			},
+			{
+				Name:{
+					avatar: '/team/9.webp',
+					name: 'Jackson Pollock',
+					status:'offline',
+				},
+				description:'Based on emails sent rate, the top 10 users',
+				date: 'Mar 27, 2021',
+				creatBy:'Jackson Pollock',
+				lastActivity:{
+					iconColor:'text-500',
+					label:'6 hours ago',
+				}
+			},
+			{
+				Name:{
+					avatar: '/team/35.webp',
+					name: 'Ansolo Lazinatov',
+					status:'online',
+				},
+				description:'Based on the percentage of recipients',
+				date: 'Jun 24, 2021',
+				creatBy:'Ansolo Lazinarov',
+				lastActivity:{
+					iconColor:'text-success',
+					label:'Active',
+				}
+			},
+			{
+				Name:{
+					avatar: '/team/9.webp',
+					name: 'Jackson Pollock',
+					status:'offline',
+				},
+				description:'Obtaining leads today',
+				date: 'May 19, 2024',
+				creatBy:'Jackson Pollock',
+				lastActivity:{
+					iconColor:'text-500',
+					label:'6 hours ago',
+				}
+			},
+			{
+				Name:{
+					avatar: '/team/35.webp',
+					name: 'Ansolo Lazinatov',
+					status:'online',
+				},
+				description:'Sums up the many phases of new and existing businesses.',
+				date: 'Aug 19, 2024',
+				creatBy:'Ansolo Lazinarov',
+				lastActivity:{
+					iconColor:'text-success',
+					label:'Active',
+				}
+			},
+			{
+				Name:{
+					avatar: '/team/35.webp',
+					name: 'Ansolo Lazinatov',
+					status:'online',
+				},
+				description:'Purchasing-Related Vendors',
+				date: 'Aug 19, 2024',
+				creatBy:'Ansolo Lazinarov',
+				lastActivity:{
+					iconColor:'text-success',
+					label:'Active',
+				}
+			},
+		]
+
+	#leadDetailsTable.border-top.border-bottom.border-200(data-list!={
+		valueNames: ["name", "description", "create_date","create_by", "last_activity",],
+		page: 5,
+		pagination: true
+	})
+		.table-responsive.scrollbar.mx-n1.px-1
+			table.table.fs--1.mb-0
+				thead
+					tr
+						th.white-space-nowrap.fs--1.align-middle.ps-0(style='width:26px;')
+							.form-check.mb-0.fs-0
+								input.form-check-input(
+									type='checkbox'
+									data-bulk-select!={
+										body: "lead-details-table-body",
+									}
+								)
+						th.sort.white-space-nowrap.align-middle.pe-3.ps-0.text-uppercase(scope='col' data-sort="name" style='width:20%; min-width:100px' ) Name
+						th.sort.align-middle.pe-6.text-uppercase(scope='col' data-sort="description" style='width:20%; max-width:60px' ) description
+						th.sort.align-middle.text-start.text-uppercase(scope='col' data-sort="create_date" style='width:20%; min-width:115px') create date
+						th.sort.align-middle.text-start.text-uppercase(scope='col' data-sort="create_by" style='width:20%; min-width:150px') create by
+						th.sort.align-middle.ps-0.text-end.text-uppercase(scope='col' data-sort="last_activity" style='width:20%; max-width:115px') Last Activity
+						th.align-middle.pe-0.text-end(scope='col' style='width:15%;')
+				tbody.list#lead-details-table-body
+					each row,index in callTableData
+						+CallTableRow(row,index)
+		.row.align-items-center.justify-content-between.py-2.pe-0.fs--1
+			.col-auto.d-flex
+				p.mb-0.d-none.d-sm-block.me-3.fw-semi-bold.text-900(data-list-info)
+				a.fw-semi-bold(href='#!' data-list-view="*")
+					| View all
+					span.fas.fa-angle-right.ms-1(data-fa-transform='down-1')
+				a.fw-semi-bold.d-none(href='#!' data-list-view="less")
+					| View Less
+					span.fas.fa-angle-right.ms-1(data-fa-transform='down-1')
+			.col-auto.d-flex
+				button.page-link(data-list-pagination="prev")
+					span.fas.fa-chevron-left
+				ul.mb-0.pagination
+				button.page-link.pe-0(data-list-pagination="next")
+					span.fas.fa-chevron-right

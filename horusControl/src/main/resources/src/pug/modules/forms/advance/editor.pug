@@ -1,0 +1,30 @@
+extends ../../../layouts/LayoutComponent
+
+append variables
+  -
+    var pageHeader = {
+      title: 'Editor',
+      description: `${name} uses Tinymce, the world's most popular JavaScript library for rich text editing.`,
+      url: `https://www.tiny.cloud/docs/quick-start/`,
+      linkText: 'Documentation for Tinymce',
+    }
+
+block prepend scripts
+  script(src=`${CWD}vendors/tinymce/tinymce.min.js`)
+
+block component 
+  .mb-9
+    +ComponentCard({
+      title: 'Example',
+      anchor: true,
+    }).mb-3.mt-6
+      = '\n'
+      textarea.tinymce(name='content' data-tinymce!={})
+      = '\n'
+
+    +ComponentCard({
+      title: 'Javascript',
+      hideNavTab: true
+    }).my-4
+      +ComponentCardLib 
+        script(src=`vendors/tinymce/tinymce.min.js`)

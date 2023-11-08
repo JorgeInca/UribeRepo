@@ -1,0 +1,39 @@
+extends layouts/LayoutTheme
+include mixins/widgets/WidgetNavbar
+include mixins/widgets/Stats
+include mixins/widgets/Tables
+include mixins/widgets/ECommerce
+include mixins/widgets/Users
+include mixins/widgets/Forms
+include mixins/widgets/Others
+
+prepend styles
+  link(href=`${CWD}vendors/choices/choices.min.css`, rel='stylesheet')
+  link(href=`${CWD}vendors/dhtmlx-gantt/dhtmlxgantt.css`, rel='stylesheet')
+  link(href=`${CWD}vendors/flatpickr/flatpickr.min.css`, rel='stylesheet')
+  link(href=`${CWD}vendors/glightbox/glightbox.min.css`, rel='stylesheet')
+  link(href=`${CWD}vendors/dropzone/dropzone.min.css`, rel='stylesheet')
+
+prepend scripts
+  script(src=`${CWD}vendors/choices/choices.min.js`)
+  script(src=`${CWD}vendors/echarts/echarts.min.js`)
+  script(src=`${CWD}vendors/dhtmlx-gantt/dhtmlxgantt.js`)
+  script(src=`${CWD}vendors/glightbox/glightbox.min.js`) 
+  script(src=`${CWD}vendors/tinymce/tinymce.min.js`)
+  script(src=`${CWD}vendors/dropzone/dropzone.min.js`)
+
+append scripts
+  script(src=`${CWD}assets/js/ecommerce-dashboard.js`)
+  script(src=`${CWD}assets/js/projectmanagement-dashboard.js`)
+  script(src=`${CWD}assets/js/crm-dashboard.js`)
+  script(src=`${CWD}assets/js/crm-analytics.js`)
+
+block content
+  +WidgetNavbar
+  .mb-9(data-bs-spy="scroll" data-bs-target="#widgets-scrollspy")
+    +Stats
+    +Tables
+    +ECommerce
+    +Users
+    +Forms
+    +Others

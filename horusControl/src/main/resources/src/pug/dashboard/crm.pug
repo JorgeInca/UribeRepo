@@ -1,0 +1,50 @@
+extends ../layouts/LayoutTheme
+include ../mixins/dashboard/common
+include ../mixins/dashboard/CRM/Crm
+include ../mixins/dashboard/CRM/CrmStats
+include ../mixins/dashboard/CRM/NewUserList
+
+prepend styles
+
+prepend scripts
+	script(src=`${CWD}vendors/echarts/echarts.min.js`)
+
+append scripts
+	script(src=`${CWD}assets/js/crm-dashboard.js`)
+
+block content
+	.row.gy-3.mb-4.justify-content-between
+		.col-xxl-6
+			h2.mb-2.text-1100 CRM Dashboard
+			h5.text-700.fw-semi-bold.mb-4 Check your business growth in one place
+			+CrmStats
+		.col-xxl-6.mb-6
+			h3 Contacts Created
+			p.text-700.mb-1 Payment received across all channels
+			.echart-contacts-created(style='min-height:270px; width:100%')
+		.col-12.col-xxl-6.mb-3.mb-sm-0
+			+ContactBySources
+
+		.col-12.col-xxl-6.mb-8
+			+NewUserList
+
+		.col-12.col-xxl-6
+			.row.align-items-start.justify-content-between.mb-4.g-3
+				.col-auto
+					h3 Ad Clicks
+					p.text-700.lh-sm.mb-0 Check effectiveness of your ads
+				.col-12.col-sm-4
+					select.form-select.form-select-sm#select-ad-clicks-month
+						option Mar 1 - 31, 2022
+						option April 1 - 30, 2022
+						option May 1 - 31, 2022
+			.echart-add-clicks-chart(style='min-height:385px;width:100%')
+
+		.col-12.col-xxl-6.mb-6.gy-0.gy-xxl-3
+			+DealForecast(5)
+	.mx-lg-n4
+		.row.g-3.mb-9.mt-n7
+			.col-xl-5
+				+LeadConversion
+			.col-xl-7
+				+RevenueTarget

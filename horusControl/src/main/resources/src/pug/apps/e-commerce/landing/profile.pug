@@ -1,0 +1,81 @@
+extends ../../../layouts/LayoutEcommerce
+include ../../../mixins/dashboard/common
+include ../../../mixins/e-commerce/profile/ProfileCards
+include ../../../mixins/e-commerce/profile/PersonalInfo
+include ../../../mixins/e-commerce/profile/ProfileOrderTable
+include ../../../mixins/e-commerce/profile/ProfileReviewTable
+include ../../../mixins/e-commerce/profile/ProfileWishListTable
+include ../../../mixins/e-commerce/profile/ProfileStores
+
+
+append variables
+  - var disableNavigationType = true;
+  - var disableHorizontalNavbarShape = true;
+  - var disableVerticalNavbarAppearance = true;
+  - var disableHorizontalNavbarAppearance = true;
+  
+block ecomContent
+  +Section(null,'container-small').pt-5.pb-9
+    nav.mb-2(aria-label='breadcrumb')
+      ol.breadcrumb.mb-0
+        li.breadcrumb-item
+          a(href='#!') Page 1
+        li.breadcrumb-item
+          a(href='#!') Page 2
+        li.breadcrumb-item.active(aria-current='page') Default
+    .row.align-items-center.justify-content-between.g-3.mb-4
+      .col-auto
+        h2.mb-0 Profile
+      .col-auto
+        .row.g-2.g-sm-3
+          .col-auto
+            button.btn.btn-phoenix-danger
+              span.fas.fa-trash-alt.me-2
+              | Delete customer
+          .col-auto
+            button.btn.btn-phoenix-secondary
+              span.fas.fa-key.me-2
+              | Reset password
+    .row.g-3.mb-6
+      .col-12.col-lg-8
+        +ProfileCard.h-100
+      .col-12.col-lg-4
+        +AddressCard.h-100
+    div
+      .scrollbar
+        ul#myTab.nav.nav-underline.flex-nowrap.mb-3.pb-1(role='tablist')
+          li.nav-item.me-3
+            a#orders-tab.nav-link.text-nowrap.active(data-bs-toggle='tab' href='#tab-orders' role='tab' aria-controls='tab-orders' aria-selected='true')
+              span.fas.fa-shopping-cart.me-2
+              | Orders 
+              span.text-700.fw-normal  (35)
+          li.nav-item.me-3
+            a#reviews-tab.nav-link.text-nowrap(data-bs-toggle='tab' href='#tab-reviews' role='tab' aria-controls='tab-orders' aria-selected='true')
+              span.fas.fa-star.me-2
+              | Reviews
+              span.text-700.fw-normal  (24)
+          li.nav-item.me-3
+            a#wishlist-tab.nav-link.text-nowrap(data-bs-toggle='tab' href='#tab-wishlist' role='tab' aria-controls='tab-orders' aria-selected='true')
+              span.fas.fa-heart.me-2
+              | Wishlist
+          li.nav-item.me-3
+            a#stores-tab.nav-link.text-nowrap(data-bs-toggle='tab' href='#tab-stores' role='tab' aria-controls='tab-stores' aria-selected='true')
+              span.fas.fa-home.me-2
+              | Stores
+          li.nav-item
+            a#personal-info-tab.nav-link.text-nowrap(data-bs-toggle='tab' href='#tab-personal-info' role='tab' aria-controls='tab-personal-info' aria-selected='true')
+              span.fas.fa-user.me-2
+              | Personal info
+      #profileTabContent.tab-content
+        #tab-orders.tab-pane.fade.show.active(role='tabpanel' aria-labelledby='orders-tab')
+          +ProfileOrderTable
+        #tab-reviews.tab-pane.fade(role='tabpanel' aria-labelledby='reviews-tab')
+          +ProfileReviewTable
+        #tab-wishlist.tab-pane.fade(role='tabpanel' aria-labelledby='wishlist-tab')
+          +ProfileWishListTable
+        #tab-stores.tab-pane.fade(role='tabpanel' aria-labelledby='wishlist-tab')
+          +ProfileStoresTable
+          +FavouriteStores
+        #tab-personal-info.tab-pane.fade(role='tabpanel' aria-labelledby='personal-info-tab')
+          +PersonalInfo
+          

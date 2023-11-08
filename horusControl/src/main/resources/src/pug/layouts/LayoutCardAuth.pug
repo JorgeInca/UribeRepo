@@ -1,0 +1,30 @@
+include ../mixins/authentication/SocialButtons
+
+mixin LayoutCardBasic(config)
+  .container-fluid.bg-300.dark__bg-1200
+    +Background({image:`${CWD}assets/img/bg/${config.img}.png`, className: 'bg-auth-card-overlay' })
+    .row.flex-center.position-relative.min-vh-100.g-0.py-5
+      .col-11.col-sm-10.col-xl-8
+        .card.border.border-200.auth-card
+          .card-body.pe-md-0
+            .row.align-items-center.gx-0.gy-7
+              .col-auto.bg-100.dark__bg-1100.rounded-3.position-relative.overflow-hidden.auth-title-box
+                +Background({image:`${CWD}assets/img/bg/38.png`, className: '' })
+                .position-relative.px-4.px-lg-7.pt-7.pb-7.pb-sm-5.text-center.text-md-start.pb-lg-7(class=`${config.page === 'sign-up'? 'card-sign-up': config.page === 'sign-in' ? 'pb-md-7': ''}`)
+                  h3.mb-3.text-black.fs-1 Phoenix Authentication
+                  p.text-700 Give yourself some hassle-free development process with the uniqueness of Phoenix!
+                  ul.list-unstyled.mb-0.w-max-content.w-md-auto.mx-auto
+                    li.d-flex.align-items-center
+                      span.uil.uil-check-circle.text-success.me-2
+                      span.text-700.fw-semi-bold Fast
+                    li.d-flex.align-items-center
+                      span.uil.uil-check-circle.text-success.me-2
+                      span.text-700.fw-semi-bold Simple
+                    li.d-flex.align-items-center
+                      span.uil.uil-check-circle.text-success.me-2
+                      span.text-700.fw-semi-bold Responsive
+                .position-relative.z-index--1.mb-6.d-none.d-md-block.text-center(class=`${config.page === 'forgot-pasword' ? 'mt-md-5': 'mt-md-15'}`)
+                  img.auth-title-box-img.d-dark-none(src=`${CWD}assets/img/spot-illustrations/auth.png`, alt="" )
+                  img.auth-title-box-img.d-light-none(src=`${CWD}assets/img/spot-illustrations/auth-dark.png`, alt="")
+              .col.mx-auto
+                block

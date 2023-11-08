@@ -1,0 +1,97 @@
+mixin Files({itemPaddingClass,titleClass,showAddBtn,imgMaxWidth})
+  div(class=titleClass) 
+    h4.mb-3 Files
+  .border-top.border-300(class=itemPaddingClass)
+    .me-n3
+      .d-flex.flex-between-center
+        .d-flex.mb-1
+          span.fa-solid.fa-image.me-2.text-700.fs--1
+          p.text-1000.mb-0.lh-1 Silly_sight_1.png
+        .font-sans-serif.btn-reveal-trigger
+          button.btn.btn-sm.dropdown-toggle.dropdown-caret-none.transition-none(type='button' class=`btn-reveal${reveal ? '-' + reveal : ''}` data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent")
+            span.fas.fa-ellipsis-h(class=iconClass)
+          .dropdown-menu.dropdown-menu-end.py-2(aria-labelledby=id)
+            a(href='#!').dropdown-item Edit
+            a(href='#!').dropdown-item.text-danger Delete
+            a(href='#!').dropdown-item Download
+            a(href='#!').dropdown-item Report abuse
+      .d-flex.fs--1.text-700.mb-2.flex-wrap
+        span 768 kb
+        span.text-400.mx-1 | 
+        a(href="#!") Shantinan Mekalan 
+        span.text-400.mx-1 | 
+        span.text-nowrap 21st Dec, 12:56 PM
+      img(src=`${CWD}assets/img/generic/40.png` alt='' style=`max-width:${imgMaxWidth}px`).rounded-2
+  .border-top.border-300(class=itemPaddingClass)
+    .me-n3
+      .d-flex.flex-between-center
+        div
+          .d-flex.align-items-center.mb-1
+            span.fa-solid.fa-image.me-2.fs--1.text-700
+            p.text-1000.mb-0.lh-1 All_images.zip
+          .d-flex.fs--1.text-700.mb-0.flex-wrap
+            span 12.8 mb
+            span.text-400.mx-1 | 
+            a(href="#!") Yves Tanguy 
+            span.text-400.mx-1 | 
+            span.text-nowrap 19th Dec, 08:56 PM
+        .font-sans-serif.btn-reveal-trigger
+          button.btn.btn-sm.dropdown-toggle.dropdown-caret-none.transition-none(type='button' class=`btn-reveal${reveal ? '-' + reveal : ''}` data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent")
+            span.fas.fa-ellipsis-h(class=iconClass)
+          .dropdown-menu.dropdown-menu-end.py-2(aria-labelledby=id )
+            a(href='#!').dropdown-item Edit
+            a(href='#!').dropdown-item.text-danger Delete
+            a(href='#!').dropdown-item Download
+            a(href='#!').dropdown-item Report abuse
+
+  .border-top.border-bottom.border-300(class=itemPaddingClass)
+    .me-n3
+      .d-flex.flex-between-center
+        div
+          .d-flex.align-items-center.mb-1.flex-wrap
+            span.fa-solid.fa-file-lines.me-2.fs--1.text-700
+            p.text-1000.mb-0.lh-1 Project.txt
+          .d-flex.fs--1.text-700.mb-0.flex-wrap
+            span 123 kb
+            span.text-400.mx-1 | 
+            a(href="#!") Shantinan Mekalan 
+            span.text-400.mx-1 | 
+            span.text-nowrap 12th Dec, 12:56 PM
+        .font-sans-serif.btn-reveal-trigger
+          button.btn.btn-sm.dropdown-toggle.dropdown-caret-none.transition-none(type='button' class=`btn-reveal${reveal ? '-' + reveal : ''}`  data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent")
+            span.fas.fa-ellipsis-h(class=iconClass)
+          .dropdown-menu.dropdown-menu-end.py-2(aria-labelledby=id )
+            a(href='#!').dropdown-item Edit
+            a(href='#!').dropdown-item.text-danger Delete
+            a(href='#!').dropdown-item Download
+            a(href='#!').dropdown-item Report abuse
+  if showAddBtn
+    .px-5.px-md-6.my-3
+      a.fw-bold.fs--1(href='#!')
+        span.fas.fa-plus.me-1
+        | Add file(s)
+
+mixin ViewButtons(view)
+  a.btn.btn-phoenix-primary.px-3.me-1(class=view === 'list' ? 'border-0 text-900' : '' href=`${CWD}${paths['project-management-project-list-view']}` data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="List view")
+    span.fa-solid.fa-list.fs--2
+  a.btn.btn-phoenix-primary.px-3.me-1(class=view === 'board' ? 'border-0 text-900' : '' href=`${CWD}${paths['project-management-project-board-view']}` data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Board view")
+    svg(width='9' height='9' viewbox='0 0 9 9' fill='none' xmlns='http://www.w3.org/2000/svg')
+      path(d='M0 0.5C0 0.223857 0.223858 0 0.5 0H1.83333C2.10948 0 2.33333 0.223858 2.33333 0.5V1.83333C2.33333 2.10948 2.10948 2.33333 1.83333 2.33333H0.5C0.223857 2.33333 0 2.10948 0 1.83333V0.5Z' fill='currentColor')
+      path(d='M3.33333 0.5C3.33333 0.223857 3.55719 0 3.83333 0H5.16667C5.44281 0 5.66667 0.223858 5.66667 0.5V1.83333C5.66667 2.10948 5.44281 2.33333 5.16667 2.33333H3.83333C3.55719 2.33333 3.33333 2.10948 3.33333 1.83333V0.5Z' fill='currentColor')
+      path(d='M6.66667 0.5C6.66667 0.223857 6.89052 0 7.16667 0H8.5C8.77614 0 9 0.223858 9 0.5V1.83333C9 2.10948 8.77614 2.33333 8.5 2.33333H7.16667C6.89052 2.33333 6.66667 2.10948 6.66667 1.83333V0.5Z' fill='currentColor')
+      path(d='M0 3.83333C0 3.55719 0.223858 3.33333 0.5 3.33333H1.83333C2.10948 3.33333 2.33333 3.55719 2.33333 3.83333V5.16667C2.33333 5.44281 2.10948 5.66667 1.83333 5.66667H0.5C0.223857 5.66667 0 5.44281 0 5.16667V3.83333Z' fill='currentColor')
+      path(d='M3.33333 3.83333C3.33333 3.55719 3.55719 3.33333 3.83333 3.33333H5.16667C5.44281 3.33333 5.66667 3.55719 5.66667 3.83333V5.16667C5.66667 5.44281 5.44281 5.66667 5.16667 5.66667H3.83333C3.55719 5.66667 3.33333 5.44281 3.33333 5.16667V3.83333Z' fill='currentColor')
+      path(d='M6.66667 3.83333C6.66667 3.55719 6.89052 3.33333 7.16667 3.33333H8.5C8.77614 3.33333 9 3.55719 9 3.83333V5.16667C9 5.44281 8.77614 5.66667 8.5 5.66667H7.16667C6.89052 5.66667 6.66667 5.44281 6.66667 5.16667V3.83333Z' fill='currentColor')
+      path(d='M0 7.16667C0 6.89052 0.223858 6.66667 0.5 6.66667H1.83333C2.10948 6.66667 2.33333 6.89052 2.33333 7.16667V8.5C2.33333 8.77614 2.10948 9 1.83333 9H0.5C0.223857 9 0 8.77614 0 8.5V7.16667Z' fill='currentColor')
+      path(d='M3.33333 7.16667C3.33333 6.89052 3.55719 6.66667 3.83333 6.66667H5.16667C5.44281 6.66667 5.66667 6.89052 5.66667 7.16667V8.5C5.66667 8.77614 5.44281 9 5.16667 9H3.83333C3.55719 9 3.33333 8.77614 3.33333 8.5V7.16667Z' fill='currentColor')
+      path(d='M6.66667 7.16667C6.66667 6.89052 6.89052 6.66667 7.16667 6.66667H8.5C8.77614 6.66667 9 6.89052 9 7.16667V8.5C9 8.77614 8.77614 9 8.5 9H7.16667C6.89052 9 6.66667 8.77614 6.66667 8.5V7.16667Z' fill='currentColor')
+
+  a.btn.btn-phoenix-primary.px-3(class=view === 'card' ? 'border-0 text-900' : '' href=`${CWD}${paths['project-management-project-card-view']}` data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Card view")
+    svg(width='9' height='9' viewBox='0 0 9 9' fill='none' xmlns='http://www.w3.org/2000/svg')
+      path(d='M0 0.5C0 0.223858 0.223858 0 0.5 0H3.5C3.77614 0 4 0.223858 4 0.5V3.5C4 3.77614 3.77614 4 3.5 4H0.5C0.223858 4 0 3.77614 0 3.5V0.5Z' fill='currentColor')
+      path(d='M0 5.5C0 5.22386 0.223858 5 0.5 5H3.5C3.77614 5 4 5.22386 4 5.5V8.5C4 8.77614 3.77614 9 3.5 9H0.5C0.223858 9 0 8.77614 0 8.5V5.5Z' fill='currentColor')
+      path(d='M5 0.5C5 0.223858 5.22386 0 5.5 0H8.5C8.77614 0 9 0.223858 9 0.5V3.5C9 3.77614 8.77614 4 8.5 4H5.5C5.22386 4 5 3.77614 5 3.5V0.5Z' fill='currentColor')
+      path(d='M5 5.5C5 5.22386 5.22386 5 5.5 5H8.5C8.77614 5 9 5.22386 9 5.5V8.5C9 8.77614 8.77614 9 8.5 9H5.5C5.22386 9 5 8.77614 5 8.5V5.5Z' fill='currentColor')
+
+
+

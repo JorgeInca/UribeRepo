@@ -1,0 +1,317 @@
+append variables
+	-
+		var sidebarItems = [
+			{
+				icon: 'uil uil-inbox',
+				label: 'Inbox',
+				count: 5,
+				link: `${CWD}${paths['email-inbox']}`
+			},
+			{
+				icon: 'uil uil-location-arrow',
+				label: 'Sent',
+				count: 23,
+				active: true
+			},
+			{
+				icon: 'uil uil-pen',
+				label: 'Draft'
+			},
+			{
+				icon: 'uil uil-exclamation-circle',
+				label: 'Spam'
+			},
+			{
+				icon: 'uil uil-trash',
+				label: 'Trash'
+			},
+			{
+				icon: 'uil uil-star',
+				label: 'Starred'
+			},
+			{
+				icon: 'uil uil-archive',
+				label: 'Archive'
+			},
+			{
+				icon: 'fa-solid fa-circle text-primary',
+				label: 'Personal'
+			},
+			{
+				icon: 'fa-solid fa-circle text-primary-600',
+				label: 'Work'
+			},
+			{
+				icon: 'fa-solid fa-circle text-success',
+				label: 'Payments'
+			},
+			{
+				icon: 'fa-solid fa-circle text-warning',
+				label: 'Invoices'
+			},
+			{
+				icon: 'fa-solid fa-circle text-danger',
+				label: 'Accounts'
+			},
+			{
+				icon: 'fa-solid fa-circle text-info',
+				label: 'Forums'
+			},
+		];
+	-
+		var emails = [
+			{
+				id: 1,
+				user: 'Jessica Ball',
+				img: '60.webp',
+				title: 'Query about purchased soccer socks',
+				description: 'Greetings. I have purchased some socks under the bundle offer you availed this week. According to the offer I was thrilled to get a 25% off of any product I bought. Regardless, I had to pay the exact full price for them...',
+				time: '1 M',
+				star: true,
+				read: false
+			},
+			{
+				id: 2,
+				user: 'Danny Reid',
+				img: '58.webp',
+				title: 'How to take the headache out of Order',
+				description: `Hello! As I've mentioned before, we have this huge order deals to ship within this month. Also, the financial report is attached to this email. Hopefully, you'll find it useful for the company.`,
+				time: '3 M',
+				star: false,
+				read: false,
+				attachments: [
+					{
+						id: 1,
+						type: 'pdf',
+						icon: 'fas fa-file-pdf text-warning fs--1',
+						fileName: 'Financial_Reports.pdf'
+					},
+					{
+						id: 2,
+						type: 'zip',
+						icon: 'fas fa-file-zipper text-warning fs--1',
+						fileName: 'Frame20.zip'
+					}
+
+				]
+			},
+			{
+				id: 3,
+				user: 'Harley Brown',
+				img: '57.webp',
+				title: 'The Arnold Schwarzenegger of Order',
+				description: 'I’ve come across your posts and found some favorable deals on your page. I’ve added a load of products to the cart and I don’t know the payment options you avail. Also, can you enlighten me about any discount or...',
+				time: '5 M',
+				star: true,
+				read: true,
+			},
+			{
+				id: 4,
+				user: 'Hollie Stephens',
+				img: '59.webp',
+				title: 'My order is not being taken',
+				description: 'Hello. I’m knocking to let you know that I am trying to place some orders on your site. But my orders are not being taken, maybe it’s technical issues. Can you help me with it as I really need the products I am trying to...',
+				time: '8 M',
+				star: false,
+				read: false
+			},
+			{
+				id: 5,
+				user: 'Natasha West',
+				img: 'avatar.webp',
+				avatarPlaceholder: true,
+				title: 'Shipment is missing',
+				description: 'Greetings! I’ve got an email saying I was to get the products yesterday. But got a call instead saying the shipment was misplaced. Can you put some light on it? Really need the products.',
+				time: '20 M',
+				star: true,
+				read: true
+			},
+			{
+				id: 6,
+				user: 'Max Williamson',
+				name: 'R',
+				title: 'How can I order something urgently?',
+				description: 'I saw your promotion on 25% sales. Do you avail emergency orders and urgent shipments? If you do, I need to place some orders. Please reply, thanks.',
+				time: '30 M',
+				star: true,
+				read: true,
+				attachments: [
+					{
+						id: 1,
+						type: 'wav',
+						icon: 'fa-solid fa-music text-primary fs--1',
+						fileName: 'syllabus'
+					}
+				]
+			},
+			{
+				id: 7,
+				user: 'Ethan Hawkins',
+				img: '30.webp',
+				title: 'How the delicacy of the products will be handled??',
+				description: 'Hello! I need to purchase some delicate products. Can you tell me how you handle the delicacy of the products to be shipped? I don’t want to get my hands on broken things, so. Thank you!  ',
+				time: '32 M',  
+				star: false,
+				read: true
+			},
+
+		];
+mixin EmailSidebar
+	.email-content.scrollbar-overlay
+		.d-flex.justify-content-between.align-items-center
+			p.text-uppercase.fs--2.text-600.mb-2.fw-bold mailbox
+			button.btn.d-lg-none.p-0.mb-2(data-phoenix-dismiss="offcanvas")
+				span.uil.uil-times.fs-0
+
+		ul.nav.flex-column.border-top.fs--1.vertical-nav.mb-4
+			each item in sidebarItems.slice(0,5)
+				li.nav-item
+					a.nav-link.py-2.ps-0.pe-3.border-end.border-bottom.text-start.outline-none(aria-current='page' class=item.active ? 'active' : '' href=item.link ? item.link : '#!') 
+						.d-flex.align-items-center
+							span.me-2.nav-icons(class=item.icon)
+							span.flex-1=item.label
+							if item.count
+								span.nav-item-count=item.count
+
+		.d-flex.justify-content-between
+			p.text-uppercase.fs--2.text-600.mb-2.fw-bold Filtered
+			a.fs--2.fw-bold(href="#!")
+				span.fa-solid.fa-plus.me-2
+				| Add Folder
+		ul.nav.flex-column.border-top.fs--1.vertical-nav.mb-4
+			each item in sidebarItems.slice(5,7)
+				li.nav-item
+					a.nav-link.py-2.ps-0.pe-3.border-end.border-bottom.text-start.outline-none(aria-current='page' class=item.active ? 'active' : '' href='#!') 
+						.d-flex.align-items-center
+							span.me-2.nav-icons(class=item.icon)
+							span.flex-1=item.label
+							if item.count
+								span.nav-item-count=item.count
+
+		.d-flex.justify-content-between
+			p.text-uppercase.fs--2.text-600.mb-2.fw-bold Labels
+			a.fs--2.fw-bold(href="#!")
+				span.fa-solid.fa-plus.me-2
+				| Add Label
+		ul.nav.flex-column.border-top.fs--1.vertical-nav
+			each item in sidebarItems.slice(7,13)
+				li.nav-item
+					a.nav-link.py-2.ps-0.pe-3.border-end.border-bottom.text-start.outline-none(aria-current='page' class=item.active ? 'active' : '' href='#!') 
+						.d-flex.align-items-center
+							span.ms-n1.me-1(class=item.icon data-fa-transform='shrink-10')
+							span.flex-1=item.label
+							if item.count
+								span.nav-item-count=item.count
+
+mixin EmailRow(config,isLast)
+	.border-top.border-200.hover-actions-trigger(class=`${!isLast ? 'py-3': 'pt-3'}`)
+		.row.align-items-sm-center.gx-2
+			.col-auto
+				.d-flex.flex-column.flex-sm-row(class=`${config.read ? '' : ''}`)
+					input.form-check-input.mb-2.m-sm-0.me-sm-2(type='checkbox' id=`checkbox-${config.id}` data-bulk-select-row)
+					button.btn.p-0
+						span(class=`${config.star ? 'fas text-warning' : 'far text-300'}`).fa-star
+
+			.col-auto
+				if(config.img)
+					+Avatar({size: 's', img: `team/${config.img}`, round: 'circle',imgClass: config.avatarPlaceholder ? 'avatar-placeholder' : false}).rounded-circle
+				else
+					+Avatar({size: 's', name: config.name})
+			.col-auto
+				a(href=`${CWD}${paths['email-detail']}` class=`${config.read ? 'text-900 fw-semi-bold' : 'text-1100 fw-bold'}`).inbox-link.fs--1=config.user
+			.col-auto.ms-auto
+				.hover-actions.end-0
+					+ActionButton
+
+
+				span.fs--2(class=`${!config.read ? 'fw-bold' : ''}`)=config.time
+		.ms-4.mt-n3.mt-sm-0.ms-sm-11
+			a(href=`${CWD}${paths['email-detail']}`).d-block.inbox-link
+				span.fs--1.line-clamp-1(class=`${!config.read ? 'text-1100' : 'text-1000'}`)=config.title
+				p.fs--1.ps-0.text-700.mb-0.line-clamp-2=config.description
+			if(config.attachments)
+				each attachment in config.attachments
+					if(attachment.type === 'img')
+						a.d-inline-flex.align-items-center.border.rounded-pill.px-3.py-1.me-2.mt-2.inbox-link(href=`${CWD}assets/img/${attachment.src}` data-gallery=`gallery-${config.id}`)
+							span(class=attachment.icon)
+							span.ms-2 #{attachment.fileName}
+					else
+						a.d-inline-flex.align-items-center.border.rounded-pill.px-3.py-1.me-2.mt-2.inbox-link(href="#!")
+							span(class=attachment.icon)
+							span.ms-2.fw-bold.fs--2.text-900 #{attachment.fileName}
+
+mixin EmailDetailRow(config,isLast) 
+	.border-top.border-200.py-3(class=`${isLast ? 'py-3': ''}`)
+		.row.align-items-start.gx-2.flex-nowrap
+			.col-auto
+				.d-flex.flex-column.align-items-start
+					input.form-check-input.mb-2.me-2(type='checkbox' id=`checkbox-${config.id}` data-bulk-select-row)
+					button.btn.p-0
+						span(class=`${config.star ? 'fas text-warning' : 'far text-300'}`).fa-star
+
+			.col-auto
+				if(config.img)
+					+Avatar({size: 's', img: `team/${config.img}`, round: 'circle'}).rounded-circle
+				else
+					+Avatar({size: 's', name: config.name, round: 'circle'}).rounded-circle
+			.col-auto
+				a(href=`${CWD}${paths['email-detail']}` class=`${config.read ? 'text-900 fw-semi-bold' : 'text-1100 fw-bold'}`).inbox-link.fs--1=config.user
+			.col-auto.ms-auto
+				span.fs--2(class=`${!config.read ? 'fw-bold' : ''}`)=config.time
+		.ms-5.mt-n3
+			a(href=`${CWD}${paths['email-detail']}`).d-block.inbox-link
+				span.fs--1.line-clamp-1(class=`${!config.read ? 'text-black' : 'text-900'}`)=config.title
+				p.fs--1.ps-0.text-600.mb-0.line-clamp-2=config.description
+			if(config.attachments)
+				each attachment in config.attachments
+					if(attachment.type === 'img')
+						a.d-inline-flex.align-items-center.border.rounded-pill.px-3.py-1.me-2.mt-2.inbox-link(href=`${CWD}assets/img/${attachment.src}` data-gallery=`gallery-${config.id}`)
+							span(class=attachment.icon)
+							span.ms-2 #{attachment.fileName}
+					else
+						a.d-inline-flex.align-items-center.border.rounded-pill.px-3.py-1.me-2.mt-2.inbox-link(href="#!")
+							span(class=attachment.icon)
+							span.ms-2.fw-bold.fs--2.text-900 #{attachment.fileName}
+
+mixin InboxToolbar(inbox)
+	.d-flex.align-items-center.flex-wrap.position-sticky.pb-2.bg-soft.z-index-2.email-toolbar(class=inbox ? 'inbox-toolbar' : '')
+		.d-flex.align-items-center.flex-1.me-2
+			button.btn.btn-sm.p-0.me-2(type="button" onclick="location.reload()")
+				span.text-primary.fas.fa-redo.fs--2
+			p.fw-semi-bold.fs--2.text-600.mb-0.lh-sm.text-nowrap Last refreshed 1m ago
+		.d-flex
+			p.text-600.fs--1.fw-semi-bold.mb-0.me-3 #{inbox ? 'Showing :' : ''} 
+				span.text-900 1-7 
+				| of 
+				span.text-900 205
+			button.btn.p-0.me-3(type="button")
+				span.text-500.fa-solid.fa-angle-left.fs--2
+			button.btn.p-0(type="button")
+				span.text-primary.fa-solid.fa-angle-right.fs--2
+	.border-top.border-200.py-2.d-flex.justify-content-between
+		.form-check.mb-0.fs-0
+			input.form-check-input(type='checkbox' data-bulk-select-row)
+		div
+			button.btn.p-0.me-2.text-500.hover-text-600(data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Archive")
+				span.fas.fa-archive.fs--2
+			button.btn.p-0.me-2.text-500.hover-text-600(data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete")
+				span.fas.fa-trash.fs--2
+			button.btn.p-0.me-2.text-500.hover-text-600(data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Star")
+				span.fas.fa-star.fs--2
+			button.btn.p-0.text-500.hover-text-600(data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Tags")
+				span.fas.fa-tag.fs--2
+
+mixin ActionButton(user)
+	button.btn.btn-phoenix-secondary.btn-icon.dropdown-toggle.dropdown-caret-none(type='button' data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent")
+		span.fa-solid.fa-ellipsis
+	.dropdown-menu.dropdown-menu-end.py-2(aria-labelledby=id )
+		a(href='#!').dropdown-item Mark Unread
+		a(href='#!').dropdown-item Mark Important
+		a(href='#!').dropdown-item Archive
+		a(href='#!').dropdown-item Download
+		a(href='#!').dropdown-item Print
+		a(href='#!').dropdown-item Report Spam
+		a(href='#!').dropdown-item Report Phishing
+		a(href='#!').dropdown-item Mute #{user ? user : 'Jessica Ball'}
+		a(href='#!').dropdown-item Block #{user ? user : 'Jessica Ball'}
+		a(href='#!').dropdown-item.text-danger Delete

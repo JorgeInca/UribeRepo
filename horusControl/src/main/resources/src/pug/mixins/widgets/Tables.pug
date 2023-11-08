@@ -1,0 +1,32 @@
+include WidgetSectionTitle
+include ../dashboard/e-commerce/LatestReviews
+include ../dashboard/e-commerce/TopRegions
+include ../dashboard/project-management/ProjectSummery
+include ../dashboard/project-management/ToDo
+include ../dashboard/project-management/RecentActivity
+include ../crm/ReportsDetails
+
+mixin Tables
+  +WidgetSectionTitle({
+    transform: 'shrink-2',
+    icon: 'fas fa-list',
+    title: 'Tables, Files, and Lists',
+    subtitle: `${name}'s styled components are dedicatedly made for displaying your contents and lists.`
+  }).mb-5#scrollspyTables.pt-7
+  H3.mb-3 Purchasers and sellers
+  +PurchasersSellersTable
+  .row.gx-6.mt-n3.pb-5
+    .col-xl-6 
+      +TopRegionsTable
+    .col-xl-6.mt-7
+      +DealForecast(6)
+  .mx-n4.px-4.mx-lg-n6.px-lg-6.bg-white.py-5.border-y.border-300
+    +ProjectSummery
+  .mt-3.mx-lg-n4
+    .row.g-3
+      .col-12.col-xl-6.col-xxl-7
+        +CardToDoListManagement
+      .col-12.col-xl-6.col-xxl-5
+        +RecentActivityCard
+  .mx-n4.px-4.mx-lg-n6.px-lg-6.bg-white.pt-7.mt-3.border-y.border-300
+    +LatestReviews

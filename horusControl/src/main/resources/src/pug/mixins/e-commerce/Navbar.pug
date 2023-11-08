@@ -1,0 +1,145 @@
+mixin CategoryDropdown
+  -
+    var categories = [
+      {
+        title: 'Collectibles & Art',
+        icon: 'pocket',
+        sections: [
+          'Collectibles',
+          'Antiques',
+          'Sports memorabilia ',
+          'Art',
+        ]
+      },
+      {
+        title: 'Home & Gardan',
+        icon: 'home',
+        sections: [
+          'Yard, Garden & Outdoor',
+          'Crafts',
+          'Home Improvement',
+          'Pet Supplies',
+        ]
+      },
+      {
+        title: 'Sporting Goods',
+        icon: 'globe',
+        sections: [
+          'Outdoor Sports',
+          'Team Sports',
+          'Exercise & Fitness',
+          'Golf',
+        ]
+      },
+      {
+        title: 'Electronics',
+        icon: 'monitor',
+        sections: [
+          'Computers & Tablets',
+          'Camera & Photo',
+          'TV, Audio & Surveillance',
+          'Cell Ohone & Accessories',
+        ]
+      },
+      {
+        title: 'Auto Parts & Accessories',
+        icon: 'truck',
+        sections: [
+          'GPS & Security Devices',
+          'Rader & Laser Detectors',
+          'Care & Detailing',
+          'Scooter Parts & Accessories',
+        ]
+      },
+      {
+        title: 'Toys & Hobbies',
+        icon: 'codesandbox',
+        sections: [
+          'Radio Control',
+          'Kids Toys',
+          'Action Figures',
+          'Dolls & Bears',
+        ]
+      },
+      {
+        title: 'Fashion',
+        icon: 'watch',
+        sections: [
+          'Women',
+          'Men',
+          'Jewelry & Watches',
+          'Shoes',
+        ]
+      },
+      {
+        title: 'Musical Instruments & Gear',
+        icon: 'music',
+        sections: [
+          'Guitar',
+          'Pro Audio Equipment',
+          'String',
+          'Stage Lighting & Effects',
+        ]
+      },
+      {
+        title: 'Other Categories',
+        icon: 'grid',
+        sections: [
+          'Video Games & Consoles',
+          'Health & Beauty',
+          'Baby',
+          'Business & Industrial',
+        ]
+      },
+    ]
+  .dropdown
+    button.btn.text-900.ps-0.pe-5.text-nowrap.dropdown-toggle.dropdown-caret-none(data-category-btn data-bs-toggle='dropdown')
+      span.fas.fa-bars.me-2
+      | Category
+    .dropdown-menu.border.py-0.category-dropdown-menu
+      .card.border-0.scrollbar(style='max-height: 657px;')
+        .card-body.p-6.pb-3
+          .row.gx-7.gy-5.mb-5
+            each category in categories
+              .col-12.col-sm-6.col-md-4
+                .d-flex.align-items-center.mb-3
+                  span.text-primary.me-2(data-feather=`${category.icon}` style='stroke-width:3;')
+                  h6.text-1000.mb-0.text-nowrap=category.title
+                .ms-n2
+                  each section in category.sections
+                    a.text-black.d-block.mb-1.text-decoration-none.hover-bg-100.px-2.py-1.rounded-2(href="#!")=section 
+          .text-center.border-top.pt-3
+            a.fw-bold(href="#!")
+              | See all Categories
+              span.fas.fa-angle-right.ms-1(data-fa-transform="down-1")
+
+mixin Navbar
+  nav.ecommerce-navbar.navbar-expand.navbar-light.bg-white.justify-content-between
+    .container-small.d-flex.flex-between-center(data-navbar) 
+      +CategoryDropdown
+      ul.navbar-nav.justify-content-end.align-items-center
+        li.nav-item(data-nav-item)
+          a.nav-link.ps-0(class=activeNavItem === 'home' ? 'active' : '' href=`${CWD}${paths['e-commerce-fe-home']}`) Home
+        li.nav-item(data-nav-item)
+          a.nav-link(class=activeNavItem === 'store' ? 'active' : '' href=`${CWD}${paths['e-commerce-fe-favourite-stores']}`) My Favorites Stores
+        li.nav-item(data-nav-item)
+          a.nav-link(class=activeNavItem === 'products' ? 'active' : '' href=`${CWD}${paths['e-commerce-fe-product-filter']}`) Products
+        li.nav-item(data-nav-item)
+          a.nav-link(class=activeNavItem === 'wishlist' ? 'active' : '' href=`${CWD}${paths['e-commerce-fe-wishlist']}`) Wishlist
+        li.nav-item(data-nav-item)
+          a.nav-link(class=activeNavItem === 'shipping-info' ? 'active' : '' href=`${CWD}${paths['e-commerce-fe-shipping-info']}`) Shipping Info
+        li.nav-item(data-nav-item)
+          a.nav-link(href=`${CWD}${paths['e-commerce-add-product']}`) Be a vendor
+        li.nav-item(data-nav-item)
+          a.nav-link(class=activeNavItem === 'order-tracking' ? 'active' : '' href=`${CWD}${paths['e-commerce-fe-order-tracking']}`) Track order
+        li.nav-item(data-nav-item)
+          a.nav-link.pe-0(class=activeNavItem === 'checkout' ? 'active' : '' href=`${CWD}${paths['e-commerce-fe-checkout']}`) Checkout
+        li.nav-item(data-nav-item data-more-item).dropdown
+          a.nav-link.dropdown-toggle.dropdown-caret-none.fw-bold.pe-0(href="javascript: void(0)" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-boundary="window" data-bs-reference="parent") 
+            | More
+            span.fas.fa-angle-down.ms-2
+          .dropdown-menu.dropdown-menu-end.category-list(aria-labelledby="navbarDropdown" data-category-list)
+
+
+
+

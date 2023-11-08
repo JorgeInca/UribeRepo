@@ -1,0 +1,156 @@
+mixin EventDescription
+	.card&attributes(attributes)
+		.card-body
+			h1.lh-sm.fs-2.fs-xxl-4.mb-2 Brandmyth presents- Shironamhin 25 years celebration with symphony orchestra
+			p.fs-0.mb-4.text-600 Tavern on the Greend, New York
+			.card.mb-5.mb-xxl-7
+				.card-body
+					.row.gy-5
+						.col-md-6.d-flex.justify-content-between
+							div
+								.mb-3
+									.d-flex.align-items-center
+										.px-2.py-1.bg-info-100.rounded
+											span.text-info(data-feather="map-pin")
+										h5.ms-2.text-1100.mb-0 Location
+								p.lh-sm.mb-0.text-700 36/4A, James Tiberius Auditorium,
+									br 
+									| Vancouver, British Columbia, Canada				
+							.my-4.mx-3.border-start.d-none.d-md-block
+						.col-md-6
+							.mb-3
+								.d-flex.align-items-center
+									.px-2.py-1.bg-primary-100.rounded
+										span.text-primary(data-feather="clock")
+									h5.ms-2.mb-0 Date &amp; Time
+							p.lh-sm.mb-0.text-700 28th June - 2nd July 2022,
+								br 
+								| 10 am - 4 pm Eastern Daylight Time
+			.row.g-2
+				.col-12.col-md-auto.flex-md-grow-1
+					button.btn.btn-primary.w-100(type='button') Get Tickets
+				.col-12.col-sm-auto.flex-sm-grow-1.flex-md-grow-0
+					button.btn.btn-phoenix-primary.w-100(type='button')
+						span.fa-regular.fa-calendar-plus.me-2
+						| Add to Calendar	
+				.col-6.col-sm-auto
+					button.btn.btn-phoenix-primary.w-100(type='button')
+						span.fa-solid.fa-heart.me-2
+						| 3677
+				.col-6.col-sm-auto
+					button.btn.btn-phoenix-primary.w-100(type='button')
+						span.fa-solid.fa-share-nodes.me-2
+						| 4467
+
+mixin EventDetail
+	.col-xl-8.border-end-xl.border-300
+		+EventDescription.mb-9
+
+		h2.mb-3 About this event
+		p.text-justify.text-800.mb-6.mb-xxl-8 The Festival Season hopes to continue its rescheduled events in 2023 during the spring block. This will be a continuation of the tradition for the loyal fanbase to watch a jam-packed day full of exciting top-notch performances. With a unique lineup, you’ll know what to expect and get ready to embrace the festivity. Moreover, we’ve added a detailed list of the performers, with details of dates, lineups and prospective entry requirements. We will keep you posted with necessary updates regarding the event.
+		h4.mb-3.fw-bold.text-1000.fs-xxl-2 Singers:
+		p To join the festival, you’ll need to register through 
+			a(href="mailto:register@event.com") register@event.com
+			| After confirming the payment, you’ll be provided with a unique ID number that you’ll need to show before the authority to get the tickets.
+		p The ID number will be unique to all members, so it’s requested that you don’t share it with anyone. Any damage regarding a misused ID will not be ours to compensate or refund.Enjoy!
+		.row.g-1.g-sm-2.mb-7.mb-xxl-8
+			.col-3
+				a(href=`${CWD}assets/img/gallery/19.jpg` data-gallery=`gallery-posts-${index}`)
+					img.rounded.h-100.w-100.fit-cover(src=`${CWD}assets/img/gallery/19.jpg` alt='...')
+			.col-3
+				a(href=`${CWD}assets/img/gallery/20.jpg` data-gallery=`gallery-posts-${index}`)
+					img.rounded.h-100.w-100.fit-cover(src=`${CWD}assets/img/gallery/20.jpg` alt='...')
+			.col-6
+				a(href=`${CWD}assets/img/gallery/21.jpg` data-gallery=`gallery-posts-${index}`)
+					img.rounded.h-100.w-100.fit-cover(src=`${CWD}assets/img/gallery/21.jpg` alt='...')
+		h4.mb-3.text-1000.fs-xxl-2 Topic To Be Covered:
+		ul.mb-6.ps-4
+			li Latest Update With Bitcoin
+			li Blockchain Vs Bitcoin
+			li Why Do We Need CryptoCurrency?
+			li Bitcoin History
+			li Bitcoin Vs Ethereum
+			li How Big Is Cryptocurrency Right Now?
+			li Crypto Scams &amp; How To Identify Them
+			li Is it Worth Buying To Keep?
+
+		h4.mb-3.text-1000.fs-xxl-2 Refund Policy:
+		ul.mb-6.ps-4
+			li Contact the organizer to request a refund.
+			li Eventbrite's fee is nonrefundable.
+
+		h3.mb-3.fw-bold.text-1000.fs-1.fs-xxl-2 Responses:
+		.d-flex.mb-6
+			.me-3
+				p.mb-2.text-800 Going
+				h3.text-800 4,569
+			.my-3.mx-2.mx-sm-3.border-start
+
+			.mx-3
+				p.mb-2.text-800 Interested
+				h3.text-800 15,652
+			.my-3.mx-2.mx-sm-3.border-start
+			.ms-3
+				p.mb-2.text-800 Share
+				h3.text-800 11,236
+		h3.mb-3.fw-bold.text-1000.fs-1 Share with Friends:
+		.d-flex.mb-5
+			button.btn.btn-phoenix-primary.btn-icon.me-2
+				span.fa-brands.fa-facebook.text-facebbok
+			button.btn.btn-phoenix-primary.btn-icon.me-2
+				span.fa-brands.fa-facebook-messenger
+			button.btn.btn-phoenix-primary.btn-icon.me-2
+				span.fa-brands.fa-twitter.text-info
+			button.btn.btn-phoenix-primary.btn-icon.me-2
+				span.fa-solid.fa-envelope.text-danger
+			button.btn.btn-phoenix-primary.btn-icon.me-2
+				span.fa-brands.fa-linkedin-in.text-info
+
+		button.btn.btn-phoenix-primary.w-100.mb-5.mb-xl-0(type='button') Load more
+
+	.col-xl-4
+		h3.mb-5.mb-xl-4 Organized by
+		.row.g-2.mb-6.align-items-center
+			.col-auto
+				img.rounded.img-fluid(src=`${CWD}assets/img/brand2/b.png` alt='...' width='40' height='40' )
+
+			.col-sm-auto.flex-1
+				a.mb-0.text-primary.fw-semi-bold.lh-sm(href="#!") Bass Events, Inc.
+			.col-sm-auto.col-xl-12.col-xxl-auto
+				button.btn.btn-link.text-900.p-0.me-1(type='button') 10k Followers	
+				button.btn.btn-phoenix-primary.px-3(type='button')
+					span.fa-solid.fa-user-plus.me-2
+					| Follow
+
+		.mb-8
+			h3.mb-5.mb-xl-4 Location		
+			.googlemap.mb-3.mb-xl-4.location-map.border(data-googlemap data-gmap data-latlng='40.7228022,-74.0020158' data-scrollwheel='false' data-zoom='15')
+				.marker-content.py-3
+					h5 Google map    
+					p.mb-0 A nice template for your site.
+						br
+						| Customize it as you want.
+
+			.row.flex-between-center.g-0.gy-3
+				.col-12.col-sm-auto.me-1
+					.d-flex
+						h3.fw-bold.text-1000.fs-0.me-2.mb-0 James Tiberius Auditorium
+						p.mb-0.text-1000.fs--1 Vancouver
+				.col-12.col-sm-auto.col-xl-12
+					button.btn.btn-phoenix-primary.w-100(type='button')
+						span.fa-solid.fa-route.me-2
+						| Get directions
+
+		h3.mb-3 Tags
+		.d-flex.flex-wrap.pb-7.border-bottom
+			span.badge.badge-tag.me-2.mb-2 Music
+			span.badge.badge-tag.me-2.mb-2 CONCERT
+			span.badge.badge-tag.mb-2 Greatest show on earth
+
+		//- hr.mb-5
+		.row.g-0.py-3.border-bottom.border-dashed.border-300.align-items-end.justify-content-between
+			.col-auto
+				h3.flex-1.mb-0.text-nowrap.me-3 Upcoming events
+			.col-auto
+				a.fw-bold.fs--1(href="#!") See more
+		+Events

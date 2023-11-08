@@ -1,0 +1,56 @@
+mixin RecentActivityTimeline
+  -
+    var timelineItems = [
+      {
+        date: '01 DEC, 2023',
+        time: '10:30 AM',
+        icon: 'fa-solid fa-chess',
+        title: 'Phoenix Template: Unleashing Creative Possibilities',
+        tasker: 'Shantinon Mekalan',
+        content: 'Discover limitless creativity with the Phoenix template! Our latest update offers an array of innovative features and design options.'
+      },
+      {
+        date: '05 DEC, 2023',
+        time: '12:30 AM',
+        icon: 'fa-solid fa-dove',
+        title: 'Empower Your Digital Presence: The Phoenix Template Unveiled',
+        tasker: 'Bookworm22',
+        content: 'Unveiling the Phoenix template, a game-changer for your digital presence. With its powerful features and sleek design,'
+      },
+      {
+        date: '15 DEC, 2023',
+        time: '2:30 AM',
+        icon: 'fa-solid fa-dungeon',
+        title: 'Phoenix Template: Simplified Design, Maximum Impact',
+        tasker: 'Sharuka Nijibum',
+        content: 'Introducing the Phoenix template, where simplified design meets maximum impact. Elevate your digital presence with its sleek and intuitive features.'
+      },
+    ]
+  .timeline-vertical.timeline-with-details
+    each item,index in timelineItems
+      .timeline-item.position-relative
+        .row.g-md-3
+          .col-12.col-md-auto.d-flex
+            .timeline-item-date.order-1.order-md-0.me-md-4
+              p.fs--2.fw-semi-bold.text-600.text-end=item.date
+                br.d-none.d-md-block
+                |  #{item.time}
+            .timeline-item-bar.position-md-relative.me-3.me-md-0.border-400
+              .icon-item.icon-item-sm.rounded-7.shadow-none.bg-primary-100
+                span(class=item.icon).text-primary-600.fs--2.dark__text-primary-300
+              if index !== timelineItems.length - 1
+                span.timeline-bar.border-end.border-dashed.border-400
+          .col
+            .timeline-item-content.ps-6.ps-md-3
+              h5.fs--1.lh-sm=item.title
+              p.fs--1 by 
+                a(href="#!").fw-semi-bold=item.tasker
+              p.fs--1.text-800(class=`${index !== timelineItems.length - 1 ? 'mb-5': 'mb-0'}`)=item.content
+
+mixin RecentActivityCard
+  .card.h-100
+    .card-body
+      .card-title.mb-1
+        h3.text-1100 Activity
+      p.text-700.mb-4 Recent activity across all projects
+      +RecentActivityTimeline

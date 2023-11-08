@@ -1,0 +1,1365 @@
+append variables
+  - var title = 'Phoenix';
+  - var theme = `${name}-${version}`;
+  - var bootstrapVersion = '5.2';
+  - var attrsMain = { id: 'top', class: 'main' };
+  - var attrsLayout = { class: '', 'data-layout': ENV === 'PROD' ? 'container' : false }
+  - var colors = ['primary', 'secondary', 'success', 'info', 'warning', 'danger'];
+  - var grays = ['black', 1100, 1000, 900, 800, 700, 600, 500, 400, 300, 200, 100, 'soft', 'white'];
+  - var colorsAll = colors.concat(grays);
+  - var footer = true;
+  - var pathName = (locals.filename || locals.history[0]).split('\\').join('/').split('src/pug/').pop().split('.pug').shift();
+  - var pageTree = pathName.split('/');
+  - var CWD = pageTree.slice(1).map(() => '../').join('');
+  -
+    var months = [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December',
+    ];
+  -
+    var monthsShort = [
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec',
+    ]
+  -
+    var themeColor =  {
+      primary: '#3874ff',
+      secondary: '#49525d',
+      success: '#25b003',
+      info: '#0097eb',
+      warning: '#e5780b',
+      danger: '#ec1f00',
+      light: '#f6f7f8',
+      dark: '#15181b'
+    }
+  -
+    var graysColor = {
+      white: '#fff',
+      soft: '#fcfcfd',
+      100: '#f6f7f8',
+      200: '#f1f2f4',
+      300: '#e2e5e9',
+      400: '#b1b9c2',
+      500: '#9aa3af',
+      600: '#84909e',
+      700: '#6d7a8a',
+      800: '#5a6573',
+      900: '#49525d',
+      1000: '#2b3036',
+      1100: '#15181b',
+      'black': '#000'
+    } 
+  -
+    var sitemap = [
+      {
+        label: 'dashboard',
+        labelDisabled: true,
+        icon: 'uil-chart-pie',
+        pages: [
+          {
+            name: 'home',
+            icon: 'pie-chart',
+            flat: true,
+            pages: [
+              {
+                name: 'e-commerce',
+                path: 'index',
+                pathName: 'default-dashboard',
+                topNavIcon: 'shopping-cart', // works for navbar top
+              },
+              {
+                name: 'project-management',
+                path: 'dashboard/project-management',
+                pathName: 'project-management-dashboard',
+                topNavIcon: 'clipboard',
+              },
+              {
+                name: 'CRM',
+                path: 'dashboard/crm',
+                pathName: 'crm',
+                topNavIcon: 'phone',
+                badge: {
+                  type: 'info',
+                  text: 'New'
+                },
+              },
+              {
+                name: 'social-feed',
+                path: 'apps/social/feed',
+                pathName: 'social-feed',
+                topNavIcon: 'share-2'
+              },
+            ]
+          },
+        ],
+      },
+      {
+        label: 'apps',
+        icon: 'uil-cube',
+        pages : [
+          {
+            name: 'e-commerce',
+            icon: 'shopping-cart',
+            pages: [
+              {
+                name: 'admin',
+                open: true,
+                pages: [
+                  {
+                    name: 'add-product',
+                    path: 'apps/e-commerce/admin/add-product',
+                    pathName: 'e-commerce-add-product',
+                  },
+                  {
+                    name: 'products',
+                    path: 'apps/e-commerce/admin/products',
+                    pathName: 'e-commerce-products',
+                  },
+                  {
+                    name: 'customers',
+                    path: 'apps/e-commerce/admin/customers',
+                    pathName: 'e-commerce-customers',
+                  },
+                  {
+                    name: 'customer-details',
+                    path: 'apps/e-commerce/admin/customer-details',
+                    pathName: 'e-commerce-customer-details',
+                  },
+                  {
+                    name: 'orders',
+                    path: 'apps/e-commerce/admin/orders',
+                    pathName: 'e-commerce-orders',
+                  },
+                  {
+                    name: 'order-details',
+                    path: 'apps/e-commerce/admin/order-details',
+                    pathName: 'e-commerce-order-details',
+                  },
+                  {
+                    name: 'refund',
+                    path: 'apps/e-commerce/admin/refund',
+                    pathName: 'e-commerce-refund',
+                  },
+                ]
+              },
+              {
+                name: 'customer',
+                open: true,
+                pages: [
+                  {
+                    name: 'homepage',
+                    path: 'apps/e-commerce/landing/homepage',
+                    pathName: 'e-commerce-fe-home',
+                  },
+                  {
+                    name: 'product-details',
+                    path: 'apps/e-commerce/landing/product-details',
+                    pathName: 'e-commerce-fe-product-details',
+                  },
+                  {
+                    name: 'products-filter',
+                    path: 'apps/e-commerce/landing/products-filter',
+                    pathName: 'e-commerce-fe-product-filter',
+                  },
+                  {
+                    name: 'cart',
+                    path: 'apps/e-commerce/landing/cart',
+                    pathName: 'e-commerce-fe-cart',
+                  },
+                  {
+                    name: 'checkout',
+                    path: 'apps/e-commerce/landing/checkout',
+                    pathName: 'e-commerce-fe-checkout',
+                  },
+                  {
+                    name: 'shipping-info',
+                    path: 'apps/e-commerce/landing/shipping-info',
+                    pathName: 'e-commerce-fe-shipping-info',
+                  },
+                  {
+                    name: 'profile',
+                    path: 'apps/e-commerce/landing/profile',
+                    pathName: 'e-commerce-fe-profile',
+                  },
+                  {
+                    name: 'favourite-stores',
+                    path: 'apps/e-commerce/landing/favourite-stores',
+                    pathName: 'e-commerce-fe-favourite-stores',
+                  },
+                  {
+                    name: 'wishlist',
+                    path: 'apps/e-commerce/landing/wishlist',
+                    pathName: 'e-commerce-fe-wishlist',
+                  },
+                  {
+                    name: 'order-tracking',
+                    path: 'apps/e-commerce/landing/order-tracking',
+                    pathName: 'e-commerce-fe-order-tracking',
+                  },
+                  {
+                    name: 'invoice',
+                    path: 'apps/e-commerce/landing/invoice',
+                    pathName: 'e-commerce-fe-invoice',
+                  },
+                ]
+              },
+
+            ]
+          },
+          {
+            name: 'CRM',
+            icon: 'phone',
+            dot: true,
+            pages: [
+              {
+                name: 'analytics',
+                path: 'apps/crm/analytics',
+                pathName: 'crm-analytics',
+              },
+              {
+                name: 'deals',
+                path: 'apps/crm/deals',
+                pathName: 'crm-deals',
+                badge: {
+                  type: 'info',
+                  text: 'New'
+                },
+              },
+              {
+                name: 'deal details',
+                path: 'apps/crm/deal-details',
+                pathName: 'crm-deal-details',
+              },
+              {
+                name: 'leads',
+                path: 'apps/crm/leads',
+                pathName: 'crm-leads',
+              },
+              {
+                name: 'lead details',
+                path: 'apps/crm/lead-details',
+                pathName: 'crm-lead-details',
+              },
+              {
+                name: 'reports',
+                path: 'apps/crm/reports',
+                pathName: 'crm-reports',
+              },
+              {
+                name: 'reports details',
+                path: 'apps/crm/reports-details',
+                pathName: 'crm-reports-details',
+                badge: {
+                  type: 'info',
+                  text: 'New'
+                },
+              },
+              {
+                name: 'add-contact',
+                path: 'apps/crm/add-contact',
+                pathName: 'crm-add-contact',
+              },
+
+            ]
+          },
+          {
+            name: 'project-management',
+            icon: 'clipboard',
+            pages: [
+              {
+                name: 'create new',
+                path: 'apps/project-management/create-new',
+                pathName: 'project-management-create-new',
+              },
+              {
+                name: 'project-list-view',
+                path: 'apps/project-management/project-list-view',
+                pathName: 'project-management-project-list-view',
+              },
+              {
+                name: 'project-card-view',
+                path: 'apps/project-management/project-card-view',
+                pathName: 'project-management-project-card-view',
+              },
+              {
+                name: 'project-board-view',
+                path: 'apps/project-management/project-board-view',
+                pathName: 'project-management-project-board-view',
+              },
+              {
+                name: 'todo-list',
+                path: 'apps/project-management/todo-list',
+                pathName: 'project-management-todo-list',
+              },
+              {
+                name: 'project-details',
+                path: 'apps/project-management/project-details',
+                pathName: 'project-management-project-details',
+              },
+            ]
+          },
+          {
+            name: 'chat',
+            icon: 'message-square',
+            path: 'apps/chat',
+            pathName: 'app-chat',
+          },
+          {
+            name: 'email',
+            icon: 'mail',
+            pages: [
+              {
+                name: 'inbox',
+                path: 'apps/email/inbox',
+                pathName: 'email-inbox',
+              },
+              {
+                name: 'email-detail',
+                path: 'apps/email/email-detail',
+                pathName: 'email-detail',
+              },
+              {
+                name: 'compose',
+                path: 'apps/email/compose',
+                pathName: 'email-compose',
+              },
+            ]
+          },
+          {
+            name: 'events',
+            icon: 'bookmark',
+            pages: [
+              {
+                name: 'create an event',
+                path: 'apps/events/create-an-event',
+                pathName: 'create-an-event',
+              },
+              {
+                name: 'Event detail',
+                path: 'apps/events/event-detail',
+                pathName: 'event-detail',
+              },
+            ]
+          },
+          {
+            name: 'kanban',// folder
+            icon: 'trello',
+            dot: true,
+            pages: [
+              {
+                name: 'Kanban',
+                path: 'apps/kanban/kanban',
+                pathName: 'app-kanban',
+              },
+              {
+                name: 'boards',
+                path: 'apps/kanban/boards',
+                pathName: 'kanban-boards',
+                badge: {
+                  type: 'info',
+                  text: 'New'
+                },
+              },
+              {
+                name: 'create board',
+                path: 'apps/kanban/create-kanban-board',
+                pathName: 'create-kanban-board',
+              },
+            ]
+          },
+          {
+            name: 'social',
+            icon: 'share-2',
+            pages: [
+              {
+                name: 'profile',
+                path: 'apps/social/profile',
+                pathName: 'social-profile',
+              },
+              {
+                name: 'settings',
+                path: 'apps/social/settings',
+                pathName: 'settings',
+              },
+            ]
+          },
+          {
+            name: 'calendar',
+            icon: 'calendar',
+            path: 'apps/calendar',
+            pathName: 'app-calendar',
+          },
+
+        ],
+      },
+      {
+        label: 'pages',
+        icon: 'uil-files-landscapes-alt',
+        pages:[
+          {
+            name: 'starter',
+            icon: 'compass',
+            path: 'pages/starter',
+            pathName: 'starter-page',
+          },
+          {
+            name: 'faq',
+            icon: 'help-circle',
+            dot: true,
+            pages: [
+              {
+                name: 'faq-accordion',
+                path: 'pages/faq/faq-accordion',
+                pathName: 'faq-accordion',
+              },
+              {
+                name: 'faq-tab',
+                path: 'pages/faq/faq-tab',
+                pathName: 'faq-tab',
+                badge: {
+                  type: 'info',
+                  text: 'New'
+                },
+              },
+            ]
+          },
+          {
+            name: 'landing',
+            icon: 'globe',
+            dot: true,
+            pages: [
+              {
+                name: 'default',
+                path: 'pages/landing/default',
+                pathName: 'landing-default',
+              },
+              {
+                name: 'alternate',
+                path: 'pages/landing/alternate',
+                pathName: 'landing-alternate',
+                badge: {
+                  type: 'info',
+                  text: 'New'
+                },
+              },
+            ]
+          },
+          {
+            name: 'pricing',
+            icon: 'tag',
+            pages: [
+              {
+                name: 'pricing-column',
+                path: 'pages/pricing/pricing-column',
+                pathName: 'pricing-column',
+              },
+              {
+                name: 'pricing-grid',
+                path: 'pages/pricing/pricing-grid',
+                pathName: 'pricing-grid',
+              },
+            ]
+          },
+          {
+            name: 'notifications',
+            icon: 'bell',
+            path: 'pages/notifications',
+            pathName: 'notifications-page',
+          },
+          {
+            name: 'members',
+            icon: 'users',
+            path: 'pages/members',
+            pathName: 'members-page',
+          },
+          {
+            name: 'timeline',
+            icon: 'clock',
+            path: 'pages/timeline',
+            pathName: 'timeline-page',
+          },
+          {
+            name: 'errors',
+            icon: 'alert-triangle',
+            dot: true,
+            pages: [
+              {
+                name: '404',
+                path: 'pages/errors/404',
+                pathName: 'error-404',
+              },
+              {
+                name: '403',
+                path: 'pages/errors/403',
+                pathName: 'error-403',
+                badge: {
+                  type: 'info',
+                  text: 'New'
+                },
+              },
+              {
+                name: '500',
+                path: 'pages/errors/500',
+                pathName: 'error-500',
+              },
+            ]
+          },
+          {
+            name: 'authentication',
+            icon: 'lock',
+            dot: true,
+            pages: [
+              {
+                name: 'simple',
+                dot: true,
+                pages: [
+                  {
+                    name: 'sign-in',
+                    path: 'pages/authentication/simple/sign-in',
+                    pathName: 'simple-signin',
+                  },
+                  {
+                    name: 'sign-up',
+                    path: 'pages/authentication/simple/sign-up',
+                    pathName: 'simple-signup',
+                  },
+                  {
+                    name: 'sign-out',
+                    path: 'pages/authentication/simple/sign-out',
+                    pathName: 'simple-signout',
+                  },
+                  {
+                    name: 'forgot-password',
+                    path: 'pages/authentication/simple/forgot-password',
+                    pathName: 'simple-forgot-password',
+                  },
+                  {
+                    name: 'reset-password',
+                    path: 'pages/authentication/simple/reset-password',
+                    pathName: 'simple-reset-password',
+                  },
+                  {
+                    name: 'lock-screen',
+                    path: 'pages/authentication/simple/lock-screen',
+                    pathName: 'simple-lock-screen',
+                  },
+                  {
+                    name: '2FA',
+                    path: 'pages/authentication/simple/2FA',
+                    pathName: 'simple-2FA',
+                    badge: {
+                      type: 'info',
+                      text: 'New'
+                    },
+                  }
+                ] 
+              },
+              {
+                name: 'split',
+                dot: true,
+                pages: [
+                  {
+                    name: 'sign-in',
+                    path: 'pages/authentication/split/sign-in',
+                    pathName: 'split-signin',
+                  },
+                  {
+                    name: 'sign-up',
+                    path: 'pages/authentication/split/sign-up',
+                    pathName: 'split-signup',
+                  },
+                  {
+                    name: 'sign-out',
+                    path: 'pages/authentication/split/sign-out',
+                    pathName: 'split-signout',
+                  },
+                  {
+                    name: 'forgot-password',
+                    path: 'pages/authentication/split/forgot-password',
+                    pathName: 'split-forgot-password',
+                  },
+                  {
+                    name: 'reset-password',
+                    path: 'pages/authentication/split/reset-password',
+                    pathName: 'split-reset-password',
+                  },
+                  {
+                    name: 'lock-screen',
+                    path: 'pages/authentication/split/lock-screen',
+                    pathName: 'split-lock-screen',
+                  },
+                  {
+                    name: '2FA',
+                    path: 'pages/authentication/split/2FA',
+                    pathName: 'split-2FA',
+                    badge: {
+                      type: 'info',
+                      text: 'New'
+                    },
+                  },
+                ]  
+              },
+              {
+                name: 'Card',
+                dot: true,
+                pages: [
+                  {
+                    name: 'sign-in',
+                    path: 'pages/authentication/card/sign-in',
+                    pathName: 'card-signin',
+                  },
+                  {
+                    name: 'sign-up',
+                    path: 'pages/authentication/card/sign-up',
+                    pathName: 'card-signup',
+                  },
+                  {
+                    name: 'sign-out',
+                    path: 'pages/authentication/card/sign-out',
+                    pathName: 'card-signout',
+                  },
+                  {
+                    name: 'forgot-password',
+                    path: 'pages/authentication/card/forgot-password',
+                    pathName: 'card-forgot-password',
+                  },
+                  {
+                    name: 'reset-password',
+                    path: 'pages/authentication/card/reset-password',
+                    pathName: 'card-reset-password',
+                  },
+                  {
+                    name: 'lock-screen',
+                    path: 'pages/authentication/card/lock-screen',
+                    pathName: 'card-lock-screen',
+                  },
+                  {
+                    name: '2FA',
+                    path: 'pages/authentication/card/2FA',
+                    pathName: 'card-2FA',
+                    badge: {
+                      type: 'info',
+                      text: 'New'
+                    },
+                  }
+                ]  
+              }
+            ]  
+          },
+          {
+            name: 'layouts',
+            icon: 'layout',
+            pages: [
+              {
+                name: 'vertical-sidenav',
+                path: 'demo/vertical-sidenav',
+                pathName: 'demo-vertical-sidenav',
+              },
+              {
+                name: 'dark-mode',
+                path: 'demo/dark-mode',
+                pathName: 'demo-dark-mode',
+              },
+              {
+                name: 'sidenav-collapse',
+                path: 'demo/sidenav-collapse',
+                pathName: 'demo-sidenav-collapse',
+              },
+              {
+                name: 'darknav',
+                path: 'demo/darknav',
+                pathName: 'demo-darknav',
+              },
+              {
+                name: 'topnav-slim',
+                path: 'demo/topnav-slim',
+                pathName: 'demo-topnav-slim',
+              },
+              {
+                name: 'navbar-top-slim',
+                path: 'demo/navbar-top-slim',
+                pathName: 'demo-navbar-top-slim',
+              },
+              {
+                name: 'navbar-top',
+                path: 'demo/navbar-top',
+                pathName: 'demo-navbar-top',
+              },
+              {
+                name: 'horizontal-slim',
+                path: 'demo/horizontal-slim',
+                pathName: 'demo-horizontal-slim',
+              },
+              {
+                name: 'combo-nav',
+                path: 'demo/combo-nav',
+                pathName: 'demo-combo-nav',
+              },
+              {
+                name: 'combo-nav-slim',
+                path: 'demo/combo-nav-slim',
+                pathName: 'demo-combo-nav-slim',
+              },
+              {
+                name: 'dual-nav',
+                path: 'demo/dual-nav',
+                pathName: 'demo-dual-nav',
+              },
+            ]
+          }, 
+
+        ]
+      },
+      {
+        label: 'modules',
+        icon: 'uil-puzzle-piece',
+        megaMenu: true, // works for navbar top
+        pages:[
+          {
+            name: 'forms',
+            icon: 'file-text',
+            pages: [
+              {
+                name: 'basic',
+                pages: [
+                  {
+                    name: 'form-control',
+                    path: 'modules/forms/basic/form-control',
+                    pathName: 'form-control',
+                  },
+                  {
+                    name: 'input-group',
+                    path: 'modules/forms/basic/input-group',
+                    pathName: 'form-input-group',
+                  },
+                  {
+                    name: 'select',
+                    path: 'modules/forms/basic/select',
+                    pathName: 'form-select',
+                  },
+                  {
+                    name: 'checks',
+                    path: 'modules/forms/basic/checks',
+                    pathName: 'form-checks',
+                  },
+                  {
+                    name: 'range',
+                    path: 'modules/forms/basic/range',
+                    pathName: 'form-range',
+                  },
+                    {
+                      name: 'floating-labels',
+                      path: 'modules/forms/basic/floating-labels',
+                      pathName: 'floating-labels',
+                  },
+                  {
+                    name: 'layout',
+                    path: 'modules/forms/basic/layout',
+                    pathName: 'form-layout',
+                  },
+                ]
+              },
+              {
+                name: 'advance',
+                pages: [
+                  {
+                    name: 'advance-select',
+                    path: 'modules/forms/advance/advance-select',
+                    pathName: 'advance-select',
+                  },
+                  {
+                    name: 'date-picker',
+                    path: 'modules/forms/advance/date-picker',
+                    pathName: 'date-picker',
+                  },
+                  {
+                    name: 'editor',
+                    path: 'modules/forms/advance/editor',
+                    pathName: 'text-editor',
+                  },
+                  {
+                    name: 'file-uploader',
+                    path: 'modules/forms/advance/file-uploader',
+                    pathName: 'file-uploader',
+                  },
+                  {
+                    name: 'rating',
+                    path: 'modules/forms/advance/rating',
+                    pathName: 'advance-rating',
+                  },
+                  {
+                    name: 'emoji-button',
+                    path: 'modules/forms/advance/emoji-button',
+                    pathName: 'emoji-button',
+                  },
+                ]
+              },
+              {
+                name: 'validation',
+                path: 'modules/forms/validation',
+                pathName: 'forms-validation',
+              },
+              {
+                name: 'wizard',
+                path: 'modules/forms/wizard',
+                pathName: 'forms-wizard',
+              },
+            ]
+          },
+
+          {
+            name: 'icons',
+            icon: 'grid',
+            pages: [
+              {
+                name: 'feather',
+                path: 'modules/icons/feather',
+                pathName: 'icons-feather',
+              },
+              {
+                name: 'font awesome',
+                path: 'modules/icons/font-awesome',
+                pathName: 'icons-font-awesome',
+              },
+              {
+                name: 'unicons',
+                path: 'modules/icons/unicons',
+                pathName: 'icons-unicons',
+              },
+            ]
+          },
+          {
+            name: 'tables',
+            icon: 'columns',
+            pages: [
+              {
+                name: 'Basic tables',
+                path: 'modules/tables/basic-tables',
+                pathName: 'basic-tables',
+              },
+              {
+                name: 'Advance tables',
+                path: 'modules/tables/advance-tables',
+                pathName: 'advance-tables',
+              },
+              {
+                name: 'Bulk Select',
+                path: 'modules/tables/bulk-select',
+                pathName: 'bulk-select',
+              },
+            ]
+          },
+          {
+            name: 'ECharts',
+            icon: 'bar-chart-2',
+            pages: [
+              {
+                name: 'line-charts',
+                pathName: 'line-charts',
+                path: 'modules/echarts/line-charts',
+              },
+              {
+                name: 'bar-charts',
+                pathName: 'bar-charts',
+                path: 'modules/echarts/bar-charts',
+              },
+              {
+                name: 'candlestick-charts',
+                pathName: 'candlestick-charts',
+                path: 'modules/echarts/candlestick-charts',
+              },
+              {
+                name: 'geo-map',
+                pathName: 'geo-map',
+                path: 'modules/echarts/geo-map',
+              },
+              {
+                name: 'scatter-charts',
+                pathName: 'scatter-charts',
+                path: 'modules/echarts/scatter-charts',
+              },
+              {
+                name: 'pie-charts',
+                pathName: 'pie-charts',
+                path: 'modules/echarts/pie-charts',
+              },
+              {
+                name: 'gauge-chart',
+                pathName: 'gauge-chart',
+                path: 'modules/echarts/gauge-chart',
+              },
+              {
+                name: 'radar-charts',
+                pathName: 'radar-charts',
+                path: 'modules/echarts/radar-charts',
+              },
+              {
+                name: 'heatmap-charts',
+                pathName: 'heatmap-charts',
+                path: 'modules/echarts/heatmap-charts',
+              },
+              {
+                name: 'how-to-use',
+                pathName: 'how-to-use',
+                path: 'modules/echarts/how-to-use',
+              }
+            ]
+          },
+          {
+            name: 'components',
+            icon: 'package',
+            pages: [
+              {
+                name: 'accordion',
+                pathName: 'components-accordion',
+                path: 'modules/components/accordion',
+              },
+              {
+                name: 'avatar',
+                pathName: 'components-avatar',
+                path: 'modules/components/avatar',
+              },
+              {
+                name: 'alerts',
+                pathName: 'components-alerts',
+                path: 'modules/components/alerts',
+              },
+              {
+                name: 'badge',
+                pathName: 'components-badge',
+                path: 'modules/components/badge'
+              },
+              {
+                name: 'breadcrumb',
+                pathName: 'components-breadcrumb',
+                path: 'modules/components/breadcrumb'
+              },
+              {
+                name: 'buttons',
+                pathName: 'components-buttons',
+                path: 'modules/components/button'
+              },
+              {
+                name: 'calendar',
+                pathName: 'components-calendar',
+                path: 'modules/components/calendar'
+              },
+              {
+                name: 'card',
+                pathName: 'components-card',
+                path: 'modules/components/card'
+              },
+              {
+                name: 'carousel',
+                pages: [
+                  {
+                    name: 'bootstrap',
+                    path: 'modules/components/carousel/bootstrap',
+                    label:'bootstrap-carousel',
+                    pathName:'components-bs-carousel'
+                  },
+                  {
+                    name: 'swiper',
+                    path: 'modules/components/carousel/swiper',
+                    pathName: 'components-swiper-carousel'
+                  },
+                ]
+              },
+              {
+                name: 'collapse',
+                pathName: 'components-bs-collapse',
+                path: 'modules/components/collapse'
+              },
+              {
+                name: 'dropdown',
+                pathName: 'components-bs-dropdown',
+                path: 'modules/components/dropdown'
+              },
+              {
+                name: 'list-group',
+                pathName: 'components-bs-list-group',
+                path: 'modules/components/list-group'
+              },
+              {
+                name: 'modals',
+                pathName: 'components-modal',
+                path: 'modules/components/modal'
+              },
+              //- {
+              //-   name: 'navs-_and_-Tabs',
+              //-   pathName: 'components-modal',
+              //-   path: 'modules/components/navs-and-tabs/navs'
+              //- },
+              {
+                name: 'navs-_and_-Tabs',
+                pages: [
+                  {
+                    name: 'navs',
+                    pathName: 'components-navs',
+                    path: 'modules/components/navs-and-tabs/navs'
+                  },
+                  {
+                    name: 'navbar',
+                    pathName: 'navbar',
+                    path: 'modules/components/navs-and-tabs/navbar'
+                  },
+                  {
+                    name: 'tabs',
+                    pathName: 'components-tabs',
+                    path: 'modules/components/navs-and-tabs/tabs'
+                  },
+                ]
+              },
+              {
+                name: 'offcanvas',
+                pathName: 'components-offcanvas',
+                path: 'modules/components/offcanvas'
+              },
+              {
+                name: 'progress-bar',
+                pathName: 'basic-progress-bar',
+                path: 'modules/components/progress-bar',
+              },
+              {
+                name: 'placeholder',
+                pathName: 'components-placeholder',
+                path: 'modules/components/placeholder',
+              },
+              {
+                name: 'pagination',
+                path: 'modules/components/pagination',
+                pathName: 'components-pagination',
+              },
+              {
+                name: 'popovers',
+                path: 'modules/components/popovers',
+                pathName: 'components-popovers',
+              },
+              {
+                name: 'scrollspy',
+                path: 'modules/components/scrollspy',
+                pathName: 'components-scrollspy',
+              },
+              {
+                name: 'sortable',
+                path: 'modules/components/sortable',
+                pathName: 'components-sortable',
+              },
+              {
+                name: 'spinners',
+                path: 'modules/components/spinners',
+                pathName: 'components-spinners',
+              },
+              {
+                name: 'toast',
+                path: 'modules/components/toast',
+                pathName: 'components-toast',
+              },
+              {
+                name: 'tooltips',
+                path: 'modules/components/tooltips',
+                pathName: 'components-bs-tooltips',
+              },
+              {
+                name: 'chat-widget',
+                path: 'modules/components/chat-widget',
+                pathName: 'components-chat-widget',
+              },
+            ]
+          },
+          {
+            name: 'utilities',
+            icon: 'tool',
+            pages: [
+              {
+                name: 'background',
+                path: 'modules/utilities/background',
+                pathName: 'utilities-background',
+              },
+              {
+                name: 'borders',
+                path: 'modules/utilities/borders',
+                pathName: 'utilities-borders'
+              },
+              {
+                name: 'colors',
+                path: 'modules/utilities/colors',
+                pathName: 'utilities-colors'
+              },
+              {
+                name: 'display',
+                path: 'modules/utilities/display',
+                pathName: 'utilities-display'
+              },
+              {
+                name: 'flex',
+                path: 'modules/utilities/flex',
+                pathName: 'utilities-flex'
+              },
+              {
+                name: 'stacks',
+                path: 'modules/utilities/stacks',
+                pathName: 'utilities-stacks'
+              },
+              {
+                name: 'float',
+                path: 'modules/utilities/float',
+                pathName: 'utilities-float'
+              },
+              {
+                name: 'grid',
+                path: 'modules/utilities/grid',
+                pathName: 'utilities-grid'
+              },
+              {
+                name: 'interactions',
+                path: 'modules/utilities/interactions',
+                pathName: 'utilities-interactions'
+              },
+              {
+                name: 'opacity',
+                path: 'modules/utilities/opacity',
+                pathName: 'utilities-opacity'
+              },
+              {
+                name: 'overflow',
+                path: 'modules/utilities/overflow',
+                pathName: 'utilities-overflow'
+              },
+              {
+                name: 'position',
+                path: 'modules/utilities/position',
+                pathName: 'utilities-position'
+              },
+              {
+                name: 'shadows',
+                path: 'modules/utilities/shadows',
+                pathName: 'utilities-shadows'
+              },
+              {
+                name: 'sizing',
+                path: 'modules/utilities/sizing',
+                pathName: 'utilities-sizing'
+              },
+              {
+                name: 'spacing',
+                path: 'modules/utilities/spacing',
+                pathName: 'utilities-spacing'
+              },
+              {
+                name: 'Typography',
+                path: 'modules/utilities/typography',
+                pathName: 'utilities-typography'
+              },
+              {
+                name: 'vertical-align',
+                path: 'modules/utilities/vertical-align',
+                pathName: 'utilities-vertical-align'
+              },
+              {
+                name: 'visibility',
+                path: 'modules/utilities/visibility',
+                pathName: 'utilities-visibility'
+              }
+            ]
+          },
+          {
+            name: 'widgets',
+            path: 'widgets',
+            icon: 'server',
+            badge: {
+              type: 'info',
+              text: 'New'
+            },
+          },
+          {
+            name:'multi-level',
+            icon: 'layers',
+            pages: [
+              {
+                name: 'level-two',
+                pages:[
+                  {
+                    name: 'item-1',
+                    path: '#!',
+                  },
+                  {
+                    name: 'item-2',
+                    path: '#!',
+                  },
+                ]
+              },
+              {
+                name:'level-three',
+                pages: [
+                  {
+                    name: 'item-3',
+                    path: '#!',
+                  },
+                  {
+                    name: 'item-4',
+                    path: '#!',
+                    pages:[
+                      {
+                        name: 'item-5',
+                        path: '#!',
+                      },
+                      {
+                        name: 'item-6',
+                        path: '#!',
+                      },
+                    ]
+                  }
+                ]
+              },
+              {
+                name:'level-four',
+                pages: [
+                  {
+                    name: 'item-6',
+                    path: '#!',
+                  },
+                  {
+                    name: 'item-7',
+                    pages:[
+                      {
+                        name: 'item-8',
+                        path: '#!',
+                      },
+                      {
+                        name: 'item-9',
+                        pages: [
+                          {
+                            name: 'item-10',
+                            path: '#!',
+                          },
+                          {
+                            name: 'item-11',
+                            path: '#!',
+                          }
+                        ]
+                      },
+                    ]
+                  }
+                ]
+              },
+            ]
+          },
+        ]
+      },
+      {
+        label: 'documentation',
+        icon: 'uil-document-layout-right',
+        pages: [
+          {
+            name: 'getting-started',
+            icon: 'life-buoy',
+            path: 'documentation/getting-started',
+            pathName:'getting-started',
+          },
+          {
+            name: 'customization',
+            icon: 'settings',
+            dropdownInside: true,
+            pages:[
+              {
+                name:'configuration',
+                path:'documentation/customization/configuration',
+                pathName:'doc-configuration',
+              },
+              {
+                name:'styling',
+                path:'documentation/customization/styling',
+                pathName:'doc-styling',
+              },
+              {
+                name:'dark-mode',
+                path:'documentation/customization/dark-mode',
+                pathName:'doc-dark-mode',
+              },
+              {
+                name:'plugin',
+                path:'documentation/customization/plugin',
+                pathName:'doc-plugin',
+              }
+
+            ]
+          },
+          {
+            name: 'layouts-doc',
+            icon: 'table',
+            dropdownInside: true,
+            pages:[
+              {
+                name:'vertical navbar',
+                path:'documentation/layouts/vertical-navbar',
+                pathName:'doc-layout-vertical-navbar',
+              },
+              {
+                name:'horizontal navbar',
+                path:'documentation/layouts/horizontal-navbar',
+                pathName:'doc-layout-horizontal-navbar',
+              },
+              {
+                name:'combo navbar',
+                path:'documentation/layouts/combo-navbar',
+                pathName:'doc-layout-combo-navbar',
+              },
+              {
+                name:'dual nav',
+                path:'documentation/layouts/dual-nav',
+                pathName:'doc-layout-dual-nav',
+              },
+
+            ]
+          },
+          {
+            name: 'gulp',
+            icon: 'fa-brands fa-gulp ms-1 me-1 fa-lg',
+            iconSet: 'font-awesome',
+            path: 'documentation/gulp',
+            pathName:'doc-gulp',
+          },
+          {
+            name: 'design-file',
+            icon: 'figma',
+            path: 'documentation/design-file',
+            pathName:'doc-design-file',
+          },
+          {
+            name: 'changelog',
+            icon: 'git-merge',
+            path: 'changelog',
+            pathName:'changelog',
+          },
+          {
+            name: 'showcase',
+            icon: 'monitor',
+            path: 'showcase',
+            pathName:'showcase',
+          }
+        ]
+      }
+    ];
+
+  - var paths = flatSitemap(sitemap);

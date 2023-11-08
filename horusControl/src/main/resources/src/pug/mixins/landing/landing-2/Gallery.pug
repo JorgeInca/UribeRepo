@@ -1,0 +1,60 @@
+mixin GalleryLightbox(config)
+  a(href='#!' data-bigpicture!={
+    gallery: '#image_gallery',
+  } data-bp=`${CWD}assets/img/gallery/${config.img}.png` )
+    img.rounded.img-fluid.w-100(src=`${CWD}assets/img/gallery/${config.img}.png` alt='')
+
+
+mixin Gallery 
+  section.gallery
+    .position-absolute.left-0.w-100.gallery-overlay
+    +Background({image: `${CWD}assets/img/bg/bg-left-26.png`, attrs: { style: { 'background-size': 'auto','background-position':'left 65%'}}, className: "d-none d-xl-block"})
+    +Background({image: `${CWD}assets/img/bg/bg-right-26.png`, attrs: { style: { 'background-size': 'auto','background-position':'right 62%'}}, className: "d-none d-xl-block"})
+    .container-small.position-relative.px-lg-7.px-xxl-3
+      .text-center.mb-7
+        h5.text-info.mb-3 Gallery
+        h2.mb-2 Our best works
+      ul.nav.font-sans-serif.mb-6.w-max-content.mx-auto(data-filter-nav)&attributes(attributes)
+        li.nav-item
+          a.isotope-nav.cursor-pointer.active(data-filter='*') First
+        li.nav-item
+          a.isotope-nav.cursor-pointer(data-filter='.second') Second
+        li.nav-item
+          a.isotope-nav.cursor-pointer(data-filter='.third') Third
+        li.nav-item 
+          a.isotope-nav.cursor-pointer(data-filter='.fourth') Fourth
+      .row.g-3#image_gallery( data-sl-isotope!={
+        layoutMode: 'packery',   
+      })
+        .col-6.col-md-4.px-2.isotope-item.fourth
+          +GalleryLightbox({
+            img: 27,  
+          }) 
+        .col-6.col-md-4.px-2.isotope-item.third
+          +GalleryLightbox({
+            img: 28,
+          }) 
+        .col-6.col-md-4.px-2.isotope-item.second
+          +GalleryLightbox({
+            img: 29, 
+          })
+        .col-6.col-md-4.px-2.isotope-item.third
+          +GalleryLightbox({
+            img: 30, 
+          }) 	
+        .col-6.col-md-4.px-2.isotope-item.third
+          +GalleryLightbox({
+            img: 31, 
+          })
+        .col-6.col-md-4.px-2.isotope-item.second
+          +GalleryLightbox({
+            img: 32, 
+          })
+        .col-6.col-md-4.px-2.isotope-item.fourth
+          +GalleryLightbox({
+            img: 33, 
+          })
+        .col-6.col-md-4.px-2.isotope-item.third
+          +GalleryLightbox({
+            img: 34, 
+          })

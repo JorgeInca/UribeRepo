@@ -1,0 +1,10 @@
+mixin WidgetSectionTitle({ title, subtitle, icon, transform})
+  .d-flex&attributes(attributes)
+    span.fa-stack.me-2.ms-n1
+      i.fas.fa-circle.fa-stack-2x.text-primary
+      i.fa-inverse.fa-stack-1x.text-primary-soft(data-fa-transform=transform class=icon)
+    .col
+      h3.mb-0.text-primary.position-relative.fw-bold
+        span.bg-soft.pe-2=title
+        span.border.border-primary-200.position-absolute.top-50.translate-middle-y.w-100.start-0.z-index--1
+      p.mb-0=subtitle

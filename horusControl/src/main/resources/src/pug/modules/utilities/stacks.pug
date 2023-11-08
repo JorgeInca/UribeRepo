@@ -1,0 +1,90 @@
+extends ../../layouts/LayoutComponent
+include ../../mixins/utilities/Stacks
+
+
+append variables
+
+  -
+    var pageHeader = {
+      title: 'Stacks',
+      description: 'Shorthand helpers that build on top of our flexbox utilities to make component layout faster and easier than ever.',
+      url: `https://getbootstrap.com/docs/${bootstrapVersion}/helpers/stacks/`,
+      linkText: 'Stacks on Bootstrap'
+    }
+  -
+    var rightNav = [
+      {
+        name: 'Vertical',
+        id: '#vertical',
+      },
+      {
+        name: 'Horizontal',
+        id: '#horizontal',
+      },
+      {
+        name: 'Margin utilities',
+        id: '#margin-utilities',
+      },
+      {
+        name: 'Vertical rules',
+        id: '#vertical-rules',
+      },
+      {
+        name: 'Stack buttons',
+        id: '#stack-buttons',
+      },
+      {
+        name: 'Inline form',
+        id: '#inline-form',
+      },
+    ]
+
+block component
+  .mb-9
+    +ComponentCard({
+      title: 'Vertical',
+      description: `Use <code>.vstack</code> to create vertical layouts. Stacked items are full-width by default. Use <code>.gap-*</code> utilities to add space between items.`,
+      anchor:true,
+      descriptionClass:'mt-2'
+    }).my-5
+      +StacksVerticalLayout
+
+    +ComponentCard({
+      title: 'Horizontal',
+      description: `Use <code>.hstack</code> for horizontal layouts. Stacked items are vertically centered by default and only take up their necessary width. Use <code>.gap-*</code> utilities to add space between items.`,
+      anchor:true,
+      descriptionClass:'mt-2'
+    }).my-5
+      +StacksHorizontalLayout
+
+    +ComponentCard({
+      title: 'Margin utilities',
+      description: `Using horizontal margin utilities like <code>.ms-auto</code> as spacers:`,
+      anchor:true,
+      descriptionClass:'mt-2'
+    }).my-5
+      +StacksMerginUtilities
+
+    +ComponentCard({
+      title: 'Vertical rules',
+      description: `allowing you to create vertical dividers in common layouts`,
+      anchor:true,
+      descriptionClass:'mt-2'
+    }).my-5
+      +StacksVerticalRules
+
+    +ComponentCard({
+      title: 'Stack buttons',
+      description: `Use <code>.vstack</code> to stack buttons and other elements:`,
+      anchor:true,
+      descriptionClass:'mt-2'
+    }).my-5
+      +StackButtons
+
+    +ComponentCard({
+      title: 'Inline form',
+      description: `Create an inline form with <code>.hstack:</code>`,
+      anchor:true,
+      descriptionClass:'mt-2'
+    }).my-5
+      +StacksInlineForm

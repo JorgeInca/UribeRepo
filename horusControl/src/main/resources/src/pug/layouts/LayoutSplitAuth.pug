@@ -1,0 +1,15 @@
+include ../mixins/authentication/SocialButtons
+
+mixin LayoutSplitBasic(config)
+	- var config = Object.assign({logo:true}, config)
+
+	.row.vh-100.g-0&attributes(attributes)
+		.col-lg-6.position-relative.d-none.d-lg-block
+			+Background({image:`${CWD}assets/img/bg/${config.img}.png`, className: '' })
+		.col-lg-6
+			.row.flex-center.h-100.g-0.px-4.px-sm-0
+				.col.col-sm-6.col-lg-7.col-xl-6
+					if config.logo
+						a(href=`${CWD}${paths['default-dashboard']}`).d-flex.flex-center.text-decoration-none.mb-4
+							+Logo({text:false,width:58}).fw-bolder.fs-5.d-inline-block
+					block

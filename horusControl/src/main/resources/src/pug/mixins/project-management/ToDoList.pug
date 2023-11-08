@@ -1,0 +1,251 @@
+append variables
+  -
+    var todoList = [
+      {
+        task: 'Designing the dungeon',
+        badge: {
+          label: 'DRAFT',
+          variant: 'primary'
+        },
+        attachment: 2,
+        date: '12 Nov, 2021',
+        time: '12:00 PM'
+      },
+      {
+        task: 'Hiring a motion graphic designer',
+        badge: {
+          label: "URGENT",
+          variant: 'warning'
+        },
+        date: "12 Nov, 2021",
+        time: '12:00 PM',
+        attachment: 2,
+        list: 3,
+      },
+      {
+        task: 'Daily Meetings Purpose, participants',
+        badge: {
+          label: "ON PROCESS",
+          variant: 'info'
+        },
+        date: "12 Dec, 2021",
+        time: '05:00 AM',
+        attachment: 4,
+      },
+      {
+        task: 'Finalizing the geometric shapes',
+        date: "12 Nov, 2021",
+        time: '12:00 PM',
+        attachment: 3,
+      },
+      {
+        task: 'Daily meeting with team members',
+        date: "1 Nov, 2021",
+        time: '12:00 PM',
+      },
+      {
+        task: 'Daily Standup Meetings',
+        date: "13 Nov, 2021",
+        time: '10:00 PM',
+        list: 4,
+      },
+      {
+        task: 'Procrastinate for a month',
+        badge: {
+          label: "ON PROCESS",
+          variant: 'info'
+        },
+        date: "12 Nov, 2021",
+        time: '12:00 PM',
+        attachment: 3,
+        checked: true
+      },
+      {
+        task: 'warming up',
+        date: "12 Nov, 2021",
+        time: '12:00 PM',
+        attachment: 3,
+        badge: {
+          label: "CLOSE",
+          variant: 'secondary'
+        },
+        checked: true
+      },
+      {
+        task: 'Make ready for release',
+        date: "2o Nov, 2021",
+        time: '1:00 AM',
+        attachment: 2,
+        checked: true,
+        list: 2,
+      },
+      {
+        task: 'Modify the component',
+        date: "22 Nov, 2021",
+        time: '1:00 AM',
+        attachment: 4,
+        checked: true
+      },
+      {
+        task: 'Delete overlapping tasks and articles',
+        date: "25 Nov, 2021",
+        time: '1:00 AM',
+        attachment: 2,
+        badge: {
+          label: "CLOSE",
+          variant: 'secondary'
+        },
+        checked: true
+      },
+    ];
+
+mixin TodoListItem(item,index,isLast)
+  .row.justify-content-between.align-items-md-center.hover-actions-trigger.btn-reveal-trigger.border-200.py-3.gx-0(class=isLast ? 'border-top border-bottom' : 'border-top')
+    .col-12.col-lg-auto.flex-1
+      div(data-todo-offcanvas-toogle data-todo-offcanvas-target=`todoOffcanvas-${index + 1}`)
+        .form-check.mb-1.mb-md-0.d-flex.align-items-center.lh-1
+          input.form-check-input.flex-shrink-0.form-check-line-through.mt-0.me-2(type="checkbox" id=`checkbox-todo-${index}` class= `form-check-input-${item.color}` checked=item.checked)
+          label.form-check-label.mb-0.fs-0.me-2.line-clamp-1(for=`checkbox-todo-${index}`)=item.task
+          if item.badge
+            span.badge.badge-phoenix.fs--2(class=`badge-phoenix-${item.badge.variant}`)= item.badge.label
+    .col-12.col-lg-auto
+      .d-flex.ms-4.lh-1.align-items-center
+        if item.attachment
+          button.btn.p-0.text-700.fs--2.me-2
+            span.fas.fa-paperclip.me-1
+            |#{item.attachment}
+        if item.list
+          button.btn.p-0.text-warning.fs--2.me-2
+            span.fas.fa-tasks.me-1
+            |#{item.list}
+        p.text-700.fs--2.mb-md-0.me-2.me-lg-3.mb-0=item.date
+        .d-none.d-lg-block.end-0.position-absolute(style='top: 23%;')
+          .hover-actions.end-0
+            button.btn.btn-phoenix-secondary.btn-icon.me-1.fs--2.text-900.px-0.me-1
+              span.fas.fa-edit
+            button.btn.btn-phoenix-secondary.btn-icon.fs--2.text-danger.px-0
+              span.fas.fa-trash
+        .hover-lg-hide
+          p.text-700.fs--2.ps-lg-3.border-start-lg.border-300.fw-bold.mb-md-0.mb-0=item.time
+
+mixin SubTasks(index)
+  h4.mb-3 Subtasks
+  .d-flex.flex-between-center.hover-actions-trigger.border-300.py-3.border-top
+    .form-check.mb-1.mb-md-0.d-flex.align-items-center.lh-1.min-h-auto
+      input.subtask-checkbox.form-check-input.form-check-line-through.mt-0.me-3(type="checkbox" id=`subtask${index}1`)
+      label.form-check-label.mb-0.fs-0(for=`subtask${index}1`) Study Dragons
+    .hover-actions.end-0
+      button.btn.btn-sm.me-1.fs--2.text-700.px-0.me-3
+        span.fa-solid.fa-pencil
+      button.btn.btn-sm.text-700.px-0
+        span.fa-solid.fa-xmark.fs-0
+
+  .d-flex.flex-between-center.hover-actions-trigger.border-300.py-3.border-top
+    .form-check.mb-1.mb-md-0.d-flex.align-items-center.lh-1.min-h-auto
+      input.subtask-checkbox.form-check-input.form-check-line-through.mt-0.me-3(type="checkbox" id=`subtask${index}2`)
+      label.form-check-label.mb-0.fs-0(for=`subtask${index}2`) Procrastinate a bit
+    .hover-actions.end-0
+      button.btn.btn-sm.me-1.fs--2.text-700.px-0.me-3
+        span.fa-solid.fa-pencil
+      button.btn.btn-sm.text-700.px-0
+        span.fa-solid.fa-xmark.fs-0
+
+  .d-flex.flex-between-center.hover-actions-trigger.border-300.py-3.border-top.border-bottom.mb-3
+    .form-check.mb-1.mb-md-0.d-flex.align-items-center.lh-1.min-h-auto
+      input.subtask-checkbox.form-check-input.form-check-line-through.mt-0.me-3(type="checkbox" id=`subtask${index}3`)
+      label.form-check-label.mb-0.fs-0(for=`subtask${index}3`) Staring at the notebook for 5 mins
+    .hover-actions.end-0
+      button.btn.btn-sm.me-1.fs--2.text-700.px-0.me-3
+        span.fa-solid.fa-pencil
+      button.btn.btn-sm.text-700.px-0
+        span.fa-solid.fa-xmark.fs-0
+  a.fw-bold.fs--1(href='#!')
+    span.fas.fa-plus.me-1
+    | Add subtask
+
+mixin OthersInformation(index)
+  h5.text-1000.mb-2 Status
+  select.form-select.mb-4(aria-label='Default select example')
+    option(selected='') Select
+    option(value='1') One
+    option(value='2') Two
+    option(value='3') Three
+
+  h5.text-1000.mb-2 Due Date
+  .flatpickr-input-container.mb-4
+    input.form-control.datetimepicker.ps-6(type='text' placeholder='Set the due date', data-options!={disableMobile:true})
+    span.uil.uil-calendar-alt.flatpickr-icon.text-700
+
+  h5.text-1000.mb-2 Reminder
+  .flatpickr-input-container.mb-4
+    input.form-control.datetimepicker.ps-6(type='text' placeholder='Reminder', data-options!={enableTime:true, noCalendar: true, dateFormat:'H:i',disableMobile:true,static: true})
+    span.uil.uil-bell-school.flatpickr-icon.text-700
+
+  h5.text-1000.mb-2 Tag
+  .choices-select-container.mb-6
+    select.form-select(data-choices multiple data-options!={removeItemButton: true,placeholder: true})
+      option(value="") Select organizer...
+      option Massachusetts Institute of Technology
+      option University of Chicago
+      option GSAS Open Labs At Harvard
+      option California Institute of Technology
+    span.uil.uil-tag-alt.choices-icon.text-700(style='top: 26%;')
+  .text-end.mb-9
+    button.btn.btn-phoenix-danger Delete Task
+
+
+mixin TodoPageListItem(item,index,isLast)
+  .row.justify-content-between.align-items-md-center.hover-actions-trigger.btn-reveal-trigger.border-200.py-3.gx-0.cursor-pointer(class=isLast ? 'border-top border-bottom' : 'border-top' data-todo-offcanvas-toogle data-todo-offcanvas-target=`todoOffcanvas-${index + 1}`)
+    .col-12.col-md-auto.flex-1
+      div
+        .form-check.mb-1.mb-md-0.d-flex.align-items-center.lh-1
+          input.form-check-input.flex-shrink-0.form-check-line-through.mt-0.me-2(type="checkbox" id=`checkbox-todo-${index}` class= `form-check-input-${item.color}` data-event-propagation-prevent)
+          label.form-check-label.mb-0.fs-0.me-2.line-clamp-1.flex-grow-1.flex-md-grow-0.cursor-pointer=item.task
+          if item.badge
+            span.badge.badge-phoenix.fs--2(class=`badge-phoenix-${item.badge.variant}`)= item.badge.label
+    .col-12.col-md-auto
+      .d-flex.ms-4.lh-1.align-items-center
+        if item.attachment
+          button.btn.btn-link.p-0.text-700.fs--2.me-2
+            span.fas.fa-paperclip.me-1
+            |#{item.attachment}
+        if item.list
+          button.btn.btn-link.p-0.text-warning.fs--2.me-2
+            span.fas.fa-tasks.me-1
+            |#{item.list}
+        p.text-700.fs--2.mb-md-0.me-2.me-md-3.mb-0=item.date
+        .d-none.d-md-block.end-0.position-absolute(style='top: 23%;')
+          .hover-actions.end-0
+            button.btn.btn-phoenix-secondary.btn-icon.me-1.fs--2.text-900.px-0(data-event-propagation-prevent)
+              span.fas.fa-edit
+            button.btn.btn-phoenix-secondary.btn-icon.fs--2.text-danger.px-0
+              span.fas.fa-trash
+        .hover-md-hide.hover-lg-show.hover-xl-hide
+          p.text-700.fs--2.ps-md-3.border-start-md.border-300.fw-bold.mb-md-0.mb-0=item.time
+
+
+mixin ToDoOffcanvas(title,index)
+  .offcanvas.offcanvas-end.content-offcanvas.offcanvas-backdrop-transparent.border-start.border-300.shadow-none.bg-100(tabindex='-1', data-todo-content-offcanvas id=`todoOffcanvas-${index + 1}`)
+    .offcanvas-body.p-0
+      .p-5.p-md-6
+        .d-flex.flex-between-center.align-items-start.gap-5.mb-4
+          h2.fw-bold.fs-2.mb-0.text-1000= title
+          button.btn.flex-shrink-0.px-0.py-1(type='button' data-bs-dismiss='offcanvas' aria-label='Close')
+            span.fa-solid.fa-xmark
+        .mb-6
+          .d-flex.align-items-center.mb-3
+            h4.text-900.me-3 Description
+            a(href="#!").btn.btn-link.text-decoration-none.p-0
+              span.fa-solid.fa-pen
+          p.text-1000.mb-0 The female circus horse-rider is a recurring subject in Chagall’s work. In 1926 the art dealer Ambroise Vollard invited Chagall to make a project based on the circus. They visited Paris’s historic Cirque d’Hiver Bouglione together; Vollard lent Chagall his private box seats. Chagall completed 19 gouaches Chagall’s work. In 1926 the art dealer Ambroise Vollard invited Chagall to make a project based on the circus.
+
+        +SubTasks(index)
+
+      .mb-6
+        +Files({itemPaddingClass: 'px-5 px-md-6 py-4',titleClass:'px-5 px-md-6',showAddBtn: true,imgMaxWidth:270})
+
+      .px-5.px-md-6
+        h4.mb-4.text-black Others Information
+        +OthersInformation(index)
+
+

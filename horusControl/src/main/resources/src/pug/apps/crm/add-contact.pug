@@ -1,0 +1,171 @@
+extends ../../layouts/LayoutTheme
+
+append variables
+	- 
+		var breadcrumb = [
+			{
+				label: 'Page 1',
+				href: '#!'
+			},
+			{
+				label: 'Page 2',
+				href: '#!',
+			},
+			{
+				label: 'Default',
+				href: '#!',
+				active: true
+			},
+		];
+
+block content
+	.border-bottom.mb-7.mx-n3.px-2.mx-lg-n6.px-lg-6
+		.row 
+			.col-xl-9
+				.d-sm-flex.justify-content-between
+					h2.mb-4 Create a new lead
+					.d-flex.mb-3
+						button.btn.btn-phoenix-primary.me-2.px-6 Cancel
+						button.btn.btn-primary Create lead
+	.row
+		.col-xl-9
+			.d-flex.align-items-end.position-relative.mb-7
+				input#upload-avatar.d-none(type="file")
+				.hoverbox(style='width: 150px; height: 150px')
+					.hoverbox-content.bg-black.rounded-circle.d-flex.flex-center.z-index-1(style="--phoenix-bg-opacity: .56;")
+						span.fa-solid.fa-camera.fs-7.text-300
+					.position-relative.bg-400.rounded-circle.cursor-pointer.d-flex.flex-center.mb-xxl-7
+						.avatar.avatar-5xl
+							img.rounded-circle(src=`${CWD}assets/img/team/150x150/58.webp` alt='')
+						label.w-100.h-100.position-absolute.z-index-1(for="upload-avatar")
+
+			h4.mb-3 Lead Information	
+			form.row.g-3.mb-9
+				.col-sm-6.col-md-4
+					.form-floating
+						select.form-select#floatingSelectOwner
+							option(selected) 	Max Ernst
+							option(value='1') Ernst
+							option(value='2') Max 
+						label(for='floatingSelectOwner') Lead owner
+				.col-sm-6.col-md-4
+					.form-floating
+						input.form-control#floatingInputFirstname(type='text' placeholder='First name')
+						label(for='floatingInputFirstname') First name
+				.col-sm-6.col-md-4
+					.form-floating
+						input.form-control#floatingInputLastname(type='text' placeholder='Last name')
+						label(for='floatingInputLastname') Last name
+				.col-sm-6.col-md-4
+					.form-floating
+						input.form-control#floatingInputCompany(type='text' placeholder='Company')
+						label(for='floatingInputCompany') Company
+				.col-sm-6.col-md-4
+					.form-floating
+						input.form-control#floatingInputTitle(type='text' placeholder='title')
+						label(for='floatingInputTitle') Title
+				.col-sm-6.col-md-4
+					.form-floating
+						input.form-control#floatingInputEmail(type='text' placeholder='email')
+						label(for='floatingInputEmail') Email
+				.col-sm-6.col-md-4
+					.form-floating
+						input.form-control#floatingInputAlternativeEmail(type='text' placeholder='alternative email')
+						label(for='floatingInputAlternativeEmail') Alternative Email
+				.col-sm-6.col-md-4
+					.form-floating
+						input.form-control#floatingInputPhone(type='tel' placeholder='phone' pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" )
+						label(for='floatingInputPhone') Phone
+				.col-sm-6.col-md-4
+					.form-floating
+						input.form-control#floatingInputWebsite(type='text' placeholder='website')
+						label(for='floatingInputWebsite') Website
+				.col-sm-6.col-md-4
+					.form-floating
+						input.form-control#floatingInputLinkedin(type='text' placeholder='linkedin')
+						label(for='floatingInputLinkedin') linkedin
+				.col-sm-6.col-md-4
+					.form-floating
+						input.form-control#floatingInputSkype(type='text' placeholder='skype')
+						label(for='floatingInputSkype') Skype id
+				.col-sm-6.col-md-4
+					.form-floating
+						input.form-control#floatingInputTwitter(type='text' placeholder='twitter')
+						label(for='floatingInputTwitter') Twitter		
+				.col-sm-6.col-md-4
+					.form-floating
+						input.form-control#floatingInputEmployees(type='text' placeholder='employees')
+						label(for='floatingInputEmployees') Number of employees
+				.col-sm-6.col-md-4
+					.form-floating
+						input.form-control#floatingInputRevenue(type='text' placeholder='revenue')
+						label(for='floatingInputRevenue') Annual revenue		
+				.col-sm-6.col-md-4
+					.form-floating
+						select.form-select#floatingSelectIndustry
+							option(selected) Large Enterprise
+							option(value='1') Manufacturing
+							option(value='2') Education
+							option(value='3') Technology
+						label(for='floatingSelectIndustry') industry
+				.col-sm-6.col-md-4
+					.form-floating
+						select.form-select#floatingSelectStatus
+							option(selected) New
+							option(value='1') suspended
+							option(value='2') ongoing
+							option(value='3') Current
+						label(for='floatingSelectStatus') Lead status	
+				.col-sm-6.col-md-4
+					.form-floating
+						select.form-select#floatingSelectLeadSource
+							option(selected) Advertisement
+							option(value='1') Advertisement One
+							option(value='2') Advertisement Two
+							option(value='3') Consulting
+						label(for='floatingSelectLeadSource') lead source
+				.col-sm-6.col-md-4
+					.form-floating
+						select.form-select#floatingSelectRating
+							option(selected) 	Active
+							option(value='1') Inactive
+							option(value='2') Active
+						label(for='floatingSelectRating') rating
+
+				h4.mt-6 Address Information
+				.col-sm-6.col-md-4
+					.form-floating
+						input.form-control#floatingInputStreet(type='text' placeholder='street')
+						label(for='floatingInputStreet') Street
+				.col-sm-6.col-md-4
+					.form-floating
+						select.form-select#floatingSelectCity
+							option(selected) 	Neo centrola
+							option(value='1') London
+							option(value='2') New York 
+						label(for='floatingSelectCity') City
+				.col-sm-6.col-md-4
+					.form-floating
+						select.form-select#floatingSelectState
+							option(selected) 	Qualimando
+							option(value='1') Sovereign
+							option(value='2') Northeastern United States
+						label(for='floatingSelectState') State
+				.col-sm-6
+					.form-floating
+						select.form-select#floatingSelectCountry
+							option(selected) 	United Empire of Brekania
+							option(value='1') UK
+							option(value='2') USA
+						label(for='floatingSelectCountry') Country
+				.col-sm-6
+					.form-floating
+						input.form-control#floatingInputZipcode(type='text' placeholder='zip code')
+						label(for='floatingInputZipcode') zip code
+				h4.mt-6 Description
+				.col-12
+					.form-floating
+						textarea#floatingProjectOverview.form-control(placeholder='Leave a comment here' style='height: 128px')
+						label(for='floatingProjectOverview') Lead description
+				.col-12.d-flex.justify-content-end.mt-6
+					button.btn.btn-primary Create lead

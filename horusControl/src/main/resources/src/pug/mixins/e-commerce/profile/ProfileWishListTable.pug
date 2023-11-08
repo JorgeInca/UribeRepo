@@ -1,0 +1,131 @@
+mixin ProfileWishlistTableRow(data,index)
+  tr.hover-actions-trigger.btn-reveal-trigger.position-static
+    td.align-middle.white-space-nowrap.ps-0.py-0
+      a(href=`${CWD}${paths['e-commerce-fe-product-details']}`).border.rounded-2.d-inline-block
+        img(src=`${CWD}assets/img/${data.productImage}` alt="" width=53)
+    td.products.align-middle.pe-11
+      a.fw-semi-bold.mb-0.line-clamp-1(href=`${CWD}${paths['e-commerce-fe-product-details']}`)=data.product
+    td.color.align-middle.white-space-nowrap.fs--1.text-900=data.color
+    td.size.align-middle.white-space-nowrap.text-700.fs--1.fw-semi-bold=data.size
+    td.price.align-middle.text-900.fs--1.fw-semi-bold.text-end=data.price
+    td.total.align-middle.fw-bold.text-1000.text-end.text-nowrap.pe-0
+      //- .d-flex.align-items-center.justify-content-end
+      //- a.mb-0.fs--2.text-500.fw-bold.text-decoration-none(href="#")
+      button.btn.btn-sm.text-500.hover-text-600.me-2
+        span.fas.fa-trash
+      button.btn.btn-primary.fs--2
+        span.fas.fa-shopping-cart.me-1.fs--2
+        |Add to cart
+
+
+
+mixin ProfileWishListTable
+  -
+    var profileWishlistTableData = [
+      {
+        product:'Fitbit Sense Advanced Smartwatch with Tools for Heart Health, Stress Management & Skin Temperature Trends, Carbon/Graphite, One Size (S & L Bands)',
+        productImage:'/products/1.png',
+        color: 'Pure matte black',
+        price:'$57',
+        size: 42,
+        total: '$57'
+      },
+      {
+        product: '2021 Apple 12.9-inch iPad Pro (Wi‑Fi, 128GB) - Space Gray',
+        productImage:'/products/7.png',
+        color: 'Black',
+        price:'$1,499',
+        size: 'Pro',
+        total: '$1499'
+      },
+      {
+        product:'PlayStation 5 DualSense Wireless Controller',
+        productImage:'/products/6.png',
+        color: 'White',
+        price:'$299',
+        size: 'Regular',
+        total: '$359'
+      },
+      {
+        product:'Apple MacBook Pro 13 inch-M1-8/256GB-space',
+        productImage:'/products/3.png',
+        color: 'Space Gray',
+        price:'$1,699',
+        size: 'Pro',
+        total: '$1,799'
+      },
+      {
+        product:'Apple iMac 24" 4K Retina Display M1 8 Core CPU, 7 Core GPU, 256GB SSD, Green (MJV83ZP/A) 2021',
+        productImage:'/products/4.png',
+        color: 'Ocean Blue',
+        price: '$65',
+        size: '21"',
+        total: '$65'
+      },
+      {
+        product:'Apple Magic Mouse (Wireless, Rechargable) - Silver',
+        productImage:'/products/10.png',
+        color: 'White',
+        price:'$30',
+        size: 'Regular',
+        total: '$60'
+      },
+      {
+        product:'Amazon Basics Matte Black Wired Keyboard - US Layout (QWERTY)',
+        productImage:'/products/8.png',
+        color: 'Black',
+        price:'$40',
+        size: 'MD',
+        total: '$40'
+      },
+      {
+        product:'HORI Racing Wheel Apex for PlayStation 4_3, and PC',
+        productImage:'/products/12.png',
+        color: 'Black',
+        price:'$130',
+        size: '45',
+        total: '$130'
+      },
+      {
+        product:'Xbox Series S',
+        productImage:'/products/17.png',
+        color: 'Space Gray',
+        price: '$99',
+        size: 'sm',
+        total: '$99'
+      },
+    ]
+
+  #productWishlistTable.border-y(data-list!={
+    valueNames: ["products", "color", "size", "price", "quantity", "total"],
+    page: 5,
+    pagination: true
+  })
+    .table-responsive.scrollbar
+      table.table.fs--1.mb-0
+        thead
+          tr
+            th.sort.white-space-nowrap.align-middle.fs--2(scope='col' style='width:7%;')
+            th.sort.white-space-nowrap.align-middle(scope='col' style='width:30%; min-width:250px;' data-sort="products") PRODUCTS
+            th.sort.align-middle(scope='col' data-sort="color" style='width:16%;' ) COLOR
+            th.sort.align-middle(scope='col' data-sort="size" style='width:10%;') SIZE
+            th.sort.align-middle.text-end(scope='col' data-sort="price" style='width:10%;') PRICE
+            th.sort.align-middle.text-end.pe-0(scope='col' style='width:35%;') 
+        tbody.list#profile-wishlist-table-body
+          each row,index in profileWishlistTableData
+            +ProfileWishlistTableRow(row,index)
+    .row.align-items-center.justify-content-between.py-2.pe-0.fs--1
+      .col-auto.d-flex
+        p.mb-0.d-none.d-sm-block.me-3.fw-semi-bold.text-900(data-list-info)
+        a.fw-semi-bold(href='#!' data-list-view="*")
+          | View all
+          span.fas.fa-angle-right.ms-1(data-fa-transform='down-1')
+        a.fw-semi-bold.d-none(href='#!' data-list-view="less")
+          | View Less
+          span.fas.fa-angle-right.ms-1(data-fa-transform='down-1')
+      .col-auto.d-flex
+        button.page-link(data-list-pagination="prev")
+          span.fas.fa-chevron-left
+        ul.mb-0.pagination
+        button.page-link.pe-0(data-list-pagination="next")
+          span.fas.fa-chevron-right

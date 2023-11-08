@@ -1,0 +1,110 @@
+append variables
+  -
+    var views = [
+      {
+        title: 'Month View',
+        value: 'dayGridMonth'
+      },
+      {
+        title: 'Week View',
+        value: 'timeGridWeek'
+      },
+      {
+        title: 'Day View',
+        value: 'timeGridDay'
+      },
+      {
+        title: 'List View',
+        value: 'listWeek'
+      },
+      {
+        title: 'Year View',
+        value: 'listYear'
+      },
+    ]
+mixin CalendarEventDetailsModal
+  #eventDetailsModal.modal.fade(tabindex="-1")
+    .modal-dialog.modal-dialog-centered
+      .modal-content.border
+
+mixin CalendarAddEventModal
+  #addEventModal.modal.fade(tabindex="-1")
+    .modal-dialog
+      .modal-content.border
+        +CalendarAddEventModalForm
+        
+mixin CalendarAddEventModalForm(clsBtn=true)
+  form#addEventForm(autocomplete="off")&attributes(attributes)
+    .modal-header.px-card.border-0
+      //- h5.modal-title Create Schedule
+      //- button.btn-close.me-n1(type="button" data-bs-dismiss="modal" aria-label="Close" class=!clsBtn && 'd-none')
+      .w-100.d-flex.justify-content-between.align-items-start
+        div
+          h5.mb-0.lh-sm.text-1000 Add new
+          .mt-2
+            .form-check.form-check-inline
+              input.form-check-input#inlineRadio1(type='radio' name='calendarTask' checked)
+              label.form-check-label(for='inlineRadio1') Event
+            .form-check.form-check-inline 
+              input.form-check-input#inlineRadio2(type='radio' name='calendarTask')
+              label.form-check-label(for='inlineRadio2') Task
+        button.btn.p-1.fs--2.text-900(type='button' data-bs-dismiss='modal' aria-label='Close')
+          | DISCARD 
+    .modal-body.p-card.py-0
+      .form-floating.mb-3
+        input.form-control#eventTitle(type='text'  name="title" required placeholder='Event title')
+        label(for='eventTitle') Title
+      .form-floating.mb-5
+        select.form-select#eventLabel(name="label")
+          option(value="primary" selected) Business
+          option(value="secondary") Personal
+          option(value="success") Meeting
+          option(value="danger") Birthday
+          option(value="info") Report
+          option(value="warinng") Must attend
+      
+        label(for='eventLabel') Label
+
+      .flatpickr-input-container.mb-3
+        .form-floating
+          input#eventStartDate.form-control.datetimepicker(type='text' name="startDate" placeholder="yyyy/mm/dd hh:mm", data-options!={disableMobile:true, enableTime: "true", dateFormat: 'Y-m-d H:i'})
+          span.uil.uil-calendar-alt.flatpickr-icon.text-700
+          label.ps-6(for='eventStartDate') Starts at
+      .flatpickr-input-container.mb-3
+        .form-floating
+          input#eventEndDate.form-control.datetimepicker(type='text' name="endDate" placeholder="yyyy/mm/dd hh:mm", data-options!={disableMobile:true, enableTime: "true", dateFormat: 'Y-m-d H:i'})
+          span.uil.uil-calendar-alt.flatpickr-icon.text-700
+          label.ps-6(for='eventEndDate') Ends at
+     
+      +Checkbox({id: 'eventAllDay', text: 'All day event ', attrs: {class: ""}})(name="allDay")
+
+      .form-floating.my-5
+        textarea#eventDescription.form-control(placeholder='Leave a comment here' name="description" style='height: 128px')
+        label(for='eventDescription') Description
+      .form-floating.mb-3
+        select.form-select#eventRepetition(name="repetition")
+          option(value="" selected) No Repeat
+          option(value="daily") Daily 
+          option(value="deekly") Weekly
+          option(value="monthly") Monthly
+          option(value="dailyExceptHolidays") Daily (except holidays)
+          option(value="custom") Custom
+        label(for='eventRepetition') Repetition
+
+      .form-floating.mb-3
+        select.form-select#eventReminder(name="reminder")
+          option(value="" selected) 30 minutes earlier
+          option(value="" ) 8 am on the day
+          option(value="" ) 8 am on the day before
+          option(value="" ) 2 days earlier
+          option(value="" ) a week earlier
+
+        label(for='eventReminder') Reminder
+      button.btn.btn-link.p-0.mb-3(type='button') 
+        span.fa-solid.fa-plus.me-2
+        |Add Reminder
+
+    .modal-footer.d-flex.justify-content-between.align-items-center.border-0
+      a(href=`${CWD}${paths['create-an-event']}`).me-3.fs--1.text-900 More options
+        span.fas.fa-angle-right.ms-1.fs--2
+      button.btn.btn-primary.px-4(type="submit") Save

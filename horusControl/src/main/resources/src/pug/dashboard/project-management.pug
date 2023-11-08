@@ -1,0 +1,75 @@
+extends ../layouts/LayoutTheme
+include ../mixins/dashboard/common
+include ../mixins/dashboard/project-management/Stats
+include ../mixins/dashboard/project-management/ZeroRoadmap
+include ../mixins/dashboard/project-management/ToDo
+include ../mixins/project-management/ToDoList
+include ../mixins/dashboard/project-management/ProjectSummery
+include ../mixins/dashboard/project-management/IssueChart
+include ../mixins/dashboard/project-management/ElevenProgressChart
+include ../mixins/dashboard/project-management/FlyCard
+include ../mixins/dashboard/project-management/RecentActivity
+include ../mixins/dashboard/e-commerce/TotalSalesChart
+include ../mixins/dashboard/e-commerce/StatCard
+include ../mixins/dashboard/e-commerce/TopRegions
+include ../mixins/dashboard/e-commerce/LatestReviews
+include ../mixins/project-management/Common
+include ../mixins/common/Avatar
+
+
+append variables
+  //- - var attrsContent = { class: 'pt-5' };
+
+
+prepend styles
+  link(href=`${CWD}vendors/choices/choices.min.css`, rel='stylesheet')
+  link(href=`${CWD}vendors/dhtmlx-gantt/dhtmlxgantt.css`, rel='stylesheet')
+  link(href=`${CWD}vendors/flatpickr/flatpickr.min.css`, rel='stylesheet')
+
+
+prepend scripts
+  script(src=`${CWD}vendors/choices/choices.min.js`)
+  script(src=`${CWD}vendors/echarts/echarts.min.js`)
+  script(src=`${CWD}vendors/dhtmlx-gantt/dhtmlxgantt.js`)
+
+append scripts
+  script(src=`${CWD}assets/js/projectmanagement-dashboard.js`)
+
+block content
+  .row.gy-3.mb-6.justify-content-between
+    .col-md-9.col-auto
+      //- .mb-6
+      h2.mb-2.text-1100 Projects Dashboard
+      h5.text-700.fw-semi-bold Here’s what’s going on at your business right now
+    .col-md-3.col-auto
+      .flatpickr-input-container
+        input.form-control.ps-6.datetimepicker#datepicker(type="text" data-options!={dateFormat:'M j, Y',disableMobile:true,defaultDate: "Mar 1, 2022"})
+        //- span.fa-regular.fa-calendar-alt.flatpickr-icon
+        span.uil.uil-calendar-alt.flatpickr-icon.text-700
+
+  .row.mb-3.gy-6
+    .col-12.col-xxl-2
+      +Stats
+    .col-12.col-xl-6.col-xxl-5
+      +ZeroRoadmap
+    .col-12.col-xl-6.col-xxl-5
+      +FlyCard
+
+
+  .mx-n4.px-4.mx-lg-n6.px-lg-6.bg-white.pt-7.pb-3.border-y.border-300
+    .row
+      .col-12.col-xl-7.col-xxl-6
+        +IssueChart
+      .col-12.col-xl-5.col-xxl-6
+        +ElevenProgressChart
+  .mx-lg-n4.mt-3
+    .row.g-3
+      .col-12.col-xl-6.col-xxl-7
+        +CardToDoListManagement
+      .col-12.col-xl-6.col-xxl-5
+        +RecentActivityCard
+  .row.mt-3
+    .col-12
+      .mx-n4.px-4.mx-lg-n6.px-lg-6.bg-white.pt-6.border-top.border-300 
+        +ProjectSummery  
+

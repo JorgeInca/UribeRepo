@@ -1,0 +1,52 @@
+append variables
+  -
+    var blogs= [
+      {
+        image:'blog-5.png',
+        views:'2563',
+        heart:'125',
+        comments:'125',
+        category:'SEO',
+        title:'Top 10 ways to Ace SEO for your business',
+      },
+      {
+        image:'blog-6.png',
+        views:'1256',
+        heart:'325',
+        comments:'32',
+        category:'Marketing',
+        title:'Top 12 Marketing strategies you can take',
+      },
+      {
+        image:'blog-7.png',
+        views:'142',
+        heart:'123',
+        comments:'22',
+        category:'Marketing',
+        title:'The top 7 methods to improve as a marketer',
+      },
+    ];
+mixin Blogs 
+  +Section('container-small px-lg-7 px-xxl-3')#blog.pt-10
+    .text-center.mb-5.mb-8
+      h5.text-info.mb-3 Blogs
+      h2.mb-2 Our most viewed articles
+    .row.gx-3.gy-7
+      each blog in blogs 
+        .col-lg-4
+          .blog-card
+            img.w-100.rounded-3(src=`${CWD}assets/img/blog/${blog.image}`, alt="")
+            .d-flex.align-items-cente.mt-3
+              a.btn-link.text-decoration-none.text-800.d-flex.align-items-center.me-3(href='#!')
+                span.fa-solid.fa-eye.fs--1
+                span.fs--2.ms-1.lh-1=blog.views
+              a.btn-link.text-decoration-none.text-800.d-flex.align-items-center.me-3(href='#!')
+                span.fa-solid.fa-heart.fs--1
+                span.ms-1.fs--2.lh-1=blog.heart
+              a.btn-link.text-decoration-none.text-800.d-flex.align-items-center(href='#!')
+                span.fa-solid.fa-comment.fs--1
+                span.ms-1.fs--2.lh-1=blog.comments
+            span.badge.bg-primary.mb-2.mt-4=blog.category
+            h4.mb-3.pe-sm-5.lh-lg= blog.title
+            a.btn-link.px-0.d-flex.align-items-center.fs--1.fw-bold(href='#!' role='button') See more
+              span.fa-solid.fa-angle-right.ms-2

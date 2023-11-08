@@ -1,0 +1,52 @@
+mixin Testimonial 
+  +Section('container-small px-lg-7 px-xxl-3').pb-14.overflow-x-hidden
+    .text-center.mb-5.position-relative
+      h5.text-info.mb-3 Testimonial
+      h2.mb-2.lh-base What our customers has to say about us
+    -
+      var testimonial = [
+        {
+          name: 'Johna Austin',
+          designation: 'CEO',
+          description: 'Amazing theme, excellent support from ThemeWagon with really fast reaction time! Thank you!',
+          img: 'team/12.webp',
+          rating: '5'
+        },
+        {
+          name: 'Monica Gomez',
+          designation: 'Founder',
+          description: 'An excellent theme with fast support team to aid the development process! Thanks team Phoenix!',
+          img: 'team/13.webp',
+          rating: '4.5'
+        },
+        {
+          name: 'Marc Chiasson',
+          designation: 'CTO',
+          description: 'Amazing support system with quickest reply and steady communication of the concerned. Really loved working with Phoenix!',
+          img: 'team/14.webp',
+          rating: '4'
+        }
+      ]
+    #carouselExampleIndicators.carousel.testimonial-carousel.slide.position-relative.dark__bg-1100(data-bs-ride='carousel')
+      +Background({image: `${CWD}assets/img/bg/39.png`, attrs: {
+        style: {
+          'background-size': '186px',
+          'background-position': 'top 20px right 20px',
+        }
+        }, className: "d-none d-md-block"})
+      img.position-absolute.d-none.d-lg-block(src=`${CWD}assets/img/bg/bg-left-22.png`, width="150" alt="" style="top: -100px; left: -70px")
+      img.position-absolute.d-none.d-lg-block(src=`${CWD}assets/img/bg/bg-right-22.png`, width="150" alt="" style="bottom: -80px; right: -80px")
+      .carousel-inner
+        each item, index in testimonial 
+          .carousel-item.text-center.py-8.px-5.px-xl-15(class=`${index === 0 && "active"}`)
+            +Rating(item.rating, 'warning')
+            h3.fw-semi-bold.fst-italic.mt-3.mb-8.w-xl-70.mx-auto.lh-base= item.description
+            .d-flex.align-items-center.justify-content-center.gap-3.mx-auto
+              +Avatar({size: '3xl', img: `${item.img}`, round: 'circle', imgClass: 'border border-2 border-primary'})
+              div.text-start
+                h5 #{item.name}
+                p.mb-0 #{item.designation}
+      .carousel-indicators
+        button(type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1")
+        button(type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2")
+        button(type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3")

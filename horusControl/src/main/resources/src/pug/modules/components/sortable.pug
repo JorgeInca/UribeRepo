@@ -1,0 +1,80 @@
+extends ../../layouts/LayoutComponent
+include ../../mixins/components/Scrollspy
+
+prepend scripts
+  script(src=`${CWD}vendors/sortablejs/sortable.min.js`)
+
+append variables
+  -
+    var pageHeader = {
+      title: 'Sortable',
+      description: 'Reorderable drag-and-drop lists for modern browsers and touch devices. No jQuery or framework required.',
+      url: `https://sortablejs.github.io/Sortable/`,
+      linkText: 'Sortable',
+      breadcrumb:[
+        {
+          name:'Components',
+          link:'#!'
+        },
+        {
+          name:'Sortable',
+          active:true
+        },
+      ]
+    }
+  -
+    var rightNav = [
+      {
+        name: 'Basic Example',
+        id: '#basic-example',
+      },
+      {
+        name: 'User Options',
+        id: '#user-options',
+      },
+    ]
+
+block component
+  +ComponentCard({title:'Basic Example', description: 'Hare is the basic example of sortableJs. You can drag sortable items between the same group. Use <code>data-sortable</code> attribute to get default behavior. We have also designed our <a href="#!">Kanban Board</a> usign SortableJS libarary.'}).my-4
+    .row
+      .col-6(data-sortable)
+        .sortable-item-wrapper.mb-3
+          p.mb-0.sortable-item.bg-light.p-3.rounded-3 Item1
+        .sortable-item-wrapper.mb-3
+          p.mb-0.sortable-item.bg-light.p-3.rounded-3 Item2
+        .sortable-item-wrapper.mb-3
+          p.mb-0.sortable-item.bg-light.p-3.rounded-3 Item3
+
+      .col-6(data-sortable)
+        .sortable-item-wrapper.mb-3
+          p.mb-0.sortable-item.bg-light.p-3.rounded-3 Item4
+        .sortable-item-wrapper.mb-3
+          p.mb-0.sortable-item.bg-light.p-3.rounded-3 Item5
+
+  +ComponentCard({title:'User Options', description: `You can pass sortable options through  <code>data-sortable</code> attribute like <code>data-sortable="{"group":"example","animation":150}"</code>`}).my-4
+    .row
+      .col-6(data-sortable!={ 
+        group: 'example',
+        animation: 150,
+      })
+        .sortable-item-wrapper.mb-3
+          p.mb-0.sortable-item.bg-light.p-3.rounded-3 Item1
+        .sortable-item-wrapper.mb-3
+          p.mb-0.sortable-item.bg-light.p-3.rounded-3 Item2
+        .sortable-item-wrapper.mb-3
+          p.mb-0.sortable-item.bg-light.p-3.rounded-3 Item3
+
+      .col-6(data-sortable!={ 
+        group: 'example',
+        animation: 150,
+      })
+        .sortable-item-wrapper.mb-3
+          p.mb-0.sortable-item.bg-light.p-3.rounded-3 Item4
+        .sortable-item-wrapper.mb-3
+          p.mb-0.sortable-item.bg-light.p-3.rounded-3 Item5
+  +ComponentCard({
+    title: 'Javascript',
+    hideNavTab: true
+  }).my-4
+    +ComponentCardLib 
+      script(src=`vendors/sortablejs/sortable.min.js`)

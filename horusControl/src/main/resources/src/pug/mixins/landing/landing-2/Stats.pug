@@ -1,0 +1,24 @@
+mixin Stats
+  section.counter-container
+    .position-absolute.start-0.end-0.w-100.counter-overlay(style='transform: skewY(-8deg)')
+    +Background({image: `${CWD}assets/img/bg/bg-left-25.png`, attrs: { style: { 'background-size': 'auto','background-position':'left center'}}, className: "d-none d-lg-block"})
+    +Background({image: `${CWD}assets/img/bg/bg-right-25.png`, attrs: { style: { 'background-size': 'auto',
+    'background-position':'right center'}}, className: "d-none d-lg-block"})
+    .container-small.position-relative
+      .row.gx-0.gy-8.justify-content-center
+        .col-sm-6.col-md-auto.me-md-5.pe-md-5.border-end-md.border-dashed.text-center.order-2.order-md-0
+          h1.fs-5.fs-lg-7.fw-bolder.text-info.mb-3
+            span $
+            span(data-countup!={endValue: 8976, duration: 5, suffix: ''} )
+          h4 Revenue
+        .col-sm-6.col-md-auto.me-md-5.pe-md-5.border-end-md.border-dashed.text-center.order-1.order-md-0
+          h1.fs-5.fs-lg-7.fw-bolder.text-info.mb-3
+            span(data-countup!={endValue: 308, duration: 10, suffix: ''} )
+            span K
+          h4 User
+        .col-sm-6.col-md-auto.me-md-5.pe-md-5.border-end-md.border-dashed.text-center
+          h1.fs-5.fs-lg-7.fw-bolder.text-info.mb-3(data-countup!={endValue: 12, duration: 0.5, suffix: ''} )
+          h4 Countries
+        .col-sm-6.col-md-auto.text-center
+          h1.fs-5.fs-lg-7.fw-bolder.text-info.mb-3(data-countup!={endValue: 125, duration: 15, suffix: '+'} )
+          h4 Stories

@@ -1,0 +1,75 @@
+mixin GalleryLightbox(config)
+	a(href='#!' data-bigpicture!={
+		gallery: '#image_gallery',
+	} data-bp=`${CWD}assets/img/gallery/${config.img}.png` )
+		img.rounded.img-fluid.w-100(src=`${CWD}assets/img/gallery/${config.img}.png` alt='')
+
+mixin Gallery
+	section.bg-white.pb-lg-6.pb-xl-8
+		+Background({image: `${CWD}assets/img/bg/bg-5.png`, attrs: { style: { 'background-size': 'auto',} }, className: 'd-dark-none' })
+		+Background({image: `${CWD}assets/img/bg/bg-dark-5.png`, attrs: { style: { 'background-size': 'auto',} }, className: 'd-light-none' })
+		+Background({image: `${CWD}assets/img/bg/bg-left-5.png`, attrs: { style: { 'background-position': 'left', 'background-size': 'auto',} }, className: '' })
+		+Background({image: `${CWD}assets/img/bg/bg-right-6.png`, attrs: { style: { 'background-position': 'right', 'background-size': 'auto',} }, className: '' })
+		.container-small.position-relative.px-lg-7.px-xxl-3
+			.row.mb-8.text-center.text-sm-start
+				.col-12.mb-4
+					h4.text-primary.fw-bolder.mb-3 Gallery
+					h2 Some of Our Best Works
+				.col-lg-6
+					p Rise like #{name} focusing only on functionalities for your digital products leaving the design for us. Show what you do, with our latest admin dashboard. Check our best works and let us know what you want to find.
+				.col-lg-6
+					p Want to tell your customers  about the details of how and what? Tell them with all the posts at one place without them ridirecting to another page or site.
+			//- .inline-block
+			ul.nav.font-sans-serif.mb-6.justify-content-center.justify-content-sm-start.w-max-content(data-filter-nav)&attributes(attributes)
+				li.nav-item
+					a.isotope-nav.cursor-pointer.active(data-filter='*') First
+				li.nav-item
+					a.isotope-nav.cursor-pointer(data-filter='.second') Second
+				li.nav-item
+					a.isotope-nav.cursor-pointer(data-filter='.third') Third
+				li.nav-item 
+					a.isotope-nav.cursor-pointer(data-filter='.fourth') Fourth
+
+			.row.g-3#image_gallery( style="min-height: 948px" data-sl-isotope!={
+				layoutMode: 'packery',   
+			})
+				.col-6.col-md-4.col-lg-3.px-2.isotope-item.fourth
+					+GalleryLightbox({
+						img: 1,  
+					}) 
+				.col-6.col-md-4.col-lg-3.px-2.isotope-item.third
+					+GalleryLightbox({
+						img: 2,
+					}) 
+				.col-6.col-md-4.col-lg-3.px-2.isotope-item.second
+					+GalleryLightbox({
+						img: 3, 
+					})
+				.col-6.col-md-4.col-lg-3.px-2.isotope-item.third
+					+GalleryLightbox({
+						img: 5, 
+					}) 	
+				.col-6.col-md-4.col-lg-3.px-2.isotope-item.third.second
+					+GalleryLightbox({
+						img: 4, 
+					})
+				.col-6.col-md-4.col-lg-3.px-2.isotope-item.second
+					+GalleryLightbox({
+						img: 6, 
+					})
+				.col-6.col-md-4.col-lg-3.px-2.isotope-item.second
+					+GalleryLightbox({
+						img: 7, 
+					})
+				.col-6.col-md-4.col-lg-6.px-2.isotope-item.second
+					+GalleryLightbox({
+						img: 9, 
+					})
+				.col-6.col-md-4.col-lg-3.px-2.isotope-item.fourth
+					+GalleryLightbox({
+						img: 8, 
+					})
+				.col-6.col-md-4.col-lg-6.px-2.isotope-item.second
+					+GalleryLightbox({
+						img: 10, 
+					})

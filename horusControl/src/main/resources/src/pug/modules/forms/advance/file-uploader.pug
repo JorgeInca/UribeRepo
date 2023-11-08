@@ -1,0 +1,95 @@
+extends ../../../layouts/LayoutComponent
+
+append variables
+  -
+    var pageHeader = {
+      title: 'File Uploader',
+      description: `${name} uses <b>DropzoneJS</b> for file-uploader. DropzoneJS is an open-source library that provides drag & drop file uploads with image previews.`,
+      url: `https://www.dropzonejs.com/`,
+      linkText: 'Documentation for DropzoneJS',
+    }
+
+prepend styles
+  link(href=`${CWD}vendors/dropzone/dropzone.min.css`, rel='stylesheet')
+
+prepend scripts
+  script(src=`${CWD}vendors/dropzone/dropzone.min.js`)
+
+block component 
+  .mb-9
+    +ComponentCard({
+      title: 'Single File Upload',
+      anchor: true,
+      description:"<code>Dropzone </code>requires a valid server-side url for the file upload. You can easily pass it through <code>data-options </code>attribute like <code>data-options!={ url: 'valid/url'}</code>",
+      descriptionClass:'mt-2 mb-0'
+    }).mb-3.mt-6
+      .dropzone.dropzone-multiple.p-0#dropzone(data-dropzone data-options!={ url: 'valid/url', maxFiles: 1, dictDefaultMessage: 'Choose or Drop a file here' })
+        .fallback
+          input(type="file" name="file")
+        .dz-message(data-dz-message)
+          .dz-message-text
+            img(src=`${CWD}assets/img/icons/cloud-upload.svg`, width=25 alt="").me-2
+            | Drop your file here
+
+        .dz-preview.dz-preview-multiple.m-0.d-flex.flex-column
+
+          .d-flex.pb-3.border-bottom.media.px-2
+            .border.border-300.p-2.rounded-2.me-2
+              img.rounded-2(src=`${CWD}assets/img/icons/file.png` alt="..." data-dz-thumbnail).dz-image
+            .flex-1.d-flex.flex-between-center
+              div
+                h6(data-dz-name)
+                .d-flex.align-items-center
+                  p.mb-0.fs--1.text-400.lh-1(data-dz-size)
+                  .dz-progress
+                    span.dz-upload(data-dz-uploadprogress='')
+                span.fs--2.text-danger(data-dz-errormessage)
+              .dropdown.font-sans-serif
+                button.btn.btn-link.text-600.btn-sm.dropdown-toggle.btn-reveal.dropdown-caret-none(type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
+                  span.fas.fa-ellipsis-h
+                .dropdown-menu.dropdown-menu-end.border.py-2
+                  a.dropdown-item(href="#!" data-dz-remove) Remove File
+
+
+    +ComponentCard({
+      title: 'Multiple File Upload',
+      anchor: true,
+    }).mb-4
+      form.dropzone.dropzone-multiple.p-0#dropzone-multiple(data-dropzone action='#!')
+        .fallback
+          input(name='file' type='file', multiple)
+        .dz-message(data-dz-message)
+          img(src=`${CWD}assets/img/icons/cloud-upload.svg`, width=25 alt="").me-2
+          | Drop your files here
+        .dz-preview.dz-preview-multiple.m-0.d-flex.flex-column
+          .d-flex.mb-3.pb-3.border-bottom.media
+            .border.border-300.p-2.rounded-2.me-2
+              img.rounded-2(src=`${CWD}assets/img/icons/file.png` alt="..." data-dz-thumbnail).dz-image
+            .flex-1.d-flex.flex-between-center
+              div
+                h6(data-dz-name)
+                .d-flex.align-items-center
+                  p.mb-0.fs--1.text-400.lh-1(data-dz-size)
+                  .dz-progress
+                    span.dz-upload(data-dz-uploadprogress='')
+                span.fs--2.text-danger(data-dz-errormessage)
+              .dropdown.font-sans-serif
+                button.btn.btn-link.text-600.btn-sm.dropdown-toggle.btn-reveal.dropdown-caret-none(type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
+                  span.fas.fa-ellipsis-h
+                .dropdown-menu.dropdown-menu-end.border.py-2
+                  a.dropdown-item(href="#!" data-dz-remove) Remove File
+
+    .card.mb-4
+      .card-header
+        h5.mb-0 Stylesheet
+      .card-body.bg-light
+        +ComponentCardLib
+          link(href=`vendors/dropzone/dropzone.min.css`, rel='stylesheet')
+
+
+    .card.mb-4
+      .card-header
+        h5.mb-0 Javascript
+      .card-body.bg-light
+        +ComponentCardLib
+          script(src=`vendors/dropzone/dropzone.min.js`)

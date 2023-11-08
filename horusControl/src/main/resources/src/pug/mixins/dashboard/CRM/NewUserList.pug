@@ -1,0 +1,25 @@
+mixin NewUserList 
+  .mb-3
+    h3 New Users &amp; Leads
+    p.text-700.mb-0 Payment received across all channels
+  .row.g-6
+    .col-md-6.mb-2.mb-sm-0
+      .d-flex.align-items-center
+        span.me-2.text-info(data-feather="users" style="min-height:24px; width:24px")
+        h4.text-600.mb-0 New Users :
+          span.text-1100  42
+        span.badge.badge-phoenix.fs--2.badge-phoenix-success.d-inline-flex.align-items-center.ms-2
+          span.badge-label.d-inline-block.lh-base +24.5%
+          span.ms-1.fa-solid.fa-caret-up.d-inline-block.lh-1
+      .pb-0.pt-4
+        .echarts-new-users(style='min-height:110px;width:100%;')
+    .col-md-6
+      .d-flex.align-items-center
+        span.me-2.text-primary(data-feather="zap" style="height:24px; width:24px")
+        h4.text-600.mb-0 New Leads :
+          span.text-1100 45
+        span.badge.badge-phoenix.fs--2.badge-phoenix-success.d-inline-flex.align-items-center.ms-2
+          span.badge-label.d-inline-block.lh-base +30.5%
+          span.ms-1.fa-solid.fa-caret-up.d-inline-block.lh-1
+      .pb-0.pt-4
+        .echarts-new-leads(style='min-height:110px;width:100%;')

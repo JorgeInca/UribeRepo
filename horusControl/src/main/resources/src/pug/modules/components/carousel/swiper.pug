@@ -1,0 +1,166 @@
+extends ../../../layouts/LayoutComponent
+include ../../../mixins/components/Carousel
+
+
+
+
+prepend styles
+  link(href=`${CWD}vendors/swiper/swiper-bundle.min.css`, rel='stylesheet')
+
+prepend scripts
+  script(src=`${CWD}vendors/swiper/swiper-bundle.min.js`)
+
+append variables
+  -
+    var pageHeader = {
+      title: 'Swiper',
+      description: 'Swiper is the most modern free mobile touch slider with hardware accelerated transitions and amazing native behavior. It is intended to be used in mobile websites, mobile web apps, and mobile native/hybrid apps.',
+      url: `https://swiperjs.com/get-started`,
+      linkText: 'Documentation for swiper',
+      breadcrumb:[
+        {
+          name:'Components',
+          link:'#!'
+        },
+        {
+          name:'Swiper',
+          active:true
+        },
+      ]
+    }
+  -
+    var rightNav = [
+      {
+        name: 'Swiper with thumbnail',
+        id: '#swiper-with-thumbnail',
+      },
+      {
+        name: 'Swiper without thumbnail',
+        id: '#swiper-without-thumbnail',
+      },
+      {
+        name: 'Swiper without navigation example',
+        id: '#swiper-without-navigation-example',
+      },
+    ]
+
+block component
+  .mb-9
+    +ComponentCard({
+      title: 'Swiper with thumbnail',
+      anchor: true,
+      description: "This can be simply done by using the attribute. For Swiper with thumbnail use <code>thumb </code>options in your pug/HTML. You can place thumbnail to a specific parent by providing <code>thumbOptions: '#parentID' </code>value in <code>thumb </code>options. Otherwise thumbnail will be placed after the <code>.swiper-container </code>element.",
+      descriptionClass:'mt-2 mb-0'
+    }).mb-3
+      .swiper-theme-container
+        .swiper-container.theme-slider(data-swiper!={
+          spaceBetween: 5,
+          loop: true,
+          loopedSlides: 5,
+          thumb: {
+            spaceBetween: 5,
+            slidesPerView: 5,
+            loop: true,
+            freeMode: true,
+            grabCursor: true,
+            loopedSlides: 5, 
+            centeredSlides: true,
+            slideToClickedSlide: true,
+            watchSlidesVisibility: true,
+            watchSlidesProgress: true,
+          },
+          slideToClickedSlide: true,
+        })
+          .swiper-wrapper
+            .swiper-slide
+              img(src=`${CWD}assets/img/generic/30.jpg` alt="").rounded-1.img-fluid
+            .swiper-slide  
+              img(src=`${CWD}assets/img/generic/31.jpg` alt="").rounded-1.img-fluid
+            .swiper-slide  
+              img(src=`${CWD}assets/img/generic/32.jpg` alt="").rounded-1.img-fluid 
+            .swiper-slide  
+              img(src=`${CWD}assets/img/generic/33.jpg` alt="").rounded-1.img-fluid 
+            .swiper-slide  
+              img(src=`${CWD}assets/img/generic/34.jpg` alt="").rounded-1.img-fluid 
+            .swiper-slide  
+              img(src=`${CWD}assets/img/generic/35.jpg` alt="").rounded-1.img-fluid    
+        .swiper-nav
+          .swiper-button-next
+            span.fas.fa-chevron-right.nav-icon
+          .swiper-button-prev
+            span.fas.fa-chevron-left.nav-icon
+
+
+    +ComponentCard({
+      title: 'Swiper without thumbnail',
+      anchor: true,
+      description: "For Swiper without thumbnail simply remove thumb options from your pug/HTML.",
+      descriptionClass:'mt-2 mb-0'
+    }).mb-3
+      .swiper-theme-container
+        .swiper-container.theme-slider(data-swiper!={
+          autoplay: true,
+          spaceBetween: 5,
+          loop: true,
+          loopedSlides: 5,
+          slideToClickedSlide: true,
+        })
+          .swiper-wrapper
+            .swiper-slide
+              img(src=`${CWD}assets/img/generic/30.jpg` alt="").rounded-1.img-fluid
+            .swiper-slide  
+              img(src=`${CWD}assets/img/generic/31.jpg` alt="").rounded-1.img-fluid
+            .swiper-slide  
+              img(src=`${CWD}assets/img/generic/32.jpg` alt="").rounded-1.img-fluid
+            .swiper-slide  
+              img(src=`${CWD}assets/img/generic/33.jpg` alt="").rounded-1.img-fluid 
+            .swiper-slide  
+              img(src=`${CWD}assets/img/generic/34.jpg` alt="").rounded-1.img-fluid 
+            .swiper-slide  
+              img(src=`${CWD}assets/img/generic/35.jpg` alt="").rounded-1.img-fluid    
+        .swiper-nav
+          .swiper-button-next
+            span.fas.fa-chevron-right.nav-icon
+          .swiper-button-prev
+            span.fas.fa-chevron-left.nav-icon
+
+    +ComponentCard({
+      title: 'Swiper without navigation example',
+      anchor: true,
+    }).mb-3
+      .swiper-theme-container
+        .swiper-container.theme-slider(data-swiper!={
+          autoplay: true,
+          spaceBetween: 5,
+          loop: true,
+          loopedSlides: 5,
+          slideToClickedSlide: true,
+        })
+          .swiper-wrapper
+            .swiper-slide
+              img(src=`${CWD}assets/img/generic/30.jpg` alt="").rounded-1.img-fluid
+            .swiper-slide  
+              img(src=`${CWD}assets/img/generic/31.jpg` alt="").rounded-1.img-fluid
+            .swiper-slide  
+              img(src=`${CWD}assets/img/generic/32.jpg` alt="").rounded-1.img-fluid
+            .swiper-slide  
+              img(src=`${CWD}assets/img/generic/33.jpg` alt="").rounded-1.img-fluid 
+            .swiper-slide  
+              img(src=`${CWD}assets/img/generic/34.jpg` alt="").rounded-1.img-fluid 
+            .swiper-slide  
+              img(src=`${CWD}assets/img/generic/35.jpg` alt="").rounded-1.img-fluid 
+
+
+    +ComponentCard({
+      title: 'Stylesheet',
+      hideNavTab: true
+    }).my-4
+      +ComponentCardLib
+        link(href=`vendors/swiper/swiper-bundle.min.css`, rel='stylesheet')
+
+    +ComponentCard({
+      title: 'Javascript',
+      hideNavTab: true
+    }).my-4
+      +ComponentCardLib
+        script(src=`vendors/swiper/swiper-bundle.min.js`)

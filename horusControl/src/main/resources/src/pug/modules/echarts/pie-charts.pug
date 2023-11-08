@@ -1,0 +1,41 @@
+extends ../../layouts/LayoutComponent
+
+prepend scripts
+  script(src=`${CWD}vendors/echarts/echarts.min.js`)
+
+append scripts
+  script(src=`${CWD}assets/js/echarts-example.js`)
+
+
+block component
+  .row.g-4.mb-9
+    .col-xl-6
+      +ComponentCard({title:'Pie chart'})
+        // Find the JS file for the following chart at: src/js/charts/echarts/examples/pie-chart.js
+        // If you are not using gulp based workflow, you can find the transpiled code at: public/assets/js/echarts-example.js
+        .echart-pie-chart-example(style='min-height:320px')
+    .col-xl-6
+      +ComponentCard({title:'Doughnut chart'})
+        // Find the JS file for the following chart at: src/js/charts/echarts/examples/doughnut-chart.js
+        // If you are not using gulp based workflow, you can find the transpiled code at: public/assets/js/echarts-example.js
+        .echart-doughnut-chart-example(style='min-height:320px')
+    .col-xl-6
+      +ComponentCard({title:'Doughnut rounded chart'})
+        // Find the JS file for the following chart at: src/js/charts/echarts/examples/doughnut-rounded-chart.js
+        // If you are not using gulp based workflow, you can find the transpiled code at: public/assets/js/echarts-example.js
+        .echart-doughnut-rounded-chart-example(style='min-height:320px')
+    .col-xl-6
+      +ComponentCard({title:'Pie multiple chart'})
+        // Find the JS file for the following chart at: src/js/charts/echarts/examples/pie-multiple-chart.js
+        // If you are not using gulp based workflow, you can find the transpiled code at: public/assets/js/echarts-example.js
+        .echart-pie-multiple-chart-example(style='min-height:320px')
+    .col-xl-6
+      +ComponentCard({title:'Pie label align chart'})
+        // Find the JS file for the following chart at: src/js/charts/echarts/examples/pie-label-align-chart.js
+        // If you are not using gulp based workflow, you can find the transpiled code at: public/assets/js/echarts-example.js
+        .echart-pie-label-align-chart-example(style='min-height:320px')
+    .col-xl-6
+      +ComponentCard({title:'Pie edge align chart'})
+        // Find the JS file for the following chart at: src/js/charts/echarts/examples/pie-edge-align-chart.js
+        // If you are not using gulp based workflow, you can find the transpiled code at: public/assets/js/echarts-example.js
+        .echart-pie-edge-align-chart-example(style='min-height:320px')

@@ -1,0 +1,152 @@
+mixin Pricing
+  h4.mb-3 Inventory
+  .row.g-0.border-top.border-bottom.border-300
+    .col-sm-4
+      .nav.flex-sm-column.border-bottom.border-bottom-sm-0.border-end-sm.border-300.fs--1.vertical-tab.h-100.justify-content-between(role='tablist' aria-orientation='vertical')
+        a#pricingTab.nav-link.border-end.border-end-sm-0.border-bottom-sm.border-300.text-center.text-sm-start.cursor-pointer.outline-none.d-sm-flex.align-items-sm-center.active(data-bs-toggle='tab' data-bs-target='#pricingTabContent' role='tab' aria-controls='pricingTabContent' aria-selected='true') 
+          span.me-sm-2.fs-4.nav-icons(data-feather='tag')
+          span.d-none.d-sm-inline Pricing
+        a#restockTab.nav-link.border-end.border-end-sm-0.border-bottom-sm.border-300.text-center.text-sm-start.cursor-pointer.outline-none.d-sm-flex.align-items-sm-center(data-bs-toggle='tab' data-bs-target='#restockTabContent' role='tab' aria-controls='restockTabContent' aria-selected='false') 
+          span.me-sm-2.fs-4.nav-icons(data-feather='package')
+          span.d-none.d-sm-inline Restock
+        a#shippingTab.nav-link.border-end.border-end-sm-0.border-bottom-sm.border-300.text-center.text-sm-start.cursor-pointer.outline-none.d-sm-flex.align-items-sm-center(data-bs-toggle='tab' data-bs-target='#shippingTabContent' role='tab' aria-controls='shippingTabContent' aria-selected='false') 
+          span.me-sm-2.fs-4.nav-icons(data-feather='truck')
+          span.d-none.d-sm-inline Shipping
+        a#productsTab.nav-link.border-end.border-end-sm-0.border-bottom-sm.border-300.text-center.text-sm-start.cursor-pointer.outline-none.d-sm-flex.align-items-sm-center(data-bs-toggle='tab' data-bs-target='#productsTabContent' role='tab' aria-controls='productsTabContent' aria-selected='false') 
+          span.me-sm-2.fs-4.nav-icons(data-feather='globe')
+          span.d-none.d-sm-inline Global Delivery
+        a#attributesTab.nav-link.border-end.border-end-sm-0.border-bottom-sm.border-300.text-center.text-sm-start.cursor-pointer.outline-none.d-sm-flex.align-items-sm-center(data-bs-toggle='tab' data-bs-target='#attributesTabContent' role='tab' aria-controls='attributesTabContent' aria-selected='false') 
+          span.me-sm-2.fs-4.nav-icons(data-feather='sliders')
+          span.d-none.d-sm-inline Attributes
+        a#advancedTab.nav-link.text-center.text-sm-start.cursor-pointer.outline-none.d-sm-flex.align-items-sm-center(data-bs-toggle='tab' data-bs-target='#advancedTabContent' role='tab' aria-controls='advancedTabContent' aria-selected='false') 
+          span.me-sm-2.fs-4.nav-icons(data-feather='lock')
+          span.d-none.d-sm-inline Advanced
+    .col-sm-8
+      .tab-content.py-3.ps-sm-4.h-100
+        #pricingTabContent.tab-pane.fade.show.active(role='tabpanel')
+          h4.mb-3.d-sm-none Pricing
+          .row.g-3
+            .col-12.col-lg-6
+              h5.mb-2.text-1000 Regular price
+              input.form-control(type='text' placeholder='$$$')
+            .col-12.col-lg-6
+              h5.mb-2.text-1000 Sale price
+              input.form-control(type='text' placeholder='$$$')
+
+        #restockTabContent.tab-pane.fade.h-100(role='tabpanel' aria-labelledby='restockTab') 
+          .d-flex.flex-column.h-100
+            h5.mb-3.text-1000 Add to Stock
+            .row.g-3.flex-1.mb-4
+              .col-sm-7
+                input.form-control(type='number' placeholder='Quantity')
+              .col-sm
+                button.btn.btn-primary(type='button')
+                  span.fa-solid.fa-check.me-1.fs--2
+                  | Confirm
+            table
+              thead
+                tr
+                  th(style='width: 200px;')
+                  th
+              tbody
+                tr
+                  td.text-1000.fw-bold.py-1 Product in stock now:
+                  td.text-700.fw-semi-bold.py-1 $1,090
+                    button.btn.p-0(type='button')
+                      span.fa-solid.fa-rotate.text-900.ms-1(style="--phoenix-text-opacity: .6;")
+                tr
+                  td.text-1000.fw-bold.py-1 Product in transit:
+                  td.text-700.fw-semi-bold.py-1 5000
+                tr
+                  td.text-1000.fw-bold.py-1 Last time restocked:
+                  td.text-700.fw-semi-bold.py-1 30th June, 2021
+                tr
+                  td.text-1000.fw-bold.py-1 Total stock over lifetime:
+                  td.text-700.fw-semi-bold.py-1 20,000
+
+        #shippingTabContent.tab-pane.fade.h-100(role='tabpanel' aria-labelledby='shippingTab')
+          .d-flex.flex-column.h-100
+            h5.mb-3.text-1000 Shipping Type
+            .flex-1
+              .mb-4
+                .form-check.mb-1
+                  input.form-check-input(type='radio' name='shippingRadio' id="fullfilledBySeller")
+                  label.form-check-label.fs-0.text-900(for='fullfilledBySeller') Fullfilled by Seller
+                .ps-4
+                  p.text-800.fs--1.mb-0 You’ll be responsible for product delivery. 
+                    br
+                    | Any damage or delay during shipping may cost you a Damage fee.
+              .mb-4
+                .form-check.mb-1
+                  input.form-check-input(type='radio' name='shippingRadio' id="fullfilledByPhoenix" checked)
+                  label.form-check-label.fs-0.text-900.d-flex.align-items-center(for='fullfilledByPhoenix') Fullfilled by Phoenix 
+                    span.badge.badge-phoenix.badge-phoenix-warning.fs--2.ms-2 Recommended
+                .ps-4
+                  p.text-800.fs--1.mb-0 Your product, Our responsibility.
+                    br
+                    | For a measly fee, we will handle the delivery process for you.
+            p.fs--1.fw-semi-bold.mb-0 See our 
+              a.fw-bold(href="#!") Delivery terms and conditions 
+              | for details.
+
+        #productsTabContent.tab-pane.fade(role='tabpanel' aria-labelledby='productsTab')
+          h5.mb-3.text-1000 Global Delivery
+          .mb-3
+            .form-check
+              input.form-check-input(type='radio' name='deliveryRadio' id="worldwideDelivery")
+              label.form-check-label.fs-0.text-900(for='worldwideDelivery') Worldwide delivery
+            .ps-4
+              p.fs--1.mb-0.text-800 Only available with Shipping method: 
+                a(href="#!") Fullfilled by Phoenix
+          .mb-3
+            .form-check
+              input.form-check-input(type='radio' name='deliveryRadio' checked id="selectedCountry")
+              label.form-check-label.fs-0.text-900(for='selectedCountry') Selected Countries
+            .ps-4(style='max-width: 350px;')
+              select.form-select.ps-4#organizerMultiple(data-choices multiple data-options!={removeItemButton: true,placeholder: true})
+                option(value="") Type Country name
+                option United States of America
+                option United Kingdom
+                option Canada
+                option Mexico
+          div
+            .form-check
+              input.form-check-input(type='radio' name='deliveryRadio' id="localDelivery")
+              label.form-check-label.fs-0.text-900(for='localDelivery') Local delivery
+            p.fs--1.ms-4.mb-0.text-800 Deliver to your country of residence 
+              a(href="#!") Change profile address   
+
+        #attributesTabContent.tab-pane.fade(role='tabpanel' aria-labelledby='attributesTab') 
+          h5.mb-3.text-1000 Attributes
+          .form-check
+            input#fragileCheck.form-check-input(type='checkbox')
+            label.form-check-label.text-900.fs-0(for='fragileCheck') Fragile Product
+
+          .form-check
+            input#biodegradableCheck.form-check-input(type='checkbox')
+            label.form-check-label.text-900.fs-0(for='biodegradableCheck') Biodegradable
+
+          .mb-3
+            .form-check
+              input#frozenCheck.form-check-input(type='checkbox' checked)
+              label.form-check-label.text-900.fs-0(for='frozenCheck') Frozen Product
+              input.form-control(type='text' placeholder='Max. allowed Temperature' style='max-width: 350px;')
+
+          .form-check
+            input#productCheck.form-check-input(type='checkbox' checked)
+            label.form-check-label.text-900.fs-0(for='productCheck') Expiry Date of Product
+            input.form-control.inventory-attributes.datetimepicker#inventory(type="text" style='max-width: 350px;' placeholder="d/m/y" data-options!={disableMobile:true})
+        #advancedTabContent.tab-pane.fade(role='tabpanel' aria-labelledby='advancedTab') 
+          h5.mb-3.text-1000 Advanced
+          .row.g-3
+            .col-12.col-lg-6
+              h5.mb-2.text-1000 Product ID Type
+              select.form-select(aria-label='form-select-lg example')
+                option(selected) ISBN
+                option(value='1') UPC
+                option(value='2') EAN
+                option(value='3') JAN
+            .col-12.col-lg-6
+              h5.mb-2.text-1000 Product ID
+              input.form-control(type='text' placeholder='ISBN Number')
+

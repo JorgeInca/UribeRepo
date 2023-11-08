@@ -1,0 +1,15 @@
+$theme-colors-rgb: map-loop($theme-all-colors, to-rgb, '$value') !default;
+$dark-theme-colors-rgb: map-loop(
+  $dark-theme-all-colors,
+  to-rgb,
+  '$value'
+) !default;
+$grays-rgb: map-loop($grays, to-rgb, '$value') !default;
+$dark-grays-rgb: map-loop($dark-grays, to-rgb, '$value') !default;
+$utilities-colors: $theme-colors-rgb !default;
+$utilities-border-colors: map-loop(
+  $utilities-colors,
+  rgba-css-var,
+  '$key',
+  'border'
+) !default;

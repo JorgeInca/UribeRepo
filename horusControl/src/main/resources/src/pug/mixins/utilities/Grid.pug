@@ -1,0 +1,129 @@
+mixin GridTable
+  .table-responsive.scrollbar
+    table.table.table-bordered.table-striped.mb-0
+      thead
+        tr
+          th
+          th.text-center
+            | Extra small
+            br
+            small &lt;576px
+          th.text-center
+            | Small
+            br
+            small ≥576px
+          th.text-center
+            | Medium
+            br
+            small ≥768px
+          th.text-center
+            | Large
+            br
+            small ≥992px
+          th.text-center
+            | Extra large
+            br
+            small ≥1200px
+          th.text-center
+            | Massive
+            br
+            small ≥1400px
+      tbody
+        tr
+          th.text-nowrap(scope='row') Max container width
+          td None (auto)
+          td 540px
+          td 720px
+          td 960px
+          td 1140px
+          td 1320px
+        tr
+          th.text-nowrap(scope='row') Class prefix
+          td
+            code .col-
+          td
+            code .col-sm-
+          td
+            code .col-md-
+          td
+            code .col-lg-
+          td
+            code .col-xl-
+          td
+            code .col-xxl-
+        tr
+          th.text-nowrap(scope='row') # of columns
+          td(colspan='6') 12
+        tr
+          th.text-nowrap(scope='row') Gutter width
+          td(colspan='6') 30px (15px on each side of a column)
+        tr
+          th.text-nowrap(scope='row') Nestable
+          td(colspan='6') Yes
+        tr
+          th.text-nowrap(scope='row') Column ordering
+          td(colspan='6') Yes
+
+mixin GridEqualWidth 
+  .container.text-center
+    .row.bg-100.mb-3
+      .col.p-2.border 1 of 2
+      .col.p-2.border 2 of 2
+    .row.bg-100
+      .col.p-2.border 1 of 3
+      .col.p-2.border 2 of 3
+      .col.p-2.border 3 of 3
+
+mixin GridColumnWidth 
+  .container.text-center
+    .row.bg-100.mb-3
+      .col.p-2.border 1 of 3
+      .col-6.p-2.border 2 of 3 (wider)
+      .col.p-2.border 3 of 3
+    .row.bg-100
+      .col.p-2.border 1 of 3
+      .col-5.p-2.border 2 of 3 (wider)
+      .col.p-2.border 3 of 3
+
+mixin StackedToHorizontal 
+  .container.text-center
+    .row.bg-100.mb-3
+      .col-sm-8.p-2.border col-sm-8
+      .col-sm-4.p-2.border col-sm-4
+    .row.bg-100
+      .col-sm.p-2.border col-sm
+      .col-sm.p-2.border col-sm
+      .col-sm.p-2.border col-sm
+
+mixin GridMixAndMatch 
+  .container.text-center
+    //- Stack the columns on mobile by making one full-width and the other half-width
+    .row.mb-3
+      .col-md-8.bg-100.p-2.border .col-md-8
+      .col-6.col-md-4.bg-100.p-2.border .col-6 .col-md-4
+    //- Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop
+    .row.mb-3
+      .col-6.col-md-4.bg-100.p-2.border .col-6 .col-md-4
+      .col-6.col-md-4.bg-100.p-2.border .col-6 .col-md-4
+      .col-6.col-md-4.bg-100.p-2.border .col-6 .col-md-4
+    //- Columns are always 50% wide, on mobile and desktop
+    .row
+      .col-6.bg-100.p-2.border .col-6
+      .col-6.bg-100.p-2.border .col-6
+
+mixin GridRowColumns
+  .container.text-center
+    .row.row-cols-2.bg-100
+      .col.p-2.border Column
+      .col.p-2.border Column
+      .col.p-2.border Column
+      .col.p-2.border Column
+
+mixin GridNesting
+  .container.text-center
+    .row
+      .col-sm-3.bg-100.p-2.border Level 1: .col-sm-3
+      .col-sm-9.bg-100.p-3.border 
+        .row
+          .col-8.col-sm-6.p-2.border Level 2: .col-8 .col-sm-6
+          .col-4.col-sm-6.p-2.border Level 2: .col-4 .col-sm-6

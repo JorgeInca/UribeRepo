@@ -1,0 +1,37 @@
+extends ../../layouts/LayoutTheme
+include ../../mixins/social/Feed
+include ../../mixins/social/Settings
+
+
+append variables
+
+block content
+  .mb-9
+    .row.g-6
+      .col-12.col-xl-4
+        +SettingsProfileCard.mb-5
+        +LeftSidebar
+      .col-12.col-xl-8
+        .border-bottom.border-300.mb-4
+          +PersonalInformation
+          .row.gx-3.mb-6.gy-6.gy-sm-3
+            .col-12.col-sm-6
+              +CompanyInfo
+            .col-12.col-sm-6
+              +ChangePassword
+          .mb-6
+            +Social
+          .text-end.mb-6
+            div
+              button.btn.btn-phoenix-secondary.me-2 Cancel Changes
+              button.btn.btn-phoenix-primary Save Information
+        .row.gy-5
+          .col-12.col-md-6
+            h4.text-black Transfer Ownership
+            p.text-700 Transfer this account to another person or to a company repository.
+            button.btn.btn-phoenix-warning Transfer
+          .col-12.col-md-6
+            h4.text-black Account Deletion
+            p.text-700 Transfer this account to another person or to a company repository.
+            button.btn.btn-phoenix-danger Delete account
+  

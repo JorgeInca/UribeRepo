@@ -1,0 +1,66 @@
+extends ../../layouts/LayoutComponent
+
+prepend scripts
+  script(src=`${CWD}vendors/echarts/echarts.min.js`)
+
+append scripts
+  script(src=`${CWD}assets/js/echarts-example.js`)
+
+
+block component
+  .row.g-4.mb-9
+    .col-xl-6
+      +ComponentCard({title:'Basic bar chart'})
+        // Find the JS file for the following chart at: src/js/charts/echarts/examples/basic-bar-chart.js
+        // If you are not using gulp based workflow, you can find the transpiled code at: public/assets/js/echarts-example.js
+        .echart-basic-bar-chart-example(style='min-height:300px')
+    .col-xl-6
+      +ComponentCard({title:'Horizontal bar chart'})
+        // Find the JS file for the following chart at: src/js/charts/echarts/examples/horizontal-bar-chart.js
+        // If you are not using gulp based workflow, you can find the transpiled code at: public/assets/js/echarts-example.js
+        .echart-horizontal-bar-chart-example(style='min-height:300px')
+    .col-xl-6
+      +ComponentCard({title:'Bar chart with negative value'})
+        // Find the JS file for the following chart at: src/js/charts/echarts/examples/bar-negative-chart.js
+        // If you are not using gulp based workflow, you can find the transpiled code at: public/assets/js/echarts-example.js
+        .echart-bar-negative-chart-example(style='min-height:300px')
+    .col-xl-6
+      +ComponentCard({title:'Series bar chart'})
+        // Find the JS file for the following chart at: src/js/charts/echarts/examples/series-bar-chart.js
+        // If you are not using gulp based workflow, you can find the transpiled code at: public/assets/js/echarts-example.js
+        .echart-series-bar-chart-example(style='min-height:300px')
+    .col-xl-6
+      +ComponentCard({title:'Stacked bar chart'})
+        // Find the JS file for the following chart at: src/js/charts/echarts/examples/stacked-bar-chart.js
+        // If you are not using gulp based workflow, you can find the transpiled code at: public/assets/js/echarts-example.js
+        .echart-stacked-bar-chart-example(style='min-height:350px')
+    .col-xl-6
+      +ComponentCard({title:'Stacked horizontal bar chart'})
+        // Find the JS file for the following chart at: src/js/charts/echarts/examples/stacked-horizontal-bar-chart.js
+        // If you are not using gulp based workflow, you can find the transpiled code at: public/assets/js/echarts-example.js
+        .echart-stacked-horizontal-bar-chart-example(style='min-height:350px')
+    .col-xl-6
+      +ComponentCard({title:'Bar race chart'})
+        // Find the JS file for the following chart at: src/js/charts/echarts/examples/bar-race-chart.js
+        // If you are not using gulp based workflow, you can find the transpiled code at: public/assets/js/echarts-example.js
+        .echart-bar-race-chart-example(style='min-height:350px')
+    .col-xl-6
+      +ComponentCard({title:'Gradient bar chart'})
+        // Find the JS file for the following chart at: src/js/charts/echarts/examples/bar-gradient-chart.js
+        // If you are not using gulp based workflow, you can find the transpiled code at: public/assets/js/echarts-example.js
+        .echart-bar-gradient-chart-example(style='min-height:350px')
+    .col-xl-6
+      +ComponentCard({title:'Mixed chart'})
+        // Find the JS file for the following chart at: src/js/charts/echarts/examples/bar-line-mixed-chart.js
+        // If you are not using gulp based workflow, you can find the transpiled code at: public/assets/js/echarts-example.js
+        .echart-bar-line-mixed-chart-example(style='min-height:350px')
+    .col-xl-6
+      +ComponentCard({title:'Water fall chart'})
+        // Find the JS file for the following chart at: src/js/charts/echarts/examples/bar-waterfall-chart.js
+        // If you are not using gulp based workflow, you can find the transpiled code at: public/assets/js/echarts-example.js
+        .echart-bar-waterfall-chart-example(style='min-height:350px')
+    .col-12
+      +ComponentCard({title:'Bar timeline chart'})
+        // Find the JS file for the following chart at: src/js/charts/echarts/examples/bar-timeline-chart.js
+        // If you are not using gulp based workflow, you can find the transpiled code at: public/assets/js/echarts-example.js
+        .echart-bar-timeline-chart-example(style='min-height:450px')

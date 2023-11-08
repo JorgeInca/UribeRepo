@@ -1,0 +1,426 @@
+extends ../../layouts/LayoutTheme
+include ../../mixins/dashboard/common
+include ../../mixins/crm/DealDetails
+include ../../mixins/crm/LeadDetails
+include ../../mixins/project-management/ToDoList
+include ../../mixins/dashboard/project-management/ToDo
+
+
+prepend styles
+	link(href=`${CWD}vendors/dropzone/dropzone.min.css`, rel='stylesheet')
+
+prepend scripts
+	script(src=`${CWD}vendors/dropzone/dropzone.min.js`)
+
+append variables
+	- 
+		var breadcrumb = [
+			{
+				label: 'Page 1',
+				href: '#!'
+			},
+			{
+				label: 'Page 2',
+				href: '#!',
+			},
+			{
+				label: 'Default',
+				href: '#!',
+				active: true
+			},
+		];
+
+	-
+		var emailTableData = [
+			{
+				mail:{
+					subject: 'Quary about purchased soccer socks',
+					email:'jackson@mail.com',
+				},
+				active:true,
+				sent:'Jackson Pollock',
+				date: 'Dec 29, 2021 10:23 am',
+				source:'Call',
+				type_status :{
+					label: 'sent',
+					type: 'badge-phoenix-success',
+				},
+			},
+			{
+				mail:{
+					subject: 'How to take the headache out of Order',
+					email:'ansolo45@mail.com',
+				},
+				active:true,
+				sent:'Ansolo Lazinatov',
+				date: 'Dec 27, 2021 3:27 pm',
+				source:'Call',
+				type_status :{
+					label: 'delivered',
+					type: 'badge-phoenix-info',
+				},
+			},
+			{
+				mail:{
+					subject: 'The Arnold Schwarzenegger of Order',
+					email:'ansolo45@mail.com',
+				},
+				active:true,
+				sent:'Ansolo Lazinatov',
+				date: 'Dec 24, 2021 10:44 am',
+				source:'Call',
+				type_status :{
+					label: 'Bounce',
+					type: 'badge-phoenix-warning',
+				},
+			},
+			{
+				mail:{
+					subject: 'My order is not being taken',
+					email:'jackson@mail.com',
+				},
+				active:true,
+				sent:'Jackson Pollock',
+				date: 'Dec 19, 2021 4:55 pm',
+				source:'Call',
+				type_status :{
+					label: 'Spam',
+					type: 'badge-phoenix-danger',
+				},
+			},
+			{
+				mail:{
+					subject: 'Shipment is missing',
+					email:'jackson@mail.com',
+				},
+				active:true,
+				sent:'Jackson Pollock',
+				date: 'Dec 19, 2021 2:43 pm',
+				source:'Call',
+				type_status :{
+					label: 'sent',
+					type: 'badge-phoenix-success',
+				},
+			},
+			{
+				mail:{
+					subject: 'How can I order something urgently?',
+					email:'ansolo45@mail.com',
+				},
+				active:true,
+				sent:'Jackson Pollock',
+				date: 'Dec 19, 2021 2:43 pm',
+				source:'Call',
+				type_status :{
+					label: 'Delivered',
+					type: 'badge-phoenix-info',
+				},
+			},
+			{
+				mail:{
+					subject: 'How the delicacy of the products will be handled?',
+					email:'ansolo45@mail.com',
+				},
+				active:true,
+				sent:'Ansolo Lazinatov',
+				date: 'Dec 16, 2021 5:18 pm',
+				source:'Call',
+				type_status :{
+					label: 'bounced',
+					type: 'badge-phoenix-warning',
+				},
+			},
+		]
+	-
+		var CallTableData = [
+			{
+				mail:{
+					subject: 'Quary about purchased soccer socks',
+					email:'jackson@mail.com',
+				},
+				active:true,
+				sent:'Jackson Pollock',
+				date: 'Dec 29, 2021 10:23 am',
+				source:'Call',
+				type_status :{
+					label: 'sent',
+					type: 'badge-phoenix-success',
+				},
+			},
+			{
+				mail:{
+					subject: 'How to take the headache out of Order',
+					email:'ansolo45@mail.com',
+				},
+				active:true,
+				sent:'Ansolo Lazinatov',
+				date: 'Dec 27, 2021 3:27 pm',
+				source:'Call',
+				type_status :{
+					label: 'delivered',
+					type: 'badge-phoenix-info',
+				},
+			},
+
+		]	
+	-
+		var activityData = [
+			{
+				title: 'Assigned  as a director for Project  The Chewing Gum Attack',
+				name:'Jackson Pollock',
+				date: '22 September, 2022, 4:33 PM',
+				text:'Utilizing best practices to better leverage our assets, we must engage in black sky leadership thinking, not the usual band-aid solution. ',
+				iconBg:'bg-primary-100',
+				icon:'fa-clipboard text-primary-600 dark__text-primary-300',
+			},	
+			{
+				title: 'Onboarding Meeting',
+				name:'Jackson Pollock',
+				date: '20 September, 2022, 5:31pm',
+				//- text:'Utilizing best practices to better leverage our assets, we must engage in black sky leadership thinking, not the usual band-aid solution. ',
+				iconBg:'bg-info-100',
+				icon:'fa-video text-info-600 dark__text-info-300',
+			},
+			{
+				title: 'Designing the dungeon',
+				name:'Jackson Pollock',
+				date: '19 September, 2022, 4:39pm ',
+				text:'To get off the runway and paradigm shift, we should take  brass tacks with above-the-board actionable analytics, ramp up with viral partnering, not the usual goat rodeo putting socks on an octopus.  ',
+				iconBg:'bg-success-100',
+				icon:'fa-square-check text-success-600 dark__text-success-300',
+			},
+			{
+				title: 'Purchasing-Related Vendors',
+				name:'Ansolo Lazinatov',
+				date: '22 September, 2022, 4:30pm',
+				//- text:'Utilizing best practices to better leverage our assets, we must engage in black sky leadership thinking, not the usual band-aid solution. ',
+				iconBg:'bg-warning-100',
+				icon:'fa-phone-alt text-warning-600 dark__text-warning-300',
+			},
+			{
+				title: 'Quary about purchased soccer socks',
+				name:'Ansolo Lazinatov',
+				date: '15 September, 2022, 3:33pm',
+				text:'I’ve come across your posts and found some favorable deals on your page. I’ve added a load of products to the cart and I don’t know the payment options you avail. Also, can you enlighten me about any discount.',
+				iconBg:'bg-danger-100',
+				icon:'fa-envelope text-danger-600 dark__text-danger-300',
+			},
+			{
+				title: 'Added image',
+				name:'Ansolo Lazinatov',
+				date: '11 September, 2022, 12:15am ',
+				//- text:'Utilizing best practices to better leverage our assets, we must engage in black sky leadership thinking, not the usual band-aid solution. ',
+				iconBg:'bg-primary-100',
+				icon:'fa-paperclip text-primary-600 dark__text-primary-300',
+			},
+
+		]
+
+	-
+		var notesData = [
+			{
+				name:'Ansolo Lazinatov',
+				date: 'clock 12 Nov, 2018',
+				text:'Gave us a nice feedback'
+			},	
+			{
+				name:'Ansolo Lazinatov',
+				date: ' 30 Jan, 2019',
+				text:'I also want to let you know that I am available to you as your real estate insider from now on. If you have any questions about the market, even if they sound silly, call or text anytime. ',
+			},
+			{
+				name:'Jackson Pollock',
+				date: '19 September, 2022, 4:39pm ',
+				text:'To get off the runway and paradigm shift, we should take  brass tacks with above-the-board actionable analytics, ramp up with viral partnering, not the usual goat rodeo putting socks on an octopus.  ',
+			},
+			{
+				name:'Ansolo Lazinatov',
+				date: '22 September, 2022, 4:30pm',
+				text:'Utilizing best practices to better leverage our assets, we must engage in black sky leadership thinking, not the usual band-aid solution. ',
+			},	
+		]
+	-
+		var meetingData = [
+			{
+				title:'Onboarding Meeting',
+				date: {
+					from: '5:30 pm',
+					to:'7:00pm',
+					duration:' - 1h 30min'
+				},
+				badge:{
+					color:'badge-phoenix-primary ',
+					text:'today',
+				},
+				assigness:[
+					'9.webp','25.webp','32.webp','35.webp',
+				],
+				more: '+1',
+				priority:{
+					label: 'Urgent',
+					iconClass:'text-danger',
+				},
+			},	
+			{
+				title:'Agile Mindset Meetup',
+				date: {
+					from: '4:30 pm',
+					to:'6:00pm',
+					duration:' - 1h 30min'
+				},
+				badge:{
+					color:'badge-phoenix-warning',
+					text:'tomorrow',
+				},
+				assigness:[
+					'11.webp','26.webp','33.webp','30.webp'
+				],
+				more: '+1',
+				priority:{
+					label: 'Medium',
+					iconClass:'text-success',
+				},
+			},
+			{
+				title:'Meeting Fundamentals',
+				date: {
+					from: '6:00 pm',
+					to:'7:20pm',
+					duration:' - 1h 20min'
+				},
+				badge:{
+					color:'badge-phoenix-warning',
+					text:'tomorrow',
+				},
+				name: 'R',
+				assigness:[
+					'12.webp','28.webp','22.webp',
+				],
+				more: '+2',
+				priority:{
+					label: 'High',
+					iconClass:'text-warning',
+				},
+			},
+			{
+				title:'Design System Meeting',
+				date: {
+					from: '7:30 pm',
+					to:'8:45pm',
+					duration:' - 1h 45min'
+				},
+				badge:{
+					color:'badge-phoenix-warning',
+					text:'tomorrow',
+				},
+				assigness:[
+					'13.webp','24.webp','62.webp','34.webp',
+				],
+				more: '+4',
+				priority:{
+					label: 'Low',
+					iconClass:'text-info',
+				},
+			},
+		]
+
+block content
+	.pb-9
+		.row.align-items-center.justify-content-between.g-3.mb-4
+			.col-12.col-md-auto
+				h2.mb-0 Deal details
+			.col-12.col-md-auto.d-flex
+				button.btn.btn-phoenix-secondary.px-3.px-sm-5.me-2
+					span.fa-solid.fa-edit.me-sm-2
+					span.d-none.d-sm-inline Edit		
+				button.btn.btn-phoenix-danger.me-2
+					span.fa-solid.fa-trash.me-2
+					span Delete Deal
+				div
+					+DropDownLead(style="z-index: 9999")
+		.row.g-4.g-xl-6
+			.col-xl-5.col-xxl-4
+				.sticky-leads-sidebar 
+					+DealProfileCard.mb-3
+					+OtherInformation
+			.col-xl-7.col-xxl-8
+				+PrintingDimensions.mb-5
+				+DealsDetailsInfo.mb-7
+				ul.nav.nav-underline.deal-details.scrollbar.flex-nowrap.w-100.pb-1.mb-6#myTab(role='tablist' style="overflow-y: hidden;")
+					li.nav-item.text-nowrap(role='presentation').me-2
+						a.nav-link.active#activity-tab(data-bs-toggle='tab' href='#tab-activity' role='tab' aria-controls='tab-activity' aria-selected='false' tabindex='-1') 
+							span.fa-solid.fa-chart-line.me-2.tab-icon-color
+							| Activity
+					li.nav-item.text-nowrap(role='presentation').me-2
+						a.nav-link#notes-tab(data-bs-toggle='tab' href='#tab-notes' role='tab' aria-controls='tab-notes' aria-selected='false' tabindex='-1') 
+							span.fa-solid.fa-clipboard.me-2.tab-icon-color
+							| Notes
+					li.nav-item.text-nowrap(role='presentation').me-2
+						a.nav-link#meeting-tab(data-bs-toggle='tab' href='#tab-meeting' role='tab' aria-controls='tab-meeting' aria-selected='true') 
+							span.fa-solid.fa-video.me-2.tab-icon-color
+							| Meeting
+					li.nav-item.text-nowrap(role='presentation').me-2
+						a.nav-link#task-tab(data-bs-toggle='tab' href='#tab-task' role='tab' aria-controls='tab-task' aria-selected='true') 
+							span.fa-solid.fa-square-check.me-2.tab-icon-color
+							| Task
+					li.nav-item.text-nowrap(role='presentation').me-2
+						a.nav-link#call-tab(data-bs-toggle='tab' href='#tab-call' role='tab' aria-controls='tab-call' aria-selected='true') 
+							span.fa-solid.fa-phone.me-2.tab-icon-color
+							| Call
+					li.nav-item.text-nowrap(role='presentation').me-2
+						a.nav-link#emails-tab(data-bs-toggle='tab' href='#tab-emails' role='tab' aria-controls='tab-emails' aria-selected='true') 
+							span.fa-solid.fa-envelope.me-2.tab-icon-color
+							| Emails	
+					li.nav-item.text-nowrap(role='presentation').me-2
+						a.nav-link#attachments-tab(data-bs-toggle='tab' href='#tab-attachments' role='tab' aria-controls='tab-attachments' aria-selected='true') 
+							span.fa-solid.fa-paperclip.me-2.tab-icon-color
+							| Attachments
+				.tab-content#myTabContent
+					.tab-pane.fade.active.show#tab-activity(role='tabpanel' aria-labelledby='activity-tab')
+						h2.mb-4 Activity
+						+ActivitySearchBar('justify-content-start')
+						each data,index in activityData
+							+Activity(data, index === activityData.length - 1 )
+					.tab-pane.fade#tab-notes(role='tabpanel' aria-labelledby='notes-tab')
+						h2.mb-4 Notes
+						textarea.form-control.mb-3#notes(rows='4') 
+						.row.gy-4
+							.col-12.col-xl-auto.flex-1
+								each data,index in notesData
+									+Notes(data, index === notesData.length - 1 )
+					.tab-pane.fade#tab-meeting(role='tabpanel' aria-labelledby='meeting-tab')
+						h2.mb-4 Meeting
+						+MeetingSearchBar('justify-content-start').mb-3
+						.row.g-3
+							each data in meetingData
+								.col-xxl-6
+									+Meeting(data)
+					.tab-pane.fade#tab-task(role='tabpanel' aria-labelledby='task-tab') 
+						h2.mb-4 Tasks
+						+TasksList
+					.tab-pane.fade#tab-call(role='tabpanel' aria-labelledby='call-tab')
+						.row.align-items-center.gx-4.gy-3.flex-wrap.mb-3(class=justifyClass)&attributes(attributes)
+							.col-auto.d-flex.flex-1
+								h2.mb-0 Call
+							.col-auto
+								.d-flex.gap-3.gap-sm-4
+									.form-check
+										input.form-check-input#allCall(type='radio' name='allCall' checked)
+										label.form-check-label(for='allCall') All Call
+									.form-check
+										input.form-check-input#incomingCall(type='radio' name='allCall')
+										label.form-check-label(for='incomingCall') Incoming Call
+									.form-check
+										input.form-check-input#outgoingCall(type='radio' name='allCall')
+										label.form-check-label(for='outgoingCall') OutgoingCall
+							.col-auto
+								button.btn.btn-primary
+									span.fa-solid.fa-plus.me-2
+									| Add Call
+						+CallTable
+					.tab-pane.fade#tab-emails(role='tabpanel' aria-labelledby='emails-tab')
+						h2.mb-4 Emails
+						+Emails
+					.tab-pane.fade#tab-attachments(role='tabpanel' aria-labelledby='attachments-tab')
+						h2.mb-4 Attachments
+						+FilesAttachments(data, index === notesData.length - 1 )

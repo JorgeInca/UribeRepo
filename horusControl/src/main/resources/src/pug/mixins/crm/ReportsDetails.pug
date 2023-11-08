@@ -1,0 +1,455 @@
+mixin FilterReportsModal
+	#filterModal.modal.fade(tabindex="-1")
+		.modal-dialog.modal-dialog-centered
+			.modal-content.border
+				form#addEventForm(autocomplete="off")&attributes(attributes)
+					.modal-header.border-200.p-4
+						h5.modal-title.text-1000.fs-2.lh-sm Filter
+						button.btn.p-1.text-900(type='button' data-bs-dismiss='modal' aria-label='Close')
+							span.fas.fa-times.fs--1
+					.modal-body.pt-4.pb-2.px-4
+						.mb-3
+							label.fw-bold.mb-2.text-1000(for='leadStatus') Lead Status
+							select.form-select#leadStatus
+								option(value="newLead" selected) New Lead
+								option(value="coldLead") Cold Lead
+								option(value="wonLead") Won Lead
+								option(value="canceled") Canceled
+						.mb-3
+							label.fw-bold.mb-2.text-1000(for='createDate') Create Date
+							select.form-select#createDate
+								option(value="today" selected) Today
+								option(value="last7Days") Last 7 Days
+								option(value="last30Days") Last 30 Days
+								option(value="chooseATimePeriod") Choose a time period
+						.mb-3
+							label.fw-bold.mb-2.text-1000(for='designation') Designation
+							select.form-select#designation
+								option(value="VPAccounting" selected) VP Accounting
+								option(value="ceo") CEO
+								option(value="creativeDirector") Creative Director
+								option(value="accountant") Accountant
+								option(value="executiveManager") Executive Manager
+
+					.modal-footer.d-flex.justify-content-end.align-items-center.px-4.pb-4.border-0.pt-3
+						button.btn.btn-sm.btn-phoenix-primary.px-4.fs--2.my-0(type="submit") 
+							span.fas.fa-arrows-rotate.me-2.fs--2
+							| Reset
+						button.btn.btn-sm.btn-primary.px-9.fs--2.my-0(type="submit") Done
+
+mixin ChartReportsTablRow(data,index)
+	tr.hover-actions-trigger.btn-reveal-trigger.position-static
+		td.align-middle.white-space-nowrap.fw-semi-bold.text-1000.py-2=data.reportStage
+		td.align-middle.text-end.white-space-nowrap.fw-semi-bold.text-1000.ps-4.py-2=data.totalCount
+		td.align-middle.text-end.white-space-nowrap.ps-4.fw-semi-bold.text-1000
+			span.badge.badge-phoenix(class=data.status.type)=data.status.label
+
+mixin ChartReportsTable
+	-
+		var chartReportsTableData = [
+			{
+				reportStage:'Analysis',
+				totalCount:'03',
+				status:{
+					label: '+15.21%',
+					type: 'badge-phoenix-info',
+				}
+			},
+			{
+				reportStage:'Statement',
+				totalCount:'01',
+				status:{
+					label: '+05.21%',
+					type: 'badge-phoenix-warning',
+				}
+			},
+			{
+				reportStage:'Action',
+				totalCount:'02',
+				status:{
+					label: '+22.12%',
+					type: 'badge-phoenix-primary',
+				}
+			},
+			{
+				reportStage:'Offering',
+				totalCount:'02',
+				status:{
+					label: '-14.21%',
+					type: 'badge-phoenix-danger',
+				}
+			},
+			{
+				reportStage:'Interlocution',
+				totalCount:'02',
+				status:{
+					label: '-14.21%',
+					type: 'badge-phoenix-danger',
+				}
+			},
+		]
+
+	.table-responsive.scrollbar
+		table.reports-details-chart-table.table.table-sm.fs--1.mb-0
+			thead
+				tr
+					th.align-middle.pe-.text-700.fw-bold.fs--2.text-uppercase.text-nowrap(scope='col' style='width:35%;') Report stage
+					th.align-middle.text-end.ps-4.text-700.fw-bold.fs--2.text-uppercase.text-nowrap(scope='col' style='width:35%;') total count
+					th.align-middle.text-end.ps-4.text-700.fw-bold.fs--2.text-uppercase(scope='col' style='width:30%;') Status
+			tbody.list#report-data-body
+				each row,index in chartReportsTableData
+					+ChartReportsTablRow(row,index)
+
+mixin PurchasersSellersRow(data,index)
+	tr.hover-actions-trigger.btn-reveal-trigger.position-static
+		td.fs--1.align-middle.py-0
+			.form-check.mb-0.fs-0
+				input.form-check-input(type='checkbox' data-bulk-select-row!=data)
+		td.deals_name.align-middle.white-space-nowrap.fw-semi-bold.text-1000.ps-0.py-0
+			a.fw-bold.text-primary(href="#!")=data.dealsName
+		td.deal_owner.align-middle.white-space-nowrap.fw-semi-bold.text-1100.ps-4.py-0
+			.d-flex.align-items-center.position-relative
+				.avatar.avatar-m.me-3
+					if data.dealOwner.avatar
+						img.rounded-circle(src=`${CWD}assets/img/${data.dealOwner.avatar}`, alt="" class=data.dealOwner.placeholder ? 'avatar-placeholder' : '' )
+					else
+						.avatar-name.rounded-circle
+							span=data.dealOwner.name.charAt(0).toUpperCase()
+				a(href='#!').text-1000.fw-bold.stretched-link=data.dealOwner.name
+		td.account_name.align-middle.white-space-nowrap.ps-4.fw-semi-bold.text-900.py-0=data.accountName
+		td.stage.align-middle.white-space-nowrap.fw-bold.text-900.py-0
+			//- =data.stage.label
+			.d-flex.align-items-center.gap-3
+				div(style=`--phoenix-circle-progress-bar:${data.stage.data}`)
+					svg.circle-progress-svg(width="54" height="54" viewBox="0 0 170 170")
+						circle.progress-bar-rail(cx="60" cy="60" r="54" fill="none" stroke-linecap="round" stroke-width="12")
+						circle.progress-bar-top(cx="60" cy="60" r="54" fill="none" stroke-linecap="round" stroke=data.stage.color stroke-width="12")
+				h6.mb-0.text-900= data.stage.label
+		td.amount.align-middle.white-space-nowrap.fw-bold.ps-4.text-900.py-0=data.amount.totalAmount
+			span.ms-2(data-feather=`${data.amount.icon}` class=`${data.amount.color}` style="min-height:8px; width:14px;")
+
+		td.align-middle.white-space-nowrap.text-end.pe-0.ps-4
+			+DashboardDropdown.fs--2
+
+mixin PurchasersSellersTable
+	-
+		var purchasersSellersTableData = [
+			{
+				dealsName:'Jo_Td01',
+				dealOwner:{
+					avatar: 'team/avatar.webp',
+					name: 'Ally Aagaard',
+					placeholder: true,
+				},
+				accountName:'Themewagon',
+				stage:{
+					label:'Analysis',
+					color: "#3874FF",
+					data: 20,
+				},
+				amount:{
+					totalAmount:'$140',
+					icon:'trending-down',
+					color:'text-danger'
+				}
+			},
+			{
+				dealsName:'Printing Dimensions',
+				dealOwner:{
+					avatar: '/team/35.webp',
+					name: 'Alex Abadi',
+				},
+				accountName:'Black Box',
+				stage:{
+					label:'Statement',
+					color: "#0097EB",
+					data: 40,
+				},
+				amount:{
+					totalAmount:'$214',
+					icon:'trending-up',
+					color:'text-success'
+				}
+			},
+			{
+				dealsName:'MM_TD_120',
+				dealOwner:{
+					avatar: '/team/32.webp',
+					name: 'Kylia Abbott',
+				},
+				accountName:'Hunter Leader',
+				stage:{
+					label:'Action',
+					color: "#E5780B",
+					data: 50,
+				},
+				amount:{
+					totalAmount:'$412',
+					icon:'trending-up',
+					color:'text-success'
+				}
+			},
+			{
+				dealsName:'Truhlar And Truhlar Attys',
+				dealOwner:{
+					avatar: '/team/32.webp',
+					name: 'Kylia Abbott',
+				},
+				accountName:'Eagle Eye',
+				stage:{
+					label:'Offering',
+					color: "#6E7891",
+					data: 60,
+				},
+				amount:{
+					totalAmount:'$110',
+					icon:'trending-up',
+					color:'text-success'
+				}
+			},
+			{
+				dealsName:'Morlong Associates',
+				dealOwner:{
+					avatar: '/team/59.webp',
+					name: 'Lyla Nicole',
+				},
+				accountName:'Black Box',
+				stage:{
+					label:'Negotiation',
+					color: "#25B003",
+					data: 100,
+				},
+				amount:{
+					totalAmount:'$325',
+					icon:'trending-down',
+					color:'text-danger'
+				}
+			},
+
+			{
+				dealsName:'Product Order',
+				dealOwner:{
+					avatar: '/team/18.webp',
+					name: 'Hunter Leader',
+				},
+				accountName:'Themewagon',
+				stage:{
+					label:'Negotiation',
+					color: "#25B003",
+					data: 100,
+				},
+				amount:{
+					totalAmount:'$198',
+					icon:'trending-down',
+					color:'text-warning'
+				}
+			},
+			{
+				dealsName:'Feltz Printing Service',
+				dealOwner:{
+					avatar: '/team/avatar.webp',
+					name: 'Ally Aagaard',
+					placeholder: true,
+				},
+				accountName:'Themewagon',
+				stage:{
+					label:'Offering',
+					color: "#6E7891",
+					data: 80,
+				},
+				amount:{
+					totalAmount:'$142',
+					icon:'trending-up',
+					color:'text-success'
+				}
+			},
+			{
+				dealsName:'Flat Plate SP',
+				dealOwner:{
+					avatar: '/team/avatar.webp',
+					name: 'Ally Aagaard',
+					placeholder: true,
+				},
+				accountName:'Eagle Eye',
+				stage:{
+					label:'Offering',
+					color: "#6E7891",
+					data: 80,
+				},
+				amount:{
+					totalAmount:'$457',
+					icon:'trending-up',
+					color:'text-success'
+				}
+			},
+			{
+				dealsName:'Evacuated Tube',
+				dealOwner:{
+					avatar: '/team/avatar.webp',
+					name: 'Ally Aagaard',
+				},
+				accountName:'Hunter Leader',
+				stage:{
+					label:'Action',
+					color: "#E5780B",
+					data: 100,
+				},
+				amount:{
+					totalAmount:'$120',
+					icon:'trending-down',
+					color:'text-warning'
+				}
+			},
+			{
+				dealsName:'Product Delivery',
+				dealOwner:{
+					avatar: '/team/35.webp',
+					name: 'Alex Abadi',
+				},
+				accountName:'Themewagon',
+				stage:{
+					label:'Analysis',
+					color: "#3874FF",
+					data: 100,
+				},
+				amount:{
+					totalAmount:'$150',
+					icon:'trending-down',
+					color:'text-danger'
+				}
+			},
+			{
+				dealsName:'Product Order',
+				dealOwner:{
+					avatar: '/team/18.webp',
+					name: 'Hunter Leader',
+				},
+				accountName:'Themewagon',
+				stage:{
+					label:'Negotiation',
+					color: "#25B003",
+					data: 100,
+				},
+				amount:{
+					totalAmount:'$140',
+					icon:'trending-down',
+					color:'text-warning'
+				}
+			},
+			{
+				dealsName:'Feltz Printing Service',
+				dealOwner:{
+					avatar: '/team/avatar.webp',
+					name: 'Ally Aagaard',
+					placeholder: true,
+				},
+				accountName:'Themewagon',
+				stage:{
+					label:'Offering',
+					color: "#6E7891",
+					data: 80,
+				},
+				amount:{
+					totalAmount:'$122',
+					icon:'trending-up',
+					color:'text-success'
+				}
+			},
+			{
+				dealsName:'Flat Plate SP',
+				dealOwner:{
+					avatar: '/team/avatar.webp',
+					name: 'Ally Aagaard',
+					placeholder: true,
+				},
+				accountName:'Eagle Eye',
+				stage:{
+					label:'Offering',
+					color: "#6E7891",
+					data: 80,
+				},
+				amount:{
+					totalAmount:'$321',
+					icon:'trending-up',
+					color:'text-success'
+				}
+			},
+			{
+				dealsName:'Evacuated Tube',
+				dealOwner:{
+					avatar: '/team/avatar.webp',
+					name: 'Ally Aagaard',
+				},
+				accountName:'Hunter Leader',
+				stage:{
+					label:'Action',
+					color: "#E5780B",
+					data: 100,
+				},
+				amount:{
+					totalAmount:'$104',
+					icon:'trending-down',
+					color:'text-warning'
+				}
+			},
+			{
+				dealsName:'Product Delivery',
+				dealOwner:{
+					avatar: '/team/35.webp',
+					name: 'Alex Abadi',
+				},
+				accountName:'Themewagon',
+				stage:{
+					label:'Analysis',
+					color: "#3874FF",
+					data: 100,
+				},
+				amount:{
+					totalAmount:'$124',
+					icon:'trending-down',
+					color:'text-danger'
+				}
+			},
+		]
+	.border-top
+		#purchasersSellersTable(data-list!={
+			valueNames: ["deals_name","deal_owner","account_name", "stage", "amount"],
+			page: 10,
+			pagination: true
+		})
+			.table-responsive.scrollbar.mx-n1.px-1
+				table.table.table-sm.fs--1.leads-table
+					thead
+						tr
+							th.white-space-nowrap.fs--1.align-middle.ps-0(style="max-width:20px; width:18px;")
+								.form-check.mb-0.fs-0
+									input.form-check-input(
+										type='checkbox'
+										data-bulk-select!={
+											body: "purchasers-sellers-body",
+										}
+									)
+							th.sort.align-middle.ps-0.pe-5.text-uppercase.text-nowrap(scope='col' data-sort="deals_name" style='min-width:120px;') Deals name
+							th.sort.align-middle.ps-4.pe-5.text-uppercase.text-nowrap(scope='col' data-sort="deal_owner" style='min-width:50px;') Deal owner
+							th.sort.align-middle.ps-4.pe-5.text-uppercase.text-nowrap(scope='col' data-sort="account_name" style='min-width:250px;') Account name
+							th.sort.align-middle.ps-4.pe-5.text-uppercase.text-nowrap(scope='col' data-sort="stage" style='min-width:160px;') Stage
+							th.sort.align-middle.ps-4.pe-5.text-uppercase.text-nowrap(scope='col' data-sort="amount" style='min-width:50px;') Amount
+							th.sort.text-end.align-middle.pe-0.ps-4(scope='col')
+					tbody.list#purchasers-sellers-body
+						each row,index in purchasersSellersTableData
+							+PurchasersSellersRow(row,index)
+			.row.align-items-center.justify-content-between.pe-0.fs--1
+				.col-auto.d-flex
+					p.mb-0.d-none.d-sm-block.me-3.fw-semi-bold.text-900(data-list-info)
+					a.fw-semi-bold(href='#!' data-list-view="*")
+						| View all
+						span.fas.fa-angle-right.ms-1(data-fa-transform='down-1')
+					a.fw-semi-bold.d-none(href='#!' data-list-view="less")
+						| View Less
+						span.fas.fa-angle-right.ms-1(data-fa-transform='down-1')
+				.col-auto.d-flex
+					button.page-link(data-list-pagination="prev")
+						span.fas.fa-chevron-left
+					ul.mb-0.pagination
+					button.page-link.pe-0(data-list-pagination="next")
+						span.fas.fa-chevron-right

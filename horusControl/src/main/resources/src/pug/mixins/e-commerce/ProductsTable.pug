@@ -1,0 +1,237 @@
+mixin ProductTableRow(data,index)
+  tr.position-static
+    td.fs--1.align-middle
+      .form-check.mb-0.fs-0
+        input.form-check-input(type='checkbox' data-bulk-select-row!=data)
+    td.align-middle.white-space-nowrap.py-0
+      a(href=`${CWD}${paths['e-commerce-fe-product-details']}`).d-block.border.rounded-2
+        img(src=`${CWD}assets/img/${data.productImage}` alt="" width=53)
+    td.product.align-middle.ps-4
+      a.fw-semi-bold.line-clamp-3.mb-0(href=`${CWD}${paths['e-commerce-fe-product-details']}`)=`${data.product.slice(0,138)}${data.product.length > 138 ? '...' : '' }`
+    td.price.align-middle.white-space-nowrap.text-end.fw-bold.text-700.ps-4=data.price
+    td.category.align-middle.white-space-nowrap.text-600.fs--1.ps-4.fw-semi-bold=data.category
+    td.tags.align-middle.review.pb-2.ps-3(style="min-width:225px;")
+      each tag in data.tags
+        a(href="#!").text-decoration-none
+          span.badge.badge-tag.me-2.mb-2=tag
+    td.align-middle.review.fs-0.text-center.ps-4
+      if data.star
+        span.fas.fa-star.text-warning
+      else
+        .d-toggle-container
+          .d-block-hover
+            span.fas.fa-star.text-warning
+          .d-none-hover
+            span.far.fa-star.text-warning
+    td.vendor.align-middle.text-start.fw-semi-bold.ps-4
+      a(href='#!')=data.vendor
+    td.time.align-middle.white-space-nowrap.text-600.ps-4=data.publishedOn
+    td.align-middle.white-space-nowrap.text-end.pe-0.ps-4.btn-reveal-trigger
+      +DashboardDropdown.fs--2
+
+
+mixin ProductTable
+  -
+    var productTableData = [
+      {
+        product:'Fitbit Sense Advanced Smartwatch with Tools for Heart Health, Stress Management & Skin Temperature Trends, Carbon/Graphite, One Size (S & L Bands...',
+        productImage:'/products/1.png',
+        price:'$39',
+        category: 'Plants',
+        tags: ['Health','Exercise','Discipline','Lifestyle','Fitness'],
+        star: false,
+        vendor: 'Blue Olive Plant sellers. Inc',
+        publishedOn: 'Nov 12, 10:45 PM',
+      },
+      {
+        product:'iPhone 13 pro max-Pacific Blue-128GB storage',
+        productImage:'/products/2.png',
+        price:'$87',
+        category: 'Furniture',
+        tags: ['Class','Camera','Discipline','invincible','Pro','Swag'],
+        star: true,
+        vendor: 'Beatrice Furnitures',
+        publishedOn: 'Nov 11, 7:36 PM',
+      },
+      {
+        product:'Apple MacBook Pro 13 inch-M1-8/256GB-space',
+        productImage:'/products/3.png',
+        price:'$9',
+        category: 'Plants',
+        tags: ['Efficiency','Handy','Apple','Creativity','Gray'],
+        star: false,
+        vendor: 'PlantPlanet',
+        publishedOn: 'Nov 11, 8:16 AM',
+      },
+      {
+        product:'Apple iMac 24" 4K Retina Display M1 8 Core CPU...',
+        productImage:'/products/4.png',
+        price:'$8 - $58',
+        category: 'Toys',
+        tags: ['Color','Stunning','Retina','Green','PC killer'],
+        star: false,
+        vendor: 'Kizzstore',
+        publishedOn: 'Nov 8, 6:39 PM',
+      },
+      {
+        product:'Razer Kraken v3 x Wired 7.1 Surroung Sound Gaming headset',
+        productImage:'/products/5.png',
+        price:'$120',
+        category: 'Fashion',
+        tags: ['Music','Audio','Meeting','Record','Sound'],
+        star: false,
+        vendor: 'Inertia Fashion',
+        publishedOn: 'Nov 8, 5:32 PM',
+      },
+      {
+        product: 'PlayStation 5 DualSense Wireless Controller',
+        productImage: '/products/6.png',
+        price: '$239',
+        category: 'Gadgets',
+        tags: ['Game','Control','Nav','Playstation','Wireless'],
+        star: false,
+        vendor: 'FutureTech Inc',
+        publishedOn: 'Nov 6, 11:34 PM',
+      },
+      {
+        product:'2021 Apple 12.9-inch iPad Pro (Wi‑Fi, 128GB) - Space Gray',
+        productImage:'/products/7.png',
+        price: '$4',
+        category: 'Food',
+        tags: ['Ipad','Pro','Creativity','Thunderbolt','Space'],
+        star: false,
+        vendor: 'Maimuna’s Bakery',
+        publishedOn: 'Nov 1, 7:45 AM',
+      },
+      {
+        product:'Amazon Basics Matte Black Wired Keyboard - US Layout (QWERTY)',
+        productImage:'/products/8.png',
+        price: '$98',
+        category: 'Fashion',
+        tags: ['Keyboard','Smooth','Butter','RGB','Black'],
+        star: false,
+        vendor: 'Green fashion',
+        publishedOn: 'Nov 3, 12:27 PM',
+      },
+      {
+        product:'Apple Magic Mouse (Wireless, Rechargable) - Silver',
+        productImage:'/products/10.png',
+        price: '$568',
+        category: 'Fashion',
+        tags: ['Apple','Wireless','Battery','Magic','Performance'],
+        star: false,
+        vendor: 'Eastacy',
+        publishedOn: 'Nov 1, 9:39 AM',
+      },
+      {
+        product:'HORI Racing Wheel Apex for PlayStation 4_3, and PC',
+        productImage:'/products/12.png',
+        price: '$17',
+        category: 'Drinks',
+        tags: ['Steering','Gaming','PS4/3','Racing','Apex'],
+        star: false,
+        vendor: 'BrewerBro',
+        publishedOn: 'Oct 30, 3:49 PM',
+      },
+      {
+        product:'Apple Pencil (2nd Generation)',
+        productImage:'/products/21.png',
+        price: '$28',
+        category: 'Fashion',
+        tags: ['Apple','Creativity','Color','Stunning','Apex'],
+        star: false,
+        vendor: 'Eastacy',
+        publishedOn: 'Nov 25, 5:00 PM',
+      },
+      {
+        product:'Apple AirPods (2nd Generation)',
+        productImage:'/products/16.png',
+        price: '$20',
+        category: 'Fashion',
+        tags: ['Music','Audio','Meeting','Record','Sound'],
+        star: true,
+        vendor: 'FutureTech Inc',
+        publishedOn: 'Sep 20, 1:00 PM',
+      },
+      {
+        product:'Xbox Series S',
+        productImage:'/products/17.png',
+        price: '$30',
+        category: 'Gadget',
+        tags: ['Lifestyle','Audio','Magic','Performance','Apex'],
+        star: false,
+        vendor: 'FutureTech Inc',
+        publishedOn: 'Oct 18, 3:40 PM',
+      },
+      {
+        product:'Seagate Portable 2TB External Hard Drive Portable HDD',
+        productImage:'/products/18.png',
+        price: '$50',
+        category: 'Accessories',
+        tags: ['Portable','Gaming','Magic','Performance','Black'],
+        star: false,
+        vendor: 'Kizzstore',
+        publishedOn: 'Sep 20, 1:00 PM',
+      },
+      {
+        product:'Intel Core i9-11900K Desktop Processor 8 Cores up to 5.3 GHz Unlocked',
+        productImage:'/products/19.png',
+        price: '$80',
+        category: 'Accessories',
+        tags: ['Intel','Gaming','Apex','Performance','Lifestyle'],
+        star: true,
+        vendor: 'BrewerBro',
+        publishedOn: 'Dec 01, 12:00 PM',
+      },
+      {
+        product:'ASUS TUF Gaming F15 Gaming Laptop',
+        productImage:'/products/20.png',
+        price: '$150',
+        category: 'Computer',
+        tags: ['Gaming','Battery','Performance','Wireless'],
+        star: false,
+        vendor: 'Kizzstore',
+        publishedOn: 'Dec 01, 12:00 PM',
+      },
+    ]
+
+  .table-responsive.scrollbar.mx-n1.px-1
+    table.table.fs--1.mb-0
+      thead
+        tr
+          th.white-space-nowrap.fs--1.align-middle.ps-0(style="max-width:20px; width:18px;")
+            .form-check.mb-0.fs-0
+              input.form-check-input#checkbox-bulk-products-select(
+                type='checkbox' 
+                data-bulk-select!={
+                  body: "products-table-body",
+                }
+              )
+          th.sort.white-space-nowrap.align-middle.fs--2(scope='col' style='width:70px;')
+          th.sort.white-space-nowrap.align-middle.ps-4(scope='col' style='width:350px;' data-sort="product") PRODUCT NAME
+          th.sort.align-middle.text-end.ps-4(scope='col' data-sort="price" style='width:150px;' ) PRICE
+          th.sort.align-middle.ps-4(scope='col' data-sort="category" style='width:150px;') CATEGORY
+          th.sort.align-middle.ps-3(scope='col' data-sort="tags" style='width:250px;') TAGS
+          th.sort.align-middle.fs-0.text-center.ps-4(scope='col' style='width:125px;')
+          th.sort.align-middle.ps-4(scope='col' data-sort="vendor" style='width:200px;') VENDOR
+          th.sort.align-middle.ps-4(scope='col' data-sort="time" style='width:50px;') PUBLISHED ON
+          th.sort.text-end.align-middle.pe-0.ps-4(scope='col')
+
+      tbody.list#products-table-body
+        each row,index in productTableData
+          +ProductTableRow(row,index)
+  .row.align-items-center.justify-content-between.py-2.pe-0.fs--1
+    .col-auto.d-flex
+      p.mb-0.d-none.d-sm-block.me-3.fw-semi-bold.text-900(data-list-info)
+      a.fw-semi-bold(href='#!' data-list-view="*")
+        | View all
+        span.fas.fa-angle-right.ms-1(data-fa-transform='down-1')
+      a.fw-semi-bold.d-none(href='#!' data-list-view="less")
+        | View Less
+        span.fas.fa-angle-right.ms-1(data-fa-transform='down-1')
+    .col-auto.d-flex
+      button.page-link(data-list-pagination="prev")
+        span.fas.fa-chevron-left
+      ul.mb-0.pagination
+      button.page-link.pe-0(data-list-pagination="next")
+        span.fas.fa-chevron-right

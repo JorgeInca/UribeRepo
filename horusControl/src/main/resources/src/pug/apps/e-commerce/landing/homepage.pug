@@ -1,0 +1,89 @@
+extends ../../../layouts/LayoutEcommerce
+include ../../../mixins/e-commerce/homepage/Category
+include ../../../mixins/e-commerce/homepage/TopDeals
+include ../../../mixins/e-commerce/homepage/TopElectronics
+include ../../../mixins/e-commerce/homepage/BestOffers
+include ../../../mixins/e-commerce/homepage/Cta
+include ../../../mixins/e-commerce/homepage/common
+include ../../../mixins/common/Rating
+
+
+append variables
+  - var disableNavigationType = true;
+  - var disableHorizontalNavbarShape = true;
+  - var disableVerticalNavbarAppearance = true;
+  - var disableHorizontalNavbarAppearance = true;
+  - var activeNavItem = 'home';
+
+
+append styles
+  link(href=`${CWD}vendors/swiper/swiper-bundle.min.css`, rel='stylesheet')
+
+append scripts
+  script(src=`${CWD}vendors/swiper/swiper-bundle.min.js`)
+
+block ecomContent
+  .ecommerce-homepage.pt-5.mb-9
+    +Section(null,'container-small').py-0
+      +Categories
+    +Section(null,'container px-xl-0 px-xxl-3').py-0.px-xl-3
+      .row.g-3.mb-9
+        .col-12
+          .whooping-banner.w-100.rounded-3.overflow-hidden
+            +Background({
+              image: `${CWD}assets/img/e-commerce/whooping_banner_product.png`,
+              className: 'z-index--1 product-bg',
+              attrs: {
+                style: 'background-position: bottom right;',
+              }
+            })
+            +Background({
+              image: `${CWD}assets/img/e-commerce/whooping_banner_shape_2.png`,
+              className: 'z-index--1 shape-bg',
+              attrs: {
+                style: 'background-position: bottom left;',
+              }
+            })
+            .banner-text.light
+              h2.text-warning-300.fw-bolder.fs-lg-5.fs-xxl-6
+                | Whooping 
+                span.gradient-text 60% 
+                | Off
+              h3.fw-bolder.fs-lg-3.fs-xxl-5.text-white.light on everyday items
+            a.btn.btn-lg.btn-primary.rounded-pill.banner-button(href='#!') Shop Now
+        .col-12.col-xl-6
+          .gift-items-banner.w-100.rounded-3.overflow-hidden
+            +Background({
+              image: `${CWD}assets/img/e-commerce/gift-items-banner-bg.png`,
+              className: 'z-index--1 banner-bg',
+            })
+            .banner-text.text-md-center.light
+              h2.text-white.fw-bolder.fs-xl-4
+                | Get 
+                span.gradient-text 10% Off 
+                br.d-md-none
+                |  on gift items
+              a.btn.btn-lg.btn-primary.rounded-pill.banner-button(href='#!') Buy Now
+        .col-12.col-xl-6
+          .best-in-market-banner.d-flex.h-100.px-4.px-sm-7.py-5.px-md-11.rounded-3.overflow-hidden
+            +Background({
+              image: `${CWD}assets/img/e-commerce/best-in-market-bg.png`,
+              className: 'z-index--1 banner-bg',
+            })
+            .row.align-items-center.w-sm-100
+              .col-8
+                .banner-text.light
+                  h2.text-white.fw-bolder.fs-sm-4.mb-5
+                    | MI 11 Pro
+                    br
+                    span.fs-1.fs-sm-2  Best in the market
+                  a.btn.btn-lg.btn-warning.rounded-pill.banner-button(href='#!') Buy Now
+              .col-4
+                img.w-100.w-sm-75(src=`${CWD}assets/img/e-commerce/5.png` alt="")
+      +TopDeals
+      +TopElectronics
+      +BestOffers
+      +Cta
+
+
+

@@ -1,0 +1,123 @@
+mixin CustomerWishlistTableRow(data,index)
+  tr.hover-actions-trigger.btn-reveal-trigger.position-static
+    td.align-middle.white-space-nowrap.py-1
+      a(href=`${CWD}${paths['e-commerce-fe-product-details']}`).border.rounded-2.d-inline-block
+        img(src=`${CWD}assets/img/${data.productImage}` alt="" width=40 height=40)
+    td.products.align-middle
+      a.fw-semi-bold.mb-0(href=`${CWD}${paths['e-commerce-fe-product-details']}`)=`${data.product.slice(0,138)}${data.product.length > 138 ? '...' : '' }`
+    td.color.align-middle.white-space-nowrap.fs--1.text-900=data.color
+    td.size.align-middle.white-space-nowrap.text-700.fs--1.fw-semi-bold=data.size
+    td.price.align-middle.text-900.fs--1.fw-semi-bold.text-end=data.price
+    td.total.align-middle.fw-bold.text-1000.text-end=data.total
+
+
+mixin CustomerWishlistTable
+  -
+    var customerWishlistTableData = [
+      {
+        product:'Fitbit Sense Advanced Smartwatch wi...',
+        productImage:'/products/1.png',
+        color: 'Pure matte black',
+        price:'$57',
+        size: 42,
+        total: '$57'
+      },
+      {
+        product:'2021 Apple 12.9-inch iPad Pro (Wi‑Fi, ...',
+        productImage:'/products/7.png',
+        color: 'Black',
+        price:'$1,499',
+        size: 'Pro',
+        total: '$1499'
+      },
+      {
+        product:'PlayStation 5 DualSense Wireless Cont...',
+        productImage:'/products/6.png',
+        color: 'White',
+        price:'$299',
+        size: 'Regular',
+        total: '$359'
+      },
+      {
+        product:'Apple MacBook Pro 13 inch-M1-8/256G...',
+        productImage:'/products/3.png',
+        color: 'Space Gray',
+        price:'$1,699',
+        size: 'Pro',
+        total: '$1,799'
+      },
+      {
+        product:'Apple iMac 24" 4K Retina Display M1 8 C...',
+        productImage:'/products/4.png',
+        color: 'Ocean Blue',
+        price: '$65',
+        size: '21"',
+        total: '$65'
+      },
+      {
+        product:'Apple Magic Mouse (Wireless, Recharg...',
+        productImage:'/products/10.png',
+        color: 'White',
+        price:'$30',
+        size: 'Regular',
+        total: '$60'
+      },
+      {
+        product:'Amazon Basics Matte Black Wired Keybo...',
+        productImage:'/products/8.png',
+        color: 'Black',
+        price:'$40',
+        size: 'MD',
+        total: '$40'
+      },
+      {
+        product:'HORI Racing Wheel Apex for PlayStation...',
+        productImage:'/products/12.png',
+        color: 'Black',
+        price:'$130',
+        size: '45',
+        total: '$130'
+      },
+      {
+        product:'Xbox Series S',
+        productImage:'/products/17.png',
+        color: 'Space Gray',
+        price: '$99',
+        size: 'sm',
+        total: '$99'
+      },
+    ]
+
+  #customerWishlistTable.border-200.border-top.border-bottom(data-list!={
+    valueNames: ["products", "color", "size", "price", "quantity", "total"],
+    page: 5,
+    pagination: true
+  })
+    .table-responsive.scrollbar
+      table.table.fs--1.mb-0
+        thead
+          tr
+            th.sort.white-space-nowrap.align-middle.fs--2(scope='col' style='width:5%;')
+            th.sort.white-space-nowrap.align-middle(scope='col' style='width:35%; min-width:250px;' data-sort="products") PRODUCTS
+            th.sort.align-middle(scope='col' data-sort="color" style='width:15%;' ) COLOR
+            th.sort.align-middle(scope='col' data-sort="size" style='width:10%;') SIZE
+            th.sort.align-middle.text-end(scope='col' data-sort="price" style='width:15%;') PRICE
+            th.sort.align-middle.text-end(scope='col' data-sort="total" style='width:15%;') TOTAL
+        tbody.list#customer-wishlist-table-body
+          each row,index in customerWishlistTableData
+            +CustomerWishlistTableRow(row,index)
+    .row.align-items-center.justify-content-between.py-2.pe-0.fs--1
+      .col-auto.d-flex
+        p.mb-0.d-none.d-sm-block.me-3.fw-semi-bold.text-900(data-list-info)
+        a.fw-semi-bold(href='#!' data-list-view="*")
+          | View all
+          span.fas.fa-angle-right.ms-1(data-fa-transform='down-1')
+        a.fw-semi-bold.d-none(href='#!' data-list-view="less")
+          | View Less
+          span.fas.fa-angle-right.ms-1(data-fa-transform='down-1')
+      .col-auto.d-flex
+        button.page-link(data-list-pagination="prev")
+          span.fas.fa-chevron-left
+        ul.mb-0.pagination
+        button.page-link.pe-0(data-list-pagination="next")
+          span.fas.fa-chevron-right

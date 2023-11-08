@@ -1,0 +1,18 @@
+mixin Navbar
+	nav.navbar.navbar-expand-lg.sticky-top.py-3(data-navbar-soft-on-scroll)
+		.container-small.px-0.px-sm-3
+			a.navbar-brand(href=`${CWD}${paths['default-dashboard']}`)
+				+Logo
+			button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation')
+				span.navbar-toggler-icon
+			.collapse.navbar-collapse#navbarSupportedContent
+				ul.navbar-nav.ms-auto.mb-2.mb-lg-0
+					li.nav-item.border-bottom.border-bottom-lg-0
+						a.nav-link.fs--1.fw-bold.pe-3.active(aria-current='page' href=`${CWD}documentation/getting-started.html`) Documentation
+					li.nav-item.border-bottom.border-bottom-lg-0
+						a.nav-link.fs--1.fw-bold.pe-3(href="mailto:support@themewagon.com") Support
+					li.nav-item
+						a.nav-link.fs--1.fw-bold.pe-5(href="https://themewagon.com/hire-us/" target='_blank') Hire us		
+
+				.d-grid.d-lg-flex.align-items-center
+					a.btn.btn-primary(href='https://themes.getbootstrap.com/product/phoenix-admin-dashboard-webapp-template/' target='_blank') Purchase

@@ -1,0 +1,223 @@
+mixin ProfileStoresTableRow(data,index)
+  tr.hover-actions-trigger.btn-reveal-trigger.position-static
+    td.align-middle.white-space-nowrap.ps-0.py-0
+      a(href="#!") 
+        img(src=`${CWD}assets/img/${data.productImage}` alt="" width=53)
+    td.products.align-middle
+      a.fw-semi-bold.mb-0(href='#!')=`${data.product.slice(0,138)}${data.product.length > 138 ? '...' : '' }`
+    td.color.align-middle.white-space-nowrap.fs--1.text-900
+      +Rating(data.rating)
+    td.size.align-middle.white-space-nowrap.text-primary.fs--1.fw-bold.text-end=data.orders
+    td.price.align-middle.text-end.text-900.fw-semi-bold=data.total
+    td.price.align-middle.text-700.fs--1.text-end=data.date
+    td.total.align-middle.fw-bold.text-1000.text-end
+      +DashboardDropdown
+
+mixin ProfileStoresTable
+  -
+    var profileWishlistTableData = [
+      {
+        product:'Dell Technologies',
+        productImage:'/brand2/dell.png',
+        color: 'Pure matte black',
+        rating:5,
+        spent:"$ 1250",
+        orders:3,
+        date:"Dec 12, 12:56 PM",
+        size: 42,
+        total: '$ 23987'
+      },
+      {
+        product:'Honda',
+        productImage:'/brand2/honda.png',
+        color: 'Black',
+        rating:3,
+        orders:5,
+        price:'$1,499',
+        date:"Dec 09, 10:48 AM",
+        size: 'Pro',
+        total: '$ 1250'
+      },
+      {
+        product:'Xiaomi',
+        productImage:'/brand2/xiaomi.png',
+        color: 'White',
+        rating:3,
+        orders:6,
+        price:'$299',
+          date:"Dec 03, 05:45 PM",
+        size: 'Regular',
+        total: '$ 360'
+      },
+      {
+        product:'Huawei Shop BD',
+        productImage:'/brand/huawei.png',
+        color: 'Space Gray',
+        rating:3,
+        orders:1,
+        price:'$1,699',
+          date:"Nov 27, 06:20 PM",
+        size: 'Pro',
+        total: '$1,799'
+      },
+      {
+        product:'Intel',
+        productImage:'/brand2/intel-2.png',
+        color: 'Ocean Blue',
+        rating:4,
+        orders:2,
+        price: '$65',
+          date:"Nov 21, 10:25 AM",
+        size: '21"',
+        total: '$65'
+      },
+    ]
+
+  #profileStoreTable.border-y.mb-6(data-list!={
+    valueNames: ["products", "color", "size", "price", "quantity", "total"],
+    page: 5,
+    pagination: true
+  })
+    .table-responsive.scrollbar
+      table.table.table-sm.fs--1.mb-0
+        thead
+          tr
+            th.sort.white-space-nowrap.align-middle.fs--2(scope='col' style='width:7%; min-width:80px;')
+            th.sort.white-space-nowrap.align-middle(scope='col' style='width:20%; min-width:150px;' data-sort="products") VENDOR
+            th.sort.align-middle(scope='col' data-sort="color" style='width:15%; min-width:150px;' ) STORE RATING
+            th.sort.align-middle.text-end(scope='col' data-sort="price" style='width:12%; min-width:150px;') ORDERS
+            th.sort.align-middle.text-end(scope='col' data-sort="size" style='width:15%; min-width:150px;') TOTAL SPENT
+            th.sort.align-middle.text-end(scope='col' data-sort="price" style='width:15%; min-width:150px;') LAST ORDER
+            th.sort.align-middle.text-end.pe-0(scope='col' style='width:30%; min-width:150px;') 
+        tbody.list#profile-stores-table-body
+          each row,index in profileWishlistTableData
+            +ProfileStoresTableRow(row,index)
+    .row.align-items-center.justify-content-between.py-2.pe-0.fs--1
+      .col-auto.d-flex
+        p.mb-0.d-none.d-sm-block.me-3.fw-semi-bold.text-900(data-list-info)
+        a.fw-semi-bold(href='#!' data-list-view="*")
+          | View all
+          span.fas.fa-angle-right.ms-1(data-fa-transform='down-1')
+        a.fw-semi-bold.d-none(href='#!' data-list-view="less")
+          | View Less
+          span.fas.fa-angle-right.ms-1(data-fa-transform='down-1')
+      .col-auto.d-flex
+        button.page-link(data-list-pagination="prev")
+          span.fas.fa-chevron-left
+        ul.mb-0.pagination
+        button.page-link.pe-0(data-list-pagination="next")
+          span.fas.fa-chevron-right
+
+
+mixin HoverDropdown(iconClass)
+  .font-sans-serif.btn-reveal-trigger
+    button.btn.btn-sm.dropdown-toggle.dropdown-caret-none.transition-none.btn-reveal.p-2.lh-1.bg-100.rounded-1&attributes(attributes)(type='button' data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent")
+      span.fas.fa-ellipsis-h.fs--1(class=iconClass)
+    .dropdown-menu.dropdown-menu-end.py-2
+      a(href='#!').dropdown-item View
+      a(href='#!').dropdown-item Export
+      .dropdown-divider
+      a(href='#!').dropdown-item.text-danger Remove
+
+mixin StoreItem(item)
+  .col-6.col-sm-4.col-md-3.col-lg-2.hover-actions-trigger.btn-reveal-trigger
+    .border.d-flex.flex-center.rounded-3.mb-3.p-4(style='height:180px;')
+      img.mw-100(src=`${CWD}assets/img/${item.image}` alt=item.name)
+    h5.mb-2=item.name
+    .mb-1.fs--1
+      +Rating(item.rating)
+    p.text-500.fs--1.mb-2.fw-semi-bold=`(${item.people} people rated)`
+    a.btn.btn-link.p-0(href="#!")
+      | Visit Store
+      span.fas.fa-chevron-right.ms-1.fs--2
+    .hover-actions.top-0.end-0.mt-2.me-3
+      +HoverDropdown
+
+mixin FavouriteStores
+  - 
+    var storeItems = [
+      {
+        name: 'Dell Technologies',
+        rating: 4,
+        people: 1263,
+        image: 'brand2/dell.png'
+      },
+      {
+        name: 'HP Global Store',
+        rating: 3,
+        people: 365,
+        image: 'brand2/hp.png'
+      },
+      {
+        name: 'Honda',
+        rating: 5,
+        people: 596,
+        image: 'brand2/honda.png'
+      },
+      {
+        name: 'Asus ROG',
+        rating: 3,
+        people: 2365,
+        image: 'brand2/asus-rog.png'
+      },
+      {
+        name: 'Yamaha',
+        rating: 5,
+        people: 1253,
+        image: 'brand2/yamaha.png'
+      },
+      {
+        name: 'IBM',
+        rating: 3,
+        people: 996,
+        image: 'brand2/ibm.png'
+      },
+      {
+        name: 'Apple Store',
+        rating: 3,
+        people: 365,
+        image: 'brand2/apple-2.png'
+      },
+      {
+        name: 'Oppo',
+        rating: 3,
+        people: 576,
+        image: 'brand2/oppo.png'
+      },
+      {
+        name: 'Redragon',
+        rating: 2,
+        people: 1125,
+        image: 'brand2/redragon.png'
+      },
+      {
+        name: 'Microsoft XBOX',
+        rating: 4,
+        people: 830,
+        image: 'brand2/xbox.png'
+      },
+      {
+        name: 'Lenovo',
+        rating: 3,
+        people: 1032,
+        image: 'brand2/lenovo.png'
+      },
+      {
+        name: 'Xiaomi',
+        rating: 3,
+        people: 965,
+        image: 'brand2/xiaomi.png'
+      }
+    ]
+  .d-flex.flex-between-center.mb-5
+    div
+      h3.text-1100.mb-2 My Favorites Stores
+      h5.text-700.fw-semi-bold Essential for a better life
+    button.btn.btn-phoenix-primary View all
+  .row.gx-3.gy-5
+    each item in storeItems
+      +StoreItem(item)
+
+
+
+

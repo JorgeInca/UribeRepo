@@ -1,0 +1,61 @@
+extends layouts/LayoutTheme
+include mixins/dashboard/common
+include mixins/dashboard/e-commerce/Stats
+include mixins/dashboard/e-commerce/EcomCharts
+include mixins/dashboard/e-commerce/TotalSalesChart
+include mixins/dashboard/e-commerce/StatCard
+include mixins/dashboard/e-commerce/TopRegions
+include mixins/dashboard/e-commerce/LatestReviews
+
+append scripts
+  script(src=`${CWD}vendors/echarts/echarts.min.js`)
+  script(src=`${CWD}vendors/leaflet/leaflet.js`)
+  script(src=`${CWD}vendors/leaflet.markercluster/leaflet.markercluster.js`)
+  script(src=`${CWD}vendors/leaflet.tilelayer.colorfilter/leaflet-tilelayer-colorfilter.min.js`)
+  script(src=`${CWD}assets/js/ecommerce-dashboard.js`)
+
+append styles
+  link(href=`${CWD}vendors/leaflet/leaflet.css`, rel='stylesheet')
+  link(href=`${CWD}vendors/leaflet.markercluster/MarkerCluster.css`, rel='stylesheet')
+  link(href=`${CWD}vendors/leaflet.markercluster/MarkerCluster.Default.css`, rel='stylesheet')
+
+block content
+  .pb-5
+    .row.g-4
+      .col-12.col-xxl-6
+        .mb-8
+          h2.mb-2 Ecommerce Dashboard
+          h5.text-700.fw-semi-bold Here’s what’s going on at your business right now
+        +Stats
+        //- span.fa-stack.ms-4
+        //-   .fa-solid.fa-square.fa-stack-2x.text-danger-300.custom-radius(data-fa-transform="down-4 rotate--10 left-3")
+        //-   .fa-solid.fa-circle.fa-stack-2x.text-danger-100.custom-circle(data-fa-transform="up-3 right-4")
+        //-   .fa-solid.fa-star.text-danger.fa-stack-1x.fa-inverse(data-fa-transform="up-7 right-8 shrink-3")
+
+        hr.bg-200.mb-6.mt-4
+        +TotalSalesChart
+      .col-12.col-xxl-6
+        .row.g-3
+          .col-12.col-md-6
+            +TotalOrders
+          .col-12.col-md-6
+            +NewCustomers
+          .col-12.col-md-6
+            +TopCoupons
+          .col-12.col-md-6
+            +PayingCustomer
+  .mx-n4.px-4.mx-lg-n6.px-lg-6.bg-white.pt-7.border-y.border-300
+    +LatestReviews
+  .row.gx-6
+    .col-12.col-xl-6
+      +TopRegionsTable
+    .col-12.col-xl-6
+      .mx-n4.mx-lg-n6.ms-xl-0.h-100
+        .h-100.w-100
+          #map.h-100.bg-white(style="min-height: 300px;")
+  .mx-n4.px-4.mx-lg-n6.px-lg-6.bg-white.pt-6.pb-9.border-top.border-300
+    .row.g-6
+      .col-12.col-xl-6
+        +ProjectionVsActual
+      .col-12.col-xl-6
+        +ReturningCustomerRate

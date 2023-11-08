@@ -1,0 +1,23 @@
+mixin Cta
+  +Section('container-small px-lg-7 px-xxl-3').bg-soft-primary.dark__bg-1000.pb-10.overflow-hidden
+    .position-absolute.w-100.h-100.start-0.end-0(style='bottom: -350px; transform: skewY(-8deg); background: linear-gradient(102.27deg, #38ABFF 4.69%, #3874FF 106.27%)')
+    +Background({image: `${CWD}assets/img/bg/bg-left-24.png`, attrs: { style: { 'background-size': 'auto','background-position':'left center'}}})
+    +Background({image: `${CWD}assets/img/bg/bg-right-24.png`, attrs: { style: { 'background-size': 'auto','background-position':'right center'}}})
+    .row.justify-content-center
+      .col-12.text-center
+        .card.py-md-9.px-md-13.border-0.z-index-1.shadow-lg
+          +Background({image: `${CWD}assets/img/bg/bg-38.png`, attrs: { style: { 'background-position': 'center', 'background-size': '100%',} } })
+          .card-body.position-relative
+            img.img-fluid.mb-5.d-dark-none(src=`${CWD}assets/img/spot-illustrations/37.png` width=260 alt='...')
+            img.img-fluid.mb-5.d-light-none(src=`${CWD}assets/img/spot-illustrations/37_2.png`  width=260 alt='...')
+            p.fw-bold 2008 Premium Icons 
+              span.text-primary.fs-2 .
+              |  Included FREE with it
+            h1.fs-2.fs-sm-4.fs-lg-6.fw-bolder.lh-sm.mb-3 Join
+              span.gradient-text-primary.mx-2 Phoenix
+              span Today
+
+            form.d-flex.justify-content-center.mb-3.px-xxl-15
+              .d-grid.d-sm-block
+              input.form-control.me-3#ctaEmail1(type='email' placeholder='Email' aria-describedby='ctaEmail1')
+              button.btn.btn-primary(type='submit') Subscribe

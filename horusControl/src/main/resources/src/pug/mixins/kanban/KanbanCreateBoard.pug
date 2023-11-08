@@ -1,0 +1,39 @@
+mixin WizardContent(config)
+  - var config = Object.assign({ url: `${CWD}${paths['wizard-auth']}` }, config)
+  .tab-content
+    .tab-pane.active(role="tabpanel" aria-labelledby=config.tab1.split('#').pop() id=config.tab1)
+      p.mb-4 This will be the <b>Name</b> and description of your Kanban board. You and other admins can edit the name in future. The name can contain letters, numbers & punctuation. 
+      +Step1(config)
+    .tab-pane(role="tabpanel" aria-labelledby=config.tab2.split('#').pop() id=config.tab2)
+      p.mb-4 These will be the <b>Columns</b> of your Kanban board. They represent discrete stages in work process. Columns can be Edited, Removed, Rearranged or Added in future.
+      +Step2(config)
+    .tab-pane(role="tabpanel" aria-labelledby=config.tab3.split('#').pop() id=config.tab3)
+      p.mb-4 Select a <b>Background</b> Colour or Image. This will also be thumbnail for your Kanban board. 
+      +Step3(config)
+    .tab-pane(role="tabpanel" aria-labelledby=config.tab4.split('#').pop() id=config.tab4)
+      p.mb-4 These will be the <b>Tags</b> for your tasks/cards of your Kanban board. Tags are labels to allow easy & simpler classification of tasks.
+      +Step4(config)
+    .tab-pane(role="tabpanel" aria-labelledby=config.tab5.split('#').pop() id=config.tab5)
+      p.mb-4 Add  <b>Members</b> or <b>Guests</b> to your Kanban board. They can add, edit, or move tasks in your board. Tasks can also be assigned to them.
+        <br>
+        a.mb-4(href='#!') Learn more
+      +Step5(config)
+
+mixin WizardHeader(config)
+  p.mb-0.text-800 Step: 
+    span(data-kanban-step) 1
+  ul.nav.justify-content-between.nav-wizard.nav-wizard-progress
+    li.nav-item
+      a(href=config.tab1 data-bs-toggle='tab' data-wizard-step='1').nav-link.active.fw-semi-bold
+
+    li.nav-item
+      a(href=config.tab2 data-bs-toggle='tab' data-wizard-step='2').nav-link.fw-semi-bold
+
+    li.nav-item
+      a(href=config.tab3 data-bs-toggle='tab' data-wizard-step='3').nav-link.fw-semi-bold
+
+    li.nav-item
+      a(href=config.tab4 data-bs-toggle='tab' data-wizard-step='4').nav-link.fw-semi-bold
+
+    li.nav-item
+      a(href=config.tab5 data-bs-toggle='tab' data-wizard-step='5').nav-link.fw-semi-bold

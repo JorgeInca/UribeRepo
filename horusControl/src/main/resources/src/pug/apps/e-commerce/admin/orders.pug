@@ -1,0 +1,104 @@
+extends ../../../layouts/LayoutTheme
+include ../../../mixins/dashboard/common
+include ../../../mixins/e-commerce/OrderTable
+
+append variables
+  - 
+    var breadcrumb = [
+      {
+        label: 'Page 1',
+        href: '#!'
+      },
+      {
+        label: 'Page 2',
+        href: '#!',
+      },
+      {
+        label: 'Default',
+        href: '#!',
+        active: true
+      },
+    ];
+
+block content
+  .mb-9
+    .row.g-3.mb-4
+      .col-auto
+        h2.mb-0 Orders
+    ul.nav.nav-links.mb-3.mb-lg-2.mx-n3
+      li.nav-item
+        a.nav-link.active(aria-current='page' href='#')
+          span All 
+          span.text-700.fw-semi-bold (68817)
+      li.nav-item
+        a.nav-link(href='#')
+          span Pending payment 
+          span.text-700.fw-semi-bold (6)
+      li.nav-item
+        a.nav-link(href='#')
+          span Unfulfilled 
+          span.text-700.fw-semi-bold (17)
+      li.nav-item
+        a.nav-link(href='#')
+          span Completed
+          span.text-700.fw-semi-bold (6,810)
+      li.nav-item
+        a.nav-link(href='#')
+          span Refunded
+          span.text-700.fw-semi-bold (8)
+      li.nav-item
+        a.nav-link(href='#')
+          span Failed
+          span.text-700.fw-semi-bold (2)
+
+    #orderTable(data-list!={
+      valueNames: ["order", "total", "customer", "payment_status", "fulfilment_status", "delivery_type", "date"],
+      page: 10,
+      pagination: true
+    })
+      .mb-4
+        .row.g-3
+          .col-auto
+            +Search({placeholder: 'Search orders', inputClass: ''})
+          .col-auto.scrollbar.overflow-hidden-y.flex-grow-1
+            .btn-group.position-static(role='group')
+              .btn-group.position-static.text-nowrap(role='group')
+                button.btn.btn-phoenix-secondary.px-7.flex-shrink-0(type='button' data-bs-toggle='dropdown' data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent") 
+                  | Payment status
+                  span.fas.fa-angle-down.ms-2
+                ul.dropdown-menu.dropdown-menu-end
+                  li
+                    a.dropdown-item(href='#') Action
+                  li
+                    a.dropdown-item(href='#') Another action
+                  li
+                    a.dropdown-item(href='#') Something else here
+                  li
+                    hr.dropdown-divider
+                  li
+                    a.dropdown-item(href='#') Separated link
+              .btn-group.position-static.text-nowrap(role='group')
+                button.btn.btn-sm.btn-phoenix-secondary.px-7.flex-shrink-0(type='button' data-bs-toggle='dropdown' data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent") 
+                  | Fulfilment status
+                  span.fas.fa-angle-down.ms-2
+                ul.dropdown-menu.dropdown-menu-end
+                  li
+                    a.dropdown-item(href='#') Action
+                  li
+                    a.dropdown-item(href='#') Another action
+                  li
+                    a.dropdown-item(href='#') Something else here
+                  li
+                    hr.dropdown-divider
+                  li
+                    a.dropdown-item(href='#') Separated link
+              button.btn.btn-sm.btn-phoenix-secondary.px-7.flex-shrink-0 More filters     
+          .col-auto
+            button.btn.btn-link.text-900.me-4.px-0
+              span.fa-solid.fa-file-export.fs--1.me-2
+              | Export
+            button.btn.btn-primary
+              span.fas.fa-plus.me-2
+              | Add order
+      .mx-n4.px-4.mx-lg-n6.px-lg-6.bg-white.border-top.border-bottom.border-200.position-relative.top-1
+        +OrderTable

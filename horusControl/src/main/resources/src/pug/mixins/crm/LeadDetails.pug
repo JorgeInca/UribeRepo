@@ -1,0 +1,492 @@
+mixin LeadProfileCard
+	.card&attributes(attributes)
+		.card-body
+			.row.align-items-center.g-3.text-center.text-xxl-start
+				.col-12.col-xxl-auto
+					.avatar.avatar-5xl
+						img.rounded-circle(src=`${CWD}assets/img/team/33.webp`, alt="")
+				.col-12.col-sm-auto.flex-1
+					h3.fw-bolder.mb-2 Ansolo Lazinatov
+					p.mb-0 Chief tech officer,
+					a.fw-bold(href='#!') Blue Beetles
+
+mixin AboutThisLead
+	.card&attributes(attributes)
+		.card-body
+			.d-flex.align-items-center.mb-5
+				h3 About lead
+				button.btn.btn-link.px-3(type='button') Edit
+			.mb-4
+				.d-flex.align-items-center.mb-1
+					span.me-2.uil.uil-envelope-alt   
+					h5.text-1000.mb-0 Email
+				a(href="mailto:shatinon@jeemail.com:") ansolo5@jeemail.com
+			.mb-4
+				.d-flex.align-items-center.mb-1
+					span.me-2.uil.uil-phone  
+					h5.text-1000.mb-0 Phone
+				a(href="tel:+1234567890") +1234567890	
+			.mb-4
+				.d-flex.align-items-center.mb-1
+					span.me-2.uil.uil-globe
+					h5.text-1000.mb-0 Website
+				a(href="#!") www.bb.ru.com	
+
+			.mb-4
+				.d-flex.align-items-center.mb-1
+					span.me-2.uil.uil-building
+					h5.text-1000.mb-0 Industry
+				p.mb-0.text-800 Large Enterprise
+
+			.mb-4
+				.d-flex.align-items-center.mb-1
+					span.me-2.uil.uil-postcard
+					h5.text-1000.mb-0 Number of employees
+				p.mb-0.text-800 126
+
+			.mb-4
+				.d-flex.align-items-center.mb-1
+					span.me-2.uil.uil-dollar-alt
+					h5.text-1000.mb-0 Annual Revenue
+				p.mb-0.text-800 $12000 
+
+			.mb-4
+				.d-flex.align-items-center.mb-1
+					span.me-2.uil.uil-clock
+					h5.text-1000.mb-0 Last contacted
+				p.mb-0.text-800 12 November 2021, 10:54 AM
+
+			.mb-4
+				.d-flex.align-items-center.mb-1
+					span.me-2.uil.uil-file-check-alt
+					h5.text-1000.mb-0 Lead source
+				p.mb-0.text-800 Advertisement
+
+			div
+				.d-flex.align-items-center.mb-1
+					span.me-2.uil.uil-check-circle
+					h5.text-1000.mb-0 Lead status
+				span.badge.badge-phoenix.badge-phoenix-primary New Lead
+
+mixin Address
+	.card&attributes(attributes)
+		.card-body
+			.d-flex.align-items-center.mb-5
+				h3 Address
+				button.btn.btn-link(type='button') Edit
+			.mb-4
+				.d-flex.align-items-center.mb-1
+					span.me-2.uil.uil-estate
+					h5.mb-0 Street
+				p.mb-0.text-800 38/2 Penelope street
+
+			.mb-4
+				.d-flex.align-items-center.mb-1
+					span.me-2.uil.uil-map-pin-alt
+					h5.mb-0.text-1000 Zip code
+				p.mb-0.text-800 1425
+
+			.mb-4
+				.d-flex.align-items-center.mb-1
+					span.me-2.uil.uil-map
+					h5.mb-0.text-1000 City
+				p.mb-0.text-800 Qualimando
+
+			div
+				.d-flex.align-items-center.mb-1
+					span.me-2.uil.uil-windsock
+					h5.mb-0.text-1000 Country
+				p.mb-0.text-800 United Empire of Brekania
+
+mixin DropDownLead
+	button.btn.px-3.btn-phoenix-secondary(type='button' data-bs-toggle='dropdown' data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent")
+		span.fa-solid.fa-ellipsis
+	ul.dropdown-menu.dropdown-menu-end.p-0&attributes(attributes)
+		li
+			a.dropdown-item(href='#!') View profile
+		li
+			a.dropdown-item(href='#!') Report
+		li
+			a.dropdown-item(href='#!') Manage notifications
+		li
+			a.dropdown-item.text-danger(href='#!') Delete Lead
+
+mixin TasksList
+	-
+		var taskList = [
+			{
+				task: 'Platforms for data administration',
+				date: '19 Nov, 2022',
+				time: '11:56 PM'
+			},
+			{
+				task: 'Make wiser business choices.',
+				date: "05 Nov, 2022",
+				time: '09:30 PM',
+			},
+			{
+				task: 'Market and consumer insights',
+				date: "02 Nov, 2022",
+				time: '05:25 AM',
+			},
+			{
+				task: 'Dashboards for business insights',
+				date: "29 Oct, 2022",
+				time: '08:21 PM',
+			},
+			{
+				task: 'Analytics and consultancy for data',
+				date: "21 Oct, 2022",
+				time: '03:45 PM',
+				checked: true
+			},
+			{
+				task: 'Planning your locations Customer data platform',
+				date: "14 Oct, 2022",
+				time: '10:00 PM',
+				checked: true
+			},
+			{
+				task: 'Promotion of technology',
+				date: "12 Oct, 2022",
+				time: '02:00 AM',
+				checked: true
+			},
+		];
+
+	+TodoSearchBar('justify-content-start').mb-3
+	each tasks,index in taskList
+		+TodoListItem(tasks,index)
+	a.fw-bold.fs--1.mt-4(href='#!')
+		span.fas.fa-plus.me-1
+		| Add new task
+
+mixin FilesAttachments
+	.border-top.border-dashed.border-300.pt-3.pb-4
+		.d-flex.flex-between-center
+			.d-flex.mb-1
+				span.fa-solid.fa-image.me-2.text-700.fs--1
+				p.text-1000.mb-0.lh-1 Silly_sight_1.png
+			.font-sans-serif.btn-reveal-trigger
+				button.btn.btn-sm.dropdown-toggle.dropdown-caret-none.transition-none&attributes(attributes)(type='button' class=`btn-reveal${reveal ? '-' + reveal : ''}` id=id data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent")
+					span.fas.fa-ellipsis-h(class=iconClass)
+				.dropdown-menu.dropdown-menu-end.py-2(aria-labelledby=id)
+					a(href='#!').dropdown-item Edit
+					a(href='#!').dropdown-item.text-danger Delete
+					a(href='#!').dropdown-item Download
+					a(href='#!').dropdown-item Report abuse
+		p.fs--1.text-700.mb-2
+			span 768kB
+			span.text-400.mx-1 | 
+			a(href="#!") Shantinan Mekalan 
+			span.text-400.mx-1 | 
+			span.text-nowrap 21st Dec, 12:56 PM
+		img(src=`${CWD}assets/img/generic/40.png` alt='').rounded-2
+	.border-top.border-dashed.border-300.py-4
+		.d-flex.flex-between-center
+			div
+				.d-flex.align-items-center.mb-1
+					span.fa-solid.fa-image.me-2.fs--1.text-700
+					p.text-1000.mb-0.lh-1 All_images.zip
+				p.fs--1.text-700.mb-0
+					span 12.8 mB
+					span.text-400.mx-1 |
+					a(href="#!") Yves Tanguy 
+					span.text-400.mx-1 | 
+					span.text-nowrap 19th Dec, 08:56 PM
+			.font-sans-serif.btn-reveal-trigger
+				button.btn.btn-sm.dropdown-toggle.dropdown-caret-none.transition-none&attributes(attributes)(type='button' class=`btn-reveal${reveal ? '-' + reveal : ''}` id=id data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent")
+					span.fas.fa-ellipsis-h(class=iconClass)
+				.dropdown-menu.dropdown-menu-end.py-2(aria-labelledby=id )
+					a(href='#!').dropdown-item Edit
+					a(href='#!').dropdown-item.text-danger Delete
+					a(href='#!').dropdown-item Download
+					a(href='#!').dropdown-item Report abuse
+
+	.border-top.border-dashed.border-300.py-4
+		.d-flex.flex-between-center
+			div
+				.d-flex.align-items-center.mb-1
+					span.fa-solid.fa-file-lines.me-2.fs--1.text-700
+					p.text-1000.mb-0.lh-1 Project.txt
+				p.fs--1.text-700.mb-0
+					span 123 kB
+					span.text-400.mx-1 | 
+					a(href="#!") Shantinan Mekalan 
+					span.text-400.mx-1 | 
+					span.text-nowrap 12th Dec, 12:56 PM
+			.font-sans-serif.btn-reveal-trigger
+				button.btn.btn-sm.dropdown-toggle.dropdown-caret-none.transition-none&attributes(attributes)(type='button' class=`btn-reveal${reveal ? '-' + reveal : ''}` id=id data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent")
+					span.fas.fa-ellipsis-h(class=iconClass)
+				.dropdown-menu.dropdown-menu-end.py-2(aria-labelledby=id )
+					a(href='#!').dropdown-item Edit
+					a(href='#!').dropdown-item.text-danger Delete
+					a(href='#!').dropdown-item Download
+					a(href='#!').dropdown-item Report abuse											
+
+mixin DealsTableRow(data,index)
+	tr.hover-actions-trigger.btn-reveal-trigger.position-static
+		td.fs--1.align-middle.px-0.py-3
+			.form-check.mb-0.fs-0
+				input.form-check-input(type='checkbox' data-bulk-select-row!=data)
+		td.dealName.align-middle.white-space-nowrap.py-2.ps-0
+			a.fw-semi-bold(href='#!' class=(data.active ? 'text-primary' : 'text-600 pointers-events-none text-decoration-none'))= `${data.dealName}`
+		td.amount.align-middle.white-space-nowrap.text-start.fw-bold.text-700.py-2.text-end.pe-6=data.amount
+		td.stage.align-middle.white-space-nowrap.text-900.py-2
+			span.badge.badge-phoenix.fs--2(class=data.stage_status.type)=data.stage_status.label
+
+		td.probability.align-middle.white-space-nowrap
+			p.text-800.fs--2.mb-0 #{data.progress.min}%
+			.progress.bg-primary-100(style="height:3px;" role="progressbar")
+				.progress-bar(style=`width: ${(data.progress.min/data.progress.max)*100}%` role="progressbar" aria-valuenow='25' aria-valuemin="0" aria-valuemax='100' class=`${data.progress.color}`)
+		td.date.align-middle.text-700.text-center.py-2=data.date
+		td.type.align-middle.fw-semi-bold.py-2.text-end
+			span.badge.badge-phoenix.fs--2(class=data.type_status.type)=data.type_status.label
+		td.align-middle.text-end.white-space-nowrap.pe-0.action.py-2
+			+DashboardDropdown
+
+mixin DealsTable
+	-
+		var dealsTableData = [
+			{
+				dealName: 'Mocking Bird',
+				active:true,
+				amount:'$6,800,000',
+				stage_status :{
+					label: 'won deal',
+					type: 'badge-phoenix-success',
+				},
+				progress:{
+					min:'67',
+					max:'145',
+					color:'bg-info'
+				},
+				date: 'Dec 29, 2021',
+				type_status :{
+					label: 'warm',
+					type: 'badge-phoenix-info',
+				},
+			},
+			{
+				dealName: 'Airbender',
+				active:true,
+				amount:'$89,090,000',
+				stage_status :{
+					label: 'new Deal',
+					type: 'badge-phoenix-primary',
+				},
+				progress:{
+					min:'34',
+					max:'145',
+					color:'bg-warning'
+				},
+				date: 'Mar 27, 2021',
+				type_status :{
+					label: 'hot',
+					type: 'badge-phoenix-danger',
+				},
+			},
+			{
+				dealName: 'Showmen',
+				active:true,
+				amount:'$78,650,000',
+				stage_status :{
+					label: 'Canceled',
+					type: 'badge-phoenix-secondary',
+				},
+				progress:{
+					min:'89',
+					max:'145',
+					color:'bg-success'
+				},
+				date: 'Jun 24, 2021',
+				type_status :{
+					label: 'cold',
+					type: 'badge-phoenix-warning',
+				},
+			},
+			{
+				dealName: 'Tarakihi',
+				active:true,
+				amount:'$1,200,000',
+				stage_status :{
+					label: 'In Progress',
+					type: 'badge-phoenix-info',
+				},
+				progress:{
+					min:'90',
+					max:'145',
+					color:'bg-success'
+				},
+				date: 'May 19, 2024',
+				type_status :{
+					label: 'hot',
+					type: 'badge-phoenix-danger',
+				},
+			},
+			{
+				dealName: 'Ponce d’leon',
+				active:true,
+				amount:'$46,000',
+				stage_status :{
+					label: 'won Deal',
+					type: 'badge-phoenix-success',
+				},
+				progress:{
+					min:'97',
+					max:'145',
+					color:'bg-success'
+				},
+				date: 'Aug 19, 2024',
+				type_status :{
+					label: 'cold',
+					type: 'badge-phoenix-warning',
+				},
+			},
+			{
+				dealName: 'leon',
+				active:true,
+				amount:'$66,000',
+				stage_status :{
+					label: 'IN PROGRESS',
+					type: 'badge-phoenix-info',
+				},
+				progress:{
+					min:'88',
+					max:'145',
+					color:'bg-success'
+				},
+				date: 'Aug 19, 2024',
+				type_status :{
+					label: 'cold',
+					type: 'badge-phoenix-warning',
+				},
+			},
+		]
+
+	#leadDetailsTable.border-top.border-bottom.border-200(data-list!={
+		valueNames: ["dealName", "amount", "stage","probability", "date", "type"],
+		page: 5,
+		pagination: true
+	})
+		.table-responsive.scrollbar.mx-n1.px-1
+			table.table.fs--1.mb-0
+				thead
+					tr
+						th.white-space-nowrap.fs--1.align-middle.ps-0(style='width:26px;')
+							.form-check.mb-0.fs-0
+								input.form-check-input(
+									type='checkbox'
+									data-bulk-select!={
+										body: "lead-details-table-body",
+									}
+								)
+						th.sort.white-space-nowrap.align-middle.pe-3.ps-0.text-uppercase(scope='col' data-sort="dealName" style='width:15%; min-width:200px') Deal name
+						th.sort.align-middle.pe-6.text-uppercase.text-end(scope='col' data-sort="amount" style='width:15%; min-width:100px') Amount
+						th.sort.align-middle.text-start.text-uppercase(scope='col' data-sort="stage" style='width:20%; min-width:200px') Stage
+						th.sort.align-middle.text-start.text-uppercase(scope='col' data-sort="probability" style='width:20%; min-width:100px') Probability
+						th.sort.align-middle.ps-0.text-end.text-uppercase(scope='col' data-sort="date" style='width:15%; min-width:120px') Closing Date
+						th.sort.align-middle.text-end.text-uppercase(scope='col' data-sort="type" style='width:15%; min-width:140px') Type
+						th.align-middle.pe-0.text-end(scope='col' style='width:15%;') 
+				tbody.list#lead-details-table-body
+					each row,index in dealsTableData
+						+DealsTableRow(row,index)
+		.row.align-items-center.justify-content-between.py-2.pe-0.fs--1
+			.col-auto.d-flex
+				p.mb-0.d-none.d-sm-block.me-3.fw-semi-bold.text-900(data-list-info)
+				a.fw-semi-bold(href='#!' data-list-view="*")
+					| View all
+					span.fas.fa-angle-right.ms-1(data-fa-transform='down-1')
+				a.fw-semi-bold.d-none(href='#!' data-list-view="less")
+					| View Less
+					span.fas.fa-angle-right.ms-1(data-fa-transform='down-1')
+			.col-auto.d-flex
+				button.page-link(data-list-pagination="prev")
+					span.fas.fa-chevron-left
+				ul.mb-0.pagination
+				button.page-link.pe-0(data-list-pagination="next")
+					span.fas.fa-chevron-right
+
+//- Emails Table
+
+mixin EmailsTableRow(data,index)
+	tr.hover-actions-trigger.btn-reveal-trigger.position-static
+		td.fs--1.align-middle.px-0.py-3
+			.form-check.mb-0.fs-0
+				input.form-check-input(type='checkbox' data-bulk-select-row!=data)
+		td.subject.order.align-middle.white-space-nowrap.py-2.ps-0.text-
+			a.fw-semi-bold(href='#!' class=(data.active ? 'text-primary' : 'text-600 pointers-events-none text-decoration-none'))= `${data.mail.subject}`
+			.fs--2.d-block=data.mail.email
+		td.sent.align-middle.white-space-nowrap.text-start.fw-bold.text-700.py-2=data.sent
+		td.date.align-middle.white-space-nowrap.text-900.py-2=data.date
+		td.align-middle.white-space-nowrap.ps-3
+			span.fa-solid.fa-phone.text-primary.me-2
+			=data.source
+		td.status.align-middle.fw-semi-bold.text-end.py-2
+			span.badge.badge-phoenix.fs--2(class=data.type_status.type)=data.type_status.label
+
+mixin EmailTable(data,type)
+	.border-top.border-bottom.border-200(id=`${type}EmailsTable` data-list!={
+		valueNames: ["subject", "sent", "date","source", "status"],
+		page: 7,
+		pagination: true
+	})
+		.table-responsive.scrollbar.mx-n1.px-1
+			table.table.fs--1.mb-0
+				thead
+					tr
+						th.white-space-nowrap.fs--1.align-middle.ps-0(style='width:26px;')
+							.form-check.mb-0.fs-0
+								input.form-check-input(
+									type='checkbox'
+									data-bulk-select!={
+										body: `${type}-email-table-body`,
+									}
+								)
+						th.sort.white-space-nowrap.align-middle.pe-3.ps-0.text-uppercase(scope='col' data-sort="subject" style='width:31%; min-width:350px') Subject
+						th.sort.align-middle.pe-3.text-uppercase(scope='col' data-sort="sent" style='width:15%; min-width:130px') Sent by
+						th.sort.align-middle.text-start.text-uppercase(scope='col' data-sort="date" style='min-width:165px') Date
+						th.sort.align-middle.pe-0.text-uppercase(scope='col' style='width:15%; min-width:100px') Action
+						th.sort.align-middle.text-end.text-uppercase(scope='col' data-sort="status" style='width:15%; min-width:100px') Status
+				tbody.list(id=`${type}-email-table-body`)
+					each row,index in data
+						+EmailsTableRow(row,index)
+		.row.align-items-center.justify-content-between.py-2.pe-0.fs--1
+			.col-auto.d-flex
+				p.mb-0.d-none.d-sm-block.me-3.fw-semi-bold.text-900(data-list-info)
+				a.fw-semi-bold(href='#!' data-list-view="*")
+					| View all
+					span.fas.fa-angle-right.ms-1(data-fa-transform='down-1')
+				a.fw-semi-bold.d-none(href='#!' data-list-view="less")
+					| View Less
+					span.fas.fa-angle-right.ms-1(data-fa-transform='down-1')
+			.col-auto.d-flex
+				button.page-link(data-list-pagination="prev")
+					span.fas.fa-chevron-left
+				ul.mb-0.pagination
+				button.page-link.pe-0(data-list-pagination="next")
+					span.fas.fa-chevron-right
+
+mixin Emails
+	div
+		.scrollbar
+			ul#emailTab.nav.nav-underline.flex-nowrap.mb-1(role='tablist')
+				li.nav-item.me-3
+					a#mail-tab.nav-link.text-nowrap.border-0.active(data-bs-toggle='tab' href='#tab-mail' aria-controls="mail-tab" role='tab' aria-selected='true')
+						| Mails (68)
+						span.text-700.fw-normal
+				li.nav-item.me-3
+					a#drafts-tab.nav-link.text-nowrap.border-0(data-bs-toggle='tab' href='#tab-drafts' aria-controls="drafts-tab" role='tab' aria-selected='true')
+						| Drafts (6)
+						span.text-700.fw-normal
+				li.nav-item.me-3
+					a#schedule-tab.nav-link.text-nowrap.border-0(data-bs-toggle='tab' href='#tab-schedule' aria-controls="schedule-tab" role='tab' aria-selected='true')
+						| Scheduled (17)
+		+Search({placeholder: 'Search...'}).w-100.mb-3
+		#profileTabContent.tab-content
+			#tab-mail.tab-pane.fade.show.active(role='tabpanel' aria-labelledby='mail-tab')
+				+EmailTable(emailTableData,'all')
+			#tab-drafts.tab-pane.fade(role='tabpanel' aria-labelledby='drafts-tab')
+				+EmailTable(emailTableData.slice(0,5),'drafts')
+			#tab-schedule.tab-pane.fade(role='tabpanel' aria-labelledby='schedule-tab')
+				+EmailTable(emailTableData.slice(0,4),'scheduled')

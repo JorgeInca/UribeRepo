@@ -1,0 +1,17 @@
+extends ../../layouts/LayoutComponent
+include ../../mixins/documentation/Plugin
+
+append variables
+  -
+    var pageHeader = {
+      title: 'Plugin',
+      description:`List of third-party plugins that ${title} uses`
+    }
+
+block component
+  +ComponentCard({title: 'Simple approach(without npm)', hideNavTab: true}).my-4
+    +SimpleApproach
+  +ComponentCard({title: 'Using npm', hideNavTab: true}).my-4
+    +NpmApproach
+  h2.mt-5.mb-3 Built-in plugins
+  +Plugins

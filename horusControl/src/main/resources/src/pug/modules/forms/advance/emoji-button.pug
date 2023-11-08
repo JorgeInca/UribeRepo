@@ -1,0 +1,32 @@
+extends ../../../layouts/LayoutComponent
+
+append variables
+  -
+    var pageHeader = {
+      title: 'Emoji button',
+      description: `Phoenix uses Picmo as a emoji picker component. It displays a panel of emojis where one can be selected. What is done with the selected emoji is up to you.`,
+      url: `https://picmojs.com/docs/api/overview/`,
+      linkText: 'Documentation for Picmo',
+    }
+
+append scripts 
+  script(src='https://unpkg.com/picmo@5.7.6/dist/umd/index.js')
+  script(src='https://unpkg.com/@picmo/popup-picker@5.7.6/dist/umd/index.js')
+
+block component
+  .mb-9
+    +ComponentCard({
+      title: 'Example',
+      anchor: true,
+    }).mb-3.mt-6
+      .position-relative
+        .btn.btn-primary(data-picmo!={ position: 'bottom-start' })
+          span.fa-regular.fa-face-smile.fs-1
+
+    +ComponentCard({
+      title: 'Javascript',
+      hideNavTab: true
+    }).my-4
+      +ComponentCardLib 
+        script(src='https://unpkg.com/picmo@5.7.6/dist/umd/index.js')
+        script(src='https://unpkg.com/@picmo/popup-picker@5.7.6/dist/umd/index.js')

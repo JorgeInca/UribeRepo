@@ -1,0 +1,589 @@
+extends layouts/LayoutComponent
+
+mixin Changelog(config)
+  .card.shadow-none.border.border-300.my-3
+    .card-header.border-bottom.border-300.bg-soft
+      h5.mb-2
+        code.fw-bold.fs-1=config.version
+        |  - #{config.name}
+      p.mb-0=config.date
+    .card-body
+      block
+
+append variables
+  -
+    var pageHeader = {
+      title: 'Changelog'
+    }
+
+block component
+
+  +Changelog({
+    version: 'v1.13.0',
+    name:'Auxo',
+    date: '18 June, 2023',
+  })
+    h6.mb-2 New
+    ul.bullet-inside.ps-0
+      li PAGE :
+        code  public/pages/faq/faq-tab.html
+      li PAGE :
+        code  public/pages/errors/403.html
+      li PAGE :
+        code  public/pages/authentication/simple/2FA.html
+      li PAGE :
+        code  public/pages/authentication/split/2FA.html
+      li PAGE :
+        code  public/pages/authentication/card/2FA.html
+      li JS :
+        code  src/js/theme/faq-tab.js
+      li JS :
+        code  src/js/theme/2fa-verification.js
+      li JS :
+        code  src/js/theme/sortable.js
+      li JS :
+        code src/js/theme/kanban.js
+      li DOC :
+        code  public/modules/components/sortable.html
+
+    h6.mb-2 Update
+    ul.bullet-inside.ps-0
+      li Added text-decoration-underline at links.
+      li JS :
+        code src/js/theme/calendar/app-calendar.js
+
+    h6.mb-2 Fix
+    ul.bullet-inside.ps-0
+      li Advance table issue fixed
+      li Other minor bugs
+  +Changelog({
+    version: 'v1.12.0',
+    name:'Notus',
+    date: '15 May, 2023',
+  })
+    h6.mb-2 New
+    ul.bullet-inside.ps-0
+      li PAGE :
+        code  public/apps/kanban/boards.html
+      li PAGE :
+        code  public/widgets.html
+      li FEATURE :
+        code  Double top navigation
+      li FEATURE :
+        code  Popover added in all avatar
+      li FEATURE :
+        code  Bootstrap validation added of each advanced input fields
+      li JS :
+        code  src/js/theme/create-board.js
+      li JS :
+        code  src/js/theme/advance-ajax-table.js
+    h6.mb-2 Update
+    ul.bullet-inside.ps-0
+      li PAGE :
+        code  public/apps/kanban/create-kanban-board.html
+      li DOC :
+        code  public/documentation/layouts/vertical-navbar.html
+      li DOC :
+        code  public/modules/tables/advance-tables.html
+      li DOC :
+        code  public/modules/forms/advance/advance-select.html
+      li DOC :
+        code  public/modules/forms/advance/date-picker.html
+      li JS :
+        code  src/js/theme/wizard.js
+    h6.mb-2 Fix
+    ul.bullet-inside.ps-0
+      li SCSS !default issue fixed
+      li Page scroll issue fixed after navbar vertical collapsed
+  +Changelog({
+    version: 'v1.11.0',
+    name:'Artemis',
+    date: '03 Apr, 2023',
+  })
+    h6.mb-2 New
+    ul.bullet-inside.ps-0
+      li PAGE :
+        code  public/apps/crm/deals.html
+      li PAGE :
+        code  public/apps/crm/reports-details.html
+      li PAGE :
+        code  public/apps/kanban/kanban.html
+      li PAGE :
+        code  public/apps/kanban/create-kanban-board.html
+      li PAGE :
+        code  public/modules/echarts/line-charts.html
+      li PAGE :
+        code  public/modules/echarts/bar-charts.html
+      li PAGE :
+        code  public/modules/echarts/candlestick-charts.html
+      li PAGE :
+        code  public/modules/echarts/geo-map.html
+      li PAGE :
+        code  public/modules/echarts/scatter-charts.html
+      li PAGE :
+        code  public/modules/echarts/pie-charts.html
+      li PAGE :
+        code  public/modules/echarts/gauge-chart.html
+      li PAGE :
+        code  public/modules/echarts/radar-charts.html
+      li PAGE :
+        code  public/modules/echarts/heatmap-charts.html
+      li DOC :
+        code  public/modules/echarts/how-to-use.html
+      li DOC :
+        code  public/modules/utilities/stacks.html
+      li DOC :
+        code  public/modules/utilities/grid.html
+      li DOC :
+        code  public/documentation/customization/configuration.html
+      li DOC :
+        code  public/documentation/customization/dark-mode.html
+      li PLUGIN :
+        code  Sortablejs  
+      li JS : 
+        code src/js/theme/randomColor.js
+      li JS : 
+        code  src/js/theme/copyLink.js
+    h6.mb-2 Update
+    ul.bullet-inside.ps-0
+      li DOC :
+        code  public/modules/tables/advance-tables.html
+
+  +Changelog({
+    version: 'v1.10.0',
+    name:'Hephaestus',
+    date: '5 Mar, 2023',
+  })
+    h6.mb-2 New
+    ul.bullet-inside.ps-0
+      li PAGE :
+        code  public/apps/crm/deal-details.html
+      li PAGE :
+        code  public/apps/crm/analytics.html
+      li PAGE :
+        code  public/modules/forms/advance/emoji-button.html    
+      li FEATURE :
+        code  Chat Demo (floating widget)
+      li FEATURE :
+        code  Emoji button (picmo) dark mode version added
+    h6.mb-2 Fix
+    ul.bullet-inside.ps-0
+      li Topnav dropdown spacing issue 
+      li Modal body scrolling issue
+      li Other minor bugs
+
+
+  +Changelog({
+    version: 'v1.9.0',
+    name:'Persephone',
+    date: '5 Feb, 2023',
+  })
+    h6.mb-2 New
+    ul.bullet-inside.ps-0
+      li PAGE :
+        code  public/dashboard/crm.html
+      li PAGE :
+        code  public/apps/crm/leads.html
+      li PAGE :
+        code  public/apps/crm/lead-details.html
+      li PAGE :
+        code  public/apps/crm/reports.html
+      li PAGE :
+        code  public/apps/crm/add-contact.html
+      li PAGE :
+        code  public/pages/landing/alternate.html
+      li PAGE :
+        code  public/pages/authentication/card/sign-in.html
+      li PAGE :
+        code  public/pages/authentication/card/sign-up.html
+      li PAGE :
+        code  public/pages/authentication/card/sign-out.html
+      li PAGE :
+        code  public/pages/authentication/card/forgot-password.html
+      li PAGE :
+        code  public/pages/authentication/card/reset-password.html
+      li PAGE :
+        code  public/pages/authentication/card/lock-screen.html
+    h6.mb-2 Update
+    ul.bullet-inside.ps-0
+      li Feature :
+        code  Horizontal Navbar new design (dropdown on hover)
+      li Feature :
+        code  Bulk select implemented on table
+    h6.mb-2 Fix
+    ul.bullet-inside.ps-0
+      li Other minor bugs
+
+  +Changelog({
+    version: 'v1.8.0',
+    name:'Boreas',
+    date: '10 Jan, 2023',
+  })
+    h6.mb-2 New
+    ul.bullet-inside.ps-0
+      li PAGE :
+        code  public/pages/pages/timeline.html
+      li PAGE :
+        code  public/modules/tables/bulk-select.html
+      li Feature :
+        code  Bulk Select
+      li Feature :
+        code  Search-box added in top navbar
+    h6.mb-2 Fix
+    ul.bullet-inside.ps-0
+      li Email page issues in slim and combo layout.
+      li Chat page issues in slim and combo layout.
+      li Other minor bugs
+
+  +Changelog({
+    version: 'v1.7.0',
+    name:'Cronus',
+    date: '14 Dec, 2022',
+  })
+    h6.mb-2 New
+    ul.bullet-inside.ps-0
+      li Feature :
+        code  RTL
+      li Feature :
+        code  Combo Navbar
+      li Feature :
+        code  Combo Navbar Slim
+      li PAGE :
+        code  public/apps/calendar.html
+      li PAGE :
+        code  public/apps/chat.html  
+      li PAGE :
+        code  public/demo/combo-nav.html
+      li PAGE :
+        code  public/demo/combo-nav-slim.html
+      li DOC: 
+        code public/documentation/layouts/combo-navbar.html
+      li DOC: 
+        code public/modules/components/calendar.html
+      li PLUGIN: 
+        code FullCalendar
+
+  +Changelog({
+    version: 'v1.6.0',
+    name:'Erebus',
+    date: '22 Nov, 2022',
+  })
+    h6.mb-2 New
+    ul.bullet-inside.ps-0
+      li Feature :
+        code  Dark Mode
+      li Feature :
+        code  Slim Navbar
+      li Feature :
+        code  Collapsed Navbar
+      li Feature :
+        code  Dark Navbar
+
+
+  +Changelog({
+    version: 'v1.5.0',
+    name:'Ares',
+    date: '10 Oct, 2022',
+  })
+    h6.mb-2 New
+    ul.bullet-inside.ps-0
+      li PAGE :
+        code  public/apps/email/inbox.html
+      li PAGE :
+        code  public/apps/email/email-detail.html
+      li PAGE :
+        code  public/apps/email/compose.html
+      li PAGE :
+        code  public/apps/social/feed.html
+      li PAGE :
+        code  public/apps/events/create-an-event.html 
+      li PAGE :
+        code  public/apps/events/event-detail.html
+
+  +Changelog({
+    version: 'v1.4.0',
+    name:'Zeus',
+    date: '15 Sept, 2022',
+  })
+    h6.mb-2 New
+    ul.bullet-inside.ps-0
+      li PAGE :
+        code  public/apps/e-commerce/landing/order-tracking.html
+      li PAGE :
+        code  public/apps/project-management/project-board-view.html
+      li PAGE :
+        code  public/apps/project-management/project-details.html
+      li PAGE :
+        code  public/pages/pages/pricing/pricing-grid.html
+      li PAGE :
+        code  public/modules/forms/wizard.html 
+      li PAGE :
+        code  public/landing.html
+
+
+  +Changelog({
+    version: 'v1.3.0',
+    name:'Gorgon',
+    date: '25 Aug, 2022',
+  })
+    h6.mb-2 New
+    ul.bullet-inside.ps-0
+      li PAGE :
+        code  public/apps/e-commerce/landing/products-filter.html
+      li PAGE :
+        code  public/apps/e-commerce/admin/refund.html
+      li PAGE :
+        code  publicapps/e-commerce/landing/wishlist.html
+      li PAGE :
+        code  public/apps/e-commerce/landing/invoice.html
+      li PAGE :
+        code  public/apps/project-management/project-list-view.html
+      li PAGE :
+        code  public/apps/project-management/project-card-view.html
+      li PAGE :
+        code  public/apps/project-management/todo-list.html
+      li PAGE :
+        code  public/apps/project-management/create-new.html
+      li SCSS :
+        code  src/scss/theme/plugins/_google-map.scss
+      li JS :
+        code  src/js/theme/product-filter.js
+
+  +Changelog({
+    version: 'v1.2.0',
+    name:'Demetra',
+    date: '2 Aug, 2022',
+  })
+    h6.mb-2 New
+    ul.bullet-inside.ps-0
+      li PAGE :
+        code  public/apps/project-management.html
+      li PAGE :
+        code  public/apps/e-commerce/admin/add-product.html
+      li PAGE :
+        code  public/apps/e-commerce/admin/customer-details.html 
+      li PAGE :
+        code  public/apps/e-commerce/admin/customers.html
+      li PAGE :
+        code  public/apps/e-commerce/landing/order-details.html  
+      li PAGE :
+        code  public/apps/e-commerce/homepage.html
+      li PAGE :
+        code  public/apps/e-commerce/cart.html
+      li PAGE :
+        code  public/apps/e-commerce/checkout.html
+      li PAGE :
+        code  public/apps/e-commerce/product-details.html  
+      li PAGE :
+        code  public/modules/components/carousel/bootstrap.html
+      li PAGE :
+        code  public/modules/components/carousel/swiper.html
+      li PAGE :
+        code  public/modules/components/navs-and-tabs/navbar.html
+      li PAGE :
+        code  public/modules/components/navs-and-tabs/navs.html
+      li PAGE :
+        code  public/modules/components/navs-and-tabs/tabs.html
+      li PAGE :
+        code  public/modules/components/accordion.html          
+      li PAGE
+        code  public/modules/components/alerts.html
+      li PAGE :
+        code  public/modules/components/avatar.html
+      li PAGE :
+        code  public/modules/components/badge.html
+      li PAGE :
+        code  public/modules/components/breadcrumb.html
+      li PAGE :
+        code  public/modules/components/button.html
+      li PAGE :
+        code  public/modules/components/card.html
+      li PAGE :
+        code  public/modules/components/collapse.html
+      li PAGE :
+        code  public/modules/components/dropdown.html
+      li PAGE :
+        code  public/modules/components/index.html
+      li PAGE :
+        code  public/modules/components/list-group.html 
+      li PAGE :
+        code  public/modules/components/modal.html
+      li PAGE :
+        code  public/modules/components/offcanvas.html
+      li PAGE :
+        code  public/modules/components/pagination.html
+      li PAGE :
+        code  public/modules/components/placeholder.html
+      li PAGE :
+        code  public/modules/components/popovers.html
+      li PAGE :
+        code  public/modules/components/progress-bar.html
+      li PAGE :
+        code  public/modules/components/progress.html
+      li PAGE :
+        code  public/modules/components/progress-bar.html
+      li PAGE :
+        code  public/modules/components/scrollspy.html
+      li PAGE :
+        code  public/modules/components/spinners.html
+      li PAGE :
+        code  public/modules/components/tooltips.html
+      li PAGE :
+        code  public/modules/forms/advance/advance-select.html
+      li PAGE :
+        code  public/modules/forms/advance/date-picker.html
+      li PAGE :
+        code  public/modules/forms/advance/editor.html
+      li PAGE :
+        code  public/modules/forms/advance/file-uploader.html 
+      li PAGE :
+        code  public/modules/forms/advance/rating.html
+      li PAGE :
+        code  public/modules/forms/basic/floating-labels.html
+      li PAGE :
+        code  public/modules/forms/basic/input-group.html
+      li PAGE :
+        code  public/modules/forms/basic/layout.html
+      li PAGE :
+        code  public/modules/forms/basic/range.html
+      li PAGE :
+        code  public/modules/forms/basic/select.html                            
+      li PAGE :
+        code  public/modules/forms/validation.html
+      li PAGE :
+        code  public/modules/icons/feather.html
+      li PAGE :
+        code  public/modules/icons/font-awesome.html
+      li PAGE :
+        code  public/modules/icons/unicons.html
+      li PAGE :
+        code  public/modules/tables/advance-tables.html 
+      li PAGE :
+        code  public/modules/tables/basic-tables.html 
+      li PAGE :
+        code  public/modules/utilities/background.html
+      li PAGE :
+        code  public/modules/utilities/borders.html
+      li PAGE :
+        code  public/modules/utilities/colors.html 
+      li PAGE :
+        code  public/modules/utilities/display.html
+      li PAGE :
+        code  public/modules/utilities/flex.html 
+      li PAGE :
+        code  public/modules/utilities/float.html 
+      li PAGE :
+        code  public/modules/utilities/interactions.html 
+      li PAGE :
+        code  public/modules/utilities/opacity.html 
+      li PAGE :
+        code  public/modules/utilities/overflow.html 
+      li PAGE :
+        code  public/modules/utilities/position.html 
+      li PAGE :
+        code  public/modules/utilities/shadows.html 
+      li PAGE :
+        code  public/modules/utilities/sizing.html 
+      li PAGE :
+        code  public/modules/utilities/spacing.html 
+      li PAGE :
+        code  public/modules/utilities/typography.html 
+      li PAGE :
+        code  public/modules/utilities/vertical-align.html                                       
+      li PAGE :
+        code  public/modules/utilities/visibility.html
+      li PAGE :
+        code  public/pages/authentication/simple/forgot-password.html
+      li PAGE :
+        code  public/pages/authentication/simple/lock-screen.html
+      li PAGE :
+        code  public/pages/authentication/simple/reset-password.html
+      li PAGE :
+        code  public/pages/authentication/simple/sign-in.html
+      li PAGE :
+        code  public/pages/authentication/simple/sign-up.html
+      li PAGE :
+        code  public/pages/errors/404.html
+      li PAGE :
+        code  public/pages/errors/500.html
+      li PAGE :
+        code  public/pages/pages/members.html
+      li PAGE :
+        code  public/pages/starter.html
+
+  +Changelog({
+    version: 'v1.1.0',
+    name:'Hermes',
+    date: '17 April, 2022',
+  })
+    h6.mb-2 New
+    ul.bullet-inside.ps-0
+      li PAGE : 
+        code public/apps/e-commerce/orders.html
+      li PAGE : 
+        code public/apps/e-commerce/products.html
+      li PAGE : 
+        code public/pages/pages/faq-accordion.html
+      li PAGE : 
+        code public/pages/pages/pricing.html
+      li PAGE : 
+        code public/pages/pages/notifications.html
+      li PAGE : 
+        code public/pages/pages/pricing.html
+      li PAGE : 
+        code public/modules/components/navs-and-tabs/navbar.html
+      li PAGE : 
+        code public/modules/components/navs-and-tabs/tabs.html
+
+      li JS : 
+        code src/scripts/theme/list.js
+
+    h6.mb-2 Update
+    ul.bullet-inside.ps-0
+      li JS : 
+        code webpack/webpack.config.js
+      li SCSS : 
+        code src/scss/theme/_badges.scss
+      li SCSS : 
+        code src/scss/theme/_mixed.scss
+      li SCSS : 
+        code src/scss/theme/_colors.scss
+      li SCSS : 
+        code src/scss/theme/_nav-tab.scss
+      li SCSS : 
+        code src/scss/theme/_pagination.scss
+      li SCSS : 
+        code src/scss/theme/_reboot.scss
+      li SCSS : 
+        code src/scss/theme/_search-box.scss
+      li SCSS : 
+        code src/scss/theme/_table.scss
+      li SCSS : 
+        code src/scss/theme/_variables.scss
+      li SCSS : 
+        code src/scss/theme/plugins/_list.scss
+      li SCSS : 
+        code src/scss/theme/root/_light.scss
+      li JSON : 
+        code package.json
+
+    h6.mb-2 Fix
+    ul.bullet-inside.ps-0.mb-0
+      li Minor issues
+
+
+  +Changelog({
+    version: 'v1.0.1',
+    name:'Theseus',
+    date: '30 March, 2022',
+  })
+    h6.mb-2 Fix
+    ul.bullet-inside.ps-0.mb-0
+      li Minor issues
+
+  +Changelog({
+    version: 'v1.0.0',
+    name:'Initial Release',
+    date: '24 March, 2022'
+  })
+    p.mb-0 Nothing to see here.

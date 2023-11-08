@@ -1,0 +1,98 @@
+mixin SupportContent 
+  -
+    var supportData = [
+      {
+        id: 1,
+        avatar: 'team/30.webp',
+        messages: [
+          //- {
+          //-   type: 'received',
+          //-   message: "Hello, welcome to the jungle.",
+          //-   time: 'Just now',
+          //- },
+          //- {
+          //-   type: 'sent',
+          //-   message: "I need a little help with something",
+          //-   time: 'Just now',
+          //-   seen: true,
+          //- }
+        ]
+      }
+    ]
+  - var suggestions = ["I need help with something", "I can’t reorder a product I previously ordered", "How do I place an order?", "My payment method not working"]
+
+  each thread in supportData 
+    .d-flex.flex-column-reverse.scrollbar.h-100.p-3
+      if !thread.messages.length
+        .text-end.mt-6
+          each item,index in suggestions
+            a(href="#!" class=`${index !== suggestions.length - 1 && "mb-2"}`).d-inline-flex.align-items-center.text-decoration-none.text-1100.hover-bg-soft.rounded-pill.border.border-primary.py-2.ps-4.pe-3
+              p.mb-0.fw-semi-bold.fs--1 #{item}
+              span.fa-solid.fa-paper-plane.text-primary.fs--1.ms-3
+      else
+        .d-flex.flex-column-reverse
+          each message in thread.messages
+            if message.type === 'received'
+              +ReceivedSupport(message,thread.avatar,thread.id)
+            else
+              +SentSupport(message,thread.id)
+          hr.my-4.border-dashed.border-top.border-300
+      .text-center.mt-auto
+        .avatar.avatar-3xl.status-online
+          img.rounded-circle.border.border-3.border-white(src=`${CWD}assets/img/${thread.avatar}`, alt='')
+        h5.mt-2.mb-3 Eric
+        p.text-center.text-black.mb-0 Ask us anything – we’ll get back to you here or by email within 24 hours.
+
+mixin ReceivedSupport(message,avatar)
+  .chat-message.mb-2
+    .d-flex
+      .avatar.avatar-m.me-3.flex-shrink-0
+        img.rounded-circle(src=`${CWD}assets/img/${avatar}`, alt='')
+      .mb-1.received-message-content.bg-white.border.rounded-2.p-3
+        p.mb-0=message.message
+    p.mb-0.fs--2.text-600.fw-semi-bold.ms-7=message.time
+
+mixin SentSupport(message)
+  .chat-message.mb-2
+    .d-flex.flex-end-center
+      .me-3
+        .mb-1.sent-message-content.light.bg-primary.rounded-2.p-3.text-white
+          p.mb-0=message.message
+    .d-flex.align-items-center.justify-content-end.gap-1
+      p.mb-0.fs--2.text-600.fw-semi-bold=message.time
+      if message.seen 
+        span.fa-solid.fa-check-double.text-success.fs--3
+
+mixin SupportChat 
+  .support-chat-container&attributes(attrsSupportChat)
+    .container-fluid.support-chat
+      .card.bg-white
+        .card-header.d-flex.flex-between-center.px-4.py-3.border-bottom
+          h5.mb-0.d-flex.align-items-center.gap-2 Demo widget
+            span.fa-solid.fa-circle.text-success.fs--3
+          .btn-reveal-trigger
+            button.btn.btn-link.p-0.dropdown-toggle.dropdown-caret-none.transition-none.d-flex&attributes(attributes)(type='button' id='support-chat-dropdown' data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent")
+              span.fas.fa-ellipsis-h.text-900(class=iconClass)
+            .dropdown-menu.dropdown-menu-end.py-2(aria-labelledby='support-chat-dropdown' )
+              a(href='#!').dropdown-item Request a callback
+              a(href='#!').dropdown-item Search in chat
+              a(href='#!').dropdown-item Show history
+              a(href='#!').dropdown-item Report to Admin
+              a(href='#!').dropdown-item.btn-support-chat Close Support
+        .card-body.chat.p-0
+          +SupportContent
+        .card-footer.d-flex.align-items-center.gap-2.border-top.ps-3.pe-4.py-3
+          .d-flex.align-items-center.flex-1.gap-3.border.rounded-pill.px-4
+            input.form-control.outline-none.border-0.flex-1.fs--1.px-0(type='text' placeholder='Write message')
+            label.btn.btn-link.d-flex.p-0.text-500.fs--1.border-0(for=`supportChatPhotos`)
+              span.fa-solid.fa-image
+            input.d-none(type="file" accept='image/*' id=`supportChatPhotos`)
+            label.btn.btn-link.d-flex.p-0.text-500.fs--1.border-0(for=`supportChatAttachment`) 
+              span.fa-solid.fa-paperclip
+            input.d-none(type="file" id=`supportChatAttachment`)
+          button.btn.p-0.border-0.send-btn
+            span.fa-solid.fa-paper-plane.fs--1
+    button.btn.p-0.border.border-200.btn-support-chat
+      span.fs-0.btn-text.text-primary.text-nowrap Chat demo
+      span.fa-solid.fa-circle.text-success.fs--1.ms-2
+      span.fa-solid.fa-chevron-down.text-primary.fs-1

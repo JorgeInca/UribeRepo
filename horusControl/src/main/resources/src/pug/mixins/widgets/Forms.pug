@@ -1,0 +1,33 @@
+include WidgetSectionTitle
+include ../e-commerce/add-product/OrganizeCard
+include ../e-commerce/add-product/VariantCard
+include ../e-commerce/add-product/ProductDescription
+include ../e-commerce/add-product/DisplayImage
+include ../e-commerce/add-product/Pricing
+include ../events/CreateEvent
+include ../email/Compose
+
+mixin Forms
+  +WidgetSectionTitle({
+    transform: 'shrink-2',
+    icon: 'fas fa-file-alt',
+    title: 'Forms',
+    subtitle: `Get different types of data from the user by using ${name}'s customizable form.`
+  }).mb-5#scrollspyForms.pt-7
+  .row.g-5.mb-5
+    .col-12.col-xl-8
+      +ProductDescription
+      +DisplayImage
+      +Pricing
+    .col-12.col-xl-4
+      .row.g-2
+        .col-12.col-xl-12
+          +OrganizeCard.mb-3
+        .col-12.col-xl-12
+          +VariantCard
+  .row.g-5
+    .col-xxl-6
+      +Compose
+    .col-xxl-6
+      .row.gx-3.gy-4
+        +EventDetails

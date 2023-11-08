@@ -1,0 +1,48 @@
+mixin FunFacts
+  +Section('container-small px-lg-7 px-xxl-3').overflow-hidden.rotating-earth-container.pb-5.pb-md-0.pt-12
+    .row
+      .col-lg-6.text-center.text-lg-start
+        h5.text-info.mb-3 One-stop solution
+        h2.mb-2.lh-base Used by millions of users
+        h1.fs-4.fs-sm-6.mb-3.text-gradient-info.fw-black WORLDWIDE
+        p.mb-10 Keep it simple with Phoenix and help your organization grow with the abundance you look for.
+        -
+          var items = [
+            {
+              lightImg: 'lightning-speed',
+              darkImg: 'lightning-speed-dark',
+              title: 'Lightning Speed',
+              description: 'Grow fast with Phoenix!'
+            },
+            {
+              lightImg: 'best-statistics',
+              darkImg: 'best-statistics-dark',
+              title: 'Best Statistics',
+              description: 'Get all reports at hand!'
+            },
+            {
+              lightImg: 'all-night',
+              darkImg: 'all-night-dark',
+              title: 'All-night Protection',
+              description: 'Security Assured: Ensure data Safety with Phoenix!'
+            },
+            {
+              lightImg: 'editable-features',
+              darkImg: 'editable-features-dark',
+              title: 'Editable Features',
+              description: 'Edits made easy and safe!'
+            },
+          ]
+        .row.gy-6
+          each item in items 
+            .col-sm-6.text-center.text-lg-start
+              img.mb-4.d-dark-none(src=`${CWD}assets/img/icons/${item.lightImg}.png`, alt="")
+              img.mb-4.d-light-none(src=`${CWD}assets/img/icons/${item.darkImg}.png`, alt="")
+              h4.mb-2= item.title
+              p= item.description
+      .col-lg-auto
+        .position-relative.position-lg-absolute.rotating-earth
+          .lottie.d-dark-none(data-options!={ path: `${CWD}assets/img/animated-icons/rotating-earth.json` })
+          .lottie.d-light-none(data-options!={ path: `${CWD}assets/img/animated-icons/rotating-earth-dark.json` })
+          img.position-absolute.d-dark-none(src=`${CWD}assets/img/spot-illustrations/earth-plane.png`, alt="")
+          img.position-absolute.d-light-none(src=`${CWD}assets/img/spot-illustrations/earth-plane-dark.png`, alt="")

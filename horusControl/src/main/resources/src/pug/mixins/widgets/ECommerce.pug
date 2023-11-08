@@ -1,0 +1,26 @@
+include WidgetSectionTitle
+include ../e-commerce/cart/CartTable
+include ../e-commerce/cart/SummaryCard
+include ../e-commerce/checkout/Checkout
+
+mixin ECommerce 
+  +WidgetSectionTitle({
+    transform: 'shrink-4',
+    icon: 'fas fa-cart-plus',
+    title: 'E-commerce',
+    subtitle: `Find more cards which are dedicatedly made for E-commerce.`
+  }).mb-5#scrollspyEcommerce.pt-7
+  div 
+    h3.mb-3 Cart
+    +CartTable
+  .my-6
+    .row.g-5
+      .col-xl-8
+        +PaymentMethod
+      .col-xl-4
+        +CartSummaryCard
+  .row.g-6
+    .col-xl-6
+      +DeliveryType(data)
+    .col-xl-6
+      +BillingInfo

@@ -1,0 +1,435 @@
+extends ../../layouts/LayoutTheme
+include ../../mixins/kanban/kanban/KanbanHeader
+include ../../mixins/kanban/kanban/KanbanModal
+include ../../mixins/kanban/kanban/KanbanOffcanvas
+
+prepend styles
+  //- link(href=`${CWD}vendors/sortablejs/sortable.min.css`, rel='stylesheet')
+
+prepend scripts
+  script(src=`${CWD}vendors/sortablejs/sortable.min.js`)
+  script(src=`${CWD}vendors/dropzone/dropzone.min.js`)
+append variables
+  - var attrsContent = { class: 'kanban-content' };
+  -
+    var kanbanItems = [
+      {
+        title: 'Unassaigned',
+        borderColor: 'warning',
+        isCollapsed: true,
+        items: [
+          {
+            status: 'feature',
+            details:'Develop a new feature for the phoenix mobile app',
+            icon: 'fas fa-check-double',
+            color: 'primary'
+          },
+          {
+            status: 'Bug',
+            details:'Conduct user research to gather feedback on the latest product iteration',
+            icon: 'fas fa-bug',
+            color: 'danger'
+
+          },
+          {
+            status: 'Issue',
+            details:'Review and approve marketing materials for the upcoming product launch',
+            icon: 'fa-solid fa-triangle-exclamation',
+            color: 'warning',
+          },
+        ] 
+      },
+      {
+        title: 'To do',
+        borderColor: '300',
+        items: [
+          {
+            status: 'Bug',
+            details:'Test and debug code for the e-commerce website checkout process',
+            icon: 'fas fa-bug',
+            color: 'danger',
+            img:'1.jpg',
+            //- footerChecked: true,
+            attached: 15,
+            users: [
+              {
+                img:'team/30.webp',
+              },
+              {
+                img:'team/57.webp',
+              },
+              {
+                img:'team/25.webp',
+              },
+            ],
+          },
+          {
+            status: 'Issue',
+            details:'Write a blog post on industry trends and best practices',
+            icon: 'fa-solid fa-triangle-exclamation',
+            color: 'warning',
+            footerDate: true,
+            users: [
+              {
+                img:'team/30.webp',
+              },
+              {
+                img:'team/57.webp',
+              },
+              {
+                img:'team/25.webp',
+              },
+            ],
+          },
+        ] 
+      },
+
+      {
+        title: 'Doing',
+        borderColor: 'primary',
+        items: [
+          {
+            status: 'Bug',
+            details:'Create wireframes for a new phoenix landing page design',
+            icon: 'fas fa-bug',
+            color: 'danger',
+            footerDate: true,
+            users: [
+              {
+                img:'team/57.webp',
+              },
+              {
+                more:'R',
+                contentClass: 'text-warning bg-soft-warning'
+              },
+            ],
+          },
+          {
+            status: 'undefined',
+            details:'Set up and configure a new software tool for the marketing team',
+            icon: 'fas fa-spinner',
+            color: 'secondary',
+            footerChecked: true,
+            users: [
+              {
+                img:'team/25.webp',
+              }
+            ],
+          },
+          {
+            status: 'Feature',
+            details:'Draft and send a press release to announce a new partnership',
+            icon: 'fas fa-check-double',
+            color: 'primary',
+            footerDate: true,
+            attached: 15,
+          },
+          {
+            status: 'Issue',
+            details:'Conduct a security audit of the phoenix web applications',
+            icon: 'fa-solid fa-triangle-exclamation',
+            color: 'warning',
+            footerDate: true,
+            attached: 15,
+            img: 'glass.jpg'
+          },
+        ] 
+      },
+      {
+        title: 'Review',
+        borderColor: 'info',
+        items: [
+          {
+            status: 'Issue',
+            details:'Design and develop a new logo for the phoenix',
+            icon: 'fa-solid fa-triangle-exclamation',
+            color: 'warning',
+            attached: 15,
+            users: [
+              {
+                img:'team/57.webp',
+              },
+              {
+                img:'team/25.webp',
+              },
+              {
+                img:'team/30.webp',
+              },
+            ],
+          },
+          {
+            status: 'issue',
+            details:'Create a fresh visual identity for Phoenix with a new logo design',
+            icon: 'fa-solid fa-triangle-exclamation',
+            color: 'warning',
+            footerChecked: true,
+            users: [
+              {
+                img:'team/25.webp',
+              },
+              {
+                img:'team/57.webp',
+              },
+              {
+                img:'team/30.webp',
+              },
+            ],
+          },
+          {
+            status: 'Undefined',
+            details:'Identify best software vendors for company-wide system through comprehensive research and evaluation',
+            icon: 'fas fa-spinner',
+            color: 'secondary',
+            attached: 15,
+          },
+          {
+            status: 'Feature',
+            details:'Write and edit copy for a new email marketing campaign',
+            icon: 'fas fa-check-double',
+            color: 'primary',
+            attached: 15,
+            img: 'wall.jpg'
+          },
+        ] 
+      },
+      {
+        title: 'Release',
+        borderColor: 'success',
+        items: [
+          {
+            status: 'Feature',
+            details:'Improve Phoenix website usability through user testing',
+            icon: 'fas fa-check-double',
+            color: 'primary',
+            attached: 15,
+            users: [
+              {
+                img:'team/57.webp',
+              }
+            ],
+          },
+          {
+            status: 'Bug',
+            details:'Develop and deliver a training program for new employees',
+            icon: 'fas fa-bug',
+            color: 'danger',
+            attached: 15,
+            img: 'home.jpg',
+            users: [
+              {
+                img:'team/57.webp',
+              },
+              {
+                img:'team/25.webp',
+              },
+              {
+                img:'team/30.webp',
+              },
+            ],
+          },
+          {
+            status: 'Undefined',
+            details:'Organize and lead a brainstorming session to generate new product ideas',
+            icon: 'fas fa-spinner',
+            color: 'secondary',
+            attached: 15,
+            users: [
+              {
+                img:'team/57.webp',
+              },
+              {
+                img:'team/25.webp',
+              }
+            ],
+          },
+
+        ] 
+      },
+
+    ]  
+
+block content
+
+  +KanbanHeader
+
+  .kanban-container.scrollbar(data-kanban-container)
+    each item in kanbanItems
+      - var {title, items, borderColor, isCollapsed} = item
+      - var totalTask = items.length
+      .kanban-column.scrollbar(class=`${isCollapsed ? 'collapsed': ''}`)
+        .kanban-column-header.px-4.hover-actions-trigger
+          .d-flex.align-items-center.border-bottom.border-3.py-3(class=`border-${borderColor}`)
+            h5.mb-0.kanban-column-title=title
+              span.kanban-title-badge=totalTask
+            .hover-actions-trigger
+              button.btn.btn-sm.btn-phoenix-default.kanban-header-dropdown-btn.hover-actions(type='button' data-boundary="viewport" data-bs-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
+                span.fas.fa-ellipsis-h
+              .dropdown-menu.dropdown-menu-end.py-2(style='width: 15rem;')
+                -
+                  var tasks = [
+                    {
+                      title: 'Sort tasks',
+                      isNasted: true,
+                    },
+                    {
+                      title: 'Sort all tasks'
+                    },
+                    {
+                      title: 'Move all tasks',
+                      isNasted: true,
+                    },
+                    {
+                      title: 'Remove all tasks',
+                    },
+                    {
+                      hr: true,
+                    },
+                    {
+                      title: 'Import'
+                    },
+                    {
+                      title: 'Export',
+                      isNasted: true,
+                    },
+                    {
+                      hr: true,
+                    },
+                    {
+                      title: 'Move column',
+                      isNasted: true,
+                    },
+                    {
+                      title: 'Duplicate column'
+                    },
+                    {
+                      title: 'Delete column'
+                    },
+                    {
+                      title: 'Archive column'
+                    },
+                    {
+                      hr: true,
+                    },
+                    {
+                      title: 'Edit title & description',
+                    },
+                    {
+                      title: 'Edit colour',
+                      isNasted: true,
+                    }
+                  ];
+
+                each task in tasks
+                  if task.title
+                    a.dropdown-item.d-flex.flex-between-center.border-1(href='#!' class=`${task.class}`)
+                      span #{task.title}
+                      if task.isNasted
+                        span.fas.fa-angle-right.fs--2
+                  else 
+                    hr.my-2
+
+            span.uil.uil-left-arrow-to-left.fs-0.ms-auto.kanban-collapse-icon(data-kanban-collapse)
+            span.uil.uil-arrow-from-right.fs-0.ms-auto.kanban-collapse-icon(data-kanban-collapse)
+
+        .kanban-items-container(data-sortable)
+          each item in items 
+            .sortable-item-wrapper.border-bottom.px-2.py-2
+              .card.sortable-item.hover-actions-trigger
+                .card-body.py-3.px-3
+                  if item.img 
+                    .position-relative.mb-2.overflow-hidden.rounded(style='height:200px; width:100%')
+                      +Background({
+                        image: `${CWD}assets/img/kanban/${item.img}`,
+                      })
+                  .kanban-status.mb-1.position-relative.lh-1
+                    span.fa.fa-circle.me-2.d-inline-block(class=`text-${item.color}` style="min-width:1rem" data-fa-transform='shrink-1 down-3')
+                    span.badge.badge-phoenix.fs--2(class=`badge-phoenix-${item.color}`)
+                      span
+                        +cleanText(item.status)
+                      span.ms-1.d-inline-block(class=item.icon data-fa-transform="up-2" style="height:7.8px;width:7.8px;")
+                    .font-sans-serif
+                      -
+                        var tasks = [
+                          {
+                            title: 'Move',
+                            isNasted: true,
+                          },
+                          {
+                            title: 'Duplicate'
+                          },
+                          {
+                            title: 'Jump to top',
+                          },
+                          {
+                            title: 'Jump to bottom',
+                          },
+                          {
+                            hr: true,
+                          },
+                          {
+                            title: 'Print/Download'
+                          },
+                          {
+                            title: 'Share',
+                            isNasted: true,
+                          },
+                          {
+                            hr: true,
+                          },
+                          {
+                            title: 'Move to archive',
+                            isNasted: true,
+                          },
+                          {
+                            title: 'Delete',
+                            class: 'text-danger'
+                          }
+                        ];
+                      button.btn.btn-sm.btn-phoenix-default.kanban-item-dropdown-btn.hover-actions(type='button' data-boundary="viewport" data-bs-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
+                        span.fas.fa-ellipsis-h.fa-rotate-90(data-fa-transform="shrink-2")
+                      .dropdown-menu.dropdown-menu-end.py-2(style='width: 15rem;')
+                        each task in tasks
+                          if task.title
+                            a.dropdown-item.d-flex.flex-between-center.border-1(href='#!' class=`${task.class}`)
+                              span #{task.title}
+                              if task.isNasted
+                                span.fas.fa-angle-right.fs--2
+                          else 
+                            hr.my-2
+                  p.mb-0.stretched-link(data-bs-toggle="modal" data-bs-target="#KanbanItemDetailsModal") #{item.details}
+                  .d-flex.mt-2.align-items-center
+                    if item.footerDate
+                      p.mb-0.text-600.fs--1.lh-1.me-3.white-space-nowrap
+                        span.fa-solid.fa-calendar-xmark.fs--1.me-2.d-inline-block(style="min-width: 1rem;")
+                        | Jan 25
+                    if item.attached
+                      p.mb-0.text-600.fs--1.lh-1
+                        span.fa-solid.fa-paperclip.fs--1.me-2.d-inline-block(style="min-width: 1rem;")
+                        | #{item.attached}
+                    if item.footerChecked
+                      p.mb-0.text-600.fs--1.lh-1
+                        span.fa.fa-check-square.fs--1.me-2.d-inline-block(style="min-width: 1rem;")
+                        | 5/34
+                    if item.users
+                      .avatar-group.ms-auto
+                        each user in item.users
+                          +Avatar(Object.assign({size: 's'},user)).border.border-white.rounded-pill
+
+        .py-3.px-4.kanban-add-task
+          button.btn.bg-sm.bg-300.me-2.px-0(data-bs-toggle="modal" data-bs-target="#kanbanAddTask")
+            span.fas.fa-plus.text-white.dark__text-400(data-fa-transform='grow-4 down-1')
+          input.form-control.search-input.rounded-3.px-3(placeholder='Add new task')
+
+    .kanban-column.scrollbar.position-relative.bg-transparent
+      .d-flex.h-100.flex-center.fw-bold.hover-bg-100
+        a(href="#!").text-decoration-none.stretched-link.text-800
+          .circle-btn.bg-200.mx-auto
+            span.fas.fa-plus(data-fa-transform="shrink-2")
+          span Add another list
+
+  +KanbanOffcanvas
+append afterMainContent
+  +KanbanAddTask
+  +KanbanItemDetailsModal
+
+

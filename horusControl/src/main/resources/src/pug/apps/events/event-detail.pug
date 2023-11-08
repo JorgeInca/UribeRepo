@@ -1,0 +1,38 @@
+extends ../../layouts/LayoutTheme
+include ../../mixins/events/EventDetail
+include ../../mixins/social/Feed
+
+prepend styles
+	link(href=`${CWD}vendors/choices/choices.min.css`, rel='stylesheet')
+	link(href=`${CWD}vendors/glightbox/glightbox.min.css`, rel='stylesheet')
+
+
+prepend scripts
+	script(src!=`https://maps.googleapis.com/maps/api/js?key=${APIGmap}&callback=initMap` async)
+	script(src=`${CWD}vendors/choices/choices.min.js`)
+	script(src=`${CWD}vendors/glightbox/glightbox.min.js`)
+
+append variables
+	- 
+		var breadcrumb = [
+			{
+				label: 'Page 1',
+				href: '#!'
+			},
+			{
+				label: 'Page 2',
+				href: '#!',
+			},
+			{
+				label: 'Default',
+				href: '#!',
+				active: true
+			},
+		];
+
+block content
+	.pb-9
+		h2.mb-4.mb-lg-6 Event details
+		img.rounded.w-100.fit-cover.mb-5.mb-md-6.mb-xl-8(src=`${CWD}assets/img/generic/34.png` alt='' style='min-height: 250px;')
+		.row.gx-lg-9
+			+EventDetail

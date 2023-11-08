@@ -1,0 +1,23 @@
+extends ../../../layouts/LayoutEcommerce
+include ../../../mixins/e-commerce/profile/ProfileWishListTable
+
+
+append variables
+  - var disableNavigationType = true;
+  - var disableHorizontalNavbarShape = true;
+  - var disableVerticalNavbarAppearance = true;
+  - var disableHorizontalNavbarAppearance = true;
+  - var activeNavItem = 'wishlist';
+
+block ecomContent
+  +Section(null,'container-small cart').pt-5.pb-9
+    nav.mb-2(aria-label='breadcrumb')
+      ol.breadcrumb.mb-0
+        li.breadcrumb-item
+          a(href='#!') Page 1
+        li.breadcrumb-item
+          a(href='#!') Page 2
+        li.breadcrumb-item.active(aria-current='page') Default
+    h2.mb-5 Wishlist
+      span.text-700.fw-normal.ms-2 (43)
+    +ProfileWishListTable

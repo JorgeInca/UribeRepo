@@ -1,0 +1,290 @@
+mixin NavbarStyle(config)
+  input.btn-check(
+    id=config.id
+    type='radio' 
+    name='config.name' 
+    value=config.value
+    data-theme-control='phoenixNavbarVerticalStyle'
+    disabled=disableVerticalNavbarAppearance
+  )
+  label.btn.d-block.w-100.btn-navbar-style.fs--1(for=config.id) 
+    img.img-fluid.img-prototype.d-dark-none(src=`${CWD}assets/img/generic/${config.img}.png`, alt="")
+    img.img-fluid.img-prototype.d-light-none(src=`${CWD}assets/img/generic/${config.imgDark}.png`, alt="")
+    span.label-text.d-dark-none 
+      +cleanText(config.value)
+    span.label-text.d-light-none
+      +cleanText(config.darkValue)
+mixin NavbarTopStyle(config)
+  input.btn-check(
+    id=config.id
+    type='radio' 
+    name='config.name' 
+    value=config.value
+    data-theme-control='phoenixNavbarTopStyle'
+  )
+  label.btn.d-block.w-100.btn-navbar-style.fs--1(for=config.id) 
+    img.img-fluid.img-prototype(src=`${CWD}assets/img/generic/${config.img}.png`, alt="")
+    span.label-text 
+      +cleanText(config.value)
+
+mixin SettingsPanel
+  #settings-offcanvas.offcanvas.offcanvas-end.settings-panel.border-0(tabindex='-1' aria-labelledby='settings-offcanvas')
+    .offcanvas-header.align-items-start.border-bottom.flex-column
+      .pt-1.w-100.mb-6.d-flex.justify-content-between.align-items-start
+        div
+          h5.mb-2.me-2.lh-sm
+            span.fas.fa-palette.me-2.fs-0
+            | Theme Customizer
+          p.mb-0.fs--1 Explore different styles according to your preferences
+        button.btn.p-1.fw-bolder(type='button' data-bs-dismiss='offcanvas' aria-label='Close')
+          span.fas.fa-times.fs-0  
+
+      button.btn.btn-phoenix-secondary.w-100(data-theme-control="reset")
+        span.fas.fa-arrows-rotate.me-2.fs--2
+        | Reset to default
+
+
+    #themeController.offcanvas-body.scrollbar.px-card
+      //---------------------------- Color Scheme stats -----------------------------------
+
+      .setting-panel-item.mt-0
+        h5.setting-panel-item-title Color Scheme
+        .row.gx-2
+          .col-6
+            input.btn-check(
+              id="themeSwitcherLight"
+              name='theme-color'
+              type='radio'
+              value="light"
+              data-theme-control='phoenixTheme'
+            )
+            label.btn.d-inline-block.btn-navbar-style.fs--1(for="themeSwitcherLight") 
+              span.mb-2.rounded.d-block
+                img.img-fluid.img-prototype.mb-0(src=`${CWD}assets/img/generic/default-light.png`, alt="")
+              span.label-text
+                +cleanText('light')
+          .col-6
+            input.btn-check(
+              id="themeSwitcherDark"
+              name='theme-color'
+              type='radio'  
+              value="dark"
+              data-theme-control='phoenixTheme'
+            )
+            label.btn.d-inline-block.btn-navbar-style.fs--1(for="themeSwitcherDark") 
+              span.mb-2.rounded.d-block
+                img.img-fluid.img-prototype.mb-0(src=`${CWD}assets/img/generic/default-dark.png`, alt="")
+              span.label-text 
+                +cleanText('dark')
+      //---------------------------- Color Scheme Ends -----------------------------------
+
+      .border.rounded-3.p-4.setting-panel-item.bg-white
+        .d-flex.justify-content-between.align-items-center
+          h5.setting-panel-item-title.mb-1 RTL 
+          .form-check.form-switch.mb-0
+            input.form-check-input.ms-auto(type='checkbox' data-theme-control='phoenixIsRTL')
+        p.mb-0.text-700 Change text direction
+
+      //---------------------------- support-chat -----------------------------------
+
+      .border.rounded-3.p-4.setting-panel-item.bg-white
+        .d-flex.justify-content-between.align-items-center
+          h5.setting-panel-item-title.mb-1 Support Chat 
+          .form-check.form-switch.mb-0
+            input.form-check-input.ms-auto(type='checkbox' data-theme-control='phoenixSupportChat')
+        p.mb-0.text-700 Toggle support chat
+
+      //---------------------------- Navigation type stats -----------------------------------
+      .setting-panel-item
+        h5.setting-panel-item-title Navigation Type
+        - var navbarTopPageUrl = ENV !== 'PROD' ? `${CWD}${paths['doc-layout-horizontal-navbar']}` : false;
+        - var navbarVerticalPageUrl = ENV !== 'PROD' ? `${CWD}${paths['doc-layout-vertical-navbar']}` : false;
+        - var navbarComboPageUrl = ENV !== 'PROD' ? `${CWD}${paths['doc-layout-combo-navbar']}` : false;
+        - var navbarDualPageUrl = ENV !== 'PROD' ? `${CWD}${paths['doc-layout-dual-nav']}` : false;
+        .row.gx-2
+          .col-6
+            input.btn-check(
+              id="navbarPositionVertical"
+              name='navigation-type'
+              type='radio'
+              value="vertical"
+              data-theme-control='phoenixNavbarPosition'
+              data-page-url=navbarVerticalPageUrl
+              disabled=disableNavigationType
+            )
+            label.btn.d-inline-block.btn-navbar-style.fs--1(for="navbarPositionVertical") 
+              span.mb-2.rounded.d-block
+                img.img-fluid.img-prototype.d-dark-none(src=`${CWD}assets/img/generic/default-light.png`, alt="")
+                img.img-fluid.img-prototype.d-light-none(src=`${CWD}assets/img/generic/default-dark.png`, alt="")
+              span.label-text
+                +cleanText('vertical')
+          .col-6
+            input.btn-check(
+              id="navbarPositionHorizontal"
+              name='navigation-type'
+              type='radio'  
+              value="horizontal"
+              data-theme-control='phoenixNavbarPosition'
+              data-page-url=navbarTopPageUrl
+              disabled=disableNavigationType
+            )
+            label.btn.d-inline-block.btn-navbar-style.fs--1(for="navbarPositionHorizontal") 
+              span.mb-2.rounded.d-block
+                img.img-fluid.img-prototype.d-dark-none(src=`${CWD}assets/img/generic/top-default.png`, alt="")
+                img.img-fluid.img-prototype.d-light-none(src=`${CWD}assets/img/generic/top-default-dark.png`, alt="")
+              span.label-text 
+                +cleanText('horizontal')
+          .col-6
+            input.btn-check(
+              id="navbarPositionCombo"
+              name='navigation-type'
+              type='radio'  
+              value="combo"
+              data-theme-control='phoenixNavbarPosition'
+              disabled=disableNavigationType
+              data-page-url=navbarComboPageUrl
+            )
+            label.btn.d-inline-block.btn-navbar-style.fs--1(for="navbarPositionCombo") 
+              span.mb-2.rounded.d-block
+                img.img-fluid.img-prototype.d-dark-none(src=`${CWD}assets/img/generic/nav-combo-light.png`, alt="")
+                img.img-fluid.img-prototype.d-light-none(src=`${CWD}assets/img/generic/nav-combo-dark.png`, alt="")
+              span.label-text 
+                +cleanText('combo')
+          .col-6
+            input.btn-check(
+              id="navbarPositionTopDouble"
+              name='navigation-type'
+              type='radio'  
+              value="dual-nav"
+              data-theme-control='phoenixNavbarPosition'
+              disabled=disableNavigationType
+              data-page-url=navbarDualPageUrl
+            )
+            label.btn.d-inline-block.btn-navbar-style.fs--1(for="navbarPositionTopDouble") 
+              span.mb-2.rounded.d-block
+                img.img-fluid.img-prototype.d-dark-none(src=`${CWD}assets/img/generic/dual-light.png`, alt="")
+                img.img-fluid.img-prototype.d-light-none(src=`${CWD}assets/img/generic/dual-dark.png`, alt="")
+              span.label-text 
+                +cleanText('dual-nav')
+        if disableNavigationType
+          p.text-warning-500.font-medium 
+            span.fa-solid.fa-triangle-exclamation.me-2.text-warning
+            | You can't update navigation type in this page
+
+
+      //---------------------------- Navigation type Ends -----------------------------------
+
+      //---------------------------- Vertical Navbar appearance stats -----------------------------------
+      .setting-panel-item
+        h5.setting-panel-item-title Vertical Navbar Appearance
+        .row.gx-2
+          .col-6
+            +NavbarStyle({
+              id: 'navbar-style-default',
+              img: 'default-light',
+              imgDark: 'default-dark',
+              value: 'default',
+              darkValue: 'default'
+            })
+          .col-6
+            +NavbarStyle({
+              id: 'navbar-style-dark',
+              img: 'vertical-darker',
+              imgDark: 'vertical-lighter',  
+              value: 'darker',
+              darkValue: 'lighter'
+            })
+        if disableVerticalNavbarAppearance
+          p.text-warning-500.font-medium 
+            span.fa-solid.fa-triangle-exclamation.me-2.text-warning
+            | You can't update vertical navbar appearance type in this page
+
+      //---------------------------- Vertical Navbar appearance Ends -----------------------------------
+
+      //---------------------------- Horizontal navbar shape stats -----------------------------------
+      .setting-panel-item
+        h5.setting-panel-item-title Horizontal Navbar Shape
+        - var navbarSlimPageUrl = ENV !== 'PROD' ? `${CWD}${paths['doc-layout-horizontal-navbar']}#horizontal-navbar-slim` : false;
+        - var navbarHorizontalPageUrl = ENV !== 'PROD' ? `${CWD}${paths['doc-layout-horizontal-navbar']}` : false;
+        .row.gx-2
+          .col-6
+            input.btn-check(
+              id="navbarShapeDefault"
+              name='navbar-shape'
+              type='radio'
+              value="default"
+              data-theme-control='phoenixNavbarTopShape'
+              data-page-url=navbarHorizontalPageUrl
+              disabled=disableHorizontalNavbarShape
+            )
+            label.btn.d-inline-block.btn-navbar-style.fs--1(for="navbarShapeDefault") 
+              span.mb-2.rounded.d-block
+                img.img-fluid.img-prototype.d-dark-none.mb-0(src=`${CWD}assets/img/generic/top-default.png`, alt="")
+                img.img-fluid.img-prototype.d-light-none.mb-0(src=`${CWD}assets/img/generic/top-default-dark.png`, alt="")
+              span.label-text
+                +cleanText('Default')
+          .col-6
+            input.btn-check(
+              id="navbarShapeSlim"
+              name='navbar-shape'
+              type='radio'  
+              value="slim"
+              data-theme-control='phoenixNavbarTopShape'
+              data-page-url=navbarSlimPageUrl
+              disabled=disableHorizontalNavbarShape
+            )
+            label.btn.d-inline-block.btn-navbar-style.fs--1(for="navbarShapeSlim") 
+              span.mb-2.rounded.d-block
+                img.img-fluid.img-prototype.d-dark-none.mb-0(src=`${CWD}assets/img/generic/top-slim.png`, alt="")
+                img.img-fluid.img-prototype.d-light-none.mb-0(src=`${CWD}assets/img/generic/top-slim-dark.png`, alt="")
+              span.label-text 
+                +cleanText('slim')
+        if disableHorizontalNavbarShape
+          p.text-warning-500.font-medium 
+            span.fa-solid.fa-triangle-exclamation.me-2.text-warning
+            | You can't update vertical navbar appearance type in this page
+
+      //---------------------------- Horizontal navbar shape Ends -----------------------------------
+
+      //---------------------------- Horizontal navbar appearance stats -----------------------------------
+      .setting-panel-item
+        h5.setting-panel-item-title Horizontal Navbar Appearance
+        .row.gx-2
+          .col-6
+            input.btn-check(
+              id="navbarTopDefault"
+              name='navbar-top-style'
+              type='radio'
+              value="default"
+              data-theme-control='phoenixNavbarTopStyle'
+              disabled=disableHorizontalNavbarAppearance
+            )
+            label.btn.d-inline-block.btn-navbar-style.fs--1(for="navbarTopDefault") 
+              span.mb-2.rounded.d-block
+                img.img-fluid.img-prototype.d-dark-none.mb-0(src=`${CWD}assets/img/generic/top-default.png`, alt="")
+                img.img-fluid.img-prototype.d-light-none.mb-0(src=`${CWD}assets/img/generic/top-style-darker.png`, alt="")
+              span.label-text
+                +cleanText('Default')
+          .col-6
+            input.btn-check(
+              id="navbarTopDarker"
+              name='navbar-top-style'
+              type='radio'  
+              value="darker"
+              data-theme-control='phoenixNavbarTopStyle'
+              disabled=disableHorizontalNavbarAppearance
+            )
+            label.btn.d-inline-block.btn-navbar-style.fs--1(for="navbarTopDarker") 
+              span.mb-2.rounded.d-block
+                img.img-fluid.img-prototype.d-dark-none.mb-0(src=`${CWD}assets/img/generic/navbar-top-style-light.png`, alt="")
+                img.img-fluid.img-prototype.d-light-none.mb-0(src=`${CWD}assets/img/generic/top-style-lighter.png`, alt="")
+              span.label-text.d-dark-none
+                +cleanText('darker')
+              span.label-text.d-light-none
+                +cleanText('lighter')
+        if disableHorizontalNavbarAppearance
+          p.text-warning-500.font-medium 
+            span.fa-solid.fa-triangle-exclamation.me-2.text-warning
+            | You can't update vertical navbar appearance type in this page
+
+      a.bun.btn-primary.d-grid.mb-3.text-white.dark__text-100.mt-5(href="https://themes.getbootstrap.com/product/phoenix-admin-dashboard-webapp-template/" target="_blank").btn.btn-primary Purchase template

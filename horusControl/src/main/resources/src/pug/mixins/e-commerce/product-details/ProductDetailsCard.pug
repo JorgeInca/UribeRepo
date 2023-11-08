@@ -1,0 +1,50 @@
+mixin ProductDetailsCard
+	-
+		var productDetails = [
+			{
+				checked:true,
+				img:'2',
+				productName:' iPhone 13 pro max-Pacific Blue- 128GB',
+				price: '$899.99',
+				mb:`mb-5`,	
+			},
+			{
+				checked:true,
+				img:'16',
+				productName:'Apple AirPods Pro',
+				price: '$59.00',
+				mb:`mb-5`,
+			},
+				{
+				checked:false,
+				img:'10',
+				productName:'Apple Magic Mouse (Wireless, Rechargable) - Silver, Worst mouse ever',
+				price: '$89.00',
+				mb:`mb-0`,
+			},
+		]
+	mixin PeroductDetails(data) 
+		.d-flex.align-items-center(class=`${data.mb}`)
+			.form-check.mb-0
+				input.form-check-input(type='checkbox' checked=data.checked)
+				label.form-check-label
+			a(href=`${CWD}${paths['e-commerce-fe-product-details']}`) 
+				img.border.rounded(src=`${CWD}assets/img/products/${data.img}.png`, width="53" alt="")
+			.ms-2
+				a(href=`${CWD}${paths['e-commerce-fe-product-details']}`).fs--1.fw-bold.line-clamp-2.mb-2!=data.productName
+				h5=data.price	
+	.card
+		.card-body
+			h5.text-black Usually Bought Together
+			.w-75
+				p.text-700.fs--1.fw-bold.line-clamp-1 with 24" iMac® with Retina 4.5K display - Apple M1 8GB Memory - 256GB SSD - w/Touch ID (Latest Model) - Blue
+			.border-dashed.border-y.py-4
+				each product,index in productDetails
+					+PeroductDetails(product)
+			.d-flex.align-items-end.justify-content-between.pt-3
+				div
+					h5.mb-2.text-600 Total
+					h4.mb-0.text-1100 $958.99
+				.btn.btn-outline-warning Add 3 items to cart
+					span.fas.fa-shopping-cart.ms-2
+

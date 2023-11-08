@@ -1,0 +1,180 @@
+append variables
+  - var attrsFooter = { class: 'position-absolute'}
+
+mixin LayoutContentProd
+
+  //- div.container-fluid.px-0&attributes(attrsLayout)
+    //- script.
+
+  block wrapperContent
+    block beforeContent
+      block navbarVertical
+        +NavbarVertical.navbar-expand-lg(style='display:none')
+
+      block navbarHorizontal
+        block navbarTop 
+          +TopNav({
+            toggleID: 'navbarVerticalCollapse',
+            links: false,
+            search: true
+          }).navbar-expand(style='display:none')
+
+          +TopNavSlim({
+            toggleID: 'navbarVerticalCollapse',
+            links: false,
+            search: true
+            }).navbar-expand(style='display:none')
+
+          +NavbarTop({
+            toggleID: 'navbarTopCollapse',
+            links: false,
+            search: true
+            }).navbar-expand-lg(style='display:none')
+
+          +NavbarTopSlim({
+            toggleID: 'navbarTopCollapse',
+            links: false,
+            search: true
+            }).navbar-expand-lg(style='display:none')
+
+          +NavbarCombo({
+            toggleID: 'navbarVerticalCollapse',
+            links: false,
+            search: true
+            }).navbar-expand-lg(style='display:none')
+
+          +NavbarComboSlim({
+            toggleID: 'navbarVerticalCollapse',
+            links: false,
+            search: true
+            }).navbar-expand-lg(style='display:none')
+
+          +DualNav({
+            toggleID: 'navbarTopCollapse',
+            links: false,
+            search: true
+            }).navbar-expand-lg(style='display:none')
+
+        #searchBoxModal.modal.fade(tabindex='-1' aria-hidden='true' data-bs-backdrop="true" data-phoenix-modal style='--phoenix-backdrop-opacity: 1;')
+          .modal-dialog
+            .modal-content.mt-15.rounded-pill
+              .modal-body.p-0
+                +NavSearch({placeholder:'Search...',inputClass:'form-control-lg'})(style='width: auto')
+
+    script.
+      var navbarTopShape = window.config.config.phoenixNavbarTopShape;
+      var navbarPosition = window.config.config.phoenixNavbarPosition;
+      var body = document.querySelector('body');
+      var navbarDefault = document.querySelector('#navbarDefault');
+      var navbarTop = document.querySelector('#navbarTop');
+      var topNavSlim = document.querySelector('#topNavSlim');
+      var navbarTopSlim = document.querySelector('#navbarTopSlim');
+      var navbarCombo = document.querySelector('#navbarCombo');
+      var navbarComboSlim = document.querySelector('#navbarComboSlim');
+      var dualNav = document.querySelector('#dualNav');
+
+      var documentElement = 	document.documentElement;
+      var navbarVertical = document.querySelector('.navbar-vertical');
+
+      if(navbarPosition === 'dual-nav'){
+        topNavSlim.remove();
+        navbarTop.remove();
+        navbarVertical.remove();
+        navbarTopSlim.remove();
+        navbarCombo.remove();
+        navbarComboSlim.remove();
+        navbarDefault.remove();
+        dualNav.removeAttribute('style');
+        documentElement.classList.add('dual-nav');
+      }
+      else if(navbarTopShape === 'slim' && navbarPosition === 'vertical'){
+        navbarDefault.remove();
+        navbarTop.remove();
+        navbarTopSlim.remove();
+        navbarCombo.remove();
+        navbarComboSlim.remove();
+        topNavSlim.style.display='block';
+        navbarVertical.style.display='inline-block';
+        body.classList.add('nav-slim');
+      }
+      else if(navbarTopShape === 'slim' && navbarPosition === 'horizontal'){
+        navbarDefault.remove();
+        navbarVertical.remove();
+        navbarTop.remove();
+        topNavSlim.remove();
+        navbarCombo.remove();
+        navbarComboSlim.remove();
+        navbarTopSlim.removeAttribute('style');
+        body.classList.add('nav-slim');
+      }
+      else if(navbarTopShape === 'slim' && navbarPosition === 'combo'){
+        navbarDefault.remove();
+        //- navbarVertical.remove();
+        navbarTop.remove();
+        topNavSlim.remove();
+        navbarCombo.remove();
+        navbarTopSlim.remove();
+        navbarComboSlim.removeAttribute('style');
+        navbarVertical.removeAttribute('style');
+        body.classList.add('nav-slim');
+      }
+      else if(navbarTopShape === 'default' && navbarPosition === 'horizontal'){
+        navbarDefault.remove();
+        topNavSlim.remove();
+        navbarVertical.remove();
+        navbarTopSlim.remove();
+        navbarCombo.remove();  
+        navbarComboSlim.remove();
+        navbarTop.removeAttribute('style');
+        documentElement.classList.add('navbar-horizontal');
+      }
+      else if(navbarTopShape === 'default' && navbarPosition === 'combo'){
+        topNavSlim.remove();
+        navbarTop.remove();
+        navbarTopSlim.remove();
+        navbarDefault.remove();
+        navbarComboSlim.remove();
+        navbarCombo.removeAttribute('style');
+        navbarVertical.removeAttribute('style');
+        documentElement.classList.add('navbar-combo')
+
+      }
+      else {
+        topNavSlim.remove();
+        navbarTop.remove();
+        navbarTopSlim.remove();
+        navbarCombo.remove();
+        navbarComboSlim.remove();
+        navbarDefault.removeAttribute('style');
+        navbarVertical.removeAttribute('style');
+      }
+
+      var navbarTopStyle = window.config.config.phoenixNavbarTopStyle;
+      var navbarTop = document.querySelector('.navbar-top');
+      if(navbarTopStyle === 'darker'){
+        navbarTop.classList.add('navbar-darker');
+      }
+
+      var navbarVerticalStyle = window.config.config.phoenixNavbarVerticalStyle;
+      var navbarVertical = document.querySelector('.navbar-vertical');
+      if(navbarVerticalStyle === 'darker'){
+        navbarVertical.classList.add('navbar-darker');
+      }
+
+    .content()&attributes(attrsContent)
+      if breadcrumb
+        nav.mb-2(aria-label='breadcrumb')&attributes(attrsBreadcrumb)
+          ol.breadcrumb.mb-0
+            each item in breadcrumb
+              if item.active
+                li.breadcrumb-item.active=item.label
+              else
+                li.breadcrumb-item
+                  a(href=item.href)=item.label
+
+      block content
+
+      if footer
+        +Footer
+
+    block afterContent

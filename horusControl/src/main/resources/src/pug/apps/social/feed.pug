@@ -1,0 +1,35 @@
+extends ../../layouts/LayoutTheme
+include ../../mixins/social/Feed
+include ../../mixins/navbars/NavbarBottom
+
+append variables
+  - var attrsFooter = { class: 'd-none d-lg-block position-absolute'}
+  - var attrsSupportChat = {class: 'support-chat-bottom-lg'}
+
+prepend styles
+  link(href=`${CWD}vendors/glightbox/glightbox.min.css`, rel='stylesheet')
+
+prepend scripts
+  script(src=`${CWD}vendors/glightbox/glightbox.min.js`) 
+
+block content
+  .pb-10
+    .row.gy-3.gx-5.gx-xxl-6
+      .col-lg-5.col-xl-4.d-none.d-lg-block
+        +FeedProfileCard.mb-5
+        +ProfileNavigation
+        .mb-8.mt-6
+          +Messages
+        .mb-8
+          +Photos
+        .d-flex.pb-4.border-bottom.border-dashed.border-300.align-items-end
+          h3.flex-1.mb-0 Events
+          a.fw-bold.fs--1(href="#!") See more
+        +Events
+      .col-lg-7.col-xl-8
+        +FeedTextarea.mb-5
+        .mb-9
+          +PostList(3)
+        .text-center
+          a(href="#!").btn.btn-link.fs-0.p-0 Load more
+  +NavbarBottom('home').d-lg-none

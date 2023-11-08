@@ -1,0 +1,228 @@
+extends ../../layouts/LayoutTheme
+include ../../mixins/dashboard/common
+include ../../mixins/crm/Reports
+
+prepend styles
+	link(href=`${CWD}vendors/choices/choices.min.css`, rel='stylesheet')
+	link(href=`${CWD}vendors/flatpickr/flatpickr.min.css`, rel='stylesheet')
+
+prepend scripts
+	script(src=`${CWD}vendors/choices/choices.min.js`)
+
+append variables
+	-
+		var breadcrumb = [
+			{
+				label: 'Page 1',
+				href: '#!'
+			},
+			{
+				label: 'Page 2',
+				href: '#!',
+			},
+			{
+				label: 'Default',
+				href: '#!',
+				active: true
+			},
+		];
+	-
+		var reportsDataList = [
+			{
+				title:'Purchasers and sellers',
+				text:'Purchasing-Related Vendors',
+				priority:{
+					label: 'Urgent',
+					iconClass:'text-danger',
+				},
+				reportsby:'Reports by email',
+				reports:'Sales Reports',
+				date:'Dec 30, 2022',
+			},
+			{
+				title:'Useful Solutions',
+				text:'Obtaining leads today',
+				priority:{
+					label: 'Urgent',
+					iconClass:'text-danger',
+				},
+				reportsby:'Reports by email',
+				reports:'HR Reports',
+				date:'Dec 20, 2022',
+			},
+			{
+				title:'Category Products',
+				text:'Based on the percentage of recipients',
+				priority:{
+					label: 'Medium',
+					iconClass:'text-success',
+				},
+				reportsby:'Reports on Sales Orders',
+				reports:'Marketing Reports',
+				date:'Dec 28, 2022',
+			},
+			{
+				title:'Current Deals',
+				text:'Sales for Today',
+				priority:{
+					label: 'Medium',
+					iconClass:'text-success',
+				},
+				reportsby:'Reviews of Products',
+				reports:'Sales Reports',
+				date:'Dec 28, 2022',
+			},
+			{
+				title:'Useful Solutions',
+				text:'Obtaining leads today',
+				priority:{
+					label: 'Low',
+					iconClass:'text-info',
+				},
+				reportsby:'Reports by email',
+				reports:'Hr Reports',
+				date:'Dec 27, 2022',
+			},
+			{
+				title:'Current Deals',
+				text:'Sums up the many existing businesses.',
+				priority:{
+					label: 'Low',
+					iconClass:'text-info',
+				},
+				reportsby:'Reports by email',
+				reports:'Service Reports',
+				date:'Dec 26, 2022',
+			},
+			{
+				title:'Lost of Deals',
+				text:'Emails sent by users to all records,',
+				priority:{
+					label: 'High',
+					iconClass:'text-warning',
+				},
+				reportsby:'Reports on Deals',
+				reports:'Sales Reports',
+				date:'Dec 25, 2022',
+			},
+			{
+				title:'Important Accounts',
+				text:'Contracts closed by a salesman',
+				priority:{
+					label: 'Low',
+					iconClass:'text-info',
+				},
+				reportsby:'Reports on Deals',
+				reports:'Marketing Reports',
+				date:'Dec 25, 2022',
+			},
+			{
+				title:'Analytics for Email',
+				text:'Based on Status Sales Orders',
+				priority:{
+					label: 'Medium',
+					iconClass:'text-success',
+				},
+				reportsby:'Reviews of Products',
+				reports:'Sales Reports',
+				date:'Dec 24, 2022',
+			},
+			{
+				title:'Types of Deals',
+				text:'Products support will stop this month',
+				priority:{
+					label: 'Medium',
+					iconClass:'text-success',
+				},
+				reportsby:'Reports by email',
+				reports:'Marketing Reports',
+				date:'Dec 23, 2022',
+			},
+			{
+				title:'Category Products',
+				text:'Based on the percentage of recipients',
+				priority:{
+					label: 'High',
+					iconClass:'text-warning',
+				},
+				reportsby:'Reports on Sales Orders',
+				reports:'Marketing Reports',
+				date:'Dec 22, 2022',
+			},
+			{
+				title:'Current Sales',
+				text:'Sales for Today',
+				priority:{
+					label: 'Urgent',
+					iconClass:'text-danger',
+				},
+				reportsby:'Reviews of Products',
+				reports:'Sales Reports',
+				date:'Dec 22, 2022',
+			},
+			{
+				title:'Important Accounts',
+				text:'Contracts closed by a salesman',
+				priority:{
+					label: 'Urgent',
+					iconClass:'text-danger',
+				},
+				reportsby:'Reports on Deals',
+				reports:'Marketing Reports',
+				date:'Dec 21, 2022',
+			},
+			{
+				title:'Useful Solutions',
+				text:'Obtaining leads today',
+				priority:{
+					label: 'Urgent',
+					iconClass:'text-danger',
+				},
+				reportsby:'Reports by email',
+				reports:'Hr Reports',
+				date:'Dec 20, 2022',
+			},
+		]	
+
+block content
+	.pb-8
+		h2.mb-4 Reports
+		#reports(data-list!={
+      valueNames: ["title", "text", "priority", "reportsby", "reports", "date"],
+      page: 10,
+      pagination: true
+    })
+			.row.g-3.justify-content-between.mb-2
+				.col-12
+					.d-md-flex.justify-content-between
+						.mb-3
+							button.btn.btn-primary.me-4
+								span.fas.fa-plus.me-2
+								| Create Report
+								
+							button.btn.btn-link.text-900.px-0
+								span.fa-solid.fa-file-export.fs--1.me-2
+								| Export	
+						.d-flex.mb-3
+							+Search({placeholder: 'Search by name'}).me-2
+							+DropDownReportsFilter
+			.row.g-3.list#reportsList
+				each data in reportsDataList
+					.col-12.col-xl-6
+						+Reports(data)
+			.row.align-items-center.justify-content-between.py-2.pe-0.fs--1.mt-2
+				.col-auto.d-flex
+					p.mb-0.d-none.d-sm-block.me-3.fw-semi-bold.text-900(data-list-info)
+					a.fw-semi-bold(href='#!' data-list-view="*")
+						| View all
+						span.fas.fa-angle-right.ms-1(data-fa-transform='down-1')
+					a.fw-semi-bold.d-none(href='#!' data-list-view="less")
+						| View Less
+						span.fas.fa-angle-right.ms-1(data-fa-transform='down-1')
+				.col-auto.d-flex
+					button.page-link(data-list-pagination="prev")
+						span.fas.fa-chevron-left
+					ul.mb-0.pagination
+					button.page-link.pe-0(data-list-pagination="next")
+						span.fas.fa-chevron-right
+				

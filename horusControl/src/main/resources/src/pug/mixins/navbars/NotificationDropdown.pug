@@ -1,0 +1,108 @@
+mixin NotificationItems(info,isLast)
+	.px-2.px-sm-3.py-3.border-300.notification-card.position-relative(class=`${info.read ? 'read' : 'unread'} ${isLast ? '' : 'border-bottom'}` )
+		.d-flex.align-items-center.justify-content-between.position-relative
+			.d-flex
+				.avatar.avatar-m.status-online.me-3
+					if info.avatar
+						img.rounded-circle(src=`${CWD}assets/img/${info.avatar}`, alt="" class=info.avatarPlaceholder ? 'avatar-placeholder' : '')
+					else
+						.avatar-name.rounded-circle
+							span=info.name.charAt(0).toUpperCase()
+				.flex-1.me-sm-3
+					h4.fs--1.text-black=info.name
+					p.fs--1.text-1000.mb-2.mb-sm-3.fw-normal!=info.text
+						span.ms-2.text-400.fw-bold.fs--2=info.ago
+					p.text-800.fs--1.mb-0
+						span.me-1(class=`${info.icon}`)
+						span.fw-bold=info.time 
+						| #{info.date}
+			.font-sans-serif.d-none.d-sm-block
+				button.btn.fs--2.btn-sm.dropdown-toggle.dropdown-caret-none.transition-none.notification-dropdown-toggle(type='button' data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent")
+					span.fas.fa-ellipsis-h.fs--2.text-900
+				.dropdown-menu.dropdown-menu-end.py-2(aria-labelledby=id )
+					a(href='#!').dropdown-item Mark as unread
+
+mixin NotificationDropdown
+	-
+		var todays= [
+			{ 
+				avatar: 'team/40x40/30.webp',
+				name: "Jessie Samson",
+				text: "<span class='me-1 fs--2'>💬</span>Mentioned you in a comment.",
+				ago:"10m",
+				icon:"fas fa-clock",
+				time:"10:41 AM ",
+				date:"August 7,2021",
+				read: true
+			},
+			{ 
+				name:"Jane Foster",
+				text:"<span class='me-1 fs--2'>📅</span>Created an event.",
+				ago:"20m",
+				icon:"fas fa-clock",
+				time:"10:20 AM ",
+				date:"August 7,2021",
+				read: false
+			},
+			{ 
+				avatar:'team/40x40/avatar.webp',
+				avatarPlaceholder: true,
+				name:"Jessie Samson",
+				text:"<span class='me-1 fs--2'>👍</span>Liked your comment.",
+				ago:"1h",
+				icon:"fas fa-clock",
+				time:"9:30 AM ",
+				date:"August 7,2021",
+				read: false
+			},
+		]
+	-
+		var yesterdays= [
+			{ 
+				avatar:'team/40x40/57.webp',
+				name:"Kiera Anderson",
+				text:"<span class='me-1 fs--2'>💬</span>Mentioned you in a comment.",
+				ago:"",
+				icon:"fas fa-clock",
+				time:"9:11 AM ",
+				date:"August 7,2021",
+				read: false
+			},
+			{ 
+				avatar:'team/40x40/59.webp',
+				name:"Herman Carter",
+				text:"<span class='me-1 fs--2'>👤</span>Tagged you in a comment.",
+				ago:"",
+				icon:"fas fa-clock",
+				time:"10:58 PM ",
+				date:"August 7,2021",
+				read: false
+			},
+			{ 
+				avatar:'team/40x40/58.webp',
+				name:"Benjamin Button",
+				text:"<span class='me-1 fs--2'>👍</span>Liked your comment.",
+				ago:"",
+				icon:"fas fa-clock",
+				time:"10:18 AM ",
+				date:"August 7,2021",
+				read: true
+			},
+		]
+	.dropdown-menu#navbarDropdownNotfication.dropdown-menu-end.notification-dropdown-menu.py-0.shadow.border.border-300.navbar-dropdown-caret(aria-labelledby='navbarDropdownNotfication')&attributes(attributes)
+		.card.position-relative.border-0
+			.card-header.p-2 
+				.d-flex.justify-content-between
+					h5.text-black.mb-0 Notificatons
+					button.btn.btn-link.p-0.fs--1.fw-normal(type='button') Mark all as read
+			.card-body.p-0
+				.scrollbar-overlay(style="height: 27rem;")
+					.border-300
+						each item in todays
+							+NotificationItems(item)
+					.border-300
+						each item,index in yesterdays
+							+NotificationItems(item,index === yesterdays.length - 1)
+			.card-footer.p-0.border-top.border-0
+				.my-2.text-center.fw-bold.fs--2.text-600
+					a(href=`${CWD}${paths['notifications-page']}`).fw-bolder Notification history

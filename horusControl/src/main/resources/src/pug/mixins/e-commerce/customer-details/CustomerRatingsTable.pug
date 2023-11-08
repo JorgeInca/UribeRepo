@@ -1,0 +1,207 @@
+mixin CustomerRatingsTableRow(data,index)
+  tr.hover-actions-trigger.btn-reveal-trigger.position-static
+    td.align-middle.product.white-space-nowrap
+      a.fw-semi-bold(href=`${CWD}${paths['e-commerce-fe-product-details']}`)=`${data.product.slice(0,33)}${data.product.length > 33 ? '...' : '' }`
+    td.align-middle.rating.white-space-nowrap.fs--2
+      +Rating(data.rating)
+    td.align-middle.review(style='min-width:350px;')
+      p.fw-semi-bold.text-1000.mb-0!=`${data.review.slice(0,117)}${data.review.length > 117 ? `...<a href='#!'>See more</a>` : '' }`
+    td.align-middle.text-end.status
+      span.badge.badge-phoenix.fs--2(class=`badge-phoenix-${data.status.badge}`)
+        span.badge-label=data.status.title
+        span.ms-1(data-feather=data.status.icon style='height:12.8px;width:12.8px;')
+    td.align-middle.text-end.date.white-space-nowrap
+      p.text-700.mb-0=data.time
+    td.align-middle.white-space-nowrap.text-end.pe-0
+      +DashboardDropdown.fs--2
+
+mixin CustomerRatingsTable
+  -
+    var customerRatingsTableData = [
+      {
+        product:'Apple Magic Mouse (Wireless, Rechargable) - Silver',
+        productImage:'/products/10.png',
+        rating:4,
+        review: "It's lovely, works right out of the box (as you'd expect from an Apple device), and has a number of useful functions.",
+        status: {
+          title: 'Success',
+          badge: 'success',
+          icon:'check'
+        },
+        time:'Just now'
+      },
+      {
+        product:'Fitbit Sense Advanced Smartwatch with Tools',
+        productImage:'/products/1.png',
+        rating:5,
+        review:'This is an exceptional smartwatch, featuring a wealth of useful functions at an affordable price. The watch is small tool',
+        status: {
+          title: 'Success',
+          badge: 'success',
+          icon:'check'
+        },
+        time:'Dec 9, 2:28PM',
+      },
+      {
+        product:'HORI Racing Wheel Apex for PlayStation 4_3, and PC',
+        productImage:'/products/12.png',
+        customer:{
+          name:'Raymond Mims',
+          avatar:'/team/avatar.webp'
+        },
+        rating:4,
+        review: 'This steering wheel is a great buy! It works well and feels good, however I wish it had a wider diameter like a real steering wheel.',
+        status: {
+          title: 'Pending',
+          badge: 'warning',
+          icon:'alert-octagon'
+        },
+        time:'Dec 4, 12:56 PM'
+      },
+      {
+        product:'Razer Kraken v3 x Wired 7.1 Surroung Sound Gaming headset',
+        productImage:'/products/5.png',
+        customer:{
+          name:'Kim Carroll',
+          avatar:'/team/avatar.webp'
+        },
+        rating:3,
+        review: "My son says these are the greatest he's ever tasted.",
+        status: {
+          title: 'Cancelled',
+          badge: 'secondary',
+          icon:'x'
+        },
+        time:'Nov 28, 7:28 PM'
+      },
+      {
+        product:'iPhone 13 pro max-Pacific Blue-128GB storage',
+        productImage:'/products/2.png',
+        customer:{
+          name:'Ashley Garrett',
+          avatar:'/team/59.webp'
+        },
+        rating:3,
+        review:'I chose wisely. The phone is in excellent condition, with no scratches or dents, excellent battery life, and flawless operation.',
+        status: {
+          title: 'Success',
+          badge: 'success',
+          icon:'check'
+        },
+        time:'Nov 24, 10:16 AM'
+      },
+      {
+        product:'Apple MacBook Pro 13 inch-M1-8/256GB-space',
+        productImage:'/products/3.png',
+        customer:{
+          name:'Woodrow Burton',
+          avatar:'/team/58.webp'
+        },
+        rating:4.5,
+        review:"It's lovely, works right out of the box (as you'd expect from an Apple device), and has a number of useful functions.",
+        status: {
+          title: 'Pending',
+          badge: 'warning',
+          icon:'alert-octagon'
+        },
+        time:'Just now'
+      },
+      {
+        product:'Apple iMac 24" 4K Retina Display M1 8 Core CPU...',
+        productImage:'/products/4.png',
+        customer:{
+          name:'Eric McGee',
+          avatar:'/team/avatar.webp'
+        },
+        rating:3,
+        review:'The best experience we could hope for. Customer service team is amazing and the quality of their products is unsurpassed.',
+        status: {
+          title: 'Pending',
+          badge: 'warning',
+          icon:'alert-octagon'
+        },
+        time:'Nov 09, 3:23 AM'
+      },
+      {
+        product:'PlayStation 5 DualSense Wireless Controller',
+        productImage:'/products/6.png',
+        customer:{
+          name:'Barbara Lucas',
+          avatar:'/team/57.webp'
+        },
+        rating:4,
+        review:"My son says these are the greatest he's ever tasted.",
+        status: {
+          title: 'Success',
+          badge: 'success',
+          icon:'check'
+        },
+        time:'Nov 08, 8:53 AM'
+      },
+      {
+        product:'2021 Apple 12.9-inch iPad Pro (Wi‑Fi, 128GB) - Space Gray',
+        productImage:'/products/7.png',
+        customer:{
+          name:'Ansolo Lazinatov',
+          avatar:'/team/3.webp'
+        },
+        rating:4.5,
+        review:'The response time and service I received when contacted the designers were Phenomenal!',
+        status: {
+          title: 'Pending',
+          badge: 'warning',
+          icon:'alert-octagon'
+        },
+        time:'Nov 07, 9:00 PM'
+      },
+      {
+        product:'Amazon Basics Matte Black Wired Keyboard - US Layout (QWERTY)',
+        productImage:'/products/8.png',
+        customer:{
+          name:'Emma watson',
+          avatar:'/team/26.webp'
+        },
+        rating:3,
+        review: "I chose wisely. The phone is in excellent condition, with no scratches or dents, excellent battery life, and flawless operation.",
+        status: {
+          title: 'Pending',
+          badge: 'warning',
+          icon:'alert-octagon'
+        },
+        time:'Nov 07, 11:20 AM'
+      }
+    ]
+  #customerRatingsTable.border-top.border-bottom.border-200(data-list!={
+    valueNames: ["product", "rating", "review", "status", "date"],
+    page: 5,
+    pagination: true
+  })
+    .table-responsive.scrollbar
+      table.table.fs--1.mb-0
+        thead
+          tr
+            th.sort.white-space-nowrap.align-middle(scope='col' style='width:20%;' data-sort="product") PRODUCT
+            th.sort.align-middle(scope='col' data-sort="rating" style='width:10%;') RATING
+            th.sort.align-middle(scope='col' style='width:50%;' data-sort="review") REVIEW
+            th.sort.text-end.align-middle(scope='col' style='width:10%;' data-sort="status") STATUS
+            th.sort.text-end.align-middle(scope='col' style='width:10%;' data-sort="date") DATE
+            th.sort.text-end.pe-0.align-middle(scope='col')
+
+        tbody.list#customer-rating-table-body
+          each row,index in customerRatingsTableData
+            +CustomerRatingsTableRow(row,index)
+    .row.align-items-center.justify-content-between.py-2.pe-0.fs--1
+      .col-auto.d-flex
+        p.mb-0.d-none.d-sm-block.me-3.fw-semi-bold.text-900(data-list-info)
+        a.fw-semi-bold(href='#!' data-list-view="*")
+          | View all
+          span.fas.fa-angle-right.ms-1(data-fa-transform='down-1')
+        a.fw-semi-bold.d-none(href='#!' data-list-view="less")
+          | View Less
+          span.fas.fa-angle-right.ms-1(data-fa-transform='down-1')
+      .col-auto.d-flex
+        button.page-link(data-list-pagination="prev")
+          span.fas.fa-chevron-left
+        ul.mb-0.pagination
+        button.page-link.pe-0(data-list-pagination="next")
+          span.fas.fa-chevron-right

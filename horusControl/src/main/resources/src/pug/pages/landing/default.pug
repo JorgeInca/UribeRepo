@@ -1,0 +1,49 @@
+extends  ../../layouts/LayoutTheme
+include  ../../mixins/landing/common/Navbar
+include  ../../mixins/navbars/Search.pug
+include  ../../mixins/landing/landing-1/HeroHeader
+include  ../../mixins/landing/landing-1/Brands
+include  ../../mixins/landing/landing-1/Features
+include  ../../mixins/landing/landing-1/Testimonial
+include  ../../mixins/landing/landing-1/FunFacts
+include  ../../mixins/landing/landing-1/Gallery
+include  ../../mixins/landing/landing-1/Pricing
+include  ../../mixins/landing/landing-1/Blog
+include  ../../mixins/landing/landing-1/Address
+include  ../../mixins/landing/landing-1/Team
+include  ../../mixins/landing/landing-1/Cta
+include  ../../mixins/landing/landing-1/Footer
+include ../../mixins/common/SupportChat
+
+append styles
+
+append scripts
+	script(src=`${CWD}vendors/isotope-layout/isotope.pkgd.min.js`)
+	script(src=`${CWD}vendors/isotope-packery/packery-mode.pkgd.min.js`)
+	script(src=`${CWD}vendors/bigpicture/BigPicture.js`)
+	script(src=`${CWD}vendors/countup/countUp.umd.js`)
+	script(src!=`https://maps.googleapis.com/maps/api/js?key=${APIGmap}&callback=initMap` async)
+	script(src=`https://smtpjs.com/v3/smtp.js`)
+
+append variables
+	- var attrsMain = { style: "--phoenix-scroll-margin-top: 1.2rem;" };
+	- var disableNavigationType = true;
+	- var disableVerticalNavbarAppearance = true;
+	- var disableHorizontalNavbarShape = true;
+	- var disableHorizontalNavbarAppearance = true;
+
+block mainContent
+	+Navbar
+	+HeroHeader
+	+Brands
+	+Features
+	+Testimonial
+	+FunFacts
+	+Gallery
+	+Pricing
+	+Blog
+	+Address
+	+Teams
+	+Cta
+	+FooterLanding
+	+SupportChat

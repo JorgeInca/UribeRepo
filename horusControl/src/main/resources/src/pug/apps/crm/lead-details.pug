@@ -1,0 +1,194 @@
+extends ../../layouts/LayoutTheme
+include ../../mixins/dashboard/common
+include ../../mixins/crm/LeadDetails
+include ../../mixins/project-management/ToDoList
+include ../../mixins/dashboard/project-management/ToDo
+
+prepend styles
+	link(href=`${CWD}vendors/dropzone/dropzone.min.css`, rel='stylesheet')
+
+prepend scripts
+	script(src=`${CWD}vendors/dropzone/dropzone.min.js`)
+
+append variables
+	- 
+		var breadcrumb = [
+			{
+				label: 'Page 1',
+				href: '#!'
+			},
+			{
+				label: 'Page 2',
+				href: '#!',
+			},
+			{
+				label: 'Default',
+				href: '#!',
+				active: true
+			},
+		];
+
+	-
+		var emailTableData = [
+			{
+				mail:{
+					subject: 'Quary about purchased soccer socks',
+					email:'jackson@mail.com',
+				},
+				active:true,
+				sent:'Jackson Pollock',
+				date: 'Dec 29, 2021 10:23 am',
+				source:'Call',
+				type_status :{
+					label: 'sent',
+					type: 'badge-phoenix-success',
+				},
+			},
+			{
+				mail:{
+					subject: 'How to take the headache out of Order',
+					email:'ansolo45@mail.com',
+				},
+				active:true,
+				sent:'Ansolo Lazinatov',
+				date: 'Dec 27, 2021 3:27 pm',
+				source:'Call',
+				type_status :{
+					label: 'delivered',
+					type: 'badge-phoenix-info',
+				},
+			},
+			{
+				mail:{
+					subject: 'The Arnold Schwarzenegger of Order',
+					email:'ansolo45@mail.com',
+				},
+				active:true,
+				sent:'Ansolo Lazinatov',
+				date: 'Dec 24, 2021 10:44 am',
+				source:'Call',
+				type_status :{
+					label: 'Bounce',
+					type: 'badge-phoenix-warning',
+				},
+			},
+			{
+				mail:{
+					subject: 'My order is not being taken',
+					email:'jackson@mail.com',
+				},
+				active:true,
+				sent:'Jackson Pollock',
+				date: 'Dec 19, 2021 4:55 pm',
+				source:'Call',
+				type_status :{
+					label: 'Spam',
+					type: 'badge-phoenix-danger',
+				},
+			},
+			{
+				mail:{
+					subject: 'Shipment is missing',
+					email:'jackson@mail.com',
+				},
+				active:true,
+				sent:'Jackson Pollock',
+				date: 'Dec 19, 2021 2:43 pm',
+				source:'Call',
+				type_status :{
+					label: 'sent',
+					type: 'badge-phoenix-success',
+				},
+			},
+			{
+				mail:{
+					subject: 'How can I order something urgently?',
+					email:'ansolo45@mail.com',
+				},
+				active:true,
+				sent:'Jackson Pollock',
+				date: 'Dec 19, 2021 2:43 pm',
+				source:'Call',
+				type_status :{
+					label: 'Delivered',
+					type: 'badge-phoenix-info',
+				},
+			},
+			{
+				mail:{
+					subject: 'How the delicacy of the products will be handled?',
+					email:'ansolo45@mail.com',
+				},
+				active:true,
+				sent:'Ansolo Lazinatov',
+				date: 'Dec 16, 2021 5:18 pm',
+				source:'Call',
+				type_status :{
+					label: 'bounced',
+					type: 'badge-phoenix-warning',
+				},
+			},
+		]
+
+block content
+	.pb-9
+		.row 
+			.col-12
+				.row.align-items-center.justify-content-between.g-3.mb-3
+					.col-12.col-md-auto
+						h2.mb-0 Lead details
+					.col-12.col-md-auto
+						.d-flex
+							.flex-1.d-md-none
+								button.btn.px-3.btn-phoenix-secondary.text-700.me-2(data-phoenix-toggle='offcanvas' data-phoenix-target='#productFilterColumn')
+									span.fa-solid.fa-bars
+							button.btn.btn-primary.me-2
+								span.fa-solid.fa-envelope.me-2
+								span Send an email
+							button.btn.btn-phoenix-secondary.px-3.px-sm-5.me-2
+								span.fa-solid.fa-thumbtack.me-sm-2
+								span.d-none.d-sm-inline Shortlist
+							+DropDownLead(style="z-index: 9999")
+
+		.row.g-0.g-md-4.g-xl-6
+			.col-md-5.col-lg-5.col-xl-4
+				.sticky-leads-sidebar 
+					.lead-details-offcanvas.bg-soft.scrollbar.phoenix-offcanvas.phoenix-offcanvas-fixed#productFilterColumn
+						.d-flex.justify-content-between.align-items-center.mb-2.d-md-none
+							h3.mb-0 Lead Details
+							button.btn.p-0(data-phoenix-dismiss="offcanvas")
+								span.uil.uil-times.fs-1
+						+LeadProfileCard.mb-3
+						+AboutThisLead.mb-3
+						+Address.mb-3
+					.phoenix-offcanvas-backdrop.d-lg-none.top-0(data-phoenix-backdrop)
+			.col-md-7.col-lg-7.col-xl-8
+				.lead-details-container
+					nav#navbar-deals-detail.navbar.pb-4.px-0.sticky-top.bg-soft.nav-underline-scrollspy
+						ul.nav.nav-underline
+							li.nav-item
+								a.nav-link.pe-3(href='#scrollspyTask') Task
+							li.nav-item
+								a.nav-link.pe-3(href='#scrollspyDeals') Deals
+							li.nav-item
+								a.nav-link.pe-3(href='#scrollspyEmails') Emails
+							li.nav-item
+								a.nav-link(href='#scrollspyAttachments') Attachments	
+
+					.scrollspy-example.bg-body-tertiary.rounded-2(data-bs-spy='scroll' data-bs-offset="0" data-bs-target='#navbar-deals-detail' data-bs-root-margin='0px 0px -40%' data-bs-smooth-scroll='true' tabindex='0')
+						.mb-8
+							h2#scrollspyTask.mb-4 Tasks
+							+TasksList
+						.mb-8
+							.d-flex.justify-content-between.align-items-center.mb-4#scrollspyDeals
+								h2.mb-0 Deals
+								button.btn.btn-primary.btn-sm
+									span.fa-solid.fa-plus.me-2
+									| Add Deals
+							+DealsTable
+						.mb-8
+							h2#scrollspyEmails.mb-2 Emails
+							+Emails
+						div
+							h2#scrollspyAttachments.mb-4 Attachments
+							+FilesAttachments

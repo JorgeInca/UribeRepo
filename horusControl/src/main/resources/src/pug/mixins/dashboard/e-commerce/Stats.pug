@@ -1,0 +1,41 @@
+mixin SingleStat(stat)
+  - var color = stat.color;
+  - var icon = stat.icon;
+  .d-flex.align-items-center
+    span.fa-stack(style="min-height: 46px;min-width: 46px;")
+      span.fa-solid.fa-square.fa-stack-2x(data-fa-transform="down-4 rotate--10 left-4" class=`text-${color}-300`)
+      span.fa-solid.fa-circle.fa-stack-2x.stack-circle( class=`text-${color}-100` data-fa-transform="up-4 right-3 grow-2")
+      span.fa-stack-1x(class=`${icon} text-${color} ` data-fa-transform="shrink-2 up-8 right-6")
+    .ms-3
+      h4.mb-0=stat.title
+      p.text-800.fs--1.mb-0=stat.subTitle
+
+mixin Stats
+  -
+    const stats = [
+      {
+        img:'illustrations/4l.png',
+        icon:'fa-solid fa-star',
+        color: 'success',
+        title:'57 new orders',
+        subTitle:'Awating processing'
+      },
+      {
+        img:'illustrations/3l.png',
+        icon:'fa-solid fa-pause',
+        color: 'warning',
+        title:'5 orders',
+        subTitle:'On hold'
+      },
+      {
+        img:'illustrations/2l.png',
+        icon:'fa-solid fa-xmark',
+        color: 'danger',
+        title:'15 products',
+        subTitle:'Out of stock'
+      },
+    ]
+  .row.align-items-center.g-4
+    each stat in stats
+      .col-12.col-md-auto
+        +SingleStat(stat)

@@ -1,0 +1,66 @@
+extends ../../../layouts/LayoutTheme
+include ../../../mixins/dashboard/common
+include ../../../mixins/e-commerce/order-details/OrderTable
+include ../../../mixins/e-commerce/order-details/OrderDetailsCards
+
+
+append variables
+  - 
+    var breadcrumb = [
+      {
+        label: 'Page 1',
+        href: '#!'
+      },
+      {
+        label: 'Page 2',
+        href: '#!',
+      },
+      {
+        label: 'Default',
+        href: '#!',
+        active: true
+      },
+    ];
+
+block content
+  .mb-9
+    h2.mb-2 Refund
+    .row.align-items-center.mb-3.gx-3.gy-2
+      .col-12.col-sm-auto
+        p.text-800.lh-sm.mb-0 Order 
+          a.fw-bold.ms-1(href='#!') #349
+      .col-12.col-sm-auto.flex-grow-1
+        .row.align-items-center.flex-wrap.gy-1
+          .col-auto.flex-grow-1
+            p.text-800.lh-sm.mb-0 Customer IP : 
+              a.fw-bold.ms-1(href='#!') 2364847
+          .col-auto
+            .dropdown
+              button.btn.dropdown-toggle.dropdown-caret-none.px-0.text-900(type='button' data-bs-toggle='dropdown' aria-expanded='false')
+                | More action
+                span.fas.fa-chevron-down.ms-2.fs--2
+              ul.dropdown-menu.dropdown-menu-end
+                li
+                  a.dropdown-item(href='#') Action
+                li
+                  a.dropdown-item(href='#') Another action
+                li
+                  a.dropdown-item(href='#') Something else here
+                li
+                  a.dropdown-item(href='#') Cancel
+
+    .row.gx-5
+      .col-12.col-xl-8.col-xxl-9
+        +OrderTable
+      .col-12.col-xl-4.col-xxl-3
+        .row
+          .col-12
+            +SummaryCard.mb-3
+          .col-12
+            .card&attributes(attributes)
+              .card-body
+                h4.card-title.mb-4 Refund Amount
+                input#refundInput.form-control.mb-4(type='text' placeholder='Amount')
+                button.btn.btn-primary.w-100 Refund $500
+
+

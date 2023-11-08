@@ -1,0 +1,20 @@
+extends ../../../layouts/LayoutTheme
+include ../../../layouts/LayoutCardAuth
+
+block wrapperContent
+  +LayoutCardBasic({img:37, title: "Signed out", text: "Log in to your account", link:`${CWD}${paths['card-signin']}`})
+    .auth-form-box
+      .text-center.mb-6.mx-auto
+        img.mb-7.d-dark-none(src=`${CWD}assets/img/spot-illustrations/1.png` alt='phoenix')
+        img.mb-7.d-light-none(src=`${CWD}assets/img/spot-illustrations/dark_1.png` alt='phoenix')
+        .mb-6
+          h4.text-1000 Come back soon!
+          p.text-700 Thanks for using #{title}. 
+            br.d-lg-none
+            | You are now successfully 
+            br.d-sm-none
+            | signed out.
+        .d-grid
+          a.btn.btn-primary(href=`${CWD}${paths['card-signin']}`)
+            span.fas.fa-angle-left.me-2
+            | Go to sign in page
