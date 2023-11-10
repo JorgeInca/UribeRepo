@@ -48,11 +48,13 @@ function cargaListaInvestigaciones() {
 						creaLinkSiFinalizada( data[x].idInvestigacion , data[x].estatusText),						
 						data[x].nombreUsuario,
 						data[x].nombreEmpresa,
+						data[x].nombreCampania,
 						data[x].apellidos,
 						data[x].primer_nombre,						
 						data[x].estatusText,
 						getRiesgoTexto(data[x].riesgoTexto),
-						data[x].fechaCreacion
+						data[x].riesgoAcumulado,
+						data[x].fechaCreacionTexto
 					])
 					.order( [0,'desc'] )
 					.draw(false);
@@ -442,4 +444,40 @@ function creaLinkSiFinalizada(idInvestigacion , estatusText ) {
 			return '<strong>' + idInvestigacion + '</strong>';	
 		}
 	
+}
+
+function eliminarRegistro() {
+	
+	var idInvestigacionGlobal = $("#idInvestigacionGlobal").val();
+	var idUserHorus = $("#idUserHorus").val();
+
+
+	var eliminaRequest = {
+		riesgo: 0,
+		idInvestigacion: idInvestigacionGlobal,
+		idUsuario: idUserHorus
+	};
+
+	var uri = "eliminaRegistroById";
+
+
+	$.ajax({
+		url: uri,
+		type: 'POST',
+		dataType: 'json',
+		data: eliminaRequest,
+		success: function(data) {
+			
+			alert("Valor actualizado");	
+			cargaListaInvestigaciones();
+				
+			
+			
+			
+		},
+		error: function(xhr, ajaxOptions, thrownError) {
+			alert("ERROR");	
+		}
+
+	});
 }

@@ -25,10 +25,10 @@ public class InvestigacionTask {
 	@Autowired
 	InvestigacionService service;
 
-	@Scheduled(cron = "0 51 14 * * ?")
+	@Scheduled(cron = "0 42 21 * * ?")
 	public void everyFiveSeconds() {
 
-		Integer limit = 1000;
+		Integer limit = 1500;
 		System.out.println("*********START JOB task: " + new Date());
 
 		String functionName = "arn:aws:lambda:us-east-1:100906894518:function:SearchEnginePost";

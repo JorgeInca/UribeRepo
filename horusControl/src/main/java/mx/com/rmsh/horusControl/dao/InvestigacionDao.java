@@ -51,5 +51,7 @@ public interface InvestigacionDao {
 	public String getNombreClientePorUsuario(Long idUsuario);
 	
 	public Long getIdUserByInvestigacionId(Long investigacionid);
+	
+	public void eliminaRegistrioById(RiesgoRequest request);
 
 }

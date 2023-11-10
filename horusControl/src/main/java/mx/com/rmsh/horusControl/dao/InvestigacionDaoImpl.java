@@ -41,10 +41,14 @@ public class InvestigacionDaoImpl implements InvestigacionDao {
 			+ " A.nivel_riesgo_inicial as riesgoInicial,"
 			+ " A.nivel_riesgo_final as riesgoFinal,"
 			+ " A.fecha_creacion as fecha_creacion,"
+			+ " D.TITULO as nombreCampania, "
+			+ " A.origenes_eliminados, "
+			+ " A.menciones_eliminadas, "
 			+ " A.estatus as estatus "
 			+ " FROM investigacion A inner join usuario B on  A.id_usuario = B.id_usuario "
-			+ "left join empresa C on  B.id_empresa = C.id_empresa "
-			+ "where A.estatus != 4 order by A.fecha_creacion desc;";
+			+ " left join empresa C on  B.id_empresa = C.id_empresa "
+			+ " left join investigacion_masiva D on  A.id_masiva = D.id_investigacion_masiva "
+			+ " where A.estatus != 4 order by A.fecha_creacion desc ";
 	
 	String QUERY_CREATE_REPORTEE=
 			"INSERT INTO `horusDatabase`.`investigacion`"
@@ -90,6 +94,8 @@ public class InvestigacionDaoImpl implements InvestigacionDao {
 	
 	String QUERY_SET_RIESGO_BYID = "update investigacion A set A.nivel_riesgo_inicial = ? where A.id_investigacion = ?";
 	
+	String QUERY_ELIMINA_BYID = "update investigacion A set A.ESTATUS = 4 where A.id_investigacion = ?";
+	
 	String QUERY_UPDATE_RIESGO_FINALBYID = "update investigacion A set A.nivel_riesgo_final = ? where A.id_investigacion = ?";
 	
 	String QUERY_GET_RIESGO_FINAL_BYID = "Select nivel_riesgo_final from investigacion A where A.id_investigacion = ? ";
@@ -126,6 +132,9 @@ public class InvestigacionDaoImpl implements InvestigacionDao {
 						(Integer) rs.getObject("riesgoInicial"), 
 						(Integer) rs.getObject("riesgoFinal"), 
 						rs.getTimestamp("fecha_creacion"),
+						rs.getString("nombreCampania"),
+						rs.getString("origenes_eliminados"), 
+						rs.getString("menciones_eliminadas"),
 						rs.getInt("estatus")
 						));
 	}
@@ -403,6 +412,19 @@ public class InvestigacionDaoImpl implements InvestigacionDao {
 				QUERY_GET_USER_INVESTIGACION_BYID, new Object[] { investigacionid }, Long.class);
 		 
 		 return idUsuario;
+	}
+	
+	@Override
+	public void eliminaRegistrioById(RiesgoRequest request) {
+		// TODO Auto-generated method stub
+		jdbcTemplate.update(connection -> {
+	        PreparedStatement ps = connection
+	          .prepareStatement(QUERY_ELIMINA_BYID);
+	                	
+	        	ps.setLong(1,request.getIdInvestigacion());	        	
+	        	
+	          return ps;
+	        });		
 	}
 	
 	

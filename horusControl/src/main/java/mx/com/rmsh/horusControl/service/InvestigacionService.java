@@ -61,5 +61,7 @@ public interface InvestigacionService {
 	
 	public void updateCampanias();
 	
+	public void eliminaRegistrioById(RiesgoRequest request);
+	
 	
 }

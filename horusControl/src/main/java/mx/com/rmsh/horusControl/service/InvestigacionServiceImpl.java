@@ -6,8 +6,11 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.PreparedStatement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -26,6 +29,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import com.google.gson.Gson;
 
 import mx.com.rmsh.horusControl.dao.InvestigacionDao;
 import mx.com.rmsh.horusControl.dao.SecurityDao;
@@ -78,8 +83,94 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 	public List<Investigacion> getReportes(ReporteRequest request) {
 		
 		//Integer riesgoEditado = dao.getRiesgoFInal(lambdaQuery.getIdInvestigacion());
+		List<Investigacion> reportes = dao.getReportes(request);
+			
+
+		for (int i = 0; i < reportes.size(); i++) {
+			
+			try {
+				
+				Gson gson = new Gson();
+				
+				InvestigacionLAMBDA lambda = gson.fromJson(reportes.get(i).getJson(), InvestigacionLAMBDA.class);	
+				
+				lambda.getBody().setEliminadosOrigenes(reportes.get(i).getOrigenesEliminados());
+				lambda.getBody().setEliminadosMentions(reportes.get(i).getMencionesEliminadas());
+				
+				String fromArrayOrigenes = lambda.getBody().getEliminadosOrigenes();		
+				List<String> origenesEliminados = Arrays.asList( fromArrayOrigenes.split("\\s*,\\s*") );//Arrays.asList(fromArray.split("\\s*,\\s*"));
+				String fromArrayMentions = lambda.getBody().getEliminadosMentions();
+				List<String> mentionsEliminados = Arrays.asList( fromArrayMentions.split("\\s*,\\s*") );//Arrays.asList(fromArray.split("\\s*,\\s*"));
+				
+				
+				int intcump = 0;
+				int natcump = 0;
+				int pep = 0;
+				int others = 0;
+				int mentions = 0;			
+						
+				for (Origen origen : lambda.getBody().getOrigen()) {
+								
+					
+					if( !origenesEliminados.contains( origen.getId().toString() ) ){
+						
+						if ("intcump".equals(origen.getCategory())) {
+							intcump++;
+						}
+						if ("natcump".equals(origen.getCategory())) {
+							natcump++;
+						}
+						if ("PEP".equals(origen.getCategory())) {
+							pep++;
+						}
+						if ("others".equals(origen.getCategory())) {
+							others++;
+						}
+						
+					}
+					
+				}
+				
+				for (Mentions mention : lambda.getBody().getMentions()) {
+					
+					
+					
+					//System.out.println("mentionsEliminados " + mentionsEliminados);
+					//System.out.println("mentionsEliminados " + mention.getId());
+					
+					if( !mentionsEliminados.contains( mention.getId().toString() ) ){				
+					
+						mentions++;					
+						
+					}
+					
+				}
+				
+				String riesgoAcumulado = "";
+				
+				if( intcump>0 )
+					riesgoAcumulado = riesgoAcumulado + "Listado de Cumplimientos Internacionales<br/>";
+				if( natcump>0 )
+					riesgoAcumulado = riesgoAcumulado + "Listado de Cumplimientos Nacionales<br/>";
+				if( pep>0 )
+					riesgoAcumulado = riesgoAcumulado + "Personas Politicamente Expuestas<br/>";
+				if( others>0 )
+					riesgoAcumulado = riesgoAcumulado + "Otras Bases de Datos<br/>";
+				if( mentions>0 )
+					riesgoAcumulado = riesgoAcumulado + "Menciones Adversas";
+								
+				reportes.get(i).setRiesgoAcumulado(riesgoAcumulado);
+								
+
+			} catch (Exception e) {
+				System.out.println( e );
+			}
+            
+        }
 		
-		return dao.getReportes(request);
+		//System.out.println( reportes.toString() );
+		
+		return reportes;
 	}
 
 	@Override
@@ -338,7 +429,10 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 			// *************************************************************************Genera
 			// PDF
 			// Add Pdfs
-			String finalReportName = reportFolderPath + "Investigacion" + parameter.get("idInvestigacion") + ".pdf";
+			String todayAsString = "_" + (new SimpleDateFormat("ddMMyyyy").format(new Date()) );
+			
+			String finalReportName = reportFolderPath +  ((String)parameter.get("nombreCompleto")).replaceAll("\\s+","") + "_" + idInvestigacion.toString() + ".pdf";
+			
 			PDFMergerUtility ut = new PDFMergerUtility();
 			ut.addSource(reportName + ".pdf");
 			ut.addSource(reportName2 + ".pdf");
@@ -519,7 +613,7 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 		// Título 2
 		FillReportInvestigacionResultadoVO titulo2 = new FillReportInvestigacionResultadoVO();
 		if(reultados.getNacional().size()>0) {
-			titulo2.setG_titulo("Listados de Cumplimiento Nacionales:");
+			titulo2.setG_titulo("Listados de Cumplimiento Nacionalesns:");
 			listaObjetosResultado.add(titulo2);
 			listaObjetosResultado.addAll(reultados.getNacional());
 		}
@@ -569,9 +663,7 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 		ArrayList<FillReportInvestigacionResultadoVO> menciones = new ArrayList<FillReportInvestigacionResultadoVO>();
 		//menciones.add(new FillReportInvestigacionResultadoVO());
 		
-		String fromArrayOrigenes = body.getEliminadosOrigenes();
-		
-		System.out.println("fromArrayOrigenes " + fromArrayOrigenes.toString() );
+		String fromArrayOrigenes = body.getEliminadosOrigenes();		
 		List<String> origenesEliminados = Arrays.asList( fromArrayOrigenes.split("\\s*,\\s*") );//Arrays.asList(fromArray.split("\\s*,\\s*"));
 		String fromArrayMentions = body.getEliminadosMentions();
 		List<String> mentionsEliminados = Arrays.asList( fromArrayMentions.split("\\s*,\\s*") );//Arrays.asList(fromArray.split("\\s*,\\s*"));
@@ -722,6 +814,11 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 	public Long demoJob() throws Exception {
 		return null;
 
+	}
+	
+	public void eliminaRegistrioById(RiesgoRequest request) {
+		// TODO Auto-generated method stub
+		dao.eliminaRegistrioById(request);
 	}
 
 	@Override

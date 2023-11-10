@@ -265,4 +265,20 @@ public class InvestigacionController {
 
 		return response;
 	}
+	
+	@RequestMapping(value = "/eliminaRegistroById", method = RequestMethod.POST)
+	public @ResponseBody String eliminaRegistroById(RiesgoRequest riegoRequest) {
+
+		String response = "1";
+
+		System.out.println(riegoRequest.toString());
+
+		// arraylist
+
+		investigacionService.eliminaRegistrioById(riegoRequest);
+
+		System.out.println("********* [Controller] EliminaReisgo By Id : OK ");
+
+		return response;
+	}
 }

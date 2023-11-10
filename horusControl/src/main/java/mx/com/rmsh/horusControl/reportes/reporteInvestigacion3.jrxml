@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.0.0.final using JasperReports Library version 6.0.0  -->
-<!-- 2023-10-24T13:37:50 -->
+<!-- 2023-11-07T22:47:47 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporteInvestigacion" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3f8d7e70-1ce9-4c74-aa90-341bac4b9b8a">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
@@ -158,7 +158,7 @@ Menciones Adversas]]></text>
 					<font fontName="Dialog" size="9" isBold="false" isItalic="true" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 					<paragraph lineSpacing="Single" lineSpacingSize="0.5" tabStopWidth="40"/>
 				</textElement>
-				<text><![CDATA[Listados de Cumplimiento nacionales, internacionales, sanciones, y de Personas Políticamente Expuestas desarrollada por <style isBold="true">DBC, S.A. de C.V.</style>
+				<text><![CDATA[Listados de Cumplimiento nacionales, internacionales, sanciones, y de Personas Políticamente Expuestas desarrollada por <style isBold="true">IDBC, S.A. de C.V.</style>
 Búsquedas de menciones adversas relevantes para este servicio provenientes de Google y Yahoo!, como motores de búsqueda, en inglés y español.
 ]]></text>
 			</staticText>
@@ -219,7 +219,7 @@ Búsquedas de menciones adversas relevantes para este servicio provenientes de G
 				<textElement textAlignment="Left" verticalAlignment="Bottom" rotation="None" markup="none">
 					<font fontName="Dialog" size="10" isBold="false" isItalic="true" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 				</textElement>
-				<text><![CDATA[AI POWERED THRUST]]></text>
+				<text><![CDATA[AI POWERED TRUST]]></text>
 			</staticText>
 		</band>
 	</columnFooter>
