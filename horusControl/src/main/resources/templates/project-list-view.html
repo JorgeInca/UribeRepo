@@ -64,6 +64,9 @@
     <link href="../../assets/css/theme.min.css" type="text/css" rel="stylesheet" id="style-default">
     <link href="../../assets/css/user-rtl.min.css" type="text/css" rel="stylesheet" id="user-style-rtl">
     <link href="../../assets/css/user.min.css" type="text/css" rel="stylesheet" id="user-style-default">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/css/bootstrap-multiselect.css" />
+
+    
     <script>
       var phoenixIsRTL = window.config.config.phoenixIsRTL;
       if (phoenixIsRTL) {
@@ -623,6 +626,40 @@
               </div>
               
             </div>
+            
+            
+            
+			<div class="row justify-content-center">
+				<div class="form-row">
+					<div class="col-md-3 mb-3">
+						<label for="form_firstName">Nombre / Razón social</label>
+						<input type="text" class="form-control" id="busqueda_nombre" placeholder="Nombre / Razón social" value="" required>
+						
+					</div>
+					<div class="col-md-3 mb-3">
+						<label for="form_lastName">Apellido</label>
+						<input type="text" class="form-control" id="busqueda_apellido" placeholder="Apellido" value="">			
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="col-md-3 mb-3">
+						<label for="busqueda_campania">Campaña</label>
+						<!--<input type="text" class="form-control" id="busqueda_campania" placeholder="Campaña" value="">-->
+						<select multiple="multiple" class="form-control">
+						    <option value="cheese">Zano-Screening-Nov2023</option>
+						    <option value="tomatoes">Proeza-Screening-Nov2023	</option>
+						    <option value="mozarella">Metalsa-Screening-Nov2023	</option>						
+						</select>
+				
+					</div>
+					<div class="col-md-3 mb-3">
+						<label for="form_lastName">Usuario</label>
+						<input type="text" class="form-control" id="busqueda_usuario" placeholder="Usuario" value="">
+					</div>
+				</div>
+			</div>
+            
+           
             <div class="row g-3 justify-content-between align-items-end mb-4">
 				<!--
               <div class="col-12 col-sm-auto">
@@ -1003,6 +1040,9 @@
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 	<!-- chart js .l.-->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.1.1/chart.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/js/bootstrap-multiselect.min.js"></script>
+
+
 
   </body>
 

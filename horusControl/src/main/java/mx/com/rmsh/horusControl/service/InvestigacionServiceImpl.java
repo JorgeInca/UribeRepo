@@ -613,7 +613,7 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 		// Título 2
 		FillReportInvestigacionResultadoVO titulo2 = new FillReportInvestigacionResultadoVO();
 		if(reultados.getNacional().size()>0) {
-			titulo2.setG_titulo("Listados de Cumplimiento Nacionalesns:");
+			titulo2.setG_titulo("Listados de Cumplimiento Nacionales:");
 			listaObjetosResultado.add(titulo2);
 			listaObjetosResultado.addAll(reultados.getNacional());
 		}
@@ -680,11 +680,11 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 						String cadena3Espacios= "";
 						cadena3Espacios = cadena3Espacios + origen.getFree_text();
 						nuevo.setG_freeText(cadena3Espacios.replaceAll("\\n\\n\\n","\\n"));
-						nuevo.setG_link(origen.getUrl());
+						nuevo.setG_link(origen.getUrl() + "\n" );
 					}
 					else {
 						nuevo.setRowsOK(createTable(origen.getTexto()));
-						nuevo.setG_link(origen.getUrl());
+						nuevo.setG_link(origen.getUrl() + "\n");
 						nuevo.setG_origen2(origen.getFuente());
 					}
 
@@ -698,11 +698,11 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 						String cadena3Espacios= "";
 						cadena3Espacios = cadena3Espacios + origen.getFree_text();
 						nuevo.setG_freeText(cadena3Espacios.replaceAll("\\n\\n\\n","\\n"));
-						nuevo.setG_link(origen.getUrl());
+						nuevo.setG_link(origen.getUrl()+ "\n");
 					}
 					else{
 						nuevo.setRowsOK(createTable(origen.getTexto()));
-						nuevo.setG_link(origen.getUrl());
+						nuevo.setG_link(origen.getUrl()+ "\n");
 						nuevo.setG_origen2(origen.getFuente());
 					}
 
@@ -716,11 +716,11 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 						String cadena3Espacios= "";
 						cadena3Espacios = cadena3Espacios + origen.getFree_text();
 						nuevo.setG_freeText(cadena3Espacios.replaceAll("\\n\\n\\n","\\n"));
-						nuevo.setG_link(origen.getUrl());
+						nuevo.setG_link(origen.getUrl()+ "\n");
 					}
 					else{
 						nuevo.setRowsOK(createTable(origen.getTexto()));
-						nuevo.setG_link(origen.getUrl());
+						nuevo.setG_link(origen.getUrl()+ "\n");
 						nuevo.setG_origen2(origen.getFuente());
 					}
 
@@ -734,11 +734,11 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 						String cadena3Espacios= "";
 						cadena3Espacios = cadena3Espacios + origen.getFree_text();
 						nuevo.setG_freeText(cadena3Espacios.replaceAll("\\n\\n\\n","\\n"));
-						nuevo.setG_link(origen.getUrl());
+						nuevo.setG_link(origen.getUrl()+ "\n");
 					}
 					else{
 						nuevo.setRowsOK(createTable(origen.getTexto()));
-						nuevo.setG_link(origen.getUrl());
+						nuevo.setG_link(origen.getUrl()+ "\n");
 						nuevo.setG_origen2(origen.getFuente());
 					}
 
