@@ -310,7 +310,7 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 
 		System.out.println("********* [Service] getPDFInvestigacion : " +  idInvestigacion + " campaign: " +  campaign +" s3Exists: " + s3Exists );
 
-		boolean linux = false;
+		boolean linux = true;
 
 		// Delete first File.separator for Windows
 		String reportFolderPath = (linux ? File.separator : "") + "src" + File.separator + "main" + File.separator
