@@ -5,6 +5,7 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
+import mx.com.rmsh.horusControl.enums.RolUsuario;
 import mx.com.rmsh.horusControl.vo.UserHorus;
 
 public class UsuarioRowMapper implements RowMapper<UserHorus>{
@@ -20,7 +21,10 @@ public class UsuarioRowMapper implements RowMapper<UserHorus>{
 		user.setEstatus(rs.getInt("estatus"));
 		user.setIdEmpresa(rs.getLong("idEmpresa"));
 		user.setNombreEmpresa(rs.getString("nombreEmpresa"));
+		
 		user.setRol(rs.getInt("rol"));
+		user.setRolText( RolUsuario.getNameyId( rs.getInt("rol") ) ) ;		
+		
 		user.setPassword(rs.getString("password"));
 		
 		

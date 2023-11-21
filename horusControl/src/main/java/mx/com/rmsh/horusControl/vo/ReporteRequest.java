@@ -2,19 +2,25 @@ package mx.com.rmsh.horusControl.vo;
 
 public class ReporteRequest {
 
-	public String user;
-
-	public String getUser() {
-		return user;
+	public Long idUserHorus;
+	public String rolUser;
+	
+	public Long getIdUserHorus() {
+		return idUserHorus;
 	}
-
-	public void setUser(String user) {
-		this.user = user;
+	public void setIdUserHorus(Long idUserHorus) {
+		this.idUserHorus = idUserHorus;
 	}
-
+	public String getRolUser() {
+		return rolUser;
+	}
+	public void setRolUser(String rolUser) {
+		this.rolUser = rolUser;
+	}
 	@Override
 	public String toString() {
-		return "ReporteRequest [user=" + user + "]";
+		return "ReporteRequest [idUserHorus=" + idUserHorus + ", rolUser=" + rolUser + "]";
 	}
 
+	
 }

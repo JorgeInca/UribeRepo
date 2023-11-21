@@ -90,6 +90,7 @@
 	  <input type="text" hidden id="nameUserHorus" th:value="${#authentication.name}" >
 	<input type="text" hidden id="idUserHorus" >
 	<input type="text" hidden id="emailUserHorus" >
+	<input type="text" hidden id="rolUser" >
 	
 	<input type="text" hidden id="idInvestigacionGlobal" >
 
@@ -1027,8 +1028,17 @@
 	</script>
 
 	<script>
-		cargaListaInvestigaciones();
+		getUserData()
+		
+		setTimeout(() => {
+  			cargaListaInvestigaciones();
+		}, 2500);
+ 
+		
+		
+		$("#lambdaText").hide();
 	</script>
+
 
 
 	<!-- datatables JS -->

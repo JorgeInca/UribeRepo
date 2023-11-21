@@ -12,7 +12,9 @@ import mx.com.rmsh.horusControl.vo.RiesgoRequest;
 
 public interface InvestigacionDao {
 
-	public List<Investigacion> getReportes(ReporteRequest request);
+	public List<Investigacion> getReportesByAdmin(ReporteRequest request);
+	
+	public List<Investigacion> getReportesByUser(ReporteRequest request);
 
 	public Long guardaInvestigacion(InvestigacionRequest request);	
 

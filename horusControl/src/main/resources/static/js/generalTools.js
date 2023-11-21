@@ -23,6 +23,7 @@ function getUserData() {
 			
 			$("#idUserHorus").val( data.id_usuario );
 			$("#emailUserHorus").val( data.email );
+			$("#rolUser").val( data.rolText );
 			
 			$("#userNameGlobal").empty();
 			$('#userNameGlobal').append('Bienvenido ' + data.name);

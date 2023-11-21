@@ -37,6 +37,7 @@ import mx.com.rmsh.horusControl.dao.SecurityDao;
 import mx.com.rmsh.horusControl.enums.EstatusInvestigacion;
 import mx.com.rmsh.horusControl.enums.NivelRiesgo;
 import mx.com.rmsh.horusControl.enums.Pais;
+import mx.com.rmsh.horusControl.enums.RolUsuario;
 import mx.com.rmsh.horusControl.utils.TextoHandler;
 import mx.com.rmsh.horusControl.vo.Body;
 import mx.com.rmsh.horusControl.vo.FillReportInvestigacionResultadoVO;
@@ -83,7 +84,18 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 	public List<Investigacion> getReportes(ReporteRequest request) {
 		
 		//Integer riesgoEditado = dao.getRiesgoFInal(lambdaQuery.getIdInvestigacion());
-		List<Investigacion> reportes = dao.getReportes(request);
+		
+		
+		List<Investigacion> reportes = new ArrayList<Investigacion>();
+		
+		System.out.println( request.getRolUser() );
+		System.out.println( RolUsuario.ADMIN.getName() );
+		
+		if( RolUsuario.ADMIN.getName().equals( request.getRolUser()  )) {
+			reportes = dao.getReportesByAdmin(request);
+		}else {
+			reportes = dao.getReportesByUser(request);
+		}
 			
 
 		for (int i = 0; i < reportes.size(); i++) {

@@ -12,9 +12,13 @@ function cargaListaInvestigaciones() {
 
 
 	var uri = "consultaReportes";
+	
+	var rolUser = $("#rolUser").val();
+	var idUserHorus = $("#idUserHorus").val();
 
 	var reporteRequest = {
-		user: "jorge"
+		idUserHorus: idUserHorus,
+		rolUser : rolUser
 
 	};
 

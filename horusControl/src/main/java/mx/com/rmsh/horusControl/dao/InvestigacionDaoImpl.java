@@ -11,6 +11,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
@@ -29,7 +31,7 @@ public class InvestigacionDaoImpl implements InvestigacionDao {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
-	String QUERY_GET_REPORTE="SELECT "
+	String QUERY_GET_REPORTE_USER=" SELECT "
 			+ " A.id_investigacion as id_investigacion,"
 			+ " B.id_usuario as idUsuario,"
 			+ " B.nombre as nombreUsuario,"
@@ -47,8 +49,32 @@ public class InvestigacionDaoImpl implements InvestigacionDao {
 			+ " A.estatus as estatus "
 			+ " FROM investigacion A inner join usuario B on  A.id_usuario = B.id_usuario "
 			+ " left join empresa C on  B.id_empresa = C.id_empresa "
-			+ " left join investigacion_masiva D on  A.id_masiva = D.id_investigacion_masiva "
-			+ " where A.estatus != 4 order by A.fecha_creacion desc ";
+			+ " left join investigacion_masiva D on  A.id_masiva = D.id_investigacion_masiva "			
+			+ " where A.estatus != 4 "
+			+ " and B.id_usuario = ? "
+			+ " order by A.fecha_creacion desc ";
+	
+	String QUERY_GET_REPORTE_ADMIN=" SELECT "
+			+ " A.id_investigacion as id_investigacion,"
+			+ " B.id_usuario as idUsuario,"
+			+ " B.nombre as nombreUsuario,"
+			+ " C.id_empresa as idEmpresa,"
+			+ " C.nombre as nombreEmpresa,"
+			+ " A.apellidos as apellidos,"
+			+ " A.primer_nombre as primerNombre,"			
+			+ " A.json_desc as json_desc,"
+			+ " A.nivel_riesgo_inicial as riesgoInicial,"
+			+ " A.nivel_riesgo_final as riesgoFinal,"
+			+ " A.fecha_creacion as fecha_creacion,"
+			+ " D.TITULO as nombreCampania, "
+			+ " A.origenes_eliminados, "
+			+ " A.menciones_eliminadas, "
+			+ " A.estatus as estatus "
+			+ " FROM investigacion A inner join usuario B on  A.id_usuario = B.id_usuario "
+			+ " left join empresa C on  B.id_empresa = C.id_empresa "
+			+ " left join investigacion_masiva D on  A.id_masiva = D.id_investigacion_masiva "			
+			+ " where A.estatus != 4 "			
+			+ " order by A.fecha_creacion desc ";
 	
 	String QUERY_CREATE_REPORTEE=
 			"INSERT INTO `horusDatabase`.`investigacion`"
@@ -116,9 +142,11 @@ public class InvestigacionDaoImpl implements InvestigacionDao {
 
 	@SuppressWarnings("deprecation")
 	@Override
-	public List<Investigacion> getReportes(ReporteRequest request) {
-
-		return jdbcTemplate.query(QUERY_GET_REPORTE,
+	public List<Investigacion> getReportesByAdmin(ReporteRequest request) {
+		
+		System.out.println( "getReportesByAdmin " + request.toString()  );
+		
+		return jdbcTemplate.query(QUERY_GET_REPORTE_ADMIN,
 				
 				(rs, rowNum) -> new Investigacion(
 						rs.getLong("id_investigacion"), 
@@ -139,6 +167,35 @@ public class InvestigacionDaoImpl implements InvestigacionDao {
 						));
 	}
 
+	@SuppressWarnings("deprecation")
+	@Override
+	public List<Investigacion> getReportesByUser(ReporteRequest request) {
+		
+		System.out.println( "getReportesByUser " + request.toString()  );
+			
+
+		return jdbcTemplate.query(QUERY_GET_REPORTE_USER,	
+				new Object[] {  request.getIdUserHorus() },		
+				(rs, rowNum) -> new Investigacion(
+						rs.getLong("id_investigacion"), 
+						rs.getLong("idUsuario"),
+						rs.getString("nombreUsuario"), 
+						rs.getLong("idEmpresa"), 
+						rs.getString("nombreEmpresa"), 
+						rs.getString("apellidos"), 
+						rs.getString("primerNombre"),						 
+						rs.getString("json_desc"), 
+						(Integer) rs.getObject("riesgoInicial"), 
+						(Integer) rs.getObject("riesgoFinal"), 
+						rs.getTimestamp("fecha_creacion"),
+						rs.getString("nombreCampania"),
+						rs.getString("origenes_eliminados"), 
+						rs.getString("menciones_eliminadas"),
+						rs.getInt("estatus")
+						) );
+	}
+
+	
 	@Override
 	public Long guardaInvestigacion(InvestigacionRequest request) {
 		// TODO Auto-generated method stub

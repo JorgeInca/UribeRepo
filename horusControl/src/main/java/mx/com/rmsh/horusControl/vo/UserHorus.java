@@ -11,6 +11,7 @@ public class UserHorus {
 	public Long idEmpresa;
 	private String nombreEmpresa;
 	public Integer rol;
+	public String rolText;
 	public String password;
 
 	public UserHorus() {
@@ -94,14 +95,19 @@ public class UserHorus {
 		this.password = password;
 	}
 
+	public String getRolText() {
+		return rolText;
+	}
+
+	public void setRolText(String rolText) {
+		this.rolText = rolText;
+	}
+
 	@Override
 	public String toString() {
 		return "UserHorus [id_usuario=" + id_usuario + ", name=" + name + ", email=" + email + ", estatus=" + estatus
-				+ ", idEmpresa=" + idEmpresa + ", nombreEmpresa=" + nombreEmpresa + ", rol=" + rol + ", password="
-				+ password + "]";
+				+ ", idEmpresa=" + idEmpresa + ", nombreEmpresa=" + nombreEmpresa + ", rol=" + rol + ", rolText="
+				+ rolText + ", password=" + password + "]";
 	}
-	
-	
 
-	
 }
