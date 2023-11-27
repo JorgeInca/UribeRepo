@@ -55,6 +55,7 @@
     <!-- ===============================================-->
     <!--    Stylesheets-->
     <!-- ===============================================-->
+    <link href="phoenix/vendors/choices/choices.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&amp;display=swap" rel="stylesheet">
@@ -323,6 +324,35 @@
 						<input type="text" class="form-control" id="busqueda_apellido" placeholder="Apellido" value="">			
 					</div>
 				</div>
+
+<!-- EMPIEZA -->
+            
+            <div class="card-body p-0">
+              <div class="p-4 code-to-copy">
+                <label for="organizerMultiple">Multiple</label>
+                <select class="form-select" id="organizerMultiple" data-choices="data-choices" multiple="multiple" data-options='{"removeItemButton":true,"placeholder":true}'>
+                  <option value="">Select organizer...</option>
+                  <option>Massachusetts Institute of Technology</option>
+                  <option>University of Chicago</option>
+                  <option>GSAS Open Labs At Harvard</option>
+                  <option>California Institute of Technology</option>
+                </select>
+              </div>
+            </div>
+          
+          
+          
+        <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 5">
+          <div class="toast align-items-center text-white bg-dark border-0 light" id="icon-copied-toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+              <div class="toast-body p-3"></div>
+              <button class="btn-close btn-close-white me-2 m-auto" type="button" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+          </div>
+        </div>
+              		
+<!-- TRMINA -->		
+				
 				<div class="form-row">
 					<div class="col-md-3 mb-3">
 						<label for="busqueda_campania">Campaña</label>
@@ -648,7 +678,7 @@
 
     <!-- ===============================================-->
     <!--    JavaScripts-->
-    <!-- ===============================================-->
+    <!-- ===============================================-->-------------------------
     <script src="phoenix/vendors/popper/popper.min.js"></script>
     <script src="phoenix/vendors/bootstrap/bootstrap.min.js"></script>
     <script src="phoenix/vendors/anchorjs/anchor.min.js"></script>
@@ -659,6 +689,13 @@
     <script src="phoenix/vendors/list.js/list.min.js"></script>
     <script src="phoenix/vendors/feather-icons/feather.min.js"></script>
     <script src="phoenix/vendors/dayjs/dayjs.min.js"></script>
+    <script src="phoenix/vendors/choices/choices.min.js"></script>
+    <script src="phoenix/vendors/prism/prism.js"></script>
+    <script src="phoenix/assets/js/phoenix.js"></script>
+
+    <script src="phoenix/vendors/choices/choices.min.js"></script>
+    <script src="phoenix/vendors/prism/prism.js"></script>
+    
     <script src="phoenix/assets/js/phoenix.js"></script>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
