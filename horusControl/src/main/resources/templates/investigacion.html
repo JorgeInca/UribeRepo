@@ -31,6 +31,28 @@
     <!-- ===============================================-->
     <!--    Stylesheets-->
     <!-- ===============================================-->
+    
+    
+    <!-- Bootstrap core CSS -->
+	<link href="dist/css/bootstrap.min.css" rel="stylesheet">
+	
+	<!-- Custom styles for this template -->
+	<link href="pricing.css" rel="stylesheet">
+
+
+	<!-- Bootstrap ICONOS -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+	<!--datables CSS básico-->
+	<link rel="stylesheet" type="text/css" href="datatables/datatables.min.css" />
+	<!--datables estilo bootstrap 4 CSS-->
+	<link rel="stylesheet" type="text/css" href="datatables/DataTables-1.10.18/css/dataTables.bootstrap4.min.css">
+
+	<!--https://cssloaders.github.io/-->
+	<link rel="stylesheet" type="text/css" href="css/loader1.css" />
+
+    
+    
     <link href="phoenix/vendors/choices/choices.min.css" rel="stylesheet">
     <link href="phoenix/vendors/flatpickr/flatpickr.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -312,20 +334,24 @@
               </div>
               
               <div class="col-12 gy-6">
-                <div class="row g-3 justify-content-end">
+                <div class="row g-3 justify-content-center">
+					<div class="col-md-4 mb-3">
+						<button class="btn btn-warning" type="button"
+							id="limpiaButtonInvestigacion" onclick="limpiaInvestigacion()"
+							disabled>Limpiar formulario</button>
+					</div>
+                  <div class="col-md-4 mb-3">
+					  <button class="btn btn-primary"
+						type="submit" id="busquedaMainButton">Buscar</button>
+				  </div>
+				  
                   <div class="col-auto">
-                    <button class="btn btn-primary px-5 px-sm-15" type="submit" id="busquedaMainButton">Buscar</button>
+                    <button class="btn btn-danger px-5" type="button"
+							id="pdfButtonInvestigacion">Exportar PDF</button>
                   </div>
-                  <div class="col-auto">
-                    <button class="btn btn-danger px-5">Exportar PDF</button>
-                  </div>
+                  
                 </div>
               </div>
-              
-              
-				<div class="row">
-					<p>.</p>
-				</div>
               
               <div class="row justify-content-center">
 					<div class="col-md-6 mb-3">
@@ -442,6 +468,50 @@
 
           </div>
         </div>
+        
+        <div id="loader-wrapper" class="loaded">
+			
+			
+			<div id="page">
+			<div id="phrase_box">
+				<svg width="100%" height="100%">
+				<defs>
+						<style type="text/css">
+						@font-face {
+						font-family: "Proxima";
+						src: url('');
+						}
+						</style>
+					<mask id="mask" maskUnits="userSpaceOnUse" maskContentUnits="userSpaceOnUse">
+						<linearGradient id="linearGradient" gradientUnits="objectBoundingBox" x2="0" y2="1">
+						<stop stop-color="white" stop-opacity="0" offset="0%"/>
+						<stop stop-color="white" stop-opacity="1" offset="30%"/>
+						<stop stop-color="white" stop-opacity="1" offset="70%"/>
+						<stop stop-color="white" stop-opacity="0" offset="100%"/>
+						</linearGradient>
+						<rect width="100%" height="100%" fill="url(#linearGradient)"/>
+					</mask>
+				</defs>
+				<g width="100%" height="100%" style="mask: url(#mask);">
+					<g id="phrases"></g>
+				</g>
+			</svg>
+		</div>
+		<div id="ighex">
+			<div class="preloader loading">
+				<span class="slice"></span>
+				<span class="slice"></span>
+				<span class="slice"></span>
+				<span class="slice"></span>
+				<span class="slice"></span>
+				<span class="slice"></span>
+			</div>
+		</div>
+		</div>
+		
+	
+	</div>
+        
         <footer class="footer position-absolute">
           <div class="row g-0 justify-content-between align-items-center h-100">
             <div class="col-12 col-sm-auto text-center">
@@ -466,6 +536,8 @@
           navbarVertical.classList.add('navbar-darker');
         }
       </script>
+      
+      
       
     </main>
     <!-- ===============================================-->
@@ -588,7 +660,6 @@
       </div>
     </a>
 
-
     <!-- ===============================================-->
     <!--    JavaScripts-->
     <!-- ===============================================-->
@@ -617,10 +688,7 @@
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
-	<script>
-		jQuery("#menuBarDiv").load("globalMenuBar.html");
-		jQuery("#globalFooterBarDiv").load("globalFooterBar.html");
-	</script>
+	
 
 
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
