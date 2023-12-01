@@ -2,9 +2,17 @@
  * 
  */
 
+var multipleCampania;
+var multipleCampaniaArray;
+
+var multipleCliente;
+var multipleClienteArray;
+
+var multipleNivel;
+var multipleNivelArray;
+
 var lastClick = 0;
 var delay = 20;
-
 
 var gaugeGobal;
 
@@ -485,3 +493,336 @@ function eliminarRegistro() {
 
 	});
 }
+
+function buscaInvestigacion() {
+	
+	tableGlobal.clear().draw();
+	
+	var uri = "consultaReportesFiltros";
+	
+	var rolUser = $("#rolUser").val();
+	var idUserHorus = $("#idUserHorus").val();
+	
+	
+	console.log( $("#idRangoFecha").val() );
+	console.log( $("#idNivelMultiple").val() );
+	console.log( $("#idCampaniaMultiple").val());
+	console.log( $("#idNivelMultiple").val() );
+
+	var filtroRequest = {
+		fechas : $("#idRangoFecha").val(),
+	    nivelesRiesgo : $("#idNivelMultiple").val(),
+		campañas : $("#idCampaniaMultiple").val(),
+		empresas : $("#idNivelMultiple").val()
+	}
+	
+	var reporteRequest = {
+		idUserHorus: idUserHorus,
+		rolUser : rolUser,
+		filtro_nombre : $("#busqueda_nombre").val(),
+		filtro_apellidos : $("#busqueda_apellido").val(),
+		filtro_fechas : $("#idRangoFecha").val(),
+	    filtro_nivelesRiesgo : $("#idNivelMultiple").val(),
+		filtro_campañas : $("#idCampaniaMultiple").val(),
+		filtro_empresas : $("#idNivelMultiple").val()
+	};
+	
+	$.ajax({
+		url: uri,
+		type: 'POST',
+		dataType: 'json',
+		data: reporteRequest,
+		success: function(data) {
+
+			
+			//alert(JSON.stringify(data));
+
+			for (let x in data) {
+
+				/*let tableRef = document.getElementById("horus");
+
+				// Insert a row at the end of the table
+				let newRow = tableRef.insertRow(-1);
+
+				// Insert a cell in the row at index 0
+				let newCell = newRow.insertCell(0);
+
+				// Append a text node to the cell
+				let newText = document.createTextNode(data[x].nombreUsuario);
+
+				newCell.appendChild(newText);*/
+
+				tableGlobal.row
+					.add([
+						creaLinkSiFinalizada( data[x].idInvestigacion , data[x].estatusText),						
+						data[x].nombreUsuario,
+						data[x].nombreEmpresa,
+						data[x].nombreCampania,
+						data[x].apellidos,
+						data[x].primer_nombre,						
+						data[x].estatusText,
+						getRiesgoTexto(data[x].riesgoTexto),
+						data[x].riesgoAcumulado,
+						data[x].fechaCreacionTexto
+					])
+					.order( [0,'desc'] )
+					.draw(false);
+
+			}
+			
+			$( "#buttontest" ).prop( "disabled", true );
+
+
+
+		},
+		error: function(xhr, ajaxOptions, thrownError) {
+
+		}
+
+	});
+	
+	
+}
+
+function creaSelectCampaña() {
+
+	multipleCampania = new Choices('#idCampaniaMultiple', {
+		allowHTML: true,
+		removeItemButton: true,
+		"placeholder": true
+	});
+	
+	var newChoices = [];
+	
+	
+	var rolUser = $("#rolUser").val();
+	var idUserHorus = $("#idUserHorus").val();
+
+	var reporteRequest = {
+		idUserHorus: idUserHorus,
+		rolUser : rolUser
+
+	};
+
+	$.ajax({
+		url: "consultaCACampania",
+		type: 'POST',
+		dataType: 'json',
+		data: reporteRequest,
+		success: function(data) {
+			
+			multipleCampaniaArray = data;
+			
+			
+
+			for (let x in multipleCampaniaArray) {
+
+				const newOption = {
+					value: multipleCampaniaArray[x].idCampania,
+					label: multipleCampaniaArray[x].nombreCampania,
+				};
+
+
+				newChoices.push(newOption);
+			}
+			
+			multipleCampania.setChoices(newChoices, 'value', 'label', true);
+
+		},
+		error: function(xhr, ajaxOptions, thrownError) {
+
+		}
+
+	});
+
+}
+
+function resetSelectCampaña() {
+
+	multipleCampania.clearStore();
+	
+	var newChoices = [];
+
+	for (let x in multipleCampaniaArray) {
+
+		const newOption = {
+			value: multipleCampaniaArray[x].idCampania,
+			label: multipleCampaniaArray[x].nombreCampania,
+		};	
+		
+		newChoices.push(newOption);
+		
+	}
+	
+	multipleCampania.setChoices(newChoices, 'value', 'label', true);
+
+}
+
+function creaSelectClientes(){
+	
+	multipleCliente = new Choices('#idEmpresaMultiple', {
+		allowHTML: true,
+		removeItemButton: true,
+		"placeholder": true
+	});
+	
+	var newChoices = [];
+	
+	var rolUser = $("#rolUser").val();
+	var idUserHorus = $("#idUserHorus").val();
+
+	var reporteRequest = {
+		idUserHorus: idUserHorus,
+		rolUser : rolUser
+
+	};
+
+	$.ajax({
+		url: "consultaCACliente",
+		type: 'POST',
+		dataType: 'json',
+		data: reporteRequest,
+		success: function(data) {
+
+			multipleClienteArray = data;
+
+			for (let x in multipleClienteArray) {
+
+				const newOption = {
+					value: multipleClienteArray[x].idCliente,
+					label: multipleClienteArray[x].Nombre,
+				};
+
+				newChoices.push(newOption);
+			}
+			
+			multipleCliente.setChoices(newChoices, 'value', 'label', true);
+
+		},
+		error: function(xhr, ajaxOptions, thrownError) {
+
+		}
+
+	});
+	
+	
+}
+
+function resetSelectCliente() {
+
+	multipleCliente.clearStore();
+
+	var newChoices = [];
+
+	for (let x in multipleClienteArray) {
+
+		const newOption = {
+			value: multipleClienteArray[x].idCliente,
+			label: multipleClienteArray[x].Nombre,
+		};		
+				
+		newChoices.push(newOption);
+		
+	}
+	
+	multipleCliente.setChoices(newChoices, 'value', 'label', true);
+
+}
+
+function creaSelectNivel() {
+
+	multipleNivel = new Choices('#idNivelMultiple', {
+		allowHTML: true,
+		removeItemButton: true,
+		"placeholder": true
+	});
+	
+
+	const newOption = {
+		value: 1,
+		label: "BAJO",
+		selected: false
+	};
+	
+	const newOption2 = {
+		value: 2,
+		label: "MEDIO",
+		selected: false
+	};
+	
+	const newOption3 = {
+		value: 3,
+		label: "ALTO",
+		selected: false
+	};
+	
+	var newChoices = [];
+	
+	newChoices.push(newOption);
+	newChoices.push(newOption2);
+	newChoices.push(newOption3);	
+
+	multipleNivel.setChoices(newChoices, 'value', 'label', true);
+
+
+				
+}
+
+function resetSelectNivel() {
+	
+	multipleNivel.clearStore();
+	
+	const newOption = {
+		value: 1,
+		label: "BAJO",
+		selected: false
+	};
+	
+	const newOption2 = {
+		value: 2,
+		label: "MEDIO",
+		selected: false
+	};
+	
+	const newOption3 = {
+		value: 3,
+		label: "ALTO",
+		selected: false
+	};
+	
+	var newChoices = [];
+	newChoices.push(newOption);
+	newChoices.push(newOption2);
+	newChoices.push(newOption3);	
+
+	multipleNivel.setChoices(newChoices, 'value', 'label', true);
+
+}
+
+function creaSelects(){
+	
+	creaSelectCampaña();
+	creaSelectNivel();
+	creaSelectClientes();
+	
+}
+
+function limpiarFormulario() {
+	
+	tableGlobal.clear().draw();
+	
+	$("#busqueda_nombre").val('');
+	$("#busqueda_apellido").val('');
+	$("#idRangoFecha").val('');
+	$("#idNivelMultiple").val('');
+	$("#idCampaniaMultiple").val('');
+	$("#idNivelMultiple").val('');
+	
+        
+    resetSelectNivel(); 
+	resetSelectCampaña();
+	resetSelectCliente();		
+	
+}
+	
+	

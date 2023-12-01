@@ -1,6 +1,8 @@
 package mx.com.rmsh.horusControl.controller.app;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
@@ -31,6 +33,8 @@ import mx.com.rmsh.horusControl.vo.OrigenesBorradoRequest;
 import mx.com.rmsh.horusControl.vo.ReporteRequest;
 import mx.com.rmsh.horusControl.vo.RiesgoRequest;
 import mx.com.rmsh.horusControl.vo.UserHorus;
+import mx.com.rmsh.horusControl.vo.ca.CampaniaCA;
+import mx.com.rmsh.horusControl.vo.ca.ClienteCA;
 
 @Controller
 public class InvestigacionController {
@@ -120,6 +124,23 @@ public class InvestigacionController {
 		response = gson.toJson(investigacionService.getReportes(reporteRequest));
 
 		System.out.println("********* [Controller] consultaInvestigaciones : OK ");
+
+		return response;
+	}
+	
+	@RequestMapping(value = "/consultaReportesFiltros", method = RequestMethod.POST)
+	public @ResponseBody String reporteFiltro(ReporteRequest reporteRequest) {
+
+		String response = "";
+		Gson gson = new Gson();
+
+		System.out.println(reporteRequest.toString());
+
+		// arraylist
+
+		//response = gson.toJson(investigacionService.getReportes(reporteRequest));
+
+		System.out.println("********* [Controller] consultaReportesFiltros : OK ");
 
 		return response;
 	}
@@ -278,6 +299,52 @@ public class InvestigacionController {
 		investigacionService.eliminaRegistrioById(riegoRequest);
 
 		System.out.println("********* [Controller] EliminaReisgo By Id : OK ");
+
+		return response;
+	}
+	
+	@RequestMapping(value = "/consultaCACampania", method = RequestMethod.POST)
+	public @ResponseBody String consultaCACampania(ReporteRequest reporteRequest) {
+
+		String response = "";
+		Gson gson = new Gson();
+
+		System.out.println(reporteRequest.toString());
+
+		// arraylist
+		CampaniaCA nuevo = new CampaniaCA( 2L , "Metalsa LA");
+		CampaniaCA nuevo1 = new CampaniaCA( 1L , "Citro LA");
+		
+		List <CampaniaCA> pollos = new ArrayList<CampaniaCA>();
+		pollos.add(nuevo);
+		pollos.add(nuevo1);
+
+		response = gson.toJson(pollos);
+
+		System.out.println("********* [Controller] consultaCACampania : OK ");
+
+		return response;
+	}
+	
+	@RequestMapping(value = "/consultaCACliente", method = RequestMethod.POST)
+	public @ResponseBody String consultaCACliente(ReporteRequest reporteRequest) {
+
+		String response = "";
+		Gson gson = new Gson();
+
+		System.out.println(reporteRequest.toString());
+
+		// arraylist
+		ClienteCA nuevo = new ClienteCA( 2L , "CitroFrut");
+		ClienteCA nuevo1 = new ClienteCA( 1L , "Metalza");
+		
+		List <ClienteCA> pollos = new ArrayList<ClienteCA>();
+		pollos.add(nuevo);
+		pollos.add(nuevo1);
+
+		response = gson.toJson(pollos);
+
+		System.out.println("********* [Controller] consultaCACliente : OK ");
 
 		return response;
 	}

@@ -56,6 +56,8 @@
     <!--    Stylesheets-->
     <!-- ===============================================-->
     <link href="phoenix/vendors/choices/choices.min.css" rel="stylesheet">
+    <link href="phoenix/vendors/flatpickr/flatpickr.min.css" rel="stylesheet" />
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&amp;display=swap" rel="stylesheet">
@@ -315,31 +317,21 @@
 			<div class="row justify-content-center">
 				<div class="form-row">
 					<div class="col-md-3 mb-3">
-						<label for="form_firstName">Nombre / Razón social</label>
+						<label for="busqueda_nombre">Nombre / Razón social</label>
 						<input type="text" class="form-control" id="busqueda_nombre" placeholder="Nombre / Razón social" value="" required>
 						
 					</div>
 					<div class="col-md-3 mb-3">
-						<label for="form_lastName">Apellido</label>
+						<label for="busqueda_apellido">Apellido</label>
 						<input type="text" class="form-control" id="busqueda_apellido" placeholder="Apellido" value="">			
+					</div>
+					<div class="col-md-3 mb-3">
+						<label for="idRangoFecha">Fecha</label>
+						<input class="form-control datetimepicker" id="idRangoFecha" type="text" placeholder="d/m/y a d/m/y" data-options='{"mode":"range","dateFormat":"d/m/y","disableMobile":true}' />			
 					</div>
 				</div>
 
-<!-- EMPIEZA -->
-            
-            <div class="card-body p-0">
-              <div class="p-4 code-to-copy">
-                <label for="organizerMultiple">Multiple</label>
-                <select class="form-select" id="organizerMultiple" data-choices="data-choices" multiple="multiple" data-options='{"removeItemButton":true,"placeholder":true}'>
-                  <option value="">Select organizer...</option>
-                  <option>Massachusetts Institute of Technology</option>
-                  <option>University of Chicago</option>
-                  <option>GSAS Open Labs At Harvard</option>
-                  <option>California Institute of Technology</option>
-                </select>
-              </div>
-            </div>
-          
+       
           
           
         <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 5">
@@ -353,21 +345,35 @@
               		
 <!-- TRMINA -->		
 				
+				<div class="form-row">		
+					<div class="col-md-3 mb-3">
+						<label for="idNivelMultiple">Nivel de Riesgo</label>						
+						<select id="idNivelMultiple" class="form-select" multiple="multiple">
+					          <option value="">Selecciona Riesgo...</option>
+					     </select>									
+					</div>								
+					<div class="col-md-3 mb-3">
+						<label for="idCampaniaMultiple">Campaña</label>						
+						<select id="idCampaniaMultiple" class="form-select" multiple="multiple">
+							<option value="">Selecciona Campañas...</option>
+						</select>				
+					</div>
+					<div class="col-md-3 mb-3">
+						<label for="idEmpresaMultiple">Empresa</label>
+						<select id="idEmpresaMultiple" class="form-select" multiple="multiple">
+							<option value="">Selecciona Empresas...</option>
+						</select>
+					</div>
+				</div>
+				
 				<div class="form-row">
 					<div class="col-md-3 mb-3">
-						<label for="busqueda_campania">Campaña</label>
-						<!--<input type="text" class="form-control" id="busqueda_campania" placeholder="Campaña" value="">-->
-						<select multiple="multiple" class="form-control">
-						    <option value="cheese">Zano-Screening-Nov2023</option>
-						    <option value="tomatoes">Proeza-Screening-Nov2023	</option>
-						    <option value="mozarella">Metalsa-Screening-Nov2023	</option>						
-						</select>
-				
+						<button class="btn btn-primary px-5" onclick="buscaInvestigacion()">Buscar</button>
 					</div>
 					<div class="col-md-3 mb-3">
-						<label for="form_lastName">Usuario</label>
-						<input type="text" class="form-control" id="busqueda_usuario" placeholder="Usuario" value="">
+						<button class="btn btn-warning px-5" onclick="limpiarFormulario()">Limpiar Formulario</button>
 					</div>
+					
 				</div>
 			</div>
             
@@ -638,7 +644,7 @@
 
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
 					<button type="button" class="btn btn-primary">Enviar</button>
 				</div>
 			</div>
@@ -689,12 +695,14 @@
     <script src="phoenix/vendors/list.js/list.min.js"></script>
     <script src="phoenix/vendors/feather-icons/feather.min.js"></script>
     <script src="phoenix/vendors/dayjs/dayjs.min.js"></script>
-    <script src="phoenix/vendors/choices/choices.min.js"></script>
+    
     <script src="phoenix/vendors/prism/prism.js"></script>
     <script src="phoenix/assets/js/phoenix.js"></script>
 
-    <script src="phoenix/vendors/choices/choices.min.js"></script>
+    <script src="phoenix/vendors/choices/choices2.min.js"></script>
     <script src="phoenix/vendors/prism/prism.js"></script>
+    
+    <script src="phoenix/assets/js/flatpickr.js"></script>
     
     <script src="phoenix/assets/js/phoenix.js"></script>
     
@@ -750,9 +758,10 @@
 		setTimeout(() => {
   			cargaListaInvestigaciones();
 		}, 2500);
- 
 		
+		creaSelects();
 		
+	
 		$("#lambdaText").hide();
 	</script>
 
@@ -768,6 +777,8 @@
 	<!-- chart js .l.-->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.1.1/chart.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/js/bootstrap-multiselect.min.js"></script>
+	
+	
 
 
 
