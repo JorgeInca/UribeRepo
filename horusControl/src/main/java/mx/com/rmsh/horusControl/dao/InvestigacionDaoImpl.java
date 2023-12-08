@@ -5,6 +5,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.sql.Types;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -12,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
-import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
@@ -24,12 +28,19 @@ import mx.com.rmsh.horusControl.vo.MasivaRequest;
 import mx.com.rmsh.horusControl.vo.OrigenesBorradoRequest;
 import mx.com.rmsh.horusControl.vo.ReporteRequest;
 import mx.com.rmsh.horusControl.vo.RiesgoRequest;
+import mx.com.rmsh.horusControl.vo.ca.CampaniaCA;
+import mx.com.rmsh.horusControl.vo.ca.ClienteCA;
 
 @Repository
 public class InvestigacionDaoImpl implements InvestigacionDao {
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
+	
+	@Autowired
+	private NamedParameterJdbcTemplate namedJdbcTemplate;
+	
+	String ADD_ORDER_FECHA_A = " order by A.fecha_creacion desc ";
 	
 	String QUERY_GET_REPORTE_USER=" SELECT "
 			+ " A.id_investigacion as id_investigacion,"
@@ -51,8 +62,8 @@ public class InvestigacionDaoImpl implements InvestigacionDao {
 			+ " left join empresa C on  B.id_empresa = C.id_empresa "
 			+ " left join investigacion_masiva D on  A.id_masiva = D.id_investigacion_masiva "			
 			+ " where A.estatus != 4 "
-			+ " and B.id_usuario = ? "
-			+ " order by A.fecha_creacion desc ";
+			+ " and B.id_usuario = ? ";
+			
 	
 	String QUERY_GET_REPORTE_ADMIN=" SELECT "
 			+ " A.id_investigacion as id_investigacion,"
@@ -73,8 +84,7 @@ public class InvestigacionDaoImpl implements InvestigacionDao {
 			+ " FROM investigacion A inner join usuario B on  A.id_usuario = B.id_usuario "
 			+ " left join empresa C on  B.id_empresa = C.id_empresa "
 			+ " left join investigacion_masiva D on  A.id_masiva = D.id_investigacion_masiva "			
-			+ " where A.estatus != 4 "			
-			+ " order by A.fecha_creacion desc ";
+			+ " where A.estatus != 4 ";				
 	
 	String QUERY_CREATE_REPORTEE=
 			"INSERT INTO `horusDatabase`.`investigacion`"
@@ -139,6 +149,17 @@ public class InvestigacionDaoImpl implements InvestigacionDao {
 	
 	String QUERY_GET_USER_INVESTIGACION_BYID =
 			"select id_usuario from investigacion  where id_investigacion = ? ";
+	
+	String QUERY_GET_CA_CAMPANIA = "select * from investigacion_masiva A where A.estatus in (1,2) ";	
+	String ADD_CAMPANIA_BY_USER = " AND A.id_usuario = ? ";
+	
+	String ADD_PRIMER_NOMBRE_LIKE = " AND A.primer_nombre REGEXP :nombre ";
+	String ADD_APELLIDO_LIKE = " AND A.apellidos REGEXP :apellidos ";	
+	String ADD_DATE_RANGE = " AND ( A.fecha_creacion BETWEEN :fechaInicial AND :fechaFinal ) ";
+	String ADD_ID_MASIVA = " AND A.id_masiva in ( :idMasiva ) ";
+	String ADD_EMPRESA_IN = " AND C.id_empresa in ( :idEmpresa ) ";
+	
+	String QUERY_GET_CA_EMPRESA = "select * from empresa A where A.estatus in (1) ";
 
 	@SuppressWarnings("deprecation")
 	@Override
@@ -146,7 +167,7 @@ public class InvestigacionDaoImpl implements InvestigacionDao {
 		
 		System.out.println( "getReportesByAdmin " + request.toString()  );
 		
-		return jdbcTemplate.query(QUERY_GET_REPORTE_ADMIN,
+		return jdbcTemplate.query(QUERY_GET_REPORTE_ADMIN + ADD_ORDER_FECHA_A,
 				
 				(rs, rowNum) -> new Investigacion(
 						rs.getLong("id_investigacion"), 
@@ -174,8 +195,8 @@ public class InvestigacionDaoImpl implements InvestigacionDao {
 		System.out.println( "getReportesByUser " + request.toString()  );
 			
 
-		return jdbcTemplate.query(QUERY_GET_REPORTE_USER,	
-				new Object[] {  request.getIdUserHorus() },		
+		return jdbcTemplate.query(QUERY_GET_REPORTE_USER + ADD_ORDER_FECHA_A,	
+				new Object[] {  request.getIdUserHorus() },	
 				(rs, rowNum) -> new Investigacion(
 						rs.getLong("id_investigacion"), 
 						rs.getLong("idUsuario"),
@@ -193,6 +214,47 @@ public class InvestigacionDaoImpl implements InvestigacionDao {
 						rs.getString("menciones_eliminadas"),
 						rs.getInt("estatus")
 						) );
+	}
+	
+	@SuppressWarnings("deprecation")
+	@Override
+	public List<Investigacion> getReportesByAdminFiltro(ReporteRequest request) {
+
+		System.out.println( "getReportesByAdminFiltro " + request.toString()  );
+		
+		MapSqlParameterSource params = creaParamsInvestigacion(request);
+		
+		
+		String query = creaQueryFiltroInvestigacion(request);
+		
+		System.out.println(" Mis query " + query);
+		
+		return namedJdbcTemplate.query(query,
+				params,
+				(rs, rowNum) -> new Investigacion(
+						rs.getLong("id_investigacion"), 
+						rs.getLong("idUsuario"),
+						rs.getString("nombreUsuario"), 
+						rs.getLong("idEmpresa"), 
+						rs.getString("nombreEmpresa"), 
+						rs.getString("apellidos"), 
+						rs.getString("primerNombre"),						 
+						rs.getString("json_desc"), 
+						(Integer) rs.getObject("riesgoInicial"), 
+						(Integer) rs.getObject("riesgoFinal"), 
+						rs.getTimestamp("fecha_creacion"),
+						rs.getString("nombreCampania"),
+						rs.getString("origenes_eliminados"), 
+						rs.getString("menciones_eliminadas"),
+						rs.getInt("estatus")
+						));
+		
+	}
+
+	@Override
+	public List<Investigacion> getReportesByUserFiltro(ReporteRequest request) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	
@@ -483,6 +545,125 @@ public class InvestigacionDaoImpl implements InvestigacionDao {
 	          return ps;
 	        });		
 	}
+
+	@Override
+	public List<CampaniaCA> getCampaniaADMIN(ReporteRequest request) {
+		// 
+		return jdbcTemplate.query(QUERY_GET_CA_CAMPANIA,
+				
+				(rs, rowNum) -> new CampaniaCA(
+						rs.getLong("id_investigacion_masiva"),
+						rs.getString("TITULO")				
+						));
+	}
+
+	@SuppressWarnings("deprecation")
+	@Override
+	public List<CampaniaCA> getCampaniaUSER(ReporteRequest request) {
+		// TODO Auto-generated method stub
+		
+		return jdbcTemplate.query(QUERY_GET_CA_CAMPANIA + ADD_CAMPANIA_BY_USER,
+				new Object[] {  request.getIdUserHorus()  },	
+				(rs, rowNum) -> new CampaniaCA(
+						rs.getLong("id_investigacion_masiva"),
+						rs.getString("TITULO")				
+						));
+	
+	}
+	
+	@Override
+	public List<ClienteCA> getClientesCatalogo(ReporteRequest request) {
+		
+		// TODO Auto-generated method stub
+		return jdbcTemplate.query(QUERY_GET_CA_EMPRESA,				
+				(rs, rowNum) -> new ClienteCA(
+						rs.getLong("id_empresa"),
+						rs.getString("nombre")				
+						));
+	}
+	
+	public MapSqlParameterSource creaParamsInvestigacion(ReporteRequest request) {
+		
+		MapSqlParameterSource result = new MapSqlParameterSource();
+		
+	
+		
+		if( !"".equals( request.getFiltro_nombre() ) ) {
+			result.addValue("nombre", request.getFiltro_nombre());			
+		}
+		if( !"".equals( request.getFiltro_apellidos() ) ) {
+			result.addValue("apellidos", request.getFiltro_apellidos());				
+		}		
+		if( !"".equals( request.getFiltro_fechas() ) ) {
+			
+			String[] arrOfStr = request.getFiltro_fechas().split(" to ", 2);
+			//yyyy-mm-dd
+			
+			
+			try {
+				
+				SimpleDateFormat inputFormat = new SimpleDateFormat("dd/MM/yy");
+				
+				Date dateStart = inputFormat.parse(arrOfStr[0]);
+				Date dateEnd = inputFormat.parse(arrOfStr[1]);
+				
+		        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+
+		        String dateStartF = dateFormat.format(dateStart);
+		        String dateEndF = dateFormat.format(dateEnd);
+		        
+		        result.addValue("fechaInicial", dateStartF);	
+		        result.addValue("fechaFinal", dateEndF);	
+				
+				
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+		}	
+		if( request.getFiltro_campañas() != null ) {
+			result.addValue("idMasiva", Arrays.asList(request.getFiltro_campañas()) );
+		}
+		if( request.getFiltro_empresas() != null ) {
+			result.addValue("idEmpresa",  Arrays.asList( request.getFiltro_empresas()) );
+		}
+		
+
+		System.out.println("Params Filter array: " + result.toString() ) ;
+		System.out.println("Params Filter array: " + result.getParameterNames() ) ;
+		
+		
+		return result;
+	}
+	
+	public String creaQueryFiltroInvestigacion(ReporteRequest request) {
+		
+		String resultado = QUERY_GET_REPORTE_ADMIN;
+		
+		if( !"".equals( request.getFiltro_nombre() ) ) {
+			resultado = resultado + ADD_PRIMER_NOMBRE_LIKE;
+		}
+		if( !"".equals( request.getFiltro_apellidos() ) ) {
+			resultado = resultado + ADD_APELLIDO_LIKE;
+		}		
+		if( !"".equals( request.getFiltro_fechas() ) ) {
+			resultado = resultado + ADD_DATE_RANGE;		
+		}	
+		if( request.getFiltro_campañas() != null ) {
+			resultado = resultado + ADD_ID_MASIVA;	
+		}
+		if( request.getFiltro_empresas() != null ) {
+			resultado = resultado + ADD_EMPRESA_IN;	
+		}
+		
+		resultado = resultado + ADD_ORDER_FECHA_A;
+		
+		return resultado;
+		
+	}
+
 	
 	
 }

@@ -118,11 +118,7 @@ public class InvestigacionController {
 		Gson gson = new Gson();
 
 		System.out.println(reporteRequest.toString());
-
-		// arraylist
-
 		response = gson.toJson(investigacionService.getReportes(reporteRequest));
-
 		System.out.println("********* [Controller] consultaInvestigaciones : OK ");
 
 		return response;
@@ -135,12 +131,8 @@ public class InvestigacionController {
 		Gson gson = new Gson();
 
 		System.out.println(reporteRequest.toString());
-
-		// arraylist
-
-		//response = gson.toJson(investigacionService.getReportes(reporteRequest));
-
-		System.out.println("********* [Controller] consultaReportesFiltros : OK ");
+		response = gson.toJson(investigacionService.getReportesPorFiltro(reporteRequest));
+		System.out.println("********* [Controller] consultaReportesFiltros : OK " + response);
 
 		return response;
 	}
@@ -311,17 +303,9 @@ public class InvestigacionController {
 
 		System.out.println(reporteRequest.toString());
 
-		// arraylist
-		CampaniaCA nuevo = new CampaniaCA( 2L , "Metalsa LA");
-		CampaniaCA nuevo1 = new CampaniaCA( 1L , "Citro LA");
-		
-		List <CampaniaCA> pollos = new ArrayList<CampaniaCA>();
-		pollos.add(nuevo);
-		pollos.add(nuevo1);
+		response = gson.toJson(investigacionService.getCampaniaCA(reporteRequest));
 
-		response = gson.toJson(pollos);
-
-		System.out.println("********* [Controller] consultaCACampania : OK ");
+		System.out.println("********* [Controller] consultaCACampania : OK " + response);
 
 		return response;
 	}
@@ -334,15 +318,7 @@ public class InvestigacionController {
 
 		System.out.println(reporteRequest.toString());
 
-		// arraylist
-		ClienteCA nuevo = new ClienteCA( 2L , "CitroFrut");
-		ClienteCA nuevo1 = new ClienteCA( 1L , "Metalza");
-		
-		List <ClienteCA> pollos = new ArrayList<ClienteCA>();
-		pollos.add(nuevo);
-		pollos.add(nuevo1);
-
-		response = gson.toJson(pollos);
+		response = gson.toJson( investigacionService .getClientesCatalogo(reporteRequest) );
 
 		System.out.println("********* [Controller] consultaCACliente : OK ");
 

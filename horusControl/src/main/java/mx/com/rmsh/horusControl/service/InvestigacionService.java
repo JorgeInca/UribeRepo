@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.ResponseEntity;
 
-import mx.com.rmsh.horusControl.vo.Empresas;
 import mx.com.rmsh.horusControl.vo.Investigacion;
 import mx.com.rmsh.horusControl.vo.InvestigacionRequest;
 import mx.com.rmsh.horusControl.vo.Masiva;
@@ -15,11 +14,15 @@ import mx.com.rmsh.horusControl.vo.OrigenesBorradoRequest;
 import mx.com.rmsh.horusControl.vo.ReporteRequest;
 import mx.com.rmsh.horusControl.vo.RiesgoRequest;
 import mx.com.rmsh.horusControl.vo.UserHorus;
+import mx.com.rmsh.horusControl.vo.ca.CampaniaCA;
+import mx.com.rmsh.horusControl.vo.ca.ClienteCA;
 
 
 public interface InvestigacionService {
 	
 	public List<Investigacion> getReportes(ReporteRequest request);
+	
+	public List<Investigacion> getReportesPorFiltro(ReporteRequest request);
 	
 	public Long guardaInvestigacion(InvestigacionRequest request);
 			
@@ -62,6 +65,9 @@ public interface InvestigacionService {
 	public void updateCampanias();
 	
 	public void eliminaRegistrioById(RiesgoRequest request);
+
+	public List<CampaniaCA> getCampaniaCA(ReporteRequest request);
 	
+	public List<ClienteCA> getClientesCatalogo(ReporteRequest request);
 	
 }

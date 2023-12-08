@@ -9,12 +9,18 @@ import mx.com.rmsh.horusControl.vo.MasivaRequest;
 import mx.com.rmsh.horusControl.vo.OrigenesBorradoRequest;
 import mx.com.rmsh.horusControl.vo.ReporteRequest;
 import mx.com.rmsh.horusControl.vo.RiesgoRequest;
+import mx.com.rmsh.horusControl.vo.ca.CampaniaCA;
+import mx.com.rmsh.horusControl.vo.ca.ClienteCA;
 
 public interface InvestigacionDao {
 
 	public List<Investigacion> getReportesByAdmin(ReporteRequest request);
 	
 	public List<Investigacion> getReportesByUser(ReporteRequest request);
+	
+	public List<Investigacion> getReportesByAdminFiltro(ReporteRequest request);
+	
+	public List<Investigacion> getReportesByUserFiltro(ReporteRequest request);
 
 	public Long guardaInvestigacion(InvestigacionRequest request);	
 
@@ -55,5 +61,13 @@ public interface InvestigacionDao {
 	public Long getIdUserByInvestigacionId(Long investigacionid);
 	
 	public void eliminaRegistrioById(RiesgoRequest request);
+	
+	public List<CampaniaCA> getCampaniaADMIN(ReporteRequest request);
+	
+	public List<CampaniaCA> getCampaniaUSER(ReporteRequest request);
+	
+	public List<ClienteCA> getClientesCatalogo(ReporteRequest request);
+	
+
 
 }

@@ -73,7 +73,7 @@ function cargaListaInvestigaciones() {
 
 			}
 			
-			$( "#buttontest" ).prop( "disabled", true );
+			
 
 
 
@@ -507,14 +507,7 @@ function buscaInvestigacion() {
 	console.log( $("#idRangoFecha").val() );
 	console.log( $("#idNivelMultiple").val() );
 	console.log( $("#idCampaniaMultiple").val());
-	console.log( $("#idNivelMultiple").val() );
-
-	var filtroRequest = {
-		fechas : $("#idRangoFecha").val(),
-	    nivelesRiesgo : $("#idNivelMultiple").val(),
-		campañas : $("#idCampaniaMultiple").val(),
-		empresas : $("#idNivelMultiple").val()
-	}
+	console.log( $("#idEmpresaMultiple").val() );
 	
 	var reporteRequest = {
 		idUserHorus: idUserHorus,
@@ -524,7 +517,7 @@ function buscaInvestigacion() {
 		filtro_fechas : $("#idRangoFecha").val(),
 	    filtro_nivelesRiesgo : $("#idNivelMultiple").val(),
 		filtro_campañas : $("#idCampaniaMultiple").val(),
-		filtro_empresas : $("#idNivelMultiple").val()
+		filtro_empresas : $("#idEmpresaMultiple").val()
 	};
 	
 	$.ajax({
@@ -570,7 +563,7 @@ function buscaInvestigacion() {
 
 			}
 			
-			$( "#buttontest" ).prop( "disabled", true );
+			
 
 
 

@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.sql.PreparedStatement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -56,6 +55,8 @@ import mx.com.rmsh.horusControl.vo.ReporteRequest;
 import mx.com.rmsh.horusControl.vo.RiesgoRequest;
 import mx.com.rmsh.horusControl.vo.Tabla;
 import mx.com.rmsh.horusControl.vo.UserHorus;
+import mx.com.rmsh.horusControl.vo.ca.CampaniaCA;
+import mx.com.rmsh.horusControl.vo.ca.ClienteCA;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRExporter;
@@ -95,6 +96,110 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 			reportes = dao.getReportesByAdmin(request);
 		}else {
 			reportes = dao.getReportesByUser(request);
+		}
+			
+
+		for (int i = 0; i < reportes.size(); i++) {
+			
+			try {
+				
+				Gson gson = new Gson();
+				
+				InvestigacionLAMBDA lambda = gson.fromJson(reportes.get(i).getJson(), InvestigacionLAMBDA.class);	
+				
+				lambda.getBody().setEliminadosOrigenes(reportes.get(i).getOrigenesEliminados());
+				lambda.getBody().setEliminadosMentions(reportes.get(i).getMencionesEliminadas());
+				
+				String fromArrayOrigenes = lambda.getBody().getEliminadosOrigenes();		
+				List<String> origenesEliminados = Arrays.asList( fromArrayOrigenes.split("\\s*,\\s*") );//Arrays.asList(fromArray.split("\\s*,\\s*"));
+				String fromArrayMentions = lambda.getBody().getEliminadosMentions();
+				List<String> mentionsEliminados = Arrays.asList( fromArrayMentions.split("\\s*,\\s*") );//Arrays.asList(fromArray.split("\\s*,\\s*"));
+				
+				
+				int intcump = 0;
+				int natcump = 0;
+				int pep = 0;
+				int others = 0;
+				int mentions = 0;			
+						
+				for (Origen origen : lambda.getBody().getOrigen()) {
+								
+					
+					if( !origenesEliminados.contains( origen.getId().toString() ) ){
+						
+						if ("intcump".equals(origen.getCategory())) {
+							intcump++;
+						}
+						if ("natcump".equals(origen.getCategory())) {
+							natcump++;
+						}
+						if ("PEP".equals(origen.getCategory())) {
+							pep++;
+						}
+						if ("others".equals(origen.getCategory())) {
+							others++;
+						}
+						
+					}
+					
+				}
+				
+				for (Mentions mention : lambda.getBody().getMentions()) {
+					
+					
+					
+					//System.out.println("mentionsEliminados " + mentionsEliminados);
+					//System.out.println("mentionsEliminados " + mention.getId());
+					
+					if( !mentionsEliminados.contains( mention.getId().toString() ) ){				
+					
+						mentions++;					
+						
+					}
+					
+				}
+				
+				String riesgoAcumulado = "";
+				
+				if( intcump>0 )
+					riesgoAcumulado = riesgoAcumulado + "Listado de Cumplimientos Internacionales<br/>";
+				if( natcump>0 )
+					riesgoAcumulado = riesgoAcumulado + "Listado de Cumplimientos Nacionales<br/>";
+				if( pep>0 )
+					riesgoAcumulado = riesgoAcumulado + "Personas Politicamente Expuestas<br/>";
+				if( others>0 )
+					riesgoAcumulado = riesgoAcumulado + "Otras Bases de Datos<br/>";
+				if( mentions>0 )
+					riesgoAcumulado = riesgoAcumulado + "Menciones Adversas";
+								
+				reportes.get(i).setRiesgoAcumulado(riesgoAcumulado);
+								
+
+			} catch (Exception e) {
+				System.out.println( e );
+			}
+            
+        }
+		
+		//System.out.println( reportes.toString() );
+		
+		return reportes;
+	}
+	
+	@Override
+	public List<Investigacion> getReportesPorFiltro(ReporteRequest request) {
+		
+		//Integer riesgoEditado = dao.getRiesgoFInal(lambdaQuery.getIdInvestigacion());		
+		
+		List<Investigacion> reportes = new ArrayList<Investigacion>();
+		
+		System.out.println( request.getRolUser() );
+		System.out.println( RolUsuario.ADMIN.getName() );
+		
+		if( RolUsuario.ADMIN.getName().equals( request.getRolUser()  )) {
+			reportes = dao.getReportesByAdminFiltro(request);
+		}else {
+			reportes = dao.getReportesByUserFiltro(request);
 		}
 			
 
@@ -322,7 +427,7 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 
 		System.out.println("********* [Service] getPDFInvestigacion : " +  idInvestigacion + " campaign: " +  campaign +" s3Exists: " + s3Exists );
 
-		boolean linux = true;
+		boolean linux = false;
 
 		// Delete first File.separator for Windows
 		String reportFolderPath = (linux ? File.separator : "") + "src" + File.separator + "main" + File.separator
@@ -898,5 +1003,24 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 		dao.updateCampanias();
 		
 	}
+
+	@Override
+	public List<CampaniaCA> getCampaniaCA(ReporteRequest request) {
+		
+		if( RolUsuario.ADMIN.getName().equals(request.getRolUser()) ) {
+			return dao.getCampaniaADMIN(request);
+		}else {
+			return dao.getCampaniaUSER(request);
+		}		
+		
+	}
+
+	@Override
+	public List<ClienteCA> getClientesCatalogo(ReporteRequest request) {
+		// TODO Auto-generated method stub
+		return dao.getClientesCatalogo(request);
+	}
+	
+	
 
 }
