@@ -192,6 +192,7 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 		//Integer riesgoEditado = dao.getRiesgoFInal(lambdaQuery.getIdInvestigacion());		
 		
 		List<Investigacion> reportes = new ArrayList<Investigacion>();
+		List<Investigacion> resultado = new ArrayList<Investigacion>();
 		
 		System.out.println( request.getRolUser() );
 		System.out.println( RolUsuario.ADMIN.getName() );
@@ -209,7 +210,9 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 				
 				Gson gson = new Gson();
 				
-				InvestigacionLAMBDA lambda = gson.fromJson(reportes.get(i).getJson(), InvestigacionLAMBDA.class);	
+				
+				InvestigacionLAMBDA lambda = gson.fromJson(reportes.get(i).getJson(), InvestigacionLAMBDA.class);
+				
 				
 				lambda.getBody().setEliminadosOrigenes(reportes.get(i).getOrigenesEliminados());
 				lambda.getBody().setEliminadosMentions(reportes.get(i).getMencionesEliminadas());
@@ -248,8 +251,7 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 					
 				}
 				
-				for (Mentions mention : lambda.getBody().getMentions()) {
-					
+				for (Mentions mention : lambda.getBody().getMentions()) {					
 					
 					
 					//System.out.println("mentionsEliminados " + mentionsEliminados);
@@ -277,6 +279,39 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 					riesgoAcumulado = riesgoAcumulado + "Menciones Adversas";
 								
 				reportes.get(i).setRiesgoAcumulado(riesgoAcumulado);
+				
+				//REMOVE RISK BI ID
+				if (!(request.getFiltro_nivelesRiesgo() == null)) {
+					
+					boolean contieneUno = false;
+					
+					for (int y = 0; y < request.getFiltro_nivelesRiesgo().length; y++) {
+						
+									
+						
+						if (reportes.get(i).getRiesgoTexto().equals(
+								NivelRiesgo.getNameyId(Integer.parseInt(request.getFiltro_nivelesRiesgo()[y])))) {
+							contieneUno = true;
+
+						}
+						
+						System.out.println("**********************************");
+						System.out.println( "ContieneUno " + contieneUno);
+						System.out.println( "Y  " + request.getFiltro_nivelesRiesgo()[y] );	
+						System.out.println( "i " + reportes.get(i).getRiesgoTexto());	
+												
+					}
+					
+					
+					
+					if ( contieneUno ) {
+						resultado.add( reportes.get(i) );
+					}
+				}else {
+					
+					resultado.add( reportes.get(i) );
+					
+				}
 								
 
 			} catch (Exception e) {
@@ -287,7 +322,7 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 		
 		//System.out.println( reportes.toString() );
 		
-		return reportes;
+		return resultado;
 	}
 
 	@Override
@@ -427,7 +462,7 @@ public class InvestigacionServiceImpl implements InvestigacionService {
 
 		System.out.println("********* [Service] getPDFInvestigacion : " +  idInvestigacion + " campaign: " +  campaign +" s3Exists: " + s3Exists );
 
-		boolean linux = false;
+		boolean linux = true;
 
 		// Delete first File.separator for Windows
 		String reportFolderPath = (linux ? File.separator : "") + "src" + File.separator + "main" + File.separator

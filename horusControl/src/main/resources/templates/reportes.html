@@ -358,7 +358,7 @@
 							<option value="">Selecciona Campañas...</option>
 						</select>				
 					</div>
-					<div class="col-md-3 mb-3">
+					<div class="col-md-3 mb-3" id="divEmpresasSelect" hidden>
 						<label for="idEmpresaMultiple">Empresa</label>
 						<select id="idEmpresaMultiple" class="form-select" multiple="multiple">
 							<option value="">Selecciona Empresas...</option>
@@ -758,6 +758,13 @@
 		setTimeout(() => {
   			cargaListaInvestigaciones();
   			creaSelects();
+  			
+  			var rol = $("#rolUser").val();
+  			  			
+  			if (rol === 'ADMIN'){
+				   $('#divEmpresasSelect').removeAttr('hidden');				  
+			  }
+  			
 		}, 2500);
 		
 		

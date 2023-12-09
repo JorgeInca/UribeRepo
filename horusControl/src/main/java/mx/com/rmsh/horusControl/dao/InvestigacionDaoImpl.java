@@ -62,7 +62,7 @@ public class InvestigacionDaoImpl implements InvestigacionDao {
 			+ " left join empresa C on  B.id_empresa = C.id_empresa "
 			+ " left join investigacion_masiva D on  A.id_masiva = D.id_investigacion_masiva "			
 			+ " where A.estatus != 4 "
-			+ " and B.id_usuario = ? ";
+			+ " and B.id_usuario = :idUserHorus ";
 			
 	
 	String QUERY_GET_REPORTE_ADMIN=" SELECT "
@@ -193,10 +193,14 @@ public class InvestigacionDaoImpl implements InvestigacionDao {
 	public List<Investigacion> getReportesByUser(ReporteRequest request) {
 		
 		System.out.println( "getReportesByUser " + request.toString()  );
+		
+		MapSqlParameterSource result = new MapSqlParameterSource();
+		
+		result.addValue("idUserHorus", request.getIdUserHorus());
 			
 
-		return jdbcTemplate.query(QUERY_GET_REPORTE_USER + ADD_ORDER_FECHA_A,	
-				new Object[] {  request.getIdUserHorus() },	
+		return namedJdbcTemplate.query(QUERY_GET_REPORTE_USER + ADD_ORDER_FECHA_A,	
+				result,	
 				(rs, rowNum) -> new Investigacion(
 						rs.getLong("id_investigacion"), 
 						rs.getLong("idUsuario"),
@@ -222,10 +226,10 @@ public class InvestigacionDaoImpl implements InvestigacionDao {
 
 		System.out.println( "getReportesByAdminFiltro " + request.toString()  );
 		
-		MapSqlParameterSource params = creaParamsInvestigacion(request);
+		MapSqlParameterSource params = creaParamsInvestigacion(request,false);
 		
 		
-		String query = creaQueryFiltroInvestigacion(request);
+		String query = creaQueryFiltroInvestigacion(request,false);
 		
 		System.out.println(" Mis query " + query);
 		
@@ -253,8 +257,35 @@ public class InvestigacionDaoImpl implements InvestigacionDao {
 
 	@Override
 	public List<Investigacion> getReportesByUserFiltro(ReporteRequest request) {
-		// TODO Auto-generated method stub
-		return null;
+
+		System.out.println( "getReportesByUserFiltro " + request.toString()  );
+		
+		MapSqlParameterSource params = creaParamsInvestigacion(request,true);
+		
+		
+		String query = creaQueryFiltroInvestigacion(request,true);
+		
+		System.out.println(" Mis query " + query);
+		
+		return namedJdbcTemplate.query(query,
+				params,
+				(rs, rowNum) -> new Investigacion(
+						rs.getLong("id_investigacion"), 
+						rs.getLong("idUsuario"),
+						rs.getString("nombreUsuario"), 
+						rs.getLong("idEmpresa"), 
+						rs.getString("nombreEmpresa"), 
+						rs.getString("apellidos"), 
+						rs.getString("primerNombre"),						 
+						rs.getString("json_desc"), 
+						(Integer) rs.getObject("riesgoInicial"), 
+						(Integer) rs.getObject("riesgoFinal"), 
+						rs.getTimestamp("fecha_creacion"),
+						rs.getString("nombreCampania"),
+						rs.getString("origenes_eliminados"), 
+						rs.getString("menciones_eliminadas"),
+						rs.getInt("estatus")
+						));
 	}
 
 	
@@ -582,11 +613,13 @@ public class InvestigacionDaoImpl implements InvestigacionDao {
 						));
 	}
 	
-	public MapSqlParameterSource creaParamsInvestigacion(ReporteRequest request) {
+	public MapSqlParameterSource creaParamsInvestigacion(ReporteRequest request, boolean isUser) {
 		
 		MapSqlParameterSource result = new MapSqlParameterSource();
 		
-	
+		
+		if(isUser)
+			result.addValue("idUserHorus", request.getIdUserHorus());
 		
 		if( !"".equals( request.getFiltro_nombre() ) ) {
 			result.addValue("nombre", request.getFiltro_nombre());			
@@ -638,9 +671,14 @@ public class InvestigacionDaoImpl implements InvestigacionDao {
 		return result;
 	}
 	
-	public String creaQueryFiltroInvestigacion(ReporteRequest request) {
+	public String creaQueryFiltroInvestigacion(ReporteRequest request, boolean isUser) {
 		
-		String resultado = QUERY_GET_REPORTE_ADMIN;
+		String resultado = "";
+		
+		if (isUser)
+			resultado = QUERY_GET_REPORTE_USER;
+		else
+			resultado = QUERY_GET_REPORTE_ADMIN;
 		
 		if( !"".equals( request.getFiltro_nombre() ) ) {
 			resultado = resultado + ADD_PRIMER_NOMBRE_LIKE;
