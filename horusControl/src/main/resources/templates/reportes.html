@@ -22,7 +22,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="phoenix/assets/img/favicons/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="phoenix/assets/img/favicons/favicon-16x16.png">
     <link rel="shortcut icon" type="image/x-icon" href="phoenix/assets/img/favicons/favicon.ico">
-    <link rel="manifest" href="phoenix/assets/img/favicons/manifest.json">
+    
     
     <!-- Required meta tags -->
 	<meta charset="utf-8">
@@ -42,6 +42,8 @@
 	<link rel="stylesheet" type="text/css" href="datatables/datatables.min.css" />
 	<!--datables estilo bootstrap 4 CSS-->
 	<link rel="stylesheet" type="text/css" href="datatables/DataTables-1.10.18/css/dataTables.bootstrap4.min.css">
+	
+	
 
 	<!--Estilo requeritdo para el chart-->
     
@@ -50,9 +52,8 @@
     <script src="phoenix/vendors/imagesloaded/imagesloaded.pkgd.min.js"></script>
     <script src="phoenix/vendors/simplebar/simplebar.min.js"></script>
     <script src="phoenix/assets/js/config.js"></script>
-
-
-    <!-- ===============================================-->
+    
+     <!-- ===============================================-->
     <!--    Stylesheets-->
     <!-- ===============================================-->
     <link href="phoenix/vendors/choices/choices.min.css" rel="stylesheet">
@@ -68,6 +69,8 @@
     <link href="phoenix/assets/css/user-rtl.min.css" type="text/css" rel="stylesheet" id="user-style-rtl">
     <link href="phoenix/assets/css/user.min.css" type="text/css" rel="stylesheet" id="user-style-default">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/css/bootstrap-multiselect.css" />
+    
+    <link rel="stylesheet" type="text/css" href="css/loaderAnimation.css" />
 
     
     <script>
@@ -90,12 +93,52 @@
 
   <body>
 	  
-	  <input type="text" hidden id="nameUserHorus" th:value="${#authentication.name}" >
+	 <input type="text" hidden id="nameUserHorus" th:value="${#authentication.name}" >
 	<input type="text" hidden id="idUserHorus" >
 	<input type="text" hidden id="emailUserHorus" >
 	<input type="text" hidden id="rolUser" >
 	
 	<input type="text" hidden id="idInvestigacionGlobal" >
+	
+	<div id="loader-wrapper">
+		<div id="page">
+			<div id="phrase_box">
+				<svg width="100%" height="100%">
+					<defs>
+						<style type="text/css">
+							@font-face {
+								font-family: "Proxima";
+								src: url('');
+							}
+						</style>
+						<mask id="mask" maskUnits="userSpaceOnUse" maskContentUnits="userSpaceOnUse">
+							<linearGradient id="linearGradient" gradientUnits="objectBoundingBox" x2="0" y2="1">
+								<stop stop-color="white" stop-opacity="0" offset="0%" />
+								<stop stop-color="white" stop-opacity="1" offset="30%" />
+								<stop stop-color="white" stop-opacity="1" offset="70%" />
+								<stop stop-color="white" stop-opacity="0" offset="100%" />
+							</linearGradient>
+							<rect width="100%" height="100%" fill="url(#linearGradient)" />
+						</mask>
+					</defs>
+					<g width="100%" height="100%" style="mask: url(#mask);">
+						<g id="phrases"></g>
+					</g>
+				</svg>
+			</div>
+			<div id="ighex">
+				<div class="preloader loading">
+					<span class="slice"></span>
+					<span class="slice"></span>
+					<span class="slice"></span>
+					<span class="slice"></span>
+					<span class="slice"></span>
+					<span class="slice"></span>
+				</div>
+			</div>
+		</div>
+	</div>
+
 
     <!-- ===============================================-->
     <!--    Main Content-->
@@ -643,10 +686,14 @@
 					</div>
 
 				</div>
+				
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
 					<button type="button" class="btn btn-primary">Enviar</button>
 				</div>
+				
+				
+				
 			</div>
 		</div>
 	</div>
@@ -684,7 +731,10 @@
 
     <!-- ===============================================-->
     <!--    JavaScripts-->
-    <!-- ===============================================-->-------------------------
+    <!-- ===============================================-->
+    
+    
+        
     <script src="phoenix/vendors/popper/popper.min.js"></script>
     <script src="phoenix/vendors/bootstrap/bootstrap.min.js"></script>
     <script src="phoenix/vendors/anchorjs/anchor.min.js"></script>
@@ -692,7 +742,7 @@
     <script src="phoenix/vendors/fontawesome/all.min.js"></script>
     <script src="phoenix/vendors/lodash/lodash.min.js"></script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
-    <script src="phoenix/vendors/list.js/list.min.js"></script>
+    
     <script src="phoenix/vendors/feather-icons/feather.min.js"></script>
     <script src="phoenix/vendors/dayjs/dayjs.min.js"></script>
     
@@ -702,24 +752,43 @@
     <script src="phoenix/vendors/choices/choices2.min.js"></script>
     <script src="phoenix/vendors/prism/prism.js"></script>
     
-    <script src="phoenix/assets/js/flatpickr.js"></script>
+  
     
     <script src="phoenix/assets/js/phoenix.js"></script>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
-	
 	
 	<script src="assets/js/vendor/popper.min.js"></script>
 	<script src="dist/js/bootstrap.min.js"></script>
 	<script src="assets/js/vendor/holder.min.js"></script>
+	
+	<script src="js/loaderAnimation.js"></script>
+	
+	
 	<script src="js/reportesTools.js"></script>
-	<script src="js/generalTools.js"></script>
+	<script type="text/javascript" src="js/generalTools.js"></script>
+	
+	
+	
+	
+	
 	
 
 	<script>
+		
+		addPhrasesToDocument(phrasesLoader);
+		animaEvento();
+	
+		setTimeout(function(){
+			$('body').addClass('loaded');
+		
+		}, 6000);
+		
+		
 		jQuery("#menuBarDiv").load("globalMenuBar.html");
 		jQuery("#globalFooterBarDiv").load("globalFooterBar.html");
+		
+		
 	</script>
 
 
@@ -755,10 +824,12 @@
 	<script>
 		getUserData()
 		
+		//$('body').removeClass('loaded');
+		
 		setTimeout(() => {
   			cargaListaInvestigaciones();
   			creaSelects();
-  			
+  				//$('body').removeClass('loaded');
   			var rol = $("#rolUser").val();
   			  			
   			if (rol === 'ADMIN'){
@@ -766,9 +837,7 @@
 			  }
   			
 		}, 2500);
-		
-		
-		
+				
 	
 		$("#lambdaText").hide();
 	</script>
@@ -780,8 +849,6 @@
 
 	<script type="text/javascript" src="js/mainDatatable.js"></script>
 
-	<!-- Chart Google-->
-	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 	<!-- chart js .l.-->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.1.1/chart.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/js/bootstrap-multiselect.min.js"></script>

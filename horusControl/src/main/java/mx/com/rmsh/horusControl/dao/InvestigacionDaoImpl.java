@@ -160,6 +160,8 @@ public class InvestigacionDaoImpl implements InvestigacionDao {
 	String ADD_EMPRESA_IN = " AND C.id_empresa in ( :idEmpresa ) ";
 	
 	String QUERY_GET_CA_EMPRESA = "select * from empresa A where A.estatus in (1) ";
+	
+	String QUERY_LIMIT = " LIMIT 100 ";
 
 	@SuppressWarnings("deprecation")
 	@Override
@@ -167,7 +169,7 @@ public class InvestigacionDaoImpl implements InvestigacionDao {
 		
 		System.out.println( "getReportesByAdmin " + request.toString()  );
 		
-		return jdbcTemplate.query(QUERY_GET_REPORTE_ADMIN + ADD_ORDER_FECHA_A,
+		return jdbcTemplate.query(QUERY_GET_REPORTE_ADMIN + ADD_ORDER_FECHA_A + QUERY_LIMIT,
 				
 				(rs, rowNum) -> new Investigacion(
 						rs.getLong("id_investigacion"), 
@@ -199,7 +201,7 @@ public class InvestigacionDaoImpl implements InvestigacionDao {
 		result.addValue("idUserHorus", request.getIdUserHorus());
 			
 
-		return namedJdbcTemplate.query(QUERY_GET_REPORTE_USER + ADD_ORDER_FECHA_A,	
+		return namedJdbcTemplate.query(QUERY_GET_REPORTE_USER + ADD_ORDER_FECHA_A + QUERY_LIMIT,	
 				result,	
 				(rs, rowNum) -> new Investigacion(
 						rs.getLong("id_investigacion"), 

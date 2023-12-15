@@ -16,7 +16,12 @@ var delay = 20;
 
 var gaugeGobal;
 
+//Only 6
+var phrasesLoader = ["Cargando Investigaciones", "Cargando campañas", "Clasificando Categorias", "Calculando Riesgo", "Ordenando los Datos", "Finalizando..."];
+
 function cargaListaInvestigaciones() {
+	
+	$('body').removeClass('loaded');
 
 
 	var uri = "consultaReportes";
@@ -496,6 +501,11 @@ function eliminarRegistro() {
 
 function buscaInvestigacion() {
 	
+	
+	animaEvento();
+	
+	$('body').removeClass('loaded');
+	
 	tableGlobal.clear().draw();
 	
 	var uri = "consultaReportesFiltros";
@@ -560,6 +570,8 @@ function buscaInvestigacion() {
 					])
 					.order( [0,'desc'] )
 					.draw(false);
+					
+					$('body').addClass('loaded');
 
 			}
 			
@@ -569,7 +581,7 @@ function buscaInvestigacion() {
 
 		},
 		error: function(xhr, ajaxOptions, thrownError) {
-
+				$('body').addClass('loaded');
 		}
 
 	});

@@ -144,7 +144,7 @@ function consumeAws() {
 
 		},
 		error: function(xhr, ajaxOptions, thrownError) {
-
+			$('body').addClass('loaded');
 		}
 
 	});
