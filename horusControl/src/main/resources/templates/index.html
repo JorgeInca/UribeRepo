@@ -111,13 +111,15 @@
                     <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather="folder"></span></span><span class="nav-link-text-wrapper"><span class="nav-link-text">Masiva</span></span>
                     </div>
                   </a>
-                </div>
-                <!-- parent pages-->
-                <div class="nav-item-wrapper"><a class="nav-link label-1" href="reportes" role="button" data-bs-toggle="" aria-expanded="false">
-                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather="trello"></span></span><span class="nav-link-text-wrapper"><span class="nav-link-text">Comparar Investigación</span></span>
-                    </div>
-                  </a>
-                </div>
+                  
+                  
+               <!--
+               
+               ************ AQUI VA COMPARAR INVESTIGACION *********
+               
+               -->
+               
+               
                 <!-- parent pages-->
                 <div class="nav-item-wrapper"><a class="nav-link label-1" href="reportes" role="button" data-bs-toggle="" aria-expanded="false">
                     <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather="file-text"></span></span><span class="nav-link-text-wrapper"><span class="nav-link-text">Reportes</span></span>
@@ -131,23 +133,19 @@
                   </a>
                 </div>
                 <!-- parent pages-->
-                <div class="nav-item-wrapper"><a class="nav-link label-1" href="empresas" role="button" data-bs-toggle="" aria-expanded="false">
+                <div class="nav-item-wrapper">
+					<a class="nav-link label-1" href="empresas" role="button" data-bs-toggle="" aria-expanded="false">
                     <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather="grid"></span></span><span class="nav-link-text-wrapper"><span class="nav-link-text">Empresas</span></span>
                     </div>
                   </a>
                 </div>
-                <!-- parent pages-->
-                <div class="nav-item-wrapper"><a class="nav-link label-1" href="apps/calendar.html" role="button" data-bs-toggle="" aria-expanded="false">
-                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather="calendar"></span></span><span class="nav-link-text-wrapper"><span class="nav-link-text">Calendar</span></span>
-                    </div>
-                  </a>
-                </div>
+               
               </li>
               
               
               <li class="nav-item">
                 <!-- label-->
-                <p class="navbar-vertical-label">Documentation
+                <p class="navbar-vertical-label">Ajustes
                 </p>
                 <hr class="navbar-vertical-line" />
                 <!-- parent pages-->
@@ -160,32 +158,15 @@
                   </a>
                   <div class="parent-wrapper label-1">
                     <ul class="nav collapse parent" data-bs-parent="#navbarVerticalCollapse" id="nv-customization">
-                      <li class="collapsed-nav-item-title d-none">Customization
-                      </li>
-                      <li class="nav-item"><a class="nav-link" href="documentation/customization/configuration.html" data-bs-toggle="" aria-expanded="false">
-                          <div class="d-flex align-items-center"><span class="nav-link-text">Configuration</span>
+                      
+                      <li class="nav-item"><a class="nav-link" href="configuracion" data-bs-toggle="" aria-expanded="false">
+                          <div class="d-flex align-items-center"><span class="nav-link-text">Configuración</span>
                           </div>
                         </a>
                         <!-- more inner pages-->
                       </li>
-                      <li class="nav-item"><a class="nav-link" href="documentation/customization/styling.html" data-bs-toggle="" aria-expanded="false">
-                          <div class="d-flex align-items-center"><span class="nav-link-text">Styling</span>
-                          </div>
-                        </a>
-                        <!-- more inner pages-->
-                      </li>
-                      <li class="nav-item"><a class="nav-link" href="documentation/customization/dark-mode.html" data-bs-toggle="" aria-expanded="false">
-                          <div class="d-flex align-items-center"><span class="nav-link-text">Dark mode</span>
-                          </div>
-                        </a>
-                        <!-- more inner pages-->
-                      </li>
-                      <li class="nav-item"><a class="nav-link" href="documentation/customization/plugin.html" data-bs-toggle="" aria-expanded="false">
-                          <div class="d-flex align-items-center"><span class="nav-link-text">Plugin</span>
-                          </div>
-                        </a>
-                        <!-- more inner pages-->
-                      </li>
+                      
+                      
                     </ul>
                   </div>
                 </div>
@@ -278,130 +259,59 @@
                 <h2 class="mb-2">Escritorio Nuwa</h2>
                 <h5 class="text-700 fw-semi-bold">Inicia una investigación individual o masiva</h5>
               </div>
+              <div class="px-3 mb-5">
+            <div class="row justify-content-between">
+              <div class="col-6 col-md-4 col-xxl-2 text-center border-start-xxl border-end-xxl-0 border-bottom-xxl-0 border-end border-bottom pb-4 pb-xxl-0 ">
+				  <a class="nav-link label-1" href="investigacion" role="button" data-bs-toggle="" aria-expanded="false">
+				  <span class="uil fs-3 lh-1 uil-eye text-primary"></span>
+                <h1 class="fs-3 pt-3">Individual</h1>
+                <p class="fs--1 mb-0">Búsqueda individual</p>
+                </a>
+              </div>
+              <div class="col-6 col-md-4 col-xxl-2 text-center border-start-xxl border-end-xxl-0 border-bottom-xxl-0 border-end-md border-bottom pb-4 pb-xxl-0">
+				  <a class="nav-link label-1" href="masiva" role="button" data-bs-toggle="" aria-expanded="false">
+				  <span class="uil fs-3 lh-1 uil-folder text-info"></span>
+                <h1 class="fs-3 pt-3">Masiva</h1>
+                <p class="fs--1 mb-0">Búsqueda masiva</p>
+                </a>
+              </div>
+              <div class="col-6 col-md-4 col-xxl-2 text-center border-start-xxl border-bottom-xxl-0 border-bottom border-end border-end-md-0 pb-4 pb-xxl-0 pt-4 pt-md-0">
+				  <a class="nav-link label-1" href="reportes" role="button" data-bs-toggle="" aria-expanded="false">
+				  <span class="uil fs-3 lh-1 uil-file-alt text-primary"></span>
+                <h1 class="fs-3 pt-3">Reportes</h1>
+                <p class="fs--1 mb-0">Listado de reportes</p>
+                </a>
+              </div>
+              <div class="col-6 col-md-4 col-xxl-2 text-center border-start-xxl border-end-md border-end-xxl-0 border-bottom border-bottom-md-0 pb-4 pb-xxl-0 pt-4 pt-xxl-0">
+				  <a class="nav-link label-1" href="usuarios" role="button" data-bs-toggle="" aria-expanded="false">
+				  <span class="uil fs-3 lh-1 uil-users-alt text-info"></span>
+                <h1 class="fs-3 pt-3">Usuarios</h1>
+                <p class="fs--1 mb-0"> </p>
+                </a>
+              </div>
+              <div class="col-6 col-md-4 col-xxl-2 text-center border-start-xxl border-end border-end-xxl-0 pb-md-4 pb-xxl-0 pt-4 pt-xxl-0">
+				  <a class="nav-link label-1" href="empresas" role="button" data-bs-toggle="" aria-expanded="false">
+				  <span class="uil fs-3 lh-1 uil-building text-success"></span>
+                <h1 class="fs-3 pt-3">Empresas</h1>
+                <p class="fs--1 mb-0"></p>
+				  </a>
+              </div>
+              <div class="col-6 col-md-4 col-xxl-2 text-center border-start-xxl border-end border-end-xxl-0 pb-md-4 pb-xxl-0 pt-4 pt-xxl-0">
+				  <a class="nav-link label-1" href="configuracion" role="button" data-bs-toggle="" aria-expanded="false">
+				  <span class="uil fs-3 lh-1 uil-pen text-success"></span>
+                <h1 class="fs-3 pt-3">Configuracion</h1>
+                <p class="fs--1 mb-0"></p>
+				  </a>
+              </div>
               
-              <hr class="bg-200 mb-6 mt-4" />
-              <div class="row flex-between-center mb-4 g-3">
-                <div class="col-auto">
-                  <h3>Total sells</h3>
-                  <p class="text-700 lh-sm mb-0">Payment received across all channels</p>
-                </div>
-                <div class="col-8 col-sm-4">
-                  <select class="form-select form-select-sm mt-2" id="select-gross-revenue-month">
-                    <option>Mar 1 - 31, 2022</option>
-                    <option>April 1 - 30, 2022</option>
-                    <option>May 1 - 31, 2022</option>
-                  </select>
-                </div>
-              </div>
-              <div class="echart-total-sales-chart" style="min-height:320px;width:100%"></div>
+              
             </div>
-            <div class="col-12 col-xxl-6">
-              <div class="row g-3">
-                <div class="col-12 col-md-6">
-                  <div class="card h-100">
-                    <div class="card-body">
-                      <div class="d-flex justify-content-between">
-                        <div>
-                          <h5 class="mb-1">Total orders<span class="badge badge-phoenix badge-phoenix-warning rounded-pill fs--1 ms-2"><span class="badge-label">-6.8%</span></span></h5>
-                          <h6 class="text-700">Last 7 days</h6>
-                        </div>
-                        <h4>16,247</h4>
-                      </div>
-                      <div class="d-flex justify-content-center px-4 py-6">
-                        <div class="echart-total-orders" style="height:85px;width:115px"></div>
-                      </div>
-                      <div class="mt-2">
-                        <div class="d-flex align-items-center mb-2">
-                          <div class="bullet-item bg-primary me-2"></div>
-                          <h6 class="text-900 fw-semi-bold flex-1 mb-0">Completed</h6>
-                          <h6 class="text-900 fw-semi-bold mb-0">52%</h6>
-                        </div>
-                        <div class="d-flex align-items-center">
-                          <div class="bullet-item bg-primary-100 me-2"></div>
-                          <h6 class="text-900 fw-semi-bold flex-1 mb-0">Pending payment</h6>
-                          <h6 class="text-900 fw-semi-bold mb-0">48%</h6>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-12 col-md-6">
-                  <div class="card h-100">
-                    <div class="card-body">
-                      <div class="d-flex justify-content-between">
-                        <div>
-                          <h5 class="mb-1">New customers<span class="badge badge-phoenix badge-phoenix-warning rounded-pill fs--1 ms-2"> <span class="badge-label">+26.5%</span></span></h5>
-                          <h6 class="text-700">Last 7 days</h6>
-                        </div>
-                        <h4>356</h4>
-                      </div>
-                      <div class="pb-0 pt-4">
-                        <div class="echarts-new-customers" style="height:180px;width:100%;"></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-12 col-md-6">
-                  <div class="card h-100">
-                    <div class="card-body">
-                      <div class="d-flex justify-content-between">
-                        <div>
-                          <h5 class="mb-2">Top coupons</h5>
-                          <h6 class="text-700">Last 7 days</h6>
-                        </div>
-                      </div>
-                      <div class="pb-4 pt-3">
-                        <div class="echart-top-coupons" style="height:115px;width:100%;"></div>
-                      </div>
-                      <div>
-                        <div class="d-flex align-items-center mb-2">
-                          <div class="bullet-item bg-primary me-2"></div>
-                          <h6 class="text-900 fw-semi-bold flex-1 mb-0">Percentage discount</h6>
-                          <h6 class="text-900 fw-semi-bold mb-0">72%</h6>
-                        </div>
-                        <div class="d-flex align-items-center mb-2">
-                          <div class="bullet-item bg-primary-200 me-2"></div>
-                          <h6 class="text-900 fw-semi-bold flex-1 mb-0">Fixed card discount</h6>
-                          <h6 class="text-900 fw-semi-bold mb-0">18%</h6>
-                        </div>
-                        <div class="d-flex align-items-center">
-                          <div class="bullet-item bg-info-500 me-2"></div>
-                          <h6 class="text-900 fw-semi-bold flex-1 mb-0">Fixed product discount</h6>
-                          <h6 class="text-900 fw-semi-bold mb-0">10%</h6>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-12 col-md-6">
-                  <div class="card h-100">
-                    <div class="card-body d-flex flex-column">
-                      <div class="d-flex justify-content-between">
-                        <div>
-                          <h5 class="mb-2">Paying vs non paying</h5>
-                          <h6 class="text-700">Last 7 days</h6>
-                        </div>
-                      </div>
-                      <div class="d-flex justify-content-center pt-3 flex-1">
-                        <div class="echarts-paying-customer-chart" style="height:100%;width:100%;"></div>
-                      </div>
-                      <div class="mt-3">
-                        <div class="d-flex align-items-center mb-2">
-                          <div class="bullet-item bg-primary me-2"></div>
-                          <h6 class="text-900 fw-semi-bold flex-1 mb-0">Paying customer</h6>
-                          <h6 class="text-900 fw-semi-bold mb-0">30%</h6>
-                        </div>
-                        <div class="d-flex align-items-center">
-                          <div class="bullet-item bg-primary-100 me-2"></div>
-                          <h6 class="text-900 fw-semi-bold flex-1 mb-0">Non-paying customer</h6>
-                          <h6 class="text-900 fw-semi-bold mb-0">70%</h6>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+          </div>
+              
+              
+              
             </div>
+            
           </div>
         </div>
         
@@ -425,28 +335,13 @@
                       <th class="sort border-top border-200 text-end pe-0 align-middle" scope="col" data-sort="conv-rate" style="width:17%">CONV. RATE</th>
                     </tr>
                   </thead>
-                  <tr>
-                    <td></td>
-                    <td class="align-middle py-4">
-                      <h4 class="mb-0 fw-normal">377,620</h4>
-                    </td>
-                    <td class="align-middle text-end py-4">
-                      <h4 class="mb-0 fw-normal">236</h4>
-                    </td>
-                    <td class="align-middle text-end py-4">
-                      <h4 class="mb-0 fw-normal">$15,758</h4>
-                    </td>
-                    <td class="align-middle text-end py-4 pe-0">
-                      <h4 class="mb-0 fw-normal">10.32%</h4>
-                    </td>
-                  </tr>
                   <tbody class="list" id="table-regions-by-revenue">
                     <tr>
                       <td class="white-space-nowrap ps-0 country" style="width:32%">
                         <div class="d-flex align-items-center">
                           <h6 class="mb-0 me-3">1. </h6><a href="#!">
-                            <div class="d-flex align-items-center"><img src="phoenix/assets/img/country/india.png" alt="" width="24" />
-                              <p class="mb-0 ps-3 text-primary fw-bold fs--1">India</p>
+                            <div class="d-flex align-items-center"><img src="phoenix/assets/img/country/canada.png" alt="" width="24" />
+                              <p class="mb-0 ps-3 text-primary fw-bold fs--1">Canada</p>
                             </div>
                           </a>
                         </div>
@@ -468,8 +363,8 @@
                       <td class="white-space-nowrap ps-0 country" style="width:32%">
                         <div class="d-flex align-items-center">
                           <h6 class="mb-0 me-3">2. </h6><a href="#!">
-                            <div class="d-flex align-items-center"><img src="phoenix/assets/img/country/china.png" alt="" width="24" />
-                              <p class="mb-0 ps-3 text-primary fw-bold fs--1">China</p>
+                            <div class="d-flex align-items-center"><img src="phoenix/assets/img/country/mexico.png" alt="" width="24" />
+                              <p class="mb-0 ps-3 text-primary fw-bold fs--1">Mexico</p>
                             </div>
                           </a>
                         </div>
@@ -510,167 +405,7 @@
                         <h6>10.23%</h6>
                       </td>
                     </tr>
-                    <tr>
-                      <td class="white-space-nowrap ps-0 country" style="width:32%">
-                        <div class="d-flex align-items-center">
-                          <h6 class="mb-0 me-3">4. </h6><a href="#!">
-                            <div class="d-flex align-items-center"><img src="phoenix/assets/img/country/south-korea.png" alt="" width="24" />
-                              <p class="mb-0 ps-3 text-primary fw-bold fs--1">South Korea</p>
-                            </div>
-                          </a>
-                        </div>
-                      </td>
-                      <td class="align-middle users" style="width:17%">
-                        <h6 class="mb-0">36453<span class="text-700 fw-semi-bold ms-2">(19.7%)</span></h6>
-                      </td>
-                      <td class="align-middle text-end transactions" style="width:17%">
-                        <h6 class="mb-0">22<span class="text-700 fw-semi-bold ms-2">(9.54%)</span></h6>
-                      </td>
-                      <td class="align-middle text-end revenue" style="width:17%">
-                        <h6 class="mb-0">$4673<span class="text-700 fw-semi-bold ms-2">(11.6%)</span></h6>
-                      </td>
-                      <td class="align-middle text-end pe-0 conv-rate" style="width:17%">
-                        <h6>8.85%</h6>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="white-space-nowrap ps-0 country" style="width:32%">
-                        <div class="d-flex align-items-center">
-                          <h6 class="mb-0 me-3">5. </h6><a href="#!">
-                            <div class="d-flex align-items-center"><img src="phoenix/assets/img/country/vietnam.png" alt="" width="24" />
-                              <p class="mb-0 ps-3 text-primary fw-bold fs--1">Vietnam</p>
-                            </div>
-                          </a>
-                        </div>
-                      </td>
-                      <td class="align-middle users" style="width:17%">
-                        <h6 class="mb-0">15007<span class="text-700 fw-semi-bold ms-2">(11.9%)</span></h6>
-                      </td>
-                      <td class="align-middle text-end transactions" style="width:17%">
-                        <h6 class="mb-0">17<span class="text-700 fw-semi-bold ms-2">(6.91%)</span></h6>
-                      </td>
-                      <td class="align-middle text-end revenue" style="width:17%">
-                        <h6 class="mb-0">$2456<span class="text-700 fw-semi-bold ms-2">(10.2%)</span></h6>
-                      </td>
-                      <td class="align-middle text-end pe-0 conv-rate" style="width:17%">
-                        <h6>6.01%</h6>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="white-space-nowrap ps-0 country" style="width:32%">
-                        <div class="d-flex align-items-center">
-                          <h6 class="mb-0 me-3">6. </h6><a href="#!">
-                            <div class="d-flex align-items-center"><img src="phoenix/assets/img/country/russia.png" alt="" width="24" />
-                              <p class="mb-0 ps-3 text-primary fw-bold fs--1">Russia</p>
-                            </div>
-                          </a>
-                        </div>
-                      </td>
-                      <td class="align-middle users" style="width:17%">
-                        <h6 class="mb-0">54215<span class="text-700 fw-semi-bold ms-2">(32.9%)</span></h6>
-                      </td>
-                      <td class="align-middle text-end transactions" style="width:17%">
-                        <h6 class="mb-0">38<span class="text-700 fw-semi-bold ms-2">(7.91%)</span></h6>
-                      </td>
-                      <td class="align-middle text-end revenue" style="width:17%">
-                        <h6 class="mb-0">$3254<span class="text-700 fw-semi-bold ms-2">(12.4%)</span></h6>
-                      </td>
-                      <td class="align-middle text-end pe-0 conv-rate" style="width:17%">
-                        <h6>6.21%</h6>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="white-space-nowrap ps-0 country" style="width:32%">
-                        <div class="d-flex align-items-center">
-                          <h6 class="mb-0 me-3">7. </h6><a href="#!">
-                            <div class="d-flex align-items-center"><img src="phoenix/assets/img/country/australia.png" alt="" width="24" />
-                              <p class="mb-0 ps-3 text-primary fw-bold fs--1">Australia</p>
-                            </div>
-                          </a>
-                        </div>
-                      </td>
-                      <td class="align-middle users" style="width:17%">
-                        <h6 class="mb-0">54789<span class="text-700 fw-semi-bold ms-2">(12.7%)</span></h6>
-                      </td>
-                      <td class="align-middle text-end transactions" style="width:17%">
-                        <h6 class="mb-0">32<span class="text-700 fw-semi-bold ms-2">(14.0%)</span></h6>
-                      </td>
-                      <td class="align-middle text-end revenue" style="width:17%">
-                        <h6 class="mb-0">$3215<span class="text-700 fw-semi-bold ms-2">(5.72%)</span></h6>
-                      </td>
-                      <td class="align-middle text-end pe-0 conv-rate" style="width:17%">
-                        <h6>12.02%</h6>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="white-space-nowrap ps-0 country" style="width:32%">
-                        <div class="d-flex align-items-center">
-                          <h6 class="mb-0 me-3">8. </h6><a href="#!">
-                            <div class="d-flex align-items-center"><img src="phoenix/assets/img/country/england.png" alt="" width="24" />
-                              <p class="mb-0 ps-3 text-primary fw-bold fs--1">England</p>
-                            </div>
-                          </a>
-                        </div>
-                      </td>
-                      <td class="align-middle users" style="width:17%">
-                        <h6 class="mb-0">14785<span class="text-700 fw-semi-bold ms-2">(12.9%)</span></h6>
-                      </td>
-                      <td class="align-middle text-end transactions" style="width:17%">
-                        <h6 class="mb-0">11<span class="text-700 fw-semi-bold ms-2">(32.91%)</span></h6>
-                      </td>
-                      <td class="align-middle text-end revenue" style="width:17%">
-                        <h6 class="mb-0">$4745<span class="text-700 fw-semi-bold ms-2">(10.2%)</span></h6>
-                      </td>
-                      <td class="align-middle text-end pe-0 conv-rate" style="width:17%">
-                        <h6>8.01%</h6>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="white-space-nowrap ps-0 country" style="width:32%">
-                        <div class="d-flex align-items-center">
-                          <h6 class="mb-0 me-3">9. </h6><a href="#!">
-                            <div class="d-flex align-items-center"><img src="phoenix/assets/img/country/indonesia.png" alt="" width="24" />
-                              <p class="mb-0 ps-3 text-primary fw-bold fs--1">Indonesia</p>
-                            </div>
-                          </a>
-                        </div>
-                      </td>
-                      <td class="align-middle users" style="width:17%">
-                        <h6 class="mb-0">32156<span class="text-700 fw-semi-bold ms-2">(32.2%)</span></h6>
-                      </td>
-                      <td class="align-middle text-end transactions" style="width:17%">
-                        <h6 class="mb-0">89<span class="text-700 fw-semi-bold ms-2">(12.0%)</span></h6>
-                      </td>
-                      <td class="align-middle text-end revenue" style="width:17%">
-                        <h6 class="mb-0">$2456<span class="text-700 fw-semi-bold ms-2">(23.2%)</span></h6>
-                      </td>
-                      <td class="align-middle text-end pe-0 conv-rate" style="width:17%">
-                        <h6>9.07%</h6>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="white-space-nowrap ps-0 country" style="width:32%">
-                        <div class="d-flex align-items-center">
-                          <h6 class="mb-0 me-3">10. </h6><a href="#!">
-                            <div class="d-flex align-items-center"><img src="phoenix/assets/img/country/japan.png" alt="" width="24" />
-                              <p class="mb-0 ps-3 text-primary fw-bold fs--1">Japan</p>
-                            </div>
-                          </a>
-                        </div>
-                      </td>
-                      <td class="align-middle users" style="width:17%">
-                        <h6 class="mb-0">12547<span class="text-700 fw-semi-bold ms-2">(12.7%)</span></h6>
-                      </td>
-                      <td class="align-middle text-end transactions" style="width:17%">
-                        <h6 class="mb-0">21<span class="text-700 fw-semi-bold ms-2">(14.91%)</span></h6>
-                      </td>
-                      <td class="align-middle text-end revenue" style="width:17%">
-                        <h6 class="mb-0">$2541<span class="text-700 fw-semi-bold ms-2">(23.2%)</span></h6>
-                      </td>
-                      <td class="align-middle text-end pe-0 conv-rate" style="width:17%">
-                        <h6>20.01%</h6>
-                      </td>
-                    </tr>
+                    
                   </tbody>
                 </table>
               </div>
@@ -679,11 +414,13 @@
                 <div class="col d-flex fs--1">
                   <p class="mb-0 d-none d-sm-block me-3 fw-semi-bold text-900" data-list-info="data-list-info"></p>
                 </div>
+                
                 <div class="col-auto d-flex">
 
                   <button class="btn btn-link px-1 me-1" type="button" title="Previous" data-list-pagination="prev"><span class="fas fa-chevron-left me-2"></span>Previous</button>
                   <button class="btn btn-link px-1 ms-1" type="button" title="Next" data-list-pagination="next">Next<span class="fas fa-chevron-right ms-2"></span></button>
                 </div>
+                
               </div>
             </div>
           </div>
@@ -750,12 +487,12 @@
       <div class="offcanvas-header align-items-start border-bottom flex-column">
         <div class="pt-1 w-100 mb-6 d-flex justify-content-between align-items-start">
           <div>
-            <h5 class="mb-2 me-2 lh-sm"><span class="fas fa-palette me-2 fs-0"></span>Theme Customizer</h5>
-            <p class="mb-0 fs--1">Explore different styles according to your preferences</p>
+            <h5 class="mb-2 me-2 lh-sm"><span class="fas fa-palette me-2 fs-0"></span>Personalización</h5>
+            <p class="mb-0 fs--1">Ajusta el estilo de tu preferencia a la pantalla</p>
           </div>
           <button class="btn p-1 fw-bolder" type="button" data-bs-dismiss="offcanvas" aria-label="Close"><span class="fas fa-times fs-0"> </span></button>
         </div>
-        <button class="btn btn-phoenix-secondary w-100" data-theme-control="reset"><span class="fas fa-arrows-rotate me-2 fs--2"></span>Reset to default</button>
+        <button class="btn btn-phoenix-secondary w-100" data-theme-control="reset"><span class="fas fa-arrows-rotate me-2 fs--2"></span>Default</button>
       </div>
       <div class="offcanvas-body scrollbar px-card" id="themeController">
         <div class="setting-panel-item mt-0">
@@ -780,36 +517,8 @@
           </div>
           <p class="mb-0 text-700">Change text direction</p>
         </div>
-        <div class="border rounded-3 p-4 setting-panel-item bg-white">
-          <div class="d-flex justify-content-between align-items-center">
-            <h5 class="setting-panel-item-title mb-1">Support Chat </h5>
-            <div class="form-check form-switch mb-0">
-              <input class="form-check-input ms-auto" type="checkbox" data-theme-control="phoenixSupportChat" />
-            </div>
-          </div>
-          <p class="mb-0 text-700">Toggle support chat</p>
-        </div>
-        <div class="setting-panel-item">
-          <h5 class="setting-panel-item-title">Navigation Type</h5>
-          <div class="row gx-2">
-            <div class="col-6">
-              <input class="btn-check" id="navbarPositionVertical" name="navigation-type" type="radio" value="vertical" data-theme-control="phoenixNavbarPosition" data-page-url="documentation/layouts/vertical-navbar.html" />
-              <label class="btn d-inline-block btn-navbar-style fs--1" for="navbarPositionVertical"> <span class="mb-2 rounded d-block"><img class="img-fluid img-prototype d-dark-none" src="phoenix/assets/img/generic/default-light.png" alt=""/><img class="img-fluid img-prototype d-light-none" src="phoenix/assets/img/generic/default-dark.png" alt=""/></span><span class="label-text">Vertical</span></label>
-            </div>
-            <div class="col-6">
-              <input class="btn-check" id="navbarPositionHorizontal" name="navigation-type" type="radio" value="horizontal" data-theme-control="phoenixNavbarPosition" data-page-url="documentation/layouts/horizontal-navbar.html" />
-              <label class="btn d-inline-block btn-navbar-style fs--1" for="navbarPositionHorizontal"> <span class="mb-2 rounded d-block"><img class="img-fluid img-prototype d-dark-none" src="phoenix/assets/img/generic/top-default.png" alt=""/><img class="img-fluid img-prototype d-light-none" src="phoenix/assets/img/generic/top-default-dark.png" alt=""/></span><span class="label-text"> Horizontal</span></label>
-            </div>
-            <div class="col-6">
-              <input class="btn-check" id="navbarPositionCombo" name="navigation-type" type="radio" value="combo" data-theme-control="phoenixNavbarPosition" data-page-url="documentation/layouts/combo-navbar.html" />
-              <label class="btn d-inline-block btn-navbar-style fs--1" for="navbarPositionCombo"> <span class="mb-2 rounded d-block"><img class="img-fluid img-prototype d-dark-none" src="phoenix/assets/img/generic/nav-combo-light.png" alt=""/><img class="img-fluid img-prototype d-light-none" src="phoenix/assets/img/generic/nav-combo-dark.png" alt=""/></span><span class="label-text"> Combo</span></label>
-            </div>
-            <div class="col-6">
-              <input class="btn-check" id="navbarPositionTopDouble" name="navigation-type" type="radio" value="dual-nav" data-theme-control="phoenixNavbarPosition" data-page-url="documentation/layouts/dual-nav.html" />
-              <label class="btn d-inline-block btn-navbar-style fs--1" for="navbarPositionTopDouble"> <span class="mb-2 rounded d-block"><img class="img-fluid img-prototype d-dark-none" src="phoenix/assets/img/generic/dual-light.png" alt=""/><img class="img-fluid img-prototype d-light-none" src="phoenix/assets/img/generic/dual-dark.png" alt=""/></span><span class="label-text"> Dual nav</span></label>
-            </div>
-          </div>
-        </div>
+        
+        
         <div class="setting-panel-item">
           <h5 class="setting-panel-item-title">Vertical Navbar Appearance</h5>
           <div class="row gx-2">
@@ -820,19 +529,6 @@
             <div class="col-6">
               <input class="btn-check" id="navbar-style-dark" type="radio" name="config.name" value="darker" data-theme-control="phoenixNavbarVerticalStyle" />
               <label class="btn d-block w-100 btn-navbar-style fs--1" for="navbar-style-dark"> <img class="img-fluid img-prototype d-dark-none" src="phoenix/assets/img/generic/vertical-darker.png" alt="" /><img class="img-fluid img-prototype d-light-none" src="phoenix/assets/img/generic/vertical-lighter.png" alt="" /><span class="label-text d-dark-none"> Darker</span><span class="label-text d-light-none">Lighter</span></label>
-            </div>
-          </div>
-        </div>
-        <div class="setting-panel-item">
-          <h5 class="setting-panel-item-title">Horizontal Navbar Shape</h5>
-          <div class="row gx-2">
-            <div class="col-6">
-              <input class="btn-check" id="navbarShapeDefault" name="navbar-shape" type="radio" value="default" data-theme-control="phoenixNavbarTopShape" data-page-url="documentation/layouts/horizontal-navbar.html" />
-              <label class="btn d-inline-block btn-navbar-style fs--1" for="navbarShapeDefault"> <span class="mb-2 rounded d-block"><img class="img-fluid img-prototype d-dark-none mb-0" src="phoenix/assets/img/generic/top-default.png" alt=""/><img class="img-fluid img-prototype d-light-none mb-0" src="phoenix/assets/img/generic/top-default-dark.png" alt=""/></span><span class="label-text">Default</span></label>
-            </div>
-            <div class="col-6">
-              <input class="btn-check" id="navbarShapeSlim" name="navbar-shape" type="radio" value="slim" data-theme-control="phoenixNavbarTopShape" data-page-url="documentation/layouts/horizontal-navbar.html#horizontal-navbar-slim" />
-              <label class="btn d-inline-block btn-navbar-style fs--1" for="navbarShapeSlim"> <span class="mb-2 rounded d-block"><img class="img-fluid img-prototype d-dark-none mb-0" src="phoenix/assets/img/generic/top-slim.png" alt=""/><img class="img-fluid img-prototype d-light-none mb-0" src="phoenix/assets/img/generic/top-slim-dark.png" alt=""/></span><span class="label-text"> Slim</span></label>
             </div>
           </div>
         </div>
@@ -848,7 +544,7 @@
               <label class="btn d-inline-block btn-navbar-style fs--1" for="navbarTopDarker"> <span class="mb-2 rounded d-block"><img class="img-fluid img-prototype d-dark-none mb-0" src="phoenix/assets/img/generic/navbar-top-style-light.png" alt=""/><img class="img-fluid img-prototype d-light-none mb-0" src="phoenix/assets/img/generic/top-style-lighter.png" alt=""/></span><span class="label-text d-dark-none">Darker</span><span class="label-text d-light-none">Lighter</span></label>
             </div>
           </div>
-        </div><a class="bun btn-primary d-grid mb-3 text-white dark__text-100 mt-5 btn btn-primary" href="https://themes.getbootstrap.com/product/phoenix-admin-dashboard-webapp-template/" target="_blank">Purchase template</a>
+        </div>
       </div>
     </div><a class="card setting-toggle" href="#settings-offcanvas" data-bs-toggle="offcanvas">
       <div class="card-body d-flex align-items-center px-2 py-1">
